@@ -1,1 +1,0 @@
-# qantum_app
