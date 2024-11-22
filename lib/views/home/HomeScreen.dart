@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 GridView.count(
                   shrinkWrap: true,
                   crossAxisCount: 3,
-                  childAspectRatio: 1,
+                  childAspectRatio: 1.5,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 5,
                   children:
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Icon(
                                 provider.homeNavigationList[index].icon,
-                                size: 30,
+                                size: 26,
                                 color: (provider.selectedOption == index)
                                     ? AppColors.white
                                     : Theme.of(context)
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 provider.homeNavigationList[index].name
                                     .toUpperCase(),
                                 style: TextStyle(
-                                    fontSize: 10,
+                                    fontSize: 9,
                                     fontWeight: (provider.selectedOption == index)
                                         ? FontWeight.bold
                                         : FontWeight.normal,
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).buttonTheme.colorScheme?.primary,
                     padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 20, bottom: 20),
+                        left: 20, right: 20, top: 18, bottom: 18),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           AppStrings.txtMyDigitalCard.toUpperCase(),
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 10,
                               fontWeight: (provider.selectedOption == -2)
                                   ? FontWeight.bold
                                   : FontWeight.normal,

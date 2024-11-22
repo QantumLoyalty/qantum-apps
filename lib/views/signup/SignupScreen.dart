@@ -26,13 +26,15 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w200,
-                      color: Theme.of(context).textSelectionTheme.selectionColor),
+                      color:
+                          Theme.of(context).textSelectionTheme.selectionColor),
                 ),
                 Text(
                   AppStrings.msgFillDetailsForSignup,
                   style: TextStyle(
                       fontSize: 14,
-                      color: Theme.of(context).textSelectionTheme.selectionColor),
+                      color:
+                          Theme.of(context).textSelectionTheme.selectionColor),
                 ),
                 AppDimens.shape_20,
                 TextFormField(
@@ -146,7 +148,8 @@ class SignupScreen extends StatelessWidget {
                                               maxLines: 1,
                                               maxLength: 2,
                                               textAlign: TextAlign.center,
-                                              keyboardType: TextInputType.number,
+                                              keyboardType:
+                                                  TextInputType.number,
                                               inputFormatters: <TextInputFormatter>[
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
@@ -160,8 +163,10 @@ class SignupScreen extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.w400),
                                                   border: InputBorder.none,
-                                                  focusedBorder: InputBorder.none,
-                                                  errorBorder: InputBorder.none),
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  errorBorder:
+                                                      InputBorder.none),
                                             )),
                                         Container(
                                           margin: const EdgeInsets.only(
@@ -176,7 +181,8 @@ class SignupScreen extends StatelessWidget {
                                               maxLines: 1,
                                               maxLength: 2,
                                               textAlign: TextAlign.center,
-                                              keyboardType: TextInputType.number,
+                                              keyboardType:
+                                                  TextInputType.number,
                                               inputFormatters: <TextInputFormatter>[
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
@@ -190,8 +196,10 @@ class SignupScreen extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.w400),
                                                   border: InputBorder.none,
-                                                  focusedBorder: InputBorder.none,
-                                                  errorBorder: InputBorder.none),
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  errorBorder:
+                                                      InputBorder.none),
                                             )),
                                         Container(
                                           width: 1,
@@ -205,7 +213,8 @@ class SignupScreen extends StatelessWidget {
                                             child: TextFormField(
                                               maxLines: 1,
                                               maxLength: 4,
-                                              keyboardType: TextInputType.number,
+                                              keyboardType:
+                                                  TextInputType.number,
                                               inputFormatters: <TextInputFormatter>[
                                                 FilteringTextInputFormatter
                                                     .digitsOnly
@@ -219,8 +228,10 @@ class SignupScreen extends StatelessWidget {
                                                       fontWeight:
                                                           FontWeight.w400),
                                                   border: InputBorder.none,
-                                                  focusedBorder: InputBorder.none,
-                                                  errorBorder: InputBorder.none),
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  errorBorder:
+                                                      InputBorder.none),
                                             )),
                                       ],
                                     )),
@@ -273,17 +284,15 @@ class SignupScreen extends StatelessWidget {
                   ],
                 ),
                 AppDimens.shape_20,
-              
-                //CheckboxListTile(value: true, onChanged: (value){}),
-              
                 CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
                     value: provider.tcCheckStatus,
                     title: Text(
                       AppStrings.msgTermsAndConditionSignup,
                       style: TextStyle(
-                          color:
-                              Theme.of(context).textSelectionTheme.selectionColor,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor,
                           fontSize: 12),
                     ),
                     onChanged: (value) {
@@ -295,7 +304,10 @@ class SignupScreen extends StatelessWidget {
                         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                         backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context).buttonTheme.colorScheme?.primary)),
+                            Theme.of(context)
+                                .buttonTheme
+                                .colorScheme
+                                ?.primary)),
                     onPressed: () {
                       AppNavigator.navigateTo(context, AppNavigator.otp);
                     },
@@ -303,8 +315,9 @@ class SignupScreen extends StatelessWidget {
                       AppStrings.txtJoinNow,
                       style: TextStyle(
                         fontSize: 15,
-                        color: Theme.of(context).textSelectionTheme.selectionColor,
-                        ),
+                        color:
+                            Theme.of(context).textSelectionTheme.selectionColor,
+                      ),
                     ))
               ],
             ),

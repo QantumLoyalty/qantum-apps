@@ -39,7 +39,7 @@ class SpecialOfferItem extends StatelessWidget {
                             fontWeight: FontWeight.bold)),
                     Text(
                         "Purchase any Schooner or Pint(Pint or Imperial Pint SA) scan your Star Rewards card and get a 90g Smiths chips for only \$3",
-                        style: TextStyle(color: AppColors.black, fontSize: 12))
+                        style: TextStyle(color: AppColors.black, fontSize: 11))
                   ],
                 ),
               ),
