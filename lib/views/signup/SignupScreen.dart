@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
 import 'package:qantum_apps/core/utils/AppDimens.dart';
 import 'package:qantum_apps/core/utils/AppStrings.dart';
 import 'package:qantum_apps/view_models/SignupProvider.dart';
+import 'package:qantum_apps/views/common_widgets/AppButton.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -24,15 +24,17 @@ class SignupScreen extends StatelessWidget {
                 Text(
                   AppStrings.msgItLooksLikeNewUser,
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 26,
                       fontWeight: FontWeight.w200,
                       color:
                           Theme.of(context).textSelectionTheme.selectionColor),
                 ),
+                //AppDimens.shape_5,
                 Text(
                   AppStrings.msgFillDetailsForSignup,
                   style: TextStyle(
-                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
                       color:
                           Theme.of(context).textSelectionTheme.selectionColor),
                 ),
@@ -46,7 +48,10 @@ class SignupScreen extends StatelessWidget {
                       hintText: AppStrings.txtFirstName,
                       hintStyle: TextStyle(
                           color: Theme.of(context).hintColor,
-                          fontWeight: FontWeight.w400)),
+                          fontWeight: FontWeight.w400),
+                      border: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none),
                 ),
                 AppDimens.shape_10,
                 TextFormField(
@@ -58,7 +63,13 @@ class SignupScreen extends StatelessWidget {
                       hintText: AppStrings.txtLastName,
                       hintStyle: TextStyle(
                           color: Theme.of(context).hintColor,
-                          fontWeight: FontWeight.w400)),
+                          fontWeight: FontWeight.w400),
+                      border: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none
+
+
+                  ),
                 ),
                 AppDimens.shape_10,
                 TextFormField(
@@ -70,7 +81,12 @@ class SignupScreen extends StatelessWidget {
                       hintText: AppStrings.hintEmail,
                       hintStyle: TextStyle(
                           color: Theme.of(context).hintColor,
-                          fontWeight: FontWeight.w400)),
+                          fontWeight: FontWeight.w400),
+                      border: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none
+
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10),
@@ -173,7 +189,7 @@ class SignupScreen extends StatelessWidget {
                                               left: 5, right: 5),
                                           width: 1,
                                           height: 20,
-                                          color: AppColors.sr_button_color,
+                                          color: Theme.of(context).dividerColor,
                                         ),
                                         Expanded(
                                             flex: 2,
@@ -206,7 +222,7 @@ class SignupScreen extends StatelessWidget {
                                           height: 20,
                                           margin: const EdgeInsets.only(
                                               left: 5, right: 5),
-                                          color: AppColors.sr_button_color,
+                                          color: Theme.of(context).dividerColor,
                                         ),
                                         Expanded(
                                             flex: 6,
@@ -286,6 +302,7 @@ class SignupScreen extends StatelessWidget {
                 AppDimens.shape_20,
                 CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
+
                     value: provider.tcCheckStatus,
                     title: Text(
                       AppStrings.msgTermsAndConditionSignup,
@@ -299,26 +316,10 @@ class SignupScreen extends StatelessWidget {
                       provider.updateTCCheckStatus(value!);
                     }),
                 AppDimens.shape_20,
-                TextButton(
-                    style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                        backgroundColor: WidgetStatePropertyAll(
-                            Theme.of(context)
-                                .buttonTheme
-                                .colorScheme
-                                ?.primary)),
-                    onPressed: () {
-                      AppNavigator.navigateTo(context, AppNavigator.otp);
-                    },
-                    child: Text(
-                      AppStrings.txtJoinNow,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
-                      ),
-                    ))
+                AppButton(text: AppStrings.txtJoinNow, onClick: () {
+                  AppNavigator.navigateTo(context, AppNavigator.otp);
+                }),
+
               ],
             ),
           ),

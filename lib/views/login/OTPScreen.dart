@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:qantum_apps/views/common_widgets/AppButton.dart';
 
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
@@ -30,24 +31,20 @@ class OTPScreen extends StatelessWidget {
                         child: TextFormField(
                           maxLines: 1,
                           maxLength: 1,
+                          textInputAction: TextInputAction.next,
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
+
                             counter: AppDimens.shape_5,
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
                           ),
                         ),
                       ),
@@ -59,6 +56,7 @@ class OTPScreen extends StatelessWidget {
                           maxLines: 1,
                           maxLength: 1,
                           textAlign: TextAlign.center,
+                          textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
@@ -67,15 +65,9 @@ class OTPScreen extends StatelessWidget {
                             counter: AppDimens.shape_5,
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
                           ),
                         ),
                       ),
@@ -86,6 +78,7 @@ class OTPScreen extends StatelessWidget {
                         child: TextFormField(
                           maxLines: 1,
                           maxLength: 1,
+                          textInputAction: TextInputAction.next,
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
@@ -95,15 +88,9 @@ class OTPScreen extends StatelessWidget {
                             counter: AppDimens.shape_5,
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
                           ),
                         ),
                       ),
@@ -114,6 +101,7 @@ class OTPScreen extends StatelessWidget {
                         child: TextFormField(
                           maxLines: 1,
                           maxLength: 1,
+                          textInputAction: TextInputAction.done,
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           inputFormatters: <TextInputFormatter>[
@@ -123,15 +111,9 @@ class OTPScreen extends StatelessWidget {
                             counter: AppDimens.shape_5,
                             fillColor: Theme.of(context).cardColor,
                             filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
                           ),
                         ),
                       ),
@@ -144,26 +126,17 @@ class OTPScreen extends StatelessWidget {
                 AppStrings.msgEnterVerificationCode,
                 style: TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   color: Theme.of(context).textSelectionTheme.selectionColor,
                 ),
               ),
               AppDimens.shape_20,
-              TextButton(
-                  style: ButtonStyle(
-                      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                      backgroundColor: WidgetStatePropertyAll(
-                          Theme.of(context).buttonTheme.colorScheme!.primary)),
-                  onPressed: () {
-                    AppNavigator.navigateTo(context, AppNavigator.home);
-                  },
-                  child: Text(
-                    AppStrings.txtSubmit,
-                    style: TextStyle(
-                      color: Theme.of(context).textSelectionTheme.selectionColor,
-                    ),
-                  ))
+
+              AppButton(text: AppStrings.txtSubmit, onClick: () {
+                AppNavigator.navigateTo(context, AppNavigator.home);
+              }),
+
+
             ],
           ),
         ),

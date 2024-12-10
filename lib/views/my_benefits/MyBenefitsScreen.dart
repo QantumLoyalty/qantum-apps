@@ -9,20 +9,20 @@ class MyBenefitsScreen extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(AppDimens.screenPadding),
-      color: Theme.of(context).buttonTheme.colorScheme!.primary,
+      margin: const EdgeInsets.only(bottom: 10),
+      //color: Theme.of(context).buttonTheme.colorScheme!.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "VALUED",
             style: TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 color: Theme.of(context).textSelectionTheme.selectionColor),
           ),
           AppDimens.shape_20,
           Text(
             "Points for Gaming\nPoints for F & B\nPoints for Retail\nSpecial offers",
-
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 14,

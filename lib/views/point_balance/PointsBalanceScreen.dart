@@ -10,7 +10,8 @@ class PointsBalanceScreen extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(AppDimens.screenPadding),
-      color: Theme.of(context).buttonTheme.colorScheme!.primary,
+      margin: const EdgeInsets.only(bottom: 10),
+      //color: Theme.of(context).buttonTheme.colorScheme!.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +20,7 @@ class PointsBalanceScreen extends StatelessWidget {
             "\$0.00",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 24,
+                fontSize: 42,
                 color: Theme.of(context).textSelectionTheme.selectionColor),
           ),
           AppDimens.shape_10,

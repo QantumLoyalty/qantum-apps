@@ -9,7 +9,7 @@ class SpecialOffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
       child: ListView.separated(
         itemBuilder: (context, index) {
           return const SpecialOfferItem();

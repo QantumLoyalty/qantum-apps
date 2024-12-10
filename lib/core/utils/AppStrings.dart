@@ -1,9 +1,9 @@
 class AppStrings {
   static const String txtWelcome = 'Welcome';
-  static const String txtEnterYourNumber = 'Please enter your number';
+  static const String txtEnterYourNumber = 'Please enter Mobile number';
   static const String txtOk = "Ok";
   static const String msgEnterVerificationCode =
-      'We have sent you an SMS with a verification code';
+      'We have sent you an SMS with a verification code.';
   static const String txtSubmit = "Submit";
 
   /// HOME SCREEN MENU OPTIONS ///
@@ -24,8 +24,8 @@ class AppStrings {
   static const String txtMale = "Male";
   static const String txtFemale = "Female";
   static const String txtJoinNow = "Join now";
-  static const String msgTermsAndConditionSignup = "By pressing the Join now button I agree to the terms & conditions of the Qantum Loyalty program and I am at least 18 years of age.";
-
+  static const String msgTermsAndConditionSignup =
+      "By pressing the Join now button I agree to the terms & conditions of the Qantum Loyalty program and I am at least 18 years of age.";
 
   static const String txtViewTermsConditions = "View T&C's";
   static const String txtMyProfile = "My Profile";
@@ -34,9 +34,10 @@ class AppStrings {
   static const String txtMyDigitalCard = "My Digital Card   >";
 
   static const String msgItLooksLikeNewUser = "It looks like you're new!";
-  static const String msgFillDetailsForSignup = "Please fill in the details below to sign up.";
+  static const String msgFillDetailsForSignup =
+      "Please fill in the details below to sign up.";
+  static const String msgIncorrectPhoneNumber =
+      "The provided phone number is incorrect. Please double-check and re-enter it.";
 
   static const String txtEntries = "Entries";
-
-
 }

@@ -19,7 +19,7 @@ class PromotionsScreen extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 210,
+          height: 220,
           width: MediaQuery.of(context).size.width,
           child: CarouselSlider(
             items: colorsList.map((item) {

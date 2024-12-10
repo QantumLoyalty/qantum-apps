@@ -20,27 +20,30 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.only(
-              left: 10, right: 10, bottom: 10, top: AppDimens.screenPadding),
+          padding: const EdgeInsets.all(10),
           child: Consumer<HomeProvider>(builder: (context, provider, child) {
             return Column(
               children: [
                 const HomeAppBar(),
+                AppDimens.shape_20,
                 Expanded(child: provider.selectedScreen),
                 GridView.count(
                   shrinkWrap: true,
                   crossAxisCount: 3,
                   childAspectRatio: 1.5,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children:
-                      List.generate(provider.homeNavigationList.length, (index) {
-                    return InkWell(
-                      onTap: () {
-                        provider.updateSelectedOption(index);
-                      },
-                      child: Container(
-                        color: Theme.of(context).buttonTheme.colorScheme?.primary,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 2,
+                  children: List.generate(provider.homeNavigationList.length,
+                      (index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1)),
+                      elevation: 1,
+                      color: Theme.of(context).buttonTheme.colorScheme?.primary,
+                      child: InkWell(
+                        onTap: () {
+                          provider.updateSelectedOption(index);
+                        },
                         child: Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -49,25 +52,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                 provider.homeNavigationList[index].icon,
                                 size: 26,
                                 color: (provider.selectedOption == index)
-                                    ? AppColors.white
+                                    ? Theme.of(context)
+                                        .bottomNavigationBarTheme
+                                        .selectedItemColor
                                     : Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                        .bottomNavigationBarTheme
+                                        .unselectedItemColor,
                               ),
-                              AppDimens.shape_10,
+                              AppDimens.shape_5,
                               Text(
                                 provider.homeNavigationList[index].name
                                     .toUpperCase(),
                                 style: TextStyle(
                                     fontSize: 9,
-                                    fontWeight: (provider.selectedOption == index)
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                    fontWeight:
+                                        (provider.selectedOption == index)
+                                            ? FontWeight.w900
+                                            : FontWeight.w500,
                                     color: (provider.selectedOption == index)
-                                        ? AppColors.white
+                                        ? Theme.of(context)
+                                            .bottomNavigationBarTheme
+                                            .selectedItemColor
                                         : Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor),
+                                            .bottomNavigationBarTheme
+                                            .unselectedItemColor),
                               )
                             ],
                           ),
@@ -105,10 +113,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                               color: (provider.selectedOption == -2)
-                                  ? AppColors.white
+                                  ? Theme.of(context)
+                                  .bottomNavigationBarTheme
+                                  .selectedItemColor
                                   : Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
+                                  .bottomNavigationBarTheme
+                                  .unselectedItemColor),
                         )
                       ],
                     ),

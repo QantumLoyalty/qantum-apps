@@ -7,13 +7,14 @@ import 'package:qantum_apps/views/splash/SplashScreen.dart';
 
 import 'core/flavors_config/app_themes.dart';
 import 'core/navigation/AppNavigator.dart';
+import 'view_models/UserLoginProvider.dart';
 
-void main() {
+//TextTheme? textTheme;
+void main() async {
   FlavorConfig(
       flavor: Flavor.senseOfTaste,
       flavorValues:
           FlavorValues(appName: "Sense Of Taste", appVersion: "0.0.1"));
-
   runApp(const MyApp());
 }
 
@@ -25,15 +26,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => UserLoginProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => SignupProvider())
-
       ],
       child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,
         debugShowCheckedModeBanner: false,
         title: FlavorConfig.instance.flavorValues.appName!,
         theme: AppThemes.sotTheme,
+        // theme: AppThemes.sotTheme.copyWith(textTheme: textTheme!),
+
         initialRoute: AppNavigator.splash,
         home: const SplashScreen(),
       ),

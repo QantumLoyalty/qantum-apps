@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
 import 'package:qantum_apps/views/whats_on/widget/WhatsOnItem.dart';
 
 class WhatsOnScreen extends StatelessWidget {
@@ -8,7 +7,7 @@ class WhatsOnScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 10,right: 10),
+      padding: const EdgeInsets.only(left: 10,right: 10,bottom: 5),
       child: ListView.separated(
 
         itemBuilder: (context, index) {
