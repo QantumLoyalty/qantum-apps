@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/views/login/OTPScreen.dart';
-import 'package:qantum_apps/views/partners_offer/PartnerOfferDetailScreen.dart';
-import 'package:qantum_apps/views/promotions/PromotionDetailScreen.dart';
-import 'package:qantum_apps/views/signup/SignupScreen.dart';
+import 'package:qantum_apps/views/accounts/ClubAndMembership.dart';
+import 'package:qantum_apps/views/accounts/CommunicationPreference.dart';
+import 'package:qantum_apps/views/accounts/GamingPreferences.dart';
+import 'package:qantum_apps/views/accounts/PASStatement.dart';
+import 'package:qantum_apps/views/accounts/UserDetailScreen.dart';
 
+import '../../views/accounts/MyAccountScreen.dart';
 import '../../views/home/HomeScreen.dart';
 import '../../views/login/LoginScreen.dart';
-import '../../views/special_offers/SpecialOfferDetailScreen.dart';
+import '../../views/login/OTPScreen.dart';
+import '../../views/partners_offer/PartnerOfferDetailScreen.dart';
+import '../../views/promotions/PromotionDetailScreen.dart';
+import '../../views/signup/SignupScreen.dart';
 import '../../views/splash/SplashScreen.dart';
 import '../../views/whats_on/WhatsOnDetailScreen.dart';
 
@@ -20,6 +25,12 @@ class AppNavigator {
   static const String partnerOfferDetail = "/partnerOfferDetail";
   static const String whatsOnDetailScreen = "/whatsOnDetailScreen";
   static const String specialOfferDetailScreen = "/specialOfferDetailScreen";
+  static const String myAccountScreen = "/myAccountScreen";
+  static const String userDetailScreen = "/userDetailScreen";
+  static const String clubAndMembership = "/clubAndMembership";
+  static const String communicationPreference = "/communicationPreference";
+  static const String gamingPreferences = "/gamingPreferences";
+  static const String pasStatement = "/pasStatement";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -33,6 +44,14 @@ class AppNavigator {
       {Object? arguments}) {
     return Navigator.pushReplacementNamed(context, routeName,
         arguments: arguments);
+  }
+
+  // Method to navigate to a screen and clear backstack
+  static Future<void> navigateAndClearStack(
+      BuildContext context, String routeName,
+      {Object? arguments}) {
+    return Navigator.pushNamedAndRemoveUntil(
+        context, routeName, arguments: arguments, (value) => false);
   }
 
   // Method to go back to the previous screen
@@ -50,13 +69,17 @@ class AppNavigator {
       case login:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case otp:
-        return MaterialPageRoute(builder: (_) => const OTPScreen());
+        return MaterialPageRoute(
+            builder: (_) => OTPScreen(
+                  argument: args as Map<String, String>,
+                ));
       case signup:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
+        return MaterialPageRoute(
+            builder: (_) => SignupScreen(
+                  argument: args as Map<String, String>,
+                ));
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-      case promotionDetail:
-        return MaterialPageRoute(builder: (_) => const PromotionDetailScreen());
       case promotionDetail:
         return MaterialPageRoute(builder: (_) => const PromotionDetailScreen());
       case partnerOfferDetail:
@@ -64,9 +87,19 @@ class AppNavigator {
             builder: (_) => const PartnerOfferDetailScreen());
       case whatsOnDetailScreen:
         return MaterialPageRoute(builder: (_) => const WhatsOnDetailScreen());
-      case specialOfferDetailScreen:
+      case myAccountScreen:
+        return MaterialPageRoute(builder: (_) => MyAccountScreen());
+      case userDetailScreen:
+        return MaterialPageRoute(builder: (_) => const UserDetailScreen());
+      case clubAndMembership:
+        return MaterialPageRoute(builder: (_) => const ClubAndMembership());
+      case communicationPreference:
         return MaterialPageRoute(
-            builder: (_) => const SpecialOfferDetailScreen());
+            builder: (_) => const CommunicationPreference());
+      case gamingPreferences:
+        return MaterialPageRoute(builder: (_) => const GamingPreferences());
+      case pasStatement:
+        return MaterialPageRoute(builder: (_) => const PASStatement());
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());

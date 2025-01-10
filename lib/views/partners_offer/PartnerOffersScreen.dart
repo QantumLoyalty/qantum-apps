@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/navigation/AppNavigator.dart';
+import 'package:qantum_apps/views/partners_offer/widget/PartnerOfferItem.dart';
 
 import '../../core/utils/AppDimens.dart';
 
@@ -8,26 +9,17 @@ class PartnerOffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(AppDimens.screenPadding),
-            child: InkWell(
-                onTap: () {
-                  AppNavigator.navigateTo(
-                      context, AppNavigator.partnerOfferDetail);
-                },
-                child: Card(
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(2)),
-                  color: Colors.green,
-                  child: const SizedBox(
-                    height: 150,
-                  ),
-                ))),
-      ],
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          return const PartnerOfferItem();
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return AppDimens.shape_10;
+        },
+        itemCount: 10,
+      ),
     );
   }
 }

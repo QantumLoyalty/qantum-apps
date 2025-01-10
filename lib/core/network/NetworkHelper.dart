@@ -27,14 +27,44 @@ class NetworkHelper {
       required Map<String, dynamic> body}) async {
     late NetworkResponse networkResponse;
     try {
-      var response = await client.post(url, headers: headers, body: body);
+      var response = await client.post(url, headers: headers, body: jsonEncode(body));
       AppHelper.printMessage(response.toString());
+      if (response.statusCode == 200) {
+        networkResponse = NetworkResponse.success(
+            responseMessage: 'Success!!', response: jsonDecode(response.body));
+      } else {
+        networkResponse = NetworkResponse.error(
+            response: jsonDecode(response.body), responseMessage: 'Error!!');
+      }
     } catch (e) {
       networkResponse =
           NetworkResponse.error(response: null, responseMessage: e.toString());
     }
     return networkResponse;
   }
+
+  Future<NetworkResponse> putCall(
+      {required Uri url,
+        Map<String, String>? headers,
+        required Map<String, dynamic> body}) async {
+    late NetworkResponse networkResponse;
+    try {
+      var response = await client.put(url, headers: headers, body: jsonEncode(body));
+      AppHelper.printMessage(response.toString());
+      if (response.statusCode == 200) {
+        networkResponse = NetworkResponse.success(
+            responseMessage: 'Success!!', response: jsonDecode(response.body));
+      } else {
+        networkResponse = NetworkResponse.error(
+            response: jsonDecode(response.body), responseMessage: 'Error!!');
+      }
+    } catch (e) {
+      networkResponse =
+          NetworkResponse.error(response: null, responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
 
   Future<NetworkResponse> getCall(
       {required Uri url, Map<String, String>? headers}) async {

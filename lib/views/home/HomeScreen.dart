@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-import 'package:qantum_apps/core/utils/AppStrings.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
-import 'package:qantum_apps/views/home/widgets/HomeAppBar.dart';
-
+import 'package:qantum_apps/core/navigation/AppNavigator.dart';
+import 'package:qantum_apps/views/home/widgets/AllMenuItemsWidget.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../data/models/HomeNavigatorModel.dart';
+import '../../view_models/HomeProvider.dart';
+import '../../view_models/UserInfoProvider.dart';
+import '../common_widgets/AppScaffold.dart';
+import '../common_widgets/IconTextWidget.dart';
+import '../dialogs/MyBenefitsDialog.dart';
+import 'widgets/HomeAppBar.dart';
+import 'widgets/PointsBalanceWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,119 +21,179 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    if (context.mounted) {
+      Provider.of<UserInfoProvider>(context, listen: false).retrieveUserInfo();
+      //   Provider.of<UserInfoProvider>(context, listen: false).uploadDeviceToken();
+      Provider.of<UserInfoProvider>(context, listen: false)
+          .runFetchProfileTimer();
+      // Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(10),
-          child: Consumer<HomeProvider>(builder: (context, provider, child) {
+          child: Consumer2<HomeProvider, UserInfoProvider>(
+              builder: (context, provider, userInfoProvider, child) {
             return Column(
               children: [
                 const HomeAppBar(),
                 AppDimens.shape_20,
-                Expanded(child: provider.selectedScreen),
-                GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.5,
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 2,
-                  children: List.generate(provider.homeNavigationList.length,
-                      (index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1)),
-                      elevation: 1,
-                      color: Theme.of(context).buttonTheme.colorScheme?.primary,
-                      child: InkWell(
-                        onTap: () {
-                          provider.updateSelectedOption(index);
-                        },
-                        child: Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                provider.homeNavigationList[index].icon,
-                                size: 26,
+                Expanded(
+                    child: Stack(
+                  children: [
+                    Positioned.fill(
+                        child: provider
+                                    .homeNavigationList[provider.selectedOption]
+                                    .type ==
+                                HomeNavigatorModel.typeScreen
+                            ? provider.selectedScreen
+                            : provider
+                                .homeNavigationList[provider.prevSelectedOption]
+                                .screen),
+                    (provider.showPointsBalance)
+                        ? const PointsBalanceWidget()
+                        : Container(),
+                    (provider.showSeeAllMenu)
+                        ? const AllMenuItemsWidget()
+                        : Container()
+                  ],
+                )),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                  child: Column(
+                    children: [
+                      /// FIRST ROW --> POINTS BALANCE***SPECIAL OFFERS***PARTNER OFFERS <-- ///
+                      Row(
+                        children: List.generate(3, (index) {
+                          return Expanded(
+                              child: IconTextWidget(
+                            orientation: IconTextWidget.VERTICAL,
+                            icon: provider.homeNavigationList[index].icon,
+                            text: provider.homeNavigationList[index].name
+                                .replaceAll(" ", "\n")
+                                .toUpperCase(),
+                            textColor: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                            margin: const EdgeInsets.all(5),
+                            textSize: 13,
+                            decoration: BoxDecoration(
                                 color: (provider.selectedOption == index)
                                     ? Theme.of(context)
-                                        .bottomNavigationBarTheme
-                                        .selectedItemColor
-                                    : Theme.of(context)
-                                        .bottomNavigationBarTheme
-                                        .unselectedItemColor,
-                              ),
-                              AppDimens.shape_5,
-                              Text(
-                                provider.homeNavigationList[index].name
-                                    .toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight:
-                                        (provider.selectedOption == index)
-                                            ? FontWeight.w900
-                                            : FontWeight.w500,
-                                    color: (provider.selectedOption == index)
-                                        ? Theme.of(context)
-                                            .bottomNavigationBarTheme
-                                            .selectedItemColor
-                                        : Theme.of(context)
-                                            .bottomNavigationBarTheme
-                                            .unselectedItemColor),
-                              )
-                            ],
-                          ),
-                        ),
+                                        .iconTheme
+                                        .color!
+                                        .withValues(alpha: 0.5)
+                                    : Colors.transparent,
+                                border: Border.all(
+                                    color: Theme.of(context).iconTheme.color!,
+                                    width: 1.5),
+                                borderRadius: BorderRadius.circular(10)),
+                            onClick: () {
+                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                              checkAndHideSeeAllOptionMenu(provider);
+
+                              provider.updateSelectedOption(index);
+                            },
+                            onTapUp: (value) {
+                              /// HIDE POINTS BALANCE DIALOG
+                              if (provider.homeNavigationList[index].name ==
+                                  provider.homeNavigationList[0].name) {
+                                provider.updatePointsBalanceVisibility(false);
+                              }
+                            },
+                            onTapDown: (value) {
+                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                              checkAndHideSeeAllOptionMenu(provider);
+
+                              if (provider.homeNavigationList[index].name ==
+                                  provider.homeNavigationList[0].name) {
+                                /// SHOW POINTS BALANCE DIALOG
+                                provider.updatePointsBalanceVisibility(true);
+                              }
+                            },
+                          ));
+                        }),
                       ),
-                    );
-                  }),
+
+                      /// SECOND ROW --> MY VENUE***MY BENEFITS***MY ACCOUNT***SEE ALL <-- ///
+                      Row(
+                        children: List.generate(4, (index) {
+                          return Expanded(
+                              child: IconTextWidget(
+                            orientation: IconTextWidget.VERTICAL,
+                            icon: provider.homeNavigationList[index + 3].icon,
+                            text: provider.homeNavigationList[index + 3].name
+                                .replaceAll(" ", "\n")
+                                .toUpperCase(),
+                            margin: const EdgeInsets.all(5),
+                            textSize: 13,
+                            textColor: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                            decoration: BoxDecoration(
+                                color: (provider.selectedOption == index + 3)
+                                    ? Theme.of(context)
+                                        .iconTheme
+                                        .color!
+                                        .withValues(alpha: 0.5)
+                                    : Colors.transparent,
+                                border: Border.all(
+                                    color: Theme.of(context).iconTheme.color!,
+                                    width: 1.5),
+                                borderRadius: BorderRadius.circular(10)),
+                            onClick: () {
+                              if (provider.homeNavigationList[index + 3].name !=
+                                  provider.homeNavigationList[5].name) {
+                                provider.updateSelectedOption(index + 3);
+                              }
+
+                              if (provider.homeNavigationList[index + 3].name ==
+                                  provider.homeNavigationList[4].name) {
+                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                checkAndHideSeeAllOptionMenu(provider);
+
+                                /// SHOW MY BENEFITS DIALOG
+                                MyBenefitsDialog.getInstance()
+                                    .showBenefitsDialog(context);
+                              } else if (provider
+                                      .homeNavigationList[index + 3].name ==
+                                  provider.homeNavigationList[5].name) {
+                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                checkAndHideSeeAllOptionMenu(provider);
+
+                                AppNavigator.navigateTo(
+                                    context, AppNavigator.myAccountScreen);
+                              } else if (provider
+                                      .homeNavigationList[index + 3].name ==
+                                  provider.homeNavigationList[6].name) {
+                                provider.updateShowAllMenuVisibility(
+                                    !provider.showSeeAllMenu);
+                              }
+                            },
+                          ));
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
                 AppDimens.shape_10,
-                InkWell(
-                  onTap: () {
-                    provider.openMyDigitalCardScreen();
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).buttonTheme.colorScheme?.primary,
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 18, bottom: 18),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Card(
-                          child: Container(
-                            width: 60,
-                            height: 40,
-                            color: Colors.red,
-                          ),
-                        ),
-                        AppDimens.shape_10,
-                        Text(
-                          AppStrings.txtMyDigitalCard.toUpperCase(),
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: (provider.selectedOption == -2)
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                              color: (provider.selectedOption == -2)
-                                  ? Theme.of(context)
-                                  .bottomNavigationBarTheme
-                                  .selectedItemColor
-                                  : Theme.of(context)
-                                  .bottomNavigationBarTheme
-                                  .unselectedItemColor),
-                        )
-                      ],
-                    ),
-                  ),
-                )
               ],
             );
           }),
         ),
       ),
     );
+  }
+
+  checkAndHideSeeAllOptionMenu(HomeProvider provider) {
+    if (provider.showSeeAllMenu) {
+      provider.updateShowAllMenuVisibility(false);
+    }
   }
 }

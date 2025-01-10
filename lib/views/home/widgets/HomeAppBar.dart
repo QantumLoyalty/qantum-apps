@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
 import 'package:qantum_apps/core/utils/AppDimens.dart';
+import 'package:qantum_apps/core/utils/AppIcons.dart';
 import 'package:qantum_apps/core/utils/AppStrings.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
+import 'package:qantum_apps/view_models/UserInfoProvider.dart';
+import 'package:qantum_apps/views/dialogs/MyProfileDialog.dart';
+
+import '../../dialogs/DigitalCardDialog.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -12,106 +17,111 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: AppDimens.appBarHeight,
+      height: 80,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: Divider(thickness: 3,color: Theme.of(context).dividerColor,),
+          AppDimens.shape_10,
+          const Divider(
+            thickness: 0.5,
+            height: 0.5,
           ),
-//          AppDimens.shape_10,
-
-
+          AppDimens.shape_10,
           Expanded(
-            child: Stack(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Align(
-                  alignment: Alignment.center,
+                Expanded(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                          text: "Hello ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 18,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ),
-                        TextSpan(
-                          text: "USER",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ),
-                      ])),
-                      RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                              text: "Valued ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 12,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
+                      Consumer<UserInfoProvider>(
+                          builder: (context, provider, child) {
+                        return InkWell(
+                          onTap: () {
+                            DigitalCardDialog.getInstance()
+                                .showDigitalCardDialog(context);
+                          },
+                          child: SizedBox(
+                            width: 80,
+                            height: 50,
+                            child: Stack(
+                              children: [
+                                (provider.getUserInfo != null)
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          AppIcons.getCardBackground(provider
+                                              .getUserInfo!.membershipCategory),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Container(),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    AppStrings.txtMyCard.toUpperCase(),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor),
+                                  ),
+                                )
+                              ],
                             ),
-                            TextSpan(
-                              text: "123456",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
-                            ),
-                          ])),
+                          ),
+                        );
+                      })
                     ],
                   ),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Consumer<HomeProvider>(builder: (context, provider, child) {
-                    return InkWell(
-                      onTap: () {
-                        provider.openMyProfileScreen();
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person_2_outlined,
-                            color: provider.selectedOption == -1
-                                ? AppColors.white
-                                : Theme.of(context).textSelectionTheme.selectionColor,
-                            size: 18,
-                          ),
-                          Text(
-                            AppStrings.txtMyProfile.toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: provider.selectedOption == -1
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                                color: provider.selectedOption == -1
-                                    ? AppColors.white
-                                    : Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor),
-                          )
-                        ],
+                Expanded(
+                  child: Image.asset(
+                    AppIcons.app_logo,
+                    width: 80,
+                    height: 80,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Consumer<HomeProvider>(
+                            builder: (context, provider, child) {
+                          return InkWell(
+                            onTap: () {
+                              //   provider.openMyProfileScreen();
+                              MyProfileDialog.getInstance()
+                                  .showMyProfileDialog(context);
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  AppIcons.my_profile,
+                                  width: 36,
+                                  height: 36,
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
+                                Text(
+                                  AppStrings.txtMyProfile.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.normal,
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor),
+                                )
+                              ],
+                            ),
+                          );
+                        }),
                       ),
-                    );
-                  }),
+                    ],
+                  ),
                 )
               ],
             ),

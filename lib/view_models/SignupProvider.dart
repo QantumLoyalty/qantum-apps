@@ -6,6 +6,7 @@ class SignupProvider extends ChangeNotifier {
   String? get selectedGender => _selectedGender;
   static var male = "Male";
   static var female = "Female";
+  static var nonbinary = "Non-Binary";
 
   updateGender(String value) {
     WidgetsBinding.instance.addPostFrameCallback((_) {

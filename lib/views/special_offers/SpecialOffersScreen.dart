@@ -15,11 +15,7 @@ class SpecialOffersScreen extends StatelessWidget {
           return const SpecialOfferItem();
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            height: 1,
-            color: Theme.of(context).primaryColor,
-          );
+          return AppDimens.shape_10;
         },
         itemCount: 10,
       ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894720990633",
+    "project_id": "qantum-apps",
+    "storage_bucket": "qantum-apps.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894720990633:android:2e802d56fed8d28eb1f8b8",
+        "android_client_info": {
+          "package_name": "com.au.starhotels.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIf_18pMQ-6LpSn2YAVNCs0CN9nCAP-HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

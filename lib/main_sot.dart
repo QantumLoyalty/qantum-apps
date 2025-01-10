@@ -7,6 +7,7 @@ import 'package:qantum_apps/views/splash/SplashScreen.dart';
 
 import 'core/flavors_config/app_themes.dart';
 import 'core/navigation/AppNavigator.dart';
+import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 
 //TextTheme? textTheme;
@@ -15,6 +16,7 @@ void main() async {
       flavor: Flavor.senseOfTaste,
       flavorValues:
           FlavorValues(appName: "Sense Of Taste", appVersion: "0.0.1"));
+//  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,7 +30,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => UserLoginProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
-        ChangeNotifierProvider(create: (context) => SignupProvider())
+        ChangeNotifierProvider(create: (context) => SignupProvider()),
+        ChangeNotifierProvider(create: (context) => UserInfoProvider())
       ],
       child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,

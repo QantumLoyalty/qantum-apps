@@ -1,0 +1,5 @@
+package com.au.starhotels.qantum_apps
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()
