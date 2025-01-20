@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Applogo(),
+                      Applogo(),
                       Text(
                         AppStrings.msgPleaseRegister,
                         style: TextStyle(

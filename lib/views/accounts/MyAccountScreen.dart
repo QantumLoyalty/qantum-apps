@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
 
 import '../../core/navigation/AppNavigator.dart';
-import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
 import '../../view_models/MyAccountProvider.dart';
+import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class MyAccountScreen extends StatefulWidget {
@@ -20,8 +20,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
+    return AppScaffold(
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
@@ -50,7 +49,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context)
+                        .buttonTheme
+                        .colorScheme!
+                        .primary
+                        .withValues(alpha: 0.2),
                   ),
                   child: ListView.builder(
                     itemBuilder: (context, index) {

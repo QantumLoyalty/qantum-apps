@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../data/models/NetworkResponse.dart';
-import '../utils/AppHelper.dart';
+import '../mixins/logging_mixin.dart';
 
-class NetworkHelper {
+class NetworkHelper with LoggingMixin{
   static NetworkHelper? _instance;
   static late http.Client client;
 
@@ -27,8 +27,9 @@ class NetworkHelper {
       required Map<String, dynamic> body}) async {
     late NetworkResponse networkResponse;
     try {
+      logEvent("URL:: $url BODY:: $body HEADERS:: $headers");
       var response = await client.post(url, headers: headers, body: jsonEncode(body));
-      AppHelper.printMessage(response.toString());
+      logEvent(response.toString());
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -49,8 +50,9 @@ class NetworkHelper {
         required Map<String, dynamic> body}) async {
     late NetworkResponse networkResponse;
     try {
+      logEvent("URL:: $url BODY:: $body HEADERS:: $headers");
       var response = await client.put(url, headers: headers, body: jsonEncode(body));
-      AppHelper.printMessage(response.toString());
+      logEvent(response.toString());
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -70,8 +72,9 @@ class NetworkHelper {
       {required Uri url, Map<String, String>? headers}) async {
     late NetworkResponse networkResponse;
     try {
+      logEvent("URL:: $url HEADERS:: $headers");
       var response = await client.get(url, headers: headers);
-      AppHelper.printMessage(response.body);
+      logEvent(response.body);
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));

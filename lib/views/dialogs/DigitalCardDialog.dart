@@ -51,7 +51,7 @@ class DigitalCardDialog {
                               Positioned.fill(
                                 child: Image.asset(
                                   AppIcons.getCardBackground(
-                                      provider.getUserInfo!.membershipCategory),
+                                      provider.getUserInfo!.statusTier),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -62,23 +62,41 @@ class DigitalCardDialog {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     AppDimens.shape_20,
-                                    QrImageView(
-                                      data:
-                                          '${provider.getUserInfo!.cardNumber}',
-                                      backgroundColor: AppColors.white,
-                                      size: 180,
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: QrImageView(
+                                        data:
+                                            '${provider.getUserInfo!.cardNumber}',
+                                        backgroundColor: AppColors.white,
+                                        size: 180,
+                                      ),
                                     ),
                                     AppDimens.shape_20,
                                     Text(
-                                      '${provider.getUserInfo!.membershipCategory}',
+                                      (provider.getUserInfo!.statusTier??"").toUpperCase(),
                                       style: TextStyle(
+                                          shadows: [
+                                            Shadow(
+                                              offset: const Offset(1.0, 1.0),
+                                              blurRadius: 3.0,
+                                              color:AppColors.black.withValues(alpha: 0.5),
+                                            )
+                                          ],
                                           color: AppColors.white,
                                           fontSize: 32,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       AppStrings.txtMembership,
+
                                       style: TextStyle(
+                                          shadows: [
+                                            Shadow(
+                                              offset: const Offset(1.0, 1.0),
+                                              blurRadius: 3.0,
+                                              color:AppColors.black.withValues(alpha: 0.5),
+                                            )
+                                          ],
                                           color: AppColors.white, fontSize: 18),
                                     ),
                                   ],
@@ -96,7 +114,7 @@ class DigitalCardDialog {
                             backgroundColor: Theme.of(context).primaryColor,
                             backgroundImage: ExactAssetImage(
                               AppIcons.getCardBackground(
-                                  provider.getUserInfo!.membershipCategory),
+                                  provider.getUserInfo!.statusTier),
                             ),
                             radius: 30,
                             child: IconButton(

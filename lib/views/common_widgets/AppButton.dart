@@ -16,6 +16,8 @@ class AppButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: TextButton(
           style: ButtonStyle(
+              shadowColor:
+                  WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
               elevation: const WidgetStatePropertyAll(20),
               shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80))),

@@ -50,8 +50,8 @@ class HomeAppBar extends StatelessWidget {
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
                                         child: Image.asset(
-                                          AppIcons.getCardBackground(provider
-                                              .getUserInfo!.membershipCategory),
+                                          AppIcons.getCardBackground(
+                                              provider.getUserInfo!.statusTier),
                                           fit: BoxFit.cover,
                                         ),
                                       )
@@ -61,6 +61,13 @@ class HomeAppBar extends StatelessWidget {
                                   child: Text(
                                     AppStrings.txtMyCard.toUpperCase(),
                                     style: TextStyle(
+                                        shadows: [
+                                          Shadow(
+                                            offset: const Offset(1.0, 1.0),
+                                            blurRadius: 3.0,
+                                            color:AppColors.black.withValues(alpha: 0.5),
+                                          )
+                                        ],
                                         fontSize: 12,
                                         color: Theme.of(context)
                                             .textSelectionTheme

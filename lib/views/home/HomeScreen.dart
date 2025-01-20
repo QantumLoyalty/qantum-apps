@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/views/home/widgets/AllMenuItemsWidget.dart';
+import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../data/models/HomeNavigatorModel.dart';
 import '../../view_models/HomeProvider.dart';
@@ -9,6 +8,7 @@ import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppScaffold.dart';
 import '../common_widgets/IconTextWidget.dart';
 import '../dialogs/MyBenefitsDialog.dart';
+import 'widgets/AllMenuItemsWidget.dart';
 import 'widgets/HomeAppBar.dart';
 import 'widgets/PointsBalanceWidget.dart';
 

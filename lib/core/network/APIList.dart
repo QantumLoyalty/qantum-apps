@@ -13,7 +13,17 @@ class APIList {
 
   static get GET_PROFILE => BASE_URL + "user/get-profile";
 
+  static get UPDATE_USER_INFO => BASE_URL + "user/update-profile";
+
+  static get SEND_OTP_PROFILE => BASE_URL + "user/otp-generate";
+
+  static get RESEND_OTP_PROFILE => BASE_URL + "user/otp-again";
+
+  static get VERIFY_OTP_PROFILE => BASE_URL + "user/profile-verify";
+
   static get UPLOAD_DEVICE_TOKEN => BASE_URL + "user/device-token";
 
   static get CANCEL_ACCOUNT => BASE_URL + "user/cancel";
+
+
 }

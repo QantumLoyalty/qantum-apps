@@ -26,16 +26,13 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                 children: [
                   StaggeredGridTile.count(
                       crossAxisCellCount: 2,
-                      mainAxisCellCount: 1,
+                      mainAxisCellCount: 1.3,
                       child: Card(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: AspectRatio(
-                            aspectRatio: 1.5,
-                            child: Image.asset(
-                              'assets/common/venue_placeholder_1.png',
-                              fit: BoxFit.fitWidth,
-                            ),
+                          child: Image.asset(
+                            'assets/common/venue_placeholder_1.png',
+                            fit: BoxFit.cover,
                           ),
                         ),
                       )),
@@ -64,7 +61,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                       ))),
                   StaggeredGridTile.count(
                       crossAxisCellCount: 2,
-                      mainAxisCellCount: 1,
+                      mainAxisCellCount: 1.3,
                       child: Card(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),

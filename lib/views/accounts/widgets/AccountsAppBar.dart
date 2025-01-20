@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/AppDimens.dart';
+import '../../../core/utils/AppIcons.dart';
 import '../../../core/utils/AppStrings.dart';
 
 class AccountsAppBar extends StatelessWidget {
@@ -14,7 +15,7 @@ class AccountsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(top: 25,bottom: 25,right: 25),
+      padding: const EdgeInsets.only(top: 25, bottom: 25, right: 25),
       child: Stack(
         children: [
           showBackButton
@@ -34,11 +35,10 @@ class AccountsAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 (title == AppStrings.txtMyAccount)
-                    ? Icon(
-                        Icons.account_circle,
-                        size: 26,
-                        color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                    ? Image.asset(
+                        AppIcons.my_account,
+                        width: 24,
+                        height: 24,
                       )
                     : Container(),
                 AppDimens.shape_10,

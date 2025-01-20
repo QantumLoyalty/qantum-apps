@@ -118,6 +118,60 @@ class UserModel {
     return data;
   }
 
+  copyWith(
+      {String? id,
+      String? firstName,
+      String? lastName,
+      String? email,
+      String? dateOfBirth,
+      String? gender,
+      String? mobile,
+      String? postCode,
+      int? bluizeId,
+      String? cardNumber,
+      String? address,
+      String? suburb,
+      String? state,
+      String? dateJoined,
+      num? pointsBalance,
+      num? pointsValue,
+      num? statusPoints,
+      String? statusTier,
+      num? requiredStatusPointsForNextTier,
+      String? nextStatusTier,
+      String? membershipType,
+      String? membershipCategory,
+      num? accountAvailableBalance,
+      String? accountType}) {
+    return UserModel(
+        id: id ?? this.id,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        email: email ?? this.email,
+        dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+        gender: gender ?? this.gender,
+        mobile: mobile ?? this.mobile,
+        postCode: postCode ?? this.postCode,
+        bluizeId: bluizeId ?? this.bluizeId,
+        cardNumber: cardNumber ?? this.cardNumber,
+        address: address ?? this.address,
+        suburb: suburb ?? this.suburb,
+        state: state ?? this.state,
+        dateJoined: dateJoined ?? this.dateJoined,
+        pointsBalance: pointsBalance ?? this.pointsBalance,
+        pointsValue: pointsValue ?? this.pointsValue,
+        statusPoints: statusPoints ?? this.statusPoints,
+        statusTier: statusTier ?? this.statusTier,
+        requiredStatusPointsForNextTier: requiredStatusPointsForNextTier ??
+            this.requiredStatusPointsForNextTier,
+        nextStatusTier: nextStatusTier ?? this.nextStatusTier,
+        membershipType: membershipType ?? this.membershipType,
+        membershipCategory: membershipCategory ?? this.membershipCategory,
+        accountAvailableBalance:
+            accountAvailableBalance ?? this.accountAvailableBalance,
+        accountType: accountType ?? this.accountType);
+  }
+
   @override
   String toString() {
     return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType}';

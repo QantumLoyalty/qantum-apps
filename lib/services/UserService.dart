@@ -1,6 +1,5 @@
-import 'package:qantum_apps/core/network/NetworkHelper.dart';
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
-
+import '../core/network/NetworkHelper.dart';
+import '../data/models/NetworkResponse.dart';
 import '../core/network/APIList.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/repositories/UserRepository.dart';
@@ -130,6 +129,86 @@ class UserService implements UserRepository {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
       }, body: {});
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> sendOTPAccount(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.SEND_OTP_PROFILE),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> resendOTPAccount(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.RESEND_OTP_PROFILE),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> verifyOTPAccount(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.VERIFY_OTP_PROFILE),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> updateUserProfile(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.putCall(
+          url: Uri.parse(APIList.UPDATE_USER_INFO),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: params);
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());

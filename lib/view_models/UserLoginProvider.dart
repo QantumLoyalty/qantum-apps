@@ -147,7 +147,10 @@ class UserLoginProvider extends ChangeNotifier {
     });
   }
 
-  verifyOTP({required String userId, required String otp, required String countryCode}) async {
+  verifyOTP(
+      {required String userId,
+      required String otp,
+      required String countryCode}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -178,6 +181,7 @@ class UserLoginProvider extends ChangeNotifier {
               "PARSED USER DATA::: ${UserModel.fromJson(data)}");
           await sharedPreferencesHelper.saveUserData(UserModel.fromJson(data));
           await sharedPreferencesHelper.saveAuthToken(response['token']);
+          await sharedPreferencesHelper.saveCountryCode(countryCode);
         }
       }
     } catch (e) {

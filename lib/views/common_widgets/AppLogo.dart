@@ -4,7 +4,9 @@ import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
 
 class Applogo extends StatelessWidget {
-  const Applogo({super.key});
+  bool? hideTopLine = false;
+
+  Applogo({super.key, this.hideTopLine});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +14,18 @@ class Applogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         AppDimens.shape_10,
-        const Divider(
-          thickness: 0.5,
-          height: 0.1,
-        ),
-        AppDimens.shape_20,
+        (hideTopLine != null && hideTopLine!)
+            ? Container()
+            : const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Divider(
+                    thickness: 0.5,
+                    height: 0.1,
+                  ),
+                  AppDimens.shape_20
+                ],
+              ),
         Image.asset(
           AppIcons.app_logo,
           width: 64,

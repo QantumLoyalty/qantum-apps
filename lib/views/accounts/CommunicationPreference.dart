@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
+import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class CommunicationPreference extends StatefulWidget {
@@ -18,8 +19,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
+    return AppScaffold(
       body: SafeArea(
         child: Column(
           children: [
@@ -34,12 +34,17 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context)
+                    .buttonTheme
+                    .colorScheme!
+                    .primary
+                    .withValues(alpha: 0.2),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
+                    AppDimens.shape_5,
                     Text(
                       "Keeping in touch allows us to offer prizes,\nrewards & promotions.",
                       textAlign: TextAlign.center,
@@ -49,7 +54,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                               .selectionColor,
                           fontSize: 14),
                     ),
-                    AppDimens.shape_10,
+                    AppDimens.shape_15,
                     Text(
                       "Below you can select how we can keep in touch with you.",
                       textAlign: TextAlign.center,
@@ -62,13 +67,14 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                     AppDimens.shape_15,
                     Card(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white.withValues(alpha: 0.15),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            AppDimens.shape_5,
                             Text(
                               AppStrings.txtCommunicationChannel.toUpperCase(),
                               style: TextStyle(
@@ -105,7 +111,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 });
                               },
                               title: Text(
-                                "SMS",
+                                AppStrings.txtSMS,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .textSelectionTheme
@@ -132,7 +138,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 });
                               },
                               title: Text(
-                                "Email",
+                                AppStrings.txtEmail,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .textSelectionTheme

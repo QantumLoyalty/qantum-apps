@@ -5,7 +5,9 @@ import 'package:qantum_apps/views/accounts/GamingPreferences.dart';
 import 'package:qantum_apps/views/accounts/PASStatement.dart';
 import 'package:qantum_apps/views/accounts/UserDetailScreen.dart';
 
+import '../../views/accounts/EditUserDetailsScreen.dart';
 import '../../views/accounts/MyAccountScreen.dart';
+import '../../views/accounts/VerifyOTPAccount.dart';
 import '../../views/home/HomeScreen.dart';
 import '../../views/login/LoginScreen.dart';
 import '../../views/login/OTPScreen.dart';
@@ -31,6 +33,8 @@ class AppNavigator {
   static const String communicationPreference = "/communicationPreference";
   static const String gamingPreferences = "/gamingPreferences";
   static const String pasStatement = "/pasStatement";
+  static const String verifyOTPAccount = "/verifyOTPAccount";
+  static const String editUserDetailsScreen = "/editUserDetailsScreen";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -97,9 +101,13 @@ class AppNavigator {
         return MaterialPageRoute(
             builder: (_) => const CommunicationPreference());
       case gamingPreferences:
-        return MaterialPageRoute(builder: (_) => const GamingPreferences());
+        return MaterialPageRoute(builder: (_) => GamingPreferences());
       case pasStatement:
-        return MaterialPageRoute(builder: (_) => const PASStatement());
+        return MaterialPageRoute(builder: (_) => PASStatement());
+      case verifyOTPAccount:
+        return MaterialPageRoute(builder: (_) => VerifyOTPAccount());
+      case editUserDetailsScreen:
+        return MaterialPageRoute(builder: (_) => EditUserDetailsScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());

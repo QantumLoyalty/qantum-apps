@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/ErrorDialog.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
@@ -66,10 +67,13 @@ class _LoginScreenState extends State<LoginScreen> {
               provider.networkMessage != null) {
             Future.delayed(Duration.zero, () {
               if (provider.networkError!) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
+                /* WidgetsBinding.instance.addPostFrameCallback((_) {
                   AppHelper.showErrorMessage(
                       context, provider.networkMessage ?? "");
-                });
+                });*/
+                ErrorDialog.getInstance().showErrorDialog(context,
+                    message: provider.networkMessage ??
+                        "Ooppss.. something went wrong, please try again.");
               }
               /* else {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -92,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Applogo(),
+                      Applogo(),
                       Text(
                         AppStrings.txtWelcome,
                         style: TextStyle(

@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
-import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import '../../core/navigation/AppNavigator.dart';
+import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
+import '../../data/local/SharedPreferenceHelper.dart';
+import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/IconTextWidget.dart';
 
 class MyProfileDialog {
@@ -128,14 +128,18 @@ class MyProfileDialog {
                                               minimumSize: const Size(80, 40),
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(10)),
+                                                      BorderRadius.circular(
+                                                          10)),
                                               side: BorderSide(
                                                   width: 1,
                                                   color: Theme.of(context)
                                                       .buttonTheme
                                                       .colorScheme!
                                                       .primary)),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            AppNavigator.navigateTo(context,
+                                                AppNavigator.userDetailScreen);
+                                          },
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Column(
@@ -164,7 +168,8 @@ class MyProfileDialog {
                                           )),
                                       AppDimens.shape_15,
                                       Text(
-                                        AppStrings.txtStatusCreditsReactNextLevel
+                                        AppStrings
+                                            .txtStatusCreditsReactNextLevel
                                             .toUpperCase(),
                                         style: TextStyle(
                                             color: Theme.of(context)
@@ -184,11 +189,21 @@ class MyProfileDialog {
                                                   Countup(
                                                       begin: 0,
                                                       // end: (provider.getUserInfo!.pointsValue??0).toDouble(),
-                                                      end: 689,
+                                                      end: (provider.getUserInfo !=
+                                                                  null &&
+                                                              provider.getUserInfo!
+                                                                      .statusPoints !=
+                                                                  null)
+                                                          ? provider
+                                                              .getUserInfo!
+                                                              .statusPoints!
+                                                              .toDouble()
+                                                          : 0,
                                                       duration: const Duration(
                                                           seconds: 1),
                                                       style: TextStyle(
-                                                          color: Theme.of(context)
+                                                          color: Theme.of(
+                                                                  context)
                                                               .textSelectionTheme
                                                               .selectionColor,
                                                           fontWeight:
@@ -198,18 +213,20 @@ class MyProfileDialog {
                                                     textAlign: TextAlign.center,
                                                     text: TextSpan(children: [
                                                       TextSpan(
-                                                          text: 'of 1000',
+                                                          text:
+                                                              'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
                                                           style: TextStyle(
                                                               color: Theme.of(
                                                                       context)
                                                                   .textSelectionTheme
                                                                   .selectionColor,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               fontSize: 20)),
                                                       TextSpan(
                                                           text:
-                                                              '\n\nStatus credits\nfor Platinum'
+                                                              '\n\nStatus credits\nfor ${provider.getUserInfo != null ? provider.getUserInfo!.nextStatusTier ?? "" : ""}'
                                                                   .toUpperCase(),
                                                           style: TextStyle(
                                                               color: Theme.of(
@@ -217,7 +234,8 @@ class MyProfileDialog {
                                                                   .textSelectionTheme
                                                                   .selectionColor,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               fontSize: 8)),
                                                     ]),
                                                   ),
@@ -253,23 +271,53 @@ class MyProfileDialog {
                                                       color: AppColors.white,
                                                     ),
                                                     RangePointer(
-                                                      value: 70,
+                                                      value: getCircularGraphValue(
+                                                          provider.getUserInfo !=
+                                                                  null
+                                                              ? provider
+                                                                  .getUserInfo!
+                                                                  .statusPoints
+                                                              : 0,
+                                                          provider.getUserInfo !=
+                                                                  null
+                                                              ? provider
+                                                                  .getUserInfo!
+                                                                  .requiredStatusPointsForNextTier
+                                                              : 0),
                                                       width: 0.05,
                                                       sizeUnit:
                                                           GaugeSizeUnit.factor,
-                                                      cornerStyle:
-                                                          CornerStyle.startCurve,
+                                                      cornerStyle: CornerStyle
+                                                          .startCurve,
                                                       enableAnimation: true,
                                                       color: AppColors.white,
                                                     ),
                                                     MarkerPointer(
                                                       enableAnimation: true,
-                                                      value: 70,
+                                                      value: getCircularGraphValue(
+                                                          provider.getUserInfo !=
+                                                                  null
+                                                              ? provider
+                                                                  .getUserInfo!
+                                                                  .statusPoints
+                                                              : 0,
+                                                          provider.getUserInfo !=
+                                                                  null
+                                                              ? provider
+                                                                  .getUserInfo!
+                                                                  .requiredStatusPointsForNextTier
+                                                              : 0),
                                                       markerWidth: 25,
                                                       markerHeight: 25,
                                                       markerType:
                                                           MarkerType.image,
-                                                      color: AppColors.white,
+                                                      color: (provider.getUserInfo !=
+                                                                  null &&
+                                                              provider.getUserInfo!
+                                                                      .statusPoints !=
+                                                                  null)
+                                                          ? AppColors.white
+                                                          : Colors.transparent,
                                                       imageUrl:
                                                           'assets/common/play.png',
                                                     )
@@ -486,5 +534,14 @@ class MyProfileDialog {
             ),
           );
         });
+  }
+
+  double getCircularGraphValue(num? currentPoint, num? requiredPoints) {
+    AppHelper.printMessage(
+        "Current Point --> $currentPoint Required Point --> $requiredPoints");
+    if (currentPoint != null && requiredPoints != null) {
+      return (currentPoint / (currentPoint + requiredPoints)) * 100;
+    }
+    return 0;
   }
 }

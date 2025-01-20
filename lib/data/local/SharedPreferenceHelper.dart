@@ -11,6 +11,7 @@ class SharedPreferenceHelper {
 
   static String USER = "user";
   static String AUTH_TOKEN = "authToken";
+  static String COUNTRY_CODE = "countryCode";
 
   static Future<SharedPreferenceHelper> getInstance() async {
     _instance ??= SharedPreferenceHelper._internal();
@@ -19,7 +20,7 @@ class SharedPreferenceHelper {
   }
 
   saveUserData(UserModel user) async {
-   await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
+    await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
   }
 
   UserModel? getUserData() {
@@ -32,6 +33,17 @@ class SharedPreferenceHelper {
 
   saveAuthToken(String authToken) {
     _sharedPreferences!.setString(AUTH_TOKEN, authToken);
+  }
+
+  saveCountryCode(String countryCode) {
+    _sharedPreferences!.setString(COUNTRY_CODE, countryCode);
+  }
+
+  getCountryCode() {
+    if (_sharedPreferences!.containsKey(COUNTRY_CODE)) {
+      return _sharedPreferences!.getString(COUNTRY_CODE)!;
+    }
+    return null;
   }
 
   String? getAuthToken() {

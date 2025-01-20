@@ -50,7 +50,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget> {
                     fontWeight: FontWeight.w500),
               ),
               Text(
-                "${(provider.getUserInfo!.pointsValue ?? 0).toStringAsFixed(2)} POINTS",
+                "${(provider.getUserInfo!.pointsValue ?? 0)} POINTS",
                 style: TextStyle(
                     fontSize: 12,
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),

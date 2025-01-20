@@ -16,4 +16,12 @@ abstract class UserRepository {
   Future<NetworkResponse> cancelAccount();
 
   Future<NetworkResponse> fetchUserProfile();
+
+  Future<NetworkResponse> updateUserProfile(Map<String, dynamic> params);
+
+  Future<NetworkResponse> sendOTPAccount(Map<String, dynamic> params);
+
+  Future<NetworkResponse> resendOTPAccount(Map<String, dynamic> params);
+
+  Future<NetworkResponse> verifyOTPAccount(Map<String, dynamic> params);
 }

@@ -59,7 +59,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Applogo(),
+                    Applogo(),
                     Text(
                       AppStrings.txtEnterVerificationCode,
                       style: TextStyle(
