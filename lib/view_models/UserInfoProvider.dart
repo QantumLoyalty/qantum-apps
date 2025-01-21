@@ -365,6 +365,27 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  updateCommunicationPreferences({bool? sms, bool? email}) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        notifyListeners();
+      });
+      Map<String, dynamic> params = {};
+      if (sms != null) {}
+      if (email != null) {}
+      NetworkResponse networkResponse =
+          await UserService.getInstance().updateUserProfile(params);
+    } catch (e) {
+      logEvent("update info error: $e");
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
   updateTempUser({String? name, String? dob, String? email, String? phone}) {
     if (name != null && name.isNotEmpty) {
       if (name.contains(" ")) {
