@@ -90,134 +90,174 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(AppDimens.screenPadding),
             child: Stack(
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Applogo(),
-                      Text(
-                        AppStrings.txtWelcome,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,
-                        ),
-                      ),
-                      AppDimens.shape_10,
-                      Text(
-                        AppStrings.txtEnterYourNumber,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,
-                        ),
-                      ),
-                      AppDimens.shape_30,
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(AppStrings.txtMobileNumber,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor,
-                            )),
-                      ),
-                      AppDimens.shape_10,
-                      Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 0.5,
-                                color: Theme.of(context).dividerColor),
-                            color: Theme.of(context).cardColor,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
+                Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CountryCodePicker(
-                              favorite: const ["AU", "IN"],
-                              closeIcon: Icon(
-                                Icons.close,
-                                color: AppColors.black,
+                            Applogo(),
+                            Text(
+                              AppStrings.txtWelcome,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor,
                               ),
-                              textStyle: TextStyle(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
-                              onChanged: (code) {
-                                setState(() {
-                                  countryCode = code.dialCode!;
-                                  AppHelper.printMessage(
-                                      "Selected country::${code.dialCode}");
-                                });
-                              },
-                              initialSelection: "AU",
                             ),
-                            SizedBox(
-                                height: 60,
-                                child: VerticalDivider(
-                                  width: 0.2,
-                                  thickness: 0.2,
-                                  color: Theme.of(context).dividerColor,
-                                )),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  maxLines: 1,
-                                  maxLength: 10,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  controller: _phoneController,
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor),
-                                  decoration: InputDecoration(
-                                    counterText: "",
-                                    hintText: "0400000000",
-                                    hintStyle: TextStyle(
-                                        color: Theme.of(context).hintColor),
-                                    fillColor: Colors.transparent,
-                                    filled: true,
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                  ),
-                                ),
+                            AppDimens.shape_10,
+                            Text(
+                              AppStrings.txtEnterYourNumber,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor,
                               ),
+                            ),
+                            AppDimens.shape_30,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(AppStrings.txtMobileNumber,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor,
+                                  )),
+                            ),
+                            AppDimens.shape_10,
+                            Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 0.5,
+                                      color: Theme.of(context).dividerColor),
+                                  color: Theme.of(context).cardColor,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CountryCodePicker(
+                                    favorite: const ["AU", "IN"],
+                                    closeIcon: Icon(
+                                      Icons.close,
+                                      color: AppColors.black,
+                                    ),
+                                    textStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionHandleColor),
+                                    onChanged: (code) {
+                                      setState(() {
+                                        countryCode = code.dialCode!;
+                                        AppHelper.printMessage(
+                                            "Selected country::${code.dialCode}");
+                                      });
+                                    },
+                                    initialSelection: "AU",
+                                  ),
+                                  SizedBox(
+                                      height: 60,
+                                      child: VerticalDivider(
+                                        width: 0.2,
+                                        thickness: 0.2,
+                                        color: Theme.of(context).dividerColor,
+                                      )),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        maxLines: 1,
+                                        maxLength: 10,
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        controller: _phoneController,
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionHandleColor),
+                                        decoration: InputDecoration(
+                                          counterText: "",
+                                          hintText: "0400000000",
+                                          hintStyle: TextStyle(
+                                              color:
+                                                  Theme.of(context).hintColor),
+                                          fillColor: Colors.transparent,
+                                          filled: true,
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            AppDimens.getCustomBoxShape(30),
+                            AppButton(
+                              text: AppStrings.txtOk.toUpperCase(),
+                              onClick: () {
+                                if (_phoneController.text.isNotEmpty &&
+                                    AppHelper.verifyPhoneNumber(
+                                        _phoneController.text)) {
+                                  provider.login(
+                                      "$countryCode${_phoneController.text}");
+                                } else {
+                                  AppHelper.showErrorMessage(context,
+                                      AppStrings.msgIncorrectPhoneNumber);
+                                }
+                              },
                             ),
                           ],
                         ),
                       ),
-                      AppDimens.getCustomBoxShape(30),
-                      AppButton(
-                        text: AppStrings.txtOk,
-                        onClick: () {
-                          if (_phoneController.text.isNotEmpty &&
-                              AppHelper.verifyPhoneNumber(
-                                  _phoneController.text)) {
-                            provider
-                                .login("$countryCode${_phoneController.text}");
-                          } else {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectPhoneNumber);
-                          }
-                        },
+                    ),
+                    AppDimens.shape_10,
+                    InkWell(
+                      onTap: () {
+                        AppNavigator.navigateTo(
+                            context, AppNavigator.recoverAccountScreen);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 10, bottom: 10),
+                        child: RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              text: "Change",
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .buttonTheme
+                                      .colorScheme!
+                                      .primary,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 14)),
+                          TextSpan(
+                              text: " my mobile",
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .buttonTheme
+                                      .colorScheme!
+                                      .primary,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14)),
+                        ])),
                       ),
-                    ],
-                  ),
+                    ),
+                    AppDimens.shape_10,
+                  ],
                 ),
                 provider.showLoader
                     ? AppLoader(

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_themes.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/views/splash/SplashScreen.dart';
+import 'core/flavors_config/app_themes.dart';
+import 'core/flavors_config/flavor_config.dart';
+import 'core/navigation/AppNavigator.dart';
 import 'view_models/HomeProvider.dart';
+import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
+import 'view_models/SpecialOffersProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
+import 'views/splash/SplashScreen.dart';
 
 void main() async {
   FlavorConfig(
@@ -29,9 +32,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserLoginProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => SignupProvider()),
-        ChangeNotifierProvider(create: (context) => UserInfoProvider())
+        ChangeNotifierProvider(create: (context) => UserInfoProvider()),
+        ChangeNotifierProvider(create: (context) => PromotionsProvider()),
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
       ],
-      child: MaterialApp(
+      child: Portal(child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,
         debugShowCheckedModeBanner: false,
         title: FlavorConfig.instance.flavorValues.appName!,
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppNavigator.splash,
         //home: const HomeScreen(),
         home: const SplashScreen(),
-      ),
+      )),
     );
   }
 }

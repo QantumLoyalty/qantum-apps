@@ -1,4 +1,4 @@
-enum Flavor { starReward, senseOfTaste, qantum }
+enum Flavor { starReward, senseOfTaste, qantum, maxx }
 
 class FlavorValues {
   String? appName;

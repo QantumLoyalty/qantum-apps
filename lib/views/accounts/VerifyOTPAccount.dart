@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +12,8 @@ import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
 
 class VerifyOTPAccount extends StatefulWidget {
+  VerifyOTPAccount();
+
   @override
   State<VerifyOTPAccount> createState() => _VerifyOTPAccountState();
 }
@@ -30,6 +31,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
     _userInfoProvider.sendOTPAccount();
+
     _otpController = TextEditingController();
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remainingSec != 0) {
@@ -124,7 +126,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     ),
                     AppDimens.shape_5,
                     Text(
-                      "${AppStrings.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "")}",
+                      "${AppStrings.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.normal,
@@ -169,11 +171,21 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                         hintStyle:
                             TextStyle(color: Theme.of(context).hintColor),
                         hintText: 'XXXX',
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         errorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
@@ -214,8 +226,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage:
-                          provider.loaderMessage ?? "Please wait..",
+                      loaderMessage: provider.loaderMessage ?? "Please wait..",
                     )
                   : Container()
             ],
@@ -228,6 +239,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
   void _resetResendCode() {
     if (remainingSec == 0) {
       _userInfoProvider.resendOTPAccount();
+
       setState(() {
         remainingSec = 30;
         enableResend = false;

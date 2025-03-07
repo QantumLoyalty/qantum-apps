@@ -24,6 +24,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).buttonTheme.colorScheme!.primary,
         mini: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
         onPressed: () {

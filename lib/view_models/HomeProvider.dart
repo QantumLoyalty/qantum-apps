@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppStrings.dart';
-import 'package:qantum_apps/data/models/HomeNavigatorModel.dart';
-import 'package:qantum_apps/views/my_benefits/MyBenefitsScreen.dart';
-
-import '../views/digital_card/MyDigitalCardScreen.dart';
+import '../core/utils/AppStrings.dart';
+import '../data/models/HomeNavigatorModel.dart';
+import '../views/my_benefits/MyBenefitsScreen.dart';
 import '../views/my_venues/MyVenuesHomeScreen.dart';
 import '../views/partners_offer/PartnerOffersScreen.dart';
-import '../views/point_balance/PointsBalanceScreen.dart';
 import '../views/profile/MyProfileScreen.dart';
-import '../views/promotions/PromotionsScreen.dart';
 import '../views/special_offers/SpecialOffersScreen.dart';
-import '../views/whats_on/WhatsOnScreen.dart';
 
 class HomeProvider extends ChangeNotifier {
   int _selectedOption = 3;

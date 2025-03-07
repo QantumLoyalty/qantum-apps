@@ -31,7 +31,7 @@ class EditUserHomeScreen extends StatelessWidget {
                     "Your profile is updated successfully!!");
           }
 
-          provider.resetNetworkResponse();
+          provider.resetNetworkResponse(resetTempUser: false);
         });
       }
 

@@ -1,4 +1,4 @@
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
+import '../models/NetworkResponse.dart';
 
 abstract class UserRepository {
   Future<NetworkResponse> login(String phoneNo);
@@ -24,4 +24,19 @@ abstract class UserRepository {
   Future<NetworkResponse> resendOTPAccount(Map<String, dynamic> params);
 
   Future<NetworkResponse> verifyOTPAccount(Map<String, dynamic> params);
+
+  Future<NetworkResponse> sendOTPNewPhone({required String phoneNo});
+
+  Future<NetworkResponse> sendOTPEmail({required String phoneNo});
+
+  Future<NetworkResponse> resendOTPEmail({required String phoneNo});
+
+  Future<NetworkResponse> resendOTPNewPhone({required String phoneNo});
+
+  Future<NetworkResponse> verifyOTPEmail(
+      String phoneNo, Map<String, dynamic> params);
+
+  Future<NetworkResponse> verifyOTPNewPhone(Map<String, dynamic> params);
+
+  Future<NetworkResponse> updateDeviceDetail(Map<String, dynamic> params);
 }

@@ -48,6 +48,21 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(body: Consumer2<SignupProvider, UserLoginProvider>(
         builder: (context, provider, userLoginProvider, child) {
+      // DISPLAYING NETWORK RESPONSE
+      if (userLoginProvider.networkError != null &&
+          userLoginProvider.networkError!) {
+        Future.delayed(Duration.zero, () {
+          if (userLoginProvider.networkError!) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppHelper.showErrorMessage(
+                  context, userLoginProvider.networkMessage ?? "");
+            });
+          }
+
+          userLoginProvider.resetNetworkResponseStatus();
+        });
+      }
+
       // CHECKING USER STATUS & NAVIGATING AS PER THE STATUS
       if (userLoginProvider.isRegistered != null) {
         Future.delayed(Duration.zero, () {
@@ -64,21 +79,6 @@ class _SignupScreenState extends State<SignupScreen> {
           } else {}
 
           userLoginProvider.resetUserRegisterStatus();
-        });
-      }
-
-      // DISPLAYING NETWORK RESPONSE
-      if (userLoginProvider.networkError != null &&
-          userLoginProvider.networkError!) {
-        Future.delayed(Duration.zero, () {
-          if (userLoginProvider.networkError!) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              AppHelper.showErrorMessage(
-                  context, userLoginProvider.networkMessage ?? "");
-            });
-          }
-
-          userLoginProvider.resetNetworkResponseStatus();
         });
       }
 
@@ -127,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(
                             color: Theme.of(context)
                                 .textSelectionTheme
-                                .selectionColor),
+                                .selectionHandleColor),
                         decoration: InputDecoration(
                           fillColor: Theme.of(context).cardColor,
                           filled: true,
@@ -135,11 +135,21 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -165,11 +175,21 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -198,11 +218,21 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -238,7 +268,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .textSelectionTheme
-                                            .selectionColor),
+                                            .selectionHandleColor),
                                     decoration: InputDecoration(
                                         counterText: "",
                                         hintText: "5555",
@@ -248,13 +278,24 @@ class _SignupScreenState extends State<SignupScreen> {
                                           color: Theme.of(context).hintColor,
                                           fontWeight: FontWeight.w400,
                                         ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         border: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         focusedBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         errorBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
                                             borderRadius:
                                                 BorderRadius.circular(10))),
                                   ))
@@ -303,7 +344,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
-                                                            .selectionColor),
+                                                            .selectionHandleColor),
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "DD",
@@ -338,7 +379,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
-                                                            .selectionColor),
+                                                            .selectionHandleColor),
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "MM",
@@ -372,7 +413,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
-                                                            .selectionColor),
+                                                            .selectionHandleColor),
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "YYYY",

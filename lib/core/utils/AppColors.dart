@@ -21,6 +21,29 @@ class AppColors {
 
   static Color get qa_divider_color => const Color(0xFFFFFFFF);
 
+
+  /// MAX THEME ///
+
+  static Color get max_back_color => const Color(0xFF541C65);
+
+  static Color get max_back_color_2 => const Color(0xFF541C65);
+
+  static Color get max_text_color => const Color(0xFFffffff);
+
+  static Color get max_text_field_text_color => const Color(0xFF000000);
+
+  static Color get max_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get max_button_color => const Color(0xFFCE132E);
+
+  static Color get max_button_color_2 => const Color(0xFFCE132E);
+
+  static Color get max_card_color => const Color(0xFFFFFFFF);
+
+  static Color get max_divider_color => const Color(0xFFFFFFFF);
+
+
+
   /// STAR REWARD THEME ///
 
   static Color get sr_back_color => const Color(0xFF912325);

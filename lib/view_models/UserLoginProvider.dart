@@ -97,8 +97,15 @@ class UserLoginProvider extends ChangeNotifier {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;
         _networkError = networkResponse.isError;
-        if (response.containsKey('message')) {
-          _networkMessage = response['message'];
+        if (response.containsKey('Message') ||
+            response.containsKey('message')) {
+          if (response.containsKey('Message')) {
+            _networkMessage = response['Message'];
+          } else if (response.containsKey('message')) {
+            _networkMessage = response['message'];
+          }
+
+          print(">>> $_networkMessage");
           if (response.containsKey('userId') && response['userId'] != null) {
             _isRegistered = true;
 

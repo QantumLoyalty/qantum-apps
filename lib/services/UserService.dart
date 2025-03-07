@@ -215,4 +215,128 @@ class UserService implements UserRepository {
     }
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> sendOTPEmail({required String phoneNo}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance
+          .postCall(url: Uri.parse(APIList.SEND_OTP_EMAIL), headers: {
+        'Content-Type': 'application/json',
+      }, body: {
+        "Mobile": phoneNo
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> resendOTPEmail({required String phoneNo}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.RESEND_OTP_EMAIL + phoneNo),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {});
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> verifyOTPEmail(
+      String phoneNo, Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.VERIFY_OTP_EMAIL + phoneNo),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> sendOTPNewPhone({required String phoneNo}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance
+          .postCall(url: Uri.parse(APIList.SEND_OTP_NEW_NUMBER), headers: {
+        'Content-Type': 'application/json',
+      }, body: {
+        "Mobile": phoneNo
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> resendOTPNewPhone({required String phoneNo}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.RESEND_OTP_NEW_NUMBER + phoneNo),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {});
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> verifyOTPNewPhone(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.putCall(
+          url: Uri.parse(APIList.VERIFY_OTP_NEW_NUMBER),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> updateDeviceDetail(
+      Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+      await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.putCall(
+          url: Uri.parse(APIList.UPDATE_DEVICE_DETAILS),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: params);
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

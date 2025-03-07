@@ -53,7 +53,7 @@ class PartnerOfferDialog {
                           ),
                           Expanded(
                               child: Container(
-                                width: double.infinity,
+                            width: double.infinity,
                             padding: const EdgeInsets.all(15.0),
                             child: SingleChildScrollView(
                               child: Column(
@@ -76,7 +76,10 @@ class PartnerOfferDialog {
                                   Text(
                                     'Valid to 25.01.25',
                                     style: TextStyle(
-                                        color: AppColors.bright_sky_blue,
+                                        color: Theme.of(context)
+                                            .buttonTheme
+                                            .colorScheme!
+                                            .primary,
                                         fontSize: 10),
                                   ),
                                 ],
@@ -100,7 +103,10 @@ class PartnerOfferDialog {
                               icon: Icon(
                                 Icons.clear,
                                 size: 30,
-                                color: AppColors.bright_sky_blue,
+                                color: Theme.of(context)
+                                    .buttonTheme
+                                    .colorScheme!
+                                    .primary,
                               )),
                         ))
                   ],

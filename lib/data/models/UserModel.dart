@@ -1,5 +1,6 @@
 class UserModel {
   String? id;
+  String? bluizeUniqueUserId;
   String? firstName;
   String? lastName;
   String? email;
@@ -52,10 +53,12 @@ class UserModel {
       this.accountAvailableBalance,
       this.accountType,
       this.acceptsEmail,
-      this.acceptsSMS});
+      this.acceptsSMS,
+      this.bluizeUniqueUserId});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
+    bluizeUniqueUserId = json.containsKey("Id") ? json['Id'] : "";
     firstName = json['GivenNames'] ?? "";
     lastName = json['Surname'] ?? "";
     email = json['Email'] ?? "";
@@ -98,6 +101,7 @@ class UserModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = id ?? "";
+    data['Id'] = bluizeUniqueUserId ?? "";
     data['GivenNames'] = firstName ?? "";
     data['Surname'] = lastName ?? "";
     data['Email'] = email ?? "";
@@ -129,6 +133,7 @@ class UserModel {
 
   copyWith({
     String? id,
+    String? bluizeUniqueUserId,
     String? firstName,
     String? lastName,
     String? email,
@@ -157,6 +162,7 @@ class UserModel {
   }) {
     return UserModel(
       id: id ?? this.id,
+      bluizeUniqueUserId: bluizeUniqueUserId ?? this.bluizeUniqueUserId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
@@ -189,6 +195,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS}';
+    return 'UserModel{id: $id,Id: $bluizeUniqueUserId, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS}';
   }
 }

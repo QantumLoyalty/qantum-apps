@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../../core/utils/AppColors.dart';
@@ -17,8 +18,6 @@ class CommunicationPreference extends StatefulWidget {
 }
 
 class _CommunicationPreferenceState extends State<CommunicationPreference> {
-  bool email = false;
-  bool sms = false;
   late UserInfoProvider _userInfoProvider;
 
   @override
@@ -53,6 +52,19 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
               ),
               child: Consumer<UserInfoProvider>(
                   builder: (context, provider, child) {
+                if (provider.isNetworkError != null &&
+                    provider.networkMessage != null) {
+                  Future.delayed(Duration.zero, () {
+                    if (provider.isNetworkError!) {
+                      AppHelper.showErrorMessage(
+                          context, provider.networkMessage!);
+                    } else {
+                      AppHelper.showSuccessMessage(
+                          context, provider.networkMessage!);
+                    }
+                    provider.resetNetworkResponse();
+                  });
+                }
                 return Stack(
                   children: [
                     Padding(
@@ -126,9 +138,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     inactiveThumbColor:
                                         Theme.of(context).primaryColorDark,
                                     onChanged: (value) {
-                                      setState(() {
-                                        sms = value;
-                                      });
+                                      provider.updateCommunicationPreferences(
+                                          sms: value);
                                     },
                                     title: Text(
                                       AppStrings.txtSMS,
@@ -158,10 +169,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     inactiveThumbColor:
                                         Theme.of(context).primaryColorDark,
                                     onChanged: (value) {
-                                      setState(() {
-                                        email = value;
-                                      });
-                                      provider.updateTempUser();
+                                      provider.updateCommunicationPreferences(
+                                          email: value);
                                     },
                                     title: Text(
                                       AppStrings.txtEmail,
@@ -191,7 +200,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                       ),
                     ),
                     provider.showLoader != null && provider.showLoader!
-                        ? AppLoader()
+                        ? AppLoader(
+                            loaderMessage: AppStrings.msgCommonLoader,
+                          )
                         : Container()
                   ],
                 );

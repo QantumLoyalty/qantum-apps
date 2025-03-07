@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
@@ -7,6 +8,7 @@ import 'package:qantum_apps/views/splash/SplashScreen.dart';
 
 import 'core/flavors_config/app_themes.dart';
 import 'core/navigation/AppNavigator.dart';
+import 'view_models/SpecialOffersProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 
@@ -31,17 +33,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserLoginProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => SignupProvider()),
-        ChangeNotifierProvider(create: (context) => UserInfoProvider())
+        ChangeNotifierProvider(create: (context) => UserInfoProvider()),
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
       ],
-      child: MaterialApp(
-        onGenerateRoute: AppNavigator.generateRoute,
-        debugShowCheckedModeBanner: false,
-        title: FlavorConfig.instance.flavorValues.appName!,
-        theme: AppThemes.sotTheme,
-        // theme: AppThemes.sotTheme.copyWith(textTheme: textTheme!),
+      child: Portal(
+        child: MaterialApp(
+          onGenerateRoute: AppNavigator.generateRoute,
+          debugShowCheckedModeBanner: false,
+          title: FlavorConfig.instance.flavorValues.appName!,
+          theme: AppThemes.sotTheme,
+          // theme: AppThemes.sotTheme.copyWith(textTheme: textTheme!),
 
-        initialRoute: AppNavigator.splash,
-        home: const SplashScreen(),
+          initialRoute: AppNavigator.splash,
+          home: const SplashScreen(),
+        ),
       ),
     );
   }

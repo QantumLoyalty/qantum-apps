@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
+import 'package:provider/provider.dart';
+import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
+import '../../view_models/PromotionsProvider.dart';
+import '../../views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
+import '../dialogs/PromotionDetailDialog.dart';
 
 class MyVenuesHomeScreen extends StatefulWidget {
   const MyVenuesHomeScreen({super.key});
@@ -13,91 +18,256 @@ class MyVenuesHomeScreen extends StatefulWidget {
 
 class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<PromotionsProvider>(context, listen: false)
+        .fetchPromotionsTimer();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12),
-            child: SingleChildScrollView(
-              child: StaggeredGrid.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 2,
-                children: [
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 1.3,
-                      child: Card(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/common/venue_placeholder_1.png',
-                            fit: BoxFit.cover,
+          child:
+              Consumer<PromotionsProvider>(builder: (context, provider, child) {
+            return Stack(
+              children: [
+                provider.promotions != null
+                    ? RefreshIndicator(
+                        backgroundColor:
+                            Theme.of(context).textSelectionTheme.selectionColor,
+                        color: Theme.of(context).primaryColorDark,
+                        onRefresh: () async {
+                          Provider.of<PromotionsProvider>(context,
+                                  listen: false)
+                              .getPromotions();
+                        },
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              provider.promotions!.largePromotions != null &&
+                                      provider.promotions!.largePromotions!
+                                          .isNotEmpty
+                                  ? SizedBox(
+                                      height: 220,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: CarouselSlider.builder(
+                                        itemCount: provider.promotions!
+                                            .largePromotions!.length,
+                                        itemBuilder:
+                                            (context, index, position) {
+                                          return ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: InkWell(
+                                              onTap: () {
+                                                PromotionDetailDialog
+                                                        .getInstance()
+                                                    .showPromotionDetailDialog(
+                                                        context,
+                                                        provider.promotions!
+                                                                .largePromotions![
+                                                            index]);
+                                              },
+                                              child: AspectRatio(
+                                                aspectRatio: 9 / 6,
+                                                child: CachedNetworkImage(
+                                                  height: 220,
+                                                  imageUrl: provider
+                                                          .promotions!
+                                                          .largePromotions![
+                                                              index]
+                                                          .imageUrl ??
+                                                      "",
+                                                  errorWidget:
+                                                      (context, _, obj) {
+                                                    return PromotionsPlaceHolder(
+                                                        size: Size(
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                            200));
+                                                  },
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        options: CarouselOptions(
+                                            aspectRatio: 5 / 9,
+                                            autoPlay: false,
+                                            reverse: false,
+                                            enableInfiniteScroll: false,
+                                            enlargeCenterPage: true,
+                                            viewportFraction: 0.80,
+                                            initialPage: 0,
+                                            onPageChanged:
+                                                (index, reason) async {}),
+                                      ),
+                                    )
+                                  : Container(),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 12, right: 12, top: 12),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, position) {
+                                      print(
+                                          "Small Promotions Length ${provider.promotions!.smallPromotions!.length / 2} Pages: ${((provider.promotions!.smallPromotions!.length / 2).floor() + provider.promotions!.smallPromotions!.length % 2)}");
+
+                                      return (provider.promotions!
+                                                      .smallPromotions !=
+                                                  null &&
+                                              provider.promotions!
+                                                  .smallPromotions!.isNotEmpty)
+                                          ? Container(
+                                              margin: const EdgeInsets.only(
+                                                  top: 10),
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 130,
+                                              child: CarouselSlider.builder(
+                                                itemCount: ((provider
+                                                                .promotions!
+                                                                .smallPromotions!
+                                                                .length /
+                                                            2)
+                                                        .floor() +
+                                                    provider
+                                                            .promotions!
+                                                            .smallPromotions!
+                                                            .length %
+                                                        2),
+                                                itemBuilder:
+                                                    (context, index, position) {
+                                                  return Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              PromotionDetailDialog
+                                                                      .getInstance()
+                                                                  .showPromotionDetailDialog(
+                                                                      context,
+                                                                      provider
+                                                                          .promotions!
+                                                                          .smallPromotions![2 * index]);
+                                                            },
+                                                            child: AspectRatio(
+                                                              aspectRatio: 1,
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                height: 130,
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                                imageUrl: provider
+                                                                        .promotions!
+                                                                        .smallPromotions![2 *
+                                                                            index]
+                                                                        .imageUrl ??
+                                                                    "",
+                                                                errorWidget:
+                                                                    (context, a,
+                                                                        object) {
+                                                                  return PromotionsPlaceHolder(
+                                                                    size: Size(
+                                                                        MediaQuery.of(context)
+                                                                            .size
+                                                                            .width,
+                                                                        130),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      AppDimens.shape_10,
+                                                      Expanded(
+                                                        child: (2 * index + 1 <=
+                                                                provider
+                                                                        .promotions!
+                                                                        .smallPromotions!
+                                                                        .length -
+                                                                    1)
+                                                            ? ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    PromotionDetailDialog.getInstance().showPromotionDetailDialog(
+                                                                        context,
+                                                                        provider
+                                                                            .promotions!
+                                                                            .smallPromotions![2 *
+                                                                                index +
+                                                                            1]);
+                                                                  },
+                                                                  child:
+                                                                      AspectRatio(
+                                                                    aspectRatio:
+                                                                        1,
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                      imageUrl: provider
+                                                                              .promotions!
+                                                                              .smallPromotions![2 * index + 1]
+                                                                              .imageUrl ??
+                                                                          "",
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Container(),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                                options: CarouselOptions(
+                                                    aspectRatio: 5 / 9,
+                                                    autoPlay: false,
+                                                    reverse: false,
+                                                    enableInfiniteScroll: false,
+                                                    enlargeCenterPage: true,
+                                                    viewportFraction: 0.8,
+                                                    initialPage: 0,
+                                                    onPageChanged: (index,
+                                                        reason) async {}),
+                                              ),
+                                            )
+                                          : Container();
+                                    },
+                                    itemCount: 1,
+                                  )),
+                            ],
                           ),
                         ),
-                      )),
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: Card(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/common/venue_placeholder_2.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )),
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: Card(
-                          child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/common/venue_placeholder_2.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ))),
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 1.3,
-                      child: Card(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/common/venue_placeholder_1.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )),
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: Card(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/common/venue_placeholder_2.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )),
-                  StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: Card(
-                          child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/common/venue_placeholder_2.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ))),
-                ],
-              ),
-            ),
-          ),
+                      )
+                    : Container(),
+                provider.showLoader != null && provider.showLoader!
+                    ? AppLoader()
+                    : Container()
+              ],
+            );
+          }),
         ),
         Container(
           padding: const EdgeInsets.only(top: 15),

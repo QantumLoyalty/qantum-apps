@@ -107,7 +107,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       style: TextStyle(
                           color: Theme.of(context)
                               .textSelectionTheme
-                              .selectionColor),
+                              .selectionHandleColor),
                       decoration: InputDecoration(
                         counter: AppDimens.shape_5,
                         fillColor: Theme.of(context).cardColor,

@@ -1,13 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
-import 'package:qantum_apps/core/utils/AppIcons.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
+import '../../../core/utils/AppDimens.dart';
+import '../../../core/utils/AppIcons.dart';
+import '/data/models/OfferModel.dart';
 
 import '../../../core/navigation/AppNavigator.dart';
 import '../../../core/utils/AppColors.dart';
 import '../SpecialOfferDetailDialog.dart';
 
 class SpecialOfferItem extends StatelessWidget {
-  const SpecialOfferItem({super.key});
+  OfferModel offer;
+
+  SpecialOfferItem({super.key, required this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +23,18 @@ class SpecialOfferItem extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 100,
       child: InkWell(
-        onTap: () {
-          SpecialOfferDetailDialog.getInstance()
-              .showSpecialOfferDialog(context);
+        onTap: () async {
+          await Provider.of<SpecialOffersProvider>(context, listen: false)
+              .getOfferByID(offerID: offer.id!);
+
+          if (Provider.of<SpecialOffersProvider>(context, listen: false)
+                  .selectedOffer !=
+              null) {
+            await SpecialOfferDetailDialog.getInstance()
+                .showSpecialOfferDialog(context);
+          } else {
+            AppHelper.showErrorMessage(context, "Something went wrong.");
+          }
         },
         child: Stack(
           children: [
@@ -36,10 +53,16 @@ class SpecialOfferItem extends StatelessWidget {
                           topLeft: Radius.circular(10),
                           bottomLeft: Radius.circular(10)),
                       child: AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Image.asset(
-                          'assets/common/special_offers_placeholder.png',
+                        aspectRatio: 1.1,
+                        child: CachedNetworkImage(
+                          width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
+                          imageUrl: offer.image ?? "",
+                          errorWidget: (context, a, object) {
+                            return const AspectRatio(
+                                aspectRatio: 1.1,
+                                child: Icon(Icons.image, color: Colors.black));
+                          },
                         ),
                       ),
                     ),
@@ -51,23 +74,26 @@ class SpecialOfferItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Brewdog Punk XPA 4pk \$14",
+                            Text("${offer.header}",
                                 maxLines: 1,
                                 style: TextStyle(
                                     color: AppColors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500)),
-                            Text(
-                                "Present this voucher to receive a 4 pack of Brewdog Punk XPA for \$14",
+                            Text("${offer.description}",
                                 maxLines: 2,
                                 style: TextStyle(
                                     color: AppColors.black, fontSize: 11)),
                             AppDimens.shape_5,
                             Text(
-                              'valid till 12.1.25',
+                              'valid till ${DateFormat("dd/MM/yyyy").format(DateTime.now())}',
                               style: TextStyle(
-                                  fontSize: 8,
-                                  color: AppColors.bright_sky_blue),
+                                fontSize: 8,
+                                color: Theme.of(context)
+                                    .buttonTheme
+                                    .colorScheme!
+                                    .primary,
+                              ),
                             )
                           ],
                         ),
@@ -86,7 +112,7 @@ class SpecialOfferItem extends StatelessWidget {
                 child: Icon(
                   Icons.chevron_right,
                   size: 25,
-                  color: AppColors.bright_sky_blue,
+                  color: Theme.of(context).buttonTheme.colorScheme!.primary,
                 ),
               ),
             )

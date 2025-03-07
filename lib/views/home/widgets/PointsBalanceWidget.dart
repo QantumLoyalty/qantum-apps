@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/utils/AppStrings.dart';
@@ -43,14 +44,15 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget> {
                     fontWeight: FontWeight.w500),
               ),
               Text(
-                "\$${(provider.getUserInfo!.pointsBalance ?? 0).toStringAsFixed(2)}",
+                formatPoints((provider.getUserInfo!.pointsValue ?? 0)),
+                //formatPoints(500000),
                 style: TextStyle(
                     fontSize: 42,
                     color: Theme.of(context).textSelectionTheme.selectionColor,
                     fontWeight: FontWeight.w500),
               ),
               Text(
-                "${(provider.getUserInfo!.pointsValue ?? 0)} POINTS",
+                "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
                 style: TextStyle(
                     fontSize: 12,
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
@@ -60,5 +62,15 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget> {
         }),
       ),
     );
+  }
+
+  String formatPoints(num points) {
+    var formatter = NumberFormat("#,##0", "en_US");
+    return formatter.format(points.toInt());
+  }
+
+  String formatPointsValue(num pointsValue) {
+    var formatter = NumberFormat("#,##0.00", "en_US");
+    return formatter.format(pointsValue);
   }
 }

@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
@@ -26,10 +29,19 @@ class MyProfileDialog {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
 
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+
+
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
+
+
+          print(FlavorConfig.instance.flavorValues.appVersion);
+
+
           return Dialog(
             backgroundColor: Colors.transparent,
             insetPadding: EdgeInsets.zero,
@@ -342,9 +354,11 @@ class MyProfileDialog {
                                   ),
                                 ),
                               ),
+                              AppDimens.shape_10,
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Consumer<UserInfoProvider>(
                                       builder: (context, provider, child) {
@@ -502,18 +516,33 @@ class MyProfileDialog {
                           left: 0,
                           right: 0,
                           bottom: 50,
-                          child: CircleAvatar(
-                            backgroundColor: Theme.of(context).primaryColorDark,
-                            radius: 30,
-                            child: IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.clear,
-                                  size: 30,
-                                  color: Colors.white,
-                                )),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "V 1.0.0",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w400,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor),
+                              ),
+                              CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).primaryColorDark,
+                                radius: 30,
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(
+                                      Icons.clear,
+                                      size: 30,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                            ],
                           ))
                     ],
                   ),

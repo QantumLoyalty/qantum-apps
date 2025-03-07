@@ -23,7 +23,6 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
   late TextEditingController _birthdayMMController;
 
   late TextEditingController _birthdayYYController;
-
   late UserInfoProvider _userInfoProvider;
 
   @override
@@ -84,12 +83,13 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 hintStyle: TextStyle(
                     color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.w400),
+                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
                 border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
                 focusedBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
                 errorBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
               ),
             ),
             AppDimens.shape_20,

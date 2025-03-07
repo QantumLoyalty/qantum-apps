@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
+
+import '../utils/AppColors.dart';
 
 class AppThemes {
   static ThemeData get qantumTheme => ThemeData(
@@ -60,6 +61,75 @@ class AppThemes {
         }),
         fillColor:
             WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return Colors.transparent;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.white;
+          }
+          return Colors.transparent;
+        }),
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData());
+
+  static ThemeData get maxTheme => ThemeData(
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.max_back_color),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: AppColors.max_text_field_text_color,
+        selectionColor: AppColors.max_text_color,
+        cursorColor: AppColors.max_text_color,
+      ),
+      textTheme: TextTheme(
+          bodyLarge: TextStyle(color: AppColors.max_text_field_text_color)),
+      buttonTheme: ButtonThemeData(
+          textTheme: ButtonTextTheme.accent,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              onPrimary: AppColors.max_text_color,
+              secondary: AppColors.max_button_color_2,
+              primary: AppColors.max_button_color),
+          buttonColor: AppColors.max_button_color),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.max_button_color,
+          secondary: AppColors.max_button_color,
+          surface: AppColors.max_button_color),
+      primaryColor: AppColors.max_back_color,
+      primaryColorDark: AppColors.max_back_color_2,
+      cardColor: AppColors.max_card_color,
+      canvasColor: AppColors.max_back_color,
+      scaffoldBackgroundColor: Colors.transparent,
+      dividerColor: AppColors.max_divider_color,
+      hintColor: AppColors.max_hint_text_color,
+      iconTheme: IconThemeData(color: AppColors.max_divider_color),
+      radioTheme: RadioThemeData(
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.max_hint_text_color;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.max_text_color;
+          }
+          return AppColors.max_hint_text_color;
+        }),
+      ),
+      disabledColor: AppColors.white,
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.max_back_color),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.white,
+          unselectedItemColor: AppColors.max_text_color),
+      checkboxTheme: CheckboxThemeData(
+        checkColor:
+        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.max_text_color;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.max_hint_text_color;
+          }
+          return AppColors.max_text_color;
+        }),
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
             return Colors.transparent;
           }
@@ -276,4 +346,7 @@ class AppThemes {
       }),
     ),*/
       );
+
+
+
 }

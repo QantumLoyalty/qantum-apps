@@ -31,13 +31,18 @@ android {
             dimension "app"
             applicationId "com.au.senseoftaste.app"
             versionName "Sense of Taste"
-
+        }
+        maxx {
+            dimension "app"
+            applicationId "com.au.max.app"
+            versionName "Max Gaming"
         }
         qantum {
             dimension "app"
             applicationId "com.au.quantum.app"
             versionName "Qantum"
         }
+
 
 
     }
@@ -48,7 +53,7 @@ android {
         applicationId = "com.qapps.qantum_apps"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

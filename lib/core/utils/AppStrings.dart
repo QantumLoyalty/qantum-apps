@@ -3,7 +3,10 @@ class AppStrings {
   static const String txtEnterYourNumber = 'Please enter your mobile number';
   static const String txtOk = "Ok";
   static const String txtVerificationCode = 'Verification code';
-  static const String txtEnterVerificationCode = 'Enter the verification code.';
+  static const String txtContactVenueSupport = 'Contact venue support';
+  static const String txtThereWasError = 'There was an error!';
+  static const String msgRecoverEmailError = 'There was no email registered with this account. Please contact venue support.';
+  static const String txtEnterVerificationCode = 'Enter the verification code';
   static const String msgEnterVerificationCode =
       'We sent a code to mobile number ending in ';
   static const String txtSubmit = "Submit";
@@ -13,6 +16,11 @@ class AppStrings {
   static const String txtMyAccount = "My Account";
   static const String txtSaveAndUpdate = "Save And Update";
   static const String txtUpdate = "Update";
+  static const String txtReturnToLogin = "Return to login";
+  static const String txtLogin = "Login";
+  static const String txtSendVerificationCode = "Send verification code";
+  static const String txtRecoverYourAccount = "Recover your account";
+  static const String msgEnterMobileNoToRecoverYourAccount = "Enter the mobile number you used to register your account.\nWe’ll send you a recovery code to your email address.";
 
   /// HOME SCREEN MENU OPTIONS ///
   static const String txtPromotions = "Promotions";
@@ -73,6 +81,8 @@ class AppStrings {
   static const String txtSMS = "SMS";
   static const String txtAdd = "Add";
   static const String txtClubCode = "Club Code";
+  static const String txtSuccess = "Success!";
+  static const String msgMobileNumberUpdated = "Your new mobile number has been registered.";
 
   static const String msgEmptyFirstName = "First name can't be empty";
   static const String msgEmptyLastName = "Last name can't be empty";
@@ -106,6 +116,12 @@ class AppStrings {
       "Please choose your gender from the options provided.";
   static const String msgIncorrectDOB =
       "Ensure that your date of birth is entered correctly. You must be at least 18 years of age to proceed.";
+  static const String msgCommonError =
+      "Ooppss.. something went wrong, please try again.";
+  static const String msgCommonUpdateSuccess =
+      "Request processed successfully!!";
+  static const String msgCommonLoader =
+      "Please wait, while we are processing your request.";
 
   static const String txtCommunicationChannel = "Communication Channel";
 

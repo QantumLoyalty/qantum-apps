@@ -105,4 +105,27 @@ class AppHelper {
       return "";
     }
   }
+  static String maskEmailSecond(String? email) {
+    if (email != null && email.isNotEmpty) {
+      String maskedEmail = email;
+      if (email.contains("@")) {
+        List<String> emailParts = email.split("@");
+        AppHelper.printMessage(emailParts);
+        if (emailParts.isNotEmpty) {
+          String firstPart =
+              "${emailParts[0].replaceRange(1, emailParts[0].length, "*" * (emailParts[0].length))}@";
+          maskedEmail = firstPart+emailParts[1];
+
+         /* if (emailParts.length > 1) {
+            String secondPart = emailParts[1].replaceRange(
+                1, emailParts[1].length, "*" * (emailParts[1].length));
+            maskedEmail = maskedEmail + secondPart;
+          }*/
+        }
+      }
+      return maskedEmail;
+    } else {
+      return "";
+    }
+  }
 }

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/views/accounts/ClubAndMembership.dart';
-import 'package:qantum_apps/views/accounts/CommunicationPreference.dart';
-import 'package:qantum_apps/views/accounts/GamingPreferences.dart';
-import 'package:qantum_apps/views/accounts/PASStatement.dart';
-import 'package:qantum_apps/views/accounts/UserDetailScreen.dart';
-
+import '../../views/accounts/ClubAndMembership.dart';
+import '../../views/accounts/CommunicationPreference.dart';
+import '../../views/accounts/GamingPreferences.dart';
+import '../../views/accounts/PASStatement.dart';
+import '../../views/accounts/recoverAccount/RecoverAccountEmailFailure.dart';
+import '../../views/accounts/recoverAccount/RecoverAccountNewPhone.dart';
+import '../../views/accounts/recoverAccount/RecoverAccountSuccess.dart';
+import '../../views/accounts/recoverAccount/RecoverAccountVerificationScreen.dart';
+import '../../views/accounts/UserDetailScreen.dart';
 import '../../views/accounts/EditUserDetailsScreen.dart';
 import '../../views/accounts/MyAccountScreen.dart';
+import '../../views/accounts/recoverAccount/RecoverAccountScreen.dart';
 import '../../views/accounts/VerifyOTPAccount.dart';
 import '../../views/home/HomeScreen.dart';
 import '../../views/login/LoginScreen.dart';
@@ -35,6 +39,13 @@ class AppNavigator {
   static const String pasStatement = "/pasStatement";
   static const String verifyOTPAccount = "/verifyOTPAccount";
   static const String editUserDetailsScreen = "/editUserDetailsScreen";
+  static const String recoverAccountScreen = "/recoverAccountScreen";
+  static const String recoverAccountVerificationScreen =
+      "/recoverAccountVerificationScreen";
+  static const String recoverAccountNewPhone = "/recoverAccountNewPhone";
+  static const String recoverAccountSuccess = "/recoverAccountSuccess";
+  static const String recoverAccountEmailFailure =
+      "/recoverAccountEmailFailure";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -107,7 +118,25 @@ class AppNavigator {
       case verifyOTPAccount:
         return MaterialPageRoute(builder: (_) => VerifyOTPAccount());
       case editUserDetailsScreen:
-        return MaterialPageRoute(builder: (_) => EditUserDetailsScreen());
+        return MaterialPageRoute(builder: (_) => const EditUserDetailsScreen());
+      case recoverAccountScreen:
+        return MaterialPageRoute(builder: (_) => const RecoverAccountScreen());
+      case recoverAccountSuccess:
+        return MaterialPageRoute(builder: (_) => const RecoverAccountSuccess());
+      case recoverAccountEmailFailure:
+        return MaterialPageRoute(
+            builder: (_) => const RecoverAccountEmailFailure());
+      case recoverAccountNewPhone:
+        return MaterialPageRoute(
+            builder: (_) => RecoverAccountNewPhone(
+                  params: args as Map<String, dynamic>,
+                ));
+
+      case recoverAccountVerificationScreen:
+        return MaterialPageRoute(
+            builder: (_) => RecoverAccountVerificationScreen(
+                  params: args as Map<String, dynamic>,
+                ));
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());

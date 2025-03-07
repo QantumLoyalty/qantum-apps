@@ -59,6 +59,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                 hintStyle: TextStyle(color: Theme.of(context).hintColor),
                 fillColor: Theme.of(context).cardColor.withValues(alpha: 0.15),
                 filled: true,
+                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 focusedBorder:

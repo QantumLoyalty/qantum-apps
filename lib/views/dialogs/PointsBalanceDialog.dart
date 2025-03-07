@@ -55,7 +55,7 @@ class PointsBalanceDialog {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "\$${provider.getUserInfo!.pointsBalance}",
+                          "${provider.getUserInfo!.pointsBalance} POINTS",
                           style: TextStyle(
                               fontSize: 42,
                               color: Theme.of(context)
@@ -64,7 +64,7 @@ class PointsBalanceDialog {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "${provider.getUserInfo!.pointsBalance} POINTS",
+                          "\$${provider.getUserInfo!.pointsBalance}",
                           style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context)

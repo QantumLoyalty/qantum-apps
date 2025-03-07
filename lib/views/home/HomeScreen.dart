@@ -29,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<UserInfoProvider>(context, listen: false)
           .runFetchProfileTimer();
       // Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile();
+      Provider.of<UserInfoProvider>(context, listen: false)
+          .uploadDeviceDetail();
     }
   }
 
@@ -91,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
                                 border: Border.all(
-                                    color: Theme.of(context).iconTheme.color!,
+                                    color: Theme.of(context)
+                                        .buttonTheme
+                                        .colorScheme!
+                                        .primary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
@@ -144,7 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
                                 border: Border.all(
-                                    color: Theme.of(context).iconTheme.color!,
+                                    color: Theme.of(context)
+                                        .buttonTheme
+                                        .colorScheme!
+                                        .primary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {

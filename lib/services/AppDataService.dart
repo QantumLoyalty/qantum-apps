@@ -1,0 +1,79 @@
+import '../core/mixins/logging_mixin.dart';
+import '../core/network/APIList.dart';
+import '../core/network/NetworkHelper.dart';
+import '../data/models/NetworkResponse.dart';
+import '../data/repositories/AppDataRepository.dart';
+
+class AppDataService extends AppDataRepository with LoggingMixin {
+  static AppDataService? _instance;
+
+  AppDataService._internal();
+
+  static AppDataService getInstance() {
+    _instance ??= AppDataService._internal();
+    return _instance!;
+  }
+
+  @override
+  Future<NetworkResponse> fetchPartnerOffers() {
+    // TODO: implement fetchPartnerOffers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<NetworkResponse> fetchPromotions(String membershipType) async {
+    NetworkResponse networkResponse;
+    try {
+      var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      print(URL);
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(APIList.FETCH_PROMOTIONS + membershipType),
+          headers: {
+            'Content-Type': 'application/json',
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchSpecialOffers(
+      {required String membershipType, required String birthdayMonth}) async {
+    NetworkResponse networkResponse;
+    try {
+      var URL = APIList.FETCH_VOUCHERS + "$membershipType&month=$birthdayMonth";
+      logEvent(URL);
+      var response =
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchOfferByID(
+      {required String offerID, required String userID}) async {
+    NetworkResponse networkResponse;
+    try {
+      var URL = APIList.FETCH_VOUCHER_BY_ID + "$offerID?user_id=$userID";
+      logEvent(URL);
+      var response =
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+}
