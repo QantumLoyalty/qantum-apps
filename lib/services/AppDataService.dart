@@ -41,10 +41,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> fetchSpecialOffers(
-      {required String membershipType, required String birthdayMonth}) async {
+      {required String membershipType,
+      required String birthdayMonth,
+      required String userId,
+      required String joinDate}) async {
     NetworkResponse networkResponse;
     try {
-      var URL = APIList.FETCH_VOUCHERS + "$membershipType&month=$birthdayMonth";
+      var URL = APIList.FETCH_VOUCHERS +
+          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate";
       logEvent(URL);
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {

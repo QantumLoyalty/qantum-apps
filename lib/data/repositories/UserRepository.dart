@@ -39,4 +39,5 @@ abstract class UserRepository {
   Future<NetworkResponse> verifyOTPNewPhone(Map<String, dynamic> params);
 
   Future<NetworkResponse> updateDeviceDetail(Map<String, dynamic> params);
+  Future<NetworkResponse> checkForAppUpdate(Map<String, dynamic> params);
 }

@@ -167,7 +167,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(
                             color: Theme.of(context)
                                 .textSelectionTheme
-                                .selectionColor),
+                                .selectionHandleColor),
                         decoration: InputDecoration(
                           fillColor: Theme.of(context).cardColor,
                           filled: true,
@@ -201,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(
                             color: Theme.of(context)
                                 .textSelectionTheme
-                                .selectionColor),
+                                .selectionHandleColor),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return AppStrings.msgEmptyEmail;

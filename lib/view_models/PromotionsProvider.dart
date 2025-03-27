@@ -28,11 +28,6 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
   getPromotions() async {
     try {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showLoader = true;
-        notifyListeners();
-      });
-
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = sharedPreferenceHelper.getUserData();
@@ -56,23 +51,20 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       _isError = true;
       _networkMessage = e.toString();
     } finally {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showLoader = false;
-        notifyListeners();
-      });
+      //_showLoader = false;
+      notifyListeners();
     }
   }
 
   bool _isFetching = false;
-  int i = 0;
+
+  bool get isFetching => _isFetching;
 
   fetchPromotionsTimer() async {
     await getPromotions();
-    Timer timer = Timer.periodic(const Duration(seconds: 20), (value) async {
+    Timer.periodic(const Duration(seconds: 5), (value) async {
       if (!_isFetching) {
         _isFetching = true;
-        i += 1;
-        logEvent("Promotion Var:: $i");
         await getPromotions();
         _isFetching = false;
       }

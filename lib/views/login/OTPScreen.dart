@@ -116,10 +116,20 @@ class _OTPScreenState extends State<OTPScreen> {
                             TextStyle(color: Theme.of(context).hintColor),
                         hintText: 'XXXX',
                         border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                         errorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.transparent),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),

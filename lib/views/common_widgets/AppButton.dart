@@ -20,6 +20,11 @@ class AppButton extends StatelessWidget {
                   WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
               elevation: const WidgetStatePropertyAll(20),
               shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                  side: BorderSide(
+                      color: Theme.of(context)
+                          .buttonTheme
+                          .colorScheme!
+                          .onSecondary),
                   borderRadius: BorderRadius.circular(80))),
               backgroundColor: WidgetStatePropertyAll(backgroundColor ??
                   Theme.of(context).buttonTheme.colorScheme!.primary)),

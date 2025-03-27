@@ -7,6 +7,7 @@ import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppStrings.dart';
 import '../../common_widgets/AppButton.dart';
+import '../../common_widgets/AppCustomButton.dart';
 import '../widgets/DetailCard.dart';
 import '../widgets/PhoneCard.dart';
 import '../widgets/RecoveryEmailCard.dart';
@@ -49,11 +50,18 @@ class EditUserHomeScreen extends StatelessWidget {
               AppDimens.shape_10,
               PhoneCard(editable: true),
               AppDimens.shape_30,
-              AppButton(
-                  text: AppStrings.txtSaveAndUpdate.toUpperCase(),
-                  onClick: () {
-                    provider.updateUserInformation();
-                  }),
+              AppCustomButton(
+                text: AppStrings.txtSaveAndUpdate.toUpperCase(),
+                textColor:
+                AppHelper.getAccountsButtonTextColor(
+                    context),
+                onClick: () {
+                  provider.updateUserInformation();
+                },
+                style:
+                AppHelper.getAccountsButtonStyle(context),
+              ),
+
             ],
           ),
           provider.showLoader != null && provider.showLoader!

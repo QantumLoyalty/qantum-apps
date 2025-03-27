@@ -19,6 +19,17 @@ class MyBenefitsDialog {
   MyBenefitsDialog._internal();
 
   showBenefitsDialog(BuildContext context) {
+    var goldBenefitsList = [
+      "50% off Meals",
+      "\$2 off Drinks",
+      "Double Gaming Points",
+      "Double F&B Points",
+      "Points for Retail",
+      "Complimentary Coffee",
+      "Premium Offers",
+      "Discounted Events"
+    ];
+
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
@@ -95,19 +106,43 @@ class MyBenefitsDialog {
                                               BorderRadius.circular(10)),
                                       child: ListView.builder(
                                         itemBuilder: (context, index) {
-                                          return ListTile(
-                                            minTileHeight: 10,
-                                            leading: Icon(
-                                              Icons.check_circle,
-                                              color: AppColors
-                                                  .getMembershipCategoryColor(
-                                                      provider.getUserInfo!
-                                                          .statusTier),
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5.0,
+                                                bottom: 5.0,
+                                                left: 8.0,
+                                                right: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.check_circle,
+                                                  color: AppColors
+                                                      .getMembershipCategoryColor(
+                                                          provider.getUserInfo!
+                                                              .statusTier),
+                                                  size: 15,
+                                                ),
+                                                AppDimens.shape_5,
+                                                Text(
+                                                  (provider.getUserInfo!
+                                                              .statusTier!
+                                                              .toLowerCase() ==
+                                                          "gold")
+                                                      ? goldBenefitsList[index]
+                                                      : "Benefit ${index + 1}",
+                                                  style: const TextStyle(
+                                                      fontSize: 14),
+                                                )
+                                              ],
                                             ),
-                                            title: Text('Benefits'),
                                           );
                                         },
-                                        itemCount: 7,
+                                        itemCount: (provider
+                                                    .getUserInfo!.statusTier!
+                                                    .toLowerCase() ==
+                                                "gold")
+                                            ? goldBenefitsList.length
+                                            : 8,
                                       ),
                                     )),
                                     AppDimens.shape_20,

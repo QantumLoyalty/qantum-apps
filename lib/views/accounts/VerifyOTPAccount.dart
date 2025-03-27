@@ -8,6 +8,7 @@ import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppButton.dart';
+import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
 
@@ -49,7 +50,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         if (context.mounted) {
           /// CHECKING FOR OTP SEND CASE
@@ -211,16 +212,19 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                           )),
                     ),
                     AppDimens.shape_5,
-                    AppButton(
-                        text: AppStrings.txtSubmit.toUpperCase(),
-                        onClick: () {
-                          if (_otpController.text.isNotEmpty) {
-                            provider.verifyOTPAccount(OTP: _otpController.text);
-                          } else {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectOTP);
-                          }
-                        }),
+                    AppCustomButton(
+                      text: AppStrings.txtSubmit.toUpperCase(),
+                      textColor: AppHelper.getAccountsButtonTextColor(context),
+                      onClick: () {
+                        if (_otpController.text.isNotEmpty) {
+                          provider.verifyOTPAccount(OTP: _otpController.text);
+                        } else {
+                          AppHelper.showErrorMessage(
+                              context, AppStrings.msgIncorrectOTP);
+                        }
+                      },
+                      style: AppHelper.getAccountsButtonStyle(context),
+                    ),
                   ],
                 ),
               ),

@@ -28,10 +28,10 @@ class Applogo extends StatelessWidget {
               ),
         Image.asset(
           AppIcons.app_logo,
-          width: 64,
-          height: 64,
+          width: 72,
+          height: 72,
         ),
-        AppDimens.shape_15,
+        AppDimens.getCustomBoxShape(10),
       ],
     );
   }

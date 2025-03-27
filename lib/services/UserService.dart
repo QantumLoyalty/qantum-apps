@@ -1,10 +1,12 @@
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+
 import '../core/network/NetworkHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../core/network/APIList.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/repositories/UserRepository.dart';
 
-class UserService implements UserRepository {
+class UserService with LoggingMixin implements UserRepository  {
   static UserService? _instance;
 
   UserService._internal();
@@ -334,6 +336,25 @@ class UserService implements UserRepository {
           },
           body: params);
       networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> checkForAppUpdate(Map<String, dynamic> params) async {
+    NetworkResponse networkResponse;
+    try {
+      logEvent("URL:${APIList.CHECK_APP_UPDATE} --> PARAMS: $params");
+      var response = await NetworkHelper.instance.putCall(
+          url: Uri.parse(APIList.CHECK_APP_UPDATE),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: params);
+      networkResponse = response;
+      logEvent("APP UPDATE NETWORK RESPONSE:$response");
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

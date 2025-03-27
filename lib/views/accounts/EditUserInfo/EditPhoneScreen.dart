@@ -6,6 +6,7 @@ import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
+import '../../common_widgets/AppCustomButton.dart';
 
 class EditPhoneScreen extends StatefulWidget {
   const EditPhoneScreen({super.key});
@@ -72,55 +73,38 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
             Row(
               children: [
                 Expanded(
-                    child: OutlinedButton(
-                        style: ButtonStyle(
-                            side: WidgetStatePropertyAll(BorderSide(
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary)),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          provider.updateSelectedEditScreen(
-                              UserInfoProvider.EDIT_SCREEN);
-                        },
-                        child: Text(AppStrings.txtCancel.toUpperCase()))),
+                    child:
+                    AppCustomButton(
+                      text: AppStrings.txtCancel.toUpperCase(),
+                      onClick: () {
+                        provider.updateSelectedEditScreen(
+                            UserInfoProvider.EDIT_SCREEN);
+                      },
+                      style: AppHelper.getDeleteButtonStyle(context),
+                    )),
                 AppDimens.shape_20,
                 Expanded(
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: WidgetStatePropertyAll(
-                                Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          if (_phoneController.text.isNotEmpty &&
-                              AppHelper.verifyPhoneNumber(
-                                  _phoneController.text)) {
-                            provider.updateTempUser(
-                                phone: _phoneController.text);
-                            provider.updateSelectedEditScreen(
-                                UserInfoProvider.EDIT_SCREEN);
-                          } else {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectPhoneNumber);
-                          }
-                        },
-                        child: Text(
-                          AppStrings.txtUpdate.toUpperCase(),
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ))),
+
+                    child:
+                    AppCustomButton(
+                      text: AppStrings.txtUpdate.toUpperCase(),
+                      textColor: AppHelper.getAccountsButtonTextColor(context),
+                      onClick: () {
+                        if (_phoneController.text.isNotEmpty &&
+                            AppHelper.verifyPhoneNumber(
+                                _phoneController.text)) {
+                          provider.updateTempUser(
+                              phone: _phoneController.text);
+                          provider.updateSelectedEditScreen(
+                              UserInfoProvider.EDIT_SCREEN);
+                        } else {
+                          AppHelper.showErrorMessage(
+                              context, AppStrings.msgIncorrectPhoneNumber);
+                        }
+                      },
+                      style: AppHelper.getAccountsButtonStyle(context),
+                    )
+                ),
               ],
             )
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
@@ -19,7 +20,11 @@ void main() async {
       flavorValues:
           FlavorValues(appName: "Sense Of Taste", appVersion: "0.0.1"));
 //  await Firebase.initializeApp();
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((context) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

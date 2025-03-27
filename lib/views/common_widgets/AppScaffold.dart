@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
+
+import '../../core/utils/AppHelper.dart';
 
 class AppScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
@@ -21,6 +22,7 @@ class AppScaffold extends StatelessWidget {
       child: Scaffold(
         appBar: appBar,
         body: body,
+        backgroundColor:Colors.transparent,
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
       ),

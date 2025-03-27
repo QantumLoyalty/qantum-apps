@@ -64,6 +64,19 @@ class SpecialOfferDetailDialog {
                                           imageUrl: offerProvider
                                                   .selectedOffer!.image ??
                                               "",
+                                          placeholder: (context, _) {
+                                            return const Stack(
+                                              children: [
+                                                Center(
+                                                  child: SizedBox(
+                                                      width: 50,
+                                                      height: 50,
+                                                      child:
+                                                          CircularProgressIndicator()),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                           errorWidget: (context, a, object) {
                                             return const AspectRatio(
                                                 aspectRatio: 1.1,
@@ -104,7 +117,7 @@ class SpecialOfferDetailDialog {
                                               ),
                                               AppDimens.shape_5,
                                               Text(
-                                                'Valid to ${DateFormat("dd/MM/yyyy").format(DateTime.now())}',
+                                                'Valid to ${offerProvider.selectedOffer!.expiryDate}',
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .buttonTheme

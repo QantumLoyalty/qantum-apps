@@ -44,11 +44,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context)
-                    .buttonTheme
-                    .colorScheme!
-                    .primary
-                    .withValues(alpha: 0.2),
+                color: Theme.of(context).canvasColor,
               ),
               child: Consumer<UserInfoProvider>(
                   builder: (context, provider, child) {
@@ -92,98 +88,79 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 fontSize: 12),
                           ),
                           AppDimens.shape_15,
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            color: Colors.white.withValues(alpha: 0.15),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AppDimens.shape_5,
-                                  Text(
-                                    AppStrings.txtCommunicationChannel
-                                        .toUpperCase(),
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .buttonTheme
-                                            .colorScheme!
-                                            .primary,
-                                        fontSize: 14),
-                                  ),
-                                  Text(
-                                    "How would you like to be notified?",
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white.withValues(alpha: 0.15),
+                            ),
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppDimens.shape_5,
+                                Text(
+                                  AppStrings.txtCommunicationChannel
+                                      .toUpperCase(),
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor,
+                                      fontSize: 14),
+                                ),
+                                Text(
+                                  "How would you like to be notified?",
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor,
+                                      fontSize: 12),
+                                ),
+                                SwitchListTile(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  value: provider.getUserInfo != null &&
+                                          provider.getUserInfo!.acceptsSMS !=
+                                              null
+                                      ? provider.getUserInfo!.acceptsSMS!
+                                      : false,
+                                  onChanged: (value) {
+                                    provider.updateCommunicationPreferences(
+                                        sms: value);
+                                  },
+                                  title: Text(
+                                    AppStrings.txtSMS,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .textSelectionTheme
                                             .selectionColor,
-                                        fontSize: 12),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
                                   ),
-                                  SwitchListTile(
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    contentPadding: EdgeInsets.zero,
-                                    value: provider.getUserInfo != null &&
-                                            provider.getUserInfo!.acceptsSMS !=
-                                                null
-                                        ? provider.getUserInfo!.acceptsSMS!
-                                        : false,
-                                    inactiveTrackColor: AppColors.white,
-                                    activeTrackColor: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .primary,
-                                    activeColor: AppColors.white,
-                                    inactiveThumbColor:
-                                        Theme.of(context).primaryColorDark,
-                                    onChanged: (value) {
-                                      provider.updateCommunicationPreferences(
-                                          sms: value);
-                                    },
-                                    title: Text(
-                                      AppStrings.txtSMS,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14),
-                                    ),
+                                ),
+                                SwitchListTile(
+                                  dense: true,
+                                  contentPadding: EdgeInsets.zero,
+                                  value: provider.getUserInfo != null &&
+                                          provider.getUserInfo!.acceptsEmail !=
+                                              null
+                                      ? provider.getUserInfo!.acceptsEmail!
+                                      : false,
+                                  onChanged: (value) {
+                                    provider.updateCommunicationPreferences(
+                                        email: value);
+                                  },
+                                  title: Text(
+                                    AppStrings.txtEmail,
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
                                   ),
-                                  SwitchListTile(
-                                    dense: true,
-                                    contentPadding: EdgeInsets.zero,
-                                    value: provider.getUserInfo != null &&
-                                            provider.getUserInfo!
-                                                    .acceptsEmail !=
-                                                null
-                                        ? provider.getUserInfo!.acceptsEmail!
-                                        : false,
-                                    inactiveTrackColor: AppColors.white,
-                                    activeTrackColor: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .primary,
-                                    activeColor: AppColors.white,
-                                    inactiveThumbColor:
-                                        Theme.of(context).primaryColorDark,
-                                    onChanged: (value) {
-                                      provider.updateCommunicationPreferences(
-                                          email: value);
-                                    },
-                                    title: Text(
-                                      AppStrings.txtEmail,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                           AppDimens.shape_15,
@@ -191,9 +168,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             "Please allow up to 24 hours for changes to take affect.",
                             style: TextStyle(
                                 color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary,
+                                    .textSelectionTheme
+                                    .selectionColor,
                                 fontSize: 12),
                           ),
                         ],

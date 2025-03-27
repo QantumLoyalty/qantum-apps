@@ -4,16 +4,17 @@ class OfferModel {
   String? voucherType;
   List<String>? ratingLevel;
   Expiry? expiry;
-  List<String>? validDays;
+  List<String>? validDaysOfWeek;
   ValidTime? validTime;
-  int? triggerValue;
+  String? triggerValue;
   String? image;
   String? status;
   String? createdAt;
   String? updatedAt;
-  int? iV;
   String? id;
   String? qrURL;
+  bool? active;
+  String? expiryDate;
 
   OfferModel(
       {this.header,
@@ -21,14 +22,16 @@ class OfferModel {
       this.voucherType,
       this.ratingLevel,
       this.expiry,
-      this.validDays,
+      this.validDaysOfWeek,
       this.validTime,
       this.triggerValue,
       this.image,
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.iV,this.id,this.qrURL});
+      this.id,
+      this.qrURL,
+      this.expiryDate});
 
   OfferModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -37,7 +40,7 @@ class OfferModel {
     voucherType = json['voucherType'];
     ratingLevel = json['ratingLevel'].cast<String>();
     expiry = json['expiry'] != null ? Expiry.fromJson(json['expiry']) : null;
-    validDays = json['validDays'].cast<String>();
+    validDaysOfWeek = json['validDaysOfWeek'].cast<String>();
     validTime = json['validTime'] != null
         ? ValidTime.fromJson(json['validTime'])
         : null;
@@ -46,8 +49,9 @@ class OfferModel {
     status = json['status'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    iV = json['__v'];
-    qrURL=json['qr_url'] ?? "";
+    qrURL = json['qr_url'] ?? "";
+    active = json['active'] ?? false;
+    expiryDate = json['expiryDate'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -61,7 +65,7 @@ class OfferModel {
     if (expiry != null) {
       data['expiry'] = expiry!.toJson();
     }
-    data['validDays'] = validDays;
+    data['validDaysOfWeek'] = validDaysOfWeek;
     if (validTime != null) {
       data['validTime'] = validTime!.toJson();
     }
@@ -74,47 +78,45 @@ class OfferModel {
     if (updatedAt != null) {
       data['updatedAt'] = updatedAt!;
     }
-    data['__v'] = iV;
+    if (active != null) {
+      data['active'] = active!;
+    }
+    if (expiryDate != null) {
+      data['expiryDate'] = expiryDate!;
+    }
     return data;
   }
 
   @override
   String toString() {
-    return 'OfferModel{header: $header, description: $description, voucherType: $voucherType, ratingLevel: $ratingLevel, expiry: $expiry, validDays: $validDays, validTime: $validTime, triggerValue: $triggerValue, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, iV: $iV, id: $id, qrURL: $qrURL}';
+    return 'OfferModel{header: $header, description: $description, voucherType: $voucherType, ratingLevel: $ratingLevel, expiry: $expiry, validDays: $validDaysOfWeek, validTime: $validTime, triggerValue: $triggerValue, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt,id: $id, qrURL: $qrURL}';
   }
 }
 
 class Expiry {
   String? type;
-  ValidFrom? validFrom;
-  ValidFrom? validTo;
+  int? expiresInDays;
 
-  Expiry({this.type, this.validFrom, this.validTo});
+  Expiry({this.type, this.expiresInDays});
 
   Expiry.fromJson(Map<String, dynamic> json) {
     type = json['type'];
-    validFrom = json['validFrom'] != null
-        ? ValidFrom.fromJson(json['validFrom'])
-        : null;
-    validTo =
-        json['validTo'] != null ? ValidFrom.fromJson(json['validTo']) : null;
+    expiresInDays = json['expiresInDays'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['type'] = type;
-    if (validFrom != null) {
-      data['validFrom'] = validFrom!.toJson();
+    if (expiresInDays != null) {
+      data['expiresInDays'] = expiresInDays!;
     }
-    if (validTo != null) {
-      data['validTo'] = validTo!.toJson();
-    }
+
     return data;
   }
 
   @override
   String toString() {
-    return 'Expiry{type: $type, validFrom: $validFrom, validTo: $validTo}';
+    return 'Expiry{type: $type, expiresInDays: $expiresInDays}';
   }
 }
 
@@ -140,20 +142,23 @@ class ValidFrom {
 }
 
 class ValidTime {
+  String? type;
   String? startTime;
   String? endTime;
 
-  ValidTime({this.startTime, this.endTime});
+  ValidTime({this.type, this.startTime, this.endTime});
 
   ValidTime.fromJson(Map<String, dynamic> json) {
-    startTime = json['startTime'];
-    endTime = json['endTime'];
+    type = json['type'] ?? "";
+    startTime = json['startTime'] ?? "";
+    endTime = json['endTime'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['startTime'] = startTime;
-    data['endTime'] = endTime;
+    data['type'] = type ?? "";
+    data['startTime'] = startTime ?? "";
+    data['endTime'] = endTime ?? "";
     return data;
   }
 

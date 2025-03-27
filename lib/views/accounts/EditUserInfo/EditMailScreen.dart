@@ -6,6 +6,7 @@ import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
+import '../../common_widgets/AppCustomButton.dart';
 
 class EditMailScreen extends StatefulWidget {
   const EditMailScreen({super.key});
@@ -65,70 +66,55 @@ class _EditMailScreenState extends State<EditMailScreen> {
                 hintStyle: TextStyle(
                     color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.w400),
-                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                border:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                focusedBorder:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                errorBorder:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
             AppDimens.shape_30,
             Row(
               children: [
                 Expanded(
-                    child: OutlinedButton(
-                        style: ButtonStyle(
-                            side: WidgetStatePropertyAll(BorderSide(
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary)),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          provider.updateSelectedEditScreen(
-                              UserInfoProvider.EDIT_SCREEN);
-                        },
-                        child: Text(AppStrings.txtCancel.toUpperCase()))),
+                    child: AppCustomButton(
+                  text: AppStrings.txtCancel.toUpperCase(),
+                  onClick: () {
+                    provider
+                        .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
+                  },
+                  style: AppHelper.getDeleteButtonStyle(context),
+                )),
                 AppDimens.shape_20,
                 Expanded(
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: WidgetStatePropertyAll(
-                                Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          if (_emailController.text.toString().isEmpty) {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgEmptyEmail);
-                          } else if (!AppHelper.verifyEmailAddress(
-                              _emailController.text.toString())) {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectEmail);
-                          } else {
-                            provider.updateTempUser(
-                                email: _emailController.text.toString());
-                            provider.updateSelectedEditScreen(
-                                UserInfoProvider.EDIT_SCREEN);
-                          }
-                        },
-                        child: Text(
-                          AppStrings.txtUpdate.toUpperCase(),
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ))),
+                    child:
+                        AppCustomButton(
+                  text: AppStrings.txtUpdate.toUpperCase(),
+                  textColor: AppHelper.getAccountsButtonTextColor(context),
+                  onClick: () {
+                    if (_emailController.text.toString().isEmpty) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgEmptyEmail);
+                    } else if (!AppHelper.verifyEmailAddress(
+                        _emailController.text.toString())) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectEmail);
+                    } else {
+                      provider.updateTempUser(
+                          email: _emailController.text.toString());
+                      provider.updateSelectedEditScreen(
+                          UserInfoProvider.EDIT_SCREEN);
+                    }
+                  },
+                  style: AppHelper.getAccountsButtonStyle(context),
+                )),
               ],
             )
           ],

@@ -2,7 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/dialogs/ErrorDialog.dart';
+import '../../views/dialogs/ErrorDialog.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
@@ -101,10 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Applogo(),
                             Text(
-                              AppStrings.txtWelcome,
+                              AppStrings.txtWelcome.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 24,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor,
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Text(AppStrings.txtMobileNumber,
                                   style: TextStyle(
                                     fontSize: 12,
-                                    fontWeight: FontWeight.normal,
+                                    fontWeight: FontWeight.w500,
                                     color: Theme.of(context)
                                         .textSelectionTheme
                                         .selectionColor,
@@ -241,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Theme.of(context)
                                       .buttonTheme
                                       .colorScheme!
-                                      .primary,
+                                      .onPrimary,
                                   fontWeight: FontWeight.w900,
                                   fontSize: 14)),
                           TextSpan(
@@ -250,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Theme.of(context)
                                       .buttonTheme
                                       .colorScheme!
-                                      .primary,
+                                      .onPrimary,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14)),
                         ])),

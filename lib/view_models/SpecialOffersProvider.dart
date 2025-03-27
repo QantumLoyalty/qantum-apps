@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../data/models/OfferModel.dart';
@@ -40,22 +42,30 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       UserModel? userData = sharedPreferenceHelper.getUserData();
 
       if (userData != null) {
-        DateTime? dateTime;
+        DateTime? dob;
         try {
-          dateTime = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
+          dob = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
               .parse(userData.dateOfBirth ?? "");
         } catch (e) {
           logEvent("Exception in parsing birthdate $e");
         }
+        DateTime? joinDate;
+        try {
+          joinDate = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
+              .parse(userData.dateJoined ?? "");
+        } catch (e) {
+          logEvent("Exception in parsing birthdate $e");
+        }
 
-        NetworkResponse networkResponse =
-            await AppDataService.getInstance().fetchSpecialOffers(
-          membershipType:
-              userData.statusTier != null && userData.statusTier!.isNotEmpty
-                  ? userData.statusTier!.toLowerCase()
-                  : "valued",
-          birthdayMonth: dateTime != null ? "${dateTime.month}" : "1",
-        );
+        NetworkResponse networkResponse = await AppDataService.getInstance()
+            .fetchSpecialOffers(
+                membershipType: userData.statusTier != null &&
+                        userData.statusTier!.isNotEmpty
+                    ? userData.statusTier!.toLowerCase()
+                    : "valued",
+                birthdayMonth: dob != null ? "${dob.month}" : "1",
+                userId: userData.bluizeUniqueUserId!,
+                joinDate: DateFormat("yyyy-MM-dd").format(joinDate!));
         logEvent("Special Offers Response: ${networkResponse.response}");
         if (!networkResponse.isError) {
           _isError = networkResponse.isError;

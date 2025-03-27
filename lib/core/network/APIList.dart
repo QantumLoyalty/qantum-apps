@@ -40,9 +40,11 @@ class APIList {
 
   static get FETCH_PROMOTIONS => BASE_URL + "promotion/getBycategory?category=";
 
-  static get FETCH_VOUCHERS => BASE_URL + "voucher/getbyrating?ratingLevel=";
+  static get FETCH_VOUCHERS => BASE_URL + "offer/getbyrating?ratingLevel=";
 
-  static get FETCH_VOUCHER_BY_ID => BASE_URL + "voucher/getByIdMobile/";
+  static get FETCH_VOUCHER_BY_ID => BASE_URL + "offer/getByIdMobile/";
 
   static get UPDATE_DEVICE_DETAILS => BASE_URL + "user/device-details";
+
+  static get CHECK_APP_UPDATE => BASE_URL + "user/checkUpdate";
 }

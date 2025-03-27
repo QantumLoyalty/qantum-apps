@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
-import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
@@ -26,11 +27,7 @@ class ClubAndMembership extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context)
-                    .buttonTheme
-                    .colorScheme!
-                    .primary
-                    .withValues(alpha: 0.2),
+                color: Theme.of(context).canvasColor,
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -46,12 +43,9 @@ class ClubAndMembership extends StatelessWidget {
                     ),
                     AppDimens.shape_20,
                     Text(
-                      AppStrings.txtClubCode,
+                      AppStrings.txtClubCode.toUpperCase(),
                       style: TextStyle(
-                          color: Theme.of(context)
-                              .buttonTheme
-                              .colorScheme!
-                              .primary),
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     AppDimens.shape_15,
                     TextFormField(
@@ -93,8 +87,12 @@ class ClubAndMembership extends StatelessWidget {
                       ),
                     ),
                     AppDimens.getCustomBoxShape(30),
-                    AppButton(
-                        text: AppStrings.txtAdd.toUpperCase(), onClick: () {})
+                    AppCustomButton(
+                        style: AppHelper.getAccountsButtonStyle(context),
+                        textColor:
+                            AppHelper.getAccountsButtonTextColor(context),
+                        text: AppStrings.txtAdd.toUpperCase(),
+                        onClick: () {})
                   ],
                 ),
               ),

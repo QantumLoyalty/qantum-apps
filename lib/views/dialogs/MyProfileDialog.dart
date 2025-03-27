@@ -56,7 +56,7 @@ class MyProfileDialog {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColorDark,
+                            color: Theme.of(context).scaffoldBackgroundColor,
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
@@ -91,9 +91,8 @@ class MyProfileDialog {
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: Theme.of(context)
-                                                .buttonTheme
-                                                .colorScheme!
-                                                .primary),
+                                                .textSelectionTheme
+                                                .selectionColor),
                                       ),
                                       AppDimens.shape_20,
                                       IconTextWidget(
@@ -145,9 +144,8 @@ class MyProfileDialog {
                                               side: BorderSide(
                                                   width: 1,
                                                   color: Theme.of(context)
-                                                      .buttonTheme
-                                                      .colorScheme!
-                                                      .primary)),
+                                                      .textSelectionTheme
+                                                      .selectionColor!)),
                                           onPressed: () {
                                             AppNavigator.navigateTo(context,
                                                 AppNavigator.userDetailScreen);
@@ -160,9 +158,8 @@ class MyProfileDialog {
                                                 Icon(
                                                   Icons.handshake,
                                                   color: Theme.of(context)
-                                                      .buttonTheme
-                                                      .colorScheme!
-                                                      .primary,
+                                                      .textSelectionTheme
+                                                      .selectionColor,
                                                   size: 18,
                                                 ),
                                                 Text(
@@ -170,9 +167,8 @@ class MyProfileDialog {
                                                       .toUpperCase(),
                                                   style: TextStyle(
                                                       color: Theme.of(context)
-                                                          .buttonTheme
-                                                          .colorScheme!
-                                                          .primary,
+                                                          .textSelectionTheme
+                                                          .selectionColor,
                                                       fontSize: 10),
                                                 )
                                               ],
@@ -530,7 +526,7 @@ class MyProfileDialog {
                               ),
                               CircleAvatar(
                                 backgroundColor:
-                                    Theme.of(context).primaryColorDark,
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 radius: 30,
                                 child: IconButton(
                                     onPressed: () {

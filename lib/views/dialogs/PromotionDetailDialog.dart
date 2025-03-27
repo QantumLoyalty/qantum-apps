@@ -56,6 +56,19 @@ class PromotionDetailDialog {
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl: promotion.imageUrl ?? "",
+                                      placeholder: (context, _) {
+                                        return const Stack(
+                                          children: [
+                                            Center(
+                                              child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child:
+                                                  CircularProgressIndicator()),
+                                            ),
+                                          ],
+                                        );
+                                      },
                                       errorWidget: (context, _, obj) {
                                         return PromotionsPlaceHolder(
                                             size: Size(

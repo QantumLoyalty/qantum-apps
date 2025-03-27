@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
 
+import '../flavors_config/flavor_config.dart';
+
 class AppHelper {
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {
@@ -105,6 +107,7 @@ class AppHelper {
       return "";
     }
   }
+
   static String maskEmailSecond(String? email) {
     if (email != null && email.isNotEmpty) {
       String maskedEmail = email;
@@ -114,9 +117,9 @@ class AppHelper {
         if (emailParts.isNotEmpty) {
           String firstPart =
               "${emailParts[0].replaceRange(1, emailParts[0].length, "*" * (emailParts[0].length))}@";
-          maskedEmail = firstPart+emailParts[1];
+          maskedEmail = firstPart + emailParts[1];
 
-         /* if (emailParts.length > 1) {
+          /* if (emailParts.length > 1) {
             String secondPart = emailParts[1].replaceRange(
                 1, emailParts[1].length, "*" * (emailParts[1].length));
             maskedEmail = maskedEmail + secondPart;
@@ -126,6 +129,90 @@ class AppHelper {
       return maskedEmail;
     } else {
       return "";
+    }
+  }
+
+  static Color getAccountsButtonTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+      case Flavor.maxx:
+        return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
+      case Flavor.starReward:
+        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+    }
+  }
+
+  static ButtonStyle getAccountsButtonStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.maxx:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(AppColors.white));
+      case Flavor.starReward:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+
+      default:
+        return ButtonStyle();
+    }
+  }
+
+  static ButtonStyle getDeleteButtonStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.maxx:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.starReward:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+
+      default:
+        return ButtonStyle();
     }
   }
 }

@@ -13,80 +13,79 @@ class DetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        color: Theme.of(context).cardColor.withValues(alpha: 0.15),
-        child: Container(
-          padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      AppStrings.txtMyDetails.toUpperCase(),
-                      style: TextStyle(
-                          color: Theme.of(context)
-                              .buttonTheme
-                              .colorScheme!
-                              .primary),
-                    ),
+      return Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).cardColor.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(5)),
+        padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    AppStrings.txtMyDetails.toUpperCase(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                        color:
+                            Theme.of(context).colorScheme.secondary),
                   ),
-                  editable
-                      ? InkWell(
-                          onTap: () {
-                            provider.updateSelectedEditScreen(
-                                UserInfoProvider.DETAILS_EDIT_SCREEN);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 8, bottom: 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(AppStrings.txtEdit.toUpperCase(),
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor)),
-                                Icon(
-                                  Icons.chevron_right,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
-                                  size: 18,
-                                )
-                              ],
-                            ),
-                          ))
-                      : Container(),
-                ],
-              ),
-              Text(
-                userName(provider),
-                style: TextStyle(
-                    color: editable
-                        ? Theme.of(context).textSelectionTheme.selectionColor
-                        : Theme.of(context)
-                            .textSelectionTheme
-                            .selectionColor
-                            ?.withValues(alpha: 0.7)),
-              ),
-              AppDimens.shape_5,
-              Text(
-                "DOB ${editable ? AppHelper.formatDate(provider.tempUser!.dateOfBirth) : "**/**/****"}",
-                style: TextStyle(
-                    color: editable
-                        ? Theme.of(context).textSelectionTheme.selectionColor
-                        : Theme.of(context)
-                            .textSelectionTheme
-                            .selectionColor
-                            ?.withValues(alpha: 0.7)),
-              ),
-            ],
-          ),
+                ),
+                editable
+                    ? InkWell(
+                        onTap: () {
+                          provider.updateSelectedEditScreen(
+                              UserInfoProvider.DETAILS_EDIT_SCREEN);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 8, bottom: 8),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(AppStrings.txtEdit.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w800,
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor)),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor,
+                                size: 18,
+                              )
+                            ],
+                          ),
+                        ))
+                    : Container(),
+              ],
+            ),
+            Text(
+              userName(provider),
+              style: TextStyle(
+                  color: editable
+                      ? Theme.of(context).textSelectionTheme.selectionColor
+                      : Theme.of(context)
+                          .textSelectionTheme
+                          .selectionColor
+                          ?.withValues(alpha: 0.7)),
+            ),
+            AppDimens.shape_5,
+            Text(
+              "DOB ${editable ? AppHelper.formatDate(provider.tempUser!.dateOfBirth) : "**/**/****"}",
+              style: TextStyle(
+                  color: editable
+                      ? Theme.of(context).textSelectionTheme.selectionColor
+                      : Theme.of(context)
+                          .textSelectionTheme
+                          .selectionColor
+                          ?.withValues(alpha: 0.7)),
+            ),
+          ],
         ),
       );
     });

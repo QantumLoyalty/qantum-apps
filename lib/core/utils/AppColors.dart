@@ -7,6 +7,8 @@ class AppColors {
 
   static Color get qa_back_color_2 => const Color(0xFF070526);
 
+  static Color get qa_back_color_3 => const Color(0x3429ABE2);
+
   static Color get qa_text_color => const Color(0xFFffffff);
 
   static Color get qa_text_field_text_color => const Color(0xFF000000);
@@ -17,16 +19,17 @@ class AppColors {
 
   static Color get qa_button_color_2 => const Color(0xFF037ED5);
 
-  static Color get qa_card_color => const Color(0x80FFFFFF);
+  static Color get qa_card_color => const Color(0x26FFFFFF);
 
   static Color get qa_divider_color => const Color(0xFFFFFFFF);
-
 
   /// MAX THEME ///
 
   static Color get max_back_color => const Color(0xFF541C65);
 
   static Color get max_back_color_2 => const Color(0xFF541C65);
+
+  static Color get max_back_color_3 => const Color(0xFFCE132E);
 
   static Color get max_text_color => const Color(0xFFffffff);
 
@@ -42,21 +45,23 @@ class AppColors {
 
   static Color get max_divider_color => const Color(0xFFFFFFFF);
 
-
-
   /// STAR REWARD THEME ///
 
-  static Color get sr_back_color => const Color(0xFF912325);
+  static Color get sr_back_color => const Color(0xFFCD211F);
 
-  static Color get sr_back_color_2 => const Color(0xFF912325);
+  static Color get sr_back_color_2 => const Color(0xFFB11921);
 
-  static Color get sr_text_color => const Color(0xFFd9bcbe);
+  static Color get sr_back_color_3 => const Color(0x33000000);
+
+  static Color get sr_text_color => const Color(0xFFFFFFFF);
 
   static Color get sr_text_field_text_color => const Color(0xFF000000);
 
   static Color get sr_hint_text_color => const Color(0xFF6D6D6D);
 
-  static Color get sr_button_color => const Color(0xFF801f26);
+  static Color get sr_button_color => const Color(0xFFCD211F);
+
+  static Color get sr_button_border_color => const Color(0xFFFFFFFF);
 
   static Color get sr_card_color => const Color(0xFFFFFFFF);
 

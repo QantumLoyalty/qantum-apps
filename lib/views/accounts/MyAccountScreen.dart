@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
@@ -24,7 +23,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).buttonTheme.colorScheme!.primary,
         mini: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
         onPressed: () {
@@ -50,11 +48,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
-                    color: Theme.of(context)
-                        .buttonTheme
-                        .colorScheme!
-                        .primary
-                        .withValues(alpha: 0.2),
+                    color: Theme.of(context).canvasColor
                   ),
                   child: ListView.builder(
                     itemBuilder: (context, index) {

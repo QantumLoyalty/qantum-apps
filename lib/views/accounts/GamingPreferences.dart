@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
@@ -32,11 +33,7 @@ class GamingPreferences extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context)
-                    .buttonTheme
-                    .colorScheme!
-                    .primary
-                    .withValues(alpha: 0.2),
+                color: Theme.of(context).canvasColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,36 +62,34 @@ class GamingPreferences extends StatelessWidget {
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, item) {
-                        return ListTile(
-                          contentPadding:
-                              const EdgeInsets.only(left: 15, right: 10),
-                          tileColor: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor!
-                              .withValues(alpha: 0.15),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          trailing: Icon(Icons.chevron_right,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                          title: Text(
-                            items.keys.elementAt(item),
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary),
-                          ),
-                          subtitle: Text(
-                            items[items.keys.elementAt(item)]!,
-                            style: TextStyle(
+                        return Material(
+                          type: MaterialType.transparency,
+                          child: ListTile(
+                            contentPadding:
+                                const EdgeInsets.only(left: 15, right: 10),
+                            tileColor: AppColors.white.withValues(alpha: 0.15),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            trailing: Icon(Icons.chevron_right,
                                 color: Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor),
+                            title: Text(
+                              items.keys.elementAt(item),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            subtitle: Text(
+                              items[items.keys.elementAt(item)]!,
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor),
+                            ),
+                            onTap: () {},
                           ),
-                          onTap: () {},
                         );
                       },
                       itemCount: items.length,

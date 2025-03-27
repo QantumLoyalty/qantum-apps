@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:provider/provider.dart';
 import 'core/flavors_config/app_themes.dart';
@@ -17,8 +18,11 @@ void main() async {
       flavor: Flavor.qantum,
       flavorValues: FlavorValues(appName: "Qantum", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-//  await Firebase.initializeApp();
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((context) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +40,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
       ],
-      child: Portal(child: MaterialApp(
+      child: Portal(
+          child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,
         debugShowCheckedModeBanner: false,
         title: FlavorConfig.instance.flavorValues.appName!,

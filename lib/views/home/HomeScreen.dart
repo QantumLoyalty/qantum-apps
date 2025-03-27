@@ -25,12 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     if (context.mounted) {
       Provider.of<UserInfoProvider>(context, listen: false).retrieveUserInfo();
-      //   Provider.of<UserInfoProvider>(context, listen: false).uploadDeviceToken();
       Provider.of<UserInfoProvider>(context, listen: false)
           .runFetchProfileTimer();
-      // Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile();
       Provider.of<UserInfoProvider>(context, listen: false)
           .uploadDeviceDetail();
+      Provider.of<UserInfoProvider>(context, listen: false).checkForAppUpdate();
     }
   }
 
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Theme.of(context)
                                         .buttonTheme
                                         .colorScheme!
-                                        .primary,
+                                        .onSecondary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
@@ -152,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Theme.of(context)
                                         .buttonTheme
                                         .colorScheme!
-                                        .primary,
+                                        .onSecondary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {

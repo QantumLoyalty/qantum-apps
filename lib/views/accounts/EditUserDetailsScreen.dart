@@ -36,7 +36,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(child:
           Consumer<UserInfoProvider>(builder: (context, provider, child) {
         return Stack(

@@ -8,6 +8,7 @@ import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppButton.dart';
+import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 import 'widgets/DetailCard.dart';
@@ -45,16 +46,13 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(
+                  top: 25, left: 15, right: 15, bottom: 15),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context)
-                    .buttonTheme
-                    .colorScheme!
-                    .primary
-                    .withValues(alpha: 0.2),
+                color: Theme.of(context).canvasColor,
               ),
               child: Consumer<UserInfoProvider>(
                   builder: (context, provider, child) {
@@ -97,21 +95,25 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 AppDimens.shape_10,
                                 PhoneCard(editable: false),
                                 AppDimens.shape_30,
-                                AppButton(
-                                    text: AppStrings.txtEditAccountDetails
-                                        .toUpperCase(),
-                                    icon: Icon(
-                                      Icons.open_in_new,
-                                      color: Theme.of(context)
-                                          .buttonTheme
-                                          .colorScheme!
-                                          .onPrimary,
-                                      size: 18,
-                                    ),
-                                    onClick: () {
-                                      AppNavigator.navigateTo(context,
-                                          AppNavigator.verifyOTPAccount);
-                                    })
+                                AppCustomButton(
+                                  text: AppStrings.txtEditAccountDetails
+                                      .toUpperCase(),
+                                  textColor:
+                                      AppHelper.getAccountsButtonTextColor(
+                                          context),
+                                  icon: Icon(
+                                    Icons.open_in_new,
+                                    color: AppHelper.getAccountsButtonTextColor(
+                                        context),
+                                    size: 18,
+                                  ),
+                                  onClick: () {
+                                    AppNavigator.navigateTo(
+                                        context, AppNavigator.verifyOTPAccount);
+                                  },
+                                  style:
+                                      AppHelper.getAccountsButtonStyle(context),
+                                )
                               ],
                             ),
                           ),
@@ -119,50 +121,40 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         AppDimens.shape_20,
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                      color: Theme.of(context)
-                                          .buttonTheme
-                                          .colorScheme!
-                                          .primary)),
-                              onPressed: () async {
-                                var response = await showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text(AppStrings.txtAlert),
-                                        content: const Text(
-                                            AppStrings.msgCancelAccount),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context, false);
-                                              },
-                                              child:
-                                                  const Text(AppStrings.txtNo)),
-                                          TextButton(
-                                              onPressed: () async {
-                                                Navigator.pop(context, true);
-                                              },
-                                              child: const Text(
-                                                  AppStrings.txtYes)),
-                                        ],
-                                      );
-                                    });
+                          child: AppCustomButton(
+                            style: AppHelper.getDeleteButtonStyle(context),
+                            onClick: () async {
+                              var response = await showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text(AppStrings.txtAlert),
+                                      content: const Text(
+                                          AppStrings.msgCancelAccount),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                            child:
+                                                const Text(AppStrings.txtNo)),
+                                        TextButton(
+                                            onPressed: () async {
+                                              Navigator.pop(context, true);
+                                            },
+                                            child:
+                                                const Text(AppStrings.txtYes)),
+                                      ],
+                                    );
+                                  });
 
-                                if (response) {
-                                  /// CANCEL ACCOUNT ///
-                                  provider.cancelAccount();
-                                }
-                              },
-                              child: Text(
-                                AppStrings.txtDeleteMyAccount.toUpperCase(),
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor),
-                              )),
+                              if (response) {
+                                /// CANCEL ACCOUNT ///
+                                provider.cancelAccount();
+                              }
+                            },
+                            text: AppStrings.txtDeleteMyAccount.toUpperCase(),
+                          ),
                         ),
                         AppDimens.shape_20,
                       ],

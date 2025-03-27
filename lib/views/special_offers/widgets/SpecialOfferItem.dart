@@ -58,6 +58,20 @@ class SpecialOfferItem extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
                           imageUrl: offer.image ?? "",
+                          placeholder: (context, _) {
+                            return const Stack(
+                              children: [
+                                Center(
+                                  child: SizedBox(
+                                      width: 30,
+                                      height: 30,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      )),
+                                ),
+                              ],
+                            );
+                          },
                           errorWidget: (context, a, object) {
                             return const AspectRatio(
                                 aspectRatio: 1.1,
@@ -86,7 +100,7 @@ class SpecialOfferItem extends StatelessWidget {
                                     color: AppColors.black, fontSize: 11)),
                             AppDimens.shape_5,
                             Text(
-                              'valid till ${DateFormat("dd/MM/yyyy").format(DateTime.now())}',
+                              'valid till ${offer.expiryDate}',
                               style: TextStyle(
                                 fontSize: 8,
                                 color: Theme.of(context)

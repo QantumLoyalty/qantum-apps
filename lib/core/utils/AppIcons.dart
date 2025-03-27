@@ -2,9 +2,10 @@ import '../flavors_config/flavor_config.dart';
 
 class AppIcons {
   static String app_logo =
-      "assets/${FlavorConfig.instance.flavorValues.appName!.toLowerCase()}/app_logo.png";
+      "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/app_logo.png";
   static String my_profile = "assets/common/my_profile.png";
-  static String card_value = "assets/common/card_value.png";
+  static String card_value =
+      "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/card_value.png";
   static String card_silver = "assets/common/card_silver.png";
   static String card_gold = "assets/common/card_gold.png";
   static String card_platinum = "assets/common/card_platinum.png";

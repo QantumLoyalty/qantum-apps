@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import '../core/flavors_config/flavor_config.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppStrings.dart';
 import '../data/local/SharedPreferenceHelper.dart';
@@ -128,6 +128,20 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
       NetworkResponse networkResponse =
           await UserService.getInstance().updateDeviceDetail(params);
+      logEvent("uploadDeviceDetail response: $networkResponse");
+    } catch (e) {
+      logEvent(e.toString());
+    }
+  }
+
+  checkForAppUpdate() async {
+    try {
+      Map<String, dynamic> params = {};
+      params['appType'] = FlavorConfig.instance.flavorValues.appName;
+      params['version'] = FlavorConfig.instance.flavorValues.appVersion;
+
+      NetworkResponse networkResponse =
+          await UserService.getInstance().checkForAppUpdate(params);
       logEvent("uploadDeviceDetail response: $networkResponse");
     } catch (e) {
       logEvent(e.toString());

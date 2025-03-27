@@ -8,6 +8,7 @@ import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
+import '../../common_widgets/AppCustomButton.dart';
 
 class EditDetailScreen extends StatefulWidget {
   const EditDetailScreen({super.key});
@@ -83,13 +84,18 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 hintStyle: TextStyle(
                     color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.w400),
-                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                border:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                focusedBorder:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
-                errorBorder:
-                    OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
+                errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
             AppDimens.shape_20,
@@ -186,73 +192,69 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
             Row(
               children: [
                 Expanded(
-                    child: OutlinedButton(
-                        style: ButtonStyle(
-                            side: WidgetStatePropertyAll(BorderSide(
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary)),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          provider.updateSelectedEditScreen(
-                              UserInfoProvider.EDIT_SCREEN);
-                        },
-                        child: Text(AppStrings.txtCancel.toUpperCase()))),
+                    child: AppCustomButton(
+                  text: AppStrings.txtCancel.toUpperCase(),
+                  onClick: () {
+                    if (_fullNameFieldController.text.toString().isEmpty) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectFullName);
+                    } else if (!verifyDOB(
+                        date: _birthdayDDController.text.toString(),
+                        month: _birthdayMMController.text.toString(),
+                        year: _birthdayYYController.text.toString())) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectDOB);
+                    } else {
+                      DateTime date = DateTime(
+                          int.parse(_birthdayYYController.text.toString()),
+                          int.parse(_birthdayMMController.text.toString()),
+                          int.parse(_birthdayDDController.text.toString()));
+                      DateFormat dateTimeFormat =
+                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+
+                      provider.updateTempUser(
+                          name: _fullNameFieldController.text.toString(),
+                          dob: dateTimeFormat.format(date));
+
+                      provider.updateSelectedEditScreen(
+                          UserInfoProvider.EDIT_SCREEN);
+                    }
+                  },
+                  style: AppHelper.getDeleteButtonStyle(context),
+                )),
                 AppDimens.shape_20,
                 Expanded(
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: WidgetStatePropertyAll(
-                                Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary),
-                            shape: const WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(80))))),
-                        onPressed: () {
-                          if (_fullNameFieldController.text
-                              .toString()
-                              .isEmpty) {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectFullName);
-                          } else if (!verifyDOB(
-                              date: _birthdayDDController.text.toString(),
-                              month: _birthdayMMController.text.toString(),
-                              year: _birthdayYYController.text.toString())) {
-                            AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectDOB);
-                          } else {
-                            DateTime date = DateTime(
-                                int.parse(
-                                    _birthdayYYController.text.toString()),
-                                int.parse(
-                                    _birthdayMMController.text.toString()),
-                                int.parse(
-                                    _birthdayDDController.text.toString()));
-                            DateFormat dateTimeFormat =
-                                DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+                    child: AppCustomButton(
+                  text: AppStrings.txtUpdate.toUpperCase(),
+                  textColor: AppHelper.getAccountsButtonTextColor(context),
+                  onClick: () {
+                    if (_fullNameFieldController.text.toString().isEmpty) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectFullName);
+                    } else if (!verifyDOB(
+                        date: _birthdayDDController.text.toString(),
+                        month: _birthdayMMController.text.toString(),
+                        year: _birthdayYYController.text.toString())) {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectDOB);
+                    } else {
+                      DateTime date = DateTime(
+                          int.parse(_birthdayYYController.text.toString()),
+                          int.parse(_birthdayMMController.text.toString()),
+                          int.parse(_birthdayDDController.text.toString()));
+                      DateFormat dateTimeFormat =
+                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
 
-                            provider.updateTempUser(
-                                name: _fullNameFieldController.text.toString(),
-                                dob: dateTimeFormat.format(date));
+                      provider.updateTempUser(
+                          name: _fullNameFieldController.text.toString(),
+                          dob: dateTimeFormat.format(date));
 
-                            provider.updateSelectedEditScreen(
-                                UserInfoProvider.EDIT_SCREEN);
-                          }
-                        },
-                        child: Text(
-                          AppStrings.txtUpdate.toUpperCase(),
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ))),
+                      provider.updateSelectedEditScreen(
+                          UserInfoProvider.EDIT_SCREEN);
+                    }
+                  },
+                  style: AppHelper.getAccountsButtonStyle(context),
+                )),
               ],
             )
           ],
