@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../core/mixins/logging_mixin.dart';
+import '../core/utils/AppHelper.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/models/PromotionModel.dart';
@@ -62,7 +63,8 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
   fetchPromotionsTimer() async {
     await getPromotions();
-    Timer.periodic(const Duration(seconds: 5), (value) async {
+    Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
+        (value) async {
       if (!_isFetching) {
         _isFetching = true;
         await getPromotions();

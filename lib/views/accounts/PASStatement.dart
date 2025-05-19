@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/utils/AppDimens.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
@@ -52,6 +53,7 @@ class PASStatement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
@@ -20,6 +21,7 @@ class GamingPreferences extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [

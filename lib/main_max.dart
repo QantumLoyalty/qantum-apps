@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'view_models/SpecialOffersProvider.dart';
 import 'core/flavors_config/app_themes.dart';
@@ -13,17 +15,24 @@ import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'views/splash/SplashScreen.dart';
 
+
+
 void main() async {
   FlavorConfig(
       flavor: Flavor.maxx,
       flavorValues: FlavorValues(appName: "Max", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-//  await Firebase.initializeApp();
 
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
     runApp(const MyApp());
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    // Initialize with your OneSignal App ID
+    OneSignal.initialize("bc03a2c3-74a6-466f-b4c0-350b70a4d007");
+    // Use this method to prompt for push notifications.
+    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
+    OneSignal.Notifications.requestPermission(true);
   });
 }
 

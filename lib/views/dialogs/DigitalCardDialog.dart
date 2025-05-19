@@ -3,12 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
-import 'package:qantum_apps/core/utils/AppIcons.dart';
-import 'package:qantum_apps/core/utils/AppStrings.dart';
+import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppIcons.dart';
+import '../../core/utils/AppStrings.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:secure_content/secure_content.dart';
-
 import '../../core/utils/AppColors.dart';
 import '../../view_models/UserInfoProvider.dart';
 
@@ -75,7 +74,7 @@ class DigitalCardDialog {
                                                 BorderRadius.circular(10),
                                             child: QrImageView(
                                               data:
-                                                  '${provider.getUserInfo!.cardNumber}',
+                                                  'ABC${provider.getUserInfo!.cardNumber}',
                                               backgroundColor: AppColors.white,
                                               size: 180,
                                             ),

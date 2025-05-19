@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/data/models/BenefitsModel.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppStrings.dart';
@@ -64,6 +66,14 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   String? get networkMessage => _networkMessage;
 
+  BenefitsModel? _benefits;
+
+  BenefitsModel? get benefits => _benefits;
+
+  List<String>? _benefitItems;
+
+  List<String>? get benefitItems => _benefitItems;
+
   updateSelectedEditScreen(value) {
     _selectedEditScreen = value;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -75,6 +85,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
+
     notifyListeners();
   }
 
@@ -106,7 +117,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   runFetchProfileTimer() async {
     await fetchUserProfile();
-    Timer timer = Timer.periodic(const Duration(seconds: 60), (value) async {
+    Timer timer = Timer.periodic( Duration(seconds: AppHelper.defaultRequestTime), (value) async {
       if (!_isFetching) {
         _isFetching = true;
         i += 1;
@@ -119,9 +130,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   uploadDeviceDetail() async {
     try {
+      String? deviceToken = await AppHelper.getDeviceToken();
       Map<String, dynamic> params = {};
-      params['device_token'] = '';
-      params['appType'] = FlavorConfig.instance.flavorValues.appName;
+      params['device_token'] = deviceToken ?? "";
+      params['appType'] = "qantum";
+      //params['appType'] = FlavorConfig.instance.flavorValues.appName;
       params['app_version'] = FlavorConfig.instance.flavorValues.appVersion;
       params['device_type'] =
           Platform.isAndroid ? "ANDROID" : (Platform.isIOS ? "IOS" : "");
@@ -145,6 +158,48 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       logEvent("uploadDeviceDetail response: $networkResponse");
     } catch (e) {
       logEvent(e.toString());
+    }
+  }
+
+  getUsersBenefits() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        notifyListeners();
+      });
+
+      NetworkResponse networkResponse =
+          await UserService.getInstance().getUsersBenefits();
+
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        if ((networkResponse.response as Map<String, dynamic>)
+            .containsKey("data")) {
+          _benefits = BenefitsModel.fromJson(
+              (networkResponse.response! as Map<String, dynamic>)["data"]);
+
+          if (_benefits != null &&
+              _benefits!.htmlcontent != null &&
+              _benefits!.htmlcontent!.isNotEmpty) {
+            String benefits = _benefits!.htmlcontent!;
+            benefits = benefits.replaceAll("<ul>", "");
+            benefits = benefits.replaceAll("</ul>", "");
+            benefits = benefits.replaceAll("<li>", "");
+            _benefitItems = benefits.split("</li>");
+
+            print(_benefitItems);
+            _benefitItems!.removeWhere((test) => test == " ");
+          }
+        }
+      }
+    } catch (e) {
+      _isNetworkError = true;
+      _networkMessage = e.toString();
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
     }
   }
 

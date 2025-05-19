@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -64,7 +63,7 @@ class PromotionDetailDialog {
                                                   width: 50,
                                                   height: 50,
                                                   child:
-                                                  CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                             ),
                                           ],
                                         );
@@ -93,15 +92,7 @@ class PromotionDetailDialog {
                                               bottomRight:
                                                   Radius.circular(10))),
                                       padding: const EdgeInsets.all(10),
-                                      child: /*WebViewWidget(
-                                        controller: mController)*/
-                                          /* WebViewWidget.fromPlatformCreationParams(
-                                      params: AndroidWebViewWidgetCreationParams(
-                                        controller: mController.platform,
-                                        displayWithHybridComposition: false,
-                                      ),
-                                    ),*/
-                                          Html(data: promotion.htmlContent)),
+                                      child: Html(data: promotion.htmlContent)),
                                 ),
                               ),
                             ],

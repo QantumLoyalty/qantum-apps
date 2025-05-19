@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppStrings.dart';
 import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -117,13 +118,15 @@ class SpecialOfferDetailDialog {
                                               ),
                                               AppDimens.shape_5,
                                               Text(
-                                                'Valid to ${offerProvider.selectedOffer!.expiryDate}',
+                                                '${AppStrings.txtValidTo.toUpperCase()} ${offerProvider.selectedOffer!.expiryDate}',
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .buttonTheme
                                                         .colorScheme!
                                                         .primary,
-                                                    fontSize: 10),
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
                                             ],
                                           ),
@@ -152,10 +155,10 @@ class SpecialOfferDetailDialog {
                                   child: IconButton(
                                       onPressed: () async {
                                         Navigator.pop(context);
-                                        /* Provider.of<SpecialOffersProvider>(
+                                        Provider.of<SpecialOffersProvider>(
                                                 context,
                                                 listen: false)
-                                            .resetSelectedOffer();*/
+                                            .getSpecialOffers(hideLoader: true);
                                       },
                                       icon: Icon(
                                         Icons.clear,

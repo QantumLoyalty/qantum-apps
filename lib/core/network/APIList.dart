@@ -1,4 +1,5 @@
 class APIList {
+  // LIVE
   static get BASE_URL => "http://13.239.30.205:8081/";
 
   // LOCAL HOST static get BASE_URL => "http://10.0.2.2:8081/";
@@ -47,4 +48,6 @@ class APIList {
   static get UPDATE_DEVICE_DETAILS => BASE_URL + "user/device-details";
 
   static get CHECK_APP_UPDATE => BASE_URL + "user/checkUpdate";
+
+  static get GET_USERS_BENEFITS => BASE_URL + "benefits/getBenefitsForApp?";
 }

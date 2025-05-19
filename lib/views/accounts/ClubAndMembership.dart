@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
@@ -14,6 +15,7 @@ class ClubAndMembership extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [

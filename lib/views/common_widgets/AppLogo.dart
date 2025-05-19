@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
@@ -26,12 +27,10 @@ class Applogo extends StatelessWidget {
                   AppDimens.shape_20
                 ],
               ),
-        Image.asset(
-          AppIcons.app_logo,
-          width: 72,
-          height: 72,
-        ),
-        AppDimens.getCustomBoxShape(10),
+        Image.asset(AppIcons.app_logo,
+            width: AppHelper.getAppIconSize(context).width,
+            height: AppHelper.getAppIconSize(context).height),
+        AppDimens.shape_20
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
@@ -7,7 +8,6 @@ import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../../view_models/UserInfoProvider.dart';
-import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
@@ -38,6 +38,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [

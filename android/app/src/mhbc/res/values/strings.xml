@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Manly Harbour Boat Club</string>
+    <string name="default_notification_channel_id">com.au.mhbc.app.urgent</string>
+</resources>

@@ -12,6 +12,7 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -42,7 +43,11 @@ android {
             applicationId "com.au.quantum.app"
             versionName "Qantum"
         }
-
+        mhbc {
+            dimension "app"
+            applicationId "com.au.mhbc.app"
+            versionName "Manly Harbour Boat Club"
+        }
 
 
     }
@@ -68,8 +73,9 @@ android {
     }
 }
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation platform('com.google.firebase:firebase-bom:33.12.0')
     implementation 'com.google.firebase:firebase-analytics'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 }
 
 flutter {

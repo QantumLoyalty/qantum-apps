@@ -44,11 +44,11 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       {required String membershipType,
       required String birthdayMonth,
       required String userId,
-      required String joinDate}) async {
+      required String joinDate, required String timezone}) async {
     NetworkResponse networkResponse;
     try {
       var URL = APIList.FETCH_VOUCHERS +
-          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate";
+          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone";
       logEvent(URL);
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
@@ -80,4 +80,6 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
     return networkResponse;
   }
+
+
 }

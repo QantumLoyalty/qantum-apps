@@ -7,6 +7,7 @@ import 'package:qantum_apps/core/utils/AppIcons.dart';
 import 'package:qantum_apps/core/utils/AppStrings.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
 import 'package:qantum_apps/view_models/UserInfoProvider.dart';
+import 'package:qantum_apps/views/FortuneWheelSample.dart';
 import 'package:qantum_apps/views/dialogs/MyProfileDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -129,9 +130,11 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             builder: (context, provider, child) {
                           return InkWell(
                             onTap: () {
-                              //   provider.openMyProfileScreen();
-                              MyProfileDialog.getInstance()
+                                  MyProfileDialog.getInstance()
                                   .showMyProfileDialog(context);
+                            /*  Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      const FortuneWheelSample()));*/
                             },
                             child: Column(
                               mainAxisSize: MainAxisSize.min,

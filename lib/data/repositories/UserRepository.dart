@@ -13,6 +13,8 @@ abstract class UserRepository {
 
   Future<NetworkResponse> getPoints();
 
+  Future<NetworkResponse> getUsersBenefits();
+
   Future<NetworkResponse> cancelAccount();
 
   Future<NetworkResponse> fetchUserProfile();

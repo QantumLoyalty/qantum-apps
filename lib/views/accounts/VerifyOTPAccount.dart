@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
-import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
@@ -50,7 +50,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppThemeCustom.getCustomScaffoldBackground(context),
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         if (context.mounted) {
           /// CHECKING FOR OTP SEND CASE

@@ -123,7 +123,9 @@ class AppStrings {
   static const String msgCommonLoader =
       "Please wait, while we are processing your request.";
 
-  static const String txtCommunicationChannel = "Communication Channel";
+  static const String txtCommunicationChannel = "Communication Channels";
+
+  static const String txtValidTo = "Valid to";
 
   static const String txtStatusCreditsReactNextLevel =
       "Status Credits to reach next level";

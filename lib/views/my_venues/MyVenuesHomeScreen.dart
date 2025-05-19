@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../../view_models/PromotionsProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
@@ -340,11 +342,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       TextButton(
-                          style: TextButton.styleFrom(
-                              minimumSize: const Size(85, 30),
-                              padding: EdgeInsets.zero,
-                              backgroundColor:
-                                  Theme.of(context).primaryColorDark),
+                          style: AppThemeCustom.getMoreInfoButtonStyle(context),
                           onPressed: () {},
                           child: Padding(
                             padding:
@@ -353,9 +351,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                               AppStrings.txtMoreInfo.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 10,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom.getMoreInfoTextStyle(context),
                               ),
                             ),
                           )),
@@ -367,26 +363,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextButton(
-                          style: ButtonStyle(
-                              shadowColor: WidgetStatePropertyAll(
-                                  Colors.black.withValues(alpha: 0.4)),
-                              elevation: const WidgetStatePropertyAll(20),
-                              shape:
-                                  WidgetStatePropertyAll(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(80))),
-                              backgroundColor: WidgetStatePropertyAll(
-                                  Theme.of(context)
-                                      .buttonTheme
-                                      .colorScheme!
-                                      .primary)),
-                          /*style: TextButton.styleFrom(
-                              minimumSize: const Size(85, 30),
-                              padding: EdgeInsets.zero,
-
-                              backgroundColor: Theme.of(context)
-                                  .buttonTheme
-                                  .colorScheme!
-                                  .secondary),*/
+                          style: AppThemeCustom.getRedeemButtonStyle(context),
                           onPressed: () {},
                           child: Padding(
                             padding:
@@ -395,9 +372,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                               AppStrings.txtRedeem.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 10,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom.getRedeemTextStyle(context),
                               ),
                             ),
                           )),

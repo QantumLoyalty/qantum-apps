@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_themes.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/views/splash/SplashScreen.dart';
+import '../core/flavors_config/app_themes.dart';
+import '../core/flavors_config/flavor_config.dart';
+import '../core/navigation/AppNavigator.dart';
+import '../views/splash/SplashScreen.dart';
 import 'view_models/HomeProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
@@ -18,16 +19,39 @@ void main() async {
       flavor: Flavor.starReward,
       flavorValues: FlavorValues(appName: "Star Reward", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-//  await Firebase.initializeApp();
+
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
     runApp(const MyApp());
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    // Initialize with your OneSignal App ID
+    OneSignal.initialize("4272e19f-d3ec-461f-9b87-0df648b4e7bf");
+    // Use this method to prompt for push notifications.
+    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
+    OneSignal.Notifications.requestPermission(true);
+    OneSignal.Notifications.addClickListener((onNotificationClickEvent){
+
+      print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+
+    });
+
+
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override

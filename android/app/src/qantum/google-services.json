@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "894720990633",
-    "project_id": "qantum-apps",
-    "storage_bucket": "qantum-apps.firebasestorage.app"
+    "project_number": "686459984435",
+    "project_id": "s2w-notifications",
+    "storage_bucket": "s2w-notifications.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:894720990633:android:cfcc10a0292793efb1f8b8",
+        "mobilesdk_app_id": "1:686459984435:android:cbd77038d74821838d6146",
         "android_client_info": {
           "package_name": "com.au.quantum.app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAIf_18pMQ-6LpSn2YAVNCs0CN9nCAP-HY"
+          "current_key": "AIzaSyCE4HVKJZ0SwR9TIuFATXg9Xd2oXhzQHT8"
         }
       ],
       "services": {
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:894720990633:android:2e802d56fed8d28eb1f8b8",
+        "mobilesdk_app_id": "1:686459984435:android:96a93af6a15d36708d6146",
         "android_client_info": {
           "package_name": "com.au.starhotels.app"
         }
@@ -34,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAIf_18pMQ-6LpSn2YAVNCs0CN9nCAP-HY"
+          "current_key": "AIzaSyCE4HVKJZ0SwR9TIuFATXg9Xd2oXhzQHT8"
         }
       ],
       "services": {

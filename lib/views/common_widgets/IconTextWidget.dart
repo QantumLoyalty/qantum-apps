@@ -18,6 +18,8 @@ class IconTextWidget extends StatelessWidget {
   Function()? onClick;
   Function(TapDownDetails value)? onTapDown;
   Function(TapUpDetails value)? onTapUp;
+  Function(DragStartDetails value)? onDragStart;
+  Function(DragDownDetails value)? onDragEnd;
 
   IconTextWidget(
       {super.key,
@@ -32,7 +34,9 @@ class IconTextWidget extends StatelessWidget {
       this.margin,
       this.onClick,
       this.onTapUp,
-      this.onTapDown});
+      this.onTapDown,
+      this.onDragStart,
+      this.onDragEnd});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,10 @@ class IconTextWidget extends StatelessWidget {
       decoration: decoration,
       margin: margin,
       padding: const EdgeInsets.all(5),
-      child: InkWell(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onPanStart: onDragStart,
+        onPanDown: onDragEnd,
         onTapUp: onTapUp,
         onTapDown: onTapDown,
         onTap: onClick,

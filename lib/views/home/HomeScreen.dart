@@ -100,20 +100,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                              checkAndHideSeeAllOptionMenu(provider);
+                              // checkAndHideSeeAllOptionMenu(provider);
 
-                              provider.updateSelectedOption(index);
+                              // provider.updateSelectedOption(index);
+                            },
+                            onDragStart: (value) {
+                              /// HIDE POINTS BALANCE DIALOG
+                              if (provider.homeNavigationList[index].name ==
+                                  provider.homeNavigationList[0].name) {
+                                provider.updatePointsBalanceVisibility(false);
+                                provider.updateSelectedOption(
+                                    provider.prevSelectedOption);
+                              }
                             },
                             onTapUp: (value) {
                               /// HIDE POINTS BALANCE DIALOG
                               if (provider.homeNavigationList[index].name ==
                                   provider.homeNavigationList[0].name) {
                                 provider.updatePointsBalanceVisibility(false);
+                                provider.updateSelectedOption(
+                                    provider.prevSelectedOption);
                               }
                             },
                             onTapDown: (value) {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                               checkAndHideSeeAllOptionMenu(provider);
+                              provider.updateSelectedOption(index);
 
                               if (provider.homeNavigationList[index].name ==
                                   provider.homeNavigationList[0].name) {
@@ -176,11 +188,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                 AppNavigator.navigateTo(
                                     context, AppNavigator.myAccountScreen);
+
+                                provider.updateSelectedOption(
+                                    provider.prevSelectedOption);
                               } else if (provider
                                       .homeNavigationList[index + 3].name ==
                                   provider.homeNavigationList[6].name) {
-                                provider.updateShowAllMenuVisibility(
-                                    !provider.showSeeAllMenu);
+                                /// SEE ALL DIALOG VISIBILITY
+                                if (provider.showSeeAllMenu) {
+                                  /// SEE ALL DIALOG IS VISIBLE WE NEED TO HIDE IT
+                                  provider.updateShowAllMenuVisibility(false);
+                                  provider.updateSelectedOption(
+                                      provider.prevSelectedOption);
+                                } else {
+                                  /// SEE ALL DIALOG IS NOT VISIBLE WE NEED TO SHOW IT
+                                  provider.updateShowAllMenuVisibility(true);
+                                }
                               }
                             },
                           ));

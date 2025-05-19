@@ -1,11 +1,15 @@
 import 'dart:ui';
 
+import '../flavors_config/flavor_config.dart';
+
 class AppColors {
   /// QANTUM THEME ///
 
   static Color get qa_back_color => const Color(0xFF002D72);
 
   static Color get qa_back_color_2 => const Color(0xFF070526);
+
+  static Color get qa_floating_button_icon_color => const Color(0xFFFFFFFF);
 
   static Color get qa_back_color_3 => const Color(0x3429ABE2);
 
@@ -23,11 +27,15 @@ class AppColors {
 
   static Color get qa_divider_color => const Color(0xFFFFFFFF);
 
+  static Color get qa_disable_color => const Color(0xFF28ABE2);
+
   /// MAX THEME ///
 
   static Color get max_back_color => const Color(0xFF541C65);
 
   static Color get max_back_color_2 => const Color(0xFF541C65);
+
+  static Color get max_floating_button_icon_color => const Color(0xFF541C65);
 
   static Color get max_back_color_3 => const Color(0xFFCE132E);
 
@@ -45,11 +53,15 @@ class AppColors {
 
   static Color get max_divider_color => const Color(0xFFFFFFFF);
 
+  static Color get max_disable_color => const Color(0xFF541C65);
+
   /// STAR REWARD THEME ///
 
-  static Color get sr_back_color => const Color(0xFFCD211F);
+  static Color get sr_back_color_2 => const Color(0xFFCD211F);
 
-  static Color get sr_back_color_2 => const Color(0xFFB11921);
+  static Color get sr_back_color => const Color(0xFFB11921);
+
+  static Color get sr_floating_button_icon_color => const Color(0xFFCD211F);
 
   static Color get sr_back_color_3 => const Color(0x33000000);
 
@@ -66,6 +78,36 @@ class AppColors {
   static Color get sr_card_color => const Color(0xFFFFFFFF);
 
   static Color get sr_divider_color => const Color(0xFF9d5555);
+
+  static Color get sr_disable_color => const Color(0xFF081427);
+
+  /// MANLY HARBOUR BOAT CLUB THEME ///
+
+  static Color get mhbc_sf_color => const Color(0xFFAEC1D9);
+
+  static Color get mhbc_back_color_2 => const Color(0xFF233250);
+
+  static Color get mhbc_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get mhbc_back_color => const Color(0xFF233250);
+
+  static Color get mhbc_back_color_3 => const Color(0x33000000);
+
+  static Color get mhbc_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mhbc_text_field_text_color => const Color(0xFF000000);
+
+  static Color get mhbc_hint_text_color => const Color(0xFF6D6D6D);
+
+  static Color get mhbc_button_color => const Color(0xFF233250);
+
+  static Color get mhbc_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get mhbc_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mhbc_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get mhbc_disable_color => const Color(0xFFAEC1D9);
 
   /// SENSE OF TASTE THEME ///
 
@@ -105,9 +147,22 @@ class AppColors {
   static Color get bright_sky_blue => const Color(0xFF28ABE2);
 
   static Color getMembershipCategoryColor(String? membershipType) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch ((membershipType ?? "").toLowerCase()) {
       case "valued":
-        return const Color(0xFF14ad53);
+        {
+          switch (selectedFlavor) {
+            case Flavor.qantum:
+              return const Color(0xFF14ad53);
+            case Flavor.maxx:
+              return const Color(0xFFdb023d);
+            case Flavor.starReward:
+              return const Color(0xFFc72224);
+            default:
+              return const Color(0xFF14ad53);
+          }
+        }
+
       case "silver":
         return const Color(0xFFb8b8b8);
       case "gold":

@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import '../../core/mixins/logging_mixin.dart';
+import '../../core/utils/AppColors.dart';
 import '../flavors_config/flavor_config.dart';
 
-class AppHelper {
+class AppHelper with LoggingMixin {
+  /// MAKE IT DEFAULT 5
+  static int defaultRequestTime = 5000;
+
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {
       print(printableItem);
@@ -179,6 +183,15 @@ class AppHelper {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.mhbc:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -211,8 +224,45 @@ class AppHelper {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
+      case Flavor.mhbc:
+        return ButtonStyle(
+            shadowColor:
+            WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
+  }
+
+  static Size getAppIconSize(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return const Size(72, 72);
+      case Flavor.maxx:
+        return const Size(72, 72);
+      case Flavor.starReward:
+        return const Size(72, 72);
+      case Flavor.mhbc:
+        return const Size(142, 42);
+
+      default:
+        return const Size(72, 72);
+    }
+  }
+
+  static Future<String?> getDeviceToken() async {
+    final oneSignalUser = OneSignal.User;
+    final pushSubscription = OneSignal.User.pushSubscription;
+    printMessage("Push Subscription ${pushSubscription.optedIn}");
+    printMessage(
+        "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
+
+    return oneSignalUser.pushSubscription.id;
   }
 }

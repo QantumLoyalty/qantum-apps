@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Rewards Star</string>
+    <string name="default_notification_channel_id">com.au.starhotels.app.urgent</string>
 </resources>

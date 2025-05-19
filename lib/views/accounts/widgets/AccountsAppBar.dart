@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppIcons.dart';
@@ -26,7 +28,7 @@ class AccountsAppBar extends StatelessWidget {
                   child: Icon(
                     Icons.chevron_left,
                     size: 28,
-                    color: Theme.of(context).textSelectionTheme.selectionColor,
+                    color: AppThemeCustom.getAccountHeaderColor(context),
                   ))
               : Container(),
           Align(
@@ -35,19 +37,19 @@ class AccountsAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 (title == AppStrings.txtMyAccount)
-                    ? Image.asset(
-                        AppIcons.my_account,
+                    ? Image.asset(AppIcons.my_account,
                         width: 24,
                         height: 24,
-                      )
+                        color: AppThemeCustom.getAccountHeaderColor(context))
                     : Container(),
                 AppDimens.shape_10,
                 Text(
                   title,
                   style: TextStyle(
-                      fontSize: 20,
-                      color:
-                          Theme.of(context).textSelectionTheme.selectionColor),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: AppThemeCustom.getAccountHeaderColor(context),
+                  ),
                 )
               ],
             ),

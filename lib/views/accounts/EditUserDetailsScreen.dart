@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
@@ -36,7 +37,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppThemeCustom.getCustomScaffoldBackground(context),
       body: SafeArea(child:
           Consumer<UserInfoProvider>(builder: (context, provider, child) {
         return Stack(

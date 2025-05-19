@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -31,16 +32,11 @@ class MyProfileDialog {
 
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-
-
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
-
-
           print(FlavorConfig.instance.flavorValues.appVersion);
-
 
           return Dialog(
             backgroundColor: Colors.transparent,
@@ -73,26 +69,25 @@ class MyProfileDialog {
                                       AppDimens.shape_20,
                                       Icon(
                                         Icons.person,
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        color: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
                                         size: 40,
                                       ),
                                       Text(
                                         "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
                                         style: TextStyle(
                                             fontSize: 28,
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor),
+                                            color: AppThemeCustom
+                                                .getProfileDialogTextColor(
+                                                    context)),
                                       ),
                                       Text(
                                         "Card # ${provider.getUserInfo!.cardNumber}",
                                         style: TextStyle(
                                             fontSize: 12,
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor),
+                                            color: AppThemeCustom
+                                                .getProfileDialogCardTextColor(
+                                                    context)),
                                       ),
                                       AppDimens.shape_20,
                                       IconTextWidget(
@@ -101,36 +96,30 @@ class MyProfileDialog {
                                         iconSize: 18,
                                         text: AppHelper.formatDate(
                                             provider.getUserInfo!.dateOfBirth),
-                                        iconColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
-                                        textColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        iconColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
+                                        textColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
                                       ),
                                       IconTextWidget(
                                         orientation: IconTextWidget.HORIZONTAL,
                                         icon: Icons.phone_android_outlined,
                                         iconSize: 18,
                                         text: "${provider.getUserInfo!.mobile}",
-                                        iconColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
-                                        textColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        iconColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
+                                        textColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
                                       ),
                                       IconTextWidget(
                                         orientation: IconTextWidget.HORIZONTAL,
                                         icon: Icons.email_outlined,
                                         iconSize: 18,
                                         text: "${provider.getUserInfo!.email}",
-                                        iconColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
-                                        textColor: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        iconColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
+                                        textColor: AppThemeCustom
+                                            .getProfileDialogTextColor(context),
                                       ),
                                       AppDimens.shape_10,
                                       OutlinedButton(
@@ -180,9 +169,9 @@ class MyProfileDialog {
                                             .txtStatusCreditsReactNextLevel
                                             .toUpperCase(),
                                         style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor,
+                                            color: AppThemeCustom
+                                                .getProfileDialogTextColor(
+                                                    context),
                                             fontSize: 13),
                                       ),
                                       AppDimens.shape_15,
@@ -340,9 +329,9 @@ class MyProfileDialog {
                                       Text(
                                         'How to earn Status Credits',
                                         style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor,
+                                            color: AppThemeCustom
+                                                .getProfileDialogTextColor(
+                                                    context),
                                             fontSize: 13),
                                       ),
                                       AppDimens.shape_15,
@@ -422,9 +411,9 @@ class MyProfileDialog {
                                               style: TextStyle(
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w300,
-                                                  color: Theme.of(context)
-                                                      .textSelectionTheme
-                                                      .selectionColor),
+                                                  color: AppThemeCustom
+                                                      .getProfileDialogTextColor(
+                                                          context)),
                                             ),
                                             AppDimens.shape_10,
                                             (provider.showCancelAccountLoader !=
@@ -496,9 +485,9 @@ class MyProfileDialog {
                                         style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w300,
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor),
+                                            color: AppThemeCustom
+                                                .getProfileDialogTextColor(
+                                                    context)),
                                       ),
                                     ),
                                   ),
@@ -520,9 +509,8 @@ class MyProfileDialog {
                                 style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor),
+                                    color: AppThemeCustom
+                                        .getProfileDialogTextColor(context)),
                               ),
                               CircleAvatar(
                                 backgroundColor:

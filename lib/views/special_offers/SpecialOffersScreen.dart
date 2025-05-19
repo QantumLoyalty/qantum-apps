@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:provider/provider.dart';
 import '../../view_models/SpecialOffersProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
@@ -20,14 +19,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     Provider.of<SpecialOffersProvider>(context, listen: false)
         .getSpecialOffers();
 
-    printTimeZone();
   }
 
-printTimeZone() async
-{
-  final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-  print('DEVICE TIMEZONE $currentTimeZone');
-}
+
 
   @override
   Widget build(BuildContext context) {

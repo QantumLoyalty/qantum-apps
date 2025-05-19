@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "704961922679",
+    "project_id": "manly-harbour-boat-club",
+    "storage_bucket": "manly-harbour-boat-club.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704961922679:android:cacacbbfb349da4d816872",
+        "android_client_info": {
+          "package_name": "com.au.mhbc.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIMK9An3i0rtivXiHATXBZ470clN-5-w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

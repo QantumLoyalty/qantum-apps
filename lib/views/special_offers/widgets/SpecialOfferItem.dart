@@ -6,6 +6,7 @@ import 'package:qantum_apps/core/utils/AppHelper.dart';
 import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppIcons.dart';
+import '../../../core/utils/AppStrings.dart';
 import '/data/models/OfferModel.dart';
 
 import '../../../core/navigation/AppNavigator.dart';
@@ -30,6 +31,10 @@ class SpecialOfferItem extends StatelessWidget {
           if (Provider.of<SpecialOffersProvider>(context, listen: false)
                   .selectedOffer !=
               null) {
+            Provider.of<SpecialOffersProvider>(context, listen: false)
+                .selectedOffer!
+                .expiryDate = offer.expiryDate;
+
             await SpecialOfferDetailDialog.getInstance()
                 .showSpecialOfferDialog(context);
           } else {
@@ -100,7 +105,7 @@ class SpecialOfferItem extends StatelessWidget {
                                     color: AppColors.black, fontSize: 11)),
                             AppDimens.shape_5,
                             Text(
-                              'valid till ${offer.expiryDate}',
+                              '${AppStrings.txtValidTo} ${offer.expiryDate}',
                               style: TextStyle(
                                 fontSize: 8,
                                 color: Theme.of(context)

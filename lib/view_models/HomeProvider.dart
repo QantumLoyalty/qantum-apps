@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/utils/AppStrings.dart';
 import '../data/models/HomeNavigatorModel.dart';
-import '../views/my_benefits/MyBenefitsScreen.dart';
 import '../views/my_venues/MyVenuesHomeScreen.dart';
 import '../views/partners_offer/PartnerOffersScreen.dart';
 import '../views/profile/MyProfileScreen.dart';
@@ -17,14 +16,12 @@ class HomeProvider extends ChangeNotifier {
   int get prevSelectedOption => _prevSelectedOption;
 
   updateSelectedOption(int value) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_homeNavigationList[_selectedOption].type ==
-          HomeNavigatorModel.typeScreen) {
-        _prevSelectedOption = _selectedOption;
-      }
-      _selectedOption = value;
-      notifyListeners();
-    });
+    if (_homeNavigationList[_selectedOption].type ==
+        HomeNavigatorModel.typeScreen) {
+      _prevSelectedOption = _selectedOption;
+    }
+    _selectedOption = value;
+    notifyListeners();
   }
 
   final List<HomeNavigatorModel> _homeNavigationList = [
@@ -50,7 +47,7 @@ class HomeProvider extends ChangeNotifier {
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
         name: AppStrings.txtMyBenefits,
-        screen: const MyBenefitsScreen(),
+        screen: Container(),
         icon: Icons.restaurant,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
@@ -134,9 +131,4 @@ class HomeProvider extends ChangeNotifier {
   }
 
   bool get showSeeAllMenu => _showSeeAllMenu;
-
-
-
-
-
 }

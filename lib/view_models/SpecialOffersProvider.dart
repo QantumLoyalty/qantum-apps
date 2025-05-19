@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 import '../../data/models/OfferModel.dart';
 import '../data/models/NetworkResponse.dart';
@@ -30,12 +31,14 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   OfferModel? get selectedOffer => _selectedOffer;
 
-  getSpecialOffers() async {
+  getSpecialOffers({bool? hideLoader}) async {
     try {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showLoader = true;
-        notifyListeners();
-      });
+      if (hideLoader == null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _showLoader = true;
+          notifyListeners();
+        });
+      }
 
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
@@ -57,6 +60,8 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
           logEvent("Exception in parsing birthdate $e");
         }
 
+        final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchSpecialOffers(
                 membershipType: userData.statusTier != null &&
@@ -65,7 +70,8 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
                     : "valued",
                 birthdayMonth: dob != null ? "${dob.month}" : "1",
                 userId: userData.bluizeUniqueUserId!,
-                joinDate: DateFormat("yyyy-MM-dd").format(joinDate!));
+                joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
+                timezone: currentTimeZone);
         logEvent("Special Offers Response: ${networkResponse.response}");
         if (!networkResponse.isError) {
           _isError = networkResponse.isError;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../view_models/UserInfoProvider.dart';
@@ -30,6 +31,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -100,12 +102,12 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 AppDimens.shape_5,
                                 Text(
                                   AppStrings.txtCommunicationChannel
-                                      .toUpperCase(),
+                                      ,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .textSelectionTheme
                                           .selectionColor,
-                                      fontSize: 14),
+                                      fontSize: 15),
                                 ),
                                 Text(
                                   "How would you like to be notified?",
