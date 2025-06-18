@@ -69,20 +69,6 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(_controller);
 
-    controller.onResume = () {
-      print("Started");
-    };
-    controller.onPause = () {
-      print("Paused");
-    };
-    controller.onListen = () {
-      print("Listening...");
-      if (controller.isPaused) {
-        print("Paused");
-      } else if (controller.isClosed) {
-        print("Closed");
-      }
-    };
   }
 
   @override
@@ -199,16 +185,15 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                 ),
                 Center(
                     child: RippleAnimation(
-
-                      color: Colors.deepOrange,
-                      delay: const Duration(milliseconds: 300),
-                      minRadius: 75,
-                      maxRadius: 180,
-                      ripplesCount: 10,
-                      child: CircleAvatar(
-                                        radius: 50,
-                                        backgroundColor: Colors.brown,
-                                        child: InkWell(
+                  color: Colors.deepOrange,
+                  delay: const Duration(milliseconds: 300),
+                  minRadius: 75,
+                  maxRadius: 180,
+                  ripplesCount: 10,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.brown,
+                    child: InkWell(
                       onTap: spinWheel,
                       child: Text(
                         "SPIN",
@@ -224,15 +209,17 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                               )
                             ]),
                       ),
-                                        ),
-                                      ),
-                    )),
+                    ),
+                  ),
+                )),
                 tapToSpin && !showResult
                     ? Positioned(
                         right: 1,
                         top: 1,
                         bottom: 1,
                         child: SizedBox(
+                          width: 150,
+                          height: 18,
                           child: AnimatedBuilder(
                             builder: (context, child) => Transform.translate(
                                 offset: Offset(_animation.value, 0),
@@ -245,7 +232,7 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                                       height: 18,
                                       fit: BoxFit.contain,
                                     ),
-                                    Center(
+                                    const Center(
                                         child: Text(
                                       "   TAP TO SPIN",
                                       style: TextStyle(
@@ -257,8 +244,6 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                                 )),
                             animation: _animation,
                           ),
-                          width: 150,
-                          height: 18,
                         ),
                       )
                     : Container()
@@ -275,7 +260,7 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                         color: Colors.blueGrey,
                         border: Border.all(color: Colors.yellow, width: 1),
                         borderRadius: BorderRadius.circular(10)),
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     padding: const EdgeInsets.only(
                         top: 20, bottom: 20, left: 30, right: 30),
                     child: Row(
@@ -283,7 +268,7 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                         Expanded(
                             child: Text(
                           "Congratulations you have won ${items[index]}",
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         )),
                         AppDimens.shape_20,
                         ElevatedButton(
@@ -293,14 +278,14 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
                                         borderRadius:
                                             BorderRadius.circular(5))),
                                 backgroundColor:
-                                    WidgetStatePropertyAll(Colors.amber)),
+                                    const WidgetStatePropertyAll(Colors.amber)),
                             onPressed: () {
                               setState(() {
                                 showResult = false;
                                 tapToSpin = true;
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               "Collect",
                               style: TextStyle(
                                   fontSize: 16,

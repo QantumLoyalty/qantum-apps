@@ -8,7 +8,7 @@ import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
   /// MAKE IT DEFAULT 5
-  static int defaultRequestTime = 5000;
+  static int defaultRequestTime = 5;
 
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {
@@ -192,6 +192,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.clh:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -227,7 +236,16 @@ class AppHelper with LoggingMixin {
       case Flavor.mhbc:
         return ButtonStyle(
             shadowColor:
-            WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+   case Flavor.clh:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
@@ -250,6 +268,8 @@ class AppHelper with LoggingMixin {
         return const Size(72, 72);
       case Flavor.mhbc:
         return const Size(142, 42);
+      case Flavor.clh:
+        return const Size(142, 42);
 
       default:
         return const Size(72, 72);
@@ -264,5 +284,17 @@ class AppHelper with LoggingMixin {
         "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 
     return oneSignalUser.pushSubscription.id;
+  }
+
+  static String getAppType() {
+    FlavorConfig flavorConfig = FlavorConfig.instance;
+    switch (flavorConfig.flavor) {
+      case Flavor.starReward:
+        return "StarReward";
+      case Flavor.qantum:
+        return "Qantum";
+      default:
+        return "StarReward";
+    }
   }
 }

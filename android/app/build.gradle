@@ -26,7 +26,7 @@ android {
         starReward {
             dimension "app"
             applicationId "com.au.starhotels.app"
-            versionName "Star Reqard"
+            versionName "Star Reward"
         }
         senseOfTaste {
             dimension "app"
@@ -47,6 +47,11 @@ android {
             dimension "app"
             applicationId "com.au.mhbc.app"
             versionName "Manly Harbour Boat Club"
+        }
+        clh {
+            dimension "app"
+            applicationId "com.au.clh.app"
+            versionName "Central Lane Hotel"
         }
 
 

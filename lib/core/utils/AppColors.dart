@@ -109,6 +109,34 @@ class AppColors {
 
   static Color get mhbc_disable_color => const Color(0xFFAEC1D9);
 
+  /// MANLY HARBOUR BOAT CLUB THEME ///
+
+  static Color get clh_sf_color => const Color(0xFFD23434);
+
+  static Color get clh_back_color_2 => const Color(0xFF190000);
+
+  static Color get clh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get clh_back_color => const Color(0xFF190000);
+
+  static Color get clh_back_color_3 => const Color(0x33000000);
+
+  static Color get clh_text_color => const Color(0xFFFFFFFF);
+
+  static Color get clh_text_field_text_color => const Color(0xFF000000);
+
+  static Color get clh_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get clh_button_color => const Color(0xFF190000);
+
+  static Color get clh_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get clh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get clh_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get clh_disable_color => const Color(0xFF190000);
+
   /// SENSE OF TASTE THEME ///
 
   static Color get sot_back_color => const Color(0xFFc69c6e);

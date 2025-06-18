@@ -110,11 +110,20 @@ class AppThemeCustom {
         return Theme.of(context).scaffoldBackgroundColor;
     }
   }
+  static Color getPointsBalanceBorder(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.clh:
+        return AppColors.clh_sf_color;
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
 
   static Color? getAccountBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.clh:
         return Theme.of(context).scaffoldBackgroundColor;
       default:
         return null;
@@ -134,12 +143,14 @@ class AppThemeCustom {
   static Color getProfileDialogCardTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.clh:
         return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).disabledColor;
     }
-  }static Color getProfileDialogTextColor(BuildContext context) {
+  }
+
+  static Color getProfileDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.mhbc:
@@ -152,7 +163,7 @@ class AppThemeCustom {
   static Color getCustomScaffoldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.clh:
         return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).scaffoldBackgroundColor;

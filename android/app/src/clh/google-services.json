@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "837168926317",
+    "project_id": "central-lane-hotel",
+    "storage_bucket": "central-lane-hotel.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837168926317:android:48adefc53d60ef0f71f964",
+        "android_client_info": {
+          "package_name": "com.au.clh.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALxRl_wFRy9fhq2a1HjqRQpOQS_jrSRJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

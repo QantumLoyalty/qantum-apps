@@ -1,15 +1,16 @@
+import 'dart:developer';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../../view_models/PromotionsProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../dialogs/PromotionDetailDialog.dart';
+import '../dialogs/SpinnerDialog.dart';
 
 class MyVenuesHomeScreen extends StatefulWidget {
   const MyVenuesHomeScreen({super.key});
@@ -18,12 +19,39 @@ class MyVenuesHomeScreen extends StatefulWidget {
   State<MyVenuesHomeScreen> createState() => _MyVenuesHomeScreenState();
 }
 
-class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
+class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
+    with SingleTickerProviderStateMixin {
+  double scaleValue = 1.0;
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
   @override
   void initState() {
     super.initState();
     Provider.of<PromotionsProvider>(context, listen: false)
         .fetchPromotionsTimer();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+      lowerBound: 0.9,
+      upperBound: 1.0,
+    );
+
+    _scaleAnimation = _controller.drive(Tween(begin: 1.0, end: 0.9));
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reverse(); // Return to normal size
+      }
+    });
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _controller.dispose();
   }
 
   @override
@@ -33,89 +61,88 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
         Expanded(
           child:
               Consumer<PromotionsProvider>(builder: (context, provider, child) {
-            /*if (provider.isFetching) {
-              Future.delayed(Duration.zero, () {
-                setState(() {});
-              });
-            }*/
-
             return Stack(
               children: [
                 provider.promotions != null
                     ? SingleChildScrollView(
                         child: Column(
                           children: [
-                            provider.promotions!.largePromotions != null &&
-                                    provider
-                                        .promotions!.largePromotions!.isNotEmpty
-                                ? SizedBox(
-                                    height: 220,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: CarouselSlider.builder(
-                                      itemCount: provider
-                                          .promotions!.largePromotions!.length,
-                                      itemBuilder: (context, index, position) {
-                                        return ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: InkWell(
-                                            onTap: () {
-                                              PromotionDetailDialog
-                                                      .getInstance()
-                                                  .showPromotionDetailDialog(
-                                                      context,
-                                                      provider.promotions!
-                                                              .largePromotions![
-                                                          index]);
-                                            },
-                                            child: AspectRatio(
-                                              aspectRatio: 9 / 6,
-                                              child: CachedNetworkImage(
-                                                height: 220,
-                                                imageUrl: provider
-                                                        .promotions!
-                                                        .largePromotions![index]
-                                                        .imageUrl ??
-                                                    "",
-                                                placeholder: (context, _) {
-                                                  return const Stack(
-                                                    children: [
-                                                      Center(
-                                                        child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                CircularProgressIndicator()),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                                errorWidget: (context, _, obj) {
-                                                  return PromotionsPlaceHolder(
-                                                      size: Size(
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                          200));
-                                                },
-                                                fit: BoxFit.cover,
+                            SizedBox(
+                                height: 220,
+                                width: MediaQuery.of(context).size.width,
+                                child: provider.promotions!.largePromotions !=
+                                            null &&
+                                        provider.promotions!.largePromotions!
+                                            .isNotEmpty
+                                    ? CarouselSlider.builder(
+                                        itemCount: provider.promotions!
+                                            .largePromotions!.length,
+                                        itemBuilder:
+                                            (context, index, position) {
+                                          return ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: InkWell(
+                                              onTap: () {
+                                                PromotionDetailDialog
+                                                        .getInstance()
+                                                    .showPromotionDetailDialog(
+                                                        context,
+                                                        provider.promotions!
+                                                                .largePromotions![
+                                                            index]);
+                                              },
+                                              child: AspectRatio(
+                                                aspectRatio: 9 / 6,
+                                                child: CachedNetworkImage(
+                                                  height: 220,
+                                                  imageUrl: provider
+                                                          .promotions!
+                                                          .largePromotions![
+                                                              index]
+                                                          .imageUrl ??
+                                                      "",
+                                                  placeholder: (context, _) {
+                                                    return const Stack(
+                                                      children: [
+                                                        Center(
+                                                          child: SizedBox(
+                                                              width: 50,
+                                                              height: 50,
+                                                              child:
+                                                                  CircularProgressIndicator()),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                  errorWidget:
+                                                      (context, _, obj) {
+                                                    return PromotionsPlaceHolder(
+                                                        size: Size(
+                                                            MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width,
+                                                            200));
+                                                  },
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      options: CarouselOptions(
-                                          aspectRatio: 5 / 9,
-                                          autoPlay: false,
-                                          reverse: false,
-                                          enableInfiniteScroll: false,
-                                          enlargeCenterPage: true,
-                                          viewportFraction: 0.80,
-                                          initialPage: 0,
-                                          onPageChanged:
-                                              (index, reason) async {}),
-                                    ))
-                                : Container(),
+                                          );
+                                        },
+                                        options: CarouselOptions(
+                                            aspectRatio: 5 / 9,
+                                            autoPlay: false,
+                                            reverse: false,
+                                            enableInfiniteScroll: false,
+                                            enlargeCenterPage: true,
+                                            viewportFraction: 0.80,
+                                            initialPage: 0,
+                                            onPageChanged:
+                                                (index, reason) async {}),
+                                      )
+                                    : Container()),
                             Padding(
                                 padding: const EdgeInsets.only(
                                     left: 12, right: 12, top: 12),
@@ -123,9 +150,6 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, position) {
-                                    print(
-                                        "Small Promotions Length ${provider.promotions!.smallPromotions!.length / 2} Pages: ${((provider.promotions!.smallPromotions!.length / 2).floor() + provider.promotions!.smallPromotions!.length % 2)}");
-
                                     return (provider.promotions!
                                                     .smallPromotions !=
                                                 null &&
@@ -316,9 +340,9 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
             );
           }),
         ),
-        Container(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
+        /*Container(
+            padding: const EdgeInsets.only(top: 15),
+            child: */ /*Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -351,7 +375,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                               AppStrings.txtMoreInfo.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 10,
-                                color: AppThemeCustom.getMoreInfoTextStyle(context),
+                                color: AppThemeCustom.getMoreInfoTextStyle(
+                                    context),
                               ),
                             ),
                           )),
@@ -364,7 +389,41 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                     children: [
                       TextButton(
                           style: AppThemeCustom.getRedeemButtonStyle(context),
-                          onPressed: () {},
+                          onPressed: () {
+                            showGeneralDialog(
+                                context: context,
+                                transitionDuration:
+                                    const Duration(milliseconds: 500),
+                                pageBuilder: (context, anim1, anim2) {
+                                  return const Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.zero,
+                                    child: SpinnerDialog(),
+                                  );
+                                },
+                                transitionBuilder:
+                                    (context, anim1, anim2, child) {
+                                  return BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 4 * anim1.value,
+                                        sigmaY: 4 * anim1.value),
+                                    child: SlideTransition(
+                                      position: Tween(
+                                              begin: const Offset(0, -1),
+                                              end: const Offset(0, 0))
+                                          .animate(anim1),
+                                      child: child,
+                                    ),
+                                  );
+                                });
+
+                            */ /* */ /*showDialog(
+                                context: context,
+                                builder: (context) => const Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.zero,
+                                    child: SpinnerDialog()));*/ /* */ /*
+                          },
                           child: Padding(
                             padding:
                                 const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -372,7 +431,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                               AppStrings.txtRedeem.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 10,
-                                color: AppThemeCustom.getRedeemTextStyle(context),
+                                color:
+                                    AppThemeCustom.getRedeemTextStyle(context),
                               ),
                             ),
                           )),
@@ -381,9 +441,51 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen> {
                 ],
               )
             ],
-          ),
-        )
+          ),*/
+        (FlavorConfig.instance.flavor == Flavor.maxx)
+            ? GestureDetector(
+                onTapUp: scaleSpinToPlay(1.0),
+                onTapDown: scaleSpinToPlay(0.8),
+                onTapCancel: scaleSpinToPlay(1.0),
+                onTap: () {
+                  _controller.forward();
+
+                  showGeneralDialog(
+                      context: context,
+                      transitionDuration: const Duration(milliseconds: 500),
+                      pageBuilder: (context, anim1, anim2) {
+                        return const Dialog(
+                          backgroundColor: Colors.transparent,
+                          insetPadding: EdgeInsets.zero,
+                          child: SpinnerDialog(),
+                        );
+                      },
+                      transitionBuilder: (context, anim1, anim2, child) {
+                        return BackdropFilter(
+                          filter: ImageFilter.blur(
+                              sigmaX: 4 * anim1.value, sigmaY: 4 * anim1.value),
+                          child: SlideTransition(
+                            position: Tween(
+                                    begin: const Offset(0, -1),
+                                    end: const Offset(0, 0))
+                                .animate(anim1),
+                            child: child,
+                          ),
+                        );
+                      });
+                },
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Image.asset('assets/common/spin_to_play.png'),
+                ))
+            : Container()
       ],
     );
+  }
+
+  scaleSpinToPlay(double scale) {
+    setState(() {
+      scaleValue = scale;
+    });
   }
 }

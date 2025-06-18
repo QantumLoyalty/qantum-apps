@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
-
+import '/views/common_widgets/AppCustomButton.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';

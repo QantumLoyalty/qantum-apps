@@ -74,7 +74,7 @@ class NetworkHelper with LoggingMixin{
     try {
       logEvent("URL:: $url HEADERS:: $headers");
       var response = await client.get(url, headers: headers);
-      logEvent(response.body);
+      logEvent("$url --> Response${response.body}");
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));

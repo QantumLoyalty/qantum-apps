@@ -1,4 +1,5 @@
 import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import 'package:qantum_apps/data/models/UserModel.dart';
 
 import '../core/network/NetworkHelper.dart';
@@ -21,8 +22,9 @@ class UserService with LoggingMixin implements UserRepository {
   Future<NetworkResponse> login(String phoneNo) async {
     NetworkResponse networkResponse;
     try {
-      var response = await NetworkHelper.instance
-          .getCall(url: Uri.parse(APIList.LOGIN + phoneNo));
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(
+              "${APIList.LOGIN}$phoneNo?appType=${AppHelper.getAppType()}"));
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -37,7 +39,8 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       var response = await NetworkHelper.instance.postCall(
-          url: Uri.parse(APIList.REGISTRATION + phoneNo),
+          url: Uri.parse(
+              "${APIList.REGISTRATION}$phoneNo?appType=${AppHelper.getAppType()}"),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -54,7 +57,8 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       var response = await NetworkHelper.instance.postCall(
-          url: Uri.parse(APIList.VERIFY_OTP),
+          url: Uri.parse(
+              APIList.VERIFY_OTP + "?appType=${AppHelper.getAppType()}"),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -223,12 +227,15 @@ class UserService with LoggingMixin implements UserRepository {
   Future<NetworkResponse> sendOTPEmail({required String phoneNo}) async {
     NetworkResponse networkResponse;
     try {
-      var response = await NetworkHelper.instance
-          .postCall(url: Uri.parse(APIList.SEND_OTP_EMAIL), headers: {
-        'Content-Type': 'application/json',
-      }, body: {
-        "Mobile": phoneNo
-      });
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(
+              APIList.SEND_OTP_EMAIL + "?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            "Mobile": phoneNo
+          });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -241,7 +248,9 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       var response = await NetworkHelper.instance.postCall(
-          url: Uri.parse(APIList.RESEND_OTP_EMAIL + phoneNo),
+          url: Uri.parse(APIList.RESEND_OTP_EMAIL +
+              phoneNo +
+              "?appType=${AppHelper.getAppType()}"),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -259,7 +268,9 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       var response = await NetworkHelper.instance.postCall(
-          url: Uri.parse(APIList.VERIFY_OTP_EMAIL + phoneNo),
+          url: Uri.parse(APIList.VERIFY_OTP_EMAIL +
+              phoneNo +
+              "?appType=${AppHelper.getAppType()}"),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -275,12 +286,15 @@ class UserService with LoggingMixin implements UserRepository {
   Future<NetworkResponse> sendOTPNewPhone({required String phoneNo}) async {
     NetworkResponse networkResponse;
     try {
-      var response = await NetworkHelper.instance
-          .postCall(url: Uri.parse(APIList.SEND_OTP_NEW_NUMBER), headers: {
-        'Content-Type': 'application/json',
-      }, body: {
-        "Mobile": phoneNo
-      });
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.SEND_OTP_NEW_NUMBER +
+              "?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            "Mobile": phoneNo
+          });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -310,7 +324,8 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       var response = await NetworkHelper.instance.putCall(
-          url: Uri.parse(APIList.VERIFY_OTP_NEW_NUMBER),
+          url: Uri.parse(APIList.VERIFY_OTP_NEW_NUMBER +
+              "?appType=${AppHelper.getAppType()}"),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -373,7 +388,7 @@ class UserService with LoggingMixin implements UserRepository {
 
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.GET_USERS_BENEFITS +
-              "type=${user.statusTier!.toLowerCase()}&appType=Qantum"),
+              "type=${user.statusTier!.toLowerCase()}"),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'

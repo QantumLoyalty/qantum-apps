@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Central Lane Hotel</string>
+    <string name="default_notification_channel_id">com.au.clh.app.urgent</string>
+</resources>

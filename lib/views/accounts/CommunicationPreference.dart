@@ -4,7 +4,6 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../view_models/UserInfoProvider.dart';
-import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';

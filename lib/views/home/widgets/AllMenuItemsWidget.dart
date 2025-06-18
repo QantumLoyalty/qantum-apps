@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../view_models/HomeProvider.dart';
 import '../../common_widgets/IconTextWidget.dart';
 
@@ -17,8 +18,8 @@ class AllMenuItemsWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Theme.of(context).primaryColorDark,
-            border: Border.all(color: Theme.of(context).iconTheme.color!),
+            color: AppThemeCustom.getPointsBalanceBackground(context),
+            border: Border.all(color: AppThemeCustom.getPointsBalanceBorder(context)),
             borderRadius: BorderRadius.circular(10)),
         child: Consumer<HomeProvider>(builder: (context, provider, child) {
           return GridView.builder(

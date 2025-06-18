@@ -1,6 +1,7 @@
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
+import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/repositories/AppDataRepository.dart';
 
@@ -24,12 +25,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   Future<NetworkResponse> fetchPromotions(String membershipType) async {
     NetworkResponse networkResponse;
     try {
-      var URL = APIList.FETCH_PROMOTIONS + membershipType;
-      print(URL);
+      // var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.FETCH_PROMOTIONS + membershipType),
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
           });
       networkResponse = response;
     } catch (e) {
@@ -44,15 +47,19 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       {required String membershipType,
       required String birthdayMonth,
       required String userId,
-      required String joinDate, required String timezone}) async {
+      required String joinDate,
+      required String timezone}) async {
     NetworkResponse networkResponse;
     try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_VOUCHERS +
           "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone";
       logEvent(URL);
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
       });
       networkResponse = response;
     } catch (e) {
@@ -67,11 +74,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       {required String offerID, required String userID}) async {
     NetworkResponse networkResponse;
     try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_VOUCHER_BY_ID + "$offerID?user_id=$userID";
       logEvent(URL);
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
       });
       networkResponse = response;
     } catch (e) {
@@ -80,6 +90,4 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
     return networkResponse;
   }
-
-
 }

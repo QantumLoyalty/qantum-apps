@@ -113,15 +113,13 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   }
 
   bool _isFetching = false;
-  int i = 0;
 
   runFetchProfileTimer() async {
     await fetchUserProfile();
-    Timer timer = Timer.periodic( Duration(seconds: AppHelper.defaultRequestTime), (value) async {
+    Timer timer = Timer.periodic(
+        Duration(seconds: AppHelper.defaultRequestTime), (value) async {
       if (!_isFetching) {
         _isFetching = true;
-        i += 1;
-        logEvent("Var:: $i");
         await fetchUserProfile();
         _isFetching = false;
       }
@@ -133,7 +131,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       String? deviceToken = await AppHelper.getDeviceToken();
       Map<String, dynamic> params = {};
       params['device_token'] = deviceToken ?? "";
-      params['appType'] = "qantum";
+      // params['appType'] = "qantum";
       //params['appType'] = FlavorConfig.instance.flavorValues.appName;
       params['app_version'] = FlavorConfig.instance.flavorValues.appVersion;
       params['device_type'] =
@@ -719,6 +717,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
       if (networkResponse.response != null &&
           networkResponse.response is Map<String, dynamic>) {
+        print(networkResponse.toString());
         Map<String, dynamic> responseObject =
             networkResponse.response as Map<String, dynamic>;
 

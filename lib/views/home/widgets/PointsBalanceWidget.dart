@@ -34,7 +34,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget> {
           decoration: BoxDecoration(
               color: AppThemeCustom.getPointsBalanceBackground(context),
               border: Border.all(
-                  color: Theme.of(context).buttonTheme.colorScheme!.primary!),
+                  color: AppThemeCustom.getPointsBalanceBorder(context)),
               borderRadius: BorderRadius.circular(10)),
           child:
               Consumer<UserInfoProvider>(builder: (context, provider, child) {

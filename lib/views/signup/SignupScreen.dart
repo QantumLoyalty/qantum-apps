@@ -6,6 +6,7 @@ import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
+import '../../core/utils/UpperCaseTextFormatter.dart';
 import '../../view_models/SignupProvider.dart';
 import '../../view_models/UserLoginProvider.dart';
 import '../common_widgets/AppButton.dart';
@@ -30,6 +31,9 @@ class _SignupScreenState extends State<SignupScreen> {
   late TextEditingController _birthdayDDController;
   late TextEditingController _birthdayMMController;
   late TextEditingController _birthdayYYController;
+  late FocusNode _birthdayDDFocusNode;
+  late FocusNode _birthdayMMFocusNode;
+  late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
@@ -40,8 +44,24 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController = TextEditingController();
     _postcodeController = TextEditingController();
     _birthdayDDController = TextEditingController();
+
     _birthdayMMController = TextEditingController();
+
     _birthdayYYController = TextEditingController();
+    _birthdayDDFocusNode = FocusNode();
+    _birthdayMMFocusNode = FocusNode();
+    _birthdayYYFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _birthdayDDController.dispose();
+    _birthdayMMController.dispose();
+    _birthdayYYController.dispose();
+    _birthdayDDFocusNode.dispose();
+    _birthdayMMFocusNode.dispose();
+    _birthdayYYFocusNode.dispose();
   }
 
   @override
@@ -118,6 +138,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         maxLines: 1,
                         keyboardType: TextInputType.text,
                         controller: _firstNameController,
+                        inputFormatters: <TextInputFormatter>[
+                          UpperCaseTextFormatter()
+                        ],
                         validator: (value) {
                           if (value!.isEmpty) {
                             return AppStrings.msgEmptyFirstName;
@@ -164,6 +187,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           }
                           return null;
                         },
+                        inputFormatters: <TextInputFormatter>[
+                          UpperCaseTextFormatter()
+                        ],
                         style: TextStyle(
                             color: Theme.of(context)
                                 .textSelectionTheme
@@ -341,10 +367,37 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     ],
                                                     controller:
                                                         _birthdayDDController,
+                                                    focusNode:
+                                                        _birthdayDDFocusNode,
                                                     style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
                                                             .selectionHandleColor),
+                                                    onChanged: (value) {
+                                                      if (value.length == 2) {
+                                                        int? day =
+                                                            int.tryParse(value);
+                                                        if (day != null &&
+                                                            day > 31) {
+                                                          _birthdayDDController
+                                                              .text = '31';
+                                                          _birthdayDDController
+                                                                  .selection =
+                                                              TextSelection
+                                                                  .fromPosition(
+                                                            TextPosition(
+                                                                offset:
+                                                                    _birthdayDDController
+                                                                        .text
+                                                                        .length),
+                                                          );
+                                                        } else {
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  _birthdayMMFocusNode);
+                                                        }
+                                                      }
+                                                    },
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "DD",
@@ -380,6 +433,33 @@ class _SignupScreenState extends State<SignupScreen> {
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
                                                             .selectionHandleColor),
+                                                    focusNode:
+                                                        _birthdayMMFocusNode,
+                                                    onChanged: (value) {
+                                                      if (value.length == 2) {
+                                                        int? day =
+                                                            int.tryParse(value);
+                                                        if (day != null &&
+                                                            day > 12) {
+                                                          _birthdayMMController
+                                                              .text = '12';
+                                                          _birthdayMMController
+                                                                  .selection =
+                                                              TextSelection
+                                                                  .fromPosition(
+                                                            TextPosition(
+                                                                offset:
+                                                                    _birthdayMMController
+                                                                        .text
+                                                                        .length),
+                                                          );
+                                                        } else {
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  _birthdayYYFocusNode);
+                                                        }
+                                                      }
+                                                    },
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "MM",
@@ -410,6 +490,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     ],
                                                     controller:
                                                         _birthdayYYController,
+                                                    focusNode:
+                                                        _birthdayYYFocusNode,
                                                     style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textSelectionTheme
@@ -430,6 +512,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                                             InputBorder.none,
                                                         errorBorder:
                                                             InputBorder.none),
+                                                    onChanged: (value) {
+                                                      if (value.length == 4) {
+                                                        FocusScope.of(context)
+                                                            .requestFocus(
+                                                                FocusNode());
+                                                      }
+                                                    },
                                                   )),
                                             ],
                                           )),
