@@ -169,6 +169,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       NetworkResponse networkResponse =
           await UserService.getInstance().getUsersBenefits();
 
+
       if (networkResponse.response != null &&
           networkResponse.response is Map<String, dynamic>) {
         if ((networkResponse.response as Map<String, dynamic>)

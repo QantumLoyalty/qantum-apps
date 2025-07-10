@@ -2,11 +2,10 @@ import 'dart:ui';
 
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
@@ -77,6 +76,7 @@ class MyProfileDialog {
                                         "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
                                         style: TextStyle(
                                             fontSize: 28,
+                                            fontWeight: FontWeight.bold,
                                             color: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context)),
@@ -169,6 +169,7 @@ class MyProfileDialog {
                                             .txtStatusCreditsReactNextLevel
                                             .toUpperCase(),
                                         style: TextStyle(
+                                            fontWeight: FontWeight.w600,
                                             color: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -327,8 +328,9 @@ class MyProfileDialog {
                                       ),
                                       AppDimens.shape_15,
                                       Text(
-                                        'How to earn Status Credits',
+                                        'HOW TO EARN STATUS CREDITS',
                                         style: TextStyle(
+                                            fontWeight: FontWeight.w600,
                                             color: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -382,14 +384,22 @@ class MyProfileDialog {
                                                             context, false);
                                                       },
                                                       child: const Text(
-                                                          AppStrings.txtNo)),
+                                                        AppStrings.txtNo,
+                                                        style: TextStyle(
+                                                            color: Colors.grey),
+                                                      )),
                                                   TextButton(
                                                       onPressed: () async {
                                                         Navigator.pop(
                                                             context, true);
                                                       },
-                                                      child: const Text(
-                                                          AppStrings.txtYes)),
+                                                      child: Text(
+                                                        AppStrings.txtYes,
+                                                        style: TextStyle(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
+                                                      )),
                                                 ],
                                               );
                                             });
@@ -450,7 +460,10 @@ class MyProfileDialog {
                                                       Navigator.pop(context);
                                                     },
                                                     child: const Text(
-                                                        AppStrings.txtNo)),
+                                                      AppStrings.txtNo,
+                                                      style: TextStyle(
+                                                          color: Colors.grey),
+                                                    )),
                                                 TextButton(
                                                     onPressed: () async {
                                                       /// CLEARING ALL PREFERENCE
@@ -472,8 +485,13 @@ class MyProfileDialog {
                                                               AppNavigator
                                                                   .login);
                                                     },
-                                                    child: const Text(
-                                                        AppStrings.txtYes)),
+                                                    child: Text(
+                                                      AppStrings.txtYes,
+                                                      style: TextStyle(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .primaryColor),
+                                                    )),
                                               ],
                                             );
                                           });

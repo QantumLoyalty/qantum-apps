@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../views/dialogs/ErrorDialog.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -143,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   border: Border.all(
                                       width: 0.5,
                                       color: Theme.of(context).dividerColor),
-                                  color: Theme.of(context).cardColor,
+                                  color: AppThemeCustom.getTextFieldBackground(context),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,9 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ],
                                         controller: _phoneController,
                                         style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionHandleColor),
+                                            color: AppThemeCustom.getTextFieldTextColor(context)),
                                         decoration: InputDecoration(
                                           counterText: "",
                                           hintText: "0400000000",

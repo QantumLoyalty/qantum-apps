@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:qantum_apps/core/navigation/AppNavigator.dart';
 import '../../data/models/PromotionModel.dart';
 import '../my_venues/widgets/PromotionsPlaceHolder.dart';
 
@@ -16,6 +17,8 @@ class PromotionDetailDialog {
   PromotionDetailDialog._internal();
 
   showPromotionDetailDialog(BuildContext context, PromotionItem promotion) {
+    print("PROMOTION DATA: ${promotion.htmlContent}");
+
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
@@ -91,8 +94,20 @@ class PromotionDetailDialog {
                                               bottomLeft: Radius.circular(10),
                                               bottomRight:
                                                   Radius.circular(10))),
-                                      padding: const EdgeInsets.all(10),
-                                      child: Html(data: promotion.htmlContent)),
+                                      padding: const EdgeInsets.only(
+                                          top: 10,
+                                          left: 10,
+                                          bottom: 20,
+                                          right: 10),
+                                      child: Html(
+                                        data: promotion.htmlContent,
+                                        onLinkTap: (String? url,
+                                            Map<String, String> attributes, _) {
+                                          AppNavigator.navigateTo(
+                                              context, AppNavigator.appWebView,
+                                              arguments: url);
+                                        },
+                                      )),
                                 ),
                               ),
                             ],

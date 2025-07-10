@@ -32,13 +32,11 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = sharedPreferenceHelper.getUserData();
-      if (userData != null) {
-        NetworkResponse networkResponse = await AppDataService.getInstance()
-            .fetchPromotions(
-                userData.statusTier != null && userData.statusTier!.isNotEmpty
-                    ? userData.statusTier!.toLowerCase()
-                    : "valued");
 
+      if (userData != null) {
+        String userTier = await AppHelper.getUserTierType(userData);
+        NetworkResponse networkResponse =
+            await AppDataService.getInstance().fetchPromotions(userTier);
         _isError = networkResponse.isError;
         Map<String, dynamic> resultData =
             networkResponse.response as Map<String, dynamic>;

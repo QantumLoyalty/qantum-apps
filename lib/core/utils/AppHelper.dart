@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
+import '../../data/local/SharedPreferenceHelper.dart';
+import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
@@ -80,6 +82,7 @@ class AppHelper with LoggingMixin {
             end: Alignment.bottomCenter,
             colors: [
           Theme.of(context).primaryColorDark,
+          //Color(0xFF1C4D61),
           Theme.of(context).primaryColor,
         ]));
   }
@@ -201,6 +204,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.montaukTavern:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -242,7 +254,16 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-   case Flavor.clh:
+      case Flavor.clh:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.montaukTavern:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -270,6 +291,8 @@ class AppHelper with LoggingMixin {
         return const Size(142, 42);
       case Flavor.clh:
         return const Size(142, 42);
+      case Flavor.montaukTavern:
+        return const Size(142, 42);
 
       default:
         return const Size(72, 72);
@@ -293,8 +316,34 @@ class AppHelper with LoggingMixin {
         return "StarReward";
       case Flavor.qantum:
         return "Qantum";
+      case Flavor.maxx:
+        return "MaxGaming";
+      case Flavor.clh:
+        return "Central";
+      case Flavor.mhbc:
+        return "Manly";
+      case Flavor.montaukTavern:
+        return "Montauk";
+      case Flavor.senseOfTaste:
+        return "Sense";
+
       default:
-        return "StarReward";
+        return "Qantum";
+    }
+  }
+
+  static Future<String> getUserTierType(UserModel userData) async {
+    if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
+      return userData.statusTier!;
+    } else {
+      /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
+      FlavorConfig flavorConfig = FlavorConfig.instance;
+      switch (flavorConfig.flavor) {
+        case Flavor.mhbc:
+          return "Crewmate";
+        default:
+          return "Valued";
+      }
     }
   }
 }

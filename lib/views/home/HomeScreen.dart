@@ -1,3 +1,4 @@
+import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                     child: Stack(
                   children: [
-                    Positioned.fill(
+                    /*Positioned.fill(
                         child: provider
                                     .homeNavigationList[provider.selectedOption]
                                     .type ==
@@ -56,7 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? provider.selectedScreen
                             : provider
                                 .homeNavigationList[provider.prevSelectedOption]
-                                .screen),
+                                .screen)*/
+
+                    ConditionBuilder<Widget>.on(
+                        () =>
+                            provider.homeNavigationList[provider.selectedOption]
+                                .type ==
+                            HomeNavigatorModel.typeScreen,
+                        () =>
+                            provider.selectedScreen).build(
+                        orElse: () => provider
+                            .homeNavigationList[provider.prevSelectedOption]
+                            .screen),
                     (provider.showPointsBalance)
                         ? const PointsBalanceWidget()
                         : Container(),

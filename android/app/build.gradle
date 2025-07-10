@@ -53,6 +53,11 @@ android {
             applicationId "com.au.clh.app"
             versionName "Central Lane Hotel"
         }
+        montaukTavern {
+            dimension "app"
+            applicationId "com.au.montauk.app"
+            versionName "Montauk Tavern"
+        }
 
 
     }

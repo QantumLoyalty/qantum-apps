@@ -4,7 +4,7 @@ class APIList {
   //static get BASE_URL => "https://api.s2w.com.au/";
 
   // LOCAL HOST
- // static get BASE_URL => "http://192.168.1.38:8081/";
+  //static get BASE_URL => "http://localhost:8081/";
 
   static get LOGIN => BASE_URL + "user/check/";
 

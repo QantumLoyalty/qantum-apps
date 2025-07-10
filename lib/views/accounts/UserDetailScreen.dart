@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -138,14 +139,19 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                             onPressed: () {
                                               Navigator.pop(context, false);
                                             },
-                                            child:
-                                                const Text(AppStrings.txtNo)),
+                                            child: const Text(
+                                              AppStrings.txtNo,
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            )),
                                         TextButton(
                                             onPressed: () async {
                                               Navigator.pop(context, true);
                                             },
-                                            child:
-                                                const Text(AppStrings.txtYes)),
+                                            child: Text(AppStrings.txtYes,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor))),
                                       ],
                                     );
                                   });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppStrings.dart';
@@ -53,12 +54,12 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
               ],
               controller: _phoneController,
               style: TextStyle(
-                  color: Theme.of(context).textSelectionTheme.selectionColor),
+                  color: AppThemeCustom.getTextFieldTextColor(context)),
               decoration: InputDecoration(
                 counterText: "",
                 hintText: "0400000000",
                 hintStyle: TextStyle(color: Theme.of(context).hintColor),
-                fillColor: Theme.of(context).cardColor.withValues(alpha: 0.15),
+                fillColor: AppThemeCustom.getTextFieldBackground(context),
                 filled: true,
                 enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
                 border:

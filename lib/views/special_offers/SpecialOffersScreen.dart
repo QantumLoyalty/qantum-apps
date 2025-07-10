@@ -13,15 +13,15 @@ class SpecialOffersScreen extends StatefulWidget {
 }
 
 class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
+  late SpecialOffersProvider _specialOffersProvider;
+
   @override
   void initState() {
     super.initState();
-    Provider.of<SpecialOffersProvider>(context, listen: false)
-        .getSpecialOffers();
-
+    _specialOffersProvider =
+        Provider.of<SpecialOffersProvider>(context, listen: false);
+    _specialOffersProvider.fetchSpecialOffersTimer();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,5 +59,11 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
         ],
       );
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _specialOffersProvider.stopSpecialOffersTimer();
   }
 }

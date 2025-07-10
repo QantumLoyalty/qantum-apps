@@ -386,9 +386,10 @@ class UserService with LoggingMixin implements UserRepository {
 
       UserModel user = sharedPreferenceHelper.getUserData()!;
 
+      final String userStatusTier = await AppHelper.getUserTierType(user);
+
       var response = await NetworkHelper.instance.getCall(
-          url: Uri.parse(APIList.GET_USERS_BENEFITS +
-              "type=${user.statusTier!.toLowerCase()}"),
+          url: Uri.parse(APIList.GET_USERS_BENEFITS + "type=$userStatusTier"),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'

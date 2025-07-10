@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 import '../../data/models/OfferModel.dart';
+import '../core/utils/AppHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../data/local/SharedPreferenceHelper.dart';
@@ -31,9 +32,11 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   OfferModel? get selectedOffer => _selectedOffer;
 
-  getSpecialOffers({bool? hideLoader}) async {
+  Timer? _fetchSpecialOfferTimer;
+
+  getSpecialOffers({bool? showLoader}) async {
     try {
-      if (hideLoader == null) {
+      if (showLoader != null && showLoader) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _showLoader = true;
           notifyListeners();
@@ -62,12 +65,11 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
         final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
 
+        final String userStatusTier = await AppHelper.getUserTierType(userData);
+
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchSpecialOffers(
-                membershipType: userData.statusTier != null &&
-                        userData.statusTier!.isNotEmpty
-                    ? userData.statusTier!.toLowerCase()
-                    : "valued",
+                membershipType: userStatusTier,
                 birthdayMonth: dob != null ? "${dob.month}" : "1",
                 userId: userData.bluizeUniqueUserId!,
                 joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
@@ -101,6 +103,27 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  bool _isFetching = false;
+
+  bool get isFetching => _isFetching;
+
+  fetchSpecialOffersTimer() async {
+    await getSpecialOffers(showLoader: true);
+    _fetchSpecialOfferTimer = Timer.periodic(
+        Duration(seconds: AppHelper.defaultRequestTime), (value) async {
+      if (!_isFetching) {
+        _isFetching = true;
+        await getSpecialOffers(showLoader: false);
+        _isFetching = false;
+      }
+    });
+  }
+
+  stopSpecialOffersTimer() {
+    logEvent("Stopping the timer");
+    _fetchSpecialOfferTimer?.cancel();
+  }
+
   getOfferByID({required String offerID}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -114,7 +137,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .fetchOfferByID(
               offerID: offerID, userID: userData!.bluizeUniqueUserId!);
-      logEvent("OFFER BY ID RESPONSE ${networkResponse}");
+      logEvent("OFFER BY ID RESPONSE $networkResponse");
       if (!networkResponse.isError) {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;

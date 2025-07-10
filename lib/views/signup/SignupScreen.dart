@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
@@ -148,11 +149,11 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionHandleColor),
+                            color:
+                                AppThemeCustom.getTextFieldTextColor(context)),
                         decoration: InputDecoration(
-                          fillColor: Theme.of(context).cardColor,
+                          fillColor:
+                              AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
                           hintText: AppStrings.txtFirstName,
                           hintStyle: TextStyle(
@@ -191,11 +192,11 @@ class _SignupScreenState extends State<SignupScreen> {
                           UpperCaseTextFormatter()
                         ],
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionHandleColor),
+                            color:
+                                AppThemeCustom.getTextFieldTextColor(context)),
                         decoration: InputDecoration(
-                          fillColor: Theme.of(context).cardColor,
+                          fillColor:
+                              AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
                           hintText: AppStrings.txtLastName,
                           hintStyle: TextStyle(
@@ -225,9 +226,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionHandleColor),
+                            color:
+                                AppThemeCustom.getTextFieldTextColor(context)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return AppStrings.msgEmptyEmail;
@@ -238,7 +238,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                         decoration: InputDecoration(
-                          fillColor: Theme.of(context).cardColor,
+                          fillColor:
+                              AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
                           hintText: AppStrings.hintEmail,
                           hintStyle: TextStyle(
@@ -269,7 +270,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 2,
+                              flex: 3,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
@@ -292,13 +293,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ],
                                     controller: _postcodeController,
                                     style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionHandleColor),
+                                        color: AppThemeCustom
+                                            .getTextFieldTextColor(context)),
                                     decoration: InputDecoration(
                                         counterText: "",
                                         hintText: "5555",
-                                        fillColor: Theme.of(context).cardColor,
+                                        fillColor: AppThemeCustom
+                                            .getTextFieldBackground(context),
                                         filled: true,
                                         hintStyle: TextStyle(
                                           color: Theme.of(context).hintColor,
@@ -330,7 +331,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             AppDimens.shape_20,
                             Expanded(
-                                flex: 8,
+                                flex: 7,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
@@ -347,8 +348,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                       child: Container(
                                           margin: const EdgeInsets.only(top: 3),
                                           decoration: BoxDecoration(
-                                              color:
-                                                  Theme.of(context).cardColor,
+                                              color: AppThemeCustom
+                                                  .getTextFieldBackground(
+                                                      context),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Row(
@@ -370,9 +372,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     focusNode:
                                                         _birthdayDDFocusNode,
                                                     style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .textSelectionTheme
-                                                            .selectionHandleColor),
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context)),
                                                     onChanged: (value) {
                                                       if (value.length == 2) {
                                                         int? day =
@@ -430,9 +432,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     controller:
                                                         _birthdayMMController,
                                                     style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .textSelectionTheme
-                                                            .selectionHandleColor),
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context)),
                                                     focusNode:
                                                         _birthdayMMFocusNode,
                                                     onChanged: (value) {
@@ -493,9 +495,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                                     focusNode:
                                                         _birthdayYYFocusNode,
                                                     style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .textSelectionTheme
-                                                            .selectionHandleColor),
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context)),
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "YYYY",

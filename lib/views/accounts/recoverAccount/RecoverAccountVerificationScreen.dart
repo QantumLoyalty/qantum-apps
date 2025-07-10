@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
 import '../../common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
@@ -184,13 +185,11 @@ class _RecoverAccountVerificationScreenState
                       ],
                       controller: _otpController,
                       style: TextStyle(
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor),
+                          color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
                         counter: AppDimens.shape_5,
                         fillColor:
-                            Theme.of(context).cardColor.withValues(alpha: 0.15),
+                        AppThemeCustom.getTextFieldBackground(context),
                         filled: true,
                         hintStyle:
                             TextStyle(color: Theme.of(context).hintColor),

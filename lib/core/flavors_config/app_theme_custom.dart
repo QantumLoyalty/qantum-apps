@@ -106,10 +106,13 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc:
         return AppColors.mhbc_back_color;
+      case Flavor.montaukTavern:
+        return AppColors.mhbc_back_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
   }
+
   static Color getPointsBalanceBorder(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -123,7 +126,7 @@ class AppThemeCustom {
   static Color? getAccountBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh:
+      case Flavor.mhbc || Flavor.clh || Flavor.montaukTavern:
         return Theme.of(context).scaffoldBackgroundColor;
       default:
         return null;
@@ -135,6 +138,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc:
         return Theme.of(context).primaryColor;
+      case Flavor.montaukTavern:
+        return AppColors.mt_back_color_3;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
@@ -160,13 +165,35 @@ class AppThemeCustom {
     }
   }
 
-  static Color getCustomScaffoldBackground(BuildContext context) {
+  static Color? getCustomScaffoldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.clh:
         return Theme.of(context).primaryColor;
+      case Flavor.montaukTavern:
+        return null;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
+    }
+  }
+
+  static Color getTextFieldBackground(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return Theme.of(context).cardColor.withValues(alpha: 0.15);
+      default:
+        return Theme.of(context).cardColor;
+    }
+  }
+
+  static Color getTextFieldTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+      default:
+        return AppColors.black;
     }
   }
 }

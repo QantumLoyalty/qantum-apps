@@ -137,6 +137,35 @@ class AppColors {
 
   static Color get clh_disable_color => const Color(0xFF190000);
 
+/// MONTAUK TAVERN ///
+
+  static Color get mt_sf_color => const Color(0xFF2984a3);
+
+  static Color get mt_back_color => const Color(0xFF111A25);
+
+  static Color get mt_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get mt_back_color_2 => const Color(0xFF2984A3);
+
+  static Color get mt_back_color_3 => const Color(0xFF55f6ff);
+
+  static Color get mt_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mt_text_field_text_color => const Color(0xFF000000);
+
+  static Color get mt_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get mt_button_color => const Color(0x00FFFFFF);
+
+  static Color get mt_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get mt_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mt_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get mt_disable_color => const Color(0xFF55f6ff);
+
+
   /// SENSE OF TASTE THEME ///
 
   static Color get sot_back_color => const Color(0xFFc69c6e);

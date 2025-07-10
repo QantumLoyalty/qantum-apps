@@ -158,7 +158,7 @@ class SpecialOfferDetailDialog {
                                         Provider.of<SpecialOffersProvider>(
                                                 context,
                                                 listen: false)
-                                            .getSpecialOffers(hideLoader: true);
+                                            .getSpecialOffers(showLoader: true);
                                       },
                                       icon: Icon(
                                         Icons.clear,

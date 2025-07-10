@@ -203,7 +203,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                       .size
                                                                       .width,
                                                               height: 130,
-                                                              fit: BoxFit.fill,
+                                                              fit: BoxFit.cover,
                                                               imageUrl: provider
                                                                       .promotions!
                                                                       .smallPromotions![2 *

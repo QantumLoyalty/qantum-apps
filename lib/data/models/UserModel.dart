@@ -77,7 +77,11 @@ class UserModel {
     pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
-    statusTier = json.containsKey("StatusTier") ? json["StatusTier"] ?? "" : "";
+    if (json.containsKey("StatusTier") && json["StatusTier"] != null) {
+      statusTier = json["StatusTier"];
+    } else {
+      statusTier = "";
+    }
     requiredStatusPointsForNextTier =
         json.containsKey("RequiredStatusPointsForNextTier")
             ? json["RequiredStatusPointsForNextTier"]
@@ -92,7 +96,11 @@ class UserModel {
     accountAvailableBalance = json.containsKey("AccountAvailableBalance")
         ? json["AccountAvailableBalance"]
         : 0.0;
-    accountType = json.containsKey("AccountType") ? json["AccountType"] : "";
+    if (json.containsKey("AccountType") && json['AccountType'] != null) {
+      accountType = json["AccountType"];
+    } else {
+      accountType = "";
+    }
     acceptsEmail =
         json.containsKey("AcceptsEmail") ? json["AcceptsEmail"] : false;
     acceptsSMS = json.containsKey("AcceptsSMS") ? json["AcceptsSMS"] : false;

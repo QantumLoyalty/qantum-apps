@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "955221819710",
+    "project_id": "montauk-tavern",
+    "storage_bucket": "montauk-tavern.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955221819710:android:4887a4ba7bb304fab9ac6f",
+        "android_client_info": {
+          "package_name": "com.au.montauk.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjmtiLz9_30IzUc-rtmLtn1Idt08FsAac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

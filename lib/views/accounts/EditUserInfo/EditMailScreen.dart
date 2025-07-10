@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppStrings.dart';
@@ -49,7 +50,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               style: TextStyle(
-                  color: Theme.of(context).textSelectionTheme.selectionColor),
+                  color: AppThemeCustom.getTextFieldTextColor(context)),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppStrings.msgEmptyEmail;
@@ -60,7 +61,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
                 return null;
               },
               decoration: InputDecoration(
-                fillColor: Theme.of(context).cardColor.withValues(alpha: 0.15),
+                fillColor: AppThemeCustom.getTextFieldBackground(context),
                 filled: true,
                 hintText: AppStrings.hintEmail,
                 hintStyle: TextStyle(

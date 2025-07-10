@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
 import '../../views/accounts/GamingPreferences.dart';
@@ -46,6 +47,7 @@ class AppNavigator {
   static const String recoverAccountSuccess = "/recoverAccountSuccess";
   static const String recoverAccountEmailFailure =
       "/recoverAccountEmailFailure";
+  static const String appWebView = "/appWebView";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -136,6 +138,11 @@ class AppNavigator {
         return MaterialPageRoute(
             builder: (_) => RecoverAccountVerificationScreen(
                   params: args as Map<String, dynamic>,
+                ));
+      case appWebView:
+        return MaterialPageRoute(
+            builder: (_) => AppWebView(
+                  url: args as String,
                 ));
 
       default:

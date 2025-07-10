@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/mixins/dob_mixin.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
@@ -76,9 +76,9 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 return null;
               },
               style: TextStyle(
-                  color: Theme.of(context).textSelectionTheme.selectionColor),
+                  color: AppThemeCustom.getTextFieldTextColor(context)),
               decoration: InputDecoration(
-                fillColor: Theme.of(context).cardColor.withValues(alpha: 0.15),
+                fillColor: AppThemeCustom.getTextFieldBackground(context),
                 filled: true,
                 hintText: "",
                 hintStyle: TextStyle(
@@ -109,7 +109,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
             Container(
                 margin: const EdgeInsets.only(top: 3),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor.withValues(alpha: 0.15),
+                    color: AppThemeCustom.getTextFieldBackground(context),
                     borderRadius: BorderRadius.circular(10)),
                 child: Row(
                   children: [
@@ -124,9 +124,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                         ],
                         controller: _birthdayDDController,
                         style: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor),
+                            color: AppThemeCustom.getTextFieldTextColor(context)),
                         decoration: InputDecoration(
                             counterText: "",
                             hintText: "DD",
@@ -149,9 +147,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                       ],
                       controller: _birthdayMMController,
                       style: TextStyle(
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor),
+                          color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
                           counterText: "",
                           hintText: "MM",
@@ -173,9 +169,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                       ],
                       controller: _birthdayYYController,
                       style: TextStyle(
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor),
+                          color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
                           counterText: "",
                           hintText: "YYYY",

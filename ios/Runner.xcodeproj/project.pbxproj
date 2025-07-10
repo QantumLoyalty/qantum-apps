@@ -63,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		017C0293A9CD8BB6290B17B0 /* Pods-RunnerTests.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		0BD4CA6480F47D21F2F8B5D3 /* Pods-RunnerTests.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-max.xcconfig"; sourceTree = "<group>"; };
 		0E98EABDBE2E93B906E9E2DA /* Pods-RunnerTests.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		123AAE3EB53DD2283A120178 /* Pods-NotificationServiceExtensionMAX.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		172F7D69B6BA570AEDFE932B /* Pods-NotificationServiceExtensionMAX.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.debug-qantum.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		1D4284F65C79746CAA4CAAFE /* Pods-RunnerTests.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-mhbc.xcconfig"; sourceTree = "<group>"; };
 		1D5FF4C9B1121F9F93C7A0E2 /* Pods-Runner.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-qantum.xcconfig"; sourceTree = "<group>"; };
+		1DA0DE2F0EACE49238B5B9FF /* Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		230901BB2DB8FBBC00E89009 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		230D7E6F2DB1120D00650354 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		230D7E762DB1125800650354 /* RunnerProfile-starrewards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-starrewards.entitlements"; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		236ED4092DDB375700B1E8B8 /* RunnerDebug-mhbc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-mhbc.entitlements"; sourceTree = "<group>"; };
 		236ED40A2DDB377F00B1E8B8 /* RunnerProfile-mhbc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-mhbc.entitlements"; sourceTree = "<group>"; };
 		26254BDF5CE39B7E2FC62AD0 /* Pods-RunnerTests.profile-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-clh.xcconfig"; sourceTree = "<group>"; };
+		2D16637862B36C9CFF819664 /* Pods-Runner.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		2D3CE2CB47CB215FBCC80E52 /* Pods-NotificationServiceExtensionQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionQA.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionQA/Pods-NotificationServiceExtensionQA.debug.xcconfig"; sourceTree = "<group>"; };
 		2D7CD6DC48FA15793041BA47 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DA6E5875351FD7A1C6ADE31 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,12 +99,14 @@
 		318D6CC8A6292D022C244DC9 /* Pods-NotificationServiceExtensionMAX.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.profile.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35B3724D86FA55C344509E89 /* Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		368F23122D7BD7893B143063 /* Pods-OneSignalNotificationServiceExtension.release-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-clh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-clh.xcconfig"; sourceTree = "<group>"; };
 		39E6A991172665105FC02379 /* Pods-NotificationServiceExtensionQA.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionQA.debug-max.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionQA/Pods-NotificationServiceExtensionQA.debug-max.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		43EF417034CB3D9E8F7FED9D /* Pods-RunnerTests.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-qantum.xcconfig"; sourceTree = "<group>"; };
 		46C652B6399C0AEF7DF69538 /* Pods-NotificationServiceExtensionQA.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionQA.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionQA/Pods-NotificationServiceExtensionQA.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
 		472B91EDE2F1F2E7385A7623 /* Pods-Runner.release-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-clh.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-clh.xcconfig"; sourceTree = "<group>"; };
+		4799E5736305198734295872 /* Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		47D240A9092B429939E0337A /* Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
 		512FB118F3E2FE9A04A54333 /* Pods-NotificationServiceExtensionMAX.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.profile-qantum.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.profile-qantum.xcconfig"; sourceTree = "<group>"; };
 		541BBA17ECAD1A5AA1565459 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +136,7 @@
 		7A993F6FADA169AE49B86325 /* Pods-Runner.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-max.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7D58C0F222F4B14D399EA26A /* Pods-NotificationServiceExtensionMAX.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
+		7F81644668DE8F9C81709303 /* Pods-RunnerTests.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		812566235B1855B955DA3632 /* Pods-RunnerTests.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
 		81C33B4CF6E3F8FEB615E782 /* Pods-NotificationServiceExtensionSR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionSR.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionSR/Pods-NotificationServiceExtensionSR.debug.xcconfig"; sourceTree = "<group>"; };
 		825B878DE9A330E499E73DBA /* Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; sourceTree = "<group>"; };
@@ -165,14 +171,17 @@
 		B5E3D330C2E730756A6C77CC /* Pods-RunnerTests.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
 		BA5A1834284C65FCE66E89B4 /* Pods-Runner.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
 		BC2EEAE1CAFCCB3F01FA0A5C /* Pods-NotificationServiceExtensionSR.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionSR.release-starrewards.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionSR/Pods-NotificationServiceExtensionSR.release-starrewards.xcconfig"; sourceTree = "<group>"; };
+		BE85E02B75771944CD58F308 /* Pods-Runner.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		BF0D24E204FB9B7C7159071B /* Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; sourceTree = "<group>"; };
 		C10AC669245EC87B5A1B5E34 /* Pods-NotificationServiceExtensionMAX.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.release-max.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.release-max.xcconfig"; sourceTree = "<group>"; };
+		C19303427505363F25638BDE /* Pods-RunnerTests.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		C2C386ADECCF57219BFAC0BE /* Pods-NotificationServiceExtensionMAX.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.release-qantum.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.release-qantum.xcconfig"; sourceTree = "<group>"; };
 		C8EFA534A0EF238079D24BAA /* Pods-NotificationServiceExtensionQA.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionQA.release-qantum.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionQA/Pods-NotificationServiceExtensionQA.release-qantum.xcconfig"; sourceTree = "<group>"; };
 		CB993DF8EAED851D60B95087 /* Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
 		CBFB1BB45A8FF988649FB84F /* Pods-RunnerTests.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-starrewards.xcconfig"; sourceTree = "<group>"; };
 		CE89560FA9E2F33326B7C577 /* Pods_NotificationServiceExtensionSR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtensionSR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09B4E7CD3C69C96C402701B /* Pods-RunnerTests.release-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-clh.xcconfig"; sourceTree = "<group>"; };
+		D4338E0D3A4599A81CAC3C21 /* Pods-Runner.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		D4FC9C21183B0F8053A55BFC /* Pods-NotificationServiceExtensionMAX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionMAX.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionMAX/Pods-NotificationServiceExtensionMAX.debug.xcconfig"; sourceTree = "<group>"; };
 		D663FE5BEAE7984ABCE02278 /* Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		D867562B04953FCD71778CE3 /* Pods-NotificationServiceExtensionSR.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtensionSR.debug-max.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtensionSR/Pods-NotificationServiceExtensionSR.debug-max.xcconfig"; sourceTree = "<group>"; };
@@ -370,6 +379,15 @@
 				55B4F90C14228FB1BF324CA2 /* Pods-RunnerTests.debug-clh.xcconfig */,
 				D09B4E7CD3C69C96C402701B /* Pods-RunnerTests.release-clh.xcconfig */,
 				26254BDF5CE39B7E2FC62AD0 /* Pods-RunnerTests.profile-clh.xcconfig */,
+				35B3724D86FA55C344509E89 /* Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig */,
+				4799E5736305198734295872 /* Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig */,
+				1DA0DE2F0EACE49238B5B9FF /* Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig */,
+				BE85E02B75771944CD58F308 /* Pods-Runner.debug-montauktavern.xcconfig */,
+				2D16637862B36C9CFF819664 /* Pods-Runner.release-montauktavern.xcconfig */,
+				D4338E0D3A4599A81CAC3C21 /* Pods-Runner.profile-montauktavern.xcconfig */,
+				C19303427505363F25638BDE /* Pods-RunnerTests.debug-montauktavern.xcconfig */,
+				017C0293A9CD8BB6290B17B0 /* Pods-RunnerTests.release-montauktavern.xcconfig */,
+				7F81644668DE8F9C81709303 /* Pods-RunnerTests.profile-montauktavern.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -3007,6 +3025,424 @@
 			};
 			name = "Profile-max";
 		};
+		23F3528B2E05655B001614F3 /* Debug-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-montaukTavern";
+		};
+		23F3528C2E05655B001614F3 /* Debug-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Montauk Tavern";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-montaukTavern";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-max.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-montaukTavern";
+		};
+		23F3528D2E05655B001614F3 /* Debug-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C19303427505363F25638BDE /* Pods-RunnerTests.debug-montauktavern.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-montaukTavern";
+		};
+		23F3528E2E05655B001614F3 /* Debug-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35B3724D86FA55C344509E89 /* Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-montaukTavern";
+		};
+		23F352932E056597001614F3 /* Release-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-montaukTavern";
+		};
+		23F352942E056597001614F3 /* Release-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Montauk Tavern";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-montaukTavern";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-max.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-montaukTavern";
+		};
+		23F352952E056597001614F3 /* Release-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 017C0293A9CD8BB6290B17B0 /* Pods-RunnerTests.release-montauktavern.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-montaukTavern";
+		};
+		23F352962E056597001614F3 /* Release-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4799E5736305198734295872 /* Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release-montaukTavern";
+		};
+		23F352972E0565A4001614F3 /* Profile-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-montaukTavern";
+		};
+		23F352982E0565A4001614F3 /* Profile-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Montauk Tavern";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-montaukTavern";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-starrewards.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-montaukTavern";
+		};
+		23F352992E0565A4001614F3 /* Profile-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F81644668DE8F9C81709303 /* Pods-RunnerTests.profile-montauktavern.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-montaukTavern";
+		};
+		23F3529A2E0565A4001614F3 /* Profile-montaukTavern */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DA0DE2F0EACE49238B5B9FF /* Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.montauktavern.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Profile-montaukTavern";
+		};
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3316,12 +3752,14 @@
 			buildConfigurations = (
 				235B5CEC2DC9D72D004A8F1C /* Debug */,
 				235B5CED2DC9D72D004A8F1C /* Debug-max */,
+				23F3528E2E05655B001614F3 /* Debug-montaukTavern */,
 				235B5CEE2DC9D72D004A8F1C /* Debug-starrewards */,
 				234E069B2E0009A400C1E77F /* Debug-clh */,
 				235B5CEF2DC9D72D004A8F1C /* Debug-qantum */,
 				236ED3F72DDAE45D00B1E8B8 /* Debug-mhbc */,
 				235B5CF02DC9D72D004A8F1C /* Release */,
 				235B5CF12DC9D72D004A8F1C /* Release-max */,
+				23F352962E056597001614F3 /* Release-montaukTavern */,
 				235B5CF22DC9D72D004A8F1C /* Release-qantum */,
 				235B5CF32DC9D72D004A8F1C /* Release-starrewards */,
 				234E069F2E0009BB00C1E77F /* Release-clh */,
@@ -3331,6 +3769,7 @@
 				235B5CF62DC9D72D004A8F1C /* Profile-qantum */,
 				235B5CF72DC9D72D004A8F1C /* Profile-starrewards */,
 				234E06A32E0009C800C1E77F /* Profile-clh */,
+				23F3529A2E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F32DDAE44D00B1E8B8 /* Profile-mhbc */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3341,12 +3780,14 @@
 			buildConfigurations = (
 				331C8088294A63A400263BE5 /* Debug */,
 				23ED95D92D6C8838005C5478 /* Debug-max */,
+				23F3528D2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241D2D8C048D006147DE /* Debug-starrewards */,
 				234E069A2E0009A400C1E77F /* Debug-clh */,
 				235EB8502D268E7A00621146 /* Debug-qantum */,
 				236ED3F62DDAE45D00B1E8B8 /* Debug-mhbc */,
 				331C8089294A63A400263BE5 /* Release */,
 				23ED95DC2D6C886A005C5478 /* Release-max */,
+				23F352952E056597001614F3 /* Release-montaukTavern */,
 				235EB8532D268E9000621146 /* Release-qantum */,
 				238424202D8C04A6006147DE /* Release-starrewards */,
 				234E069E2E0009BB00C1E77F /* Release-clh */,
@@ -3356,6 +3797,7 @@
 				235EB8562D268E9E00621146 /* Profile-qantum */,
 				238424232D8C04BB006147DE /* Profile-starrewards */,
 				234E06A22E0009C800C1E77F /* Profile-clh */,
+				23F352992E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F22DDAE44D00B1E8B8 /* Profile-mhbc */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3366,12 +3808,14 @@
 			buildConfigurations = (
 				97C147031CF9000F007C117D /* Debug */,
 				23ED95D72D6C8838005C5478 /* Debug-max */,
+				23F3528B2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241B2D8C048D006147DE /* Debug-starrewards */,
 				234E06982E0009A400C1E77F /* Debug-clh */,
 				235EB84E2D268E7A00621146 /* Debug-qantum */,
 				236ED3F42DDAE45D00B1E8B8 /* Debug-mhbc */,
 				97C147041CF9000F007C117D /* Release */,
 				23ED95DA2D6C886A005C5478 /* Release-max */,
+				23F352932E056597001614F3 /* Release-montaukTavern */,
 				235EB8512D268E9000621146 /* Release-qantum */,
 				2384241E2D8C04A6006147DE /* Release-starrewards */,
 				234E069C2E0009BB00C1E77F /* Release-clh */,
@@ -3381,6 +3825,7 @@
 				235EB8542D268E9E00621146 /* Profile-qantum */,
 				238424212D8C04BB006147DE /* Profile-starrewards */,
 				234E06A02E0009C800C1E77F /* Profile-clh */,
+				23F352972E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F02DDAE44D00B1E8B8 /* Profile-mhbc */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3391,12 +3836,14 @@
 			buildConfigurations = (
 				97C147061CF9000F007C117D /* Debug */,
 				23ED95D82D6C8838005C5478 /* Debug-max */,
+				23F3528C2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241C2D8C048D006147DE /* Debug-starrewards */,
 				234E06992E0009A400C1E77F /* Debug-clh */,
 				235EB84F2D268E7A00621146 /* Debug-qantum */,
 				236ED3F52DDAE45D00B1E8B8 /* Debug-mhbc */,
 				97C147071CF9000F007C117D /* Release */,
 				23ED95DB2D6C886A005C5478 /* Release-max */,
+				23F352942E056597001614F3 /* Release-montaukTavern */,
 				235EB8522D268E9000621146 /* Release-qantum */,
 				2384241F2D8C04A6006147DE /* Release-starrewards */,
 				234E069D2E0009BB00C1E77F /* Release-clh */,
@@ -3406,6 +3853,7 @@
 				235EB8552D268E9E00621146 /* Profile-qantum */,
 				238424222D8C04BB006147DE /* Profile-starrewards */,
 				234E06A12E0009C800C1E77F /* Profile-clh */,
+				23F352982E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F12DDAE44D00B1E8B8 /* Profile-mhbc */,
 			);
 			defaultConfigurationIsVisible = 0;

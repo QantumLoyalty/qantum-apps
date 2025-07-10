@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
 
 import '../../../core/utils/AppColors.dart';
@@ -110,7 +111,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                           border: Border.all(
                               width: 0.5,
                               color: Theme.of(context).dividerColor),
-                          color: Theme.of(context).cardColor,
+                          color: AppThemeCustom.getTextFieldBackground(context),
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,9 +124,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                               color: AppColors.black,
                             ),
                             textStyle: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionHandleColor),
+                                color: AppThemeCustom.getTextFieldTextColor(context)),
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;

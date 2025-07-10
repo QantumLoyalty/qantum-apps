@@ -52,9 +52,7 @@ class ClubAndMembership extends StatelessWidget {
                     TextFormField(
                       style: TextStyle(
                           fontSize: 16,
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor!),
+                          color: AppThemeCustom.getTextFieldTextColor(context)),
                       maxLines: 1,
                       maxLength: 80,
                       decoration: InputDecoration(
@@ -63,13 +61,10 @@ class ClubAndMembership extends StatelessWidget {
                             const EdgeInsets.only(left: 15, right: 15),
                         hintText: AppStrings.msgEnterClubCode,
                         hintStyle: TextStyle(
-                            fontSize: 20,
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor!
-                                .withValues(alpha: 0.2)),
+                            fontSize: 20, color: Theme.of(context).hintColor),
                         filled: true,
-                        fillColor: AppColors.white.withValues(alpha: 0.2),
+                        fillColor:
+                            AppThemeCustom.getTextFieldBackground(context),
                         border: OutlineInputBorder(
                             borderSide: const BorderSide(
                               color: Colors.transparent,

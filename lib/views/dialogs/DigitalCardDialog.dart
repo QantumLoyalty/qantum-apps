@@ -3,12 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
 import '../../core/utils/AppStrings.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:secure_content/secure_content.dart';
 import '../../core/utils/AppColors.dart';
+import '../../data/local/SharedPreferenceHelper.dart';
+import '../../data/models/UserModel.dart';
 import '../../view_models/UserInfoProvider.dart';
 
 class DigitalCardDialog {
@@ -22,6 +25,11 @@ class DigitalCardDialog {
   DigitalCardDialog._internal();
 
   showDigitalCardDialog(BuildContext context) async {
+    SharedPreferenceHelper sharedPreferenceHelper =
+        await SharedPreferenceHelper.getInstance();
+    UserModel? userData = sharedPreferenceHelper.getUserData();
+    String userTierType = await AppHelper.getUserTierType(userData!);
+
     await showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 250),
@@ -84,10 +92,7 @@ class DigitalCardDialog {
                                             child: Column(
                                               children: [
                                                 Text(
-                                                  (provider.getUserInfo!
-                                                              .statusTier ??
-                                                          "")
-                                                      .toUpperCase(),
+                                                  userTierType.toUpperCase(),
                                                   style: TextStyle(
                                                       shadows: [
                                                         Shadow(

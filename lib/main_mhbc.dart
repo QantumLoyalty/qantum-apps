@@ -33,7 +33,7 @@ void main() async {
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
-      print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+     // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
   });
 }
