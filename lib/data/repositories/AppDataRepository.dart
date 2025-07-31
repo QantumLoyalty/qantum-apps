@@ -15,5 +15,12 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> fetchPartnerOffers();
 
+  Future<NetworkResponse> fetchSeeAllButtons();
+
+
+
+
+
+
 
 }

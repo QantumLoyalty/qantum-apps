@@ -31,8 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
-    print(
-        "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/app_logo.png");
+  }
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
   }
 
   @override
@@ -144,7 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   border: Border.all(
                                       width: 0.5,
                                       color: Theme.of(context).dividerColor),
-                                  color: AppThemeCustom.getTextFieldBackground(context),
+                                  color: AppThemeCustom.getTextFieldBackground(
+                                      context),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,7 +193,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ],
                                         controller: _phoneController,
                                         style: TextStyle(
-                                            color: AppThemeCustom.getTextFieldTextColor(context)),
+                                            color: AppThemeCustom
+                                                .getTextFieldTextColor(
+                                                    context)),
                                         decoration: InputDecoration(
                                           counterText: "",
                                           hintText: "0400000000",

@@ -32,6 +32,8 @@
 	<true/>
 	<key>NSBrightnessUsageDescription</key>
 	<string>App requires access to brightness settings for better code scanning experience</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>App requires access to location for better offers suggestions</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

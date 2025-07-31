@@ -37,12 +37,18 @@ class AccountsAppBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 (title == AppStrings.txtMyAccount)
-                    ? Image.asset(AppIcons.my_account,
-                        width: 24,
-                        height: 24,
-                        color: AppThemeCustom.getAccountHeaderColor(context))
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(AppIcons.my_account,
+                              width: 24,
+                              height: 24,
+                              color: AppThemeCustom.getAccountHeaderColor(
+                                  context)),
+                          AppDimens.shape_10,
+                        ],
+                      )
                     : Container(),
-                AppDimens.shape_10,
                 Text(
                   title,
                   style: TextStyle(

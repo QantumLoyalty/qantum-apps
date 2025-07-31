@@ -1,6 +1,6 @@
 class APIList {
   // LIVE
-  static get BASE_URL => "http://13.239.30.205:8081/";
+  static get BASE_URL => "http://3.24.55.180:8081/";
   //static get BASE_URL => "https://api.s2w.com.au/";
 
   // LOCAL HOST
@@ -52,4 +52,5 @@ class APIList {
   static get CHECK_APP_UPDATE => BASE_URL + "user/checkUpdate";
 
   static get GET_USERS_BENEFITS => BASE_URL + "benefits/getBenefitsForApp?";
+  static get FETCH_HOME_BUTTONS => BASE_URL + "button/get";
 }

@@ -109,7 +109,7 @@ class AppNavigator {
       case userDetailScreen:
         return MaterialPageRoute(builder: (_) => const UserDetailScreen());
       case clubAndMembership:
-        return MaterialPageRoute(builder: (_) => const ClubAndMembership());
+        return MaterialPageRoute(builder: (_) => ClubAndMembership());
       case communicationPreference:
         return MaterialPageRoute(
             builder: (_) => const CommunicationPreference());

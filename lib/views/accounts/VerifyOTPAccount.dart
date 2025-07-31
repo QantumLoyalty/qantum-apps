@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/common_widgets/AppScaffold.dart';
+import '../../views/common_widgets/AppScaffold.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -22,7 +22,7 @@ class VerifyOTPAccount extends StatefulWidget {
 
 class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
   late TextEditingController _otpController;
-
+  late FocusNode _otpFocusNode;
   int remainingSec = 30;
   bool enableResend = false;
   Timer? timer;
@@ -35,6 +35,10 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
     _userInfoProvider.sendOTPAccount();
 
     _otpController = TextEditingController();
+    _otpFocusNode = FocusNode();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _otpFocusNode.requestFocus();
+    });
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remainingSec != 0) {
         setState(() {
@@ -161,11 +165,13 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                       controller: _otpController,
+                      focusNode: _otpFocusNode,
                       style: TextStyle(
                           color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
                         counter: AppDimens.shape_5,
-                        fillColor: AppThemeCustom.getTextFieldBackground(context),
+                        fillColor:
+                            AppThemeCustom.getTextFieldBackground(context),
                         filled: true,
                         hintStyle:
                             TextStyle(color: Theme.of(context).hintColor),
@@ -255,5 +261,6 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
     if (timer != null && timer!.isActive) {
       timer!.cancel();
     }
+    _otpFocusNode.dispose();
   }
 }

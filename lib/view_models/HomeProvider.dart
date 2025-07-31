@@ -1,4 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import '../core/mixins/logging_mixin.dart';
+import '../core/utils/AppHelper.dart';
+import '../data/models/MoreButtonModel.dart';
+import '../data/models/NetworkResponse.dart';
+import '../services/AppDataService.dart';
 import '../core/utils/AppStrings.dart';
 import '../data/models/HomeNavigatorModel.dart';
 import '../views/my_venues/MyVenuesHomeScreen.dart';
@@ -6,7 +13,9 @@ import '../views/partners_offer/PartnerOffersScreen.dart';
 import '../views/profile/MyProfileScreen.dart';
 import '../views/special_offers/SpecialOffersScreen.dart';
 
-class HomeProvider extends ChangeNotifier {
+class HomeProvider extends ChangeNotifier with LoggingMixin {
+  Timer? _fetchSeeAllTimer;
+
   int _selectedOption = 3;
 
   int get selectedOption => _selectedOption;
@@ -14,6 +23,10 @@ class HomeProvider extends ChangeNotifier {
   int _prevSelectedOption = 3;
 
   int get prevSelectedOption => _prevSelectedOption;
+
+  Map<int, dynamic>? _moreButtonsMap;
+
+  Map<int, dynamic>? get moreButtonsMap => _moreButtonsMap;
 
   updateSelectedOption(int value) {
     if (_homeNavigationList[_selectedOption].type ==
@@ -125,10 +138,76 @@ class HomeProvider extends ChangeNotifier {
 
   bool _showSeeAllMenu = false;
 
-  updateShowAllMenuVisibility(bool value) {
+  updateShowAllMenuVisibility(bool value, String from) {
     _showSeeAllMenu = value;
+    logEvent("from --> $from _showSeeAllMenu --> $_showSeeAllMenu");
     notifyListeners();
   }
 
   bool get showSeeAllMenu => _showSeeAllMenu;
+
+  getAllOptions() async {
+    try {
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().fetchSeeAllButtons();
+
+      if (!networkResponse.isError && networkResponse.response != null) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        if (response["success"] as bool && response.containsKey("data")) {
+          List<MoreButtonModel> moreButtonsList = [];
+          (response["data"] as Map<String, dynamic>)["buttons"]
+              .forEach((value) {
+            moreButtonsList.add(MoreButtonModel.fromJson(value));
+          });
+          if (moreButtonsList.isNotEmpty) {
+            _moreButtonsMap = {};
+            for (int i = 1; i <= 6; i++) {
+              List<MoreButtonModel> filterList = moreButtonsList
+                  .where((item) => item.position == (i))
+                  .toList();
+              if (filterList.isNotEmpty) {
+                _moreButtonsMap![i] = filterList[0];
+              } else {
+                _moreButtonsMap![i] = null;
+              }
+            }
+          }
+
+          if (_moreButtonsMap != null && _moreButtonsMap!.isNotEmpty) {
+            if ((_moreButtonsMap![4] is! MoreButtonModel) &&
+                (_moreButtonsMap![5] is! MoreButtonModel) &&
+                (_moreButtonsMap![6] is! MoreButtonModel)) {
+              _moreButtonsMap!.remove(4);
+              _moreButtonsMap!.remove(5);
+              _moreButtonsMap!.remove(6);
+            }
+            logEvent(_moreButtonsMap);
+          }
+        }
+      }
+
+      logEvent(networkResponse);
+    } catch (e) {
+      logEvent(e.toString());
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  bool _isFetching = false;
+
+  bool get isFetching => _isFetching;
+
+  getAllOptionsTimer() async {
+    await getAllOptions();
+    _fetchSeeAllTimer = Timer.periodic(
+        Duration(seconds: AppHelper.defaultRequestTime), (value) async {
+      if (!_isFetching) {
+        _isFetching = true;
+        await getAllOptions();
+        _isFetching = false;
+      }
+    });
+  }
 }

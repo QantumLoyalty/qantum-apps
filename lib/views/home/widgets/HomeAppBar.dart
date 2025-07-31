@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
-import 'package:qantum_apps/core/utils/AppIcons.dart';
-import 'package:qantum_apps/core/utils/AppStrings.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
-import 'package:qantum_apps/view_models/UserInfoProvider.dart';
-import 'package:qantum_apps/views/FortuneWheelSample.dart';
-import 'package:qantum_apps/views/dialogs/MyProfileDialog.dart';
-import 'package:qantum_apps/views/dialogs/SpinnerDialog.dart';
+import '/core/mixins/logging_mixin.dart';
+import '/core/utils/AppColors.dart';
+import '/core/utils/AppDimens.dart';
+import '/core/utils/AppIcons.dart';
+import '/core/utils/AppStrings.dart';
+import '/view_models/HomeProvider.dart';
+import '/view_models/UserInfoProvider.dart';
+import '/views/dialogs/MyProfileDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
-
 import '../../dialogs/DigitalCardDialog.dart';
 
 class HomeAppBar extends StatelessWidget with LoggingMixin {
@@ -38,10 +35,19 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                 Expanded(
                   child: Column(
                     children: [
-                      Consumer<UserInfoProvider>(
-                          builder: (context, provider, child) {
+
+
+
+              Consumer2<UserInfoProvider,HomeProvider>(
+                          builder: (context, provider,homeProvider, child) {
                         return InkWell(
                           onTap: () async {
+
+                            /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                            if (homeProvider.showSeeAllMenu) {
+                              homeProvider.updateShowAllMenuVisibility(false,"my card");
+                            }
+
                             double screenBrightness = 0.4;
 
                             try {
@@ -131,6 +137,10 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             builder: (context, provider, child) {
                           return InkWell(
                             onTap: () {
+                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                              if (provider.showSeeAllMenu) {
+                                provider.updateShowAllMenuVisibility(false,"my profile");
+                              }
                               MyProfileDialog.getInstance()
                                   .showMyProfileDialog(context);
                             },
@@ -141,8 +151,8 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               children: [
                                 Image.asset(
                                   AppIcons.my_profile,
-                                  width: 36,
-                                  height: 36,
+                                  width: 34,
+                                  height: 34,
                                   color: Theme.of(context).iconTheme.color,
                                 ),
                                 Text(

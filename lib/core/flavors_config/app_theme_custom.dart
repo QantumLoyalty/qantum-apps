@@ -105,7 +105,7 @@ class AppThemeCustom {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.mhbc:
-        return AppColors.mhbc_back_color;
+        return AppColors.mhbc_sf_color;
       case Flavor.montaukTavern:
         return AppColors.mhbc_back_color;
       default:
@@ -118,6 +118,32 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.clh:
         return AppColors.clh_sf_color;
+      case Flavor.mhbc:
+        return AppColors.white;
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
+
+  static Color getSeeAllBackground(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mhbc:
+        return AppColors.mhbc_back_color_2;
+      case Flavor.montaukTavern:
+        return AppColors.mhbc_back_color;
+      default:
+        return Theme.of(context).scaffoldBackgroundColor;
+    }
+  }
+
+  static Color getSeeAllBorder(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.clh:
+        return AppColors.clh_sf_color;
+      case Flavor.mhbc:
+        return AppColors.mhbc_back_color_2;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }

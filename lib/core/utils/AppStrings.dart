@@ -44,6 +44,8 @@ class AppStrings {
   static const String txtGamingPreferences = "Gaming Preferences";
   static const String txtPASStatement = "PAS Statement";
   static const String txtEditAccountDetails = 'Edit Account Details';
+  /// MHBC APP ///
+  static const String txtSponsorship = 'Sponsorship';
 
   //////////////////////////////////
 

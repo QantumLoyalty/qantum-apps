@@ -107,7 +107,8 @@ class AppColors {
 
   static Color get mhbc_divider_color => const Color(0xFFD9D9D9);
 
-  static Color get mhbc_disable_color => const Color(0xFFAEC1D9);
+  //static Color get mhbc_disable_color => const Color(0xFFAEC1D9);
+  static Color get mhbc_disable_color => const Color(0xFF233250);
 
   /// MANLY HARBOUR BOAT CLUB THEME ///
 

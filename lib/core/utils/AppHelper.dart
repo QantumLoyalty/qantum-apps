@@ -26,6 +26,11 @@ class AppHelper with LoggingMixin {
     return false;
   }
 
+  static bool verifyURL(String url) {
+
+    print("URL $url");
+    return  Uri.tryParse(url)?.hasScheme ?? false;
+  }
   static bool verifyEmailAddress(String email) {
     return RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_'{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")

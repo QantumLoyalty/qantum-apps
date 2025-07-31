@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '/views/common_widgets/AppCustomButton.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
-import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppStrings.dart';
@@ -9,7 +9,9 @@ import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class ClubAndMembership extends StatelessWidget {
-  const ClubAndMembership({super.key});
+  ClubAndMembership({super.key});
+
+  Flavor selectedFlavor = FlavorConfig.instance.flavor!;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,10 @@ class ClubAndMembership extends StatelessWidget {
         child: Column(
           children: [
             AccountsAppBar(
-                showBackButton: true, title: AppStrings.txtClubAndMembership),
+                showBackButton: true,
+                title: selectedFlavor == Flavor.mhbc
+                    ? AppStrings.txtSponsorship
+                    : AppStrings.txtClubAndMembership),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,

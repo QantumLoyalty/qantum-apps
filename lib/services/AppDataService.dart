@@ -90,4 +90,25 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> fetchSeeAllButtons() async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var URL = APIList.FETCH_HOME_BUTTONS;
+      logEvent(URL);
+      var response =
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
 }

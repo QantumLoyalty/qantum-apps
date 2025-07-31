@@ -56,13 +56,17 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void dispose() {
-    super.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _postcodeController.dispose();
     _birthdayDDController.dispose();
     _birthdayMMController.dispose();
     _birthdayYYController.dispose();
     _birthdayDDFocusNode.dispose();
     _birthdayMMFocusNode.dispose();
     _birthdayYYFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -682,9 +686,19 @@ class _SignupScreenState extends State<SignupScreen> {
                                     params['PostCode'] =
                                         _postcodeController.text;
                                     params['Email'] = _emailController.text;
-                                    params['Gender'] = provider
-                                        .selectedGender![0]
-                                        .toUpperCase();
+                                    // params['Gender'] = provider.selectedGender![0].toUpperCase();
+                                    if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "M") {
+                                      params['Gender'] = "M";
+                                    } else if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "F") {
+                                      params['Gender'] = "F";
+                                    } else {
+                                      params['Gender'] = "U";
+                                    }
+
                                     String phoneNo =
                                         "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
                                     AppHelper.printMessage(

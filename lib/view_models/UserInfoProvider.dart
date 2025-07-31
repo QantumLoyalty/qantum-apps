@@ -148,7 +148,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   checkForAppUpdate() async {
     try {
       Map<String, dynamic> params = {};
-      params['appType'] = FlavorConfig.instance.flavorValues.appName;
+      params['appType'] = AppHelper.getAppType();
       params['version'] = FlavorConfig.instance.flavorValues.appVersion;
 
       NetworkResponse networkResponse =

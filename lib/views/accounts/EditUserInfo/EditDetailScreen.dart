@@ -1,3 +1,4 @@
+import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -20,10 +21,12 @@ class EditDetailScreen extends StatefulWidget {
 class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
   late TextEditingController _fullNameFieldController;
   late TextEditingController _birthdayDDController;
-
   late TextEditingController _birthdayMMController;
-
   late TextEditingController _birthdayYYController;
+  late FocusNode _birthdayDDFocusNode;
+  late FocusNode _birthdayMMFocusNode;
+  late FocusNode _birthdayYYFocusNode;
+
   late UserInfoProvider _userInfoProvider;
 
   @override
@@ -44,11 +47,24 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
     }
 
     _birthdayDDController = TextEditingController(
-        text: dateTime != null ? dateTime.day.toString() : "");
+        text: ConditionBuilder
+            .on(() => dateTime != null && dateTime.day > 10,
+                () => dateTime!.day.toString())
+            .on(() => dateTime != null && dateTime.day < 10,
+                () => "0${dateTime!.day.toString()}")
+            .build(orElse: () => ""));
     _birthdayMMController = TextEditingController(
-        text: dateTime != null ? dateTime.month.toString() : "");
+        text: ConditionBuilder.on(() => dateTime != null && dateTime.month > 10,
+                () => dateTime!.month.toString())
+            .on(() => dateTime != null && dateTime.month < 10,
+                () => "0${dateTime!.month.toString()}")
+            .build(orElse: () => ""));
     _birthdayYYController = TextEditingController(
         text: dateTime != null ? dateTime.year.toString() : "");
+
+    _birthdayDDFocusNode = FocusNode();
+    _birthdayMMFocusNode = FocusNode();
+    _birthdayYYFocusNode = FocusNode();
   }
 
   @override
@@ -115,26 +131,44 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        maxLines: 1,
-                        maxLength: 2,
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        controller: _birthdayDDController,
-                        style: TextStyle(
-                            color: AppThemeCustom.getTextFieldTextColor(context)),
-                        decoration: InputDecoration(
-                            counterText: "",
-                            hintText: "DD",
-                            hintStyle: TextStyle(
-                                color: Theme.of(context).hintColor,
-                                fontWeight: FontWeight.w400),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            errorBorder: InputBorder.none),
-                      ),
+                          maxLines: 1,
+                          maxLength: 2,
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          controller: _birthdayDDController,
+                          focusNode: _birthdayDDFocusNode,
+                          style: TextStyle(
+                              color: AppThemeCustom.getTextFieldTextColor(
+                                  context)),
+                          decoration: InputDecoration(
+                              counterText: "",
+                              hintText: "DD",
+                              hintStyle: TextStyle(
+                                  color: Theme.of(context).hintColor,
+                                  fontWeight: FontWeight.w400),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              errorBorder: InputBorder.none),
+                          onChanged: (value) {
+                            if (value.length == 2) {
+                              int? day = int.tryParse(value);
+                              if (day != null && day > 31) {
+                                _birthdayDDController.text = '31';
+                                _birthdayDDController.selection =
+                                    TextSelection.fromPosition(
+                                  TextPosition(
+                                      offset:
+                                          _birthdayDDController.text.length),
+                                );
+                              } else {
+                                FocusScope.of(context)
+                                    .requestFocus(_birthdayMMFocusNode);
+                              }
+                            }
+                          }),
                     ),
                     Expanded(
                         child: TextFormField(
@@ -146,6 +180,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                       controller: _birthdayMMController,
+                      focusNode: _birthdayMMFocusNode,
                       style: TextStyle(
                           color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
@@ -157,29 +192,52 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           errorBorder: InputBorder.none),
+                      onChanged: (value) {
+                        if (value.length == 2) {
+                          int? day = int.tryParse(value);
+                          if (day != null && day > 12) {
+                            _birthdayMMController.text = '12';
+                            _birthdayMMController.selection =
+                                TextSelection.fromPosition(
+                              TextPosition(
+                                  offset: _birthdayMMController.text.length),
+                            );
+                          } else {
+                            FocusScope.of(context)
+                                .requestFocus(_birthdayYYFocusNode);
+                          }
+                        }
+                      },
                     )),
                     Expanded(
                         child: TextFormField(
-                      maxLines: 1,
-                      maxLength: 4,
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      controller: _birthdayYYController,
-                      style: TextStyle(
-                          color: AppThemeCustom.getTextFieldTextColor(context)),
-                      decoration: InputDecoration(
-                          counterText: "",
-                          hintText: "YYYY",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context).hintColor,
-                              fontWeight: FontWeight.w400),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none),
-                    )),
+                            maxLines: 1,
+                            maxLength: 4,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            controller: _birthdayYYController,
+                            focusNode: _birthdayYYFocusNode,
+                            style: TextStyle(
+                                color: AppThemeCustom.getTextFieldTextColor(
+                                    context)),
+                            decoration: InputDecoration(
+                                counterText: "",
+                                hintText: "YYYY",
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context).hintColor,
+                                    fontWeight: FontWeight.w400),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                errorBorder: InputBorder.none),
+                            onChanged: (value) {
+                              if (value.length == 4) {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                              }
+                            })),
                   ],
                 )),
             AppDimens.shape_30,
@@ -255,5 +313,16 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
         );
       }),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _birthdayDDController.dispose();
+    _birthdayMMController.dispose();
+    _birthdayYYController.dispose();
+    _birthdayDDFocusNode.dispose();
+    _birthdayMMFocusNode.dispose();
+    _birthdayYYFocusNode.dispose();
   }
 }
