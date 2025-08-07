@@ -17,6 +17,10 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> fetchSeeAllButtons();
 
+  Future<NetworkResponse> updateCouponCode({required String couponCode});
+
+
+
 
 
 

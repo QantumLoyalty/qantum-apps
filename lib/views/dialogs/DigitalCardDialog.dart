@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
 import '../../core/utils/AppStrings.dart';
@@ -82,7 +82,7 @@ class DigitalCardDialog {
                                                 BorderRadius.circular(10),
                                             child: QrImageView(
                                               data:
-                                                  'ABC${provider.getUserInfo!.cardNumber}',
+                                                  'MHBCAAAAA${provider.getUserInfo!.cardNumber}',
                                               backgroundColor: AppColors.white,
                                               size: 180,
                                             ),
@@ -143,6 +143,64 @@ class DigitalCardDialog {
                                                       color: AppColors.white,
                                                       fontSize: 14),
                                                 ),
+                                                (showMembershipCategory(userData
+                                                        .membershipCategory))
+                                                    ? Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          AppDimens.shape_30,
+                                                          Text(
+                                                            AppStrings
+                                                                .txtMembership,
+                                                            style: TextStyle(
+                                                                shadows: [
+                                                                  Shadow(
+                                                                    offset:
+                                                                        const Offset(
+                                                                            1.0,
+                                                                            1.0),
+                                                                    blurRadius:
+                                                                        3.0,
+                                                                    color: AppColors
+                                                                        .black
+                                                                        .withValues(
+                                                                            alpha:
+                                                                                0.5),
+                                                                  )
+                                                                ],
+                                                                color: AppColors
+                                                                    .white,
+                                                                fontSize: 16),
+                                                          ),
+                                                          Text(
+                                                            "${userData.membershipCategory}",
+                                                            style: TextStyle(
+                                                                shadows: [
+                                                                  Shadow(
+                                                                    offset:
+                                                                        const Offset(
+                                                                            1.0,
+                                                                            1.0),
+                                                                    blurRadius:
+                                                                        3.0,
+                                                                    color: AppColors
+                                                                        .black
+                                                                        .withValues(
+                                                                            alpha:
+                                                                                0.5),
+                                                                  )
+                                                                ],
+                                                                color: AppColors
+                                                                    .white,
+                                                                fontSize: 22),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Container()
                                               ],
                                             ),
                                           )
@@ -195,5 +253,22 @@ class DigitalCardDialog {
             ),
           );
         });
+  }
+
+  bool showMembershipCategory(String? membershipCategory) {
+    if (membershipCategory != null && membershipCategory.isNotEmpty) {
+      switch (membershipCategory.toUpperCase()) {
+        case "NON FINANCIAL":
+          return true;
+        case "INVITE ONLY":
+          return true;
+        case "STAFF":
+          return true;
+        default:
+          return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

@@ -7,6 +7,7 @@ import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppIcons.dart';
 import '../../../core/utils/AppStrings.dart';
+import '../../../view_models/HomeProvider.dart';
 import '/data/models/OfferModel.dart';
 
 import '../../../core/navigation/AppNavigator.dart';
@@ -28,16 +29,22 @@ class SpecialOfferItem extends StatelessWidget {
           await Provider.of<SpecialOffersProvider>(context, listen: false)
               .getOfferByID(offerID: offer.id!);
 
-          if (Provider.of<SpecialOffersProvider>(context, listen: false)
-                  .selectedOffer !=
-              null) {
-            Provider.of<SpecialOffersProvider>(context, listen: false)
-                .selectedOffer!
-                .expiryDate = offer.expiryDate;
+          if (context.mounted) {
+            Provider.of<HomeProvider>(context, listen: false)
+                .updateShowAllMenuVisibility(false, "Special Offers Item");
 
-            await SpecialOfferDetailDialog.getInstance()
-                .showSpecialOfferDialog(context);
+            if (Provider.of<SpecialOffersProvider>(context, listen: false)
+                    .selectedOffer !=
+                null) {
+              Provider.of<SpecialOffersProvider>(context, listen: false)
+                  .selectedOffer!
+                  .expiryDate = offer.expiryDate;
+
+              await SpecialOfferDetailDialog.getInstance()
+                  .showSpecialOfferDialog(context);
+            }
           } else {
+            if (!context.mounted) return;
             AppHelper.showErrorMessage(context, "Something went wrong.");
           }
         },

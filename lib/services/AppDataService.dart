@@ -111,4 +111,26 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> updateCouponCode({required String couponCode}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var URL = APIList.UPDATE_COUPON_CODE;
+      logEvent(URL);
+      var response =
+          await NetworkHelper.instance.putCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+      }, body: {
+        'coupon_codes': couponCode
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

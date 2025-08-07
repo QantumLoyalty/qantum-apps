@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppStrings.dart';
+import 'package:qantum_apps/view_models/HomeProvider.dart';
 import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -155,6 +156,9 @@ class SpecialOfferDetailDialog {
                                   child: IconButton(
                                       onPressed: () async {
                                         Navigator.pop(context);
+                                        Provider.of<HomeProvider>(context,
+                                                listen: false)
+                                            .updateSelectedOption(1);
                                         Provider.of<SpecialOffersProvider>(
                                                 context,
                                                 listen: false)

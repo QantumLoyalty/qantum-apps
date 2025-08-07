@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../../view_models/PromotionsProvider.dart';
@@ -46,7 +46,6 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     });
   }
 
-
   @override
   void dispose() {
     super.dispose();
@@ -59,8 +58,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Column(
       children: [
         Expanded(
-          child:
-              Consumer<PromotionsProvider>(builder: (context, provider, child) {
+          child: Consumer2<PromotionsProvider, HomeProvider>(
+              builder: (context, provider, homeProvider, child) {
             return Stack(
               children: [
                 provider.promotions != null
@@ -84,6 +83,11 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                 BorderRadius.circular(10),
                                             child: InkWell(
                                               onTap: () {
+                                                homeProvider
+                                                    .updateShowAllMenuVisibility(
+                                                        false,
+                                                        "Large Promotions Item");
+
                                                 PromotionDetailDialog
                                                         .getInstance()
                                                     .showPromotionDetailDialog(
@@ -185,6 +189,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                 .circular(10),
                                                         child: InkWell(
                                                           onTap: () {
+                                                            homeProvider
+                                                                .updateShowAllMenuVisibility(
+                                                                    false,
+                                                                    "Large Promotions Item");
                                                             PromotionDetailDialog
                                                                     .getInstance()
                                                                 .showPromotionDetailDialog(
@@ -258,6 +266,9 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                           10),
                                                               child: InkWell(
                                                                 onTap: () {
+
+                                                                  homeProvider.updateShowAllMenuVisibility(false, "Large Promotions Item");
+
                                                                   PromotionDetailDialog.getInstance().showPromotionDetailDialog(
                                                                       context,
                                                                       provider
