@@ -754,13 +754,28 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_birthdayDDController.text.isNotEmpty &&
         _birthdayMMController.text.isNotEmpty &&
         _birthdayYYController.text.isNotEmpty) {
-      DateTime dateTime = DateTime(
+      DateTime now = DateTime.now();
+      DateTime dob = DateTime(
           int.parse(_birthdayYYController.text),
           int.parse(_birthdayMMController.text),
           int.parse(_birthdayDDController.text));
 
-      return dateTime.isBefore(DateTime.now()) &&
-          (DateTime.now().difference(dateTime).inDays ~/ 365) > 18;
+      if (dob.isBefore(DateTime.now())) {
+        int age = now.year - dob.year;
+
+        // If birthday hasn’t occurred yet this year, subtract 1
+        if (now.month < dob.month ||
+            (now.month == dob.month && now.day < dob.day)) {
+          age--;
+        }
+
+        print("AGE RESULT :: $age");
+
+        return age >= 18;
+      } else {
+        return false;
+      }
+
     } else {
       return false;
     }

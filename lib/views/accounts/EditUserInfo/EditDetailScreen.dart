@@ -317,12 +317,13 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
 
   @override
   void dispose() {
-    super.dispose();
     _birthdayDDController.dispose();
     _birthdayMMController.dispose();
     _birthdayYYController.dispose();
     _birthdayDDFocusNode.dispose();
     _birthdayMMFocusNode.dispose();
     _birthdayYYFocusNode.dispose();
+    super.dispose();
+
   }
 }

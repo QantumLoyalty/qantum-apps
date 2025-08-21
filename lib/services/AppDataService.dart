@@ -102,7 +102,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        'Authorization':
+            'Bearer ${sharedPreferenceHelper.getAuthToken()}'
       });
       networkResponse = response;
     } catch (e) {

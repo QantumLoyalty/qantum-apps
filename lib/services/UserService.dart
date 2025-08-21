@@ -1,6 +1,6 @@
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/data/models/UserModel.dart';
+import '/core/mixins/logging_mixin.dart';
+import '/core/utils/AppHelper.dart';
+import '/data/models/UserModel.dart';
 
 import '../core/network/NetworkHelper.dart';
 import '../data/models/NetworkResponse.dart';
@@ -98,7 +98,7 @@ class UserService with LoggingMixin implements UserRepository {
       var response = await NetworkHelper.instance
           .postCall(url: Uri.parse(APIList.GET_PROFILE), headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
       }, body: {});
       networkResponse = response;
     } catch (e) {
@@ -384,9 +384,9 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      UserModel user = sharedPreferenceHelper.getUserData()!;
+      UserModel? user = await sharedPreferenceHelper.getUserData();
 
-      final String userStatusTier = await AppHelper.getUserTierType(user);
+      final String userStatusTier = await AppHelper.getUserTierType(user!);
 
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.GET_USERS_BENEFITS + "type=$userStatusTier"),

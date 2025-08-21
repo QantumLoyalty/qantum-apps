@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/data/models/BenefitsModel.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import '../core/utils/AppHelper.dart';
+import '../data/models/BenefitsModel.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppStrings.dart';
@@ -29,10 +30,10 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   int? _selectedEditScreen;
 
   int? get selectedEditScreen => _selectedEditScreen;
-  static int EDIT_SCREEN = 0;
-  static int DETAILS_EDIT_SCREEN = 1;
-  static int EMAIL_EDIT_SCREEN = 2;
-  static int MOBILE_EDIT_SCREEN = 3;
+  static const int EDIT_SCREEN = 0;
+  static const int DETAILS_EDIT_SCREEN = 1;
+  static const int EMAIL_EDIT_SCREEN = 2;
+  static const int MOBILE_EDIT_SCREEN = 3;
 
   bool? _showLoader;
 
@@ -169,7 +170,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       NetworkResponse networkResponse =
           await UserService.getInstance().getUsersBenefits();
 
-
       if (networkResponse.response != null &&
           networkResponse.response is Map<String, dynamic>) {
         if ((networkResponse.response as Map<String, dynamic>)
@@ -186,7 +186,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             benefits = benefits.replaceAll("<li>", "");
             _benefitItems = benefits.split("</li>");
 
-            print(_benefitItems);
+            logEvent(_benefitItems);
             _benefitItems!.removeWhere((test) => test == " ");
           }
         }
@@ -718,7 +718,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
       if (networkResponse.response != null &&
           networkResponse.response is Map<String, dynamic>) {
-        print(networkResponse.toString());
+        logEvent(networkResponse.toString());
         Map<String, dynamic> responseObject =
             networkResponse.response as Map<String, dynamic>;
 
@@ -838,5 +838,15 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         notifyListeners();
       });
     }
+  }
+
+  String? version;
+
+  /// Fetches the app version and name from the package info and logs it.
+  getAppInfo() async {
+    final appInfo = await PackageInfo.fromPlatform();
+    logEvent('${appInfo.version} ${appInfo.appName}');
+    version = appInfo.version;
+    notifyListeners();
   }
 }

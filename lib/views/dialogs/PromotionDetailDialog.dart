@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
+import '/core/navigation/AppNavigator.dart';
 import '../../data/models/PromotionModel.dart';
 import '../my_venues/widgets/PromotionsPlaceHolder.dart';
 
@@ -16,9 +16,8 @@ class PromotionDetailDialog {
 
   PromotionDetailDialog._internal();
 
-  showPromotionDetailDialog(BuildContext context, PromotionItem promotion) {
-    print("PROMOTION DATA: ${promotion.htmlContent}");
-
+  showPromotionDetailDialog(
+      BuildContext context, PromotionItem promotion, String from) {
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
@@ -47,16 +46,18 @@ class PromotionDetailDialog {
                               MediaQuery.of(context).size.height * 0.80 - 80,
                           child: Column(
                             children: [
-                              Expanded(
-                                flex: 9,
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.only(
                                         topRight: Radius.circular(10),
                                         topLeft: Radius.circular(10)),
                                     child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
+                                      fit: from == "SMALL"
+                                          ? BoxFit.contain
+                                          : BoxFit.cover,
                                       imageUrl: promotion.imageUrl ?? "",
                                       placeholder: (context, _) {
                                         return const Stack(

@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -29,7 +28,7 @@ class MyProfileDialog {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
 
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
 
     showGeneralDialog(
         context: context,
@@ -522,14 +521,25 @@ class MyProfileDialog {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "V 1.0.0",
+                              /*Text(
+                                "V 1.0.1",
                                 style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,
                                     color: AppThemeCustom
                                         .getProfileDialogTextColor(context)),
-                              ),
+                              ),*/
+                              Selector<UserInfoProvider, String?>(
+                                  builder: (_, version, __) => Text(
+                                        "V $version",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppThemeCustom
+                                                .getProfileDialogTextColor(
+                                                    context)),
+                                      ),
+                                  selector: (_, v) => v.version),
                               CircleAvatar(
                                 backgroundColor:
                                     Theme.of(context).scaffoldBackgroundColor,

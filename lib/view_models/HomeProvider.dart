@@ -50,7 +50,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
         name: AppStrings.txtPartnerOffers,
-        screen: const PartnerOffersScreen(),
+        screen:  PartnerOffersScreen(),
         icon: Icons.handshake,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(

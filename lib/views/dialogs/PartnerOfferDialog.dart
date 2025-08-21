@@ -15,7 +15,7 @@ class PartnerOfferDialog {
 
   PartnerOfferDialog._internal();
 
-  showPartnerOfferDialog(BuildContext context) {
+  showPartnerOfferDialog(BuildContext context, String imagePath) {
     showGeneralDialog(
         context: context,
         pageBuilder: (context, anim1, anim2) {
@@ -46,7 +46,7 @@ class PartnerOfferDialog {
                               height: 180,
                               width: double.infinity,
                               child: Image.asset(
-                                'assets/common/partner_offer_placeholder.png',
+                                imagePath,
                                 fit: BoxFit.fill,
                               ),
                             ),

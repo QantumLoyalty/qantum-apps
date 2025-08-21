@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
@@ -27,7 +28,7 @@ class DigitalCardDialog {
   showDigitalCardDialog(BuildContext context) async {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = sharedPreferenceHelper.getUserData();
+    UserModel? userData = await sharedPreferenceHelper.getUserData();
     String userTierType = await AppHelper.getUserTierType(userData!);
 
     await showGeneralDialog(
@@ -82,7 +83,7 @@ class DigitalCardDialog {
                                                 BorderRadius.circular(10),
                                             child: QrImageView(
                                               data:
-                                                  'MHBCAAAAA${provider.getUserInfo!.cardNumber}',
+                                                  '${getScancode()}${provider.getUserInfo!.cardNumber}',
                                               backgroundColor: AppColors.white,
                                               size: 180,
                                             ),
@@ -256,19 +257,34 @@ class DigitalCardDialog {
   }
 
   bool showMembershipCategory(String? membershipCategory) {
-    if (membershipCategory != null && membershipCategory.isNotEmpty) {
-      switch (membershipCategory.toUpperCase()) {
-        case "NON FINANCIAL":
-          return true;
-        case "INVITE ONLY":
-          return true;
-        case "STAFF":
-          return true;
-        default:
-          return false;
+    Flavor flavor = FlavorConfig.instance.flavor!;
+    if (flavor == Flavor.mhbc) {
+      if (membershipCategory != null && membershipCategory.isNotEmpty) {
+        switch (membershipCategory.toUpperCase()) {
+          case "NON FINANCIAL":
+            return true;
+          case "INVITE ONLY":
+            return true;
+          case "STAFF":
+            return true;
+          default:
+            return false;
+        }
+      } else {
+        return false;
       }
     } else {
       return false;
+    }
+  }
+
+  String getScancode() {
+    Flavor flavor = FlavorConfig.instance.flavor!;
+
+    if (flavor == Flavor.mhbc) {
+      return "MHBCAAAAA";
+    } else {
+      return "ABC1234";
     }
   }
 }

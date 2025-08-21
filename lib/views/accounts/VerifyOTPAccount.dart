@@ -14,7 +14,7 @@ import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
 
 class VerifyOTPAccount extends StatefulWidget {
-  VerifyOTPAccount();
+  const VerifyOTPAccount({super.key});
 
   @override
   State<VerifyOTPAccount> createState() => _VerifyOTPAccountState();
@@ -257,10 +257,11 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
 
   @override
   void dispose() {
-    super.dispose();
     if (timer != null && timer!.isActive) {
       timer!.cancel();
     }
     _otpFocusNode.dispose();
+    _otpController.dispose();
+    super.dispose();
   }
 }

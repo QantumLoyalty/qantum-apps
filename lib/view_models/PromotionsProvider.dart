@@ -31,7 +31,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = sharedPreferenceHelper.getUserData();
+      UserModel? userData = await sharedPreferenceHelper.getUserData();
 
       if (userData != null) {
         String userTier = await AppHelper.getUserTierType(userData);

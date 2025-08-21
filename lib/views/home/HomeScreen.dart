@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
@@ -23,9 +25,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   Timer? _pointsDialogTimer;
   late HomeProvider _homeProvider;
+  late Flavor flavor;
 
   @override
   void initState() {
@@ -39,7 +42,16 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<UserInfoProvider>(context, listen: false).checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
+
+      flavor = FlavorConfig.instance.flavor!;
+      logEvent("SELECTED FLAVOR $flavor");
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("didChangeDependencies HOME");
   }
 
   startPointsDialogTimer() {
@@ -113,11 +125,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor: (index == 2) ? Colors.transparent : null,
+                            iconColor: (flavor == Flavor.mhbc &&
+                                    provider.homeNavigationList[index].name ==
+                                        provider.homeNavigationList[2].name
+                                ? Colors.transparent
+                                : null),
                             text: provider.homeNavigationList[index].name
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            textColor: (index == 2)
+                            textColor: flavor == Flavor.mhbc &&
+                                    provider.homeNavigationList[index].name ==
+                                        (provider.homeNavigationList[2].name)
                                 ? Colors.transparent
                                 : Theme.of(context)
                                     .textSelectionTheme
@@ -132,10 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
                                 border: Border.all(
-                                    color:  Theme.of(context)
-                                            .buttonTheme
-                                            .colorScheme!
-                                            .onSecondary,
+                                    color: Theme.of(context)
+                                        .buttonTheme
+                                        .colorScheme!
+                                        .onSecondary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
@@ -169,9 +187,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                               checkAndHideSeeAllOptionMenu(
                                   provider, "points balance");
-                              if (provider.homeNavigationList[index].name ==
-                                  provider.homeNavigationList[2].name) {
-                                /// DO NOTHING
+
+                              if (flavor == Flavor.mhbc &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name) {
+                                /// DO NOTHING ///
                               } else {
                                 provider.updateSelectedOption(index);
 

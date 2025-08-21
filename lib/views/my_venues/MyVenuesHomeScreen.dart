@@ -67,7 +67,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                         child: Column(
                           children: [
                             SizedBox(
-                                height: 220,
+                                //height: 220,
                                 width: MediaQuery.of(context).size.width,
                                 child: provider.promotions!.largePromotions !=
                                             null &&
@@ -78,70 +78,83 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                             .largePromotions!.length,
                                         itemBuilder:
                                             (context, index, position) {
-                                          return ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: InkWell(
-                                              onTap: () {
-                                                homeProvider
-                                                    .updateShowAllMenuVisibility(
-                                                        false,
-                                                        "Large Promotions Item");
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5, right: 5),
+                                            child: Stack(
+                                              children: [
+                                                Center(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        homeProvider
+                                                            .updateShowAllMenuVisibility(
+                                                                false,
+                                                                "Large Promotions Item");
 
-                                                PromotionDetailDialog
-                                                        .getInstance()
-                                                    .showPromotionDetailDialog(
-                                                        context,
-                                                        provider.promotions!
-                                                                .largePromotions![
-                                                            index]);
-                                              },
-                                              child: AspectRatio(
-                                                aspectRatio: 9 / 6,
-                                                child: CachedNetworkImage(
-                                                  height: 220,
-                                                  imageUrl: provider
-                                                          .promotions!
-                                                          .largePromotions![
-                                                              index]
-                                                          .imageUrl ??
-                                                      "",
-                                                  placeholder: (context, _) {
-                                                    return const Stack(
-                                                      children: [
-                                                        Center(
-                                                          child: SizedBox(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child:
-                                                                  CircularProgressIndicator()),
+                                                        PromotionDetailDialog
+                                                                .getInstance()
+                                                            .showPromotionDetailDialog(
+                                                                context,
+                                                                provider
+                                                                    .promotions!
+                                                                    .largePromotions![index],
+                                                                "LARGE");
+                                                      },
+                                                      child: AspectRatio(
+                                                        aspectRatio: 16 / 9,
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: provider
+                                                                  .promotions!
+                                                                  .largePromotions![
+                                                                      index]
+                                                                  .imageUrl ??
+                                                              "",
+                                                          placeholder:
+                                                              (context, _) {
+                                                            return const Stack(
+                                                              children: [
+                                                                Center(
+                                                                  child: SizedBox(
+                                                                      width: 50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          CircularProgressIndicator()),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                          errorWidget: (context,
+                                                              _, obj) {
+                                                            return PromotionsPlaceHolder(
+                                                                size: Size(
+                                                                    MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    200));
+                                                          },
+                                                          fit: BoxFit.cover,
                                                         ),
-                                                      ],
-                                                    );
-                                                  },
-                                                  errorWidget:
-                                                      (context, _, obj) {
-                                                    return PromotionsPlaceHolder(
-                                                        size: Size(
-                                                            MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width,
-                                                            200));
-                                                  },
-                                                  fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
                                           );
                                         },
                                         options: CarouselOptions(
-                                            aspectRatio: 5 / 9,
                                             autoPlay: false,
                                             reverse: false,
                                             enableInfiniteScroll: false,
-                                            enlargeCenterPage: true,
-                                            viewportFraction: 0.80,
+                                            enlargeCenterPage: false,
+                                            viewportFraction: 0.8,
                                             initialPage: 0,
                                             onPageChanged:
                                                 (index, reason) async {}),
@@ -149,7 +162,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                     : Container()),
                             Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 12, right: 12, top: 12),
+                                    left: 12, right: 12, top: 0),
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -161,7 +174,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                 .smallPromotions!.isNotEmpty)
                                         ? Container(
                                             margin:
-                                                const EdgeInsets.only(top: 10),
+                                                const EdgeInsets.only(top: 0),
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,
@@ -199,7 +212,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     context,
                                                                     provider
                                                                         .promotions!
-                                                                        .smallPromotions![2 * index]);
+                                                                        .smallPromotions![2 * index],
+                                                                    "SMALL");
                                                           },
                                                           child: AspectRatio(
                                                             aspectRatio: 1,
@@ -266,8 +280,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                           10),
                                                               child: InkWell(
                                                                 onTap: () {
-
-                                                                  homeProvider.updateShowAllMenuVisibility(false, "Large Promotions Item");
+                                                                  homeProvider
+                                                                      .updateShowAllMenuVisibility(
+                                                                          false,
+                                                                          "Large Promotions Item");
 
                                                                   PromotionDetailDialog.getInstance().showPromotionDetailDialog(
                                                                       context,
@@ -275,7 +291,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                           .promotions!
                                                                           .smallPromotions![2 *
                                                                               index +
-                                                                          1]);
+                                                                          1],
+                                                                      "SMALL");
                                                                 },
                                                                 child:
                                                                     AspectRatio(

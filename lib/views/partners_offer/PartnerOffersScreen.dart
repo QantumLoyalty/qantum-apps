@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/views/partners_offer/widget/PartnerOfferItem.dart';
+import '/views/partners_offer/widget/PartnerOfferItem.dart';
 
 import '../../core/utils/AppDimens.dart';
 
 class PartnerOffersScreen extends StatelessWidget {
-  const PartnerOffersScreen({super.key});
+  PartnerOffersScreen({super.key});
+
+  List<String> offersList = [
+    "assets/common/partner_offer_placeholder.png",
+    "assets/common/partner_offer_placeholder_2.png"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +17,14 @@ class PartnerOffersScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
       child: ListView.separated(
         itemBuilder: (context, index) {
-          return const PartnerOfferItem();
+          return PartnerOfferItem(
+            imagePath: offersList[index],
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return AppDimens.shape_10;
         },
-        itemCount: 10,
+        itemCount: offersList.length,
       ),
     );
   }

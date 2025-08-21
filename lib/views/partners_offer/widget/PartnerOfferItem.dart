@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../dialogs/PartnerOfferDialog.dart';
 
 class PartnerOfferItem extends StatelessWidget {
-  const PartnerOfferItem({super.key});
+  String imagePath;
+
+  PartnerOfferItem({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +15,12 @@ class PartnerOfferItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: () {
-
-            PartnerOfferDialog.getInstance().showPartnerOfferDialog(context);
+            PartnerOfferDialog.getInstance()
+                .showPartnerOfferDialog(context, imagePath);
           },
           child: Image.asset(
-            'assets/common/partner_offer_placeholder.png',
-            fit: BoxFit.fill,
+            imagePath,
+            fit: BoxFit.contain,
           ),
         ),
       ),
