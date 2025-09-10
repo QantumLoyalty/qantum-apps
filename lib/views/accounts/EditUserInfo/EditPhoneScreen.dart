@@ -61,7 +61,9 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                 hintStyle: TextStyle(color: Theme.of(context).hintColor),
                 fillColor: AppThemeCustom.getTextFieldBackground(context),
                 filled: true,
-                enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent),borderRadius: BorderRadius.circular(10)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10)),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 focusedBorder:
@@ -74,38 +76,32 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
             Row(
               children: [
                 Expanded(
-                    child:
-                    AppCustomButton(
-                      text: AppStrings.txtCancel.toUpperCase(),
-                      onClick: () {
-                        provider.updateSelectedEditScreen(
-                            UserInfoProvider.EDIT_SCREEN);
-                      },
-                      style: AppHelper.getDeleteButtonStyle(context),
-                    )),
+                    child: AppCustomButton(
+                  text: AppStrings.txtCancel.toUpperCase(),
+                  onClick: () {
+                    provider
+                        .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
+                  },
+                  style: AppThemeCustom.getUpdateInfoButtonStyle(context),
+                )),
                 AppDimens.shape_20,
                 Expanded(
-
-                    child:
-                    AppCustomButton(
-                      text: AppStrings.txtUpdate.toUpperCase(),
-                      textColor: AppHelper.getAccountsButtonTextColor(context),
-                      onClick: () {
-                        if (_phoneController.text.isNotEmpty &&
-                            AppHelper.verifyPhoneNumber(
-                                _phoneController.text)) {
-                          provider.updateTempUser(
-                              phone: _phoneController.text);
-                          provider.updateSelectedEditScreen(
-                              UserInfoProvider.EDIT_SCREEN);
-                        } else {
-                          AppHelper.showErrorMessage(
-                              context, AppStrings.msgIncorrectPhoneNumber);
-                        }
-                      },
-                      style: AppHelper.getAccountsButtonStyle(context),
-                    )
-                ),
+                    child: AppCustomButton(
+                  text: AppStrings.txtUpdate.toUpperCase(),
+                  textColor: AppThemeCustom.getUpdateInfoTextColor(context),
+                  onClick: () {
+                    if (_phoneController.text.isNotEmpty &&
+                        AppHelper.verifyPhoneNumber(_phoneController.text)) {
+                      provider.updateTempUser(phone: _phoneController.text);
+                      provider.updateSelectedEditScreen(
+                          UserInfoProvider.EDIT_SCREEN);
+                    } else {
+                      AppHelper.showErrorMessage(
+                          context, AppStrings.msgIncorrectPhoneNumber);
+                    }
+                  },
+                  style: AppThemeCustom.getUpdateInfoButtonStyle(context),
+                )),
               ],
             )
           ],

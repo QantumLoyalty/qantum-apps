@@ -38,7 +38,25 @@ class AppIcons {
         default:
           return card_value;
       }
-    } else if (selectedFlavor == Flavor.clh) {
+    }
+    else if (selectedFlavor == Flavor.hogansReward) {
+      switch (membershipType!.toLowerCase()) {
+        case "pearl":
+          return "assets/hogansReward/card_pearl.png";
+        case "opal":
+          return "assets/hogansReward/card_opal.png";
+        case "ruby":
+          return "assets/hogansReward/card_ruby.png";
+        case "sapphire":
+          return "assets/hogansReward/card_ruby.png";
+        case "diamond":
+        default:
+        return "assets/hogansReward/card_ruby.png";
+      }
+    }
+
+
+    else if (selectedFlavor == Flavor.clh) {
       switch (membershipType!.toLowerCase().trim()) {
         case "member":
           return "assets/centralLaneHotel/card_member.png";

@@ -167,6 +167,40 @@ class AppColors {
   static Color get mt_disable_color => const Color(0xFF55f6ff);
 
 
+  /// HOGANS REWARD THEME ///
+
+
+  static Color get hr_sf_color => const Color(0xFF000000);
+
+  static Color get hr_back_color => const Color(0xFF000000);
+
+  static Color get hr_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get hr_back_color_2 => const Color(0xFF000000);
+
+  static Color get hr_back_color_3 => const Color(0xFF55f6ff);
+
+  static Color get hr_text_color => const Color(0xFFFFFFFF);
+
+  static Color get hr_text_field_text_color => const Color(0xFF000000);
+
+  static Color get hr_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get hr_button_color => const Color(0xFF01ABE0);
+
+  static Color get hr_button_border_color => const Color(0xFF01ABE0);
+
+  static Color get hr_card_color => const Color(0xFFFFFFFF);
+
+  static Color get hr_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get hr_disable_color => const Color(0xFF01ABE0);
+
+
+
+
+
+
   /// SENSE OF TASTE THEME ///
 
   static Color get sot_back_color => const Color(0xFFc69c6e);

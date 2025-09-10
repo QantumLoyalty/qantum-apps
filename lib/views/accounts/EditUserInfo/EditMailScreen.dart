@@ -91,14 +91,13 @@ class _EditMailScreenState extends State<EditMailScreen> {
                     provider
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
                   },
-                  style: AppHelper.getDeleteButtonStyle(context),
+                  style: AppThemeCustom.getCancelInfoButtonStyle(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(
-                    child:
-                        AppCustomButton(
+                    child: AppCustomButton(
                   text: AppStrings.txtUpdate.toUpperCase(),
-                  textColor: AppHelper.getAccountsButtonTextColor(context),
+                  textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_emailController.text.toString().isEmpty) {
                       AppHelper.showErrorMessage(
@@ -114,7 +113,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
                           UserInfoProvider.EDIT_SCREEN);
                     }
                   },
-                  style: AppHelper.getAccountsButtonStyle(context),
+                  style: AppThemeCustom.getUpdateInfoButtonStyle(context),
                 )),
               ],
             )

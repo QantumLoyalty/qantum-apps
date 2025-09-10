@@ -42,9 +42,8 @@ class PartnerOfferDialog {
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10)),
-                            child: SizedBox(
-                              height: 180,
-                              width: double.infinity,
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
                               child: Image.asset(
                                 imagePath,
                                 fit: BoxFit.fill,

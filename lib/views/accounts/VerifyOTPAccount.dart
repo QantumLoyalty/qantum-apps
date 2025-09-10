@@ -218,7 +218,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     AppDimens.shape_5,
                     AppCustomButton(
                       text: AppStrings.txtSubmit.toUpperCase(),
-                      textColor: AppHelper.getAccountsButtonTextColor(context),
+                      textColor: AppHelper.getEditAccountsButtonTextColor(context),
                       onClick: () {
                         if (_otpController.text.isNotEmpty) {
                           provider.verifyOTPAccount(OTP: _otpController.text);
@@ -227,7 +227,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                               context, AppStrings.msgIncorrectOTP);
                         }
                       },
-                      style: AppHelper.getAccountsButtonStyle(context),
+                      style: AppHelper.getEditAccountsButtonStyle(context),
                     ),
                   ],
                 ),

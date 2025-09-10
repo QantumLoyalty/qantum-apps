@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
-
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 
@@ -85,7 +84,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                   Text(
                     "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
                     style: TextStyle(
-                        fontSize: 12, color: Theme.of(context).disabledColor),
+                        fontSize: 12, color: AppThemeCustom.getPointsBalanceTextColor(context)),
                   ),
                 ],
               );

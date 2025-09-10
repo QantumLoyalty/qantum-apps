@@ -19,7 +19,7 @@ class EditUserDetailsScreen extends StatefulWidget {
 }
 
 class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
-  var screens = [
+   var screens = [
     const EditUserHomeScreen(),
     const EditDetailScreen(),
     const EditMailScreen(),

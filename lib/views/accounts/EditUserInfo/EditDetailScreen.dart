@@ -272,13 +272,13 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           UserInfoProvider.EDIT_SCREEN);
                     }
                   },
-                  style: AppHelper.getDeleteButtonStyle(context),
+                  style: AppThemeCustom.getCancelInfoButtonStyle(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(
                     child: AppCustomButton(
                   text: AppStrings.txtUpdate.toUpperCase(),
-                  textColor: AppHelper.getAccountsButtonTextColor(context),
+                  textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_fullNameFieldController.text.toString().isEmpty) {
                       AppHelper.showErrorMessage(
@@ -305,7 +305,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           UserInfoProvider.EDIT_SCREEN);
                     }
                   },
-                  style: AppHelper.getAccountsButtonStyle(context),
+                  style: AppThemeCustom.getUpdateInfoButtonStyle(context),
                 )),
               ],
             )

@@ -27,9 +27,8 @@ class DetailCard extends StatelessWidget {
                   child: Text(
                     AppStrings.txtMyDetails.toUpperCase(),
                     style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                        color:
-                            Theme.of(context).colorScheme.secondary),
+                        fontWeight: FontWeight.w800,
+                        color: Theme.of(context).colorScheme.secondary),
                   ),
                 ),
                 editable

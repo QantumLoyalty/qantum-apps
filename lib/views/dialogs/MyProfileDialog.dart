@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/mixins/logging_mixin.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -15,7 +15,7 @@ import '../../data/local/SharedPreferenceHelper.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/IconTextWidget.dart';
 
-class MyProfileDialog {
+class MyProfileDialog with LoggingMixin {
   static final MyProfileDialog _myProfileDialog = MyProfileDialog._internal();
 
   static MyProfileDialog getInstance() {
@@ -23,6 +23,9 @@ class MyProfileDialog {
   }
 
   MyProfileDialog._internal();
+
+  static const double dialogHeightFactor = 0.90;
+  static const double dialogHeightBottomMargin = 80;
 
   showMyProfileDialog(BuildContext context) async {
     SharedPreferenceHelper sharedPreferenceHelper =
@@ -34,7 +37,7 @@ class MyProfileDialog {
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
-          print(FlavorConfig.instance.flavorValues.appVersion);
+          logEvent(FlavorConfig.instance.flavorValues.appVersion);
 
           return Dialog(
             backgroundColor: Colors.transparent,
@@ -44,8 +47,7 @@ class MyProfileDialog {
                 alignment: Alignment.center,
                 child: SizedBox(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.90,
-                  //  padding: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height * dialogHeightFactor,
                   child: Stack(
                     children: [
                       Container(
@@ -55,7 +57,7 @@ class MyProfileDialog {
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.90 - 80,
+                        height: MediaQuery.of(context).size.height * dialogHeightFactor - dialogHeightBottomMargin,
                         child: Consumer<UserInfoProvider>(
                             builder: (context, provider, child) {
                           return Column(
@@ -68,11 +70,12 @@ class MyProfileDialog {
                                       Icon(
                                         Icons.person,
                                         color: AppThemeCustom
-                                            .getProfileDialogTextColor(context),
+                                            .getProfileDialogImage(context),
                                         size: 40,
                                       ),
                                       Text(
                                         "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold,
@@ -521,14 +524,6 @@ class MyProfileDialog {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              /*Text(
-                                "V 1.0.1",
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppThemeCustom
-                                        .getProfileDialogTextColor(context)),
-                              ),*/
                               Selector<UserInfoProvider, String?>(
                                   builder: (_, version, __) => Text(
                                         "V $version",
@@ -578,8 +573,7 @@ class MyProfileDialog {
   }
 
   double getCircularGraphValue(num? currentPoint, num? requiredPoints) {
-    AppHelper.printMessage(
-        "Current Point --> $currentPoint Required Point --> $requiredPoints");
+    logEvent("Current Point --> $currentPoint Required Point --> $requiredPoints");
     if (currentPoint != null && requiredPoints != null) {
       return (currentPoint / (currentPoint + requiredPoints)) * 100;
     }

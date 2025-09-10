@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import '../../core/flavors_config/flavor_config.dart';
+import '../../core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
@@ -88,16 +88,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                 Expanded(
                     child: Stack(
                   children: [
-                    /*Positioned.fill(
-                        child: provider
-                                    .homeNavigationList[provider.selectedOption]
-                                    .type ==
-                                HomeNavigatorModel.typeScreen
-                            ? provider.selectedScreen
-                            : provider
-                                .homeNavigationList[provider.prevSelectedOption]
-                                .screen)*/
-
                     ConditionBuilder<Widget>.on(
                         () =>
                             provider.homeNavigationList[provider.selectedOption]

@@ -3,7 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
+import '../../core/enums/AdvertisementEnums.dart';
+import '/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../../view_models/PromotionsProvider.dart';
@@ -48,9 +49,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
 
   @override
   void dispose() {
-    super.dispose();
-
     _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -99,10 +99,11 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                 .getInstance()
                                                             .showPromotionDetailDialog(
                                                                 context,
-                                                                provider
-                                                                    .promotions!
-                                                                    .largePromotions![index],
-                                                                "LARGE");
+                                                                provider.promotions!
+                                                                        .largePromotions![
+                                                                    index],
+                                                                AdvertisementEnums
+                                                                    .large);
                                                       },
                                                       child: AspectRatio(
                                                         aspectRatio: 16 / 9,
@@ -210,10 +211,12 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     .getInstance()
                                                                 .showPromotionDetailDialog(
                                                                     context,
-                                                                    provider
-                                                                        .promotions!
-                                                                        .smallPromotions![2 * index],
-                                                                    "SMALL");
+                                                                    provider.promotions!
+                                                                            .smallPromotions![
+                                                                        2 *
+                                                                            index],
+                                                                    AdvertisementEnums
+                                                                        .small);
                                                           },
                                                           child: AspectRatio(
                                                             aspectRatio: 1,
@@ -292,7 +295,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                           .smallPromotions![2 *
                                                                               index +
                                                                           1],
-                                                                      "SMALL");
+                                                                      AdvertisementEnums
+                                                                          .small);
                                                                 },
                                                                 child:
                                                                     AspectRatio(

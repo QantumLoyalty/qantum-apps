@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/view_models/UserInfoProvider.dart';
-import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
-
+import '../../../core/utils/AppHelper.dart';
+import '../../../view_models/UserInfoProvider.dart';
+import '/views/common_widgets/AppLoader.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppStrings.dart';
-import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppCustomButton.dart';
 import '../widgets/DetailCard.dart';
 import '../widgets/PhoneCard.dart';
@@ -53,13 +51,13 @@ class EditUserHomeScreen extends StatelessWidget {
               AppCustomButton(
                 text: AppStrings.txtSaveAndUpdate.toUpperCase(),
                 textColor:
-                AppHelper.getAccountsButtonTextColor(
+                AppHelper.getEditAccountsButtonTextColor(
                     context),
                 onClick: () {
                   provider.updateUserInformation();
                 },
                 style:
-                AppHelper.getAccountsButtonStyle(context),
+                AppHelper.getEditAccountsButtonStyle(context),
               ),
 
             ],

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "99625253490",
+    "project_id": "hogan-s-reward",
+    "storage_bucket": "hogan-s-reward.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99625253490:android:be9517f9ad82c450af60eb",
+        "android_client_info": {
+          "package_name": "com.au.hogansreward.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbBI_Pf62V4zADTQgrqgi-_ZgxM9cxs4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

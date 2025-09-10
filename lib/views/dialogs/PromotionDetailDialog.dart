@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '../../core/enums/AdvertisementEnums.dart';
 import '/core/navigation/AppNavigator.dart';
 import '../../data/models/PromotionModel.dart';
 import '../my_venues/widgets/PromotionsPlaceHolder.dart';
@@ -10,14 +11,14 @@ class PromotionDetailDialog {
   static final PromotionDetailDialog _promotionDetailDialog =
       PromotionDetailDialog._internal();
 
-  static PromotionDetailDialog getInstance() {
+   static  PromotionDetailDialog getInstance() {
     return _promotionDetailDialog;
   }
 
   PromotionDetailDialog._internal();
 
   showPromotionDetailDialog(
-      BuildContext context, PromotionItem promotion, String from) {
+      BuildContext context, PromotionItem promotion, AdvertisementEnums from) {
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
@@ -55,7 +56,7 @@ class PromotionDetailDialog {
                                         topRight: Radius.circular(10),
                                         topLeft: Radius.circular(10)),
                                     child: CachedNetworkImage(
-                                      fit: from == "SMALL"
+                                      fit: from == AdvertisementEnums.small
                                           ? BoxFit.contain
                                           : BoxFit.cover,
                                       imageUrl: promotion.imageUrl ?? "",

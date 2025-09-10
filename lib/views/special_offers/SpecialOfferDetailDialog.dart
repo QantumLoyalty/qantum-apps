@@ -1,14 +1,11 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppStrings.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
-import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
+import '../../core/utils/AppStrings.dart';
+import '../../view_models/HomeProvider.dart';
+import '../../view_models/SpecialOffersProvider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../view_models/UserInfoProvider.dart';
@@ -58,11 +55,9 @@ class SpecialOfferDetailDialog {
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
                                     child: AspectRatio(
-                                      aspectRatio: 1.6,
+                                      aspectRatio: 16/9,
                                       child: CachedNetworkImage(
-                                          //height: 180,
-                                          // width: double.infinity,
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.contain,
                                           imageUrl: offerProvider
                                                   .selectedOffer!.image ??
                                               "",
@@ -81,7 +76,7 @@ class SpecialOfferDetailDialog {
                                           },
                                           errorWidget: (context, a, object) {
                                             return const AspectRatio(
-                                                aspectRatio: 1.1,
+                                                aspectRatio: 16/9,
                                                 child: Icon(Icons.image,
                                                     color: Colors.black));
                                           }),

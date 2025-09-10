@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
-import '../../data/local/SharedPreferenceHelper.dart';
 import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
@@ -93,7 +92,10 @@ class AppHelper with LoggingMixin {
   }
 
   static String maskPhoneNumber(String phone) {
-    return "*******${phone.substring(phone.length - 3, phone.length)}";
+  //  return "*******${phone.substring(phone.length - 3, phone.length)}";
+    if (phone.isEmpty || phone.length < 3) return phone;
+    return '*' * (phone.length - 3) + phone.substring(phone.length - 3);
+
   }
 
   static String maskEmail(String? email) {
@@ -154,6 +156,18 @@ class AppHelper with LoggingMixin {
       case Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
 
+      case Flavor.hogansReward:
+        return Theme.of(context).primaryColor;
+
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+    }
+  }
+  static Color getEditAccountsButtonTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.maxx:
+        return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
@@ -218,6 +232,94 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.hogansReward:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.white));
+
+      default:
+        return ButtonStyle();
+    }
+  }
+
+  static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.maxx:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(AppColors.white));
+      case Flavor.starReward:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.mhbc:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.clh:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.montaukTavern:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.hogansReward:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .primary
+                .withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
         return ButtonStyle();
@@ -277,6 +379,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.hogansReward:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(Colors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return const ButtonStyle();
@@ -298,6 +409,8 @@ class AppHelper with LoggingMixin {
         return const Size(142, 42);
       case Flavor.montaukTavern:
         return const Size(142, 42);
+      case Flavor.hogansReward:
+        return const Size(142, 42);
 
       default:
         return const Size(72, 72);
@@ -315,26 +428,18 @@ class AppHelper with LoggingMixin {
   }
 
   static String getAppType() {
-    FlavorConfig flavorConfig = FlavorConfig.instance;
-    switch (flavorConfig.flavor) {
-      case Flavor.starReward:
-        return "StarReward";
-      case Flavor.qantum:
-        return "Qantum";
-      case Flavor.maxx:
-        return "MaxGaming";
-      case Flavor.clh:
-        return "Central";
-      case Flavor.mhbc:
-        return "Manly";
-      case Flavor.montaukTavern:
-        return "Montauk";
-      case Flavor.senseOfTaste:
-        return "Sense";
-
-      default:
-        return "Qantum";
-    }
+    final flavor = FlavorConfig.instance.flavor;
+    const appTypeMap = {
+      Flavor.starReward: "StarReward",
+      Flavor.qantum: "Qantum",
+      Flavor.maxx: "MaxGaming",
+      Flavor.clh: "Central",
+      Flavor.mhbc: "Manly",
+      Flavor.montaukTavern: "Montauk",
+      Flavor.senseOfTaste: "Sense",
+      //Flavor.hogansReward: "Hogan",
+    };
+    return appTypeMap[flavor] ?? "Qantum";
   }
 
   static Future<String> getUserTierType(UserModel userData) async {

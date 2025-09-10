@@ -65,6 +65,11 @@ android {
             applicationId "com.au.montauk.app"
             versionName "Montauk Tavern"
         }
+        hogansReward {
+            dimension "app"
+            applicationId "com.au.hogansreward.app"
+            versionName "Hogan's Reward"
+        }
 
 
     }
