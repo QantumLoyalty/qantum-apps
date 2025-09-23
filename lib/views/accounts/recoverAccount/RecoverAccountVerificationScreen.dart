@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLoader.dart';
@@ -31,6 +31,7 @@ class _RecoverAccountVerificationScreenState
   Timer? timer;
   late UserInfoProvider _userInfoProvider;
   late bool verifyOTPEmail;
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _RecoverAccountVerificationScreenState
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         if (context.mounted) {
@@ -63,7 +65,7 @@ class _RecoverAccountVerificationScreenState
             if (provider.emailOTPSent!) {
               Future.delayed(Duration.zero, () {
                 AppHelper.showSuccessMessage(
-                    context, provider.networkMessage ?? "OTP sent!!!");
+                    context, provider.networkMessage ?? loc.msgOtpSent);
                 provider.resetNetworkResponse();
               });
             } else {
@@ -71,7 +73,7 @@ class _RecoverAccountVerificationScreenState
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue while sending the OTP!!!");
+                        loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -82,7 +84,7 @@ class _RecoverAccountVerificationScreenState
             if (provider.newMobileOTPSent!) {
               Future.delayed(Duration.zero, () {
                 AppHelper.showSuccessMessage(
-                    context, provider.networkMessage ?? "OTP sent!!!");
+                    context, provider.networkMessage ?? loc.msgOtpSent);
                 provider.resetNetworkResponse();
               });
             } else {
@@ -90,7 +92,7 @@ class _RecoverAccountVerificationScreenState
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue while sending the OTP!!!");
+                        loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -105,8 +107,6 @@ class _RecoverAccountVerificationScreenState
                       context, AppNavigator.recoverAccountNewPhone,
                       arguments: widget.params);
                 } else {
-                  print(
-                      "provider.accountVerified! ${provider.accountVerified!}");
                   AppNavigator.navigateAndClearStack(
                       context, AppNavigator.recoverAccountSuccess);
                 }
@@ -118,7 +118,7 @@ class _RecoverAccountVerificationScreenState
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue in verification of your account, please try again.");
+                        loc.msgIssueInVerifyAccount);
                 provider.resetNetworkResponse();
               });
             }
@@ -137,7 +137,7 @@ class _RecoverAccountVerificationScreenState
                       hideTopLine: true,
                     ),
                     Text(
-                      AppStrings.txtEnterVerificationCode,
+                      loc.txtEnterVerificationCode,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -149,8 +149,8 @@ class _RecoverAccountVerificationScreenState
                     Text(
                       //"${AppStrings.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
                       verifyOTPEmail
-                          ? "We sent a code to the email address ${AppHelper.maskEmailSecond(widget.params["email"])}"
-                          : "We sent a code to the mobile number ending in ${AppHelper.maskPhoneNumber(widget.params["newPhone"])}",
+                          ? "${loc.msgVerificationCodeSentToEmail} ${AppHelper.maskEmailSecond(widget.params["email"])}"
+                          : "${loc.msgVerificationCodeSentToPhone} ${AppHelper.maskPhoneNumber(widget.params["newPhone"])}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13,
@@ -163,7 +163,7 @@ class _RecoverAccountVerificationScreenState
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.txtVerificationCode,
+                        loc.txtVerificationCode,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -220,7 +220,7 @@ class _RecoverAccountVerificationScreenState
                             _resetResendCode();
                           },
                           child: Text(
-                            "Resend code${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
+                            "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
                             style: TextStyle(
                               color: remainingSec == 0
                                   ? Theme.of(context)
@@ -235,21 +235,21 @@ class _RecoverAccountVerificationScreenState
                     ),
                     AppDimens.shape_5,
                     AppButton(
-                        text: AppStrings.txtSubmit.toUpperCase(),
+                        text: loc.txtSubmit.toUpperCase(),
                         onClick: () {
                           if (_otpController.text.isNotEmpty) {
                             if (verifyOTPEmail) {
                               provider.verifyEmailOTPAccount(
                                   phone: widget.params['phone'],
-                                  OTP: _otpController.text);
+                                  OTP: _otpController.text,loc: loc);
                             } else {
                               provider.verifyNewPhoneOTP(
                                   OTP: _otpController.text,
-                                  params: widget.params);
+                                  params: widget.params,loc: loc);
                             }
                           } else {
                             AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectOTP);
+                                context, loc.msgIncorrectOTP);
                           }
                         }),
                   ],
@@ -257,7 +257,7 @@ class _RecoverAccountVerificationScreenState
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? "Please wait..",
+                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],
@@ -270,9 +270,9 @@ class _RecoverAccountVerificationScreenState
   void _resetResendCode() {
     if (remainingSec == 0) {
       if (verifyOTPEmail) {
-        _userInfoProvider.reSendOTPEmail(widget.params['phone']);
+        _userInfoProvider.reSendOTPEmail(widget.params['phone'],loc: loc);
       } else {
-        _userInfoProvider.reSendOTPNewPhone(widget.params['newPhone']);
+        _userInfoProvider.reSendOTPNewPhone(widget.params['newPhone'],loc: loc);
       }
       setState(() {
         remainingSec = 30;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
+import '/core/utils/AppDimens.dart';
+import '/core/utils/AppHelper.dart';
 
 class IconTextWidget extends StatelessWidget {
   int orientation;

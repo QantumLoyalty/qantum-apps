@@ -14,6 +14,8 @@ import 'view_models/SpecialOffersProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'views/splash/SplashScreen.dart';
+import 'l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   FlavorConfig(
@@ -53,6 +55,17 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('hi'),
+          Locale('zh', 'CN')
+        ],
         title: FlavorConfig.instance.flavorValues.appName!,
         theme: AppThemes.qantumTheme,
         initialRoute: AppNavigator.splash,

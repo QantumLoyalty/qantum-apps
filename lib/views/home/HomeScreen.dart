@@ -9,6 +9,7 @@ import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../../data/models/HomeNavigatorModel.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/HomeProvider.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppScaffold.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   Timer? _pointsDialogTimer;
   late HomeProvider _homeProvider;
   late Flavor flavor;
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -75,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: SafeArea(
         child: Container(
@@ -120,7 +123,9 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                         provider.homeNavigationList[2].name
                                 ? Colors.transparent
                                 : null),
-                            text: provider.homeNavigationList[index].name
+                            text: provider
+                                .getTranslatedOptionsName(loc,
+                                    provider.homeNavigationList[index].name)
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
                             textColor: flavor == Flavor.mhbc &&
@@ -214,7 +219,9 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                             provider.moreButtonsMap!.isEmpty))
                                     ? Colors.transparent
                                     : null,
-                            text: provider.homeNavigationList[index + 3].name
+                            text: provider
+                                .getTranslatedOptionsName(loc,
+                                    provider.homeNavigationList[index + 3].name)
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
                             margin: const EdgeInsets.all(5),
@@ -318,14 +325,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   }
 
   Widget checkForSeeAllMenu(HomeProvider provider) {
-    print("showSeeAllMenu --> ${provider.showSeeAllMenu}");
     return provider.showSeeAllMenu ? const AllMenuItemsWidget() : Container();
-    /*if (provider.moreButtonsMap != null &&
-        provider.moreButtonsMap!.isNotEmpty) {
-      return provider.showSeeAllMenu ? const AllMenuItemsWidget() : Container();
-    } else {
-      return Container();
-    }*/
   }
 
   checkAndHideSeeAllOptionMenu(HomeProvider provider, String from) {

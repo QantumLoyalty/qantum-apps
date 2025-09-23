@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/BenefitsModel.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/mixins/logging_mixin.dart';
-import '../core/utils/AppStrings.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/models/UserModel.dart';
@@ -267,11 +267,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  sendOTPAccount() async {
+  sendOTPAccount(BuildContext context) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        _loaderMessage = AppStrings.msgSendingOTP;
+        _loaderMessage = AppLocalizations.of(context)!.msgSendingOTP;
         notifyListeners();
       });
       SharedPreferenceHelper sharedPreferenceHelper =
@@ -310,11 +310,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  resendOTPAccount() async {
+  resendOTPAccount({required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        _loaderMessage = AppStrings.msgResendOTP;
+        _loaderMessage = loc.msgResendOTP;
         notifyListeners();
       });
       SharedPreferenceHelper sharedPreferenceHelper =
@@ -353,11 +353,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  verifyOTPAccount({required String OTP}) async {
+  verifyOTPAccount({required String OTP,required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        _loaderMessage = AppStrings.msgVerifyingOTP;
+        _loaderMessage = loc.msgVerifyingOTP;
         notifyListeners();
       });
       SharedPreferenceHelper sharedPreferenceHelper =
@@ -405,11 +405,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  verifyEmailOTPAccount({required String phone, required String OTP}) async {
+  verifyEmailOTPAccount({required String phone, required String OTP, required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        _loaderMessage = AppStrings.msgVerifyingOTP;
+        _loaderMessage = loc.msgVerifyingOTP;
         notifyListeners();
       });
       SharedPreferenceHelper sharedPreferenceHelper =
@@ -459,11 +459,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   }
 
   verifyNewPhoneOTP(
-      {required Map<String, dynamic> params, required String OTP}) async {
+      {required Map<String, dynamic> params, required String OTP,required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        _loaderMessage = AppStrings.msgVerifyingOTP;
+        _loaderMessage = loc.msgVerifyingOTP;
         notifyListeners();
       });
 
@@ -553,7 +553,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
-  updateUserInformation() async {
+  updateUserInformation({required AppLocalizations loc}) async {
     if (tempUser != null) {
       try {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -574,7 +574,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         if ((networkResponse.response is Map<String, dynamic>) &&
             (networkResponse.response as Map<String, dynamic>)
                 .containsKey("user")) {
-          _networkMessage = "Your profile is updated successfully!!";
+          _networkMessage = loc.msgProfileUpdateSuccess;
           _userModel = UserModel.fromJson(
               (networkResponse.response as Map<String, dynamic>)["user"]);
 
@@ -609,7 +609,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  updateCommunicationPreferences({bool? sms, bool? email}) async {
+  updateCommunicationPreferences({bool? sms, bool? email,required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -635,16 +635,16 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               (networkResponse.response as Map<String, dynamic>)["message"];
         } else {
           if (_isNetworkError!) {
-            _networkMessage = AppStrings.msgCommonError;
+            _networkMessage = loc.msgCommonError;
           } else {
-            _networkMessage = AppStrings.msgCommonUpdateSuccess;
+            _networkMessage = loc.msgCommonUpdateSuccess;
           }
         }
       } else {
         if (_isNetworkError!) {
-          _networkMessage = AppStrings.msgCommonError;
+          _networkMessage = loc.msgCommonError;
         } else {
-          _networkMessage = AppStrings.msgCommonUpdateSuccess;
+          _networkMessage = loc.msgCommonUpdateSuccess;
         }
       }
 
@@ -707,7 +707,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
-  sendOTPNewPhone({required String phone}) async {
+  sendOTPNewPhone({required String phone,required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -727,11 +727,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           _networkMessage = responseObject["message"];
         } else {
           _otpSent = false;
-          _networkMessage = "Issue while sending the OTP!!!";
+          _networkMessage = loc.msgOtpIssue;
         }
       } else {
         _otpSent = false;
-        _networkMessage = "Issue while sending the OTP!!!";
+        _networkMessage = loc.msgOtpIssue;
       }
     } catch (e) {
       _networkMessage = e.toString();
@@ -744,7 +744,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  sendOTPEmail(String phone) async {
+  sendOTPEmail(String phone,{required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -762,7 +762,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           _tempUser = UserModel.fromJson(responseObject["user"]);
         }
       } else {
-        _networkMessage = "Issue while sending the OTP!!!";
+        _networkMessage = loc.msgOtpIssue;
       }
     } catch (e) {
       _networkMessage = e.toString();
@@ -775,7 +775,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  reSendOTPEmail(String phone) async {
+  reSendOTPEmail(String phone,{required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -792,7 +792,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         if (responseObject.containsKey("message")) {
           _networkMessage = responseObject["message"];
         } else {
-          _networkMessage = "OTP sent successfully!!!";
+          _networkMessage = loc.msgOtpSent;
         }
       }
     } catch (e) {
@@ -807,7 +807,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  reSendOTPNewPhone(String phone) async {
+  reSendOTPNewPhone(String phone,{required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -825,7 +825,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           _networkMessage = responseObject["message"];
         } else {
           _newMobileOTPSent = false;
-          _networkMessage = "Issue in sending the OTP";
+          _networkMessage = loc.msgOtpIssue;
         }
       }
     } catch (e) {

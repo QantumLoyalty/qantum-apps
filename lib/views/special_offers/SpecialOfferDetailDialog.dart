@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/utils/AppStrings.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/HomeProvider.dart';
 import '../../view_models/SpecialOffersProvider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -114,7 +114,7 @@ class SpecialOfferDetailDialog {
                                               ),
                                               AppDimens.shape_5,
                                               Text(
-                                                '${AppStrings.txtValidTo.toUpperCase()} ${offerProvider.selectedOffer!.expiryDate}',
+                                                '${AppLocalizations.of(context)!.txtValidTo} ${offerProvider.selectedOffer!.expiryDate}',
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .buttonTheme

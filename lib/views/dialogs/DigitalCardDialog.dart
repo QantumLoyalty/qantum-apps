@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import '../../l10n/app_localizations.dart';
+import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
-import '../../core/utils/AppStrings.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:secure_content/secure_content.dart';
 import '../../core/utils/AppColors.dart';
@@ -111,7 +111,8 @@ class DigitalCardDialog {
                                                           FontWeight.bold),
                                                 ),
                                                 Text(
-                                                  AppStrings.txtMembership,
+                                                  AppLocalizations.of(context)!
+                                                      .txtMembership,
                                                   style: TextStyle(
                                                       shadows: [
                                                         Shadow(
@@ -128,7 +129,7 @@ class DigitalCardDialog {
                                                 ),
                                                 AppDimens.shape_20,
                                                 Text(
-                                                  "Time: ${DateFormat("HH:mm").format(DateTime.now())}\nDate: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
+                                                  "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       shadows: [
@@ -155,7 +156,8 @@ class DigitalCardDialog {
                                                         children: [
                                                           AppDimens.shape_30,
                                                           Text(
-                                                            AppStrings
+                                                            AppLocalizations.of(
+                                                                    context)!
                                                                 .txtMembership,
                                                             style: TextStyle(
                                                                 shadows: [

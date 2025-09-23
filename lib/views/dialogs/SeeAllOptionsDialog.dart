@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
-import 'package:qantum_apps/views/common_widgets/IconTextWidget.dart';
+import '/view_models/HomeProvider.dart';
+import '/views/common_widgets/IconTextWidget.dart';
 
 class SeeAllOptionsDialog {
   static final SeeAllOptionsDialog _seeAllOptionsDialog =

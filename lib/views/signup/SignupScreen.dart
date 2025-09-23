@@ -6,8 +6,8 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../core/utils/UpperCaseTextFormatter.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/SignupProvider.dart';
 import '../../view_models/UserLoginProvider.dart';
 import '../common_widgets/AppButton.dart';
@@ -36,6 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
   late FocusNode _birthdayMMFocusNode;
   late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -71,6 +72,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
+
     return AppScaffold(body: Consumer2<SignupProvider, UserLoginProvider>(
         builder: (context, provider, userLoginProvider, child) {
       // DISPLAYING NETWORK RESPONSE
@@ -120,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       Applogo(),
                       Text(
-                        AppStrings.msgPleaseRegister,
+                        loc.msgPleaseRegister,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -130,7 +133,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       AppDimens.shape_5,
                       Text(
-                        AppStrings.msgFillDetailsForSignup,
+                        loc.msgFillDetailsForSignup,
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 12,
@@ -148,7 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return AppStrings.msgEmptyFirstName;
+                            return loc.msgEmptyFirstName;
                           }
                           return null;
                         },
@@ -159,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           fillColor:
                               AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
-                          hintText: AppStrings.txtFirstName,
+                          hintText: loc.txtFirstName,
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
@@ -188,7 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         controller: _lastNameController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return AppStrings.msgEmptyLastName;
+                            return loc.msgEmptyLastName;
                           }
                           return null;
                         },
@@ -202,7 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           fillColor:
                               AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
-                          hintText: AppStrings.txtLastName,
+                          hintText: loc.txtLastName,
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
@@ -234,9 +237,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                 AppThemeCustom.getTextFieldTextColor(context)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppStrings.msgEmptyEmail;
+                            return loc.msgEmptyEmail;
                           } else if (!AppHelper.verifyEmailAddress(value)) {
-                            return AppStrings.msgIncorrectEmail;
+                            return loc.msgIncorrectEmail;
                           }
 
                           return null;
@@ -245,7 +248,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           fillColor:
                               AppThemeCustom.getTextFieldBackground(context),
                           filled: true,
-                          hintText: AppStrings.hintEmail,
+                          hintText: loc.hintEmail,
                           hintStyle: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontWeight: FontWeight.w400),
@@ -280,7 +283,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    AppStrings.txtPostcode,
+                                    loc.txtPostcode,
                                     style: TextStyle(
                                         fontSize: 10,
                                         color: Theme.of(context)
@@ -341,7 +344,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      AppStrings.txtBirthday,
+                                      loc.txtBirthday,
                                       style: TextStyle(
                                           color: Theme.of(context)
                                               .textSelectionTheme
@@ -547,7 +550,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       provider.updateGender(value!);
                                     }),
                                 Text(
-                                  SignupProvider.male,
+                                  loc.txtMale,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .textSelectionTheme
@@ -567,7 +570,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     provider.updateGender(value!);
                                   }),
                               Text(
-                                SignupProvider.female,
+                                loc.txtFemale,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .textSelectionTheme
@@ -586,7 +589,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     provider.updateGender(value!);
                                   }),
                               Text(
-                                SignupProvider.nonbinary,
+                                loc.txtNonBinary,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .textSelectionTheme
@@ -613,7 +616,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             AppDimens.getCustomBoxShape(8),
                             Expanded(
                               child: Text(
-                                AppStrings.msgTermsAndConditionSignup,
+                                loc.msgTermsAndConditionSignup,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     color: Theme.of(context)
@@ -649,7 +652,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: RichText(
                             text: TextSpan(children: [
                               TextSpan(
-                                  text: AppStrings.txtView,
+                                  text: loc.txtView,
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 13,
@@ -658,7 +661,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           .colorScheme!
                                           .primary)),
                               TextSpan(
-                                  text: " ${AppStrings.txtTermsAndConditions}",
+                                  text: " ${loc.txtTermsAndConditions}",
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: Theme.of(context)
@@ -670,7 +673,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           )),
                       AppDimens.shape_20,
                       AppButton(
-                          text: AppStrings.txtJoinNow.toUpperCase(),
+                          text: loc.txtJoinNow.toUpperCase(),
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
                               if (_postcodeController.text.isNotEmpty) {
@@ -703,15 +706,15 @@ class _SignupScreenState extends State<SignupScreen> {
                                         "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
                                     AppHelper.printMessage(
                                         "PARAMS:: $params -> $phoneNo");
-                                    userLoginProvider.signup(phoneNo, params);
+                                    userLoginProvider.signup(phoneNo, params,loc: loc);
                                   } else {
                                     AppHelper.showErrorMessage(context,
-                                        AppStrings.msgCheckTermsAndConditions);
+                                        loc.msgCheckTermsAndConditions);
                                   }
                                 }
                               } else {
                                 AppHelper.showErrorMessage(
-                                    context, AppStrings.msgEmptyPostcode);
+                                    context, loc.msgEmptyPostcode);
                               }
                             }
 
@@ -723,7 +726,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               userLoginProvider.showLoader
                   ? AppLoader(
-                      loaderMessage: AppStrings.msgPleaseWait,
+                      loaderMessage: loc.msgPleaseWait,
                     )
                   : Container()
             ],
@@ -741,9 +744,9 @@ class _SignupScreenState extends State<SignupScreen> {
       return true;
     } else {
       if (!verifyDOB()) {
-        AppHelper.showErrorMessage(context, AppStrings.msgIncorrectDOB);
+        AppHelper.showErrorMessage(context, loc.msgIncorrectDOB);
       } else {
-        AppHelper.showErrorMessage(context, AppStrings.msgSelectGender);
+        AppHelper.showErrorMessage(context, loc.msgSelectGender);
       }
 
       return false;
@@ -775,7 +778,6 @@ class _SignupScreenState extends State<SignupScreen> {
       } else {
         return false;
       }
-
     } else {
       return false;
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
+import '/core/navigation/AppNavigator.dart';
+import '/core/utils/AppColors.dart';
+import '/core/utils/AppDimens.dart';
 
 class PromotionDetailScreen extends StatelessWidget {
   const PromotionDetailScreen({super.key});

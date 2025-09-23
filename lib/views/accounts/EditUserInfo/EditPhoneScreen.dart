@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppCustomButton.dart';
 
@@ -19,7 +19,7 @@ class EditPhoneScreen extends StatefulWidget {
 class _EditPhoneScreenState extends State<EditPhoneScreen> {
   late TextEditingController _phoneController;
   late UserInfoProvider _userInfoProvider;
-
+late AppLocalizations loc;
   @override
   void initState() {
     super.initState();
@@ -32,6 +32,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       child: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         return Column(
@@ -39,7 +40,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
           children: [
             AppDimens.shape_10,
             Text(
-              AppStrings.txtPhoneNumber.toUpperCase(),
+              loc.txtPhoneNumber.toUpperCase(),
               style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).textSelectionTheme.selectionColor),
@@ -77,7 +78,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
               children: [
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtCancel.toUpperCase(),
+                  text: loc.txtCancel.toUpperCase(),
                   onClick: () {
                     provider
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
@@ -87,7 +88,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                 AppDimens.shape_20,
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtUpdate.toUpperCase(),
+                  text: loc.txtUpdate.toUpperCase(),
                   textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_phoneController.text.isNotEmpty &&
@@ -97,7 +98,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                           UserInfoProvider.EDIT_SCREEN);
                     } else {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectPhoneNumber);
+                          context, loc.msgIncorrectPhoneNumber);
                     }
                   },
                   style: AppThemeCustom.getUpdateInfoButtonStyle(context),

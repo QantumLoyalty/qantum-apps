@@ -7,7 +7,7 @@ import '../../../core/navigation/AppNavigator.dart';
 import '../../../core/utils/AppColors.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLoader.dart';
@@ -26,9 +26,13 @@ class RecoverAccountNewPhone extends StatefulWidget {
 class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
   final TextEditingController _phoneController = TextEditingController();
   String countryCode = "+61";
+  late AppLocalizations loc;
 
   @override
   Widget build(BuildContext context) {
+
+    loc=AppLocalizations.of(context)!;
+
     return AppScaffold(
       // backgroundColor: Theme.of(context).primaryColorDark,
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
@@ -56,7 +60,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue while sending the OTP!!!");
+                        loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -75,7 +79,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                       hideTopLine: true,
                     ),
                     Text(
-                      "Enter your new mobile number",
+                      loc.msgEnterNewMobile,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -87,7 +91,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.txtMobileNumber,
+                        loc.txtMobileNumber,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -123,8 +127,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;
-                                AppHelper.printMessage(
-                                    "Selected country::${code.dialCode}");
+
                               });
                             },
                             initialSelection: "AU",
@@ -168,15 +171,15 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                     ),
                     AppDimens.shape_15,
                     AppButton(
-                        text: AppStrings.txtSubmit.toUpperCase(),
+                        text: loc.txtSubmit.toUpperCase(),
                         onClick: () {
                           if (_phoneController.text.isNotEmpty) {
                             provider.sendOTPNewPhone(
                                 phone:
-                                    '$countryCode${_phoneController.text.toString()}');
+                                    '$countryCode${_phoneController.text.toString()}',loc: loc);
                           } else {
                             AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectPhoneNumber);
+                                context, loc.msgIncorrectPhoneNumber);
                           }
                         }),
                   ],
@@ -184,7 +187,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? "Please wait..",
+                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],

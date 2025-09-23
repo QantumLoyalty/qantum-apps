@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/UserLoginProvider.dart';
 import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppLoader.dart';
@@ -23,7 +23,7 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   late TextEditingController _otpController;
-
+  late AppLocalizations loc;
   @override
   void initState() {
     super.initState();
@@ -39,6 +39,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: SafeArea(
         child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
@@ -67,7 +68,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   children: [
                     Applogo(),
                     Text(
-                      AppStrings.txtEnterVerificationCode,
+                      loc.txtEnterVerificationCode,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -77,7 +78,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                     AppDimens.shape_5,
                     Text(
-                      "${AppStrings.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
+                      "${loc.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.normal,
@@ -89,7 +90,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.txtVerificationCode,
+                        loc.txtVerificationCode,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -142,7 +143,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     AppDimens.shape_20,
                     AppDimens.shape_20,
                     AppButton(
-                        text: AppStrings.txtSubmit,
+                        text: loc.txtSubmit,
                         onClick: () {
                           if (_otpController.text.isNotEmpty) {
                             AppHelper.printMessage(widget.argument);
@@ -153,7 +154,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 otp: _otpController.text);
                           } else {
                             AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectOTP);
+                                context, loc.msgIncorrectOTP);
                           }
                         }),
                   ],
@@ -161,7 +162,7 @@ class _OTPScreenState extends State<OTPScreen> {
               ),
               provider.showLoader
                   ? AppLoader(
-                      loaderMessage: AppStrings.msgVerifyingOTP,
+                      loaderMessage: loc.msgVerifyingOTP,
                     )
                   : Container()
             ],

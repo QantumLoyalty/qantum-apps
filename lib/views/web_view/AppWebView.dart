@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
-import '../../core/flavors_config/app_theme_custom.dart';
+import 'package:qantum_apps/l10n/app_localizations.dart';
+import '../../views/common_widgets/AppLoader.dart';
 import '../../views/common_widgets/AppScaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -50,7 +50,7 @@ class _AppWebViewState extends State<AppWebView> {
             showLoader
                 ? Center(
                     child: AppLoader(
-                      loaderMessage: "Loading..",
+                      loaderMessage: AppLocalizations.of(context)!.txtLoading,
                     ),
                   )
                 : Container()

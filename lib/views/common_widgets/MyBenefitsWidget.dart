@@ -1,12 +1,11 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../view_models/HomeProvider.dart';
 import '../../view_models/UserInfoProvider.dart';
 
@@ -89,7 +88,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              AppStrings.txtMembershipBenefits,
+                              AppLocalizations.of(context)!.txtMembershipBenefits,
                               style: TextStyle(shadows: [
                                 Shadow(
                                   offset: const Offset(1.0, 1.0),

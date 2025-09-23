@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/l10n/app_localizations.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/MoreButtonModel.dart';
@@ -39,41 +40,62 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
 
   final List<HomeNavigatorModel> _homeNavigationList = [
     HomeNavigatorModel(
-        name: AppStrings.txtPointsBalance,
+        name: "txtPointsBalance",
         screen: Container(),
         icon: Icons.attach_money,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
-        name: AppStrings.txtSpecialOffers,
+        name: "txtSpecialOffers",
         screen: const SpecialOffersScreen(),
         icon: Icons.card_giftcard,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: AppStrings.txtPartnerOffers,
-        screen:  PartnerOffersScreen(),
+        name: "txtPartnerOffers",
+        screen: PartnerOffersScreen(),
         icon: Icons.handshake,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: AppStrings.txtMyVenue,
+        name: "txtMyVenue",
         screen: const MyVenuesHomeScreen(),
         icon: Icons.location_on,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: AppStrings.txtMyBenefits,
+        name: "txtMyBenefits",
         screen: Container(),
         icon: Icons.restaurant,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
-        name: AppStrings.txtMyAccount,
+        name: "txtMyAccount",
         screen: const MyProfileScreen(),
         icon: Icons.account_circle_outlined,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: AppStrings.txtSeeAll,
+        name: "txtSeeAll",
         screen: Container(),
         icon: Icons.more_horiz,
         type: HomeNavigatorModel.typeDialog),
   ];
+
+  String getTranslatedOptionsName(AppLocalizations loc, String key) {
+    switch (key) {
+      case "txtPointsBalance":
+        return loc.txtPointsBalance;
+      case "txtSpecialOffers":
+        return loc.txtSpecialOffers;
+      case "txtPartnerOffers":
+        return loc.txtPartnerOffers;
+      case "txtMyVenue":
+        return loc.txtMyVenue;
+      case "txtMyBenefits":
+        return loc.txtMyBenefits;
+      case "txtMyAccount":
+        return loc.txtMyAccount;
+      case "txtSeeAll":
+        return loc.txtSeeAll;
+      default:
+        return key;
+    }
+  }
 
   List<HomeNavigatorModel> get homeNavigationList => _homeNavigationList;
   final List<HomeNavigatorModel> _seeAllOptionsList = [

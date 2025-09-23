@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
+import '/l10n/app_localizations.dart';
+import '../../core/utils/AppDimens.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
-import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
@@ -31,14 +31,14 @@ class PASStatement extends StatelessWidget {
       x: 1,
       barRods: [
         BarChartRodData(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(5), topRight: Radius.circular(5)),
           toY: 87204.9,
           color: Colors.lightBlueAccent,
           width: 30,
         ),
         BarChartRodData(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
           toY: -7000,
           color: Colors.white,
@@ -52,13 +52,17 @@ class PASStatement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations loc=AppLocalizations.of(context)!;
+
+
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [
             AccountsAppBar(
-                showBackButton: true, title: AppStrings.txtPASStatement),
+                showBackButton: true, title: loc.txtPASStatement),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
@@ -74,14 +78,14 @@ class PASStatement extends StatelessWidget {
                   child: Column(
                 children: [
                   AppDimens.shape_20,
-                  Text("Player Activity Statement for",
+                  Text(loc.txtPlayerActivityStatementFor,
                       style: TextStyle(
                           fontSize: 15,
                           color: Theme.of(context)
                               .textSelectionTheme
                               .selectionColor!)),
                   Text(
-                    "(1 Jul 2023 to 30 September 2023)",
+                    "(1 Jul 2023 ${loc.txtTo} 30 September 2023)",
                     style: TextStyle(
                         fontSize: 13,
                         color: Theme.of(context)
@@ -97,7 +101,7 @@ class PASStatement extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "DETAILS",
+                          loc.txtDetails,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary),
                         ),
@@ -106,7 +110,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Card #",
+                                "${loc.txtCard} #",
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -129,7 +133,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Total amount bet",
+                                loc.txtTotalAmountBet,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -152,7 +156,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Total amount won",
+                                loc.txtTotalAmountWon,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -175,7 +179,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Net amount won or lost",
+                                loc.txtNetAmountWonOrLost,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -199,7 +203,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Total days played",
+                                loc.txtTotalDaysPlayed,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -222,7 +226,7 @@ class PASStatement extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                "Total hours played",
+                                loc.txtTotalHoursPlayed,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Theme.of(context)
@@ -254,7 +258,7 @@ class PASStatement extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "PERFORMANCE",
+                          loc.txtPerformance,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.secondary),
                         ),

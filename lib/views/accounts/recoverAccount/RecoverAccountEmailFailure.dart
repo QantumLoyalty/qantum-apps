@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '/l10n/app_localizations.dart';
 import '/views/common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../common_widgets/AppLogo.dart';
 
 class RecoverAccountEmailFailure extends StatelessWidget {
@@ -9,6 +9,10 @@ class RecoverAccountEmailFailure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations loc= AppLocalizations.of(context)!;
+
+
     return AppScaffold(
         body: SafeArea(
       child: Container(
@@ -21,7 +25,7 @@ class RecoverAccountEmailFailure extends StatelessWidget {
               hideTopLine: true,
             ),
             Text(
-              AppStrings.txtThereWasError,
+              loc.txtThereWasError,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -30,7 +34,7 @@ class RecoverAccountEmailFailure extends StatelessWidget {
             ),
             AppDimens.shape_5,
             Text(
-              AppStrings.msgRecoverEmailError,
+              loc.msgRecoverEmailError,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -50,7 +54,7 @@ class RecoverAccountEmailFailure extends StatelessWidget {
                   onPressed: () {},
                   child: Padding(
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
-                    child: Text(AppStrings.txtContactVenueSupport.toUpperCase(),
+                    child: Text(loc.txtContactVenueSupport.toUpperCase(),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

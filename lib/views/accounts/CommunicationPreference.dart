@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
@@ -19,6 +19,7 @@ class CommunicationPreference extends StatefulWidget {
 
 class _CommunicationPreferenceState extends State<CommunicationPreference> {
   late UserInfoProvider _userInfoProvider;
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -29,14 +30,15 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
+
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [
             AccountsAppBar(
-                showBackButton: true,
-                title: AppStrings.txtCommunicationPreferences),
+                showBackButton: true, title: loc.txtCommunicationPreferences),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
@@ -70,7 +72,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                         children: [
                           AppDimens.shape_5,
                           Text(
-                            "Keeping in touch allows us to offer prizes,\nrewards & promotions.",
+                            loc.msgKeepingInTouch,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Theme.of(context)
@@ -80,7 +82,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                           ),
                           AppDimens.shape_15,
                           Text(
-                            "Below you can select how we can keep in touch with you.",
+                            loc.msgSelectCommunicationPreference,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Theme.of(context)
@@ -100,8 +102,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                               children: [
                                 AppDimens.shape_5,
                                 Text(
-                                  AppStrings.txtCommunicationChannel
-                                      ,
+                                  loc.txtCommunicationChannel,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .textSelectionTheme
@@ -109,7 +110,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                       fontSize: 15),
                                 ),
                                 Text(
-                                  "How would you like to be notified?",
+                                  loc.msgCommunicationPreference,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .textSelectionTheme
@@ -127,10 +128,10 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                       : false,
                                   onChanged: (value) {
                                     provider.updateCommunicationPreferences(
-                                        sms: value);
+                                        sms: value,loc: loc);
                                   },
                                   title: Text(
-                                    AppStrings.txtSMS,
+                                    loc.txtSMS,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .textSelectionTheme
@@ -149,10 +150,10 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                       : false,
                                   onChanged: (value) {
                                     provider.updateCommunicationPreferences(
-                                        email: value);
+                                        email: value,loc: loc);
                                   },
                                   title: Text(
-                                    AppStrings.txtEmail,
+                                    loc.txtEmail,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .textSelectionTheme
@@ -166,7 +167,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                           ),
                           AppDimens.shape_15,
                           Text(
-                            "Please allow up to 24 hours for changes to take affect.",
+                            loc.msgCommunicationPreference,
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .textSelectionTheme
@@ -178,7 +179,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                     ),
                     provider.showLoader != null && provider.showLoader!
                         ? AppLoader(
-                            loaderMessage: AppStrings.msgCommonLoader,
+                            loaderMessage: loc.msgCommonLoader,
                           )
                         : Container()
                   ],

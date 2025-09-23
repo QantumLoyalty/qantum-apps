@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../l10n/app_localizations.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
-import '/core/utils/AppStrings.dart';
 import '/view_models/HomeProvider.dart';
 import '/view_models/UserInfoProvider.dart';
 import '/views/dialogs/MyProfileDialog.dart';
@@ -58,7 +58,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               throw 'Failed to get system brightness';
                             }
 
-                            logEvent("SCREEN BRIGHTNESS:: $screenBrightness");
 
                             try {
                               await ScreenBrightness.instance
@@ -97,7 +96,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    AppStrings.txtMyCard.toUpperCase(),
+                                    AppLocalizations.of(context)!.txtMyCard.toUpperCase(),
                                     style: TextStyle(
                                         shadows: [
                                           Shadow(
@@ -156,7 +155,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   color: Theme.of(context).iconTheme.color,
                                 ),
                                 Text(
-                                  AppStrings.txtMyProfile.toUpperCase(),
+                                  AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.normal,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppCustomButton.dart';
 
@@ -19,6 +18,7 @@ class EditMailScreen extends StatefulWidget {
 class _EditMailScreenState extends State<EditMailScreen> {
   late TextEditingController _emailController;
   late UserInfoProvider _userInfoProvider;
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -32,6 +32,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       child: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         return Column(
@@ -39,7 +40,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
           children: [
             AppDimens.shape_10,
             Text(
-              AppStrings.txtRecoveryEmail.toUpperCase(),
+              loc.txtRecoveryEmail.toUpperCase(),
               style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).textSelectionTheme.selectionColor),
@@ -53,9 +54,9 @@ class _EditMailScreenState extends State<EditMailScreen> {
                   color: AppThemeCustom.getTextFieldTextColor(context)),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppStrings.msgEmptyEmail;
+                  return loc.msgEmptyEmail;
                 } else if (!AppHelper.verifyEmailAddress(value)) {
-                  return AppStrings.msgIncorrectEmail;
+                  return loc.msgIncorrectEmail;
                 }
 
                 return null;
@@ -63,7 +64,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
               decoration: InputDecoration(
                 fillColor: AppThemeCustom.getTextFieldBackground(context),
                 filled: true,
-                hintText: AppStrings.hintEmail,
+                hintText: loc.hintEmail,
                 hintStyle: TextStyle(
                     color: Theme.of(context).hintColor,
                     fontWeight: FontWeight.w400),
@@ -86,7 +87,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
               children: [
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtCancel.toUpperCase(),
+                  text: loc.txtCancel.toUpperCase(),
                   onClick: () {
                     provider
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
@@ -96,16 +97,16 @@ class _EditMailScreenState extends State<EditMailScreen> {
                 AppDimens.shape_20,
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtUpdate.toUpperCase(),
+                  text: loc.txtUpdate.toUpperCase(),
                   textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_emailController.text.toString().isEmpty) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgEmptyEmail);
+                          context, loc.msgEmptyEmail);
                     } else if (!AppHelper.verifyEmailAddress(
                         _emailController.text.toString())) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectEmail);
+                          context, loc.msgIncorrectEmail);
                     } else {
                       provider.updateTempUser(
                           email: _emailController.text.toString());

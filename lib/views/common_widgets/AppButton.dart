@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
+import '/core/utils/AppDimens.dart';
 
 class AppButton extends StatelessWidget {
   String text;

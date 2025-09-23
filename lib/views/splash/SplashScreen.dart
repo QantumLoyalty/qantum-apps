@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';

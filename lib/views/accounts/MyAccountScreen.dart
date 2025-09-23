@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/MyAccountProvider.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
@@ -42,7 +42,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AccountsAppBar(
-                  showBackButton: false, title: AppStrings.txtMyAccount),
+                  showBackButton: false,
+                  title: AppLocalizations.of(context)!.txtMyAccount),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(10),
@@ -55,8 +56,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         title: Text(
-                          myAccountProvider.accountOptions.keys
-                              .elementAt(index),
+                          myAccountProvider.getTranslatedText(
+                              AppLocalizations.of(context)!,
+                              myAccountProvider.accountOptions.keys
+                                  .elementAt(index)),
                           style: TextStyle(
                               color: Theme.of(context)
                                   .textSelectionTheme

@@ -19,14 +19,14 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # MHBC - 1.0.5+60
 # MAX - 1.0.0+56
-# QANTUM - 1.0.0+56
+# QANTUM - 1.0.0+58
 # SENSE OF TASTE - 1.0.0+56
 # CENTRAL LANE HOTEL - 1.0.0+56
 # STAR REWARD - 1.0.0+56
 # MONTALK TAVERN - 1.0.0+56
 # HOGAN'S REWARD - 1.0.0+1
 
-version: 1.0.5+60
+version: 1.0.0+58
 
 environment:
   sdk: ^3.5.3
@@ -40,6 +40,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -80,6 +81,7 @@ dependencies:
   freezed: ^3.1.0
   json_annotation: ^4.9.0
   flutter_secure_storage: ^9.2.4
+  flutter_localization: ^0.3.3
 
 #  easy_geofencing: ^0.2.0
 
@@ -106,7 +108,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/common/

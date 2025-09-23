@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
-import 'package:qantum_apps/core/navigation/AppNavigator.dart';
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
-import 'package:qantum_apps/services/AppDataService.dart';
-
+import '/l10n/app_localizations.dart';
+import '/core/mixins/logging_mixin.dart';
+import '/core/navigation/AppNavigator.dart';
+import '/data/models/NetworkResponse.dart';
+import '/services/AppDataService.dart';
 import '../core/flavors_config/flavor_config.dart';
-import '../core/utils/AppStrings.dart';
 
 class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   final Map<String, String> _accountOptions = {
-    AppStrings.txtChangeMyDetails: AppNavigator.userDetailScreen,
-    AppStrings.txtCommunicationPreferences:
-        AppNavigator.communicationPreference,
-    AppStrings.txtClubAndMembership: AppNavigator.clubAndMembership,
-    AppStrings.txtGamingPreferences: AppNavigator.gamingPreferences,
-    AppStrings.txtPASStatement: AppNavigator.pasStatement,
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+    "txtClubAndMembership": AppNavigator.clubAndMembership,
+    "txtGamingPreferences": AppNavigator.gamingPreferences,
+    "txtPASStatement": AppNavigator.pasStatement,
   };
   final Map<String, String> _accountOptionsMHBC = {
-    AppStrings.txtChangeMyDetails: AppNavigator.userDetailScreen,
-    AppStrings.txtCommunicationPreferences:
-        AppNavigator.communicationPreference,
-    AppStrings.txtSponsorship: AppNavigator.clubAndMembership,
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+    "txtSponsorship": AppNavigator.clubAndMembership,
   };
 
   Map<String, String> get accountOptions {
@@ -30,6 +27,26 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return _accountOptionsMHBC;
       default:
         return _accountOptions;
+    }
+  }
+
+  String getTranslatedText(AppLocalizations loc, String key) {
+    switch (key) {
+      case "txtChangeMyDetails":
+        return loc.txtChangeMyDetails;
+      case "txtCommunicationPreferences":
+        return loc.txtCommunicationPreferences;
+      case "txtClubAndMembership":
+        return loc.txtClubAndMembership;
+      case "txtGamingPreferences":
+        return loc.txtGamingPreferences;
+      case "txtPASStatement":
+        return loc.txtPASStatement;
+      case "txtSponsorship":
+        return loc.txtSponsorship;
+
+      default:
+        return key; // fallback
     }
   }
 
@@ -45,7 +62,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
 
   String? get networkResponse => _networkResponse;
 
-  updateCoupon({required String coupon}) async {
+  updateCoupon({required String coupon,required AppLocalizations loc}) async {
     try {
       _showLoader = true;
       notifyListeners();
@@ -55,9 +72,9 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
 
       _networkError = networkResponse.isError;
       if (networkResponse.isError) {
-        _networkResponse = "Ooppss.. something went wrong, please try again.";
+        _networkResponse = loc.msgCommonError;
       } else {
-        _networkResponse = "Club code saved successfully!";
+        _networkResponse = loc.msgClubCodeSaved;
       }
     } catch (e) {
       _networkError = true;

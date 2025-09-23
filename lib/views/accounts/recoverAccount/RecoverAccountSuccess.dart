@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '/l10n/app_localizations.dart';
 import '../../../core/navigation/AppNavigator.dart';
 import '../../common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLogo.dart';
 
@@ -11,6 +11,8 @@ class RecoverAccountSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations loc = AppLocalizations.of(context)!;
+
     return AppScaffold(
         body: SafeArea(
       child: Padding(
@@ -22,7 +24,7 @@ class RecoverAccountSuccess extends StatelessWidget {
             ),
             AppDimens.shape_20,
             Text(
-              AppStrings.txtSuccess,
+              loc.txtSuccess,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -31,7 +33,7 @@ class RecoverAccountSuccess extends StatelessWidget {
             ),
             AppDimens.shape_5,
             Text(
-              AppStrings.msgMobileNumberUpdated,
+              loc.msgMobileNumberUpdated,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
@@ -41,7 +43,7 @@ class RecoverAccountSuccess extends StatelessWidget {
             ),
             AppDimens.shape_30,
             AppButton(
-                text: AppStrings.txtLogin.toUpperCase(),
+                text: loc.txtLogin.toUpperCase(),
                 onClick: () {
                   AppNavigator.navigateAndClearStack(
                       context, AppNavigator.home);

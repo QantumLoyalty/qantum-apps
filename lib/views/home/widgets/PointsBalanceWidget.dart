@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 
 class PointsBalanceWidget extends StatefulWidget {
@@ -65,7 +65,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppStrings.txtPointsBalance.toUpperCase(),
+                    AppLocalizations.of(context)!.txtPointsBalance.toUpperCase(),
                     style: TextStyle(
                         fontSize: 16,
                         color:

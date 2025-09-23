@@ -2,13 +2,13 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../views/dialogs/ErrorDialog.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../view_models/UserLoginProvider.dart';
 import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppLoader.dart';
@@ -25,11 +25,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController _phoneController;
   String countryCode = "+61";
+  late AppLocalizations loc;
 
   @override
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
+
   }
 
   @override
@@ -40,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: SafeArea(
         child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
@@ -80,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 });*/
                 ErrorDialog.getInstance().showErrorDialog(context,
                     message: provider.networkMessage ??
-                        "Ooppss.. something went wrong, please try again.");
+                        loc.msgCommonError);
               }
               /* else {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -108,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Applogo(),
                             Text(
-                              AppStrings.txtWelcome.toUpperCase(),
+                              loc.txtWelcome,
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
@@ -119,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             AppDimens.shape_10,
                             Text(
-                              AppStrings.txtEnterYourNumber,
+                              loc.txtEnterYourNumber,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
@@ -131,7 +134,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             AppDimens.shape_30,
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text(AppStrings.txtMobileNumber,
+                              child: Text(
+                                  loc.txtMobileNumber,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
@@ -215,7 +219,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             AppDimens.getCustomBoxShape(30),
                             AppButton(
-                              text: AppStrings.txtOk.toUpperCase(),
+                              text: loc
+                                  .txtOk
+                                  .toUpperCase(),
                               onClick: () {
                                 if (_phoneController.text.isNotEmpty &&
                                     AppHelper.verifyPhoneNumber(
@@ -224,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       "$countryCode${_phoneController.text}");
                                 } else {
                                   AppHelper.showErrorMessage(context,
-                                      AppStrings.msgIncorrectPhoneNumber);
+                                      loc.msgIncorrectPhoneNumber);
                                 }
                               },
                             ),
@@ -239,9 +245,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             context, AppNavigator.recoverAccountScreen);
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, top: 10, bottom: 10),
-                        child: RichText(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10, bottom: 10),
+                          child: /*RichText(
                             text: TextSpan(children: [
                           TextSpan(
                               text: "Change",
@@ -261,16 +267,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .onPrimary,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14)),
-                        ])),
-                      ),
+                        ])),*/
+                              RichText(
+                                  text: TextSpan(
+                                      children: _buildLocalizedChangeMyMobile(
+                                          context)))),
                     ),
                     AppDimens.shape_10,
                   ],
                 ),
                 provider.showLoader
                     ? AppLoader(
-                        loaderMessage:
-                            "Please hold on while we verify your account and send the OTP.",
+                        loaderMessage: loc.msgVerifyAccountAndProceed,
                       )
                     : Container()
               ],
@@ -279,5 +287,37 @@ class _LoginScreenState extends State<LoginScreen> {
         }),
       ),
     );
+  }
+
+  List<TextSpan> _buildLocalizedChangeMyMobile(BuildContext context) {
+    // Use a temporary marker where the bold word should go
+    final template = loc.txtChangeMyMobile("§§");
+
+    // Split the string into parts
+    final parts = template.split("§§");
+
+    return [
+      if (parts.isNotEmpty)
+        TextSpan(
+            text: parts[0],
+            style: TextStyle(
+                color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                fontWeight: FontWeight.w400,
+                fontSize: 14)), // text before
+      TextSpan(
+        text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
+        style: TextStyle(
+            color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+            fontWeight: FontWeight.w900,
+            fontSize: 14),
+      ),
+      if (parts.length > 1)
+        TextSpan(
+            text: parts[1],
+            style: TextStyle(
+                color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                fontWeight: FontWeight.w400,
+                fontSize: 14)), // text after
+    ];
   }
 }

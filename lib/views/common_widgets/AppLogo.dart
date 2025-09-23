@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
+import '/core/utils/AppHelper.dart';
 
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';

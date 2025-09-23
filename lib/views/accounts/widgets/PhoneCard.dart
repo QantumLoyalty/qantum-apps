@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
 
 class PhoneCard extends StatelessWidget {
@@ -28,7 +28,7 @@ class PhoneCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      AppStrings.txtMobileNumber.toUpperCase(),
+                      AppLocalizations.of(context)!.txtMobileNumber.toUpperCase(),
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: Theme.of(context)
@@ -48,7 +48,7 @@ class PhoneCard extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(AppStrings.txtEdit.toUpperCase(),
+                                Text(AppLocalizations.of(context)!.txtEdit.toUpperCase(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w800,
                                         fontSize: 12,

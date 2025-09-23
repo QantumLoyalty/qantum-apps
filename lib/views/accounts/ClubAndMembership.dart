@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/MyAccountProvider.dart';
-import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
+import '../../views/common_widgets/AppLoader.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '/views/common_widgets/AppCustomButton.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
@@ -22,6 +22,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
   Flavor selectedFlavor = FlavorConfig.instance.flavor!;
   late TextEditingController _codeController;
   MyAccountProvider myAccountProvider = MyAccountProvider();
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: ChangeNotifierProvider(
@@ -49,13 +51,11 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
             if (provider.networkError != null) {
               Future.delayed(Duration.zero, () {
                 if (provider.networkError!) {
-                  print("MESSAGE:: ${provider.networkResponse}");
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     AppHelper.showErrorMessage(
                         context, provider.networkResponse ?? "");
                   });
                 } else {
-                  print("MESSAGE:: ${provider.networkResponse}");
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     AppHelper.showSuccessMessage(
                         context, provider.networkResponse ?? "");
@@ -74,8 +74,8 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                     AccountsAppBar(
                         showBackButton: true,
                         title: selectedFlavor == Flavor.mhbc
-                            ? AppStrings.txtSponsorship
-                            : AppStrings.txtClubAndMembership),
+                            ? loc.txtSponsorship
+                            : loc.txtClubAndMembership),
                     Expanded(
                         child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -92,7 +92,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                           children: [
                             AppDimens.shape_10,
                             Text(
-                              "Obtain your club code then enter it below and earn rewards & get benefits for your club.",
+                              loc.msgObtainClubCode,
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .textSelectionTheme
@@ -100,7 +100,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                             ),
                             AppDimens.shape_20,
                             Text(
-                              AppStrings.txtClubCode.toUpperCase(),
+                              loc.txtClubCode.toUpperCase(),
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.secondary),
@@ -118,7 +118,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                                 counterText: "",
                                 contentPadding:
                                     const EdgeInsets.only(left: 15, right: 15),
-                                hintText: AppStrings.msgEnterClubCode,
+                                hintText: loc.msgEnterClubCode,
                                 hintStyle: TextStyle(
                                     fontSize: 20,
                                     color: Theme.of(context).hintColor),
@@ -149,14 +149,14 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                                     AppHelper.getAccountsButtonStyle(context),
                                 textColor: AppHelper.getAccountsButtonTextColor(
                                     context),
-                                text: AppStrings.txtAdd.toUpperCase(),
+                                text: loc.txtAdd.toUpperCase(),
                                 onClick: () {
                                   if (_codeController.text.isNotEmpty) {
                                     provider.updateCoupon(
-                                        coupon: _codeController.text);
+                                        coupon: _codeController.text,loc: loc);
                                   } else {
                                     AppHelper.showErrorMessage(
-                                        context, "Please enter the code.");
+                                        context, loc.msgEnterClubCode);
                                   }
                                 })
                           ],

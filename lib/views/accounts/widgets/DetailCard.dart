@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../core/utils/AppDimens.dart';
-import '../../../core/utils/AppStrings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
 
 class DetailCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class DetailCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    AppStrings.txtMyDetails.toUpperCase(),
+                    AppLocalizations.of(context)!.txtMyDetails.toUpperCase(),
                     style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: Theme.of(context).colorScheme.secondary),
@@ -43,7 +43,7 @@ class DetailCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(AppStrings.txtEdit.toUpperCase(),
+                              Text(AppLocalizations.of(context)!.txtEdit.toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w800,

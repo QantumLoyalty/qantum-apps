@@ -1,10 +1,8 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-
+import '/core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../l10n/app_localizations.dart';
 
 class PartnerOfferDialog {
   static PartnerOfferDialog partnerOfferDialog = PartnerOfferDialog._internal();
@@ -73,7 +71,7 @@ class PartnerOfferDialog {
                                   ),
                                   AppDimens.shape_10,
                                   Text(
-                                    'Valid to 25.01.25',
+                                    '${AppLocalizations.of(context)!.txtValidTo} 25.01.25',
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .buttonTheme

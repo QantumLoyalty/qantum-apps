@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppScaffold.dart';
@@ -26,6 +24,7 @@ class UserDetailScreen extends StatefulWidget {
 
 class _UserDetailScreenState extends State<UserDetailScreen> {
   late SharedPreferenceHelper _sharedPreferenceHelper;
+  late AppLocalizations loc;
 
   @override
   void initState() {
@@ -39,13 +38,14 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
+
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [
-            AccountsAppBar(
-                showBackButton: true, title: AppStrings.txtChangeMyDetails),
+            AccountsAppBar(showBackButton: true, title: loc.txtChangeMyDetails),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
@@ -76,7 +76,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     AppHelper.showErrorMessage(
                         context,
                         provider.networkMessage ??
-                            "Ooppss.. something went wrong, please try again.");
+                            loc.msgCommonError);
                   }
                 }
 
@@ -99,8 +99,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 PhoneCard(editable: false),
                                 AppDimens.shape_30,
                                 AppCustomButton(
-                                  text: AppStrings.txtEditAccountDetails
-                                      .toUpperCase(),
+                                  text: loc.txtEditAccountDetails.toUpperCase(),
                                   textColor:
                                       AppHelper.getAccountsButtonTextColor(
                                           context),
@@ -131,16 +130,15 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: const Text(AppStrings.txtAlert),
-                                      content: const Text(
-                                          AppStrings.msgCancelAccount),
+                                      title: Text(loc.txtAlert),
+                                      content: Text(loc.msgCancelAccount),
                                       actions: [
                                         TextButton(
                                             onPressed: () {
                                               Navigator.pop(context, false);
                                             },
-                                            child: const Text(
-                                              AppStrings.txtNo,
+                                            child: Text(
+                                              loc.txtNo,
                                               style:
                                                   TextStyle(color: Colors.grey),
                                             )),
@@ -148,7 +146,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                             onPressed: () async {
                                               Navigator.pop(context, true);
                                             },
-                                            child: Text(AppStrings.txtYes,
+                                            child: Text(loc.txtYes,
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .primaryColor))),
@@ -161,7 +159,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 provider.cancelAccount();
                               }
                             },
-                            text: AppStrings.txtDeleteMyAccount.toUpperCase(),
+                            text: loc.txtDeleteMyAccount.toUpperCase(),
                           ),
                         ),
                         AppDimens.shape_20,
@@ -170,7 +168,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     provider.showCancelAccountLoader != null &&
                             provider.showCancelAccountLoader!
                         ? AppLoader(
-                            loaderMessage: AppStrings.loadermsgCancelAccount,
+                            loaderMessage: loc.loadermsgCancelAccount,
                           )
                         : Container()
                   ],

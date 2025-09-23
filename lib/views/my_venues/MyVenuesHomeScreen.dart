@@ -67,7 +67,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                         child: Column(
                           children: [
                             SizedBox(
-                                //height: 220,
+                                height: 220,
                                 width: MediaQuery.of(context).size.width,
                                 child: provider.promotions!.largePromotions !=
                                             null &&
@@ -105,7 +105,48 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                 AdvertisementEnums
                                                                     .large);
                                                       },
-                                                      child: AspectRatio(
+                                                      child: SizedBox(
+                                                        height: 220,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: provider
+                                                                  .promotions!
+                                                                  .largePromotions![
+                                                                      index]
+                                                                  .imageUrl ??
+                                                              "",
+                                                          placeholder:
+                                                              (context, _) {
+                                                            return const Stack(
+                                                              children: [
+                                                                Center(
+                                                                  child: SizedBox(
+                                                                      width: 50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          CircularProgressIndicator()),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                          errorWidget: (context,
+                                                              _, obj) {
+                                                            return PromotionsPlaceHolder(
+                                                                size: Size(
+                                                                    MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    200));
+                                                          },
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ), /*AspectRatio(
                                                         aspectRatio: 16 / 9,
                                                         child:
                                                             CachedNetworkImage(
@@ -142,7 +183,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                           },
                                                           fit: BoxFit.cover,
                                                         ),
-                                                      ),
+                                                      ),*/
                                                     ),
                                                   ),
                                                 ),
@@ -163,7 +204,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                     : Container()),
                             Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 12, right: 12, top: 0),
+                                    left: 12, right: 12, top: 10),
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -474,7 +515,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
               )
             ],
           ),*/
-        (FlavorConfig.instance.flavor == Flavor.maxx)
+        (FlavorConfig.instance.flavor == Flavor.maxx ||
+                FlavorConfig.instance.flavor == Flavor.starReward)
             ? GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),

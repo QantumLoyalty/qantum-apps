@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-
+import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class GamingPreferences extends StatelessWidget {
   Map<String, String> items = {
-    "MANAGE LIMITS":
-        "Time and spend limits allow you to manage and track your gaming activity",
-    "ACTIVITY SNAPSHOT": "See your point history",
-    "GAMING SUPPORT": "Find the right support for you",
-    "SELF EXCLUSION": "Set self exclusion privately & confidentially"
+    "txtManageLimits": "msgTimeAndSpendLimits",
+    "txtActivitySnapshot": "msgSeeYourPointHistory",
+    "txtGamingSupport": "msgFindSupport",
+    "txtSelfExclusion": "msgSetSelfExclusion"
   };
 
   GamingPreferences({super.key});
@@ -26,7 +24,8 @@ class GamingPreferences extends StatelessWidget {
         child: Column(
           children: [
             AccountsAppBar(
-                showBackButton: true, title: AppStrings.txtGamingPreferences),
+                showBackButton: true,
+                title: AppLocalizations.of(context)!.txtGamingPreferences),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
@@ -44,14 +43,14 @@ class GamingPreferences extends StatelessWidget {
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                          text: "Your Usage",
+                          text: AppLocalizations.of(context)!.txtYourUsage,
                           style: TextStyle(
                               fontSize: 16,
                               color: Theme.of(context)
                                   .textSelectionTheme
                                   .selectionColor!)),
                       TextSpan(
-                          text: " (Daily)",
+                          text: AppLocalizations.of(context)!.txtDaily,
                           style: TextStyle(
                               fontSize: 15,
                               color: Theme.of(context)
@@ -77,14 +76,16 @@ class GamingPreferences extends StatelessWidget {
                                     .textSelectionTheme
                                     .selectionColor),
                             title: Text(
-                              items.keys.elementAt(item),
+                              translateContent(AppLocalizations.of(context)!,
+                                  items.keys.elementAt(item)),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color:
                                       Theme.of(context).colorScheme.secondary),
                             ),
                             subtitle: Text(
-                              items[items.keys.elementAt(item)]!,
+                              translateContent(AppLocalizations.of(context)!,
+                                  items[items.keys.elementAt(item)]!),
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .textSelectionTheme
@@ -107,5 +108,28 @@ class GamingPreferences extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String translateContent(AppLocalizations loc, String key) {
+    switch (key) {
+      case "txtManageLimits":
+        return loc.txtManageLimits.toUpperCase();
+      case "txtActivitySnapshot":
+        return loc.txtActivitySnapshot.toUpperCase();
+      case "txtGamingSupport":
+        return loc.txtGamingSupport.toUpperCase();
+      case "txtSelfExclusion":
+        return loc.txtSelfExclusion.toUpperCase();
+      case "msgTimeAndSpendLimits":
+        return loc.msgTimeAndSpendLimits;
+      case "msgSeeYourPointHistory":
+        return loc.msgSeeYourPointHistory;
+      case "msgFindSupport":
+        return loc.msgFindSupport;
+      case "msgSetSelfExclusion":
+        return loc.msgSetSelfExclusion;
+      default:
+        return "";
+    }
   }
 }

@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../views/common_widgets/AppScaffold.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
 import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
@@ -27,12 +27,13 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
   bool enableResend = false;
   Timer? timer;
   late UserInfoProvider _userInfoProvider;
+  late AppLocalizations loc;
 
   @override
   void initState() {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
-    _userInfoProvider.sendOTPAccount();
+    _userInfoProvider.sendOTPAccount(context);
 
     _otpController = TextEditingController();
     _otpFocusNode = FocusNode();
@@ -54,6 +55,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getCustomScaffoldBackground(context),
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
@@ -63,7 +65,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
             if (provider.otpSent!) {
               Future.delayed(Duration.zero, () {
                 AppHelper.showSuccessMessage(context,
-                    provider.networkMessage ?? "OTP sent successfully!!!");
+                    provider.networkMessage ?? loc.msgOtpSent);
                 provider.resetNetworkResponse();
               });
             } else {
@@ -71,7 +73,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue while sending the OTP!!!");
+                        loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -87,10 +89,8 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
               });
             } else {
               Future.delayed(Duration.zero, () {
-                AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        "Issue in verification of your account, please try again.");
+                AppHelper.showErrorMessage(context,
+                    provider.networkMessage ?? loc.msgVerificationIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -122,7 +122,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                       hideTopLine: true,
                     ),
                     Text(
-                      AppStrings.txtEnterVerificationCode,
+                      loc.txtEnterVerificationCode,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -132,7 +132,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     ),
                     AppDimens.shape_5,
                     Text(
-                      "${AppStrings.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
+                      "${loc.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.normal,
@@ -144,7 +144,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.txtVerificationCode,
+                        loc.txtVerificationCode,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -202,7 +202,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                             _resetResendCode();
                           },
                           child: Text(
-                            "Resend code${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
+                            "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
                             style: TextStyle(
                               color: remainingSec == 0
                                   ? Theme.of(context)
@@ -217,14 +217,15 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     ),
                     AppDimens.shape_5,
                     AppCustomButton(
-                      text: AppStrings.txtSubmit.toUpperCase(),
-                      textColor: AppHelper.getEditAccountsButtonTextColor(context),
+                      text: loc.txtSubmit.toUpperCase(),
+                      textColor:
+                          AppHelper.getEditAccountsButtonTextColor(context),
                       onClick: () {
                         if (_otpController.text.isNotEmpty) {
-                          provider.verifyOTPAccount(OTP: _otpController.text);
+                          provider.verifyOTPAccount(OTP: _otpController.text,loc: loc);
                         } else {
                           AppHelper.showErrorMessage(
-                              context, AppStrings.msgIncorrectOTP);
+                              context, loc.msgIncorrectOTP);
                         }
                       },
                       style: AppHelper.getEditAccountsButtonStyle(context),
@@ -234,7 +235,8 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? "Please wait..",
+                      loaderMessage:
+                          provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],
@@ -246,7 +248,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
 
   void _resetResendCode() {
     if (remainingSec == 0) {
-      _userInfoProvider.resendOTPAccount();
+      _userInfoProvider.resendOTPAccount(loc: loc);
 
       setState(() {
         remainingSec = 30;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppColors.dart';
-import '../../core/utils/AppStrings.dart';
 
 class ErrorDialog {
   static final ErrorDialog _errorDialog = ErrorDialog._internal();
@@ -34,7 +34,7 @@ class ErrorDialog {
                   ),
                   AppDimens.shape_15,
                   Text(
-                    title ?? "Alert!",
+                    title ?? AppLocalizations.of(context)!.txtAlert,
                     style: TextStyle(
                         color: AppColors.black,
                         fontWeight: FontWeight.w700,
@@ -54,7 +54,7 @@ class ErrorDialog {
                           Navigator.pop(context);
                         },
                         child: Text(
-                          AppStrings.txtOk.toUpperCase(),
+                          AppLocalizations.of(context)!.txtOk.toUpperCase(),
                           style: TextStyle(color: AppColors.error_red),
                         )),
                   )

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -10,7 +11,6 @@ import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/IconTextWidget.dart';
@@ -30,7 +30,7 @@ class MyProfileDialog with LoggingMixin {
   showMyProfileDialog(BuildContext context) async {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
-
+    AppLocalizations loc = AppLocalizations.of(context)!;
     Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
 
     showGeneralDialog(
@@ -47,7 +47,8 @@ class MyProfileDialog with LoggingMixin {
                 alignment: Alignment.center,
                 child: SizedBox(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * dialogHeightFactor,
+                  height:
+                      MediaQuery.of(context).size.height * dialogHeightFactor,
                   child: Stack(
                     children: [
                       Container(
@@ -57,7 +58,9 @@ class MyProfileDialog with LoggingMixin {
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * dialogHeightFactor - dialogHeightBottomMargin,
+                        height: MediaQuery.of(context).size.height *
+                                dialogHeightFactor -
+                            dialogHeightBottomMargin,
                         child: Consumer<UserInfoProvider>(
                             builder: (context, provider, child) {
                           return Column(
@@ -84,7 +87,7 @@ class MyProfileDialog with LoggingMixin {
                                                     context)),
                                       ),
                                       Text(
-                                        "Card # ${provider.getUserInfo!.cardNumber}",
+                                        "${loc.txtCard} # ${provider.getUserInfo!.cardNumber}",
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: AppThemeCustom
@@ -154,7 +157,7 @@ class MyProfileDialog with LoggingMixin {
                                                   size: 18,
                                                 ),
                                                 Text(
-                                                  AppStrings.txtEditMyDetails
+                                                  loc.txtEditMyDetails
                                                       .toUpperCase(),
                                                   style: TextStyle(
                                                       color: Theme.of(context)
@@ -167,7 +170,7 @@ class MyProfileDialog with LoggingMixin {
                                           )),
                                       AppDimens.shape_15,
                                       Text(
-                                        AppStrings
+                                        loc
                                             .txtStatusCreditsReactNextLevel
                                             .toUpperCase(),
                                         style: TextStyle(
@@ -330,7 +333,7 @@ class MyProfileDialog with LoggingMixin {
                                       ),
                                       AppDimens.shape_15,
                                       Text(
-                                        'HOW TO EARN STATUS CREDITS',
+                                        loc.txtHowToEarnStatusCredits,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: AppThemeCustom
@@ -375,9 +378,9 @@ class MyProfileDialog with LoggingMixin {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                title: const Text(
-                                                    AppStrings.txtAlert),
-                                                content: const Text(AppStrings
+                                                title:  Text(
+                                                    loc.txtAlert),
+                                                content:  Text(loc
                                                     .msgCancelAccount),
                                                 actions: [
                                                   TextButton(
@@ -385,9 +388,9 @@ class MyProfileDialog with LoggingMixin {
                                                         Navigator.pop(
                                                             context, false);
                                                       },
-                                                      child: const Text(
-                                                        AppStrings.txtNo,
-                                                        style: TextStyle(
+                                                      child:  Text(
+                                                        loc.txtNo,
+                                                        style: const TextStyle(
                                                             color: Colors.grey),
                                                       )),
                                                   TextButton(
@@ -396,7 +399,7 @@ class MyProfileDialog with LoggingMixin {
                                                             context, true);
                                                       },
                                                       child: Text(
-                                                        AppStrings.txtYes,
+                                                        loc.txtYes,
                                                         style: TextStyle(
                                                             color: Theme.of(
                                                                     context)
@@ -418,7 +421,7 @@ class MyProfileDialog with LoggingMixin {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              AppStrings.txtCancelAccount
+                                              loc.txtCancelAccount
                                                   .toUpperCase(),
                                               style: TextStyle(
                                                   fontSize: 10,
@@ -452,18 +455,18 @@ class MyProfileDialog with LoggingMixin {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              title: const Text(
-                                                  AppStrings.txtAlert),
-                                              content: const Text(
-                                                  AppStrings.msgLogout),
+                                              title:  Text(
+                                                  loc.txtAlert),
+                                              content:  Text(
+                                                  loc.msgLogout),
                                               actions: [
                                                 TextButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
-                                                    child: const Text(
-                                                      AppStrings.txtNo,
-                                                      style: TextStyle(
+                                                    child:  Text(
+                                                      loc.txtNo,
+                                                      style: const TextStyle(
                                                           color: Colors.grey),
                                                     )),
                                                 TextButton(
@@ -488,7 +491,7 @@ class MyProfileDialog with LoggingMixin {
                                                                   .login);
                                                     },
                                                     child: Text(
-                                                      AppStrings.txtYes,
+                                                      loc.txtYes,
                                                       style: TextStyle(
                                                           color: Theme.of(
                                                                   context)
@@ -501,7 +504,7 @@ class MyProfileDialog with LoggingMixin {
                                     child: Padding(
                                       padding: const EdgeInsets.all(5),
                                       child: Text(
-                                        AppStrings.txtLogout.toUpperCase(),
+                                        loc.txtLogout.toUpperCase(),
                                         style: TextStyle(
                                             fontSize: 10,
                                             fontWeight: FontWeight.w300,
@@ -573,7 +576,8 @@ class MyProfileDialog with LoggingMixin {
   }
 
   double getCircularGraphValue(num? currentPoint, num? requiredPoints) {
-    logEvent("Current Point --> $currentPoint Required Point --> $requiredPoints");
+    logEvent(
+        "Current Point --> $currentPoint Required Point --> $requiredPoints");
     if (currentPoint != null && requiredPoints != null) {
       return (currentPoint / (currentPoint + requiredPoints)) * 100;
     }

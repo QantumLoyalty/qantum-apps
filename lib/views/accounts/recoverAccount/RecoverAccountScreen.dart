@@ -2,13 +2,12 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
-
 import '../../../core/utils/AppColors.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLoader.dart';
@@ -25,9 +24,12 @@ class RecoverAccountScreen extends StatefulWidget {
 class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
   final TextEditingController _phoneController = TextEditingController();
   String countryCode = "+61";
-
+late AppLocalizations loc;
   @override
   Widget build(BuildContext context) {
+
+    loc=AppLocalizations.of(context)!;
+
     return AppScaffold(
       // backgroundColor: Theme.of(context).primaryColorDark,
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
@@ -52,7 +54,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                 AppHelper.showErrorMessage(
                     context,
                     provider.networkMessage ??
-                        "Issue while sending the OTP!!!");
+                        loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -71,7 +73,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                       hideTopLine: true,
                     ),
                     Text(
-                      AppStrings.txtRecoverYourAccount,
+                      loc.txtRecoverYourAccount,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -81,7 +83,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                     ),
                     AppDimens.shape_5,
                     Text(
-                      AppStrings.msgEnterMobileNoToRecoverYourAccount,
+                      loc.msgEnterMobileNoToRecoverYourAccount,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12,
@@ -94,7 +96,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppStrings.txtMobileNumber,
+                        loc.txtMobileNumber,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -128,8 +130,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;
-                                AppHelper.printMessage(
-                                    "Selected country::${code.dialCode}");
+
                               });
                             },
                             initialSelection: "AU",
@@ -176,13 +177,13 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                     ),
                     AppDimens.shape_15,
                     AppButton(
-                        text: AppStrings.txtSendVerificationCode.toUpperCase(),
+                        text: loc.txtSendVerificationCode.toUpperCase(),
                         onClick: () {
                           if (_phoneController.text.isNotEmpty) {
-                            provider.sendOTPEmail(_phoneController.text);
+                            provider.sendOTPEmail(_phoneController.text,loc: loc);
                           } else {
                             AppHelper.showErrorMessage(
-                                context, AppStrings.msgIncorrectPhoneNumber);
+                                context, loc.msgIncorrectPhoneNumber);
                           }
                         }),
                   ],
@@ -190,7 +191,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? "Please wait..",
+                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],

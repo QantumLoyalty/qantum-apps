@@ -9,9 +9,12 @@ import 'package:qantum_apps/views/splash/SplashScreen.dart';
 
 import 'core/flavors_config/app_themes.dart';
 import 'core/navigation/AppNavigator.dart';
+
 import 'view_models/SpecialOffersProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
+import 'l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 //TextTheme? textTheme;
 void main() async {
@@ -45,6 +48,17 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           onGenerateRoute: AppNavigator.generateRoute,
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('hi'),
+            Locale('zh', 'CN')
+          ],
           title: FlavorConfig.instance.flavorValues.appName!,
           theme: AppThemes.sotTheme,
           // theme: AppThemes.sotTheme.copyWith(textTheme: textTheme!),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
-import 'package:qantum_apps/core/utils/AppDimens.dart';
+import '/core/utils/AppColors.dart';
+import '/core/utils/AppDimens.dart';
+import '/l10n/app_localizations.dart';
 
 class AppLoader extends StatelessWidget {
   String? loaderMessage;
@@ -26,7 +27,7 @@ class AppLoader extends StatelessWidget {
                     )),
                 AppDimens.shape_15,
                 Text(
-                  loaderMessage??"Loading..",
+                  loaderMessage??AppLocalizations.of(context)!.txtLoading,
                   style: const TextStyle(fontSize: 15),
                 ),
               ],

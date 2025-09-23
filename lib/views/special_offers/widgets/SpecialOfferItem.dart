@@ -1,16 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
+import '/l10n/app_localizations.dart';
+import '/core/utils/AppHelper.dart';
+import '/view_models/SpecialOffersProvider.dart';
 import '../../../core/utils/AppDimens.dart';
-import '../../../core/utils/AppIcons.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/HomeProvider.dart';
 import '/data/models/OfferModel.dart';
-
-import '../../../core/navigation/AppNavigator.dart';
 import '../../../core/utils/AppColors.dart';
 import '../SpecialOfferDetailDialog.dart';
 
@@ -112,7 +108,7 @@ class SpecialOfferItem extends StatelessWidget {
                                     color: AppColors.black, fontSize: 11)),
                             AppDimens.shape_5,
                             Text(
-                              '${AppStrings.txtValidTo} ${offer.expiryDate}',
+                              '${AppLocalizations.of(context)!.txtValidTo} ${offer.expiryDate}',
                               style: TextStyle(
                                 fontSize: 8,
                                 color: Theme.of(context)

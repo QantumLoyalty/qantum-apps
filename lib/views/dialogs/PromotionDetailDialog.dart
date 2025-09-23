@@ -11,7 +11,7 @@ class PromotionDetailDialog {
   static final PromotionDetailDialog _promotionDetailDialog =
       PromotionDetailDialog._internal();
 
-   static  PromotionDetailDialog getInstance() {
+  static PromotionDetailDialog getInstance() {
     return _promotionDetailDialog;
   }
 
@@ -56,9 +56,7 @@ class PromotionDetailDialog {
                                         topRight: Radius.circular(10),
                                         topLeft: Radius.circular(10)),
                                     child: CachedNetworkImage(
-                                      fit: from == AdvertisementEnums.small
-                                          ? BoxFit.contain
-                                          : BoxFit.cover,
+                                      fit: BoxFit.contain,
                                       imageUrl: promotion.imageUrl ?? "",
                                       placeholder: (context, _) {
                                         return const Stack(

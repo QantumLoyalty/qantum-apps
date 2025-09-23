@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
-import 'package:qantum_apps/data/models/UserModel.dart';
-import 'package:qantum_apps/services/UserService.dart';
+import '/l10n/app_localizations.dart';
+import '/core/utils/AppHelper.dart';
+import '/data/local/SharedPreferenceHelper.dart';
+import '/data/models/NetworkResponse.dart';
+import '/data/models/UserModel.dart';
+import '/services/UserService.dart';
 
 class UserLoginProvider extends ChangeNotifier {
   bool _showLoader = false;
@@ -83,7 +84,7 @@ class UserLoginProvider extends ChangeNotifier {
     });
   }
 
-  signup(String phoneNo, Map<String, dynamic> params) async {
+  signup(String phoneNo, Map<String, dynamic> params,{required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -118,8 +119,7 @@ class UserLoginProvider extends ChangeNotifier {
             _isRegistered = false;
           }
         } else {
-          _networkMessage =
-              "Ooppss.. something went wrong, please try again or contact to our support team.";
+          _networkMessage = loc.msgCommonError;
           _isRegistered = false;
         }
       } else {

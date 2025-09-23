@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/mixins/dob_mixin.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
-import '../../../core/utils/AppStrings.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppCustomButton.dart';
 
@@ -28,7 +28,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
   late FocusNode _birthdayYYFocusNode;
 
   late UserInfoProvider _userInfoProvider;
-
+late AppLocalizations loc;
   @override
   void initState() {
     super.initState();
@@ -69,13 +69,14 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       child: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppStrings.txtFullName.toUpperCase(),
+              loc.txtFullName.toUpperCase(),
               style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).textSelectionTheme.selectionColor),
@@ -87,7 +88,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
               controller: _fullNameFieldController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return AppStrings.msgEmptyFirstName;
+                  return loc.msgEmptyFirstName;
                 }
                 return null;
               },
@@ -116,7 +117,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
             ),
             AppDimens.shape_20,
             Text(
-              AppStrings.txtBirthday.toUpperCase(),
+              loc.txtBirthday.toUpperCase(),
               style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).textSelectionTheme.selectionColor),
@@ -245,17 +246,17 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
               children: [
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtCancel.toUpperCase(),
+                  text: loc.txtCancel.toUpperCase(),
                   onClick: () {
                     if (_fullNameFieldController.text.toString().isEmpty) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectFullName);
+                          context, loc.msgIncorrectFullName);
                     } else if (!verifyDOB(
                         date: _birthdayDDController.text.toString(),
                         month: _birthdayMMController.text.toString(),
                         year: _birthdayYYController.text.toString())) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectDOB);
+                          context, loc.msgIncorrectDOB);
                     } else {
                       DateTime date = DateTime(
                           int.parse(_birthdayYYController.text.toString()),
@@ -277,18 +278,18 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 AppDimens.shape_20,
                 Expanded(
                     child: AppCustomButton(
-                  text: AppStrings.txtUpdate.toUpperCase(),
+                  text: loc.txtUpdate.toUpperCase(),
                   textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_fullNameFieldController.text.toString().isEmpty) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectFullName);
+                          context, loc.msgIncorrectFullName);
                     } else if (!verifyDOB(
                         date: _birthdayDDController.text.toString(),
                         month: _birthdayMMController.text.toString(),
                         year: _birthdayYYController.text.toString())) {
                       AppHelper.showErrorMessage(
-                          context, AppStrings.msgIncorrectDOB);
+                          context, loc.msgIncorrectDOB);
                     } else {
                       DateTime date = DateTime(
                           int.parse(_birthdayYYController.text.toString()),

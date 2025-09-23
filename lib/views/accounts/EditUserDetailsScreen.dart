@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../views/common_widgets/AppScaffold.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppLogo.dart';
 import 'EditUserInfo/EditDetailScreen.dart';
@@ -19,7 +19,7 @@ class EditUserDetailsScreen extends StatefulWidget {
 }
 
 class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
-   var screens = [
+  var screens = [
     const EditUserHomeScreen(),
     const EditDetailScreen(),
     const EditMailScreen(),
@@ -36,6 +36,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getCustomScaffoldBackground(context),
       body: SafeArea(child:
@@ -69,7 +70,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
                     hideTopLine: true,
                   ),
                   Text(
-                    AppStrings.txtChangeMyDetails,
+                    AppLocalizations.of(context)!.txtChangeMyDetails,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
