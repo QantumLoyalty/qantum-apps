@@ -468,6 +468,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgClubCodeSaved => '俱乐部代码已成功保存！';
+
+  @override
+  String get takePhotoOf => '拍摄';
+
+  @override
+  String get frontOfDL => '驾照正面';
+
+  @override
+  String get ensureFits => '请确保您的驾照置于白色边框内';
+
+  @override
+  String get takePhotoBtn => '拍照';
+
+  @override
+  String get retakeBtn => '重拍';
+
+  @override
+  String get backOfDL => '驾照背面';
+
+  @override
+  String get fetchingCameras => '正在加载摄像头';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -934,4 +955,25 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgClubCodeSaved => '俱乐部代码已成功保存！';
+
+  @override
+  String get takePhotoOf => '拍摄';
+
+  @override
+  String get frontOfDL => '驾照正面';
+
+  @override
+  String get ensureFits => '请确保您的驾照置于白色边框内';
+
+  @override
+  String get takePhotoBtn => '拍照';
+
+  @override
+  String get retakeBtn => '重拍';
+
+  @override
+  String get backOfDL => '驾照背面';
+
+  @override
+  String get fetchingCameras => '正在加载摄像头';
 }

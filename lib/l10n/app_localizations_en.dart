@@ -468,4 +468,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgClubCodeSaved => 'Club code has been saved successfully!';
+
+  @override
+  String get takePhotoOf => 'Take a photo of';
+
+  @override
+  String get frontOfDL => 'Front of Driver\'s Licence';
+
+  @override
+  String get ensureFits => 'Ensure your licence fits within the white guidelines';
+
+  @override
+  String get takePhotoBtn => 'TAKE PHOTO';
+
+  @override
+  String get retakeBtn => 'Retake';
+
+  @override
+  String get backOfDL => 'Back of Driver\'s Licence';
+
+  @override
+  String get fetchingCameras => 'Fetching cameras';
 }

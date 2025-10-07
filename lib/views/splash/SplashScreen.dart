@@ -4,6 +4,7 @@ import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
 import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
+import '../signup/DrivingLicenseScanScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,6 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
           await SharedPreferenceHelper.getInstance();
       if (sharedPreferenceHelper.getUserData() != null) {
         AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+        /*Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DrivingLicenseScanScreen()));*/
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }
@@ -41,7 +44,9 @@ class _SplashScreenState extends State<SplashScreen> {
       decoration: AppHelper.appBackground(context),
       child: AppScaffold(
         body: Center(
-            child: Applogo(hideTopLine: true,)),
+            child: Applogo(
+          hideTopLine: true,
+        )),
       ),
     );
   }

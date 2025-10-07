@@ -1,14 +1,12 @@
 import 'dart:ui';
-import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/views/common_widgets/UserStatusTier.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../core/navigation/AppNavigator.dart';
-import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -26,8 +24,10 @@ class MyProfileDialog with LoggingMixin {
 
   static const double dialogHeightFactor = 0.90;
   static const double dialogHeightBottomMargin = 80;
+  late Flavor flavor;
 
   showMyProfileDialog(BuildContext context) async {
+    flavor = FlavorConfig.instance.flavor!;
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
     AppLocalizations loc = AppLocalizations.of(context)!;
@@ -53,7 +53,8 @@ class MyProfileDialog with LoggingMixin {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            color: AppThemeCustom.getMyProfileCardBackground(
+                                context),
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
@@ -168,180 +169,10 @@ class MyProfileDialog with LoggingMixin {
                                               ],
                                             ),
                                           )),
-                                      AppDimens.shape_15,
-                                      Text(
-                                        loc
-                                            .txtStatusCreditsReactNextLevel
-                                            .toUpperCase(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: AppThemeCustom
-                                                .getProfileDialogTextColor(
-                                                    context),
-                                            fontSize: 13),
-                                      ),
-                                      AppDimens.shape_15,
-                                      SizedBox(
-                                        height: 180,
-                                        child: Stack(
-                                          children: [
-                                            Center(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Countup(
-                                                      begin: 0,
-                                                      // end: (provider.getUserInfo!.pointsValue??0).toDouble(),
-                                                      end: (provider.getUserInfo !=
-                                                                  null &&
-                                                              provider.getUserInfo!
-                                                                      .statusPoints !=
-                                                                  null)
-                                                          ? provider
-                                                              .getUserInfo!
-                                                              .statusPoints!
-                                                              .toDouble()
-                                                          : 0,
-                                                      duration: const Duration(
-                                                          seconds: 1),
-                                                      style: TextStyle(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .textSelectionTheme
-                                                              .selectionColor,
-                                                          fontWeight:
-                                                              FontWeight.w900,
-                                                          fontSize: 24)),
-                                                  RichText(
-                                                    textAlign: TextAlign.center,
-                                                    text: TextSpan(children: [
-                                                      TextSpan(
-                                                          text:
-                                                              'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
-                                                          style: TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .textSelectionTheme
-                                                                  .selectionColor,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontSize: 20)),
-                                                      TextSpan(
-                                                          text:
-                                                              '\n\nStatus credits\nfor ${provider.getUserInfo != null ? provider.getUserInfo!.nextStatusTier ?? "" : ""}'
-                                                                  .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .textSelectionTheme
-                                                                  .selectionColor,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontSize: 8)),
-                                                    ]),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SfRadialGauge(
-                                              axes: <RadialAxis>[
-                                                RadialAxis(
-                                                  minimum: 0,
-                                                  maximum: 100,
-                                                  showLabels: false,
-                                                  showTicks: false,
-                                                  startAngle: 270,
-                                                  endAngle: 270,
-                                                  axisLineStyle: AxisLineStyle(
-                                                      thickness: 0.05,
-                                                      color: AppColors.white,
-                                                      thicknessUnit:
-                                                          GaugeSizeUnit.factor,
-                                                      dashArray: const <double>[
-                                                        3,
-                                                        3
-                                                      ]),
-                                                  pointers: <GaugePointer>[
-                                                    MarkerPointer(
-                                                      enableAnimation: false,
-                                                      value: 0,
-                                                      markerWidth: 20,
-                                                      markerHeight: 20,
-                                                      markerType:
-                                                          MarkerType.circle,
-                                                      color: AppColors.white,
-                                                    ),
-                                                    RangePointer(
-                                                      value: getCircularGraphValue(
-                                                          provider.getUserInfo !=
-                                                                  null
-                                                              ? provider
-                                                                  .getUserInfo!
-                                                                  .statusPoints
-                                                              : 0,
-                                                          provider.getUserInfo !=
-                                                                  null
-                                                              ? provider
-                                                                  .getUserInfo!
-                                                                  .requiredStatusPointsForNextTier
-                                                              : 0),
-                                                      width: 0.05,
-                                                      sizeUnit:
-                                                          GaugeSizeUnit.factor,
-                                                      cornerStyle: CornerStyle
-                                                          .startCurve,
-                                                      enableAnimation: true,
-                                                      color: AppColors.white,
-                                                    ),
-                                                    MarkerPointer(
-                                                      enableAnimation: true,
-                                                      value: getCircularGraphValue(
-                                                          provider.getUserInfo !=
-                                                                  null
-                                                              ? provider
-                                                                  .getUserInfo!
-                                                                  .statusPoints
-                                                              : 0,
-                                                          provider.getUserInfo !=
-                                                                  null
-                                                              ? provider
-                                                                  .getUserInfo!
-                                                                  .requiredStatusPointsForNextTier
-                                                              : 0),
-                                                      markerWidth: 25,
-                                                      markerHeight: 25,
-                                                      markerType:
-                                                          MarkerType.image,
-                                                      color: (provider.getUserInfo !=
-                                                                  null &&
-                                                              provider.getUserInfo!
-                                                                      .statusPoints !=
-                                                                  null)
-                                                          ? AppColors.white
-                                                          : Colors.transparent,
-                                                      imageUrl:
-                                                          'assets/common/play.png',
-                                                    )
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      AppDimens.shape_15,
-                                      Text(
-                                        loc.txtHowToEarnStatusCredits,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: AppThemeCustom
-                                                .getProfileDialogTextColor(
-                                                    context),
-                                            fontSize: 13),
-                                      ),
-                                      AppDimens.shape_15,
+                                      (flavor == Flavor.clh ||
+                                              flavor == Flavor.montaukTavern)
+                                          ? Container()
+                                          : UserStatusTier()
                                     ],
                                   ),
                                 ),
@@ -378,17 +209,16 @@ class MyProfileDialog with LoggingMixin {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                title:  Text(
-                                                    loc.txtAlert),
-                                                content:  Text(loc
-                                                    .msgCancelAccount),
+                                                title: Text(loc.txtAlert),
+                                                content:
+                                                    Text(loc.msgCancelAccount),
                                                 actions: [
                                                   TextButton(
                                                       onPressed: () {
                                                         Navigator.pop(
                                                             context, false);
                                                       },
-                                                      child:  Text(
+                                                      child: Text(
                                                         loc.txtNo,
                                                         style: const TextStyle(
                                                             color: Colors.grey),
@@ -455,16 +285,14 @@ class MyProfileDialog with LoggingMixin {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              title:  Text(
-                                                  loc.txtAlert),
-                                              content:  Text(
-                                                  loc.msgLogout),
+                                              title: Text(loc.txtAlert),
+                                              content: Text(loc.msgLogout),
                                               actions: [
                                                 TextButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
-                                                    child:  Text(
+                                                    child: Text(
                                                       loc.txtNo,
                                                       style: const TextStyle(
                                                           color: Colors.grey),
@@ -540,7 +368,8 @@ class MyProfileDialog with LoggingMixin {
                                   selector: (_, v) => v.version),
                               CircleAvatar(
                                 backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                    AppThemeCustom.getMyProfileCardBackground(
+                                        context),
                                 radius: 30,
                                 child: IconButton(
                                     onPressed: () {
@@ -573,14 +402,5 @@ class MyProfileDialog with LoggingMixin {
             ),
           );
         });
-  }
-
-  double getCircularGraphValue(num? currentPoint, num? requiredPoints) {
-    logEvent(
-        "Current Point --> $currentPoint Required Point --> $requiredPoints");
-    if (currentPoint != null && requiredPoints != null) {
-      return (currentPoint / (currentPoint + requiredPoints)) * 100;
-    }
-    return 0;
   }
 }

@@ -1,5 +1,8 @@
 class APIList {
-  // LIVE
+  // SANDBOX
+ // static get BASE_URL => "https://betaapi.s2w.com.au/";
+
+ // LIVE
   static get BASE_URL => "http://3.24.55.180:8081/";
 
   //static get BASE_URL => "https://api.s2w.com.au/";

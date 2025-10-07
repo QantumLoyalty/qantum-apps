@@ -46,16 +46,14 @@ class GamingPreferences extends StatelessWidget {
                           text: AppLocalizations.of(context)!.txtYourUsage,
                           style: TextStyle(
                               fontSize: 16,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor!)),
+                              color: AppThemeCustom.getAccountSectionItemStyle(
+                                  context))),
                       TextSpan(
                           text: AppLocalizations.of(context)!.txtDaily,
                           style: TextStyle(
                               fontSize: 15,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor!
+                              color: AppThemeCustom.getAccountSectionItemStyle(
+                                      context)!
                                   .withValues(alpha: 0.5)))
                     ]),
                   ),
@@ -72,24 +70,25 @@ class GamingPreferences extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             trailing: Icon(Icons.chevron_right,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor),
+                                color:
+                                    AppThemeCustom.getAccountSectionItemStyle(
+                                        context)),
                             title: Text(
                               translateContent(AppLocalizations.of(context)!,
                                   items.keys.elementAt(item)),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color:
-                                      Theme.of(context).colorScheme.secondary),
+                                      AppThemeCustom.getAccountSectionItemStyle(
+                                          context)),
                             ),
                             subtitle: Text(
                               translateContent(AppLocalizations.of(context)!,
                                   items[items.keys.elementAt(item)]!),
                               style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
+                                  color:
+                                      AppThemeCustom.getAccountSectionItemStyle(
+                                          context)),
                             ),
                             onTap: () {},
                           ),

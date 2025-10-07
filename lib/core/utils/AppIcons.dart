@@ -3,6 +3,7 @@ import '../flavors_config/flavor_config.dart';
 class AppIcons {
   static String app_logo =
       "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/app_logo.png";
+
   static String my_profile = "assets/common/my_profile.png";
   static String card_value =
       "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/card_value.png";
@@ -18,6 +19,15 @@ class AppIcons {
   static String birthday = "assets/common/birthday.png";
   static String mobile = "assets/common/mobile.png";
   static String email = "assets/common/email.png";
+
+  static String getHeaderIcon() {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    if (selectedFlavor == Flavor.northShoreTavern) {
+      return "assets/northShoreTavern/nst_header_logo.png";
+    } else {
+      return app_logo;
+    }
+  }
 
   static String getCardBackground(String? membershipType) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
@@ -38,8 +48,7 @@ class AppIcons {
         default:
           return card_value;
       }
-    }
-    else if (selectedFlavor == Flavor.hogansReward) {
+    } else if (selectedFlavor == Flavor.hogansReward) {
       switch (membershipType!.toLowerCase()) {
         case "pearl":
           return "assets/hogansReward/card_pearl.png";
@@ -51,12 +60,9 @@ class AppIcons {
           return "assets/hogansReward/card_ruby.png";
         case "diamond":
         default:
-        return "assets/hogansReward/card_ruby.png";
+          return "assets/hogansReward/card_ruby.png";
       }
-    }
-
-
-    else if (selectedFlavor == Flavor.clh) {
+    } else if (selectedFlavor == Flavor.clh) {
       switch (membershipType!.toLowerCase().trim()) {
         case "member":
           return "assets/centralLaneHotel/card_member.png";

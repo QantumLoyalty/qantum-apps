@@ -219,6 +219,41 @@ class AppColors {
 
   static Color get sot_divider_color => const Color(0xFFd4b491);
 
+
+  /// NORTH SHORE TAVERN ///
+
+  static Color get nst_sf_color => const Color(0xFFC0A36B);
+
+  static Color get nst_back_color => const Color(0xFF2E3C53);
+
+  static Color get nst_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get nst_back_color_2 => const Color(0xFF2E3C53);
+
+  static Color get nst_back_color_3 => const Color(0xFF55f6ff);
+
+  static Color get nst_text_color => const Color(0xFFFFFFFF);
+
+  static Color get nst_text_field_text_color => const Color(0xFF000000);
+
+  static Color get nst_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get nst_button_color => const Color(0xFF2E3C53);
+
+  static Color get nst_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get nst_card_color => const Color(0xFFFFFFFF);
+
+  static Color get nst_divider_color => const Color(0xFF2E3C53);
+
+  static Color get nst_disable_color => const Color(0xFF55f6ff);
+
+  static Color get nst_canvas_color => const Color(0xFFCED2CE);
+
+
+
+
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 
@@ -237,6 +272,11 @@ class AppColors {
   static Color get shadow => const Color(0xA6000000);
 
   static Color get bright_sky_blue => const Color(0xFF28ABE2);
+
+
+
+
+
 
   static Color getMembershipCategoryColor(String? membershipType) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;

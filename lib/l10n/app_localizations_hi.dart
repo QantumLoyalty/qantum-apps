@@ -468,4 +468,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgClubCodeSaved => 'क्लब कोड सफलतापूर्वक सहेजा गया!';
+
+  @override
+  String get takePhotoOf => 'फोटो लें';
+
+  @override
+  String get frontOfDL => 'ड्राइविंग लाइसेंस का सामने वाला भाग';
+
+  @override
+  String get ensureFits => 'सुनिश्चित करें कि आपका लाइसेंस सफेद रेखाओं के भीतर फिट हो';
+
+  @override
+  String get takePhotoBtn => 'फोटो लें';
+
+  @override
+  String get retakeBtn => 'दोबारा लें';
+
+  @override
+  String get backOfDL => 'ड्राइविंग लाइसेंस का पीछे वाला भाग';
+
+  @override
+  String get fetchingCameras => 'कैमरे लोड हो रहे हैं';
 }

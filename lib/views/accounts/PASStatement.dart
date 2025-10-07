@@ -52,17 +52,14 @@ class PASStatement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    AppLocalizations loc=AppLocalizations.of(context)!;
-
+    AppLocalizations loc = AppLocalizations.of(context)!;
 
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       body: SafeArea(
         child: Column(
           children: [
-            AccountsAppBar(
-                showBackButton: true, title: loc.txtPASStatement),
+            AccountsAppBar(showBackButton: true, title: loc.txtPASStatement),
             Expanded(
                 child: Container(
               width: MediaQuery.of(context).size.width,
@@ -71,8 +68,7 @@ class PASStatement extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
-                color: Theme.of(context)
-                    .canvasColor,
+                color: Theme.of(context).canvasColor,
               ),
               child: SingleChildScrollView(
                   child: Column(
@@ -81,21 +77,21 @@ class PASStatement extends StatelessWidget {
                   Text(loc.txtPlayerActivityStatementFor,
                       style: TextStyle(
                           fontSize: 15,
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor!)),
+                          fontWeight: FontWeight.w500,
+                          color: AppThemeCustom.getAccountSectionItemStyle(context))),
                   Text(
                     "(1 Jul 2023 ${loc.txtTo} 30 September 2023)",
                     style: TextStyle(
                         fontSize: 13,
-                        color: Theme.of(context)
-                            .textSelectionTheme
-                            .selectionColor!
-                            .withValues(alpha: 0.7)),
+                        color:
+                            AppThemeCustom.getAccountSectionItemStyle(context)!
+                                .withValues(alpha: 0.7)),
                   ),
                   AppDimens.shape_20,
                   Container(
-                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15),borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(8)),
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +99,8 @@ class PASStatement extends StatelessWidget {
                         Text(
                           loc.txtDetails,
                           style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary),
+                              fontWeight: FontWeight.w600,
+                              color:  AppThemeCustom.getAccountSectionItemStyle(context)),
                         ),
                         AppDimens.shape_10,
                         Row(
@@ -113,9 +110,7 @@ class PASStatement extends StatelessWidget {
                                 "${loc.txtCard} #",
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -123,9 +118,7 @@ class PASStatement extends StatelessWidget {
                               "1",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -136,9 +129,7 @@ class PASStatement extends StatelessWidget {
                                 loc.txtTotalAmountBet,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -146,9 +137,7 @@ class PASStatement extends StatelessWidget {
                               "\$10000",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -159,9 +148,7 @@ class PASStatement extends StatelessWidget {
                                 loc.txtTotalAmountWon,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -169,9 +156,7 @@ class PASStatement extends StatelessWidget {
                               "\$10000",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -182,9 +167,7 @@ class PASStatement extends StatelessWidget {
                                 loc.txtNetAmountWonOrLost,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -192,9 +175,7 @@ class PASStatement extends StatelessWidget {
                               "\$10000",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -206,9 +187,7 @@ class PASStatement extends StatelessWidget {
                                 loc.txtTotalDaysPlayed,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -216,9 +195,7 @@ class PASStatement extends StatelessWidget {
                               "30",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -229,9 +206,7 @@ class PASStatement extends StatelessWidget {
                                 loc.txtTotalHoursPlayed,
                                 style: TextStyle(
                                     fontSize: 14,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor!),
+                                    color: AppThemeCustom.getAccountSectionItemStyle(context)),
                               ),
                             ),
                             AppDimens.shape_20,
@@ -239,9 +214,7 @@ class PASStatement extends StatelessWidget {
                               "20",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             )
                           ],
                         ),
@@ -250,7 +223,9 @@ class PASStatement extends StatelessWidget {
                   ),
                   AppDimens.shape_20,
                   Container(
-                    decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15),borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(8)),
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
@@ -260,7 +235,8 @@ class PASStatement extends StatelessWidget {
                         Text(
                           loc.txtPerformance,
                           style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary),
+                              fontWeight: FontWeight.w600,
+                              color: AppThemeCustom.getAccountSectionItemStyle(context)),
                         ),
                         AppDimens.shape_10,
                         SizedBox(
@@ -295,9 +271,7 @@ class PASStatement extends StatelessWidget {
                                           ? '${value ~/ 1000}K'
                                           : '-${-value ~/ 1000}K',
                                       style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
                                         fontSize: 8,
                                       ),
                                     );
@@ -316,8 +290,8 @@ class PASStatement extends StatelessWidget {
                                     return Text(
                                       labels[value.toInt()],
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                      style:  TextStyle(
+                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
                                         fontSize: 10,
                                       ),
                                     );
@@ -335,8 +309,7 @@ class PASStatement extends StatelessWidget {
                               show: true,
                               border: const Border(
                                 bottom: BorderSide.none,
-                                left:
-                                    BorderSide(color: Colors.white, width: 1),
+                                left: BorderSide(color: Colors.white, width: 1),
                               ),
                             ),
                           )),

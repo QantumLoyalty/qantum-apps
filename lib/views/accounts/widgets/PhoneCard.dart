@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../l10n/app_localizations.dart';
@@ -28,12 +29,13 @@ class PhoneCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      AppLocalizations.of(context)!.txtMobileNumber.toUpperCase(),
+                      AppLocalizations.of(context)!
+                          .txtMobileNumber
+                          .toUpperCase(),
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary),
+                          color: AppThemeCustom.getUserInfoItemStyle(
+                              context, editable)),
                     ),
                   ),
                   editable
@@ -48,18 +50,20 @@ class PhoneCard extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(AppLocalizations.of(context)!.txtEdit.toUpperCase(),
+                                Text(
+                                    AppLocalizations.of(context)!
+                                        .txtEdit
+                                        .toUpperCase(),
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w800,
+                                        fontWeight: FontWeight.w800,
                                         fontSize: 12,
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor)),
+                                        color:
+                                            AppThemeCustom.getUserInfoItemStyle(
+                                                context, editable))),
                                 Icon(
                                   Icons.chevron_right,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor,
+                                  color: AppThemeCustom.getUserInfoItemStyle(
+                                      context, editable),
                                   size: 18,
                                 )
                               ],
@@ -75,10 +79,8 @@ class PhoneCard extends StatelessWidget {
                     : AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile!),
                 style: TextStyle(
                     color: editable
-                        ? Theme.of(context).textSelectionTheme.selectionColor
-                        : Theme.of(context)
-                            .textSelectionTheme
-                            .selectionColor
+                        ? AppThemeCustom.getUserInfoItemStyle(context, editable)
+                        : AppThemeCustom.getUserInfoItemStyle(context, editable)
                             ?.withValues(alpha: 0.7)),
               ),
             ],

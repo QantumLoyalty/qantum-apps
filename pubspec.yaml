@@ -23,10 +23,12 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # SENSE OF TASTE - 1.0.0+56
 # CENTRAL LANE HOTEL - 1.0.0+56
 # STAR REWARD - 1.0.0+56
-# MONTALK TAVERN - 1.0.0+56
+# MONTAUK TAVERN - 1.0.0+46
 # HOGAN'S REWARD - 1.0.0+1
+# NORTH SHORE TAVERN - 1.0.0+1
 
-version: 1.0.0+58
+
+version: 1.0.0+3
 
 environment:
   sdk: ^3.5.3
@@ -82,6 +84,9 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_secure_storage: ^9.2.4
   flutter_localization: ^0.3.3
+ # flutter_credit_card_scanner: ^0.11.9
+ # flutter_camera_overlay: ^0.1.1
+  image: ^4.2.0
 
 #  easy_geofencing: ^0.2.0
 
@@ -120,6 +125,7 @@ flutter:
     - assets/centralLaneHotel/
     - assets/montaukTavern/
     - assets/hogansReward/
+    - assets/northShoreTavern/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

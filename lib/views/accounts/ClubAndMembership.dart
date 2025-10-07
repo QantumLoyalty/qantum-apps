@@ -94,16 +94,14 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                             Text(
                               loc.msgObtainClubCode,
                               style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             ),
                             AppDimens.shape_20,
                             Text(
                               loc.txtClubCode.toUpperCase(),
                               style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
+                                  fontWeight: FontWeight.w500,
+                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
                             ),
                             AppDimens.shape_15,
                             TextFormField(

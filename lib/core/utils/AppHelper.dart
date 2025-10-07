@@ -9,7 +9,7 @@ import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
   /// MAKE IT DEFAULT 5
-  static int defaultRequestTime = 5;
+  static int defaultRequestTime = 5000;
 
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {
@@ -92,10 +92,9 @@ class AppHelper with LoggingMixin {
   }
 
   static String maskPhoneNumber(String phone) {
-  //  return "*******${phone.substring(phone.length - 3, phone.length)}";
+    //  return "*******${phone.substring(phone.length - 3, phone.length)}";
     if (phone.isEmpty || phone.length < 3) return phone;
     return '*' * (phone.length - 3) + phone.substring(phone.length - 3);
-
   }
 
   static String maskEmail(String? email) {
@@ -156,13 +155,14 @@ class AppHelper with LoggingMixin {
       case Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
 
-      case Flavor.hogansReward:
+      case Flavor.hogansReward || Flavor.northShoreTavern:
         return Theme.of(context).primaryColor;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
   }
+
   static Color getEditAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -241,6 +241,16 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.white));
+      case Flavor.northShoreTavern:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(
+                AppColors.nst_back_color.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.nst_back_color),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor:
+                WidgetStatePropertyAll(AppColors.nst_canvas_color));
 
       default:
         return ButtonStyle();
@@ -320,6 +330,15 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.northShoreTavern:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -388,6 +407,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.northShoreTavern:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(
+                Theme.of(context).primaryColor.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return const ButtonStyle();
@@ -397,20 +425,14 @@ class AppHelper with LoggingMixin {
   static Size getAppIconSize(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
-        return const Size(72, 72);
-      case Flavor.maxx:
-        return const Size(72, 72);
-      case Flavor.starReward:
-        return const Size(72, 72);
-      case Flavor.mhbc:
+      case Flavor.mhbc ||
+            Flavor.montaukTavern ||
+            Flavor.hogansReward ||
+            Flavor.clh:
         return const Size(142, 42);
-      case Flavor.clh:
-        return const Size(142, 42);
-      case Flavor.montaukTavern:
-        return const Size(142, 42);
-      case Flavor.hogansReward:
-        return const Size(142, 42);
+
+      case Flavor.northShoreTavern:
+        return const Size(142, 58);
 
       default:
         return const Size(72, 72);
@@ -437,7 +459,7 @@ class AppHelper with LoggingMixin {
       Flavor.mhbc: "Manly",
       Flavor.montaukTavern: "Montauk",
       Flavor.senseOfTaste: "Sense",
-      //Flavor.hogansReward: "Hogan",
+      Flavor.hogansReward: "Hogan",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

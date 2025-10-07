@@ -61,14 +61,13 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               myAccountProvider.accountOptions.keys
                                   .elementAt(index)),
                           style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
+                              color: AppThemeCustom.getAccountSectionItemStyle(
+                                  context),
+                              fontWeight: FontWeight.w500),
                         ),
                         trailing: Icon(Icons.chevron_right,
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor),
+                            color: AppThemeCustom.getAccountSectionItemStyle(
+                                context)),
                         onTap: () {
                           AppHelper.printMessage(
                               myAccountProvider.accountOptions[myAccountProvider

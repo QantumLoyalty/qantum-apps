@@ -35,17 +35,14 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                 Expanded(
                   child: Column(
                     children: [
-
-
-
-              Consumer2<UserInfoProvider,HomeProvider>(
-                          builder: (context, provider,homeProvider, child) {
+                      Consumer2<UserInfoProvider, HomeProvider>(
+                          builder: (context, provider, homeProvider, child) {
                         return InkWell(
                           onTap: () async {
-
                             /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                             if (homeProvider.showSeeAllMenu) {
-                              homeProvider.updateShowAllMenuVisibility(false,"my card");
+                              homeProvider.updateShowAllMenuVisibility(
+                                  false, "my card");
                             }
 
                             double screenBrightness = 0.4;
@@ -57,7 +54,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               logEvent(e);
                               throw 'Failed to get system brightness';
                             }
-
 
                             try {
                               await ScreenBrightness.instance
@@ -96,7 +92,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    AppLocalizations.of(context)!.txtMyCard.toUpperCase(),
+                                    AppLocalizations.of(context)!
+                                        .txtMyCard
+                                        .toUpperCase(),
                                     style: TextStyle(
                                         shadows: [
                                           Shadow(
@@ -122,7 +120,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                 ),
                 Expanded(
                   child: Image.asset(
-                    AppIcons.app_logo,
+                    AppIcons.getHeaderIcon(),
                     width: 80,
                     height: 80,
                   ),
@@ -138,7 +136,8 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             onTap: () {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                               if (provider.showSeeAllMenu) {
-                                provider.updateShowAllMenuVisibility(false,"my profile");
+                                provider.updateShowAllMenuVisibility(
+                                    false, "my profile");
                               }
                               MyProfileDialog.getInstance()
                                   .showMyProfileDialog(context);
@@ -155,7 +154,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   color: Theme.of(context).iconTheme.color,
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+                                  AppLocalizations.of(context)!
+                                      .txtMyProfile
+                                      .toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.normal,

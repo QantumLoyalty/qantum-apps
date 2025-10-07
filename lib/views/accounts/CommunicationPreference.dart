@@ -75,9 +75,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             loc.msgKeepingInTouch,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom.getAccountSectionItemStyle(context),
                                 fontSize: 14),
                           ),
                           AppDimens.shape_15,
@@ -85,9 +83,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             loc.msgSelectCommunicationPreference,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom.getAccountSectionItemStyle(context),
                                 fontSize: 12),
                           ),
                           AppDimens.shape_15,
@@ -104,17 +100,13 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 Text(
                                   loc.txtCommunicationChannel,
                                   style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
-                                      fontSize: 15),
+                                      color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                      fontSize: 15,fontWeight: FontWeight.w600),
                                 ),
                                 Text(
-                                  loc.msgCommunicationPreference,
+                                  loc.msgNotificationPreference,
                                   style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
+                                      color:AppThemeCustom.getAccountSectionItemStyle(context),
                                       fontSize: 12),
                                 ),
                                 SwitchListTile(
@@ -133,9 +125,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   title: Text(
                                     loc.txtSMS,
                                     style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -155,9 +145,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   title: Text(
                                     loc.txtEmail,
                                     style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
+                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -169,9 +157,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                           Text(
                             loc.msgCommunicationPreference,
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom.getAccountSectionItemStyle(context),
                                 fontSize: 12),
                           ),
                         ],

@@ -156,5 +156,12 @@
   "msgVerificationCodeSentToPhone": "我们已将验证码发送到以……结尾的手机号。",
   "msgIssueInVerifyAccount": "验证您的账户时出现问题，请重试。",
   "msgEnterNewMobile": "请输入您的新手机号码",
-  "msgClubCodeSaved": "俱乐部代码已成功保存！"
+  "msgClubCodeSaved": "俱乐部代码已成功保存！",
+  "takePhotoOf": "拍摄",
+  "frontOfDL": "驾照正面",
+  "ensureFits": "请确保您的驾照置于白色边框内",
+  "takePhotoBtn": "拍照",
+  "retakeBtn": "重拍",
+  "backOfDL": "驾照背面",
+  "fetchingCameras": "正在加载摄像头"
 }

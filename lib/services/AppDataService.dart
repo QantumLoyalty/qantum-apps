@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/repositories/AppDataRepository.dart';
+import 'package:http/http.dart' as http;
 
 class AppDataService extends AppDataRepository with LoggingMixin {
   static AppDataService? _instance;
@@ -102,8 +105,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
-        'Authorization':
-            'Bearer ${sharedPreferenceHelper.getAuthToken()}'
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
       });
       networkResponse = response;
     } catch (e) {
@@ -129,6 +131,40 @@ class AppDataService extends AppDataRepository with LoggingMixin {
         'coupon_codes': couponCode
       });
       networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchDLInformation(
+      {required String frontImagePath, required String backImagePath}) async {
+    NetworkResponse networkResponse;
+    try {
+      var URL =
+          "https://licensedataextractorapp.blackfield-3f4ad4c0.australiaeast.azurecontainerapps.io/licensedataextract";
+      logEvent(URL);
+
+      final request = http.MultipartRequest('POST', Uri.parse(URL));
+      request.headers['Content-Type'] = 'multipart/form-data';
+      request.files
+          .add(await http.MultipartFile.fromPath('frontimage', frontImagePath));
+      request.files
+          .add(await http.MultipartFile.fromPath('backimage', backImagePath));
+      final streamedResponse = await request.send();
+      if (streamedResponse.statusCode == 200) {
+        final respStr = await streamedResponse.stream.bytesToString();
+
+        networkResponse = NetworkResponse.success(
+            response: jsonDecode(respStr), responseMessage: "Success");
+      } else {
+        print(
+            "RESPONSE: ${streamedResponse.statusCode}: MESSAGE: ${streamedResponse.reasonPhrase}");
+        networkResponse = NetworkResponse.error(
+            responseMessage: "Error: ${streamedResponse.statusCode}");
+      }
+      // networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

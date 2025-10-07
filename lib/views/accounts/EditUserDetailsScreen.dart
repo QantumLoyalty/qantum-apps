@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../common_widgets/AppLogoHeader.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../views/common_widgets/AppScaffold.dart';
@@ -66,7 +67,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Applogo(
+                  AppLogoHeader(
                     hideTopLine: true,
                   ),
                   Text(

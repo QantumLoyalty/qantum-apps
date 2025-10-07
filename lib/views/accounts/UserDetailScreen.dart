@@ -74,9 +74,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     });
                   } else {
                     AppHelper.showErrorMessage(
-                        context,
-                        provider.networkMessage ??
-                            loc.msgCommonError);
+                        context, provider.networkMessage ?? loc.msgCommonError);
                   }
                 }
 
@@ -160,6 +158,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               }
                             },
                             text: loc.txtDeleteMyAccount.toUpperCase(),
+                            textColor: AppThemeCustom.getAccountSectionItemStyle(context),
                           ),
                         ),
                         AppDimens.shape_20,

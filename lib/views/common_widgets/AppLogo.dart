@@ -17,12 +17,13 @@ class Applogo extends StatelessWidget {
         AppDimens.shape_10,
         (hideTopLine != null && hideTopLine!)
             ? Container()
-            : const Column(
+            : Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Divider(
                     thickness: 0.5,
                     height: 0.1,
+                    color: Theme.of(context).dividerColor,
                   ),
                   AppDimens.shape_20
                 ],

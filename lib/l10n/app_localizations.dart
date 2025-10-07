@@ -1015,6 +1015,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Club code has been saved successfully!'**
   String get msgClubCodeSaved;
+
+  /// No description provided for @takePhotoOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo of'**
+  String get takePhotoOf;
+
+  /// No description provided for @frontOfDL.
+  ///
+  /// In en, this message translates to:
+  /// **'Front of Driver\'s Licence'**
+  String get frontOfDL;
+
+  /// No description provided for @ensureFits.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure your licence fits within the white guidelines'**
+  String get ensureFits;
+
+  /// No description provided for @takePhotoBtn.
+  ///
+  /// In en, this message translates to:
+  /// **'TAKE PHOTO'**
+  String get takePhotoBtn;
+
+  /// No description provided for @retakeBtn.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get retakeBtn;
+
+  /// No description provided for @backOfDL.
+  ///
+  /// In en, this message translates to:
+  /// **'Back of Driver\'s Licence'**
+  String get backOfDL;
+
+  /// No description provided for @fetchingCameras.
+  ///
+  /// In en, this message translates to:
+  /// **'Fetching cameras'**
+  String get fetchingCameras;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/view_models/HomeProvider.dart';
 import '../utils/AppColors.dart';
 import 'flavor_config.dart';
 
@@ -133,7 +134,9 @@ class AppThemeCustom {
       case Flavor.mhbc:
         return AppColors.mhbc_back_color_2;
       case Flavor.montaukTavern:
-        return AppColors.mhbc_back_color;
+        return AppColors.mt_back_color;
+      case Flavor.northShoreTavern:
+        return AppColors.nst_back_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
@@ -148,6 +151,8 @@ class AppThemeCustom {
         return AppColors.mhbc_back_color_2;
       case Flavor.hogansReward:
         return AppColors.hr_back_color;
+      case Flavor.northShoreTavern:
+        return AppColors.nst_back_color;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -212,7 +217,7 @@ class AppThemeCustom {
   static Color? getCustomScaffoldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh:
+      case Flavor.mhbc || Flavor.clh || Flavor.northShoreTavern:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -225,6 +230,8 @@ class AppThemeCustom {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.hogansReward:
+        return AppColors.white;
+      case Flavor.northShoreTavern:
         return AppColors.white;
       default:
         return Theme.of(context).disabledColor;
@@ -392,6 +399,16 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.northShoreTavern:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor:
+                WidgetStatePropertyAll(Theme.of(context).primaryColor));
 
       default:
         return ButtonStyle();
@@ -445,7 +462,7 @@ class AppThemeCustom {
       case Flavor.mhbc:
         return ButtonStyle(
             shadowColor:
-            WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
@@ -454,7 +471,7 @@ class AppThemeCustom {
       case Flavor.clh:
         return ButtonStyle(
             shadowColor:
-            WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
@@ -463,7 +480,7 @@ class AppThemeCustom {
       case Flavor.montaukTavern:
         return ButtonStyle(
             shadowColor:
-            WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
+                WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
@@ -483,12 +500,128 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-
+      case Flavor.northShoreTavern:
+        return ButtonStyle(
+            shadowColor:
+            WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor:
+            WidgetStatePropertyAll(Theme.of(context).primaryColor));
       default:
         return const ButtonStyle();
     }
   }
 
+  static Color? getCustomHomeButtonsIconStyle(
+      BuildContext context, HomeProvider provider, String itemName) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mhbc:
+        return provider.homeNavigationList[2].name == itemName
+            ? Colors.transparent
+            : null;
+      case Flavor.montaukTavern:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : null;
+      case Flavor.clh:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : null;
 
+      default:
+        return null;
+    }
+  }
 
+  static Color? getAccountSectionItemStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.northShoreTavern:
+        return Theme.of(context).primaryColor;
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+    }
+  }
+
+  static Color? getUserInfoItemStyle(BuildContext context, bool isFromEdit) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.northShoreTavern:
+        if (isFromEdit) {
+          return Theme.of(context).textSelectionTheme.selectionColor;
+        } else {
+          return Theme.of(context).primaryColor;
+        }
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+    }
+  }
+
+  static BoxBorder? getCustomHomeButtonsBorderStyle(
+      BuildContext context, HomeProvider provider, String itemName) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.montaukTavern:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? null
+            : Border.all(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5);
+      case Flavor.clh:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? null
+            : Border.all(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5);
+
+      default:
+        return Border.all(
+            color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+            width: 1.5);
+    }
+  }
+
+  static Color? getCustomHomeButtonsTextStyle(
+      BuildContext context, HomeProvider provider, String itemName) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mhbc:
+        return provider.homeNavigationList[2].name == itemName
+            ? Colors.transparent
+            : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.montaukTavern:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.clh:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : Theme.of(context).textSelectionTheme.selectionColor;
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+    }
+  }
+
+  static Color getMyProfileCardBackground(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.northShoreTavern:
+        return AppColors.nst_back_color;
+      default:
+        return Theme.of(context).scaffoldBackgroundColor;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -118,23 +119,33 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor: (flavor == Flavor.mhbc &&
+                            iconColor:
+                                AppThemeCustom.getCustomHomeButtonsIconStyle(
+                                    context,
+                                    provider,
+                                    provider.homeNavigationList[index].name),
+                            /*iconColor: (flavor == Flavor.mhbc &&
                                     provider.homeNavigationList[index].name ==
                                         provider.homeNavigationList[2].name
                                 ? Colors.transparent
-                                : null),
+                                : null),*/
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index].name)
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            textColor: flavor == Flavor.mhbc &&
+                            /*textColor: flavor == Flavor.mhbc &&
                                     provider.homeNavigationList[index].name ==
                                         (provider.homeNavigationList[2].name)
                                 ? Colors.transparent
                                 : Theme.of(context)
                                     .textSelectionTheme
-                                    .selectionColor,
+                                    .selectionColor,*/
+                            textColor:
+                                AppThemeCustom.getCustomHomeButtonsTextStyle(
+                                    context,
+                                    provider,
+                                    provider.homeNavigationList[index].name),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
                             decoration: BoxDecoration(
@@ -144,12 +155,14 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                         .color!
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
-                                border: Border.all(
+                                /*border: Border.all(
                                     color: Theme.of(context)
                                         .buttonTheme
                                         .colorScheme!
                                         .onSecondary,
-                                    width: 1.5),
+                                    width: 1.5),*/
+                                border: AppThemeCustom
+                                    .getCustomHomeButtonsBorderStyle(context,provider,provider.homeNavigationList[index].name),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
@@ -186,6 +199,24 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               if (flavor == Flavor.mhbc &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.clh &&
+                                      provider.homeNavigationList[index].name ==
+                                          provider
+                                              .homeNavigationList[0].name) ||
+                                  (flavor == Flavor.clh &&
+                                      provider.homeNavigationList[index].name ==
+                                          provider
+                                              .homeNavigationList[2].name)) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.montaukTavern &&
+                                      provider.homeNavigationList[index].name ==
+                                          provider
+                                              .homeNavigationList[0].name) ||
+                                  (flavor == Flavor.montaukTavern &&
+                                      provider.homeNavigationList[index].name ==
+                                          provider
+                                              .homeNavigationList[2].name)) {
                                 /// DO NOTHING ///
                               } else {
                                 provider.updateSelectedOption(index);
@@ -321,6 +352,20 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
           }),
         ),
       ),
+      /*floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40.0),
+            side: BorderSide(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5)),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ScanSelectionScreen()));
+        },
+        child: const Icon(Icons.adf_scanner_outlined),
+      ),*/
     );
   }
 

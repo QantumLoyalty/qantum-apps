@@ -17,14 +17,8 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> fetchSeeAllButtons();
 
+  Future<NetworkResponse> fetchDLInformation(
+      {required String frontImagePath, required String backImagePath});
+
   Future<NetworkResponse> updateCouponCode({required String couponCode});
-
-
-
-
-
-
-
-
-
 }

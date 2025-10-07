@@ -6,7 +6,8 @@ enum Flavor {
   mhbc,
   clh,
   montaukTavern,
-  hogansReward
+  hogansReward,
+  northShoreTavern,
 }
 
 class FlavorValues {
