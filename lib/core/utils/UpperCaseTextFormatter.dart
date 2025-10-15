@@ -9,6 +9,6 @@ class UpperCaseTextFormatter extends TextInputFormatter {
   }
 
   String capitalize(String value) {
-    return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";
+    return "${value[0].toUpperCase()}${value.substring(1)}";
   }
 }

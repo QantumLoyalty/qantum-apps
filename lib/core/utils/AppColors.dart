@@ -250,6 +250,36 @@ class AppColors {
 
   static Color get nst_canvas_color => const Color(0xFFCED2CE);
 
+  /// ACE REWARDS ///
+
+  static Color get ar_sf_color => const Color(0xFFC0A36B);
+
+  static Color get ar_back_color => const Color(0xFF2E3C53);
+
+  static Color get ar_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get ar_back_color_2 => const Color(0xFF2E3C53);
+
+  static Color get ar_back_color_3 => const Color(0xFF55f6ff);
+
+  static Color get ar_text_color => const Color(0xFFFFFFFF);
+
+  static Color get ar_text_field_text_color => const Color(0xFF000000);
+
+  static Color get ar_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get ar_button_color => const Color(0xFF2E3C53);
+
+  static Color get ar_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get ar_card_color => const Color(0xFFFFFFFF);
+
+  static Color get ar_divider_color => const Color(0xFF2E3C53);
+
+  static Color get ar_disable_color => const Color(0xFF55f6ff);
+
+  static Color get ar_canvas_color => const Color(0xFFCED2CE);
+
 
 
 

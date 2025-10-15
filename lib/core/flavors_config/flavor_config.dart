@@ -8,6 +8,7 @@ enum Flavor {
   montaukTavern,
   hogansReward,
   northShoreTavern,
+  aceRewards
 }
 
 class FlavorValues {

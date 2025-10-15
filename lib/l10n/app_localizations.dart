@@ -905,7 +905,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgCancelAccount.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to cancel your account?'**
+  /// **'Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
   String get msgCancelAccount;
 
   /// No description provided for @txtPlayerActivityStatementFor.

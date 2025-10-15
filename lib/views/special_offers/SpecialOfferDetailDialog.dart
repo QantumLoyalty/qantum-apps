@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/HomeProvider.dart';
 import '../../view_models/SpecialOffersProvider.dart';
@@ -162,10 +163,7 @@ class SpecialOfferDetailDialog {
                                       icon: Icon(
                                         Icons.clear,
                                         size: 30,
-                                        color: Theme.of(context)
-                                            .buttonTheme
-                                            .colorScheme!
-                                            .primary,
+                                        color: AppThemeCustom.getCloseBtnDialogColor(context)
                                       )),
                                 ))
                           ],

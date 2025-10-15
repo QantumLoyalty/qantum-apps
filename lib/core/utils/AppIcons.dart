@@ -48,6 +48,25 @@ class AppIcons {
         default:
           return card_value;
       }
+    } else if (selectedFlavor == Flavor.aceRewards) {
+      switch (membershipType!.toLowerCase()) {
+        case "staff":
+          return "assets/aceRewards/card_staff.png";
+        case "tens":
+          return "assets/aceRewards/card_tens.png";
+        case "jacks":
+          return "assets/aceRewards/card_jacks.png";
+        case "queens":
+          return card_platinum;
+        case "kings":
+          return card_gold;
+        case "ace":
+          return "assets/aceRewards/card_ace.png";
+        case "aceplus":
+          return "assets/aceRewards/card_ace_plus.png";
+        default:
+          return "assets/aceRewards/card_staff.png";
+      }
     } else if (selectedFlavor == Flavor.hogansReward) {
       switch (membershipType!.toLowerCase()) {
         case "pearl":
@@ -65,9 +84,51 @@ class AppIcons {
     } else if (selectedFlavor == Flavor.clh) {
       switch (membershipType!.toLowerCase().trim()) {
         case "member":
-          return "assets/centralLaneHotel/card_member.png";
-        case "premiummember":
           return "assets/centralLaneHotel/card_premium_member.png";
+        case "premiummember":
+          return "assets/centralLaneHotel/card_member.png";
+        case "valued":
+          return card_value;
+        case "silver":
+          return card_silver;
+        case "gold":
+          return card_gold;
+        case "platinum":
+          return card_platinum;
+        case "platinumblack":
+          return card_platinum_black;
+        default:
+          return card_value;
+      }
+    } else if (selectedFlavor == Flavor.montaukTavern) {
+      switch (membershipType!.toLowerCase().trim()) {
+        case "member":
+          return "assets/montaukTavern/card_premium_member.png";
+        case "premiummember":
+          return "assets/montaukTavern/card_member.png";
+        case "valued":
+          return card_value;
+        case "silver":
+          return card_silver;
+        case "gold":
+          return card_gold;
+        case "platinum":
+          return card_platinum;
+        case "platinumblack":
+          return card_platinum_black;
+        case "sapphire":
+          return "assets/montaukTavern/card_sapphire.png";
+        case "diamond":
+          return "assets/montaukTavern/card_diamond.png";
+        default:
+          return card_value;
+      }
+    } else if (selectedFlavor == Flavor.northShoreTavern) {
+      switch (membershipType!.toLowerCase().trim()) {
+        case "prestaff":
+          return "assets/northShoreTavern/card_pre_staff.png";
+        case "staff":
+          return "assets/northShoreTavern/card_staff.png";
         case "valued":
           return card_value;
         case "silver":

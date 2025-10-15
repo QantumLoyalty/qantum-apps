@@ -413,7 +413,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get msgLogout => 'क्या आप वाकई एप्लिकेशन से लॉग आउट करना चाहते हैं?';
 
   @override
-  String get msgCancelAccount => 'क्या आप वाकई अपना खाता रद्द करना चाहते हैं?';
+  String get msgCancelAccount => 'क्या आप वाकई अपना खाता रद्द करना चाहते हैं?\nएक बार पुष्टि करने के बाद, यह खाता उपयोग नहीं किया जा सकेगा और आपका डेटा और व्यक्तिगत जानकारी 48 घंटों के भीतर हमारे सिस्टम से स्थायी रूप से हटा दी जाएगी।';
 
   @override
   String get txtPlayerActivityStatementFor => 'खिलाड़ी गतिविधि विवरण';

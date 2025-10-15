@@ -155,12 +155,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                         .color!
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
-                                /*border: Border.all(
-                                    color: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .onSecondary,
-                                    width: 1.5),*/
                                 border: AppThemeCustom
                                     .getCustomHomeButtonsBorderStyle(context,provider,provider.homeNavigationList[index].name),
                                 borderRadius: BorderRadius.circular(10)),

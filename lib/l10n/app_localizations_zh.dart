@@ -413,7 +413,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get msgLogout => '您确定要退出应用程序吗？';
 
   @override
-  String get msgCancelAccount => '您确定要注销账户吗？';
+  String get msgCancelAccount => '您确定要注销账户吗？\n一旦确认，此账户将无法再使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 
   @override
   String get txtPlayerActivityStatementFor => '玩家活动报表 -';
@@ -900,7 +900,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get msgLogout => '您确定要退出应用程序吗？';
 
   @override
-  String get msgCancelAccount => '您确定要注销账户吗？';
+  String get msgCancelAccount => '您确定要注销账户吗？\n一旦确认，此账户将无法再使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 
   @override
   String get txtPlayerActivityStatementFor => '玩家活动报表 -';

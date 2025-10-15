@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/core/flavors_config/flavor_config.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../views/dialogs/ErrorDialog.dart';
@@ -26,12 +27,13 @@ class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController _phoneController;
   String countryCode = "+61";
   late AppLocalizations loc;
+  late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
-
+    flavor = FlavorConfig.instance.flavor!;
   }
 
   @override
@@ -63,8 +65,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 args['countryCode'] = countryCode;
                 args['phoneNo'] = _phoneController.text.toString();
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  AppNavigator.navigateReplacement(context, AppNavigator.signup,
-                      arguments: args);
+                  if (flavor == Flavor.qantum) {
+                    AppNavigator.navigateReplacement(
+                        context, AppNavigator.drivingLicenseScreen,
+                        arguments: args);
+                  } else {
+                    AppNavigator.navigateReplacement(
+                        context, AppNavigator.signup,
+                        arguments: args);
+                  }
                 });
               }
 
@@ -82,8 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context, provider.networkMessage ?? "");
                 });*/
                 ErrorDialog.getInstance().showErrorDialog(context,
-                    message: provider.networkMessage ??
-                        loc.msgCommonError);
+                    message: provider.networkMessage ?? loc.msgCommonError);
               }
               /* else {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -134,8 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             AppDimens.shape_30,
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text(
-                                  loc.txtMobileNumber,
+                              child: Text(loc.txtMobileNumber,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
@@ -219,9 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             AppDimens.getCustomBoxShape(30),
                             AppButton(
-                              text: loc
-                                  .txtOk
-                                  .toUpperCase(),
+                              text: loc.txtOk.toUpperCase(),
                               onClick: () {
                                 if (_phoneController.text.isNotEmpty &&
                                     AppHelper.verifyPhoneNumber(
@@ -229,8 +234,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   provider.login(
                                       "$countryCode${_phoneController.text}");
                                 } else {
-                                  AppHelper.showErrorMessage(context,
-                                      loc.msgIncorrectPhoneNumber);
+                                  AppHelper.showErrorMessage(
+                                      context, loc.msgIncorrectPhoneNumber);
                                 }
                               },
                             ),

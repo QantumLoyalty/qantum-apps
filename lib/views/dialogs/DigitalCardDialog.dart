@@ -285,6 +285,14 @@ class DigitalCardDialog {
 
     if (flavor == Flavor.mhbc) {
       return "MHBCAAAAA";
+    } else if (flavor == Flavor.clh) {
+      return "CLH";
+    } else if (flavor == Flavor.northShoreTavern) {
+      return "NST";
+    } else if (flavor == Flavor.montaukTavern) {
+      return "MTT";
+    } else if (flavor == Flavor.hogansReward) {
+      return "HWP";
     } else {
       return "ABC1234";
     }

@@ -30,8 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
           await SharedPreferenceHelper.getInstance();
       if (sharedPreferenceHelper.getUserData() != null) {
         AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-        /*Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DrivingLicenseScanScreen()));*/
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }

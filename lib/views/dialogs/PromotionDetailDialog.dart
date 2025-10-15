@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '../../core/enums/AdvertisementEnums.dart';
 import '/core/navigation/AppNavigator.dart';
 import '../../data/models/PromotionModel.dart';
@@ -129,10 +130,7 @@ class PromotionDetailDialog {
                                   icon: Icon(
                                     Icons.clear,
                                     size: 30,
-                                    color: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .primary,
+                                    color: AppThemeCustom.getCloseBtnDialogColor(context),
                                   )),
                             ))
                       ],

@@ -59,7 +59,6 @@
   "txtBusTimetable": "Bus\nTimetable",
   "txtShowTickets": "Show\nTickets",
   "txtPlaceHolder": "PlaceHolder",
-
   "txtChangeMyDetails": "Change My Details",
   "txtCommunicationPreferences": "Communication Preferences",
   "txtClubAndMembership": "Club & Membership",
@@ -139,8 +138,7 @@
   "txtYes": "Yes",
   "txtNo": "No",
   "msgLogout": "Are you sure you want to log out of the application?",
-  "msgCancelAccount": "Are you sure you want to cancel your account?",
-
+  "msgCancelAccount": "Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.",
   "txtPlayerActivityStatementFor": "Player Activity Statement for",
   "txtDetails": "Details",
   "txtTotalAmountBet": "Total Amount Bet",
@@ -150,7 +148,6 @@
   "txtTotalHoursPlayed": "Total Hours Played",
   "txtPerformance": "Performance",
   "txtTo": "To",
-
   "msgProfileUpdateSuccess": "Your profile has been updated successfully!",
   "msgProfileUpdateError": "Oops... something went wrong while updating your profile.",
   "msgProfileUpdateLoading": "Please wait while we update your profile...",
@@ -160,7 +157,6 @@
   "msgIssueInVerifyAccount": "There was a problem verifying your account. Please try again.",
   "msgEnterNewMobile": "Please enter your new mobile number",
   "msgClubCodeSaved": "Club code has been saved successfully!",
-
   "takePhotoOf": "Take a photo of",
   "frontOfDL": "Front of Driver's Licence",
   "ensureFits": "Ensure your licence fits within the white guidelines",
@@ -168,8 +164,4 @@
   "retakeBtn": "Retake",
   "backOfDL": "Back of Driver's Licence",
   "fetchingCameras": "Fetching cameras"
-
-
-
-
 }

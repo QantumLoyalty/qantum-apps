@@ -17,18 +17,39 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 
-# MHBC - 1.0.5+60
-# MAX - 1.0.0+56
-# QANTUM - 1.0.0+58
-# SENSE OF TASTE - 1.0.0+56
-# CENTRAL LANE HOTEL - 1.0.0+56
-# STAR REWARD - 1.0.0+56
-# MONTAUK TAVERN - 1.0.0+46
-# HOGAN'S REWARD - 1.0.0+1
-# NORTH SHORE TAVERN - 1.0.0+1
 
+###################################
+# STAR REWARD
+# version:  1.0.0+56
+###################################
+# SENSE OF TASTE
+# version:  1.0.0+56
+###################################
+# MAX
+# version:  1.0.0+56
+###################################
+# HOGAN'S REWARD
+#version:  1.0.0+5
+###################################
+# MHBC
+# version:  1.0.5+60
+###################################
+# MONTAUK TAVERN
+#version:  1.0.0+51
+###################################
+# CENTRAL LANE HOTEL
+# version:  1.0.0+60
+###################################
+# NORTH SHORE TAVERN
+#version: 1.0.0+6
+###################################
+#QANTUM
+#version: 1.0.0+60
+###################################
+# ACE REWARDS
+version: 1.0.0+1
+###################################
 
-version: 1.0.0+3
 
 environment:
   sdk: ^3.5.3
@@ -84,8 +105,8 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_secure_storage: ^9.2.4
   flutter_localization: ^0.3.3
- # flutter_credit_card_scanner: ^0.11.9
- # flutter_camera_overlay: ^0.1.1
+  # flutter_credit_card_scanner: ^0.11.9
+  flutter_camera_overlay: ^0.1.1
   image: ^4.2.0
 
 #  easy_geofencing: ^0.2.0
@@ -126,6 +147,7 @@ flutter:
     - assets/montaukTavern/
     - assets/hogansReward/
     - assets/northShoreTavern/
+    - assets/aceRewards/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

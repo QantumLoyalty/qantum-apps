@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -24,7 +26,7 @@ class SignupScreen extends StatefulWidget {
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _emailController;
@@ -41,15 +43,30 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   void initState() {
     super.initState();
-    _firstNameController = TextEditingController();
+    _firstNameController =
+        TextEditingController(text: widget.argument['name'] ?? "");
+
+    String date = "", month = "", year = "";
+    if (widget.argument.containsKey("dob")) {
+      try {
+        DateFormat format = DateFormat("yyyy-MM-dd");
+        DateTime dob = format.parse(widget.argument["dob"]!);
+        date = dob.day.toString();
+        month = dob.month.toString();
+        year = dob.year.toString();
+      } catch (e) {
+        logEvent("DOB Parse Error: $e");
+      }
+    }
+
     _lastNameController = TextEditingController();
     _emailController = TextEditingController();
     _postcodeController = TextEditingController();
-    _birthdayDDController = TextEditingController();
+    _birthdayDDController = TextEditingController(text: date);
 
-    _birthdayMMController = TextEditingController();
+    _birthdayMMController = TextEditingController(text: month);
 
-    _birthdayYYController = TextEditingController();
+    _birthdayYYController = TextEditingController(text: year);
     _birthdayDDFocusNode = FocusNode();
     _birthdayMMFocusNode = FocusNode();
     _birthdayYYFocusNode = FocusNode();
@@ -676,46 +693,50 @@ class _SignupScreenState extends State<SignupScreen> {
                           text: loc.txtJoinNow.toUpperCase(),
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
-                              if (_postcodeController.text.isNotEmpty) {
-                                if (validateData(provider)) {
-                                  if (provider.tcCheckStatus) {
-                                    Map<String, dynamic> params = {};
-                                    params['GivenNames'] =
-                                        _firstNameController.text;
-                                    params['Surname'] =
-                                        _lastNameController.text;
-                                    params['DateOfBirth'] =
-                                        '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
+                              //if (_postcodeController.text.isNotEmpty) {
+                              if (validateData(provider)) {
+                                if (provider.tcCheckStatus) {
+                                  Map<String, dynamic> params = {};
+                                  params['GivenNames'] =
+                                      _firstNameController.text;
+                                  params['Surname'] = _lastNameController.text;
+                                  params['DateOfBirth'] =
+                                      '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
+                                  if (_postcodeController.text.isNotEmpty) {
                                     params['PostCode'] =
                                         _postcodeController.text;
-                                    params['Email'] = _emailController.text;
-                                    // params['Gender'] = provider.selectedGender![0].toUpperCase();
-                                    if (provider.selectedGender![0]
-                                            .toUpperCase() ==
-                                        "M") {
-                                      params['Gender'] = "M";
-                                    } else if (provider.selectedGender![0]
-                                            .toUpperCase() ==
-                                        "F") {
-                                      params['Gender'] = "F";
-                                    } else {
-                                      params['Gender'] = "U";
-                                    }
-
-                                    String phoneNo =
-                                        "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
-                                    AppHelper.printMessage(
-                                        "PARAMS:: $params -> $phoneNo");
-                                    userLoginProvider.signup(phoneNo, params,loc: loc);
-                                  } else {
-                                    AppHelper.showErrorMessage(context,
-                                        loc.msgCheckTermsAndConditions);
                                   }
+
+                                  params['Email'] = _emailController.text;
+                                  // params['Gender'] = provider.selectedGender![0].toUpperCase();
+                                  if (provider.selectedGender![0]
+                                          .toUpperCase() ==
+                                      "M") {
+                                    params['Gender'] = "M";
+                                  } else if (provider.selectedGender![0]
+                                          .toUpperCase() ==
+                                      "F") {
+                                    params['Gender'] = "F";
+                                  } else {
+                                    params['Gender'] = "U";
+                                  }
+
+                                  String phoneNo =
+                                      "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
+                                  AppHelper.printMessage(
+                                      "PARAMS:: $params -> $phoneNo");
+                                  userLoginProvider.signup(phoneNo, params,
+                                      loc: loc);
+                                } else {
+                                  AppHelper.showErrorMessage(
+                                      context, loc.msgCheckTermsAndConditions);
                                 }
-                              } else {
+                              }
+                              //}
+                              /*else {
                                 AppHelper.showErrorMessage(
                                     context, loc.msgEmptyPostcode);
-                              }
+                              }*/
                             }
 
                             // AppNavigator.navigateTo(context, AppNavigator.otp);

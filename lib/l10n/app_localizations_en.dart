@@ -413,7 +413,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgLogout => 'Are you sure you want to log out of the application?';
 
   @override
-  String get msgCancelAccount => 'Are you sure you want to cancel your account?';
+  String get msgCancelAccount => 'Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
 
   @override
   String get txtPlayerActivityStatementFor => 'Player Activity Statement for';

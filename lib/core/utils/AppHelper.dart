@@ -9,7 +9,7 @@ import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
   /// MAKE IT DEFAULT 5
-  static int defaultRequestTime = 5000;
+  static int defaultRequestTime = 5;
 
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {
@@ -460,6 +460,7 @@ class AppHelper with LoggingMixin {
       Flavor.montaukTavern: "Montauk",
       Flavor.senseOfTaste: "Sense",
       Flavor.hogansReward: "Hogan",
+      Flavor.northShoreTavern: "North"
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

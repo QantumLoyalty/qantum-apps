@@ -1,12 +1,11 @@
-/*
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_camera_overlay/model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
+import '../../core/navigation/AppNavigator.dart';
+import '/core/utils/AppHelper.dart';
+import '/views/common_widgets/AppLoader.dart';
 import '../../view_models/DocumentScanProvider.dart';
 import '/core/utils/AppDimens.dart';
 import '/views/common_widgets/AppButton.dart';
@@ -17,7 +16,9 @@ import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
 
 class DrivingLicenseScanScreen extends StatefulWidget {
-  const DrivingLicenseScanScreen({super.key});
+  Map<String, String> arguments;
+
+  DrivingLicenseScanScreen({super.key, required this.arguments});
 
   @override
   State<DrivingLicenseScanScreen> createState() =>
@@ -73,43 +74,59 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
           AppHelper.showErrorMessage(context, "Error in scanning!!");
         } else {
           if (provider.scannedData != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AppDimens.shape_20,
-                            Text(
-                              "Scanned Result",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            AppDimens.shape_20,
-                            Text("Name: ${provider.scannedData!["name"]}"),
-                            AppDimens.shape_10,
-                            Text("DOB: ${provider.scannedData!["dob"]}"),
-                            AppDimens.shape_10,
-                            Text(
-                                "Address: ${provider.scannedData!["address"]}"),
-                            AppDimens.shape_10,
-                            Text(
-                                "Expiry Date: ${provider.scannedData!["expiry_date"]}"),
-                            AppDimens.shape_20,
-                            AppButton(
-                                text: "CLOSE",
-                                onClick: () {
-                                  Navigator.pop(context);
-                                })
-                          ],
+            Future.delayed(Duration.zero, () {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (provider.scannedData!.containsKey("name")) {
+                  widget.arguments["name"] = provider.scannedData!["name"];
+                }
+                if (provider.scannedData!.containsKey("dob")) {
+                  widget.arguments["dob"] = provider.scannedData!["dob"];
+                }
+                if (provider.scannedData!.containsKey("address")) {
+                  widget.arguments["address"] =
+                      provider.scannedData!["address"];
+                }
+
+                AppNavigator.navigateReplacement(context, AppNavigator.signup,
+                    arguments: widget.arguments);
+
+                /*showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AppDimens.shape_20,
+                              const Text(
+                                "Scanned Result",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              AppDimens.shape_20,
+                              Text("Name: ${provider.scannedData!["name"]}"),
+                              AppDimens.shape_10,
+                              Text("DOB: ${provider.scannedData!["dob"]}"),
+                              AppDimens.shape_10,
+                              Text(
+                                  "Address: ${provider.scannedData!["address"]}"),
+                              AppDimens.shape_10,
+                              Text(
+                                  "Expiry Date: ${provider.scannedData!["expiry_date"]}"),
+                              AppDimens.shape_20,
+                              AppButton(
+                                  text: "CLOSE",
+                                  onClick: () {
+                                    Navigator.pop(context);
+                                  })
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  });
+                      );
+                    });*/
+              });
             });
           }
         }
@@ -139,46 +156,45 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
                     color: Theme.of(context).textSelectionTheme.selectionColor),
               ),
               Expanded(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    AppDimens.shape_20,
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: getCentralWidget(),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/common/lightbulb.png",
-                            width: 20,
-                            height: 20,
+                  child: Column(
+                children: [
+                  AppDimens.shape_20,
+                  Expanded(
+                    child: getCentralWidget(),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/common/lightbulb.png",
+                          width: 20,
+                          height: 20,
+                        ),
+                        AppDimens.shape_10,
+                        Expanded(
+                          child: Text(
+                            loc.ensureFits,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor),
                           ),
-                          AppDimens.shape_10,
-                          Expanded(
-                            child: Text(
-                              loc.ensureFits,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               )),
               AppDimens.shape_20,
               AppButton(
-                  text: preview ? "Next" : loc.takePhotoBtn,
+                  text: (findStatus() == 4)
+                      ? "SUBMIT"
+                      : (preview ? "Next" : loc.takePhotoBtn),
                   onClick: () {
                     int status = findStatus();
                     if (status == 0 || status == 2) {
@@ -195,7 +211,28 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
               AppDimens.shape_10,
               FilledButton.icon(
                   icon: Icon(Icons.replay),
-                  onPressed: () {},
+                  onPressed: () {
+                    int status = findStatus();
+                    if (status == 1) {
+                      setState(() {
+                        _frontImage = null;
+                        preview = false;
+                      });
+                    } else if (status == 3) {
+                      setState(() {
+                        _backImage = null;
+                        preview = false;
+                      });
+                    } else if (status == 4) {
+                      setState(() {
+                        _frontImage = null;
+                        _backImage = null;
+                        preview = false;
+                      });
+                    } else {
+                      setState(() {});
+                    }
+                  },
                   label: Text(
                     loc.retakeBtn,
                   ))
@@ -247,34 +284,6 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
         preview = true;
       }
     });
-
-    */
-/*showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            child: Container(
-              child: Stack(
-                children: [
-                  Center(child: Image.file(File(croppedFile.path))),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.cancel,
-                          color: Colors.red,
-                          size: 48,
-                        )),
-                  )
-                ],
-              ),
-            ),
-          );
-        });*//*
-
   }
 
   int findStatus() {
@@ -311,43 +320,32 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return SizedBox(
-                height: 300,
                 width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 child: Stack(
+                  alignment: Alignment.center,
                   children: [
-                    Center(
-                      child: SizedBox(
-                          height: 300,
-                          width: MediaQuery.of(context).size.width,
-                          child: */
-/*ClipRect(
-                                      child: OverflowBox(
-                                        alignment: Alignment.center,
-                                        child: FittedBox(
-                                          fit: BoxFit.cover,
-                                          child: SizedBox(
-                                            width: _controller!
-                                                .value.previewSize!.width,
-                                            height: _controller!
-                                                .value.previewSize!.height,
-                                            child: CameraPreview(_controller!),
-                                          ),
-                                        ),
-                                      ),
-                                    )*//*
-
-                              AspectRatio(
-                                  aspectRatio: _controller!.value.aspectRatio,
-                                  child: CameraPreview(_controller!))),
-                    ),
-                    Center(
+                    Positioned.fill(
                       child: Container(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white, width: 3),
                         ),
+                        child: FittedBox(
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                                width: _controller!.value.previewSize!.height,
+                                height: _controller!.value.previewSize!.width,
+                                child: CameraPreview(_controller!))),
+                      ),
+                    ),
+                    Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white, width: 3),
                       ),
                     )
                   ],
@@ -383,4 +381,3 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
     }
   }
 }
-*/

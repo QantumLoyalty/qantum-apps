@@ -503,13 +503,13 @@ class AppThemeCustom {
       case Flavor.northShoreTavern:
         return ButtonStyle(
             shadowColor:
-            WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
-            WidgetStatePropertyAll(Theme.of(context).primaryColor));
+                WidgetStatePropertyAll(Theme.of(context).primaryColor));
       default:
         return const ButtonStyle();
     }
@@ -531,6 +531,15 @@ class AppThemeCustom {
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
                 provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : null;
+
+      case Flavor.hogansReward:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : null;
+      case Flavor.northShoreTavern:
+        return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : null;
 
@@ -583,6 +592,18 @@ class AppThemeCustom {
             : Border.all(
                 color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
                 width: 1.5);
+      case Flavor.hogansReward:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? null
+            : Border.all(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5);
+      case Flavor.northShoreTavern:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? null
+            : Border.all(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5);
 
       default:
         return Border.all(
@@ -609,6 +630,14 @@ class AppThemeCustom {
                 provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.hogansReward:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.northShoreTavern:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : Theme.of(context).textSelectionTheme.selectionColor;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -622,6 +651,16 @@ class AppThemeCustom {
         return AppColors.nst_back_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
+    }
+  }
+
+  static Color getCloseBtnDialogColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.montaukTavern:
+        return Theme.of(context).primaryColorDark;
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
   }
 }
