@@ -71,10 +71,8 @@ class DetailCard extends StatelessWidget {
               userName(provider),
               style: TextStyle(
                   color: editable
-                      ? AppThemeCustom.getUserInfoItemStyle(
-                      context, editable)
-                      : AppThemeCustom.getUserInfoItemStyle(
-                      context, editable)
+                      ? AppThemeCustom.getUserInfoItemStyle(context, editable)
+                      : AppThemeCustom.getUserInfoItemStyle(context, editable)
                           ?.withValues(alpha: 0.7)),
             ),
             AppDimens.shape_5,
@@ -82,10 +80,8 @@ class DetailCard extends StatelessWidget {
               "DOB ${editable ? AppHelper.formatDate(provider.tempUser!.dateOfBirth) : "**/**/****"}",
               style: TextStyle(
                   color: editable
-                      ? AppThemeCustom.getUserInfoItemStyle(
-                      context, editable)
-                      : AppThemeCustom.getUserInfoItemStyle(
-                      context, editable)
+                      ? AppThemeCustom.getUserInfoItemStyle(context, editable)
+                      : AppThemeCustom.getUserInfoItemStyle(context, editable)
                           ?.withValues(alpha: 0.7)),
             ),
           ],

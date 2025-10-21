@@ -158,7 +158,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               }
                             },
                             text: loc.txtDeleteMyAccount.toUpperCase(),
-                            textColor: AppThemeCustom.getAccountSectionItemStyle(context),
+                            textColor:
+                                AppThemeCustom.getAccountSectionDeleteTextStyle(
+                                    context),
                           ),
                         ),
                         AppDimens.shape_20,

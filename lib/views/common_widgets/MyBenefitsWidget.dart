@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +87,8 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              AppLocalizations.of(context)!.txtMembershipBenefits,
+                              AppLocalizations.of(context)!
+                                  .txtMembershipBenefits,
                               style: TextStyle(shadows: [
                                 Shadow(
                                   offset: const Offset(1.0, 1.0),
@@ -186,6 +186,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                           Icons.clear,
                           size: 30,
                           color: Colors.white,
+
                         )),
                   ))
             ],

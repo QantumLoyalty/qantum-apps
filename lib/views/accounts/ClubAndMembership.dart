@@ -73,7 +73,8 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                   children: [
                     AccountsAppBar(
                         showBackButton: true,
-                        title: selectedFlavor == Flavor.mhbc
+                        title: (selectedFlavor == Flavor.mhbc ||
+                                selectedFlavor == Flavor.starReward)
                             ? loc.txtSponsorship
                             : loc.txtClubAndMembership),
                     Expanded(
@@ -94,14 +95,18 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                             Text(
                               loc.msgObtainClubCode,
                               style: TextStyle(
-                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
+                                  color:
+                                      AppThemeCustom.getAccountSectionItemStyle(
+                                          context)),
                             ),
                             AppDimens.shape_20,
                             Text(
                               loc.txtClubCode.toUpperCase(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  color: AppThemeCustom.getAccountSectionItemStyle(context)),
+                                  color:
+                                      AppThemeCustom.getAccountSectionItemStyle(
+                                          context)),
                             ),
                             AppDimens.shape_15,
                             TextFormField(
@@ -151,7 +156,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                                 onClick: () {
                                   if (_codeController.text.isNotEmpty) {
                                     provider.updateCoupon(
-                                        coupon: _codeController.text,loc: loc);
+                                        coupon: _codeController.text, loc: loc);
                                   } else {
                                     AppHelper.showErrorMessage(
                                         context, loc.msgEnterClubCode);

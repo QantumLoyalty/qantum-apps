@@ -72,9 +72,10 @@ class UserModel {
     suburb = json.containsKey("Suburb") ? json["Suburb"] : "";
     state = json.containsKey("State") ? json["State"] ?? "" : "";
     dateJoined = json.containsKey("DateJoined") ? json["DateJoined"] : "";
-    pointsValue =
-        json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
+
+    pointsValue = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
     pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
+
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
     if (json.containsKey("StatusTier") && json["StatusTier"] != null) {
@@ -82,6 +83,10 @@ class UserModel {
     } else {
       statusTier = "";
     }
+
+
+
+
     requiredStatusPointsForNextTier =
         json.containsKey("RequiredStatusPointsForNextTier")
             ? json["RequiredStatusPointsForNextTier"]

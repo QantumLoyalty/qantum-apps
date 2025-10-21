@@ -6,7 +6,6 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../views/common_widgets/AppScaffold.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../view_models/UserInfoProvider.dart';
-import '../common_widgets/AppLogo.dart';
 import 'EditUserInfo/EditDetailScreen.dart';
 import 'EditUserInfo/EditMailScreen.dart';
 import 'EditUserInfo/EditPhoneScreen.dart';

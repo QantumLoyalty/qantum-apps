@@ -90,42 +90,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
                 AppNavigator.navigateReplacement(context, AppNavigator.signup,
                     arguments: widget.arguments);
 
-                /*showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Dialog(
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              AppDimens.shape_20,
-                              const Text(
-                                "Scanned Result",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              AppDimens.shape_20,
-                              Text("Name: ${provider.scannedData!["name"]}"),
-                              AppDimens.shape_10,
-                              Text("DOB: ${provider.scannedData!["dob"]}"),
-                              AppDimens.shape_10,
-                              Text(
-                                  "Address: ${provider.scannedData!["address"]}"),
-                              AppDimens.shape_10,
-                              Text(
-                                  "Expiry Date: ${provider.scannedData!["expiry_date"]}"),
-                              AppDimens.shape_20,
-                              AppButton(
-                                  text: "CLOSE",
-                                  onClick: () {
-                                    Navigator.pop(context);
-                                  })
-                            ],
-                          ),
-                        ),
-                      );
-                    });*/
+
               });
             });
           }

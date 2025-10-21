@@ -293,6 +293,8 @@ class DigitalCardDialog {
       return "MTT";
     } else if (flavor == Flavor.hogansReward) {
       return "HWP";
+    } else if (flavor == Flavor.starReward) {
+      return "SHG";
     } else {
       return "ABC1234";
     }

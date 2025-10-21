@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '/core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../l10n/app_localizations.dart';
@@ -100,10 +101,8 @@ class PartnerOfferDialog {
                               icon: Icon(
                                 Icons.clear,
                                 size: 30,
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary,
+                                color: AppThemeCustom.getCloseBtnDialogColor(
+                                    context),
                               )),
                         ))
                   ],

@@ -251,6 +251,15 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(AppColors.nst_canvas_color));
+      case Flavor.aceRewards:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -339,6 +348,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.aceRewards:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -416,6 +434,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.aceRewards:
+        return ButtonStyle(
+            shadowColor:
+                WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.white),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return const ButtonStyle();
@@ -431,7 +458,7 @@ class AppHelper with LoggingMixin {
             Flavor.clh:
         return const Size(142, 42);
 
-      case Flavor.northShoreTavern:
+      case Flavor.northShoreTavern || Flavor.aceRewards:
         return const Size(142, 58);
 
       default:
@@ -467,16 +494,31 @@ class AppHelper with LoggingMixin {
 
   static Future<String> getUserTierType(UserModel userData) async {
     if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
-      return userData.statusTier!;
+      if (userData.statusTier!.toLowerCase() == "") {
+        return "STAFF PRE 3MTH";
+      } else {
+        return userData.statusTier!;
+      }
     } else {
       /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
       FlavorConfig flavorConfig = FlavorConfig.instance;
       switch (flavorConfig.flavor) {
         case Flavor.mhbc:
           return "Crewmate";
+        case Flavor.montaukTavern || Flavor.clh:
+          return "Member";
+        case Flavor.hogansReward:
+          return "Pearl";
+
         default:
           return "Valued";
       }
     }
+  }
+
+  static bool isClubApp() {
+    final flavor = FlavorConfig.instance.flavor;
+    const clubFlavors = {Flavor.qantum, Flavor.aceRewards};
+    return clubFlavors.contains(flavor);
   }
 }

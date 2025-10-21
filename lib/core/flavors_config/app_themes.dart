@@ -525,7 +525,7 @@ class AppThemes {
       primaryColorDark: AppColors.ar_back_color_2,
       primaryColor: AppColors.ar_back_color,
       cardColor: AppColors.ar_card_color,
-      canvasColor: AppColors.ar_back_color_2,
+      canvasColor: AppColors.ar_back_color,
       scaffoldBackgroundColor: AppColors.ar_sf_color,
       dividerColor: AppColors.ar_divider_color,
       hintColor: AppColors.ar_hint_text_color,
@@ -577,12 +577,12 @@ class AppThemes {
       switchTheme: SwitchThemeData(
           trackColor: MaterialStateProperty.resolveWith((state) =>
           state.contains(MaterialState.selected)
-              ? AppColors.ar_sf_color
+              ? AppColors.ar_back_color_2
               : AppColors.white),
           thumbColor: MaterialStateProperty.resolveWith((state) =>
           state.contains(MaterialState.selected)
               ? AppColors.white
-              : AppColors.ar_sf_color)));
+              : AppColors.ar_back_color_2)));
 
 
   static ThemeData get hogansTheme => ThemeData(

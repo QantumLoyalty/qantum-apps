@@ -79,16 +79,16 @@ class AppIcons {
           return "assets/hogansReward/card_ruby.png";
         case "diamond":
         default:
-          return "assets/hogansReward/card_ruby.png";
+          return "assets/hogansReward/card_pearl.png";
       }
     } else if (selectedFlavor == Flavor.clh) {
       switch (membershipType!.toLowerCase().trim()) {
         case "member":
-          return "assets/centralLaneHotel/card_premium_member.png";
+          return card_value;
         case "premiummember":
           return "assets/centralLaneHotel/card_member.png";
         case "valued":
-          return card_value;
+          return "assets/centralLaneHotel/card_premium_member.png";
         case "silver":
           return card_silver;
         case "gold":
@@ -103,9 +103,9 @@ class AppIcons {
     } else if (selectedFlavor == Flavor.montaukTavern) {
       switch (membershipType!.toLowerCase().trim()) {
         case "member":
-          return "assets/montaukTavern/card_premium_member.png";
-        case "premiummember":
           return "assets/montaukTavern/card_member.png";
+        case "premiummember":
+          return "assets/montaukTavern/card_premium_member.png";
         case "valued":
           return card_value;
         case "silver":
@@ -121,7 +121,7 @@ class AppIcons {
         case "diamond":
           return "assets/montaukTavern/card_diamond.png";
         default:
-          return card_value;
+          return "assets/montaukTavern/card_member.png";
       }
     } else if (selectedFlavor == Flavor.northShoreTavern) {
       switch (membershipType!.toLowerCase().trim()) {
@@ -144,7 +144,7 @@ class AppIcons {
       }
     } else {
       switch (membershipType!.toLowerCase()) {
-        case "valued":
+        case "valued" || "staff" || "pre 3 months staff":
           return card_value;
         case "silver":
           return card_silver;

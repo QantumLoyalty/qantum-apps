@@ -20,13 +20,20 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     "txtSponsorship": AppNavigator.clubAndMembership,
   };
 
+  final Map<String, String> _accountOptionsOthers = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+  };
+
   Map<String, String> get accountOptions {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.qantum || Flavor.maxx:
+        return _accountOptions;
+      case Flavor.mhbc || Flavor.starReward:
         return _accountOptionsMHBC;
       default:
-        return _accountOptions;
+        return _accountOptionsOthers;
     }
   }
 
@@ -62,7 +69,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
 
   String? get networkResponse => _networkResponse;
 
-  updateCoupon({required String coupon,required AppLocalizations loc}) async {
+  updateCoupon({required String coupon, required AppLocalizations loc}) async {
     try {
       _showLoader = true;
       notifyListeners();

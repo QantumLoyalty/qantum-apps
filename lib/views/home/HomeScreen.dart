@@ -156,7 +156,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                         .withValues(alpha: 0.5)
                                     : Colors.transparent,
                                 border: AppThemeCustom
-                                    .getCustomHomeButtonsBorderStyle(context,provider,provider.homeNavigationList[index].name),
+                                    .getCustomHomeButtonsBorderStyle(
+                                        context,
+                                        provider,
+                                        provider
+                                            .homeNavigationList[index].name),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
                               /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
@@ -211,6 +215,10 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                       provider.homeNavigationList[index].name ==
                                           provider
                                               .homeNavigationList[2].name)) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.starReward &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name)) {
                                 /// DO NOTHING ///
                               } else {
                                 provider.updateSelectedOption(index);

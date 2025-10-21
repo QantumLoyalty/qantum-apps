@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 args['countryCode'] = countryCode;
                 args['phoneNo'] = _phoneController.text.toString();
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (flavor == Flavor.qantum) {
+                  if (AppHelper.isClubApp()) {
                     AppNavigator.navigateReplacement(
                         context, AppNavigator.drivingLicenseScreen,
                         arguments: args);

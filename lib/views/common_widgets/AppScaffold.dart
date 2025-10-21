@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -9,7 +9,9 @@ class AppScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
 
-  const AppScaffold(
+  Flavor? flavor;
+
+  AppScaffold(
       {super.key,
       this.appBar,
       required this.body,
@@ -19,14 +21,32 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    flavor ??= FlavorConfig.instance.flavor;
+
     return Container(
       decoration: AppHelper.appBackground(context),
-      child: Scaffold(
-        appBar: appBar,
-        body: body,
-        backgroundColor: scaffoldBackground ?? Colors.transparent,
-        floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: appBar,
+            body: body,
+            backgroundColor: scaffoldBackground ?? Colors.transparent,
+            floatingActionButton: floatingActionButton,
+            floatingActionButtonLocation: floatingActionButtonLocation,
+          ),
+          (flavor == Flavor.aceRewards)
+              ? Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: IgnorePointer(
+                    child: Opacity(
+                        opacity: 0.4,
+                        child: Image.asset(
+                            "assets/aceRewards/scaffold_background.png")),
+                  ))
+              : Container()
+        ],
       ),
     );
   }

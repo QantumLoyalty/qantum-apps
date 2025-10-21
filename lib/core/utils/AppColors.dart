@@ -138,7 +138,7 @@ class AppColors {
 
   static Color get clh_disable_color => const Color(0xFF190000);
 
-/// MONTAUK TAVERN ///
+  /// MONTAUK TAVERN ///
 
   static Color get mt_sf_color => const Color(0xFF2984a3);
 
@@ -166,9 +166,7 @@ class AppColors {
 
   static Color get mt_disable_color => const Color(0xFF55f6ff);
 
-
   /// HOGANS REWARD THEME ///
-
 
   static Color get hr_sf_color => const Color(0xFF000000);
 
@@ -196,11 +194,6 @@ class AppColors {
 
   static Color get hr_disable_color => const Color(0xFF01ABE0);
 
-
-
-
-
-
   /// SENSE OF TASTE THEME ///
 
   static Color get sot_back_color => const Color(0xFFc69c6e);
@@ -218,7 +211,6 @@ class AppColors {
   static Color get sot_card_color => const Color(0xFF444444);
 
   static Color get sot_divider_color => const Color(0xFFd4b491);
-
 
   /// NORTH SHORE TAVERN ///
 
@@ -254,11 +246,11 @@ class AppColors {
 
   static Color get ar_sf_color => const Color(0xFFC0A36B);
 
-  static Color get ar_back_color => const Color(0xFF2E3C53);
+  static Color get ar_back_color => const Color(0xFFBC965C);
 
   static Color get ar_floating_button_icon_color => const Color(0xFFB11921);
 
-  static Color get ar_back_color_2 => const Color(0xFF2E3C53);
+  static Color get ar_back_color_2 => const Color(0xFF000000);
 
   static Color get ar_back_color_3 => const Color(0xFF55f6ff);
 
@@ -268,7 +260,7 @@ class AppColors {
 
   static Color get ar_hint_text_color => const Color(0xFFD9D9D9);
 
-  static Color get ar_button_color => const Color(0xFF2E3C53);
+  static Color get ar_button_color => const Color(0x00000000);
 
   static Color get ar_button_border_color => const Color(0xFFFFFFFF);
 
@@ -276,13 +268,9 @@ class AppColors {
 
   static Color get ar_divider_color => const Color(0xFF2E3C53);
 
-  static Color get ar_disable_color => const Color(0xFF55f6ff);
+  static Color get ar_disable_color => const Color(0xFF000000);
 
   static Color get ar_canvas_color => const Color(0xFFCED2CE);
-
-
-
-
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
@@ -302,11 +290,6 @@ class AppColors {
   static Color get shadow => const Color(0xA6000000);
 
   static Color get bright_sky_blue => const Color(0xFF28ABE2);
-
-
-
-
-
 
   static Color getMembershipCategoryColor(String? membershipType) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;

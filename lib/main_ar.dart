@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -29,7 +30,7 @@ void main() async {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     // Initialize with your OneSignal App ID
 
-    OneSignal.initialize("aff10b56-9cfb-469d-bd11-fdf9566346c0");
+    OneSignal.initialize("318ef71d-d8e8-43ad-8ccb-f97acee256a5");
     // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
@@ -62,7 +63,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SignupProvider()),
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
-        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
+        ChangeNotifierProvider(create: (context) => DocumentScanProvider())
       ],
       child: Portal(
         child: MaterialApp(

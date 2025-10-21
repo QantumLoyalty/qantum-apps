@@ -515,8 +515,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
               )
             ],
           ),*/
-        (FlavorConfig.instance.flavor == Flavor.maxx ||
-                FlavorConfig.instance.flavor == Flavor.starReward)
+        (FlavorConfig.instance.flavor == Flavor.maxx)
             ? GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),

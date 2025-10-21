@@ -20,7 +20,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
   @override
   void initState() {
     super.initState();
-    Provider.of<UserInfoProvider>(context, listen: false).fetchUserPoints();
+  //  Provider.of<UserInfoProvider>(context, listen: false).fetchUserPoints();
 
     _controller = AnimationController(
       vsync: this,
