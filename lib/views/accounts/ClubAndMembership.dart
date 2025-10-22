@@ -73,10 +73,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                   children: [
                     AccountsAppBar(
                         showBackButton: true,
-                        title: (selectedFlavor == Flavor.mhbc ||
-                                selectedFlavor == Flavor.starReward)
-                            ? loc.txtSponsorship
-                            : loc.txtClubAndMembership),
+                        title: provider.getClubSponsorshipTitle(loc)),
                     Expanded(
                         child: Container(
                       width: MediaQuery.of(context).size.width,

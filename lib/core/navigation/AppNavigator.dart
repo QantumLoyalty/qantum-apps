@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import '../../views/login/WelcomeScreen.dart';
 import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
@@ -50,6 +51,7 @@ class AppNavigator {
       "/recoverAccountEmailFailure";
   static const String appWebView = "/appWebView";
   static const String drivingLicenseScreen = "/drivingLicenseScanScreen";
+  static const String welcomeScreen = "/welcomeScreen";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -102,6 +104,8 @@ class AppNavigator {
             builder: (_) => DrivingLicenseScanScreen(
                   arguments: args as Map<String, String>,
                 ));
+      case welcomeScreen:
+        return MaterialPageRoute(builder: (_) => WelcomeScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case promotionDetail:

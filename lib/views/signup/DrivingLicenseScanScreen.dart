@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_camera_overlay/model.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/common_widgets/AppLoader.dart';
@@ -25,11 +27,12 @@ class DrivingLicenseScanScreen extends StatefulWidget {
       _DrivingLicenseScanScreenState();
 }
 
-class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
-  late AppLocalizations loc;
+class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
+    with LoggingMixin {
+  AppLocalizations? loc;
 
   CameraController? _controller;
-  late Future<void> _initializeControllerFuture;
+  Future<void>? _initializeControllerFuture;
 
   final CardOverlay overlay = CardOverlay.byFormat(OverlayFormat.cardID1);
 
@@ -43,6 +46,97 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
   }
 
   Future<void> _initCamera() async {
+    final cameraPermission = await Permission.camera.status;
+    final micPermission = await Permission.microphone.status;
+
+ if (!cameraPermission.isGranted || !micPermission.isGranted) {
+      final newStatus = await [
+        if (!cameraPermission.isGranted) Permission.camera,
+        if (!micPermission.isGranted) Permission.microphone
+      ].request();
+// Step 3: Evaluate new results
+      final cameraGranted =
+          newStatus[Permission.camera]?.isGranted ?? cameraPermission.isGranted;
+      final micGranted = newStatus[Permission.microphone]?.isGranted ??
+          micPermission.isGranted;
+
+      if (!cameraGranted || !micGranted) {
+        // Handle permanently denied case
+        if (newStatus[Permission.camera]?.isPermanentlyDenied == true ||
+            newStatus[Permission.microphone]?.isPermanentlyDenied == true) {
+          await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text(
+                "Permission Required",
+                style: TextStyle(color: Colors.black),
+              ),
+              content: const Text(
+                "Camera and Microphone permissions are required.\n"
+                "Please enable them from App Settings to continue.",
+                style: TextStyle(color: Colors.black),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    await openAppSettings();
+                  },
+                  child: const Text(
+                    "Open Settings",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          // Handle temporary denial
+          await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text(
+                "Permission Needed",
+                style: TextStyle(color: Colors.black),
+              ),
+              content: const Text(
+                "Camera and Microphone permissions are required to scan your document.",
+                style: TextStyle(color: Colors.black),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    await _initCamera(); // re-try cleanly
+                  },
+                  child: const Text(
+                    "Retry",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return;
+      }
+    }
+
+
     final cameras = await availableCameras();
     final backCamera = cameras.firstWhere(
         (camera) => camera.lensDirection == CameraLensDirection.back);
@@ -89,8 +183,6 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
 
                 AppNavigator.navigateReplacement(context, AppNavigator.signup,
                     arguments: widget.arguments);
-
-
               });
             });
           }
@@ -106,7 +198,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
               Applogo(),
               AppDimens.shape_30,
               Text(
-                loc.takePhotoOf,
+                loc!.takePhotoOf,
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -114,7 +206,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
               ),
               AppDimens.shape_10,
               Text(
-                findStatus() == 0 ? loc.frontOfDL : loc.backOfDL,
+                findStatus() == 0 ? loc!.frontOfDL : loc!.backOfDL,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -141,7 +233,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
                         AppDimens.shape_10,
                         Expanded(
                           child: Text(
-                            loc.ensureFits,
+                            loc!.ensureFits,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
@@ -156,23 +248,26 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
                 ],
               )),
               AppDimens.shape_20,
-              AppButton(
-                  text: (findStatus() == 4)
-                      ? "SUBMIT"
-                      : (preview ? "Next" : loc.takePhotoBtn),
-                  onClick: () {
-                    int status = findStatus();
-                    if (status == 0 || status == 2) {
-                      _captureWithCrop();
-                    } else if (status == 4) {
-                      provider.getDrivingLicenseInformation(
-                          _frontImage!, _backImage!);
-                    } else {
-                      setState(() {
-                        preview = false;
-                      });
-                    }
-                  }),
+              Padding(
+                padding: const EdgeInsets.only(left: 18, right: 18),
+                child: AppButton(
+                    text: (findStatus() == 4)
+                        ? "SUBMIT"
+                        : (preview ? "Next" : loc!.takePhotoBtn),
+                    onClick: () {
+                      int status = findStatus();
+                      if (status == 0 || status == 2) {
+                        _captureWithCrop();
+                      } else if (status == 4) {
+                        provider.getDrivingLicenseInformation(
+                            _frontImage!, _backImage!);
+                      } else {
+                        setState(() {
+                          preview = false;
+                        });
+                      }
+                    }),
+              ),
               AppDimens.shape_10,
               FilledButton.icon(
                   icon: Icon(Icons.replay),
@@ -199,7 +294,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
                     }
                   },
                   label: Text(
-                    loc.retakeBtn,
+                    loc!.retakeBtn,
                   ))
             ],
           ),
@@ -319,7 +414,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen> {
             } else {
               return Center(
                   child: Text(
-                loc.fetchingCameras,
+                loc!.fetchingCameras,
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,

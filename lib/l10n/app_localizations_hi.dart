@@ -197,6 +197,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtSponsorship => 'प्रायोजन';
 
   @override
+  String get txtClubSponsorship => 'क्लब प्रायोजन';
+
+  @override
   String get txtPhoneNumber => 'फोन नंबर';
 
   @override
@@ -489,4 +492,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get fetchingCameras => 'कैमरे लोड हो रहे हैं';
+
+  @override
+  String get registerToContinue => 'जारी रखने के लिए पंजीकरण करें';
+
+  @override
+  String get register => 'पंजीकरण करें';
+
+  @override
+  String get alreadyHaveAnAccount => 'क्या आपके पास पहले से एक खाता है?';
 }

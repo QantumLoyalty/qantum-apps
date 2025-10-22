@@ -70,6 +70,8 @@
   "txtPASStatement": "PAS 声明",
   "txtEditAccountDetails": "编辑账户资料",
   "txtSponsorship": "赞助",
+  "txtClubSponsorship": "俱乐部赞助",
+
   "txtPhoneNumber": "电话号码",
   "txtPostcode": "邮政编码",
   "txtBirthday": "生日",
@@ -163,5 +165,8 @@
   "takePhotoBtn": "拍照",
   "retakeBtn": "重拍",
   "backOfDL": "驾照背面",
-  "fetchingCameras": "正在加载摄像头"
+  "fetchingCameras": "正在加载摄像头",
+  "registerToContinue": "注册以继续",
+  "register": "注册",
+  "alreadyHaveAnAccount": "已经有账户了吗？"
 }

@@ -197,6 +197,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtSponsorship => '赞助';
 
   @override
+  String get txtClubSponsorship => '俱乐部赞助';
+
+  @override
   String get txtPhoneNumber => '电话号码';
 
   @override
@@ -489,6 +492,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fetchingCameras => '正在加载摄像头';
+
+  @override
+  String get registerToContinue => '注册以继续';
+
+  @override
+  String get register => '注册';
+
+  @override
+  String get alreadyHaveAnAccount => '已经有账户了吗？';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -682,6 +694,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtSponsorship => '赞助';
+
+  @override
+  String get txtClubSponsorship => '俱乐部赞助';
 
   @override
   String get txtPhoneNumber => '电话号码';
@@ -976,4 +991,13 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get fetchingCameras => '正在加载摄像头';
+
+  @override
+  String get registerToContinue => '注册以继续';
+
+  @override
+  String get register => '注册';
+
+  @override
+  String get alreadyHaveAnAccount => '已经有账户了吗？';
 }

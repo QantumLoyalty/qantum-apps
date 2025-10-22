@@ -60,6 +60,7 @@
   "txtPASStatement": "PAS विवरण",
   "txtEditAccountDetails": "खाता विवरण संपादित करें",
   "txtSponsorship": "प्रायोजन",
+  "txtClubSponsorship": "क्लब प्रायोजन",
   "txtPhoneNumber": "फोन नंबर",
   "txtPostcode": "पिनकोड",
   "txtBirthday": "जन्मदिन",
@@ -163,6 +164,9 @@
   "takePhotoBtn": "फोटो लें",
   "retakeBtn": "दोबारा लें",
   "backOfDL": "ड्राइविंग लाइसेंस का पीछे वाला भाग",
-  "fetchingCameras": "कैमरे लोड हो रहे हैं"
+  "fetchingCameras": "कैमरे लोड हो रहे हैं",
+  "registerToContinue": "जारी रखने के लिए पंजीकरण करें",
+  "register": "पंजीकरण करें",
+  "alreadyHaveAnAccount": "क्या आपके पास पहले से एक खाता है?"
 
 }

@@ -19,6 +19,11 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
     "txtSponsorship": AppNavigator.clubAndMembership,
   };
+  final Map<String, String> _accountOptionsSR = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+    "txtClubSponsorship": AppNavigator.clubAndMembership,
+  };
 
   final Map<String, String> _accountOptionsOthers = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
@@ -30,10 +35,26 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.maxx:
         return _accountOptions;
-      case Flavor.mhbc || Flavor.starReward:
+      case Flavor.mhbc:
         return _accountOptionsMHBC;
+      case Flavor.starReward:
+        return _accountOptionsSR;
+
       default:
         return _accountOptionsOthers;
+    }
+  }
+
+  String getClubSponsorshipTitle(AppLocalizations loc) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mhbc:
+        return loc.txtSponsorship;
+      case Flavor.starReward:
+        return loc.txtClubSponsorship;
+
+      default:
+        return loc.txtClubAndMembership;
     }
   }
 
@@ -51,6 +72,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtPASStatement;
       case "txtSponsorship":
         return loc.txtSponsorship;
+      case "txtClubSponsorship":
+        return loc.txtClubSponsorship;
 
       default:
         return key; // fallback

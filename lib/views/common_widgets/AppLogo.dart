@@ -6,8 +6,16 @@ import '../../core/utils/AppIcons.dart';
 
 class Applogo extends StatelessWidget {
   bool? hideTopLine = false;
+  double? iconPadding;
+  double? customIconHeight;
+  double? customIconWidth;
 
-  Applogo({super.key, this.hideTopLine});
+  Applogo(
+      {super.key,
+      this.hideTopLine,
+      this.iconPadding,
+      this.customIconHeight,
+      this.customIconWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +33,18 @@ class Applogo extends StatelessWidget {
                     height: 0.1,
                     color: Theme.of(context).dividerColor,
                   ),
-                  AppDimens.shape_20
+                  iconPadding != null
+                      ? AppDimens.getCustomBoxShape(iconPadding!)
+                      : AppDimens.shape_20
                 ],
               ),
         Image.asset(AppIcons.app_logo,
-            width: AppHelper.getAppIconSize(context).width,
-            height: AppHelper.getAppIconSize(context).height),
-        AppDimens.shape_20
+            width: customIconWidth ?? AppHelper.getAppIconSize(context).width,
+            height:
+                customIconHeight ?? AppHelper.getAppIconSize(context).height),
+        iconPadding != null
+            ? AppDimens.getCustomBoxShape(iconPadding!)
+            : AppDimens.shape_20
       ],
     );
   }

@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.0+58
+version:  1.0.0+59
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56

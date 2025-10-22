@@ -31,7 +31,12 @@ class _SplashScreenState extends State<SplashScreen> {
       if (sharedPreferenceHelper.getUserData() != null) {
         AppNavigator.navigateAndClearStack(context, AppNavigator.home);
       } else {
-        AppNavigator.navigateAndClearStack(context, AppNavigator.login);
+        if (AppHelper.isClubApp()) {
+          AppNavigator.navigateAndClearStack(
+              context, AppNavigator.welcomeScreen);
+        } else {
+          AppNavigator.navigateAndClearStack(context, AppNavigator.login);
+        }
       }
     }
   }

@@ -470,6 +470,12 @@ abstract class AppLocalizations {
   /// **'Sponsorship'**
   String get txtSponsorship;
 
+  /// No description provided for @txtClubSponsorship.
+  ///
+  /// In en, this message translates to:
+  /// **'Club Sponsorship'**
+  String get txtClubSponsorship;
+
   /// No description provided for @txtPhoneNumber.
   ///
   /// In en, this message translates to:
@@ -1057,6 +1063,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fetching cameras'**
   String get fetchingCameras;
+
+  /// No description provided for @registerToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Register to continue'**
+  String get registerToContinue;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @alreadyHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAnAccount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

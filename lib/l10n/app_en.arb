@@ -66,6 +66,7 @@
   "txtPASStatement": "PAS Statement",
   "txtEditAccountDetails": "Edit Account Details",
   "txtSponsorship": "Sponsorship",
+  "txtClubSponsorship": "Club Sponsorship",
   "txtPhoneNumber": "Phone number",
   "txtPostcode": "Postcode",
   "txtBirthday": "Birthday",
@@ -163,5 +164,8 @@
   "takePhotoBtn": "TAKE PHOTO",
   "retakeBtn": "Retake",
   "backOfDL": "Back of Driver's Licence",
-  "fetchingCameras": "Fetching cameras"
+  "fetchingCameras": "Fetching cameras",
+  "registerToContinue": "Register to continue",
+  "register": "Register",
+  "alreadyHaveAnAccount": "Already have an account?"
 }
