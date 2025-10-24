@@ -4,7 +4,8 @@ import 'package:flutter_camera_overlay/model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import '/core/utils/AppIcons.dart';
+import '/core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/common_widgets/AppLoader.dart';
@@ -37,7 +38,6 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
   final CardOverlay overlay = CardOverlay.byFormat(OverlayFormat.cardID1);
 
   String? _frontImage, _backImage;
-  bool preview = false;
 
   @override
   void initState() {
@@ -46,109 +46,18 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
   }
 
   Future<void> _initCamera() async {
-    final cameraPermission = await Permission.camera.status;
-    final micPermission = await Permission.microphone.status;
-
- if (!cameraPermission.isGranted || !micPermission.isGranted) {
-      final newStatus = await [
-        if (!cameraPermission.isGranted) Permission.camera,
-        if (!micPermission.isGranted) Permission.microphone
-      ].request();
-// Step 3: Evaluate new results
-      final cameraGranted =
-          newStatus[Permission.camera]?.isGranted ?? cameraPermission.isGranted;
-      final micGranted = newStatus[Permission.microphone]?.isGranted ??
-          micPermission.isGranted;
-
-      if (!cameraGranted || !micGranted) {
-        // Handle permanently denied case
-        if (newStatus[Permission.camera]?.isPermanentlyDenied == true ||
-            newStatus[Permission.microphone]?.isPermanentlyDenied == true) {
-          await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text(
-                "Permission Required",
-                style: TextStyle(color: Colors.black),
-              ),
-              content: const Text(
-                "Camera and Microphone permissions are required.\n"
-                "Please enable them from App Settings to continue.",
-                style: TextStyle(color: Colors.black),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    await openAppSettings();
-                  },
-                  child: const Text(
-                    "Open Settings",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-          );
-        } else {
-          // Handle temporary denial
-          await showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text(
-                "Permission Needed",
-                style: TextStyle(color: Colors.black),
-              ),
-              content: const Text(
-                "Camera and Microphone permissions are required to scan your document.",
-                style: TextStyle(color: Colors.black),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    await _initCamera(); // re-try cleanly
-                  },
-                  child: const Text(
-                    "Retry",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        return;
+    try {
+      final cameras = await availableCameras();
+      final backCamera = cameras.firstWhere(
+          (camera) => camera.lensDirection == CameraLensDirection.back);
+      _controller = CameraController(backCamera, ResolutionPreset.high,
+          enableAudio: false);
+      _initializeControllerFuture = _controller!.initialize();
+      if (mounted) {
+        setState(() {});
       }
-    }
-
-
-    final cameras = await availableCameras();
-    final backCamera = cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.back);
-
-    _controller = CameraController(
-      backCamera,
-      ResolutionPreset.high,
-    );
-
-    _initializeControllerFuture = _controller!.initialize();
-    if (mounted) {
-      setState(() {});
+    } catch (e) {
+      logEvent("Camera init error: $e");
     }
   }
 
@@ -163,8 +72,8 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     loc = AppLocalizations.of(context)!;
     return AppScaffold(body: SafeArea(child:
         Consumer<DocumentScanProvider>(builder: (context, provider, child) {
-      if (provider.isError != null) {
-        if (provider.isError!) {
+      if (provider.isErrorInScan != null) {
+        if (provider.isErrorInScan!) {
           AppHelper.showErrorMessage(context, "Error in scanning!!");
         } else {
           if (provider.scannedData != null) {
@@ -181,13 +90,29 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                       provider.scannedData!["address"];
                 }
 
-                AppNavigator.navigateReplacement(context, AppNavigator.signup,
-                    arguments: widget.arguments);
+                provider.uploadDrivingLicenseImages(_frontImage!, _backImage!);
               });
             });
           }
         }
 
+        provider.resetError();
+      }
+
+      if (provider.isErrorInUpload != null) {
+        if (provider.isErrorInUpload!) {
+          AppHelper.showErrorMessage(context, loc!.msgCommonError);
+        } else {
+          widget.arguments["license_front"] = provider.frontImageUrl ?? "";
+          widget.arguments["license_back"] = provider.backImageUrl ?? "";
+          logEvent(widget.arguments.toString());
+          Future.delayed(Duration.zero, () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppNavigator.navigateReplacement(context, AppNavigator.signup,
+                  arguments: widget.arguments);
+            });
+          });
+        }
         provider.resetError();
       }
 
@@ -226,7 +151,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset(
-                          "assets/common/lightbulb.png",
+                          AppIcons.lightBulb,
                           width: 20,
                           height: 20,
                         ),
@@ -248,65 +173,46 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                 ],
               )),
               AppDimens.shape_20,
+              InkWell(
+                onTap: () {
+                  AppNavigator.navigateReplacement(context, AppNavigator.signup,
+                      arguments: widget.arguments);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 5, bottom: 5),
+                  child: Text(
+                    loc!.noLicense,
+                    style: TextStyle(
+                      color:
+                          Theme.of(context).textSelectionTheme.selectionColor,
+                    ),
+                  ),
+                ),
+              ),
+              AppDimens.shape_20,
               Padding(
                 padding: const EdgeInsets.only(left: 18, right: 18),
                 child: AppButton(
-                    text: (findStatus() == 4)
-                        ? "SUBMIT"
-                        : (preview ? "Next" : loc!.takePhotoBtn),
+                    text: loc!.takePhotoBtn,
                     onClick: () {
-                      int status = findStatus();
-                      if (status == 0 || status == 2) {
-                        _captureWithCrop();
-                      } else if (status == 4) {
-                        provider.getDrivingLicenseInformation(
-                            _frontImage!, _backImage!);
-                      } else {
-                        setState(() {
-                          preview = false;
-                        });
-                      }
+                      _captureWithCrop(provider);
                     }),
               ),
               AppDimens.shape_10,
-              FilledButton.icon(
-                  icon: Icon(Icons.replay),
-                  onPressed: () {
-                    int status = findStatus();
-                    if (status == 1) {
-                      setState(() {
-                        _frontImage = null;
-                        preview = false;
-                      });
-                    } else if (status == 3) {
-                      setState(() {
-                        _backImage = null;
-                        preview = false;
-                      });
-                    } else if (status == 4) {
-                      setState(() {
-                        _frontImage = null;
-                        _backImage = null;
-                        preview = false;
-                      });
-                    } else {
-                      setState(() {});
-                    }
-                  },
-                  label: Text(
-                    loc!.retakeBtn,
-                  ))
             ],
           ),
           provider.showLoader != null && provider.showLoader!
-              ? AppLoader()
+              ? AppLoader(
+                  loaderMessage: loc!.msgCommonLoader,
+                )
               : Container()
         ],
       );
     })));
   }
 
-  Future<void> _captureWithCrop() async {
+  Future<void> _captureWithCrop(DocumentScanProvider provider) async {
     await _initializeControllerFuture;
 
     final rawFile = await _controller!.takePicture();
@@ -338,106 +244,120 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     setState(() {
       if (findStatus() == 0) {
         _frontImage = croppedFile.path;
-        preview = true;
       } else {
         _backImage = croppedFile.path;
-        preview = true;
+        provider.getDrivingLicenseInformation(_frontImage!, _backImage!);
       }
     });
   }
 
   int findStatus() {
-    /// 0 - initial,
-    /// 1 - front preview,
-    /// 2 - BACK captured,
-    /// 3 - back preview,
-    /// 4 -  Final done
+    /// 0 - FRONT captured,
+    /// 1 - BACK captured,
+    /// 2 - Final done
 
     if (_frontImage == null && _backImage == null) {
       return 0;
-    } else if (_frontImage != null && preview && _backImage == null) {
+    } else if (_frontImage != null && _backImage == null) {
       return 1;
-    } else if (_frontImage != null && !preview && _backImage == null) {
+    } else if (_frontImage != null && _backImage != null) {
       return 2;
-    } else if (_frontImage != null && preview && _backImage != null) {
-      return 3;
     } else {
       return 4;
     }
   }
 
   Widget getCentralWidget() {
-    /// 0 - initial,
-    /// 1 - front preview,
-    /// 2 - BACK captured,
-    /// 3 - back preview,
-    /// 4 -  Final done
+    /// 0 - FRONT captured,
+    /// 1 - BACK captured,
+    /// 2 - Final done
 
     int status = findStatus();
-    if (status == 0 || status == 2) {
-      return FutureBuilder(
-          future: _initializeControllerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned.fill(
-                      child: Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
+
+    return _initializeControllerFuture != null
+        ? FutureBuilder(
+            future: _initializeControllerFuture,
+            builder: (context, snapshot) {
+              if ((snapshot.connectionState == ConnectionState.done) &&
+                  !snapshot.hasError) {
+                return _controller != null
+                    ? SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned.fill(
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: FittedBox(
+                                    fit: BoxFit.cover,
+                                    alignment: Alignment.center,
+                                    child: SizedBox(
+                                        width: _controller!
+                                            .value.previewSize!.height,
+                                        height: _controller!
+                                            .value.previewSize!.width,
+                                        child: CameraPreview(_controller!))),
+                              ),
+                            ),
+                            Container(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border:
+                                    Border.all(color: Colors.white, width: 3),
+                              ),
+                            )
+                          ],
                         ),
-                        child: FittedBox(
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                            child: SizedBox(
-                                width: _controller!.value.previewSize!.height,
-                                height: _controller!.value.previewSize!.width,
-                                child: CameraPreview(_controller!))),
+                      )
+                    : Container();
+              } else {
+                return Center(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      loc!.fetchingCameras,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await openAppSettings();
+                        _initCamera();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10, right: 10, top: 5, bottom: 5),
+                        child: Text(
+                          loc!.openAppSettings,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: Theme.of(context)
+                                  .textSelectionTheme
+                                  .selectionColor),
+                        ),
                       ),
                     ),
-                    Container(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.white, width: 3),
-                      ),
-                    )
                   ],
-                ),
-              );
-            } else {
-              return Center(
-                  child: Text(
-                loc!.fetchingCameras,
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Theme.of(context).textSelectionTheme.selectionColor),
-              ));
-            }
-          });
-    } else if (status == 1) {
-      return Image.file(File(_frontImage!));
-    } else if (status == 3) {
-      return Image.file(File(_backImage!));
-    } else {
-      return SizedBox(
-        height: 300,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [
-            Expanded(child: Image.file(File(_frontImage!))),
-            AppDimens.shape_10,
-            Expanded(child: Image.file(File(_backImage!))),
-          ],
-        ),
-      );
-    }
+                ));
+              }
+            })
+        : Container();
   }
 }

@@ -203,6 +203,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtPhoneNumber => 'Phone number';
 
   @override
+  String get txtAddress => 'Address';
+
+  @override
   String get txtPostcode => 'Postcode';
 
   @override
@@ -491,7 +494,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backOfDL => 'Back of Driver\'s Licence';
 
   @override
-  String get fetchingCameras => 'Fetching cameras';
+  String get fetchingCameras => 'Fetching cameras..\nIf you haven’t granted Camera or Microphone permissions';
+
+  @override
+  String get openAppSettings => 'tap here to open App Settings';
 
   @override
   String get registerToContinue => 'Register to continue';
@@ -501,4 +507,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get alreadyHaveAnAccount => 'Already have an account?';
+
+  @override
+  String get noLicense => 'I don\'t have a license';
+
+  @override
+  String get chooseYourMembership => 'Choose your membership';
+
+  @override
+  String get selectMembership => 'Select membership';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get membershipRequiresApproval => 'Membership requires approval and confirmation from the Club.';
+
+  @override
+  String get confirmPayment => 'Confirm payment';
 }

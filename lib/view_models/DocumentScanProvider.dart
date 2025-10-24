@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
-import 'package:qantum_apps/services/AppDataService.dart';
+import '/data/models/NetworkResponse.dart';
+import '/services/AppDataService.dart';
 
 import '../core/mixins/logging_mixin.dart';
 
@@ -9,16 +9,32 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
 
   bool? get showLoader => _showLoader;
 
-  bool? _isError;
+  bool? _isErrorInScan;
 
-  bool? get isError => _isError;
+  bool? get isErrorInScan => _isErrorInScan;
+
+  bool? _isErrorInUpload;
+
+  bool? get isErrorInUpload => _isErrorInUpload;
 
   Map<String, dynamic>? _scannedData;
 
   Map<String, dynamic>? get scannedData => _scannedData;
 
+  NetworkResponse? _imageUploadResponse;
+
+  NetworkResponse? get imageUploadResponse => _imageUploadResponse;
+
+  String? _frontImageUrl;
+
+  String? get frontImageUrl => _frontImageUrl;
+  String? _backImageUrl;
+
+  String? get backImageUrl => _backImageUrl;
+
   resetError() {
-    _isError = null;
+    _isErrorInScan = null;
+    _isErrorInUpload = null;
     notifyListeners();
   }
 
@@ -36,17 +52,48 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
               frontImagePath: frontImagePath, backImagePath: backImagePath);
 
       logEvent("DL RESPONSE $response");
+      _isErrorInUpload = response.isError;
+
+      if (!response.isError) {
+        Map<String, dynamic> data = response.response as Map<String, dynamic>;
+        if (data["status"] == "success") {
+          logEvent("DL Data: $data");
+          _scannedData = data;
+          _isErrorInScan = false;
+        } else {
+          _isErrorInScan = true;
+          logEvent("DL Scan Failed: ${data["message"]}");
+        }
+      }
+    } catch (e) {
+      logEvent("Exception: $e");
+    } finally {
+      _showLoader = false;
+      notifyListeners();
+    }
+  }
+
+  uploadDrivingLicenseImages(
+      String frontImagePath, String backImagePath) async {
+    try {
+      _showLoader = true;
+      notifyListeners();
+
+      NetworkResponse response = await AppDataService.getInstance()
+          .uploadDLImages(
+              frontImagePath: frontImagePath, backImagePath: backImagePath);
+
+      logEvent("DL Upload RESPONSE $response");
+      _isErrorInUpload = response.isError;
 
       if (!response.isError) {
         Map<String, dynamic> data = response.response as Map<String, dynamic>;
 
-        if (data["status"] == "success") {
-          logEvent("DL Data: $data");
-          _scannedData = data;
-          _isError = false;
-        } else {
-          _isError = true;
-          logEvent("DL Scan Failed: ${data["message"]}");
+        if (data.containsKey("front")) {
+          _frontImageUrl = data["front"];
+        }
+        if (data.containsKey("back")) {
+          _backImageUrl = data["back"];
         }
       }
     } catch (e) {

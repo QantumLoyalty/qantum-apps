@@ -17,7 +17,9 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  bool? hideChangeMobileOption;
+
+  LoginScreen({super.key, this.hideChangeMobileOption});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -86,20 +88,9 @@ class _LoginScreenState extends State<LoginScreen> {
               provider.networkMessage != null) {
             Future.delayed(Duration.zero, () {
               if (provider.networkError!) {
-                /* WidgetsBinding.instance.addPostFrameCallback((_) {
-                  AppHelper.showErrorMessage(
-                      context, provider.networkMessage ?? "");
-                });*/
                 ErrorDialog.getInstance().showErrorDialog(context,
                     message: provider.networkMessage ?? loc.msgCommonError);
               }
-              /* else {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  AppHelper.showSuccessMessage(
-                      context, provider.networkMessage ?? "");
-                });
-              }*/
-
               provider.resetNetworkResponseStatus();
             });
           }
@@ -244,40 +235,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     AppDimens.shape_10,
-                    InkWell(
-                      onTap: () {
-                        AppNavigator.navigateTo(
-                            context, AppNavigator.recoverAccountScreen);
-                      },
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 10, bottom: 10),
-                          child: /*RichText(
-                            text: TextSpan(children: [
-                          TextSpan(
-                              text: "Change",
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .buttonTheme
-                                      .colorScheme!
-                                      .onPrimary,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 14)),
-                          TextSpan(
-                              text: " my mobile",
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .buttonTheme
-                                      .colorScheme!
-                                      .onPrimary,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14)),
-                        ])),*/
-                              RichText(
-                                  text: TextSpan(
-                                      children: _buildLocalizedChangeMyMobile(
-                                          context)))),
-                    ),
+                    (widget.hideChangeMobileOption != null &&
+                            widget.hideChangeMobileOption!)
+                        ? Container()
+                        : InkWell(
+                            onTap: () {
+                              AppNavigator.navigateTo(
+                                  context, AppNavigator.recoverAccountScreen);
+                            },
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 10, bottom: 10),
+                                child: RichText(
+                                    text: TextSpan(
+                                        children: _buildLocalizedChangeMyMobile(
+                                            context)))),
+                          ),
                     AppDimens.shape_10,
                   ],
                 ),

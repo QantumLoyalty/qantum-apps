@@ -19,6 +19,10 @@ class AppIcons {
   static String birthday = "assets/common/birthday.png";
   static String mobile = "assets/common/mobile.png";
   static String email = "assets/common/email.png";
+  static String lightBulb = "assets/common/lightbulb.png";
+
+
+
 
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;

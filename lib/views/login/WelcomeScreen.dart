@@ -52,7 +52,9 @@ class WelcomeScreen extends StatelessWidget {
             AppButton(
               text: loc.register.toUpperCase(),
               onClick: () {
-                AppNavigator.navigateAndClearStack(context, AppNavigator.login);
+
+                   AppNavigator.navigateAndClearStack(context, AppNavigator.login,
+                    arguments: true);
               },
             ),
             AppDimens.shape_30,

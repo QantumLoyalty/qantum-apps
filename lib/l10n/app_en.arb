@@ -68,6 +68,7 @@
   "txtSponsorship": "Sponsorship",
   "txtClubSponsorship": "Club Sponsorship",
   "txtPhoneNumber": "Phone number",
+  "txtAddress": "Address",
   "txtPostcode": "Postcode",
   "txtBirthday": "Birthday",
   "txtFirstName": "First name",
@@ -164,8 +165,17 @@
   "takePhotoBtn": "TAKE PHOTO",
   "retakeBtn": "Retake",
   "backOfDL": "Back of Driver's Licence",
-  "fetchingCameras": "Fetching cameras",
+  "fetchingCameras": "Fetching cameras..\nIf you haven’t granted Camera or Microphone permissions",
+  "openAppSettings": "tap here to open App Settings",
   "registerToContinue": "Register to continue",
   "register": "Register",
-  "alreadyHaveAnAccount": "Already have an account?"
+  "alreadyHaveAnAccount": "Already have an account?",
+  "noLicense": "I don't have a license",
+  "chooseYourMembership": "Choose your membership",
+  "selectMembership": "Select membership",
+  "next": "Next",
+  "membershipRequiresApproval": "Membership requires approval and confirmation from the Club.",
+  "confirmPayment": "Confirm payment"
+
+
 }

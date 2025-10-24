@@ -41,7 +41,8 @@ class UserLoginProvider extends ChangeNotifier {
           await UserService.getInstance().login(phoneNo);
       _networkError = networkResponse.isError;
 
-      if (networkResponse.response != null) {
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;
 
@@ -62,6 +63,8 @@ class UserLoginProvider extends ChangeNotifier {
         } else {
           _isExistingUser = null;
         }
+      } else {
+        _networkMessage = networkResponse.responseMessage;
       }
     } catch (e) {
       AppHelper.printMessage(">>> ${e.toString()}");
@@ -84,7 +87,8 @@ class UserLoginProvider extends ChangeNotifier {
     });
   }
 
-  signup(String phoneNo, Map<String, dynamic> params,{required AppLocalizations loc}) async {
+  signup(String phoneNo, Map<String, dynamic> params,
+      {required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;

@@ -36,6 +36,35 @@ class AppHelper with LoggingMixin {
         .hasMatch(email);
   }
 
+  static String getPostcode(String address) {
+    // Regular expression to find any 4-digit number (Australian-style postcode)
+    final regex = RegExp(r'\b\d{4}\b');
+    final matches = regex.allMatches(address);
+
+    if (matches.isNotEmpty) {
+      // Return the last match (in case there are multiple 4-digit numbers)
+      return matches.last.group(0) ?? "";
+    }
+    return ""; // No postcode found
+  }
+
+ static Map<String, String> extractNameParts(String fullName) {
+   // Trim and split by spaces
+   final parts = fullName.trim().split(RegExp(r'\s+'));
+
+   if (parts.isEmpty) {
+     return {'firstName': '', 'lastName': ''};
+   } else if (parts.length == 1) {
+     // Only one name
+     return {'firstName': parts[0], 'lastName': ''};
+   } else {
+     // First word = Last Name, Remaining = First Name(s)
+     final lastName = parts.first;
+     final firstName = parts.sublist(1).join(' ');
+     return {'firstName': firstName, 'lastName': lastName};
+   }
+  }
+
   static double getFontSize(BuildContext context, double baseFontSize) {
     double screenWidth = MediaQuery.of(context).size.width;
     const double baseScreenWidth = 375.0; // Standard screen width

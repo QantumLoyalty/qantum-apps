@@ -134,12 +134,14 @@ class AppThemeCustom {
   static Color getSeeAllBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.aceRewards:
+      case Flavor.mhbc:
         return AppColors.mhbc_back_color_2;
       case Flavor.montaukTavern:
         return AppColors.mt_back_color;
       case Flavor.northShoreTavern:
         return AppColors.nst_back_color;
+      case Flavor.aceRewards:
+        return AppColors.ar_back_color_2;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }

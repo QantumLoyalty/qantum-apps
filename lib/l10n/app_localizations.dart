@@ -482,6 +482,12 @@ abstract class AppLocalizations {
   /// **'Phone number'**
   String get txtPhoneNumber;
 
+  /// No description provided for @txtAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get txtAddress;
+
   /// No description provided for @txtPostcode.
   ///
   /// In en, this message translates to:
@@ -1061,8 +1067,14 @@ abstract class AppLocalizations {
   /// No description provided for @fetchingCameras.
   ///
   /// In en, this message translates to:
-  /// **'Fetching cameras'**
+  /// **'Fetching cameras..\nIf you haven’t granted Camera or Microphone permissions'**
   String get fetchingCameras;
+
+  /// No description provided for @openAppSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'tap here to open App Settings'**
+  String get openAppSettings;
 
   /// No description provided for @registerToContinue.
   ///
@@ -1081,6 +1093,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Already have an account?'**
   String get alreadyHaveAnAccount;
+
+  /// No description provided for @noLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t have a license'**
+  String get noLicense;
+
+  /// No description provided for @chooseYourMembership.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your membership'**
+  String get chooseYourMembership;
+
+  /// No description provided for @selectMembership.
+  ///
+  /// In en, this message translates to:
+  /// **'Select membership'**
+  String get selectMembership;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @membershipRequiresApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership requires approval and confirmation from the Club.'**
+  String get membershipRequiresApproval;
+
+  /// No description provided for @confirmPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm payment'**
+  String get confirmPayment;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

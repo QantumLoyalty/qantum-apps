@@ -36,14 +36,10 @@
 	<string>App requires access to location for better offers suggestions</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-    <key>NSCameraUsageDescription</key>
-    <string>This app needs camera access to scan documents.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app requires microphone access to capture audio for scanning or recording.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app needs access to your photo library to save or choose photos.</string>
-    
-    
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to scan documents.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to your photo library to save or choose photos.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

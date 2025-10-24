@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
 import '../../views/login/WelcomeScreen.dart';
+import '../../views/membership/ChooseMembershipScreen.dart';
 import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
@@ -52,6 +53,7 @@ class AppNavigator {
   static const String appWebView = "/appWebView";
   static const String drivingLicenseScreen = "/drivingLicenseScanScreen";
   static const String welcomeScreen = "/welcomeScreen";
+  static const String chooseMembershipScreen = "/chooseMembershipScreen";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -88,7 +90,13 @@ class AppNavigator {
       case splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case login:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        {
+          bool? hideChangeMobileOption = (args ?? false) as bool?;
+          return MaterialPageRoute(
+              builder: (_) => LoginScreen(
+                    hideChangeMobileOption: hideChangeMobileOption,
+                  ));
+        }
       case otp:
         return MaterialPageRoute(
             builder: (_) => OTPScreen(
@@ -106,6 +114,8 @@ class AppNavigator {
                 ));
       case welcomeScreen:
         return MaterialPageRoute(builder: (_) => WelcomeScreen());
+      case chooseMembershipScreen:
+        return MaterialPageRoute(builder: (_) => ChooseMembershipScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case promotionDetail:

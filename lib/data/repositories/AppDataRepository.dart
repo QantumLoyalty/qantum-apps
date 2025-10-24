@@ -21,4 +21,7 @@ abstract class AppDataRepository {
       {required String frontImagePath, required String backImagePath});
 
   Future<NetworkResponse> updateCouponCode({required String couponCode});
+
+  Future<NetworkResponse> uploadDLImages(
+      {required String frontImagePath, required String backImagePath});
 }

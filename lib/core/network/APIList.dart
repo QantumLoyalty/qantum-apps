@@ -1,14 +1,11 @@
 class APIList {
   // SANDBOX
- // static get BASE_URL => "https://betaapi.s2w.com.au/";
+  // static get BASE_URL => "https://betaapi.s2w.com.au/";
 
- // LIVE
+  // LIVE
   static get BASE_URL => "http://3.24.55.180:8081/";
 
   //static get BASE_URL => "https://api.s2w.com.au/";
-
-  // LOCAL HOST
-  //static get BASE_URL => "http://localhost:8081/";
 
   static get LOGIN => BASE_URL + "user/check/";
 
@@ -60,4 +57,6 @@ class APIList {
   static get FETCH_HOME_BUTTONS => BASE_URL + "button/get";
 
   static get UPDATE_COUPON_CODE => BASE_URL + "user/coupon-update";
+
+  static get UPLOAD_DRIVING_LICENSE_IMAGES => BASE_URL + "images/upload";
 }

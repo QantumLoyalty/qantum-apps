@@ -165,8 +165,16 @@
   "takePhotoBtn": "拍照",
   "retakeBtn": "重拍",
   "backOfDL": "驾照背面",
-  "fetchingCameras": "正在加载摄像头",
+  "fetchingCameras": "正在加载摄像头...\n如果您尚未授予相机或麦克风权限",
+  "openAppSettings": "请点击此处打开应用设置。",
   "registerToContinue": "注册以继续",
   "register": "注册",
-  "alreadyHaveAnAccount": "已经有账户了吗？"
+  "alreadyHaveAnAccount": "已经有账户了吗？",
+  "noLicense": "我没有驾照",
+  "txtAddress": "地址",
+  "chooseYourMembership": "选择您的会员资格",
+  "selectMembership": "选择会员",
+  "next": "下一步",
+  "membershipRequiresApproval": "会员资格需要俱乐部的批准和确认。",
+  "confirmPayment": "确认付款"
 }

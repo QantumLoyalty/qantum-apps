@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:http_parser/http_parser.dart';
+
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
@@ -159,6 +161,47 @@ class AppDataService extends AppDataRepository with LoggingMixin {
         networkResponse = NetworkResponse.success(
             response: jsonDecode(respStr), responseMessage: "Success");
       } else {
+        print(
+            "RESPONSE: ${streamedResponse.statusCode}: MESSAGE: ${streamedResponse.reasonPhrase}");
+        networkResponse = NetworkResponse.error(
+            responseMessage: "Error: ${streamedResponse.statusCode}");
+      }
+      // networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> uploadDLImages(
+      {required String frontImagePath, required String backImagePath}) async {
+    NetworkResponse networkResponse;
+    try {
+      logEvent(
+          "URL: ${APIList.UPLOAD_DRIVING_LICENSE_IMAGES}, Front: $frontImagePath, Back: $backImagePath");
+      final request = http.MultipartRequest(
+          'POST', Uri.parse(APIList.UPLOAD_DRIVING_LICENSE_IMAGES));
+      request.headers['Content-Type'] = 'multipart/form-data';
+      request.files.add(await http.MultipartFile.fromPath(
+          'front', frontImagePath,
+          contentType: MediaType('image', 'png')));
+      request.files.add(await http.MultipartFile.fromPath('back', backImagePath,
+          contentType: MediaType('image', 'png')));
+      logEvent(
+          "HEADERS: ${request.headers} --> ${request.files.map((f) => f.filename).toList()}");
+
+      final streamedResponse = await request.send();
+      print(
+          "UPLOAD RESPONSE STATUS: ${streamedResponse.statusCode} >> ${streamedResponse.reasonPhrase}");
+      if (streamedResponse.statusCode == 200) {
+        final respStr = await streamedResponse.stream.bytesToString();
+
+        networkResponse = NetworkResponse.success(
+            response: jsonDecode(respStr), responseMessage: "Success");
+      } else {
+        final responseBody = await streamedResponse.stream.bytesToString();
+        print('Body: $responseBody');
         print(
             "RESPONSE: ${streamedResponse.statusCode}: MESSAGE: ${streamedResponse.reasonPhrase}");
         networkResponse = NetworkResponse.error(

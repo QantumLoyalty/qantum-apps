@@ -203,6 +203,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtPhoneNumber => '电话号码';
 
   @override
+  String get txtAddress => '地址';
+
+  @override
   String get txtPostcode => '邮政编码';
 
   @override
@@ -491,7 +494,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backOfDL => '驾照背面';
 
   @override
-  String get fetchingCameras => '正在加载摄像头';
+  String get fetchingCameras => '正在加载摄像头...\n如果您尚未授予相机或麦克风权限';
+
+  @override
+  String get openAppSettings => '请点击此处打开应用设置。';
 
   @override
   String get registerToContinue => '注册以继续';
@@ -501,6 +507,24 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get alreadyHaveAnAccount => '已经有账户了吗？';
+
+  @override
+  String get noLicense => '我没有驾照';
+
+  @override
+  String get chooseYourMembership => '选择您的会员资格';
+
+  @override
+  String get selectMembership => '选择会员';
+
+  @override
+  String get next => '下一步';
+
+  @override
+  String get membershipRequiresApproval => '会员资格需要俱乐部的批准和确认。';
+
+  @override
+  String get confirmPayment => '确认付款';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -700,6 +724,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtPhoneNumber => '电话号码';
+
+  @override
+  String get txtAddress => '地址';
 
   @override
   String get txtPostcode => '邮政编码';
@@ -990,7 +1017,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get backOfDL => '驾照背面';
 
   @override
-  String get fetchingCameras => '正在加载摄像头';
+  String get fetchingCameras => '正在加载摄像头...\n如果您尚未授予相机或麦克风权限';
+
+  @override
+  String get openAppSettings => '请点击此处打开应用设置。';
 
   @override
   String get registerToContinue => '注册以继续';
@@ -1000,4 +1030,22 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get alreadyHaveAnAccount => '已经有账户了吗？';
+
+  @override
+  String get noLicense => '我没有驾照';
+
+  @override
+  String get chooseYourMembership => '选择您的会员资格';
+
+  @override
+  String get selectMembership => '选择会员';
+
+  @override
+  String get next => '下一步';
+
+  @override
+  String get membershipRequiresApproval => '会员资格需要俱乐部的批准和确认。';
+
+  @override
+  String get confirmPayment => '确认付款';
 }

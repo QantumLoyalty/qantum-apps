@@ -1,8 +1,9 @@
+import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import '/core/mixins/logging_mixin.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -34,6 +35,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late TextEditingController _birthdayDDController;
   late TextEditingController _birthdayMMController;
   late TextEditingController _birthdayYYController;
+  late TextEditingController _addressController;
+  late TextEditingController _address1Controller;
   late FocusNode _birthdayDDFocusNode;
   late FocusNode _birthdayMMFocusNode;
   late FocusNode _birthdayYYFocusNode;
@@ -43,33 +46,70 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   @override
   void initState() {
     super.initState();
-    _firstNameController =
-        TextEditingController(text: widget.argument['name'] ?? "");
 
-    String date = "", month = "", year = "";
-    if (widget.argument.containsKey("dob")) {
-      try {
-        DateFormat format = DateFormat("yyyy-MM-dd");
-        DateTime dob = format.parse(widget.argument["dob"]!);
-        date = dob.day.toString();
-        month = dob.month.toString();
-        year = dob.year.toString();
-      } catch (e) {
-        logEvent("DOB Parse Error: $e");
-      }
+    logEvent(widget.argument);
+    String firstName = "", lastName = "";
+    if (widget.argument.containsKey('name')) {
+      Map<String, String> namePart =
+          AppHelper.extractNameParts(widget.argument['name']!);
+      logEvent("Pre-filled name: ${widget.argument['name']}");
+      firstName = namePart['firstName'] ?? "";
+      lastName = namePart['lastName'] ?? "";
     }
 
-    _lastNameController = TextEditingController();
+    _firstNameController = TextEditingController(text: firstName);
+
+    _lastNameController = TextEditingController(text: lastName);
     _emailController = TextEditingController();
-    _postcodeController = TextEditingController();
-    _birthdayDDController = TextEditingController(text: date);
 
-    _birthdayMMController = TextEditingController(text: month);
-
-    _birthdayYYController = TextEditingController(text: year);
     _birthdayDDFocusNode = FocusNode();
     _birthdayMMFocusNode = FocusNode();
     _birthdayYYFocusNode = FocusNode();
+
+    String address = "";
+    String postcode = "";
+
+    if (widget.argument.containsKey("address")) {
+      postcode = AppHelper.getPostcode(widget.argument["address"]!);
+      if (postcode.isNotEmpty) {
+        address = widget.argument["address"]!.replaceAll(postcode, "");
+      } else {
+        address = widget.argument["address"]!;
+      }
+    }
+
+    _postcodeController = TextEditingController(text: postcode);
+    _addressController = TextEditingController(text: address);
+    _address1Controller = TextEditingController();
+
+    if (widget.argument.containsKey("dob")) {
+      DateFormat format = DateFormat("yyyy-MM-dd");
+      DateTime? dateTime;
+      try {
+        dateTime = format.parse(widget.argument["dob"]!);
+      } catch (e) {
+        logEvent("DOB Parse Error: $e");
+      }
+      _birthdayDDController = TextEditingController(
+          text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
+                  () => dateTime!.day.toString())
+              .on(() => dateTime != null && dateTime.day < 10,
+                  () => "0${dateTime!.day.toString()}")
+              .build(orElse: () => ""));
+      _birthdayMMController = TextEditingController(
+          text: ConditionBuilder.on(
+                  () => dateTime != null && dateTime.month > 10,
+                  () => dateTime!.month.toString())
+              .on(() => dateTime != null && dateTime.month < 10,
+                  () => "0${dateTime!.month.toString()}")
+              .build(orElse: () => ""));
+      _birthdayYYController = TextEditingController(
+          text: dateTime != null ? dateTime.year.toString() : "");
+    } else {
+      _birthdayDDController = TextEditingController();
+      _birthdayMMController = TextEditingController();
+      _birthdayYYController = TextEditingController();
+    }
   }
 
   @override
@@ -84,6 +124,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     _birthdayDDFocusNode.dispose();
     _birthdayMMFocusNode.dispose();
     _birthdayYYFocusNode.dispose();
+    _addressController.dispose();
+    _address1Controller.dispose();
     super.dispose();
   }
 
@@ -116,6 +158,10 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
             args['phoneNo'] = widget.argument['phoneNo']!;
             args['countryCode'] = widget.argument['countryCode']!;
             args['userId'] = "${userLoginProvider.userId}";
+
+            if (AppHelper.isClubApp()) {
+              args['fromRegistrationAndClubApp'] = 'true';
+            }
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
@@ -287,6 +333,103 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
+                      AppHelper.isClubApp()
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                AppDimens.shape_10,
+                                Text(
+                                  loc.txtAddress,
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor),
+                                ),
+                                AppDimens.shape_5,
+                                TextFormField(
+                                  maxLines: 1,
+                                  controller: _addressController,
+                                  style: TextStyle(
+                                      color:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context)),
+                                  decoration: InputDecoration(
+                                      counterText: "",
+                                      hintText: "${loc.txtAddress} 1",
+                                      fillColor:
+                                          AppThemeCustom.getTextFieldBackground(
+                                              context),
+                                      filled: true,
+                                      hintStyle: TextStyle(
+                                        color: Theme.of(context).hintColor,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                                AppDimens.shape_10,
+                                TextFormField(
+                                  maxLines: 1,
+                                  controller: _address1Controller,
+                                  style: TextStyle(
+                                      color:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context)),
+                                  decoration: InputDecoration(
+                                      counterText: "",
+                                      hintText: "${loc.txtAddress} 2",
+                                      fillColor:
+                                          AppThemeCustom.getTextFieldBackground(
+                                              context),
+                                      filled: true,
+                                      hintStyle: TextStyle(
+                                        color: Theme.of(context).hintColor,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      border: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent),
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                              ],
+                            )
+                          : Container(),
                       Container(
                         margin: const EdgeInsets.only(top: 10),
                         width: MediaQuery.of(context).size.width,
@@ -720,6 +863,24 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   } else {
                                     params['Gender'] = "U";
                                   }
+
+                                  /// ADDING PARAMS IF APP IS A CLUB APP ///
+                                  if (widget.argument
+                                      .containsKey('license_front')) {
+                                    params['licence_front'] =
+                                        widget.argument['license_front'];
+                                  }
+                                  if (widget.argument
+                                      .containsKey('license_back')) {
+                                    params['licence_back'] =
+                                        widget.argument['license_back'];
+                                  }
+
+                                  if (_address1Controller.text.isNotEmpty) {
+                                    params['Suburb'] = _address1Controller.text;
+                                  }
+
+                                  /////////////////////////////////////////
 
                                   String phoneNo =
                                       "${widget.argument['countryCode']}${widget.argument['phoneNo']}";

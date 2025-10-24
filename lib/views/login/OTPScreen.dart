@@ -24,6 +24,7 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   late TextEditingController _otpController;
   late AppLocalizations loc;
+
   @override
   void initState() {
     super.initState();
@@ -50,10 +51,18 @@ class _OTPScreenState extends State<OTPScreen> {
                     context, provider.networkMessage ?? "");
               });
             } else {
-              /// NAVIGATE TO HOME SCREEN
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-              });
+              if (widget.argument.containsKey('fromRegistrationAndClubApp')) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  AppNavigator.navigateAndClearStack(
+                      context, AppNavigator.chooseMembershipScreen);
+                });
+              } else {
+                /// NAVIGATE TO HOME SCREEN
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  AppNavigator.navigateAndClearStack(
+                      context, AppNavigator.home);
+                });
+              }
             }
             provider.resetNetworkResponseStatus();
           }

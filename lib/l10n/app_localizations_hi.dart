@@ -203,6 +203,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtPhoneNumber => 'फोन नंबर';
 
   @override
+  String get txtAddress => 'पता';
+
+  @override
   String get txtPostcode => 'पिनकोड';
 
   @override
@@ -491,7 +494,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get backOfDL => 'ड्राइविंग लाइसेंस का पीछे वाला भाग';
 
   @override
-  String get fetchingCameras => 'कैमरे लोड हो रहे हैं';
+  String get fetchingCameras => 'कैमरा लोड किया जा रहा है...\nअगर आपने कैमरा या माइक्रोफ़ोन की अनुमति नहीं दी है,';
+
+  @override
+  String get openAppSettings => 'तो सेटिंग्स खोलने के लिए यहाँ टैप करें।';
 
   @override
   String get registerToContinue => 'जारी रखने के लिए पंजीकरण करें';
@@ -501,4 +507,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get alreadyHaveAnAccount => 'क्या आपके पास पहले से एक खाता है?';
+
+  @override
+  String get noLicense => 'मेरे पास लाइसेंस नहीं है';
+
+  @override
+  String get chooseYourMembership => 'अपनी सदस्यता चुनें';
+
+  @override
+  String get selectMembership => 'सदस्यता चुनें';
+
+  @override
+  String get next => 'आगे';
+
+  @override
+  String get membershipRequiresApproval => 'सदस्यता के लिए क्लब की स्वीकृति और पुष्टि आवश्यक है।';
+
+  @override
+  String get confirmPayment => 'भुगतान की पुष्टि करें';
 }

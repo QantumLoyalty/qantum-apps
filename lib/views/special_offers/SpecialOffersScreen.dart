@@ -14,6 +14,7 @@ class SpecialOffersScreen extends StatefulWidget {
 
 class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
   late SpecialOffersProvider _specialOffersProvider;
+  final _filter = ["All", "WMLC", "Fielders"];
 
   @override
   void initState() {
@@ -32,24 +33,71 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
               ? Container(
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 5),
-                  child: RefreshIndicator(
-                    backgroundColor: Theme.of(context).primaryColorDark,
-                    color: Theme.of(context).textSelectionTheme.selectionColor,
-                    onRefresh: () async {
-                      Provider.of<SpecialOffersProvider>(context, listen: false)
-                          .getSpecialOffers();
-                    },
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return SpecialOfferItem(
-                          offer: provider.specialOffers![index],
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return AppDimens.shape_10;
-                      },
-                      itemCount: provider.specialOffers!.length,
-                    ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColorDark,
+                                borderRadius: BorderRadius.circular(25),
+                                border: Border.all(
+                                    color: Theme.of(context)
+                                        .buttonTheme
+                                        .colorScheme!
+                                        .onSecondary),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                _filter[index],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor,
+                                    ),
+                              ),
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _filter.length,
+                        ),
+                      ),
+                      Expanded(
+                        child: RefreshIndicator(
+                          backgroundColor: Theme.of(context).primaryColorDark,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor,
+                          onRefresh: () async {
+                            Provider.of<SpecialOffersProvider>(context,
+                                    listen: false)
+                                .getSpecialOffers();
+                          },
+                          child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return SpecialOfferItem(
+                                offer: provider.specialOffers![index],
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return AppDimens.shape_10;
+                            },
+                            itemCount: provider.specialOffers!.length,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               : Container(),

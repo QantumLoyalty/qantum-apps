@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
+import '/view_models/DocumentScanProvider.dart';
+import '/view_models/MembershipManagerProvider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -64,7 +65,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
-        ChangeNotifierProvider(create: (context) => DocumentScanProvider())
+        ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
+        ChangeNotifierProvider(
+            create: (context) => MembershipManagerProvider()),
       ],
       child: Portal(
         child: MaterialApp(

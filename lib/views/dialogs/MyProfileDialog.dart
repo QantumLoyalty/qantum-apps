@@ -331,7 +331,7 @@ class MyProfileDialog with LoggingMixin {
                                                               sharedPreferenceHelper =
                                                               await SharedPreferenceHelper
                                                                   .getInstance();
-                                                          sharedPreferenceHelper
+                                                          await sharedPreferenceHelper
                                                               .clearAll();
 
                                                           /// REMOVING ALL DIALOGS

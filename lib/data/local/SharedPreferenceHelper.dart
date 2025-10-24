@@ -29,7 +29,7 @@ class SharedPreferenceHelper {
     //   await _appSecureStore!.write(key: USER, value: jsonEncode(user.toJson()));
   }
 
-  UserModel? getUserData()  {
+  UserModel? getUserData() {
     if (_sharedPreferences!.containsKey(USER)) {
       return UserModel.fromJson(
           jsonDecode(_sharedPreferences!.getString(USER)!));
@@ -60,16 +60,16 @@ class SharedPreferenceHelper {
     _sharedPreferences!.setString(COUNTRY_CODE, countryCode);
   }
 
-  getCountryCode()  {
+  getCountryCode() {
     if (_sharedPreferences!.containsKey(COUNTRY_CODE)) {
       return _sharedPreferences!.getString(COUNTRY_CODE)!;
     }
     return null;
   }
 
-  String? getAuthToken()  {
+  String? getAuthToken() {
     if (_sharedPreferences!.containsKey(AUTH_TOKEN)) {
-    return  _sharedPreferences!.getString(AUTH_TOKEN)!;
+      return _sharedPreferences!.getString(AUTH_TOKEN)!;
     }
     return null;
 
@@ -86,8 +86,8 @@ class SharedPreferenceHelper {
     }*/
   }
 
-  clearAll() {
-    _sharedPreferences!.clear();
+  clearAll() async {
+    await _sharedPreferences!.clear();
     //_appSecureStore!.deleteAll();
   }
 }
