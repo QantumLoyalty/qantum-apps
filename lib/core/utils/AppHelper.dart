@@ -48,21 +48,21 @@ class AppHelper with LoggingMixin {
     return ""; // No postcode found
   }
 
- static Map<String, String> extractNameParts(String fullName) {
-   // Trim and split by spaces
-   final parts = fullName.trim().split(RegExp(r'\s+'));
+  static Map<String, String> extractNameParts(String fullName) {
+    // Trim and split by spaces
+    final parts = fullName.trim().split(RegExp(r'\s+'));
 
-   if (parts.isEmpty) {
-     return {'firstName': '', 'lastName': ''};
-   } else if (parts.length == 1) {
-     // Only one name
-     return {'firstName': parts[0], 'lastName': ''};
-   } else {
-     // First word = Last Name, Remaining = First Name(s)
-     final lastName = parts.first;
-     final firstName = parts.sublist(1).join(' ');
-     return {'firstName': firstName, 'lastName': lastName};
-   }
+    if (parts.isEmpty) {
+      return {'firstName': '', 'lastName': ''};
+    } else if (parts.length == 1) {
+      // Only one name
+      return {'firstName': parts[0], 'lastName': ''};
+    } else {
+      // First word = Last Name, Remaining = First Name(s)
+      final lastName = parts.first;
+      final firstName = parts.sublist(1).join(' ');
+      return {'firstName': firstName, 'lastName': lastName};
+    }
   }
 
   static double getFontSize(BuildContext context, double baseFontSize) {

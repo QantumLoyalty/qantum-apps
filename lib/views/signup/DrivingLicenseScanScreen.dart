@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_camera_overlay/model.dart';
+import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
+import 'package:flutter_flip_card/flipcard/flip_card.dart';
+import 'package:flutter_flip_card/modal/flip_side.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -38,10 +41,12 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
   final CardOverlay overlay = CardOverlay.byFormat(OverlayFormat.cardID1);
 
   String? _frontImage, _backImage;
+  late FlipCardController _flipController;
 
   @override
   void initState() {
     super.initState();
+    _flipController = FlipCardController();
     _initCamera();
   }
 
@@ -96,7 +101,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
           }
         }
 
-        provider.resetError();
+       // provider.resetError();
       }
 
       if (provider.isErrorInUpload != null) {
@@ -119,6 +124,50 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
       return Stack(
         children: [
           Column(
+            children: [
+              Applogo(),
+              AppDimens.shape_30,
+              Expanded(
+                  child: FlipCard(
+                frontWidget: frontCard(),
+                backWidget: backCard(),
+                controller: _flipController,
+                rotateSide: RotateSide.left,
+                axis: FlipAxis.vertical,
+                onTapFlipping: false,
+              )),
+              AppDimens.shape_20,
+              InkWell(
+                onTap: () {
+                  AppNavigator.navigateReplacement(context, AppNavigator.signup,
+                      arguments: widget.arguments);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 5, bottom: 5),
+                  child: Text(
+                    loc!.noLicense,
+                    style: TextStyle(
+                      color:
+                          Theme.of(context).textSelectionTheme.selectionColor,
+                    ),
+                  ),
+                ),
+              ),
+              AppDimens.shape_20,
+              Padding(
+                padding: const EdgeInsets.only(left: 18, right: 18),
+                child: AppButton(
+                    text: loc!.takePhotoBtn,
+                    onClick: () {
+                      _captureWithCrop(provider);
+                    }),
+              ),
+              AppDimens.shape_10,
+            ],
+          ),
+
+          /*Column(
             children: [
               Applogo(),
               AppDimens.shape_30,
@@ -201,7 +250,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
               ),
               AppDimens.shape_10,
             ],
-          ),
+          ),*/
           provider.showLoader != null && provider.showLoader!
               ? AppLoader(
                   loaderMessage: loc!.msgCommonLoader,
@@ -244,6 +293,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     setState(() {
       if (findStatus() == 0) {
         _frontImage = croppedFile.path;
+        _flipController.flipcard();
       } else {
         _backImage = croppedFile.path;
         provider.getDrivingLicenseInformation(_frontImage!, _backImage!);
@@ -359,5 +409,119 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
               }
             })
         : Container();
+  }
+
+  Widget frontCard() {
+    return Column(
+      children: [
+        Text(
+          loc!.takePhotoOf,
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).textSelectionTheme.selectionColor),
+        ),
+        AppDimens.shape_10,
+        Text(
+          loc!.frontOfDL,
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).textSelectionTheme.selectionColor),
+        ),
+        Expanded(
+            child: Column(
+          children: [
+            AppDimens.shape_20,
+            Expanded(
+              child: getCentralWidget(),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppIcons.lightBulb,
+                    width: 20,
+                    height: 20,
+                  ),
+                  AppDimens.shape_10,
+                  Expanded(
+                    child: Text(
+                      loc!.ensureFits,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        )),
+      ],
+    );
+  }
+
+  Widget backCard() {
+    return Column(
+      children: [
+        Text(
+          loc!.takePhotoOf,
+          style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).textSelectionTheme.selectionColor),
+        ),
+        AppDimens.shape_10,
+        Text(
+          loc!.backOfDL,
+          style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).textSelectionTheme.selectionColor),
+        ),
+        Expanded(
+            child: Column(
+          children: [
+            AppDimens.shape_20,
+            Expanded(
+              child: getCentralWidget(),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppIcons.lightBulb,
+                    width: 20,
+                    height: 20,
+                  ),
+                  AppDimens.shape_10,
+                  Expanded(
+                    child: Text(
+                      loc!.ensureFits,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        )),
+      ],
+    );
   }
 }
