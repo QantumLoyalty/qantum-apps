@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 pluginManagement {
     def flutterSdkPath = {
         def properties = new Properties()
