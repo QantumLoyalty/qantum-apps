@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:http_parser/http_parser.dart';
-
+import '../core/utils/AppHelper.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
@@ -144,11 +145,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       {required String frontImagePath, required String backImagePath}) async {
     NetworkResponse networkResponse;
     try {
-      var URL =
-          "https://licensedataextractorapp.blackfield-3f4ad4c0.australiaeast.azurecontainerapps.io/licensedataextract";
-      logEvent(URL);
-
-      final request = http.MultipartRequest('POST', Uri.parse(URL));
+      final request = http.MultipartRequest(
+          'POST', Uri.parse(APIList.SCAN_DRIVING_LICENSE_IMAGES));
       request.headers['Content-Type'] = 'multipart/form-data';
       request.files
           .add(await http.MultipartFile.fromPath('frontimage', frontImagePath));
@@ -192,22 +190,69 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           "HEADERS: ${request.headers} --> ${request.files.map((f) => f.filename).toList()}");
 
       final streamedResponse = await request.send();
-      print(
-          "UPLOAD RESPONSE STATUS: ${streamedResponse.statusCode} >> ${streamedResponse.reasonPhrase}");
       if (streamedResponse.statusCode == 200) {
         final respStr = await streamedResponse.stream.bytesToString();
 
         networkResponse = NetworkResponse.success(
             response: jsonDecode(respStr), responseMessage: "Success");
       } else {
-        final responseBody = await streamedResponse.stream.bytesToString();
-        print('Body: $responseBody');
-        print(
-            "RESPONSE: ${streamedResponse.statusCode}: MESSAGE: ${streamedResponse.reasonPhrase}");
         networkResponse = NetworkResponse.error(
             responseMessage: "Error: ${streamedResponse.statusCode}");
       }
       // networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchMembershipPlans() async {
+    NetworkResponse networkResponse;
+    try {
+      final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+      final appType = AppHelper.getAppType();
+
+      var url = Uri.parse(APIList.FETCH_MEMBERSHIP_PLAN +
+          "timezone=$currentTimeZone&appType=$appType");
+      //var url = Uri.parse(APIList.FETCH_MEMBERSHIP_PLAN + "timezone=$currentTimeZone&appType=$appType");
+
+      var response = await NetworkHelper.instance.getCall(url: url, headers: {
+        'Content-Type': 'application/json',
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> createPaymentIntent(
+      {required Map<String, dynamic> paymentParams}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.CREATE_PAYMENT_INTENT);
+      networkResponse = await NetworkHelper.instance.postCall(
+          url: url,
+          headers: {'Content-Type': 'application/json'},
+          body: paymentParams);
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> verifyPayment(
+      {required Map<String, dynamic> paymentParams}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.VERIFY_PAYMENT);
+      networkResponse = await NetworkHelper.instance.postCall(
+          url: url,
+          headers: {'Content-Type': 'application/json'},
+          body: paymentParams);
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

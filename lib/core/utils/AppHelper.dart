@@ -184,7 +184,7 @@ class AppHelper with LoggingMixin {
       case Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
 
-      case Flavor.hogansReward || Flavor.northShoreTavern:
+      case Flavor.hogansReward || Flavor.northShoreTavern || Flavor.queens:
         return Theme.of(context).primaryColor;
 
       default:
@@ -289,6 +289,13 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.queens:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return ButtonStyle();
@@ -377,7 +384,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.queens:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -454,7 +461,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.northShoreTavern:
+      case Flavor.northShoreTavern || Flavor.queens:
         return ButtonStyle(
             shadowColor: WidgetStatePropertyAll(
                 Theme.of(context).primaryColor.withValues(alpha: 0.1)),
@@ -484,7 +491,8 @@ class AppHelper with LoggingMixin {
       case Flavor.mhbc ||
             Flavor.montaukTavern ||
             Flavor.hogansReward ||
-            Flavor.clh:
+            Flavor.clh ||
+            Flavor.queens:
         return const Size(142, 42);
 
       case Flavor.northShoreTavern || Flavor.aceRewards:
@@ -516,12 +524,14 @@ class AppHelper with LoggingMixin {
       Flavor.montaukTavern: "Montauk",
       Flavor.senseOfTaste: "Sense",
       Flavor.hogansReward: "Hogan",
-      Flavor.northShoreTavern: "North"
+      Flavor.northShoreTavern: "North",
+      Flavor.aceRewards: "Ace",
+      Flavor.queens: "Queens"
     };
     return appTypeMap[flavor] ?? "Qantum";
   }
 
-  static Future<String> getUserTierType(UserModel userData) async {
+  static String getUserTierType(UserModel userData) {
     if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
       if (userData.statusTier!.toLowerCase() == "") {
         return "STAFF PRE 3MTH";
@@ -534,10 +544,16 @@ class AppHelper with LoggingMixin {
       switch (flavorConfig.flavor) {
         case Flavor.mhbc:
           return "Crewmate";
-        case Flavor.montaukTavern || Flavor.clh:
+        case Flavor.montaukTavern:
+          return "premiumMember";
+        case Flavor.clh:
           return "Member";
         case Flavor.hogansReward:
-          return "Pearl";
+          return "Bronze";
+        case Flavor.queens:
+          return "Queens";
+        case Flavor.aceRewards:
+          return "Staff";
 
         default:
           return "Valued";

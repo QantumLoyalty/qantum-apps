@@ -16,7 +16,6 @@ import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 void main() async {
   FlavorConfig(
       flavor: Flavor.clh,
@@ -85,6 +84,12 @@ class _MyAppState extends State<MyApp> {
           theme: AppThemes.clhTheme,
           initialRoute: AppNavigator.splash,
           home: const SplashScreen(),
+          builder: (context, child) {
+            return MediaQuery(
+                data: MediaQuery.of(context)
+                    .copyWith(textScaler: const TextScaler.linear(1.0)),
+                child: child!);
+          },
         ),
       ),
     );

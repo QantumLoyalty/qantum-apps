@@ -24,4 +24,12 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> uploadDLImages(
       {required String frontImagePath, required String backImagePath});
+
+  Future<NetworkResponse> fetchMembershipPlans();
+
+  Future<NetworkResponse> createPaymentIntent(
+      {required Map<String, dynamic> paymentParams});
+
+  Future<NetworkResponse> verifyPayment(
+      {required Map<String, dynamic> paymentParams});
 }

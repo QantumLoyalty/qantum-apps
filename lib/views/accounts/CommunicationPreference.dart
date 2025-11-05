@@ -75,7 +75,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             loc.msgKeepingInTouch,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                color:
+                                    AppThemeCustom.getAccountSectionItemStyle(
+                                        context),
                                 fontSize: 14),
                           ),
                           AppDimens.shape_15,
@@ -83,14 +85,16 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             loc.msgSelectCommunicationPreference,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                color:
+                                    AppThemeCustom.getAccountSectionItemStyle(
+                                        context),
                                 fontSize: 12),
                           ),
                           AppDimens.shape_15,
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white.withValues(alpha: 0.15),
+                              color: Colors.white.withValues(alpha: 0.25),
                             ),
                             padding: const EdgeInsets.all(12.0),
                             child: Column(
@@ -100,13 +104,16 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                 Text(
                                   loc.txtCommunicationChannel,
                                   style: TextStyle(
-                                      color: AppThemeCustom.getAccountSectionItemStyle(context),
-                                      fontSize: 15,fontWeight: FontWeight.w600),
+                                      color: AppThemeCustom
+                                          .getAccountSectionItemStyle(context),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   loc.msgNotificationPreference,
                                   style: TextStyle(
-                                      color:AppThemeCustom.getAccountSectionItemStyle(context),
+                                      color: AppThemeCustom
+                                          .getAccountSectionItemStyle(context),
                                       fontSize: 12),
                                 ),
                                 SwitchListTile(
@@ -120,12 +127,14 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                       : false,
                                   onChanged: (value) {
                                     provider.updateCommunicationPreferences(
-                                        sms: value,loc: loc);
+                                        sms: value, loc: loc);
                                   },
                                   title: Text(
                                     loc.txtSMS,
                                     style: TextStyle(
-                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                        color: AppThemeCustom
+                                            .getAccountSectionItemStyle(
+                                                context),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -140,12 +149,14 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                       : false,
                                   onChanged: (value) {
                                     provider.updateCommunicationPreferences(
-                                        email: value,loc: loc);
+                                        email: value, loc: loc);
                                   },
                                   title: Text(
                                     loc.txtEmail,
                                     style: TextStyle(
-                                        color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                        color: AppThemeCustom
+                                            .getAccountSectionItemStyle(
+                                                context),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -157,7 +168,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                           Text(
                             loc.msgCommunicationPreference,
                             style: TextStyle(
-                                color: AppThemeCustom.getAccountSectionItemStyle(context),
+                                color:
+                                    AppThemeCustom.getAccountSectionItemStyle(
+                                        context),
                                 fontSize: 12),
                           ),
                         ],

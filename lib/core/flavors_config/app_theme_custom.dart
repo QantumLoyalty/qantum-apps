@@ -142,6 +142,9 @@ class AppThemeCustom {
         return AppColors.nst_back_color;
       case Flavor.aceRewards:
         return AppColors.ar_back_color_2;
+      case Flavor.queens:
+        return Theme.of(context).primaryColor;
+
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
@@ -158,6 +161,8 @@ class AppThemeCustom {
         return AppColors.hr_back_color;
       case Flavor.northShoreTavern:
         return AppColors.nst_back_color;
+      case Flavor.queens:
+        return Theme.of(context).primaryColor;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -222,7 +227,10 @@ class AppThemeCustom {
   static Color? getCustomScaffoldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh || Flavor.northShoreTavern:
+      case Flavor.mhbc ||
+            Flavor.clh ||
+            Flavor.northShoreTavern ||
+            Flavor.queens:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -316,8 +324,8 @@ class AppThemeCustom {
   static Color getTextFieldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
-        return Theme.of(context).cardColor.withValues(alpha: 0.15);
+      case Flavor.qantum || Flavor.queens:
+        return Theme.of(context).cardColor.withValues(alpha: 0.20);
       default:
         return Theme.of(context).cardColor;
     }
@@ -326,7 +334,7 @@ class AppThemeCustom {
   static Color getTextFieldTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.queens:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       default:
         return AppColors.black;
@@ -416,7 +424,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.queens:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -526,7 +534,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.queens:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -578,7 +586,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.northShoreTavern:
         return Theme.of(context).primaryColor;
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.queens:
         return Theme.of(context).primaryColorDark;
 
       default:
@@ -589,7 +597,7 @@ class AppThemeCustom {
   static Color? getAccountSectionDeleteTextStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.northShoreTavern:
+      case Flavor.northShoreTavern || Flavor.queens:
         return Theme.of(context).primaryColor;
 
       default:
@@ -611,6 +619,12 @@ class AppThemeCustom {
           return Theme.of(context).textSelectionTheme.selectionColor;
         } else {
           return Theme.of(context).primaryColorDark;
+        }
+      case Flavor.queens:
+        if (isFromEdit) {
+          return Theme.of(context).textSelectionTheme.selectionColor;
+        } else {
+          return AppColors.black;
         }
 
       default:
@@ -703,8 +717,24 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.montaukTavern || Flavor.aceRewards:
         return Theme.of(context).primaryColorDark;
+      case Flavor.queens:
+        return AppColors.black;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
+  }
+
+  static Color getCardDialogsTextColor(BuildContext context) {
+    /*Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.queens:
+        {
+          return Theme.of(context).primaryColorDark;
+        }
+
+      default:
+        return AppColors.white;
+    }*/
+    return AppColors.white;
   }
 }

@@ -175,7 +175,17 @@
   "selectMembership": "Select membership",
   "next": "Next",
   "membershipRequiresApproval": "Membership requires approval and confirmation from the Club.",
-  "confirmPayment": "Confirm payment"
-
-
+  "confirmPayment": "Confirm payment",
+  "selectMembershipPlan": "Please select a membership plan to move to next step",
+  "fetchingMembershipPlan": "Please wait, while we are fetching membership plans for you",
+  "verifyingPayment": "Please wait, while we are verifying your payment",
+  "name": "Name",
+  "cardNumber": "Card Number",
+  "activateMessage": "Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.",
+  "payNow": "Pay Now",
+  "waitingPayment": "Waiting for payment",
+  "payReception": "PAY AT RECEPTION",
+  "payByCard": "Pay by card",
+  "paymentUnsuccessful": "Payment unsuccessful",
+  "tryAgain": "Try Again"
 }

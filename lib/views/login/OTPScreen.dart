@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
@@ -54,7 +55,8 @@ class _OTPScreenState extends State<OTPScreen> {
               if (widget.argument.containsKey('fromRegistrationAndClubApp')) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   AppNavigator.navigateAndClearStack(
-                      context, AppNavigator.chooseMembershipScreen);
+                      context, AppNavigator.chooseMembershipScreen,
+                      arguments: widget.argument);
                 });
               } else {
                 /// NAVIGATE TO HOME SCREEN
@@ -126,7 +128,8 @@ class _OTPScreenState extends State<OTPScreen> {
                               .selectionHandleColor),
                       decoration: InputDecoration(
                         counter: AppDimens.shape_5,
-                        fillColor: Theme.of(context).cardColor,
+                        fillColor:
+                            AppThemeCustom.getTextFieldBackground(context),
                         filled: true,
                         hintStyle:
                             TextStyle(color: Theme.of(context).hintColor),

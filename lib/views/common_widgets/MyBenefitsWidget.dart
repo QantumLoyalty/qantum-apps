@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
@@ -61,7 +62,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                       Positioned.fill(
                         child: Image.asset(
                           AppIcons.getCardBackground(
-                              provider.getUserInfo!.statusTier),
+                              AppHelper.getUserTierType(provider.getUserInfo!)),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -72,7 +73,8 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              provider.getUserInfo!.statusTier!.toUpperCase(),
+                              AppHelper.getUserTierType(provider.getUserInfo!)
+                                  .toUpperCase(),
                               style: TextStyle(
                                   shadows: [
                                     Shadow(
@@ -88,7 +90,8 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                             ),
                             Text(
                               AppLocalizations.of(context)!
-                                  .txtMembershipBenefits,
+                                  .txtMembershipBenefits
+                                  .toUpperCase(),
                               style: TextStyle(shadows: [
                                 Shadow(
                                   offset: const Offset(1.0, 1.0),
@@ -172,7 +175,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                     backgroundColor: Theme.of(context).primaryColor,
                     backgroundImage: ExactAssetImage(
                       AppIcons.getCardBackground(
-                          provider.getUserInfo!.statusTier),
+                          AppHelper.getUserTierType(provider.getUserInfo!)),
                     ),
                     radius: 30,
                     child: IconButton(
@@ -186,7 +189,6 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                           Icons.clear,
                           size: 30,
                           color: Colors.white,
-
                         )),
                   ))
             ],

@@ -1,9 +1,9 @@
 class APIList {
   // SANDBOX
-  // static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
-  static get BASE_URL => "http://3.24.55.180:8081/";
+  //static get BASE_URL => "http://3.24.55.180:8081/";
 
   //static get BASE_URL => "https://api.s2w.com.au/";
 
@@ -59,4 +59,16 @@ class APIList {
   static get UPDATE_COUPON_CODE => BASE_URL + "user/coupon-update";
 
   static get UPLOAD_DRIVING_LICENSE_IMAGES => BASE_URL + "images/upload";
+
+  static get FETCH_MEMBERSHIP_PLAN => BASE_URL + "club-packages/club?";
+
+  /// STRIPE APIS ///
+  static get CREATE_PAYMENT_INTENT =>
+      BASE_URL + "payment/create-payment-intent";
+
+  static get VERIFY_PAYMENT => BASE_URL + "payment/verify-payment";
+
+  ///  VENKAT'S API ///
+  static get SCAN_DRIVING_LICENSE_IMAGES =>
+      "https://licensedataextractorapp.blackfield-3f4ad4c0.australiaeast.azurecontainerapps.io/licensedataextract";
 }

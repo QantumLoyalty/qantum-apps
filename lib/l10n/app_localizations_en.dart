@@ -525,4 +525,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmPayment => 'Confirm payment';
+
+  @override
+  String get selectMembershipPlan => 'Please select a membership plan to move to next step';
+
+  @override
+  String get fetchingMembershipPlan => 'Please wait, while we are fetching membership plans for you';
+
+  @override
+  String get verifyingPayment => 'Please wait, while we are verifying your payment';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get cardNumber => 'Card Number';
+
+  @override
+  String get activateMessage => 'Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.';
+
+  @override
+  String get payNow => 'Pay Now';
+
+  @override
+  String get waitingPayment => 'Waiting for payment';
+
+  @override
+  String get payReception => 'PAY AT RECEPTION';
+
+  @override
+  String get payByCard => 'Pay by card';
+
+  @override
+  String get paymentUnsuccessful => 'Payment unsuccessful';
+
+  @override
+  String get tryAgain => 'Try Again';
 }
