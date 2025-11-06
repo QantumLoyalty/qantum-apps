@@ -97,7 +97,7 @@ class DigitalCardDialog {
                                                 Text(
                                                   userTierType.toUpperCase(),
                                                   style: TextStyle(
-                                                     /* shadows: [
+                                                      /* shadows: [
                                                         Shadow(
                                                           offset: const Offset(
                                                               1.0, 1.0),
@@ -107,7 +107,9 @@ class DigitalCardDialog {
                                                                   alpha: 0.5),
                                                         )
                                                       ],*/
-                                                      color: AppThemeCustom.getCardDialogsTextColor(context),
+                                                      color: AppThemeCustom
+                                                          .getCardDialogsTextColor(
+                                                              context),
                                                       fontSize: 32,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -126,7 +128,9 @@ class DigitalCardDialog {
                                                                   alpha: 0.5),
                                                         )
                                                       ],*/
-                                                      color: AppThemeCustom.getCardDialogsTextColor(context),
+                                                      color: AppThemeCustom
+                                                          .getCardDialogsTextColor(
+                                                              context),
                                                       fontSize: 18),
                                                 ),
                                                 AppDimens.shape_20,
@@ -144,7 +148,9 @@ class DigitalCardDialog {
                                                                   alpha: 0.5),
                                                         )
                                                       ],*/
-                                                      color: AppThemeCustom.getCardDialogsTextColor(context),
+                                                      color: AppThemeCustom
+                                                          .getCardDialogsTextColor(
+                                                              context),
                                                       fontSize: 14),
                                                 ),
                                                 (showMembershipCategory(userData
@@ -177,7 +183,9 @@ class DigitalCardDialog {
                                                                                 0.5),
                                                                   )
                                                                 ],*/
-                                                                color: AppThemeCustom.getCardDialogsTextColor(context),
+                                                                color: AppThemeCustom
+                                                                    .getCardDialogsTextColor(
+                                                                        context),
                                                                 fontSize: 16),
                                                           ),
                                                           Text(
@@ -198,7 +206,9 @@ class DigitalCardDialog {
                                                                                 0.5),
                                                                   )
                                                                 ],*/
-                                                                color: AppThemeCustom.getCardDialogsTextColor(context),
+                                                                color: AppThemeCustom
+                                                                    .getCardDialogsTextColor(
+                                                                        context),
                                                                 fontSize: 22),
                                                           ),
                                                         ],
@@ -295,6 +305,10 @@ class DigitalCardDialog {
       return "HWP";
     } else if (flavor == Flavor.starReward) {
       return "SHG";
+    } else if (flavor == Flavor.aceRewards) {
+      return "WML";
+    } else if (flavor == Flavor.queens) {
+      return "QHG";
     } else {
       return "ABC1234";
     }

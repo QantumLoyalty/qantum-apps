@@ -31,7 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
 
       if (hasUserData) {
-        AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+        AppNavigator.navigateAndClearStack(context, AppNavigator.chooseMembershipScreen);
+       //   AppNavigator.navigateAndClearStack(context, AppNavigator.home);
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }

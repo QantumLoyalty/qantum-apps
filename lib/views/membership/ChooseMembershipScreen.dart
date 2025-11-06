@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
+import '/view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '/core/utils/AppHelper.dart';
 import '/data/models/MembershipModel.dart';
@@ -15,9 +15,7 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class ChooseMembershipScreen extends StatefulWidget {
-  Map<String, dynamic> args;
-
-  ChooseMembershipScreen({super.key, required this.args});
+  ChooseMembershipScreen({super.key});
 
   @override
   State<ChooseMembershipScreen> createState() => _ChooseMembershipScreenState();
@@ -50,22 +48,9 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
     return AppScaffold(
-      body: SafeArea(child: Consumer<MembershipManagerProvider>(
-          builder: (context, provider, child) {
-        // DISPLAYING NETWORK RESPONSE
-        if (provider.isPaymentVerified != null) {
-          logEvent("isPaymentVerified: ${provider.isPaymentVerified}");
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (provider.isPaymentVerified!) {
-              logEvent("navigateAndClearStack called!!!");
-              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-            } else {
-              AppHelper.showErrorMessage(context, loc.msgCommonError);
-              provider.resetVerifyPaymentResponse();
-            }
-          });
-        }
-
+      body: SafeArea(child:
+          Consumer2<MembershipManagerProvider, UserInfoProvider>(
+              builder: (context, provider, userInfoProvider, child) {
         return Container(
           padding: const EdgeInsets.all(AppDimens.screenPadding),
           child: Stack(
@@ -164,16 +149,14 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     text: loc.next.toUpperCase(),
                     onClick: () {
                       if (provider.selectedMembership != null) {
-                        makePayment();
+                        AppNavigator.navigateAndClearStack(
+                          context,
+                          AppNavigator.choosePaymentMethod,
+                        );
                       } else {
                         AppHelper.showErrorMessage(
                             context, loc.selectMembershipPlan);
                       }
-
-                      /*AppNavigator.navigateAndClearStack(
-                        context,
-                        AppNavigator.home,
-                      );*/
                     },
                   ),
                   Container(
@@ -214,36 +197,5 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
         );
       })),
     );
-  }
-
-  makePayment() async {
-    try {
-      /// CALLING CREATE PAYMENT INTENT API FOR GETTING THE INITIAL PARAMETERS ///
-      await _membershipManagerProvider.createPaymentIntent(
-          loc: loc, userId: widget.args['userId']);
-      logEvent(
-          "paymentIntentClientSecret: ${_membershipManagerProvider.paymentIntentClientSecret}");
-      if (_membershipManagerProvider.paymentIntentClientSecret != null) {
-        /// INSTANTIATING THE PAYMENT SHEET AND PRESENTING IT TO THE USER ///
-        await Stripe.instance.initPaymentSheet(
-            paymentSheetParameters: SetupPaymentSheetParameters(
-                style: ThemeMode.dark,
-                paymentIntentClientSecret:
-                    _membershipManagerProvider.paymentIntentClientSecret!,
-                merchantDisplayName: 'Qantum'));
-        await Stripe.instance.presentPaymentSheet();
-        /* if (!mounted) return;
-        AppHelper.showSuccessMessage(context, "Payment Successful");
-*/
-
-        /// VERIFYING THE PAYMENT AND UPDATING THE MEMBERSHIP STATUS ///
-        await _membershipManagerProvider.verifyPayment(
-            loc: loc, userId: widget.args['userId']);
-      }
-    } on StripeException catch (e) {
-      logEvent("makePayment Error: $e");
-      if (!mounted) return;
-      AppHelper.showErrorMessage(context, e.error.message ?? "Payment Failed");
-    }
   }
 }

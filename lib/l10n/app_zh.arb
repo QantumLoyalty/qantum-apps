@@ -188,5 +188,7 @@
   "payReception": "於櫃台付款",
   "payByCard": "以信用卡付款",
   "paymentUnsuccessful": "付款未成功",
-  "tryAgain": "請再試一次"
+  "tryAgain": "請再試一次",
+  "receptionPaymentMessage": "您的資料已傳送至接待處。請聯繫我們友善的員工以完成付款。\n\n您可以使用現金或信用卡付款。",
+  "payAtReception": "請在接待處付款"
 }

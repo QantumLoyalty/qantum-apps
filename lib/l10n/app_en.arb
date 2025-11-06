@@ -187,5 +187,7 @@
   "payReception": "PAY AT RECEPTION",
   "payByCard": "Pay by card",
   "paymentUnsuccessful": "Payment unsuccessful",
-  "tryAgain": "Try Again"
+  "tryAgain": "Try Again",
+  "receptionPaymentMessage": "Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.",
+  "payAtReception": "Please pay at reception"
 }

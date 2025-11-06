@@ -561,4 +561,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tryAgain => 'Try Again';
+
+  @override
+  String get receptionPaymentMessage => 'Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.';
+
+  @override
+  String get payAtReception => 'Please pay at reception';
 }

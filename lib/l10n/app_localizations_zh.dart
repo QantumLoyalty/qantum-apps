@@ -561,6 +561,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tryAgain => '請再試一次';
+
+  @override
+  String get receptionPaymentMessage => '您的資料已傳送至接待處。請聯繫我們友善的員工以完成付款。\n\n您可以使用現金或信用卡付款。';
+
+  @override
+  String get payAtReception => '請在接待處付款';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1120,4 +1126,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get tryAgain => '請再試一次';
+
+  @override
+  String get receptionPaymentMessage => '您的资料已发送到前台。请与我们友好的工作人员联系以完成付款。\n\n您可以通过现金或银行卡支付。';
+
+  @override
+  String get payAtReception => '请在接待处付款';
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import '/views/signup/DrivingLicenseScanScreen.dart';
 import '../../views/login/WelcomeScreen.dart';
 import '../../views/membership/ChooseMembershipScreen.dart';
+import '../../views/membership/ChoosePaymentMethod.dart';
 import '../../views/membership/MembershipPaymentScreen.dart';
+import '../../views/membership/PendingPaymentScreen.dart';
+import '../../views/membership/ReceptionPaymentScreen.dart';
 import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
@@ -56,6 +59,9 @@ class AppNavigator {
   static const String welcomeScreen = "/welcomeScreen";
   static const String chooseMembershipScreen = "/chooseMembershipScreen";
   static const String membershipPaymentScreen = "/membershipPaymentScreen";
+  static const String pendingPaymentScreen = "/pendingPaymentScreen";
+  static const String choosePaymentMethod = "/choosePaymentMethod";
+  static const String receptionPaymentScreen = "/receptionPaymentScreen";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -117,11 +123,15 @@ class AppNavigator {
       case welcomeScreen:
         return MaterialPageRoute(builder: (_) => WelcomeScreen());
       case chooseMembershipScreen:
-        return MaterialPageRoute(
-            builder: (_) =>
-                ChooseMembershipScreen(args: args as Map<String, dynamic>));
+        return MaterialPageRoute(builder: (_) => ChooseMembershipScreen());
       case membershipPaymentScreen:
         return MaterialPageRoute(builder: (_) => MembershipPaymentScreen());
+      case pendingPaymentScreen:
+        return MaterialPageRoute(builder: (_) => PendingPaymentScreen());
+      case choosePaymentMethod:
+        return MaterialPageRoute(builder: (_) => ChoosePaymentMethod());
+      case receptionPaymentScreen:
+        return MaterialPageRoute(builder: (_) => ReceptionPaymentScreen());
 
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());

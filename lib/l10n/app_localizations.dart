@@ -1201,6 +1201,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try Again'**
   String get tryAgain;
+
+  /// No description provided for @receptionPaymentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.'**
+  String get receptionPaymentMessage;
+
+  /// No description provided for @payAtReception.
+  ///
+  /// In en, this message translates to:
+  /// **'Please pay at reception'**
+  String get payAtReception;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

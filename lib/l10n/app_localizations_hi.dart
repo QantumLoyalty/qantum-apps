@@ -561,4 +561,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get tryAgain => 'पुनः प्रयास करें';
+
+  @override
+  String get receptionPaymentMessage => 'आपका विवरण रिसेप्शन पर भेज दिया गया है। कृपया भुगतान पूरा करने के लिए हमारे किसी मित्रवत स्टाफ सदस्य से मिलें।\n\nआप नकद या कार्ड से भुगतान कर सकते हैं।';
+
+  @override
+  String get payAtReception => 'कृपया रिसेप्शन पर भुगतान करें';
 }

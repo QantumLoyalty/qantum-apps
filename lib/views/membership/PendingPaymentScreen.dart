@@ -38,72 +38,129 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
       builder: (context, provider, child) {
         return Stack(
           children: [
-            Column(
-              children: [
-                Expanded(
-                    child: SingleChildScrollView(
-                        child: Column(
-                  children: [
-                    Applogo(),
-                    AppDimens.shape_30,
-                    Row(
-                      children: [
-                        Text(
-                          loc!.name,
-                          style: const TextStyle(fontSize: 12),
+            Padding(
+              padding: const EdgeInsets.all(AppDimens.screenPadding),
+              child: Column(
+                children: [
+                  Expanded(
+                      child: SingleChildScrollView(
+                          child: Column(
+                    children: [
+                      Applogo(),
+                      AppDimens.shape_30,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              loc!.name,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor),
+                            ),
+                          ),
+                          Expanded(
+                              flex: 8,
+                              child: Text(
+                                provider.getUserInfo != null
+                                    ? "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}"
+                                    : "",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor),
+                              ))
+                        ],
+                      ),
+                      AppDimens.shape_10,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              loc!.cardNumber,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor),
+                            ),
+                          ),
+                          Expanded(
+                              flex: 8,
+                              child: Text(
+                                provider.getUserInfo != null
+                                    ? "${provider.getUserInfo!.cardNumber} ${provider.getUserInfo!.cardNumber}"
+                                    : "",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor),
+                              ))
+                        ],
+                      ),
+                      AppDimens.shape_10,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              loc!.txtMembership,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor),
+                            ),
+                          ),
+                          AppDimens.shape_10,
+                          Expanded(
+                              flex: 9,
+                              child: Text(
+                                loc!.waitingPayment,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor),
+                              ))
+                        ],
+                      ),
+                      AppDimens.shape_60,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 35,right: 35),
+                        child: Text(
+                          loc!.activateMessage,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context)
+                                  .textSelectionTheme
+                                  .selectionColor),
                         ),
-                        AppDimens.shape_10,
-                        Expanded(
-                            child: Text(provider.getUserInfo != null
-                                ? "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}"
-                                : ""))
-                      ],
-                    ),
-                    AppDimens.shape_10,
-                    Row(
-                      children: [
-                        Text(
-                          loc!.cardNumber,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        AppDimens.shape_10,
-                        Expanded(
-                            child: Text(provider.getUserInfo != null
-                                ? "${provider.getUserInfo!.cardNumber} ${provider.getUserInfo!.cardNumber}"
-                                : ""))
-                      ],
-                    ),
-                    AppDimens.shape_10,
-                    Row(
-                      children: [
-                        Text(
-                          loc!.txtMembership,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                        AppDimens.shape_10,
-                        Expanded(child: Text(loc!.waitingPayment))
-                      ],
-                    ),
-                    AppDimens.shape_20,
-                    Text(
-                      loc!.activateMessage,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                    AppDimens.shape_10,
-                    AppButton(
-                        text: loc!.payNow,
-                        onClick: () {
-                          AppNavigator.navigateTo(
-                              context, AppNavigator.chooseMembershipScreen);
-                        })
-                  ],
-                ))),
-                AppDimens.shape_10,
-                BottomInfoWidget(
-                  message: loc!.membershipRequiresApproval,
-                )
-              ],
+                      ),
+                      AppDimens.shape_30,
+                      AppButton(
+                          text: loc!.payNow.toUpperCase(),
+                          onClick: () {
+                            AppNavigator.navigateTo(
+                                context, AppNavigator.chooseMembershipScreen);
+                          })
+                    ],
+                  ))),
+                  AppDimens.shape_10,
+                  BottomInfoWidget(
+                    message: loc!.membershipRequiresApproval,
+                  )
+                ],
+              ),
             )
           ],
         );
