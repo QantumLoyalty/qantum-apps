@@ -50,7 +50,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+4
 ###################################
 # QUEENS HOTEL
-version: 1.0.0+1
+version: 1.0.0+2
 ###################################
 
 
@@ -147,6 +147,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/queensHotel/
+     - assets/brisbaneBrewing/
      - assets/common/
      - assets/senseOfTaste/
      - assets/qantum/

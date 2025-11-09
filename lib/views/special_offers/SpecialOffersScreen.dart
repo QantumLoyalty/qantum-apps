@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../view_models/SpecialOffersProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../views/special_offers/widgets/SpecialOfferItem.dart';

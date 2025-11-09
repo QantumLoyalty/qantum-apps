@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import '/view_models/DocumentScanProvider.dart';
-import '/view_models/MembershipManagerProvider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -21,8 +18,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   FlavorConfig(
-      flavor: Flavor.aceRewards,
-      flavorValues: FlavorValues(appName: "Ace Rewards", appVersion: "0.0.1"));
+      flavor: Flavor.brisbane,
+      flavorValues:
+          FlavorValues(appName: "Brisbane Brewing", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations(
@@ -30,15 +28,14 @@ void main() async {
       .then((context) {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-    OneSignal.initialize("318ef71d-d8e8-43ad-8ccb-f97acee256a5");
+    // Initialize with your OneSignal App ID
+    OneSignal.initialize("8c211b07-8892-4e9f-841f-d0e7a67445ab");
+    // Use this method to prompt for push notifications.
+    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
-      // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+      print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
-    // Set your publishable key
-    Stripe.publishableKey = "pk_test_51S2fSX1zasRgJWaHc8UoT3ayEB2U53BX6fWezGboZ8rdKamJi6YwHmFXt21fsI5z05WE24WXaoNP7zgq9XErhPl300o8fHzM7I";
-    Stripe.instance.applySettings();
-
   });
 }
 
@@ -65,9 +62,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SignupProvider()),
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
-        ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
-        ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
-        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
       ],
       child: Portal(
         child: MaterialApp(
@@ -85,15 +80,16 @@ class _MyAppState extends State<MyApp> {
             Locale('zh', 'CN')
           ],
           title: FlavorConfig.instance.flavorValues.appName!,
-          theme: AppThemes.aceRewardsTheme,
+          theme: AppThemes.brisbaneTheme,
           initialRoute: AppNavigator.splash,
+          //home: const HomeScreen(),
+          home: const SplashScreen(),
           builder: (context, child) {
             return MediaQuery(
                 data: MediaQuery.of(context)
                     .copyWith(textScaler: const TextScaler.linear(1.0)),
                 child: child!);
           },
-          home: const SplashScreen(),
         ),
       ),
     );

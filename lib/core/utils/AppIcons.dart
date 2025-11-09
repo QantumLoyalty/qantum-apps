@@ -172,6 +172,22 @@ class AppIcons {
         default:
           return "assets/queensHotel/card_queens.png";
       }
+    } else if (selectedFlavor == Flavor.brisbane) {
+      switch (membershipType.toLowerCase().trim()) {
+        case "brewcrew":
+          return "assets/brisbaneBrewing/card_brew_crew.png";
+        case "champion":
+          return "assets/brisbaneBrewing/card_champion.png";
+        case "legend":
+          return "assets/brisbaneBrewing/card_legend.png";
+        case "member":
+          return "assets/brisbaneBrewing/card_member.png";
+        case "regular":
+          return "assets/brisbaneBrewing/card_regular.png";
+
+        default:
+          return "assets/brisbaneBrewing/card_brew_crew.png";
+      }
     } else {
       switch (membershipType.toLowerCase()) {
         case "valued" || "staff" || "pre 3 months staff":

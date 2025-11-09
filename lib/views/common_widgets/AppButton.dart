@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
+import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 import '/core/utils/AppDimens.dart';
 
 class AppButton extends StatelessWidget {
@@ -8,7 +10,12 @@ class AppButton extends StatelessWidget {
   Color? textColor;
   Icon? icon;
 
-  AppButton({super.key, required this.text, required this.onClick, this.icon});
+  AppButton(
+      {super.key,
+      required this.text,
+      required this.onClick,
+      this.icon,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,7 @@ class AppButton extends StatelessWidget {
         text,
         style: TextStyle(
           fontWeight: FontWeight.normal,
-          color:
-              textColor ?? Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+          color: textColor ?? AppThemeCustom.getAppButtonTextColor(context),
         ),
       );
 }

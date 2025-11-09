@@ -50,9 +50,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 : 0,
                             duration: const Duration(seconds: 1),
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                color: AppThemeCustom
+                                    .getProfileDialogTextColor(context),
                                 fontWeight: FontWeight.w900,
                                 fontSize: 24)),
                         RichText(
@@ -62,9 +61,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 text:
                                     'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                    color: AppThemeCustom
+                                        .getProfileDialogTextColor(context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 20)),
                             TextSpan(
@@ -72,9 +70,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                     '\n\nStatus credits\nfor ${provider.getUserInfo != null ? provider.getUserInfo!.nextStatusTier ?? "" : ""}'
                                         .toUpperCase(),
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                    color: AppThemeCustom
+                                        .getProfileDialogTextColor(context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 8)),
                           ]),

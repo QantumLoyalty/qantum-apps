@@ -302,6 +302,39 @@ class AppColors {
 
   static Color get qh_canvas_color => const Color(0xFFFDF1E2);
 
+  /// BRISBANE BREWING ///
+
+  static Color get bb_sf_color => const Color(0xFF047CF4);
+
+  static Color get bb_back_color => const Color(0xFFD6F4F9);
+
+  static Color get bb_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get bb_back_color_2 => const Color(0xFFD6F4F9);
+
+  static Color get bb_back_color_3 => const Color(0xFFD6F4F9);
+
+  static Color get bb_text_color => const Color(0xFF057CF4);
+
+  static Color get bb_text_field_text_color => const Color(0xFF000000);
+
+  static Color get bb_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get bb_button_color => const Color(0xFF057CF4);
+
+  static Color get bb_button_border_color => const Color(0xFF057CF4);
+
+  static Color get bb_card_color => const Color(0xFFFFFFFF);
+
+  static Color get bb_divider_color => const Color(0xFFe2f7fb);
+
+  static Color get bb_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get bb_canvas_color => const Color(0xFF002885);
+
+
+
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 
