@@ -70,6 +70,11 @@ android {
             applicationId "com.au.hogansreward.app"
             versionName "Hogan's Reward"
         }
+        aceRewards {
+            dimension "app"
+            applicationId "com.au.acerewards.app"
+            versionName "Ace Rewards"
+        }
 
 
     }
