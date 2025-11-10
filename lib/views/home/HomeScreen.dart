@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 2), () {
       _homeProvider.updatePointsBalanceVisibility(false);
-      // _homeProvider.updateSelectedOption(_homeProvider.prevSelectedOption);
     });
   }
 
@@ -124,23 +122,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                     context,
                                     provider,
                                     provider.homeNavigationList[index].name),
-                            /*iconColor: (flavor == Flavor.mhbc &&
-                                    provider.homeNavigationList[index].name ==
-                                        provider.homeNavigationList[2].name
-                                ? Colors.transparent
-                                : null),*/
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index].name)
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            /*textColor: flavor == Flavor.mhbc &&
-                                    provider.homeNavigationList[index].name ==
-                                        (provider.homeNavigationList[2].name)
-                                ? Colors.transparent
-                                : Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,*/
                             textColor:
                                 AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,
@@ -162,12 +148,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                         provider
                                             .homeNavigationList[index].name),
                                 borderRadius: BorderRadius.circular(10)),
-                            onClick: () {
-                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                              // checkAndHideSeeAllOptionMenu(provider);
-
-                              // provider.updateSelectedOption(index);
-                            },
+                            onClick: () {},
                             onDragStart: (value) {
                               /// HIDE POINTS BALANCE DIALOG
                               if (provider.homeNavigationList[index].name ==
@@ -179,14 +160,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                             },
                             onTapUp: (value) async {
                               /// HIDE POINTS BALANCE DIALOG
-                              /*if (provider.homeNavigationList[index].name ==
-                                  provider.homeNavigationList[0].name) {
-                                await Future.delayed(
-                                    const Duration(seconds: 2));
-                                provider.updatePointsBalanceVisibility(false);
-                                provider.updateSelectedOption(
-                                    provider.prevSelectedOption);
-                              }*/
                               startPointsDialogTimer();
                             },
                             onTapDown: (value) {
@@ -217,6 +190,14 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                               .homeNavigationList[2].name)) {
                                 /// DO NOTHING ///
                               } else if ((flavor == Flavor.starReward &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name)) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.queens &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name)) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.brisbane &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name)) {
                                 /// DO NOTHING ///
@@ -290,8 +271,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               if (provider.homeNavigationList[index + 3].name !=
                                   provider.homeNavigationList[5].name) {
                                 /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                                //  checkAndHideSeeAllOptionMenu(provider,"checkAndHideSeeAllOptionMenu myVenue");
-                                //  provider.updateShowAllMenuVisibility(false, "checkAndHideSeeAllOptionMenu myVenue");
                                 if (provider.showSeeAllMenu == true &&
                                     (provider.homeNavigationList[index + 3]
                                             .name !=
@@ -331,8 +310,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
 
                                 if (provider.showSeeAllMenu) {
                                   /// SEE ALL DIALOG IS VISIBLE WE NEED TO HIDE IT
-                                  /*   provider.updateSelectedOption(
-                                      provider.prevSelectedOption);*/
                                   provider.updateShowAllMenuVisibility(
                                       false, "SeeAllMenu");
                                 } else {
@@ -354,20 +331,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
           }),
         ),
       ),
-      /*floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40.0),
-            side: BorderSide(
-                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                width: 1.5)),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ScanSelectionScreen()));
-        },
-        child: const Icon(Icons.adf_scanner_outlined),
-      ),*/
     );
   }
 

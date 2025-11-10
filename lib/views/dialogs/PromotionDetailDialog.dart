@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '/core/flavors_config/app_theme_custom.dart';
 import '../../core/enums/AdvertisementEnums.dart';
 import '/core/navigation/AppNavigator.dart';
@@ -38,9 +39,10 @@ class PromotionDetailDialog {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: Theme.of(context)
+                              /*color: Theme.of(context)
                                   .textSelectionTheme
-                                  .selectionColor,
+                                  .selectionColor,*/
+                            color: AppColors.white,
                               borderRadius: BorderRadius.circular(10)),
                           margin: const EdgeInsets.only(left: 15, right: 15),
                           width: MediaQuery.of(context).size.width,
@@ -119,9 +121,11 @@ class PromotionDetailDialog {
                             right: 0,
                             bottom: 60,
                             child: CircleAvatar(
-                              backgroundColor: Theme.of(context)
+                              /*backgroundColor: Theme.of(context)
                                   .textSelectionTheme
                                   .selectionColor,
+                              */
+                              backgroundColor: AppColors.white,
                               radius: 30,
                               child: IconButton(
                                   onPressed: () {

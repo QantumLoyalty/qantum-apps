@@ -145,6 +145,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
       Map<String, dynamic> paymentParams = {
         "userId": userId,
         "packageId": _selectedMembership!.id!,
+        "packageName": _selectedMembership!.membershipName!,
         "amount": (_selectedMembership!.calculatedPrice! * 1000).toInt(),
         "currency": "usd",
         "appType": AppHelper.getAppType()

@@ -4,7 +4,6 @@ import '/core/utils/AppHelper.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../l10n/app_localizations.dart';
 import '/core/mixins/logging_mixin.dart';
-import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
 import '/view_models/HomeProvider.dart';

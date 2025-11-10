@@ -20,8 +20,6 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
   @override
   void initState() {
     super.initState();
-  //  Provider.of<UserInfoProvider>(context, listen: false).fetchUserPoints();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -65,11 +63,13 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.txtPointsBalance.toUpperCase(),
+                    AppLocalizations.of(context)!
+                        .txtPointsBalance
+                        .toUpperCase(),
                     style: TextStyle(
                         fontSize: 16,
                         color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                            AppThemeCustom.getPointsBalanceTextColor(context),
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
@@ -78,13 +78,15 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                     style: TextStyle(
                         fontSize: 42,
                         color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                            AppThemeCustom.getPointsBalanceTextColor(context),
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
                     "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
                     style: TextStyle(
-                        fontSize: 12, color: AppThemeCustom.getPointsBalanceTextColor(context)),
+                        fontSize: 12,
+                        color: AppThemeCustom.getPointsBalancePointTextColor(
+                            context)),
                   ),
                 ],
               );

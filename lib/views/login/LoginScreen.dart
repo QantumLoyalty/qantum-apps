@@ -178,8 +178,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   SizedBox(
                                       height: 60,
                                       child: VerticalDivider(
-                                        width: 0.2,
-                                        thickness: 0.2,
+                                        width: 1,
+                                        thickness: 1,
                                         color: Theme.of(context).dividerColor,
                                       )),
                                   Expanded(

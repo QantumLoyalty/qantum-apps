@@ -177,12 +177,12 @@ class AppHelper with LoggingMixin {
   static Color getAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
-      case Flavor.starReward:
-        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+      case Flavor.brisbane:
+        return Theme.of(context).primaryColor;
 
       case Flavor.hogansReward || Flavor.northShoreTavern || Flavor.queens:
         return Theme.of(context).primaryColor;
@@ -197,6 +197,8 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
+        case Flavor.brisbane:
+        return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
@@ -296,6 +298,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.brisbane:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
         return ButtonStyle();
@@ -393,6 +404,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.brisbane:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
         return ButtonStyle();
@@ -479,6 +499,15 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.brisbane:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(
+                Theme.of(context).primaryColor.withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return const ButtonStyle();
@@ -495,7 +524,7 @@ class AppHelper with LoggingMixin {
             Flavor.queens:
         return const Size(142, 42);
 
-      case Flavor.northShoreTavern || Flavor.aceRewards:
+      case Flavor.northShoreTavern || Flavor.aceRewards || Flavor.brisbane:
         return const Size(142, 58);
 
       default:
@@ -554,6 +583,8 @@ class AppHelper with LoggingMixin {
           return "Queens";
         case Flavor.aceRewards:
           return "Staff";
+        case Flavor.brisbane:
+          return "BrewCrew";
 
         default:
           return "Valued";
