@@ -29,25 +29,28 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version:  1.0.0+56
 ###################################
 # HOGAN'S REWARD
-#version:  1.0.0+5
+#version:  1.0.0+7
 ###################################
 # MHBC
 #version:  1.0.6+61
 ###################################
 # MONTAUK TAVERN
-#version:  1.0.1+52
+#version:  1.0.1+53
 ###################################
 # CENTRAL LANE HOTEL
-#version:  1.0.1+62
+#version:  1.0.2+63
 ###################################
 # NORTH SHORE TAVERN
-#version: 1.0.0+6
+#version: 1.0.0+7
 ###################################
 #QANTUM
 #version: 1.0.0+60
 ###################################
 # ACE REWARDS
-version: 1.0.0+2
+#version: 1.0.0+4
+###################################
+# QUEENS HOTEL
+version: 1.0.0+1
 ###################################
 
 
@@ -106,12 +109,15 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   flutter_localization: ^0.3.3
   # flutter_credit_card_scanner: ^0.11.9
-  flutter_camera_overlay: ^0.1.1
   permission_handler: ^12.0.1
   image: ^4.2.0
   http_parser: ^4.1.2
-  camera: ^0.11.0+2
+  #flutter_camera_overlay: ^0.1.1
+  flutter_camera_overlay_new: ^0.0.1
+  camera: ^0.10.5+2
+  #camera: ^0.11.3
   flutter_flip_card: ^0.0.6
+  flutter_stripe: ^12.0.2
 #  easy_geofencing: ^0.2.0
 
 
@@ -140,17 +146,18 @@ flutter:
   generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/common/
-    - assets/senseOfTaste/
-    - assets/qantum/
-    - assets/max/
-    - assets/starReward/
-    - assets/manlyHarbourBoatClub/
-    - assets/centralLaneHotel/
-    - assets/montaukTavern/
-    - assets/hogansReward/
-    - assets/northShoreTavern/
-    - assets/aceRewards/
+     - assets/queensHotel/
+     - assets/common/
+     - assets/senseOfTaste/
+     - assets/qantum/
+     - assets/max/
+     - assets/starReward/
+     - assets/manlyHarbourBoatClub/
+     - assets/centralLaneHotel/
+     - assets/montaukTavern/
+     - assets/hogansReward/
+     - assets/northShoreTavern/
+     - assets/aceRewards/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

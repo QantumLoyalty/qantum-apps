@@ -525,6 +525,48 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get confirmPayment => '确认付款';
+
+  @override
+  String get selectMembershipPlan => '請選擇會員方案以進行下一步';
+
+  @override
+  String get fetchingMembershipPlan => '請稍候，我們正在為您獲取會員方案';
+
+  @override
+  String get verifyingPayment => '請稍候，我們正在驗證您的付款';
+
+  @override
+  String get name => '姓名';
+
+  @override
+  String get cardNumber => '卡號';
+
+  @override
+  String get activateMessage => '選擇「立即付款」以啟動您的會員資格，立即開始累積積分與享受會員優惠。';
+
+  @override
+  String get payNow => '立即付款';
+
+  @override
+  String get waitingPayment => '等待付款中';
+
+  @override
+  String get payReception => '於櫃台付款';
+
+  @override
+  String get payByCard => '以信用卡付款';
+
+  @override
+  String get paymentUnsuccessful => '付款未成功';
+
+  @override
+  String get tryAgain => '請再試一次';
+
+  @override
+  String get receptionPaymentMessage => '您的資料已傳送至接待處。請聯繫我們友善的員工以完成付款。\n\n您可以使用現金或信用卡付款。';
+
+  @override
+  String get payAtReception => '請在接待處付款';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1048,4 +1090,46 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get confirmPayment => '确认付款';
+
+  @override
+  String get selectMembershipPlan => '请选择会员计划以进入下一步';
+
+  @override
+  String get fetchingMembershipPlan => '请稍候，我们正在为您获取会员方案';
+
+  @override
+  String get verifyingPayment => '請稍候，我們正在驗證您的付款';
+
+  @override
+  String get name => '姓名';
+
+  @override
+  String get cardNumber => '卡號';
+
+  @override
+  String get activateMessage => '選擇「立即付款」以啟動您的會員資格，立即開始累積積分與享受會員優惠。';
+
+  @override
+  String get payNow => '立即付款';
+
+  @override
+  String get waitingPayment => '等待付款中';
+
+  @override
+  String get payReception => '於櫃台付款';
+
+  @override
+  String get payByCard => '以信用卡付款';
+
+  @override
+  String get paymentUnsuccessful => '付款未成功';
+
+  @override
+  String get tryAgain => '請再試一次';
+
+  @override
+  String get receptionPaymentMessage => '您的资料已发送到前台。请与我们友好的工作人员联系以完成付款。\n\n您可以通过现金或银行卡支付。';
+
+  @override
+  String get payAtReception => '请在接待处付款';
 }

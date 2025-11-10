@@ -525,4 +525,46 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get confirmPayment => 'भुगतान की पुष्टि करें';
+
+  @override
+  String get selectMembershipPlan => 'कृपया अगले चरण पर जाने के लिए एक सदस्यता योजना चुनें';
+
+  @override
+  String get fetchingMembershipPlan => 'कृपया प्रतीक्षा करें, हम आपके लिए सदस्यता योजनाएँ ला रहे हैं';
+
+  @override
+  String get verifyingPayment => 'कृपया प्रतीक्षा करें, हम आपका भुगतान सत्यापित कर रहे हैं';
+
+  @override
+  String get name => 'नाम';
+
+  @override
+  String get cardNumber => 'कार्ड नंबर';
+
+  @override
+  String get activateMessage => 'अपनी सदस्यता सक्रिय करने और तुरंत अंक और सदस्य लाभ अर्जित करना शुरू करने के लिए PAY NOW चुनें।';
+
+  @override
+  String get payNow => 'अभी भुगतान करें';
+
+  @override
+  String get waitingPayment => 'भुगतान की प्रतीक्षा की जा रही है';
+
+  @override
+  String get payReception => 'रिसेप्शन पर भुगतान करें';
+
+  @override
+  String get payByCard => 'कार्ड द्वारा भुगतान करें';
+
+  @override
+  String get paymentUnsuccessful => 'भुगतान असफल रहा';
+
+  @override
+  String get tryAgain => 'पुनः प्रयास करें';
+
+  @override
+  String get receptionPaymentMessage => 'आपका विवरण रिसेप्शन पर भेज दिया गया है। कृपया भुगतान पूरा करने के लिए हमारे किसी मित्रवत स्टाफ सदस्य से मिलें।\n\nआप नकद या कार्ड से भुगतान कर सकते हैं।';
+
+  @override
+  String get payAtReception => 'कृपया रिसेप्शन पर भुगतान करें';
 }

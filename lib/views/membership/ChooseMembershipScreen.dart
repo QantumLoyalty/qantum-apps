@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/view_models/UserInfoProvider.dart';
+import '../../core/navigation/AppNavigator.dart';
+import '/core/utils/AppHelper.dart';
+import '/data/models/MembershipModel.dart';
+import '/views/common_widgets/AppLoader.dart';
 import '/l10n/app_localizations.dart';
 import '/view_models/MembershipManagerProvider.dart';
-
 import '../../core/mixins/logging_mixin.dart';
-import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
 import '../common_widgets/AppButton.dart';
@@ -12,7 +15,7 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class ChooseMembershipScreen extends StatefulWidget {
-  const ChooseMembershipScreen({super.key});
+  ChooseMembershipScreen({super.key});
 
   @override
   State<ChooseMembershipScreen> createState() => _ChooseMembershipScreenState();
@@ -22,12 +25,17 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
     with LoggingMixin {
   late AppLocalizations loc;
   late TextEditingController controller;
-  bool isExpanded = false;
+  late MembershipManagerProvider _membershipManagerProvider;
 
   @override
   void initState() {
     super.initState();
     controller = TextEditingController();
+    _membershipManagerProvider =
+        Provider.of<MembershipManagerProvider>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _membershipManagerProvider.fetchMembership(loc: loc);
+    });
   }
 
   @override
@@ -39,14 +47,10 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
   @override
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
-
     return AppScaffold(
-      body: SafeArea(child: Consumer<MembershipManagerProvider>(
-          builder: (context, provider, child) {
-        if (controller.text.isEmpty) {
-          provider.updateDropdownValue(MembershipManagerProvider.list.first);
-        }
-
+      body: SafeArea(child:
+          Consumer2<MembershipManagerProvider, UserInfoProvider>(
+              builder: (context, provider, userInfoProvider, child) {
         return Container(
           padding: const EdgeInsets.all(AppDimens.screenPadding),
           child: Stack(
@@ -85,54 +89,58 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                                 onSurfaceVariant: Colors.white,
                               ),
                         ),
-                        child: DropdownMenu<String>(
-                          width: double.infinity,
-                          controller: controller,
-                          initialSelection:
-                              MembershipManagerProvider.list.first,
-                          dropdownMenuEntries: provider.menuEntries,
-                          onSelected: (String? value) {
-                            provider.updateDropdownValue(value!);
-                            setState(() {
-                              controller.text = value;
-                            });
-                          },
-                          inputDecorationTheme: InputDecorationTheme(
-                            filled: true,
-                            fillColor: Colors.white.withAlpha(5),
-                            iconColor: Colors.white,
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 12),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  color: Colors.white, width: 1),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: const BorderSide(
-                                  color: Colors.white, width: 2),
-                            ),
-                          ),
-                          menuStyle: const MenuStyle(
-                            backgroundColor:
-                                WidgetStatePropertyAll(Colors.transparent),
-                            surfaceTintColor:
-                                WidgetStatePropertyAll(Colors.transparent),
-                            padding: WidgetStatePropertyAll(EdgeInsets.zero),
-                            elevation: WidgetStatePropertyAll(0),
-                            fixedSize: WidgetStatePropertyAll(
-                                Size.fromWidth(double.infinity)),
-                            maximumSize: WidgetStatePropertyAll(
-                                Size.fromWidth(double.infinity)),
-                          ),
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        child: provider.menuEntries != null
+                            ? DropdownMenu<MembershipModel>(
+                                width: double.infinity,
+                                controller: controller,
+                                hintText: loc.selectMembership,
+                                initialSelection: provider.selectedMembership,
+                                dropdownMenuEntries: provider.menuEntries!,
+                                onSelected: (MembershipModel? value) {
+                                  provider.updateDropdownValue(value!);
+                                  setState(() {
+                                    controller.text =
+                                        "${value.membershipName} - \$${value.calculatedPrice}";
+                                  });
+                                },
+                                inputDecorationTheme: InputDecorationTheme(
+                                  filled: true,
+                                  fillColor: Colors.white.withAlpha(80),
+                                  iconColor: Colors.white,
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 12),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.white, width: 1),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                        color: Colors.white, width: 2),
+                                  ),
+                                ),
+                                menuStyle: const MenuStyle(
+                                  backgroundColor: WidgetStatePropertyAll(
+                                      Colors.transparent),
+                                  surfaceTintColor: WidgetStatePropertyAll(
+                                      Colors.transparent),
+                                  padding:
+                                      WidgetStatePropertyAll(EdgeInsets.zero),
+                                  elevation: WidgetStatePropertyAll(0),
+                                  fixedSize: WidgetStatePropertyAll(
+                                      Size.fromWidth(double.infinity)),
+                                  maximumSize: WidgetStatePropertyAll(
+                                      Size.fromWidth(double.infinity)),
+                                ),
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : Container(),
                       )
                     ],
                   ))),
@@ -140,10 +148,15 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                   AppButton(
                     text: loc.next.toUpperCase(),
                     onClick: () {
-                      AppNavigator.navigateAndClearStack(
-                        context,
-                        AppNavigator.home,
-                      );
+                      if (provider.selectedMembership != null) {
+                        AppNavigator.navigateAndClearStack(
+                          context,
+                          AppNavigator.choosePaymentMethod,
+                        );
+                      } else {
+                        AppHelper.showErrorMessage(
+                            context, loc.selectMembershipPlan);
+                      }
                     },
                   ),
                   Container(
@@ -173,7 +186,12 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     ),
                   )
                 ],
-              )
+              ),
+              provider.showLoader != null && provider.showLoader!
+                  ? AppLoader(
+                      loaderMessage: provider.loaderMessage,
+                    )
+                  : Container()
             ],
           ),
         );

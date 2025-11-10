@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import '../../view_models/SpecialOffersProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../views/special_offers/widgets/SpecialOfferItem.dart';
@@ -15,6 +16,7 @@ class SpecialOffersScreen extends StatefulWidget {
 class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
   late SpecialOffersProvider _specialOffersProvider;
   final _filter = ["All", "WMLC", "Fielders"];
+  late Flavor selectedFlavor;
 
   @override
   void initState() {
@@ -22,6 +24,7 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     _specialOffersProvider =
         Provider.of<SpecialOffersProvider>(context, listen: false);
     _specialOffersProvider.fetchSpecialOffersTimer();
+    selectedFlavor = FlavorConfig.instance.flavor!;
   }
 
   @override
@@ -35,43 +38,45 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                       const EdgeInsets.only(left: 10, right: 10, bottom: 5),
                   child: Column(
                     children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColorDark,
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(
-                                    color: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .onSecondary),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                _filter[index],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
+                      (selectedFlavor == Flavor.aceRewards)
+                          ? SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ListView.builder(
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColorDark,
+                                      borderRadius: BorderRadius.circular(25),
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .buttonTheme
+                                              .colorScheme!
+                                              .onSecondary),
                                     ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      _filter[index],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionColor,
+                                          ),
+                                    ),
+                                  );
+                                },
+                                scrollDirection: Axis.horizontal,
+                                itemCount: _filter.length,
                               ),
-                            );
-                          },
-                          scrollDirection: Axis.horizontal,
-                          itemCount: _filter.length,
-                        ),
-                      ),
+                            )
+                          : Container(),
                       Expanded(
                         child: RefreshIndicator(
                           backgroundColor: Theme.of(context).primaryColorDark,

@@ -21,9 +21,6 @@ class AppIcons {
   static String email = "assets/common/email.png";
   static String lightBulb = "assets/common/lightbulb.png";
 
-
-
-
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     if (selectedFlavor == Flavor.northShoreTavern) {
@@ -34,9 +31,10 @@ class AppIcons {
   }
 
   static String getCardBackground(String? membershipType) {
+    membershipType = membershipType!.toLowerCase().replaceAll(" ", "");
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     if (selectedFlavor == Flavor.mhbc) {
-      switch (membershipType!.toLowerCase()) {
+      switch (membershipType.toLowerCase()) {
         case "crewmate":
           return card_value;
         case "commander":
@@ -53,7 +51,7 @@ class AppIcons {
           return card_value;
       }
     } else if (selectedFlavor == Flavor.aceRewards) {
-      switch (membershipType!.toLowerCase()) {
+      switch (membershipType.toLowerCase()) {
         case "staff":
           return "assets/aceRewards/card_staff.png";
         case "tens":
@@ -72,27 +70,35 @@ class AppIcons {
           return "assets/aceRewards/card_staff.png";
       }
     } else if (selectedFlavor == Flavor.hogansReward) {
-      switch (membershipType!.toLowerCase()) {
-        case "pearl":
-          return "assets/hogansReward/card_pearl.png";
-        case "opal":
-          return "assets/hogansReward/card_opal.png";
-        case "ruby":
-          return "assets/hogansReward/card_ruby.png";
-        case "sapphire":
-          return "assets/hogansReward/card_ruby.png";
-        case "diamond":
+      switch (membershipType.toLowerCase()) {
+        case "bronze":
+          return card_lieutenant;
+        case "silver":
+          return card_silver;
+        case "gold":
+          return card_gold;
+        case "platinum":
+          return card_platinum;
+        case "staff":
+          return "assets/hogansReward/card_staff.png";
+        case "management":
+          return "assets/hogansReward/card_management.png";
+        case "family":
+          return "assets/hogansReward/card_family.png";
+        case "directors":
+          return "assets/hogansReward/card_directors.png";
+
         default:
-          return "assets/hogansReward/card_pearl.png";
+          return card_lieutenant;
       }
     } else if (selectedFlavor == Flavor.clh) {
-      switch (membershipType!.toLowerCase().trim()) {
+      switch (membershipType) {
         case "member":
-          return card_value;
-        case "premiummember":
           return "assets/centralLaneHotel/card_member.png";
-        case "valued":
+        case "premiummember":
           return "assets/centralLaneHotel/card_premium_member.png";
+        case "valued":
+          return "assets/centralLaneHotel/card_value.png";
         case "silver":
           return card_silver;
         case "gold":
@@ -105,7 +111,7 @@ class AppIcons {
           return card_value;
       }
     } else if (selectedFlavor == Flavor.montaukTavern) {
-      switch (membershipType!.toLowerCase().trim()) {
+      switch (membershipType.toLowerCase().trim()) {
         case "member":
           return "assets/montaukTavern/card_member.png";
         case "premiummember":
@@ -128,7 +134,7 @@ class AppIcons {
           return "assets/montaukTavern/card_member.png";
       }
     } else if (selectedFlavor == Flavor.northShoreTavern) {
-      switch (membershipType!.toLowerCase().trim()) {
+      switch (membershipType.toLowerCase().trim()) {
         case "prestaff":
           return "assets/northShoreTavern/card_pre_staff.png";
         case "staff":
@@ -146,8 +152,28 @@ class AppIcons {
         default:
           return card_value;
       }
+    } else if (selectedFlavor == Flavor.queens) {
+      switch (membershipType.toLowerCase().trim()) {
+        case "queens":
+          return "assets/queensHotel/card_queens.png";
+        case "ruby":
+          return "assets/queensHotel/card_ruby.png";
+        case "emerald":
+          return "assets/queensHotel/card_emerald.png";
+        case "sapphire":
+          return "assets/queensHotel/card_sapphire.png";
+        case "diamond":
+          return "assets/queensHotel/card_diamond.png";
+        case "diamondplus":
+          return "assets/queensHotel/card_diamond_plus.png";
+        case "curtiscoast":
+          return "assets/queensHotel/card_curtis_coast.png";
+
+        default:
+          return "assets/queensHotel/card_queens.png";
+      }
     } else {
-      switch (membershipType!.toLowerCase()) {
+      switch (membershipType.toLowerCase()) {
         case "valued" || "staff" || "pre 3 months staff":
           return card_value;
         case "silver":

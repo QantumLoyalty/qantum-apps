@@ -18,7 +18,7 @@ class RecoveryEmailCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).cardColor.withValues(alpha: 0.15),
+              color: Theme.of(context).cardColor.withValues(alpha: 0.40),
               borderRadius: BorderRadius.circular(5)),
           padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
           child: Column(

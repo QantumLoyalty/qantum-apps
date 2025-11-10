@@ -56,7 +56,7 @@ class SpecialOfferDetailDialog {
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10)),
                                     child: AspectRatio(
-                                      aspectRatio: 16/9,
+                                      aspectRatio: 16 / 9,
                                       child: CachedNetworkImage(
                                           fit: BoxFit.contain,
                                           imageUrl: offerProvider
@@ -77,7 +77,7 @@ class SpecialOfferDetailDialog {
                                           },
                                           errorWidget: (context, a, object) {
                                             return const AspectRatio(
-                                                aspectRatio: 16/9,
+                                                aspectRatio: 16 / 9,
                                                 child: Icon(Icons.image,
                                                     color: Colors.black));
                                           }),
@@ -160,11 +160,11 @@ class SpecialOfferDetailDialog {
                                                 listen: false)
                                             .getSpecialOffers(showLoader: true);
                                       },
-                                      icon: Icon(
-                                        Icons.clear,
-                                        size: 30,
-                                        color: AppThemeCustom.getCloseBtnDialogColor(context)
-                                      )),
+                                      icon: Icon(Icons.clear,
+                                          size: 30,
+                                          color: AppThemeCustom
+                                              .getCloseBtnDialogColor(
+                                                  context))),
                                 ))
                           ],
                         )

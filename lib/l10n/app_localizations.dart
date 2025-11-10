@@ -1129,6 +1129,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm payment'**
   String get confirmPayment;
+
+  /// No description provided for @selectMembershipPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a membership plan to move to next step'**
+  String get selectMembershipPlan;
+
+  /// No description provided for @fetchingMembershipPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait, while we are fetching membership plans for you'**
+  String get fetchingMembershipPlan;
+
+  /// No description provided for @verifyingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait, while we are verifying your payment'**
+  String get verifyingPayment;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Number'**
+  String get cardNumber;
+
+  /// No description provided for @activateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.'**
+  String get activateMessage;
+
+  /// No description provided for @payNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay Now'**
+  String get payNow;
+
+  /// No description provided for @waitingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for payment'**
+  String get waitingPayment;
+
+  /// No description provided for @payReception.
+  ///
+  /// In en, this message translates to:
+  /// **'PAY AT RECEPTION'**
+  String get payReception;
+
+  /// No description provided for @payByCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay by card'**
+  String get payByCard;
+
+  /// No description provided for @paymentUnsuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment unsuccessful'**
+  String get paymentUnsuccessful;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get tryAgain;
+
+  /// No description provided for @receptionPaymentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.'**
+  String get receptionPaymentMessage;
+
+  /// No description provided for @payAtReception.
+  ///
+  /// In en, this message translates to:
+  /// **'Please pay at reception'**
+  String get payAtReception;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

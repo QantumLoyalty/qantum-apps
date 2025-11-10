@@ -272,6 +272,36 @@ class AppColors {
 
   static Color get ar_canvas_color => const Color(0xFFCED2CE);
 
+  /// QUEENS HOTEL ///
+
+  static Color get qh_sf_color => const Color(0xFFB1BF79);
+
+  static Color get qh_back_color => const Color(0xFFA4862C);
+
+  static Color get qh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get qh_back_color_2 => const Color(0xFFA4862C);
+
+  static Color get qh_back_color_3 => const Color(0xFFA4862C);
+
+  static Color get qh_text_color => const Color(0xFFFFFFFF);
+
+  static Color get qh_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get qh_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get qh_button_color => const Color(0x00000000);
+
+  static Color get qh_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get qh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get qh_divider_color => const Color(0xFFbfab6c);
+
+  static Color get qh_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get qh_canvas_color => const Color(0xFFFDF1E2);
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 

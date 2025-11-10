@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_camera_overlay/model.dart';
+import 'package:flutter_camera_overlay_new/model.dart';
 import 'package:flutter_flip_card/controllers/flip_card_controllers.dart';
 import 'package:flutter_flip_card/flipcard/flip_card.dart';
 import 'package:flutter_flip_card/modal/flip_side.dart';
@@ -32,7 +32,7 @@ class DrivingLicenseScanScreen extends StatefulWidget {
 }
 
 class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
-    with LoggingMixin {
+    with LoggingMixin, WidgetsBindingObserver {
   AppLocalizations? loc;
 
   CameraController? _controller;
@@ -47,11 +47,35 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
   void initState() {
     super.initState();
     _flipController = FlipCardController();
-    _initCamera();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initCamera();
+    });
+  }
+
+  /// Handle app pause/resume to prevent freeze on iOS
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = _controller;
+
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _initCamera();
+    }
   }
 
   Future<void> _initCamera() async {
     try {
+      // Add a small delay on iOS after the permission popup
+      if (Platform.isIOS) {
+        await Future.delayed(const Duration(milliseconds: 300));
+      }
+
       final cameras = await availableCameras();
       final backCamera = cameras.firstWhere(
           (camera) => camera.lensDirection == CameraLensDirection.back);
@@ -61,6 +85,8 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
       if (mounted) {
         setState(() {});
       }
+    } on CameraException catch (e) {
+      debugPrint("Camera error: ${e.code} ${e.description}");
     } catch (e) {
       logEvent("Camera init error: $e");
     }
@@ -68,6 +94,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller!.dispose();
     super.dispose();
   }
@@ -101,7 +128,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
           }
         }
 
-       // provider.resetError();
+        // provider.resetError();
       }
 
       if (provider.isErrorInUpload != null) {
@@ -166,91 +193,6 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
               AppDimens.shape_10,
             ],
           ),
-
-          /*Column(
-            children: [
-              Applogo(),
-              AppDimens.shape_30,
-              Text(
-                loc!.takePhotoOf,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context).textSelectionTheme.selectionColor),
-              ),
-              AppDimens.shape_10,
-              Text(
-                findStatus() == 0 ? loc!.frontOfDL : loc!.backOfDL,
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).textSelectionTheme.selectionColor),
-              ),
-              Expanded(
-                  child: Column(
-                children: [
-                  AppDimens.shape_20,
-                  Expanded(
-                    child: getCentralWidget(),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    padding: const EdgeInsets.only(top: 15.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AppIcons.lightBulb,
-                          width: 20,
-                          height: 20,
-                        ),
-                        AppDimens.shape_10,
-                        Expanded(
-                          child: Text(
-                            loc!.ensureFits,
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              )),
-              AppDimens.shape_20,
-              InkWell(
-                onTap: () {
-                  AppNavigator.navigateReplacement(context, AppNavigator.signup,
-                      arguments: widget.arguments);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 10, right: 10, top: 5, bottom: 5),
-                  child: Text(
-                    loc!.noLicense,
-                    style: TextStyle(
-                      color:
-                          Theme.of(context).textSelectionTheme.selectionColor,
-                    ),
-                  ),
-                ),
-              ),
-              AppDimens.shape_20,
-              Padding(
-                padding: const EdgeInsets.only(left: 18, right: 18),
-                child: AppButton(
-                    text: loc!.takePhotoBtn,
-                    onClick: () {
-                      _captureWithCrop(provider);
-                    }),
-              ),
-              AppDimens.shape_10,
-            ],
-          ),*/
           provider.showLoader != null && provider.showLoader!
               ? AppLoader(
                   loaderMessage: loc!.msgCommonLoader,
@@ -274,6 +216,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     // We want rectangle ~80% of image width
     final cropW = (captured.width * 0.8).toInt();
     final cropH = (cropW / aspectRatio).toInt();
+    //final cropH = (cropW).toInt();
 
     // Center it
     final cropX = ((captured.width - cropW) / 2).toInt();
@@ -330,7 +273,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
             builder: (context, snapshot) {
               if ((snapshot.connectionState == ConnectionState.done) &&
                   !snapshot.hasError) {
-                return _controller != null
+                return (_controller != null && _controller!.value.isInitialized)
                     ? SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,

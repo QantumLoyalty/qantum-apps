@@ -4,7 +4,6 @@ import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
 import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
-import '../signup/DrivingLicenseScanScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,14 +24,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _checkLoginStatus() async {
-    if (context.mounted) {
-      SharedPreferenceHelper sharedPreferenceHelper =
-          await SharedPreferenceHelper.getInstance();
-      if (sharedPreferenceHelper.getUserData() != null) {
-        AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+    if (!mounted) return;
+    try {
+      final sharedPreferenceHelper = await SharedPreferenceHelper.getInstance();
+      final hasUserData = sharedPreferenceHelper.getUserData() != null;
+      if (!mounted) return;
+
+      if (hasUserData) {
+        AppNavigator.navigateAndClearStack(context, AppNavigator.chooseMembershipScreen);
+       //   AppNavigator.navigateAndClearStack(context, AppNavigator.home);
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }
+    } catch (e) {
+      if (!mounted) return;
+      AppNavigator.navigateAndClearStack(context, AppNavigator.login);
     }
   }
 
