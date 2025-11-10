@@ -13,6 +13,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+
 android {
     namespace = "com.au"
     compileSdk = flutter.compileSdkVersion
@@ -70,6 +71,27 @@ android {
             applicationId "com.au.hogansreward.app"
             versionName "Hogan's Reward"
         }
+        northShoreTavern {
+            dimension "app"
+            applicationId "com.au.northshoretavern.app"
+            versionName "North Shore Tavern"
+        }
+        aceRewards {
+            dimension "app"
+            applicationId "com.au.acerewards.app"
+            versionName "Ace Rewards"
+        }
+        queens {
+            dimension "app"
+            applicationId "com.au.queenshotel.app"
+            versionName "1.0.0"
+        }
+
+        brisbane {
+            dimension "app"
+            applicationId "com.au.brisbanebrewing.app"
+            versionName "1.0.0"
+        }
 
 
     }
@@ -103,12 +125,14 @@ android {
             signingConfig signingConfigs.release
             shrinkResources true
             minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.12.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.material:material:1.13.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 }
 

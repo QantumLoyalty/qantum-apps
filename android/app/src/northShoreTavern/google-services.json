@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550739725759",
+    "project_id": "north-shore-tavern-99eab",
+    "storage_bucket": "north-shore-tavern-99eab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550739725759:android:018e936f166eb6b1ee250a",
+        "android_client_info": {
+          "package_name": "com.au.northshoretavern.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB_hsu3RlO9Uh9NPRZ3eQgDXPQVZt-wx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

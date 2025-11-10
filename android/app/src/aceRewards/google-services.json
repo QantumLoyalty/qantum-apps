@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999790220341",
+    "project_id": "ace-rewards-40f49",
+    "storage_bucket": "ace-rewards-40f49.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999790220341:android:4bff7b4b8f9a8827ac0d7c",
+        "android_client_info": {
+          "package_name": "com.au.acerewards.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgFGnoic8DKeqLJyfbl3Y7pBY1npe7-9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

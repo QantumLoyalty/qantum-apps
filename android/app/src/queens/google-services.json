@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1057203232257",
+    "project_id": "queens-hotel-c1759",
+    "storage_bucket": "queens-hotel-c1759.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057203232257:android:4a5f1e8028518576982a00",
+        "android_client_info": {
+          "package_name": "com.au.queenshotel.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3R-v-q_YasjprMpMEoKvDR6NwDyURpbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
