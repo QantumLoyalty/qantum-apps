@@ -117,11 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor:
-                                AppThemeCustom.getCustomHomeButtonsIconStyle(
-                                    context,
-                                    provider,
-                                    provider.homeNavigationList[index].name),
+                            iconColor: AppThemeCustom.getCustomHomeButtonsIconStyle(context, provider, provider.homeNavigationList[index].name),
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index].name)
@@ -198,6 +194,10 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                       provider.homeNavigationList[2].name)) {
                                 /// DO NOTHING ///
                               } else if ((flavor == Flavor.brisbane &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name)) {
+                                /// DO NOTHING ///
+                              } else if ((flavor == Flavor.hogansReward &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name)) {
                                 /// DO NOTHING ///

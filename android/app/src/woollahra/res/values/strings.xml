@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Woollahra Hotel</string>
+    <string name="default_notification_channel_id">com.au.woollahra.app.urgent</string>
+</resources>

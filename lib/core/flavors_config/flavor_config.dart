@@ -10,7 +10,8 @@ enum Flavor {
   northShoreTavern,
   aceRewards,
   queens,
-  brisbane
+  brisbane,
+  woollahra
 }
 
 class FlavorValues {

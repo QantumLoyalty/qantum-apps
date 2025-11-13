@@ -274,6 +274,7 @@ late AppLocalizations loc;
                     }
                   },
                   style: AppThemeCustom.getCancelInfoButtonStyle(context),
+                      textColor: AppThemeCustom.getCancelInfoTextColor(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(

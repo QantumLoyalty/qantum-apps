@@ -19,7 +19,8 @@ class EditPhoneScreen extends StatefulWidget {
 class _EditPhoneScreenState extends State<EditPhoneScreen> {
   late TextEditingController _phoneController;
   late UserInfoProvider _userInfoProvider;
-late AppLocalizations loc;
+  late AppLocalizations loc;
+
   @override
   void initState() {
     super.initState();
@@ -84,6 +85,7 @@ late AppLocalizations loc;
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
                   },
                   style: AppThemeCustom.getUpdateInfoButtonStyle(context),
+                  textColor: AppThemeCustom.getCancelInfoTextColor(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(

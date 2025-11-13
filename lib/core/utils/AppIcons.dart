@@ -188,6 +188,20 @@ class AppIcons {
         default:
           return "assets/brisbaneBrewing/card_brew_crew.png";
       }
+    } else if (selectedFlavor == Flavor.woollahra) {
+      switch (membershipType.toLowerCase().trim()) {
+        case "crew":
+          return "assets/woollahraHotel/crew.png";
+        case "clubconnect":
+          return "assets/woollahraHotel/card_club_connect.png";
+        case "locallegends":
+          return "assets/woollahraHotel/card_local_legends.png";
+        case "regulars":
+          return "assets/woollahraHotel/card_regulars.png";
+
+        default:
+          return "assets/woollahraHotel/card_regulars.png";
+      }
     } else {
       switch (membershipType.toLowerCase()) {
         case "valued" || "staff" || "pre 3 months staff":

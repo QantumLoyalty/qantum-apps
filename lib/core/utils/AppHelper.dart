@@ -524,7 +524,7 @@ class AppHelper with LoggingMixin {
             Flavor.queens:
         return const Size(142, 42);
 
-      case Flavor.northShoreTavern || Flavor.aceRewards || Flavor.brisbane:
+      case Flavor.northShoreTavern || Flavor.aceRewards || Flavor.brisbane || Flavor.woollahra:
         return const Size(142, 58);
 
       default:
@@ -585,6 +585,8 @@ class AppHelper with LoggingMixin {
           return "Staff";
         case Flavor.brisbane:
           return "BrewCrew";
+          case Flavor.woollahra:
+          return "Regulars";
 
         default:
           return "Valued";

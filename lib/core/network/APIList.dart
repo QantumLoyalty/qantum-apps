@@ -63,9 +63,7 @@ class APIList {
   static get FETCH_MEMBERSHIP_PLAN => BASE_URL + "club-packages/club?";
 
   /// STRIPE APIS ///
-  static get CREATE_PAYMENT_INTENT =>
-      BASE_URL + "payment/create-payment-intent";
-
+  static get CREATE_PAYMENT_INTENT => BASE_URL + "payment/create-payment-intent";
   static get VERIFY_PAYMENT => BASE_URL + "payment/verify-payment";
 
   ///  VENKAT'S API ///

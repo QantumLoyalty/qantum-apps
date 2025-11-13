@@ -152,9 +152,7 @@ class MyProfileDialog with LoggingMixin {
                                                               10)),
                                                   side: BorderSide(
                                                       width: 1,
-                                                      color: Theme.of(context)
-                                                          .textSelectionTheme
-                                                          .selectionColor!)),
+                                                      color: AppThemeCustom.getEditDetailsColor(context))),
                                               onPressed: () {
                                                 AppNavigator.navigateTo(
                                                     context,
@@ -170,19 +168,14 @@ class MyProfileDialog with LoggingMixin {
                                                   children: [
                                                     Icon(
                                                       Icons.handshake,
-                                                      color: Theme.of(context)
-                                                          .textSelectionTheme
-                                                          .selectionColor,
+                                                      color: AppThemeCustom.getEditDetailsColor(context),
                                                       size: 18,
                                                     ),
                                                     Text(
                                                       loc.txtEditMyDetails
                                                           .toUpperCase(),
                                                       style: TextStyle(
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .textSelectionTheme
-                                                              .selectionColor,
+                                                          color: AppThemeCustom.getEditDetailsColor(context),
                                                           fontSize: 10),
                                                     )
                                                   ],

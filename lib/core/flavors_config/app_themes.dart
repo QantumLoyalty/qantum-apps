@@ -910,13 +910,95 @@ class AppThemes {
       switchTheme: SwitchThemeData(
           trackColor: MaterialStateProperty.resolveWith((state) =>
           state.contains(MaterialState.selected)
-              ? AppColors.bb_back_color_2
+              ? AppColors.bb_button_color
               : AppColors.white),
           thumbColor: MaterialStateProperty.resolveWith((state) =>
           state.contains(MaterialState.selected)
               ? AppColors.white
-              : AppColors.bb_back_color_2)));
+              : AppColors.bb_button_color)));
 
+  static ThemeData get woollahraTheme => ThemeData(
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.wh_back_color),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: AppColors.wh_text_field_text_color,
+        selectionColor: AppColors.wh_text_color,
+        cursorColor: AppColors.wh_text_field_text_color,
+      ),
+      textTheme: TextTheme(
+          bodyLarge: TextStyle(color: AppColors.wh_text_field_text_color)),
+      buttonTheme: ButtonThemeData(
+          textTheme: ButtonTextTheme.accent,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              onPrimary: AppColors.wh_text_color,
+              onSecondary: AppColors.wh_button_border_color,
+              secondary: AppColors.wh_back_color,
+              primary: AppColors.wh_button_color),
+          buttonColor: AppColors.wh_button_color),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.wh_button_color,
+          secondary: AppColors.white,
+          surface: AppColors.wh_button_color),
+      primaryColorDark: AppColors.wh_back_color_2,
+      primaryColor: AppColors.wh_back_color,
+      cardColor: AppColors.wh_card_color,
+      canvasColor: AppColors.wh_canvas_color,
+      scaffoldBackgroundColor: AppColors.wh_sf_color,
+      dividerColor: AppColors.wh_divider_color,
+      hintColor: AppColors.wh_hint_text_color,
+      iconTheme: IconThemeData(color: AppColors.white),
+      radioTheme: RadioThemeData(
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.white;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.wh_text_color;
+          }
+          return AppColors.white;
+        }),
+      ),
+      disabledColor: AppColors.wh_disable_color,
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.wh_back_color),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.white,
+          unselectedItemColor: AppColors.wh_text_color),
+      checkboxTheme: CheckboxThemeData(
+        checkColor:
+        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.wh_text_color;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.wh_hint_text_color;
+          }
+          return AppColors.wh_text_color;
+        }),
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return Colors.transparent;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.white;
+          }
+          return Colors.transparent;
+        }),
+      ),
+      progressIndicatorTheme:
+      ProgressIndicatorThemeData(color: AppColors.wh_back_color),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.wh_floating_button_icon_color),
+      switchTheme: SwitchThemeData(
+          trackColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.wh_button_color
+              : AppColors.white),
+          thumbColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.white
+              : AppColors.wh_button_color)));
 
 
 

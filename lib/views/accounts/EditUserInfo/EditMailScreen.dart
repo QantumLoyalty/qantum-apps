@@ -93,6 +93,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
                   },
                   style: AppThemeCustom.getCancelInfoButtonStyle(context),
+                  textColor: AppThemeCustom.getCancelInfoTextColor(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(
@@ -101,8 +102,7 @@ class _EditMailScreenState extends State<EditMailScreen> {
                   textColor: AppThemeCustom.getUpdateInfoTextColor(context),
                   onClick: () {
                     if (_emailController.text.toString().isEmpty) {
-                      AppHelper.showErrorMessage(
-                          context, loc.msgEmptyEmail);
+                      AppHelper.showErrorMessage(context, loc.msgEmptyEmail);
                     } else if (!AppHelper.verifyEmailAddress(
                         _emailController.text.toString())) {
                       AppHelper.showErrorMessage(

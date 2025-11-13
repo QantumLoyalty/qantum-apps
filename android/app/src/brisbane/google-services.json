@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1056025182878",
+    "project_id": "qantum-42fb6",
+    "storage_bucket": "qantum-42fb6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056025182878:android:c910041b68274e06c9318f",
+        "android_client_info": {
+          "package_name": "com.au.brisbanebrewing.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNDsrRqxj_t98IsVjrH8orZzFZOQ6V1zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056025182878:android:56f43abf4c029f28c9318f",
+        "android_client_info": {
+          "package_name": "com.au.quantum.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNDsrRqxj_t98IsVjrH8orZzFZOQ6V1zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

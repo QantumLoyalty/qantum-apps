@@ -332,8 +332,35 @@ class AppColors {
 
   static Color get bb_canvas_color => const Color(0xFF002885);
 
+  /// WOOLLAHRA HOTEL ///
 
+  static Color get wh_sf_color => const Color(0xFF7B7424);
 
+  static Color get wh_back_color => const Color(0xFF364328);
+
+  static Color get wh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get wh_back_color_2 => const Color(0xFF364328);
+
+  static Color get wh_back_color_3 => const Color(0xFF364328);
+
+  static Color get wh_text_color => const Color(0xFFFFFFFF);
+
+  static Color get wh_text_field_text_color => const Color(0xFF000000);
+
+  static Color get wh_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get wh_button_color => const Color(0x00000000);
+
+  static Color get wh_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get wh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get wh_divider_color => const Color(0xFFe2f7fb);
+
+  static Color get wh_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get wh_canvas_color => const Color(0xFFE5CEAA);
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
