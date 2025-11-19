@@ -60,9 +60,23 @@ class _OTPScreenState extends State<OTPScreen> {
                 });
               } else {
                 /// NAVIGATE TO HOME SCREEN
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  AppNavigator.navigateAndClearStack(
-                      context, AppNavigator.home);
+                WidgetsBinding.instance.addPostFrameCallback((_) async {
+                  if (AppHelper.isClubApp()) {
+                    /// CHECKING IF PURCHASED THE MEMBERSHIP
+                    if (await AppHelper
+                        .checkIfUserHasPurchasedTheMembership()) {
+                      /// ALREADY PURCHASED THE MEMBERSHIP
+                      AppNavigator.navigateAndClearStack(
+                          context, AppNavigator.home);
+                    } else {
+                      ///  DID NOT PURCHASED THE MEMBERSHIP
+                      AppNavigator.navigateAndClearStack(
+                          context, AppNavigator.pendingPaymentScreen);
+                    }
+                  } else {
+                    AppNavigator.navigateAndClearStack(
+                        context, AppNavigator.home);
+                  }
                 });
               }
             }

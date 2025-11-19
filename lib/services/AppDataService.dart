@@ -244,6 +244,27 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   }
 
   @override
+  Future<NetworkResponse> updatePaymentType(
+      {required Map<String, dynamic> paymentParams}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var url = Uri.parse(APIList.UPDATE_PAYMENT_TYPE);
+      networkResponse = await NetworkHelper.instance.putCall(
+          url: url,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: paymentParams);
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
   Future<NetworkResponse> verifyPayment(
       {required Map<String, dynamic> paymentParams}) async {
     NetworkResponse networkResponse;

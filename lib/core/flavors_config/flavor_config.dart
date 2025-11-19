@@ -11,7 +11,8 @@ enum Flavor {
   aceRewards,
   queens,
   brisbane,
-  woollahra
+  woollahra,
+  bluewater
 }
 
 class FlavorValues {

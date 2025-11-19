@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
+import '../../data/local/SharedPreferenceHelper.dart';
 import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
@@ -197,7 +198,7 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
-        case Flavor.brisbane:
+      case Flavor.brisbane:
         return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
@@ -282,7 +283,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(AppColors.nst_canvas_color));
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.bluewater:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -395,7 +396,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards || Flavor.queens:
+      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -490,7 +491,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards:
+      case Flavor.aceRewards || Flavor.bluewater:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -524,7 +525,11 @@ class AppHelper with LoggingMixin {
             Flavor.queens:
         return const Size(142, 42);
 
-      case Flavor.northShoreTavern || Flavor.aceRewards || Flavor.brisbane || Flavor.woollahra:
+      case Flavor.northShoreTavern ||
+            Flavor.aceRewards ||
+            Flavor.brisbane ||
+            Flavor.woollahra ||
+            Flavor.bluewater:
         return const Size(142, 58);
 
       default:
@@ -555,7 +560,9 @@ class AppHelper with LoggingMixin {
       Flavor.hogansReward: "Hogan",
       Flavor.northShoreTavern: "North",
       Flavor.aceRewards: "Ace",
-      Flavor.queens: "Queens"
+      Flavor.queens: "Queens",
+      Flavor.brisbane: "Brisbane",
+      Flavor.bluewater: "Bluewater"
     };
     return appTypeMap[flavor] ?? "Qantum";
   }
@@ -574,7 +581,7 @@ class AppHelper with LoggingMixin {
         case Flavor.mhbc:
           return "Crewmate";
         case Flavor.montaukTavern:
-          return "premiumMember";
+          return "Member";
         case Flavor.clh:
           return "Member";
         case Flavor.hogansReward:
@@ -584,9 +591,11 @@ class AppHelper with LoggingMixin {
         case Flavor.aceRewards:
           return "Staff";
         case Flavor.brisbane:
-          return "BrewCrew";
-          case Flavor.woollahra:
+          return "Brew Crew";
+        case Flavor.woollahra:
           return "Regulars";
+        case Flavor.bluewater:
+          return "Deckhand";
 
         default:
           return "Valued";
@@ -598,5 +607,21 @@ class AppHelper with LoggingMixin {
     final flavor = FlavorConfig.instance.flavor;
     const clubFlavors = {Flavor.qantum, Flavor.aceRewards};
     return clubFlavors.contains(flavor);
+  }
+
+  static Future<bool> checkIfUserHasPurchasedTheMembership() async {
+    SharedPreferenceHelper sharedPreferencesHelper =
+        await SharedPreferenceHelper.getInstance();
+    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    if (userData != null) {
+      if (userData.paymentStatus!.isNotEmpty &&
+          userData.paymentStatus!.toLowerCase() == 'success') {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

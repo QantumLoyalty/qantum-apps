@@ -62,7 +62,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                             ),
                           ),
                           Expanded(
-                              flex: 8,
+                              flex: 5,
                               child: Text(
                                 provider.getUserInfo != null
                                     ? "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}"
@@ -94,7 +94,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                               flex: 8,
                               child: Text(
                                 provider.getUserInfo != null
-                                    ? "${provider.getUserInfo!.cardNumber} ${provider.getUserInfo!.cardNumber}"
+                                    ? "${provider.getUserInfo!.cardNumber}"
                                     : "",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
@@ -135,7 +135,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                       ),
                       AppDimens.shape_60,
                       Padding(
-                        padding: const EdgeInsets.only(left: 35,right: 35),
+                        padding: const EdgeInsets.only(left: 35, right: 35),
                         child: Text(
                           loc!.activateMessage,
                           textAlign: TextAlign.center,

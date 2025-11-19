@@ -99,6 +99,8 @@ class AppIcons {
           return "assets/centralLaneHotel/card_premium_member.png";
         case "valued":
           return "assets/centralLaneHotel/card_value.png";
+        case "staff":
+          return "assets/centralLaneHotel/card_value.png";
         case "silver":
           return card_silver;
         case "gold":
@@ -112,7 +114,7 @@ class AppIcons {
       }
     } else if (selectedFlavor == Flavor.montaukTavern) {
       switch (membershipType.toLowerCase().trim()) {
-        case "member":
+        case "member" || "staff":
           return "assets/montaukTavern/card_member.png";
         case "premiummember":
           return "assets/montaukTavern/card_premium_member.png";
@@ -201,6 +203,22 @@ class AppIcons {
 
         default:
           return "assets/woollahraHotel/card_regulars.png";
+      }
+    } else if (selectedFlavor == Flavor.bluewater) {
+      switch (membershipType.toLowerCase().trim()) {
+        case "deckhand":
+          return "assets/bluewaterCaptainsClub/card_deckhand.png";
+        case "admiral":
+          return "assets/bluewaterCaptainsClub/card_admiral.png";
+        case "commodore":
+          return "assets/bluewaterCaptainsClub/card_commodore.png";
+        case "firstmate":
+          return "assets/bluewaterCaptainsClub/card_firstmate.png";
+        case "skipper":
+          return "assets/bluewaterCaptainsClub/card_skipper.png";
+
+        default:
+          return "assets/bluewaterCaptainsClub/card_deckhand.png";
       }
     } else {
       switch (membershipType.toLowerCase()) {

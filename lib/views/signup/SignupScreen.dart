@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -47,7 +49,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   void initState() {
     super.initState();
 
-    logEvent(widget.argument);
+    logEvent("PARAMS ON SIGNUP: ${widget.argument}");
     String firstName = "", lastName = "";
     if (widget.argument.containsKey('name')) {
       Map<String, String> namePart =
@@ -836,7 +838,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           text: loc.txtJoinNow.toUpperCase(),
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
-                              //if (_postcodeController.text.isNotEmpty) {
+                              if (_postcodeController.text.isNotEmpty) {
                               if (validateData(provider)) {
                                 if (provider.tcCheckStatus) {
                                   Map<String, dynamic> params = {};
@@ -851,7 +853,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   }
 
                                   params['Email'] = _emailController.text;
-                                  // params['Gender'] = provider.selectedGender![0].toUpperCase();
+
                                   if (provider.selectedGender![0]
                                           .toUpperCase() ==
                                       "M") {
@@ -884,6 +886,12 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
                                   String phoneNo =
                                       "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
+
+                                  params['State'] = "NA";
+
+                                  params['Address'] =
+                                      _addressController.text.toString();
+
                                   AppHelper.printMessage(
                                       "PARAMS:: $params -> $phoneNo");
                                   userLoginProvider.signup(phoneNo, params,
@@ -893,11 +901,11 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                       context, loc.msgCheckTermsAndConditions);
                                 }
                               }
-                              //}
-                              /*else {
+                              }
+                              else {
                                 AppHelper.showErrorMessage(
                                     context, loc.msgEmptyPostcode);
-                              }*/
+                              }
                             }
 
                             // AppNavigator.navigateTo(context, AppNavigator.otp);

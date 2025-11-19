@@ -64,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		04943E7AFB12E84BE0D82E63 /* Pods-Runner.release-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-queens.xcconfig"; sourceTree = "<group>"; };
+		0579270DD5C338CC14313E05 /* Pods-OneSignalNotificationServiceExtension.profile-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-bluewater.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-bluewater.xcconfig"; sourceTree = "<group>"; };
+		06295341378DCFA88128DE95 /* Pods-Runner.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-bluewater.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-bluewater.xcconfig"; sourceTree = "<group>"; };
 		077078D55363E240B3B297BA /* Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
 		0785E6693562995905FCBD27 /* Pods-RunnerTests.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-max.xcconfig"; sourceTree = "<group>"; };
 		08E0A26928266677F3B49F6F /* Pods-Runner.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-mhbc.xcconfig"; sourceTree = "<group>"; };
@@ -121,12 +123,15 @@
 		4544537F573E7677B9AF3775 /* Pods-Runner.debug-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-queens.xcconfig"; sourceTree = "<group>"; };
 		4727B554A96ABFDD4888A197 /* Pods-RunnerTests.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-max.xcconfig"; sourceTree = "<group>"; };
 		4A66764E1ADEB394D58BC8F8 /* Pods-RunnerTests.release-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-woollahra.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-woollahra.xcconfig"; sourceTree = "<group>"; };
+		4A73E110DB6FED13B13DA10B /* Pods-Runner.profile-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-bluewater.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-bluewater.xcconfig"; sourceTree = "<group>"; };
 		4EAB29EA5BAB25F4B8C17B28 /* Pods-RunnerTests.release-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-brisbane.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-brisbane.xcconfig"; sourceTree = "<group>"; };
 		4F4AAE6729CD246DE15B2E53 /* Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; sourceTree = "<group>"; };
 		501233E54F2E10639E921520 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		507FCA95687BC4B38D125FB9 /* Pods-Runner.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
+		525F55CF66DD630171EDABAF /* Pods-Runner.debug-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-bluewater.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-bluewater.xcconfig"; sourceTree = "<group>"; };
 		55FC9A1B0902B5FDAB38314F /* Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig"; sourceTree = "<group>"; };
 		571D68D29C871C683BEBF31A /* Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig"; sourceTree = "<group>"; };
+		5833F8298208E1A931000F38 /* Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig"; sourceTree = "<group>"; };
 		5BCA30D87B3338DA07891C28 /* Pods-Runner.profile-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-woollahra.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-woollahra.xcconfig"; sourceTree = "<group>"; };
 		5C0BDEA0E4E59B20F3F5E5D6 /* Pods-RunnerTests.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		5C88EF9D89266E740E9D8C99 /* Pods-RunnerTests.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 		609FDB786D428E6D0CB54B04 /* Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; sourceTree = "<group>"; };
 		6170C9EFAE8D9F7414798CE3 /* Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		66AEB420E4D98CBA1BE82F31 /* Pods-RunnerTests.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
+		6BB1FE69EFBF13E799815690 /* Pods-RunnerTests.debug-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-bluewater.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-bluewater.xcconfig"; sourceTree = "<group>"; };
 		6EA298228E839AABF9A060E2 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		70B73159205F9E068D74ACAB /* Pods-Runner.debug-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-northshoretavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		70F059E4721EE424719F992A /* Pods-Runner.profile-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-clh.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-clh.xcconfig"; sourceTree = "<group>"; };
@@ -149,12 +155,15 @@
 		76335D36FE08AA3084E14778 /* Pods-RunnerTests.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-max.xcconfig"; sourceTree = "<group>"; };
 		799597E9CE7F2F8E49D625F1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		79AB768D85B76E1374E1371B /* Pods-RunnerTests.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-clh.xcconfig"; sourceTree = "<group>"; };
+		7A87D7BC3F22559517FEF326 /* Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7DD5D67C45A2429D270B165C /* Pods-RunnerTests.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
 		7EAA8791D766D1CA2FC6B796 /* Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig"; sourceTree = "<group>"; };
 		7F98FC26D2D91ADE73773510 /* Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
+		80611DBA18A78918CFE8986F /* Pods-RunnerTests.profile-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-bluewater.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-bluewater.xcconfig"; sourceTree = "<group>"; };
 		809F54E421A0FDB2032B1429 /* Pods-Runner.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-starrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-starrewards.xcconfig"; sourceTree = "<group>"; };
 		84FE58E8E4061CE4D2EBDCBC /* Pods-Runner.release-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-northshoretavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-northshoretavern.xcconfig"; sourceTree = "<group>"; };
+		8CA307F1F69A9671EEAE4C5F /* Pods-RunnerTests.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-bluewater.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-bluewater.xcconfig"; sourceTree = "<group>"; };
 		8DF5E9DBBC10284DB47E495F /* Pods-Runner.profile-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-queens.xcconfig"; sourceTree = "<group>"; };
 		94D556EF40D5BD50BD73FE28 /* Pods-Runner.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		95A54843773DB1A236286145 /* Pods-RunnerTests.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
@@ -422,6 +431,15 @@
 				718AB694D18599A2C7CBBD1C /* Pods-RunnerTests.debug-woollahra.xcconfig */,
 				4A66764E1ADEB394D58BC8F8 /* Pods-RunnerTests.release-woollahra.xcconfig */,
 				3D309861B26C8B5D3AC6EDA3 /* Pods-RunnerTests.profile-woollahra.xcconfig */,
+				5833F8298208E1A931000F38 /* Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig */,
+				7A87D7BC3F22559517FEF326 /* Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig */,
+				0579270DD5C338CC14313E05 /* Pods-OneSignalNotificationServiceExtension.profile-bluewater.xcconfig */,
+				525F55CF66DD630171EDABAF /* Pods-Runner.debug-bluewater.xcconfig */,
+				06295341378DCFA88128DE95 /* Pods-Runner.release-bluewater.xcconfig */,
+				4A73E110DB6FED13B13DA10B /* Pods-Runner.profile-bluewater.xcconfig */,
+				6BB1FE69EFBF13E799815690 /* Pods-RunnerTests.debug-bluewater.xcconfig */,
+				8CA307F1F69A9671EEAE4C5F /* Pods-RunnerTests.release-bluewater.xcconfig */,
+				80611DBA18A78918CFE8986F /* Pods-RunnerTests.profile-bluewater.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -4159,6 +4177,445 @@
 			};
 			name = "Profile-starrewards";
 		};
+		2398E4BA2ECC479400EE6346 /* Debug-bluewater */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-bluewater";
+		};
+		2398E4BB2ECC479400EE6346 /* Debug-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Bluewater Captains Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-hogansreward.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-bluewater";
+		};
+		2398E4BC2ECC479400EE6346 /* Debug-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BB1FE69EFBF13E799815690 /* Pods-RunnerTests.debug-bluewater.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-bluewater";
+		};
+		2398E4BD2ECC479400EE6346 /* Debug-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5833F8298208E1A931000F38 /* Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug-bluewater";
+		};
+		2398E4BE2ECC47BC00EE6346 /* Release-bluewater */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-bluewater";
+		};
+		2398E4BF2ECC47BC00EE6346 /* Release-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Bluewater Captains Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-max.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-bluewater";
+		};
+		2398E4C02ECC47BC00EE6346 /* Release-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CA307F1F69A9671EEAE4C5F /* Pods-RunnerTests.release-bluewater.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-bluewater";
+		};
+		2398E4C12ECC47BC00EE6346 /* Release-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A87D7BC3F22559517FEF326 /* Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-bluewater";
+		};
+		2398E4C22ECC47CE00EE6346 /* Profile-bluewater */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-bluewater";
+		};
+		2398E4C32ECC47CE00EE6346 /* Profile-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Bluewater Captains Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-starrewards.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-bluewater";
+		};
+		2398E4C42ECC47CE00EE6346 /* Profile-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80611DBA18A78918CFE8986F /* Pods-RunnerTests.profile-bluewater.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-bluewater";
+		};
+		2398E4C52ECC47CE00EE6346 /* Profile-bluewater */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0579270DD5C338CC14313E05 /* Pods-OneSignalNotificationServiceExtension.profile-bluewater.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bluewater.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Profile-bluewater";
+		};
 		23C765A62E9FB24400A6D570 /* Debug-acerewards */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6546,6 +7003,7 @@
 			buildConfigurations = (
 				235B5CEC2DC9D72D004A8F1C /* Debug */,
 				237FCD382E65523F00DDAA37 /* Debug-hogansreward */,
+				2398E4BD2ECC479400EE6346 /* Debug-bluewater */,
 				23364CF02EC461BD001651A3 /* Debug-woollahra */,
 				23C765A92E9FB24400A6D570 /* Debug-acerewards */,
 				235B5CED2DC9D72D004A8F1C /* Debug-max */,
@@ -6561,6 +7019,7 @@
 				235B5CF12DC9D72D004A8F1C /* Release-max */,
 				23F352962E056597001614F3 /* Release-montaukTavern */,
 				23364CF42EC461F5001651A3 /* Release-woollahra */,
+				2398E4C12ECC47BC00EE6346 /* Release-bluewater */,
 				235B5CF22DC9D72D004A8F1C /* Release-qantum */,
 				235B5CF32DC9D72D004A8F1C /* Release-starrewards */,
 				234E069F2E0009BB00C1E77F /* Release-clh */,
@@ -6575,6 +7034,7 @@
 				235B5CF62DC9D72D004A8F1C /* Profile-qantum */,
 				235B5CF72DC9D72D004A8F1C /* Profile-starrewards */,
 				234E06A32E0009C800C1E77F /* Profile-clh */,
+				2398E4C52ECC47CE00EE6346 /* Profile-bluewater */,
 				23F3529A2E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F32DDAE44D00B1E8B8 /* Profile-mhbc */,
 				23E0D0632EC1E132002504CC /* Profile-brisbane */,
@@ -6592,6 +7052,7 @@
 			buildConfigurations = (
 				331C8088294A63A400263BE5 /* Debug */,
 				237FCD372E65523F00DDAA37 /* Debug-hogansreward */,
+				2398E4BC2ECC479400EE6346 /* Debug-bluewater */,
 				23364CEF2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A82E9FB24400A6D570 /* Debug-acerewards */,
 				23ED95D92D6C8838005C5478 /* Debug-max */,
@@ -6607,6 +7068,7 @@
 				23ED95DC2D6C886A005C5478 /* Release-max */,
 				23F352952E056597001614F3 /* Release-montaukTavern */,
 				23364CF32EC461F5001651A3 /* Release-woollahra */,
+				2398E4C02ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8532D268E9000621146 /* Release-qantum */,
 				238424202D8C04A6006147DE /* Release-starrewards */,
 				234E069E2E0009BB00C1E77F /* Release-clh */,
@@ -6621,6 +7083,7 @@
 				235EB8562D268E9E00621146 /* Profile-qantum */,
 				238424232D8C04BB006147DE /* Profile-starrewards */,
 				234E06A22E0009C800C1E77F /* Profile-clh */,
+				2398E4C42ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352992E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F22DDAE44D00B1E8B8 /* Profile-mhbc */,
 				23E0D0622EC1E132002504CC /* Profile-brisbane */,
@@ -6638,6 +7101,7 @@
 			buildConfigurations = (
 				97C147031CF9000F007C117D /* Debug */,
 				237FCD352E65523F00DDAA37 /* Debug-hogansreward */,
+				2398E4BA2ECC479400EE6346 /* Debug-bluewater */,
 				23364CED2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A62E9FB24400A6D570 /* Debug-acerewards */,
 				23ED95D72D6C8838005C5478 /* Debug-max */,
@@ -6653,6 +7117,7 @@
 				23ED95DA2D6C886A005C5478 /* Release-max */,
 				23F352932E056597001614F3 /* Release-montaukTavern */,
 				23364CF12EC461F5001651A3 /* Release-woollahra */,
+				2398E4BE2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8512D268E9000621146 /* Release-qantum */,
 				2384241E2D8C04A6006147DE /* Release-starrewards */,
 				234E069C2E0009BB00C1E77F /* Release-clh */,
@@ -6667,6 +7132,7 @@
 				235EB8542D268E9E00621146 /* Profile-qantum */,
 				238424212D8C04BB006147DE /* Profile-starrewards */,
 				234E06A02E0009C800C1E77F /* Profile-clh */,
+				2398E4C22ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352972E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F02DDAE44D00B1E8B8 /* Profile-mhbc */,
 				23E0D0602EC1E132002504CC /* Profile-brisbane */,
@@ -6684,6 +7150,7 @@
 			buildConfigurations = (
 				97C147061CF9000F007C117D /* Debug */,
 				237FCD362E65523F00DDAA37 /* Debug-hogansreward */,
+				2398E4BB2ECC479400EE6346 /* Debug-bluewater */,
 				23364CEE2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A72E9FB24400A6D570 /* Debug-acerewards */,
 				23ED95D82D6C8838005C5478 /* Debug-max */,
@@ -6699,6 +7166,7 @@
 				23ED95DB2D6C886A005C5478 /* Release-max */,
 				23F352942E056597001614F3 /* Release-montaukTavern */,
 				23364CF22EC461F5001651A3 /* Release-woollahra */,
+				2398E4BF2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8522D268E9000621146 /* Release-qantum */,
 				2384241F2D8C04A6006147DE /* Release-starrewards */,
 				234E069D2E0009BB00C1E77F /* Release-clh */,
@@ -6713,6 +7181,7 @@
 				235EB8552D268E9E00621146 /* Profile-qantum */,
 				238424222D8C04BB006147DE /* Profile-starrewards */,
 				234E06A12E0009C800C1E77F /* Profile-clh */,
+				2398E4C32ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352982E0565A4001614F3 /* Profile-montaukTavern */,
 				236ED3F12DDAE44D00B1E8B8 /* Profile-mhbc */,
 				23E0D0612EC1E132002504CC /* Profile-brisbane */,

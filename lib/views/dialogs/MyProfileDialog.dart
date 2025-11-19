@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/utils/AppColors.dart';
 import '/views/common_widgets/UserStatusTier.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -73,12 +74,22 @@ class MyProfileDialog with LoggingMixin {
                                       child: Column(
                                         children: [
                                           AppDimens.shape_20,
-                                          Icon(
-                                            Icons.person,
-                                            color: AppThemeCustom
-                                                .getProfileDialogImage(context),
-                                            size: 40,
-                                          ),
+                                          flavor == Flavor.bluewater
+                                              ? Image.asset(
+                                                  "assets/bluewaterCaptainsClub/captains_cap.png",
+                                                  width: 80,
+                                                  height: 80,
+                                                  color: Theme.of(context)
+                                                      .canvasColor
+                                                      .withValues(alpha: 0.3),
+                                                )
+                                              : Icon(
+                                                  Icons.person,
+                                                  color: AppThemeCustom
+                                                      .getProfileDialogImage(
+                                                          context),
+                                                  size: 40,
+                                                ),
                                           Text(
                                             "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
                                             textAlign: TextAlign.center,
@@ -152,7 +163,9 @@ class MyProfileDialog with LoggingMixin {
                                                               10)),
                                                   side: BorderSide(
                                                       width: 1,
-                                                      color: AppThemeCustom.getEditDetailsColor(context))),
+                                                      color: AppThemeCustom
+                                                          .getEditDetailsColor(
+                                                              context))),
                                               onPressed: () {
                                                 AppNavigator.navigateTo(
                                                     context,
@@ -168,14 +181,18 @@ class MyProfileDialog with LoggingMixin {
                                                   children: [
                                                     Icon(
                                                       Icons.handshake,
-                                                      color: AppThemeCustom.getEditDetailsColor(context),
+                                                      color: AppThemeCustom
+                                                          .getEditDetailsColor(
+                                                              context),
                                                       size: 18,
                                                     ),
                                                     Text(
                                                       loc.txtEditMyDetails
                                                           .toUpperCase(),
                                                       style: TextStyle(
-                                                          color: AppThemeCustom.getEditDetailsColor(context),
+                                                          color: AppThemeCustom
+                                                              .getEditDetailsColor(
+                                                                  context),
                                                           fontSize: 10),
                                                     )
                                                   ],

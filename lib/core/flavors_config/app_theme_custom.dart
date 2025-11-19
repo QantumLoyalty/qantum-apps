@@ -114,6 +114,8 @@ class AppThemeCustom {
         return AppColors.hr_button_color;
       case Flavor.aceRewards:
         return Theme.of(context).primaryColorDark;
+      case Flavor.bluewater:
+        return Theme.of(context).canvasColor;
 
       default:
         return Theme.of(context).scaffoldBackgroundColor;
@@ -129,6 +131,8 @@ class AppThemeCustom {
         return AppColors.white;
       case Flavor.woollahra:
         return Theme.of(context).scaffoldBackgroundColor;
+      case Flavor.bluewater:
+        return Theme.of(context).canvasColor;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
@@ -224,6 +228,9 @@ class AppThemeCustom {
         return Theme.of(context).primaryColor;
       case Flavor.hogansReward:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
+      case Flavor.brisbane:
+        return AppColors.white;
+
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
@@ -265,7 +272,7 @@ class AppThemeCustom {
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
             Flavor.aceRewards ||
-            Flavor.aceRewards:
+            Flavor.aceRewards || Flavor.bluewater:
         return AppColors.white;
 
       default:
@@ -454,7 +461,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards || Flavor.queens:
+      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -586,7 +593,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards || Flavor.queens:
+      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -647,7 +654,8 @@ class AppThemeCustom {
               Flavor.starReward ||
               Flavor.queens ||
               Flavor.mhbc ||
-              Flavor.hogansReward:
+              Flavor.hogansReward ||
+              Flavor.bluewater:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : null;
@@ -749,7 +757,9 @@ class AppThemeCustom {
             Flavor.starReward ||
             Flavor.queens ||
             Flavor.brisbane ||
-            Flavor.hogansReward || Flavor.woollahra:
+            Flavor.hogansReward ||
+            Flavor.woollahra ||
+            Flavor.bluewater:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : Border.all(
@@ -783,7 +793,9 @@ class AppThemeCustom {
             Flavor.queens ||
             Flavor.hogansReward ||
             Flavor.mhbc ||
-            Flavor.brisbane || Flavor.woollahra:
+            Flavor.brisbane ||
+            Flavor.woollahra ||
+            Flavor.bluewater:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : Theme.of(context).textSelectionTheme.selectionColor;
@@ -818,7 +830,7 @@ class AppThemeCustom {
   static Color getCloseBtnDialogColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.montaukTavern || Flavor.aceRewards || Flavor.woollahra:
+      case Flavor.montaukTavern || Flavor.aceRewards || Flavor.woollahra || Flavor.bluewater:
         return Theme.of(context).primaryColorDark;
       case Flavor.queens:
         return AppColors.black;

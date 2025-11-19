@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/utils/AppColors.dart';
 import '/core/utils/AppHelper.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../l10n/app_localizations.dart';
@@ -98,14 +99,14 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                         .txtMyCard
                                         .toUpperCase(),
                                     style: TextStyle(
-                                      /*shadows: [
+                                      shadows: [
                                         Shadow(
                                           offset: const Offset(1.0, 1.0),
                                           blurRadius: 3.0,
                                           color: AppColors.black
                                               .withValues(alpha: 0.5),
                                         )
-                                      ],*/
+                                      ],
                                       fontSize: 12,
                                       color: AppThemeCustom
                                           .getCardDialogsTextColor(context),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/flavor_config.dart';
+import '../common_widgets/BluewaterBackground.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
@@ -20,12 +22,14 @@ class CommunicationPreference extends StatefulWidget {
 class _CommunicationPreferenceState extends State<CommunicationPreference> {
   late UserInfoProvider _userInfoProvider;
   late AppLocalizations loc;
+  late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
     _userInfoProvider.fetchUserProfile();
+    flavor = FlavorConfig.instance.flavor!;
   }
 
   @override
@@ -66,6 +70,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                 }
                 return Stack(
                   children: [
+                    flavor == Flavor.bluewater
+                        ? const BluewaterBackground()
+                        : Container(),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(

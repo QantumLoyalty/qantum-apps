@@ -26,6 +26,9 @@ class UserModel {
   String? accountType;
   bool? acceptsEmail;
   bool? acceptsSMS;
+  String? paymentStatus;
+  String? paymentType;
+  String? packageName;
 
   UserModel(
       {this.id,
@@ -54,7 +57,10 @@ class UserModel {
       this.accountType,
       this.acceptsEmail,
       this.acceptsSMS,
-      this.bluizeUniqueUserId});
+      this.bluizeUniqueUserId,
+      this.packageName,
+      this.paymentStatus,
+      this.paymentType});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
@@ -107,6 +113,10 @@ class UserModel {
     acceptsEmail =
         json.containsKey("AcceptsEmail") ? json["AcceptsEmail"] : false;
     acceptsSMS = json.containsKey("AcceptsSMS") ? json["AcceptsSMS"] : false;
+    paymentStatus =
+        json.containsKey("paymentStatus") ? json["paymentStatus"] : "";
+    paymentType = json.containsKey("paymentType") ? json["paymentType"] : "";
+    packageName = json.containsKey("packageName") ? json["packageName"] : "";
   }
 
   Map<String, dynamic> toJson() {
@@ -139,6 +149,10 @@ class UserModel {
     data['AccountType'] = accountType ?? "";
     data['AcceptsEmail'] = acceptsEmail ?? false;
     data['AcceptsSMS'] = acceptsSMS ?? false;
+    data['packageName'] = packageName ?? "";
+    data['paymentType'] = paymentType ?? "";
+    data['paymentStatus'] = paymentStatus ?? "";
+
     return data;
   }
 
@@ -201,6 +215,7 @@ class UserModel {
       accountType: accountType ?? this.accountType,
       acceptsEmail: acceptsEmail ?? this.acceptsEmail,
       acceptsSMS: acceptsSMS ?? this.acceptsSMS,
+
     );
   }
 

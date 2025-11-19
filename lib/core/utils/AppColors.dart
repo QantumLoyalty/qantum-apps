@@ -362,6 +362,36 @@ class AppColors {
 
   static Color get wh_canvas_color => const Color(0xFFE5CEAA);
 
+  /// BLUE WATER ///
+
+  static Color get bcc_sf_color => const Color(0xFF213153);
+
+  static Color get bcc_back_color => const Color(0xFF213153);
+
+  static Color get bcc_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get bcc_back_color_2 => const Color(0xFF213153);
+
+  static Color get bcc_back_color_3 => const Color(0xFF213153);
+
+  static Color get bcc_text_color => const Color(0xFFFFFFFF);
+
+  static Color get bcc_text_field_text_color => const Color(0xFF000000);
+
+  static Color get bcc_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get bcc_button_color => const Color(0x00000000);
+
+  static Color get bcc_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get bcc_card_color => const Color(0xFFFFFFFF);
+
+  static Color get bcc_divider_color => const Color(0xFF2E3C53);
+
+  static Color get bcc_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get bcc_canvas_color => const Color(0xFF3F87C5);
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 

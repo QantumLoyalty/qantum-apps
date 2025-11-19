@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/flavor_config.dart';
+import '../common_widgets/BluewaterBackground.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppHelper.dart';
@@ -25,11 +27,12 @@ class UserDetailScreen extends StatefulWidget {
 class _UserDetailScreenState extends State<UserDetailScreen> {
   late SharedPreferenceHelper _sharedPreferenceHelper;
   late AppLocalizations loc;
-
+  late Flavor flavor;
   @override
   void initState() {
     super.initState();
     initSharedPreferenceHelper();
+    flavor = FlavorConfig.instance.flavor!;
   }
 
   initSharedPreferenceHelper() async {
@@ -80,6 +83,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
                 return Stack(
                   children: [
+                    flavor == Flavor.bluewater
+                        ? const BluewaterBackground()
+                        : Container(),
                     Column(
                       children: [
                         Expanded(

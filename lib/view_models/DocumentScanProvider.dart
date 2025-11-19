@@ -32,10 +32,21 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
 
   String? get backImageUrl => _backImageUrl;
 
-  resetError() {
+  bool _isNavigated = false;
+
+  bool get isNavigated => _isNavigated;
+
+  markNavigated() {
+    _isNavigated = true;
+  }
+
+  resetErrorInScan() {
     _isErrorInScan = null;
+  }
+
+  resetError() {
     _isErrorInUpload = null;
-    notifyListeners();
+    //notifyListeners();
   }
 
   getDrivingLicenseInformation(
@@ -52,7 +63,7 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
               frontImagePath: frontImagePath, backImagePath: backImagePath);
 
       logEvent("DL RESPONSE $response");
-      _isErrorInUpload = response.isError;
+      _isErrorInScan = response.isError;
 
       if (!response.isError) {
         Map<String, dynamic> data = response.response as Map<String, dynamic>;
@@ -95,6 +106,9 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
         if (data.containsKey("back")) {
           _backImageUrl = data["back"];
         }
+
+        logEvent(
+            "FRONT IMAGE URL:$_frontImageUrl BACK IMAGE URL:$_backImageUrl");
       }
     } catch (e) {
       logEvent("Exception: $e");

@@ -62,6 +62,23 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
           });
         }
 
+        if (membershipProvider.isPaymentMethodUpdated != null) {
+          logEvent(
+              "isPaymentMethodUpdated: ${membershipProvider.isPaymentMethodUpdated}");
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (membershipProvider.isPaymentMethodUpdated!) {
+              logEvent("navigateAndClearStack called!!!");
+              AppNavigator.navigateTo(
+                  context, AppNavigator.receptionPaymentScreen);
+
+              membershipProvider.resetUpdateMembershipPaymentResponse();
+            } else {
+              AppHelper.showErrorMessage(context, loc.msgCommonError);
+              membershipProvider.resetUpdateMembershipPaymentResponse();
+            }
+          });
+        }
+
         return Stack(
           children: [
             Column(
@@ -83,8 +100,8 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
                 AppButton(
                     text: loc.payReception,
                     onClick: () {
-                      AppNavigator.navigateTo(
-                          context, AppNavigator.receptionPaymentScreen);
+                      membershipProvider.updateMembershipPaymentMethod(
+                          loc: loc);
                     }),
                 Expanded(child: Container()),
                 BottomInfoWidget(

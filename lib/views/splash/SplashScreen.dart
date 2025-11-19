@@ -31,8 +31,19 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
 
       if (hasUserData) {
-        //AppNavigator.navigateAndClearStack(context, AppNavigator.chooseMembershipScreen);
-        AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+        if (AppHelper.isClubApp()) {
+          /// CHECKING IF PURCHASED THE MEMBERSHIP
+          if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
+            /// ALREADY PURCHASED THE MEMBERSHIP
+            AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+          } else {
+            ///  DID NOT PURCHASED THE MEMBERSHIP
+            AppNavigator.navigateAndClearStack(
+                context, AppNavigator.pendingPaymentScreen);
+          }
+        } else {
+          AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+        }
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }

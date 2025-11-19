@@ -309,6 +309,12 @@ class DigitalCardDialog {
       return "WML";
     } else if (flavor == Flavor.queens) {
       return "QHG";
+    } else if (flavor == Flavor.brisbane) {
+      return "BBC";
+    } else if (flavor == Flavor.woollahra) {
+      return "WHT";
+    } else if (flavor == Flavor.bluewater) {
+      return "BBGAAAAAA";
     } else {
       return "ABC1234";
     }

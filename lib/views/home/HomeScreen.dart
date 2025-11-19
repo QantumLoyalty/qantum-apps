@@ -163,7 +163,12 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               checkAndHideSeeAllOptionMenu(
                                   provider, "points balance");
 
-                              if (flavor == Flavor.mhbc &&
+                              if (flavor == Flavor.bluewater &&
+                                  provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[2].name) {
+                                /// DO NOTHING ///
+                              }
+                              else if (flavor == Flavor.mhbc &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name) {
                                 /// DO NOTHING ///

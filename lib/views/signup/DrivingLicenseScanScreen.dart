@@ -128,21 +128,21 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
           }
         }
 
-        // provider.resetError();
+         provider.resetErrorInScan();
       }
 
       if (provider.isErrorInUpload != null) {
         if (provider.isErrorInUpload!) {
           AppHelper.showErrorMessage(context, loc!.msgCommonError);
-        } else {
+        } else if(!provider.isErrorInUpload! && !provider.isNavigated!){
+          provider.markNavigated();
+          /// ENTERED IN SIGNUP NAVIGATION
           widget.arguments["license_front"] = provider.frontImageUrl ?? "";
           widget.arguments["license_back"] = provider.backImageUrl ?? "";
-          logEvent(widget.arguments.toString());
-          Future.delayed(Duration.zero, () {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              AppNavigator.navigateReplacement(context, AppNavigator.signup,
-                  arguments: widget.arguments);
-            });
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            AppNavigator.navigateReplacement(context, AppNavigator.signup,
+                arguments: widget.arguments);
           });
         }
         provider.resetError();

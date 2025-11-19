@@ -47,6 +47,13 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
 
   String? get loaderMessage => _loaderMessage;
 
+  bool? _isPaymentMethodUpdated;
+
+  bool? get isPaymentMethodUpdated => _isPaymentMethodUpdated;
+
+
+
+
   updateDropdownValue(MembershipModel value) {
     _selectedMembership = value;
     notifyListeners();
@@ -148,7 +155,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "packageName": _selectedMembership!.membershipName!,
         "amount": (_selectedMembership!.calculatedPrice! * 1000).toInt(),
         "currency": "usd",
-        "appType": AppHelper.getAppType()
+        "appType": AppHelper.getAppType(),
+        "paymentType": "card"
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .createPaymentIntent(paymentParams: paymentParams);
@@ -169,6 +177,45 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
       _showLoader = false;
       notifyListeners();
     }
+  }
+
+  updateMembershipPaymentMethod({required AppLocalizations loc}) async {
+    try {
+      _showLoader = true;
+      _loaderMessage = loc.msgCommonLoader;
+      notifyListeners();
+
+      Map<String, dynamic> paymentParams = {
+        "packageName": _selectedMembership!.membershipName!,
+        "paymentType": "reception"
+      };
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .updatePaymentType(paymentParams: paymentParams);
+
+      logEvent(
+          "Payment Intent Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
+      _isPaymentMethodUpdated=!networkResponse.isError;
+
+
+      /*_errorInResponse = networkResponse.isError;
+      if (!_errorInResponse!) {
+        _paymentIntentClientSecret =
+            (networkResponse.response as Map<String, dynamic>)["clientSecret"];
+        _paymentIntentId = (networkResponse.response
+            as Map<String, dynamic>)["paymentIntentId"];
+      }*/
+    } catch (e) {
+      _errorInResponse = true;
+      _networkResponseMessage = e.toString();
+    } finally {
+      _showLoader = false;
+      notifyListeners();
+    }
+  }
+
+  resetUpdateMembershipPaymentResponse() {
+    _isPaymentMethodUpdated = null;
+    notifyListeners();
   }
 
   verifyPayment({required AppLocalizations loc, required String userId}) async {

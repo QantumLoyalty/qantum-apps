@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/views/common_widgets/BluewaterScaffoldBackground.dart';
 import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 
@@ -27,10 +28,16 @@ class AppScaffold extends StatelessWidget {
       decoration: AppHelper.appBackground(context),
       child: Stack(
         children: [
+
+          (flavor == Flavor.bluewater)
+              ? const BluewaterScaffoldBackground()
+              : Container(),
+
           Scaffold(
             appBar: appBar,
             body: body,
-            backgroundColor: scaffoldBackground ?? Colors.transparent,
+            backgroundColor: Colors.transparent,
+            //backgroundColor: scaffoldBackground ?? Colors.transparent,
             floatingActionButton: floatingActionButton,
             floatingActionButtonLocation: floatingActionButtonLocation,
           ),
@@ -45,7 +52,8 @@ class AppScaffold extends StatelessWidget {
                         child: Image.asset(
                             "assets/aceRewards/scaffold_background.png")),
                   ))
-              : Container()
+              : Container(),
+
         ],
       ),
     );

@@ -32,4 +32,7 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> verifyPayment(
       {required Map<String, dynamic> paymentParams});
+
+  Future<NetworkResponse> updatePaymentType(
+      {required Map<String, dynamic> paymentParams});
 }

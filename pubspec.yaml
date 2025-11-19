@@ -29,16 +29,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version:  1.0.0+56
 ###################################
 # HOGAN'S REWARD
-version:  1.0.1+8
+#version:  1.0.1+8
 ###################################
 # MHBC
 #version:  1.0.6+61
 ###################################
 # MONTAUK TAVERN
-#version:  1.0.1+53
+#version:  1.0.2+54
 ###################################
 # CENTRAL LANE HOTEL
-#version:  1.0.2+63
+#version:  1.0.3+64
 ###################################
 # NORTH SHORE TAVERN
 #version: 1.0.0+7
@@ -47,16 +47,19 @@ version:  1.0.1+8
 #version: 1.0.0+60
 ###################################
 # ACE REWARDS
-#version: 1.0.0+4
+#version: 1.0.0+8
 ###################################
 # QUEENS HOTEL
 #version: 1.0.0+2
 ###################################
 # BRISBANE BREWING
-#version: 1.0.0+1
+#version: 1.0.0+3
 ###################################
 # WOOLLAHRA HOTEL
 #version: 1.0.0+1
+###################################
+# Bluewater Captains Club
+#version: 1.0.0+2
 ###################################
 
 
@@ -152,6 +155,7 @@ flutter:
   generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
+     - assets/bluewaterCaptainsClub/
      - assets/woollahraHotel/
      - assets/queensHotel/
      - assets/brisbaneBrewing/
