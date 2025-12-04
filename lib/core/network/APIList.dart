@@ -60,7 +60,10 @@ class APIList {
 
   static get UPLOAD_DRIVING_LICENSE_IMAGES => BASE_URL + "images/upload";
 
-  static get FETCH_MEMBERSHIP_PLAN => BASE_URL + "club-packages/club?";
+  static get FETCH_MEMBERSHIP_PLAN => BASE_URL + "club-package/club?";
+
+
+ //https://betaapi.s2w.com.au/club-package/club?appType=Qantum&timezone=Asia/Kolkata
 
   /// STRIPE APIS ///
   static get CREATE_PAYMENT_INTENT => BASE_URL + "payment/create-payment-intent";

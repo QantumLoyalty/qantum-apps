@@ -16,7 +16,8 @@ class DetailCard extends StatelessWidget {
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
       return Container(
         decoration: BoxDecoration(
-            color: Theme.of(context).cardColor.withValues(alpha: 0.10),
+            color:
+                AppThemeCustom.getAccountSectionCustomCard(context, editable),
             borderRadius: BorderRadius.circular(5)),
         padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
         child: Column(

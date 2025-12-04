@@ -232,4 +232,13 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
       }
     });
   }
+
+  stopGetAllOptionsTimer() {
+    logEvent(
+        "Fetch See All Timer Status::${_fetchSeeAllTimer != null && _fetchSeeAllTimer!.isActive}");
+    if (_fetchSeeAllTimer != null && _fetchSeeAllTimer!.isActive) {
+      _fetchSeeAllTimer!.cancel();
+      _fetchSeeAllTimer = null;
+    }
+  }
 }

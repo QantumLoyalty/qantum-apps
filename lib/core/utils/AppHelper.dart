@@ -116,7 +116,6 @@ class AppHelper with LoggingMixin {
             end: Alignment.bottomCenter,
             colors: [
           Theme.of(context).primaryColorDark,
-          //Color(0xFF1C4D61),
           Theme.of(context).primaryColor,
         ]));
   }
@@ -182,11 +181,15 @@ class AppHelper with LoggingMixin {
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
-      case Flavor.brisbane:
+
+      case Flavor.hogansReward ||
+            Flavor.northShoreTavern ||
+            Flavor.queens ||
+            Flavor.brisbane:
         return Theme.of(context).primaryColor;
 
-      case Flavor.hogansReward || Flavor.northShoreTavern || Flavor.queens:
-        return Theme.of(context).primaryColor;
+      case Flavor.flinders:
+        return AppColors.white;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
@@ -283,7 +286,10 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(AppColors.nst_canvas_color));
-      case Flavor.aceRewards || Flavor.bluewater:
+      case Flavor.aceRewards ||
+            Flavor.bluewater ||
+            Flavor.woollahra ||
+            Flavor.flinders:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -396,7 +402,10 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
+      case Flavor.aceRewards ||
+            Flavor.queens ||
+            Flavor.bluewater ||
+            Flavor.woollahra:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -411,6 +420,16 @@ class AppHelper with LoggingMixin {
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.flinders:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
@@ -491,7 +510,10 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards || Flavor.bluewater:
+      case Flavor.aceRewards ||
+            Flavor.bluewater ||
+            Flavor.woollahra ||
+            Flavor.flinders:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -528,9 +550,13 @@ class AppHelper with LoggingMixin {
       case Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.brisbane ||
-            Flavor.woollahra ||
             Flavor.bluewater:
         return const Size(142, 58);
+
+      case Flavor.woollahra:
+        return const Size(252, 114);
+      case Flavor.flinders:
+        return const Size(96, 96);
 
       default:
         return const Size(72, 72);
@@ -562,7 +588,8 @@ class AppHelper with LoggingMixin {
       Flavor.aceRewards: "Ace",
       Flavor.queens: "Queens",
       Flavor.brisbane: "Brisbane",
-      Flavor.bluewater: "Bluewater"
+      Flavor.bluewater: "Bluewater",
+      Flavor.flinders: "Flinders"
     };
     return appTypeMap[flavor] ?? "Qantum";
   }
@@ -589,14 +616,17 @@ class AppHelper with LoggingMixin {
         case Flavor.queens:
           return "Queens";
         case Flavor.aceRewards:
-          return "Staff";
+          return "Tens";
         case Flavor.brisbane:
-          return "Brew Crew";
+          return "Member";
         case Flavor.woollahra:
           return "Regulars";
         case Flavor.bluewater:
           return "Deckhand";
-
+        case Flavor.flinders:
+          return "Member";
+        case Flavor.northShoreTavern:
+          return "Silver";
         default:
           return "Valued";
       }

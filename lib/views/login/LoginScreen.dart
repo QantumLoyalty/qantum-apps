@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Applogo(),
                             Text(
-                              loc.txtWelcome,
+                              loc.txtWelcome.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,

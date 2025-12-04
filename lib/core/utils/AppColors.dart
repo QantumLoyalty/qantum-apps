@@ -392,6 +392,36 @@ class AppColors {
 
   static Color get bcc_canvas_color => const Color(0xFF3F87C5);
 
+  /// FLINDERS STREET WHARVES ///
+
+  static Color get fw_sf_color => const Color(0xFF5C82AB);
+
+  static Color get fw_back_color => const Color(0xFFF2F0E7);
+
+  static Color get fw_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get fw_back_color_2 => const Color(0xFFF2F0E7);
+
+  static Color get fw_back_color_3 => const Color(0xFFB8C9CE);
+
+  static Color get fw_text_color => const Color(0xFF5C82AB);
+
+  static Color get fw_text_field_text_color => const Color(0xFF000000);
+
+  static Color get fw_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get fw_button_color => const Color(0x00000000);
+
+  static Color get fw_button_border_color => const Color(0xFF5C82AB);
+
+  static Color get fw_card_color => const Color(0xFFFFFFFF);
+
+  static Color get fw_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get fw_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get fw_canvas_color => const Color(0xFFb7c9ce);
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 

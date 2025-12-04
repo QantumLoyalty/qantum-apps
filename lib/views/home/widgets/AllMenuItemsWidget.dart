@@ -54,7 +54,8 @@ class AllMenuItemsWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Colors.transparent,
                                 border: Border.all(
-                                    color: Theme.of(context).iconTheme.color!,
+                                    color: AppThemeCustom
+                                        .getAllMenuItemsBorderColor(context),
                                     width: 1),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Center(
@@ -64,9 +65,9 @@ class AllMenuItemsWidget extends StatelessWidget {
                                 maxLines: 2,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                    color:
+                                        AppThemeCustom.getAllMenuItemsTextColor(
+                                            context),
                                     fontSize: 10),
                               ),
                             )),

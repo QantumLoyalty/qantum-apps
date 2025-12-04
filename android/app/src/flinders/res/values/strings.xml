@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Flinders Street Wharves</string>
+    <string name="default_notification_channel_id">com.au.flinders.app.urgent</string>
+</resources>

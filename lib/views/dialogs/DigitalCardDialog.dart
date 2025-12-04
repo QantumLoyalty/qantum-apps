@@ -97,7 +97,7 @@ class DigitalCardDialog {
                                                 Text(
                                                   userTierType.toUpperCase(),
                                                   style: TextStyle(
-                                                      /* shadows: [
+                                                      shadows: [
                                                         Shadow(
                                                           offset: const Offset(
                                                               1.0, 1.0),
@@ -106,7 +106,7 @@ class DigitalCardDialog {
                                                               .withValues(
                                                                   alpha: 0.5),
                                                         )
-                                                      ],*/
+                                                      ],
                                                       color: AppThemeCustom
                                                           .getCardDialogsTextColor(
                                                               context),
@@ -118,7 +118,7 @@ class DigitalCardDialog {
                                                   AppLocalizations.of(context)!
                                                       .txtMembership,
                                                   style: TextStyle(
-                                                      /*shadows: [
+                                                      shadows: [
                                                         Shadow(
                                                           offset: const Offset(
                                                               1.0, 1.0),
@@ -127,7 +127,7 @@ class DigitalCardDialog {
                                                               .withValues(
                                                                   alpha: 0.5),
                                                         )
-                                                      ],*/
+                                                      ],
                                                       color: AppThemeCustom
                                                           .getCardDialogsTextColor(
                                                               context),
@@ -138,7 +138,7 @@ class DigitalCardDialog {
                                                   "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
-                                                      /*shadows: [
+                                                      shadows: [
                                                         Shadow(
                                                           offset: const Offset(
                                                               1.0, 1.0),
@@ -147,7 +147,7 @@ class DigitalCardDialog {
                                                               .withValues(
                                                                   alpha: 0.5),
                                                         )
-                                                      ],*/
+                                                      ],
                                                       color: AppThemeCustom
                                                           .getCardDialogsTextColor(
                                                               context),
@@ -168,7 +168,7 @@ class DigitalCardDialog {
                                                                     context)!
                                                                 .txtMembership,
                                                             style: TextStyle(
-                                                                /*shadows: [
+                                                                shadows: [
                                                                   Shadow(
                                                                     offset:
                                                                         const Offset(
@@ -182,7 +182,7 @@ class DigitalCardDialog {
                                                                             alpha:
                                                                                 0.5),
                                                                   )
-                                                                ],*/
+                                                                ],
                                                                 color: AppThemeCustom
                                                                     .getCardDialogsTextColor(
                                                                         context),
@@ -191,7 +191,7 @@ class DigitalCardDialog {
                                                           Text(
                                                             "${userData.membershipCategory}",
                                                             style: TextStyle(
-                                                                /*shadows: [
+                                                                shadows: [
                                                                   Shadow(
                                                                     offset:
                                                                         const Offset(
@@ -205,7 +205,7 @@ class DigitalCardDialog {
                                                                             alpha:
                                                                                 0.5),
                                                                   )
-                                                                ],*/
+                                                                ],
                                                                 color: AppThemeCustom
                                                                     .getCardDialogsTextColor(
                                                                         context),
@@ -240,10 +240,17 @@ class DigitalCardDialog {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.clear,
                                         size: 30,
                                         color: Colors.white,
+                                        shadows: <Shadow>[
+                                          Shadow(
+                                              color: AppColors.black
+                                                  .withValues(alpha: 0.5),
+                                              offset: const Offset(1.0, 1.0),
+                                              blurRadius: 3.0)
+                                        ],
                                       )),
                                 ))
                           ],
@@ -310,9 +317,11 @@ class DigitalCardDialog {
     } else if (flavor == Flavor.queens) {
       return "QHG";
     } else if (flavor == Flavor.brisbane) {
-      return "BBC";
+      return "BBCAAAAAA";
     } else if (flavor == Flavor.woollahra) {
       return "WHT";
+    } else if (flavor == Flavor.flinders) {
+      return "FSW";
     } else if (flavor == Flavor.bluewater) {
       return "BBGAAAAAA";
     } else {

@@ -51,6 +51,8 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initCamera();
     });
+
+    Provider.of<DocumentScanProvider>(context, listen: false).resetNavigated();
   }
 
   /// Handle app pause/resume to prevent freeze on iOS
@@ -128,14 +130,15 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
           }
         }
 
-         provider.resetErrorInScan();
+        provider.resetErrorInScan();
       }
 
       if (provider.isErrorInUpload != null) {
         if (provider.isErrorInUpload!) {
           AppHelper.showErrorMessage(context, loc!.msgCommonError);
-        } else if(!provider.isErrorInUpload! && !provider.isNavigated!){
+        } else if (!provider.isErrorInUpload! && !provider.isNavigated) {
           provider.markNavigated();
+
           /// ENTERED IN SIGNUP NAVIGATION
           widget.arguments["license_front"] = provider.frontImageUrl ?? "";
           widget.arguments["license_back"] = provider.backImageUrl ?? "";

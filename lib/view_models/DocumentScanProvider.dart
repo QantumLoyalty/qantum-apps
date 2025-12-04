@@ -40,6 +40,11 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
     _isNavigated = true;
   }
 
+  resetNavigated() {
+    _isNavigated = false;
+    notifyListeners();
+  }
+
   resetErrorInScan() {
     _isErrorInScan = null;
   }

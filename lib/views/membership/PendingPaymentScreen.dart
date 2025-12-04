@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/utils/AppHelper.dart';
 import '/core/navigation/AppNavigator.dart';
 import '/views/common_widgets/AppButton.dart';
 import '/view_models/UserInfoProvider.dart';
@@ -27,7 +28,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     super.initState();
     userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      userInfoProvider.retrieveUserInfo();
+      userInfoProvider.runFetchProfileTimer();
     });
   }
 
@@ -36,6 +37,18 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     loc = AppLocalizations.of(context)!;
     return AppScaffold(body: SafeArea(child: Consumer<UserInfoProvider>(
       builder: (context, provider, child) {
+        if (provider.getUserInfo != null && !provider.isNavigated) {
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
+              /// ALREADY PURCHASED THE MEMBERSHIP
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+              provider.markNavigated();
+            }
+          });
+
+
+        }
+
         return Stack(
           children: [
             Padding(

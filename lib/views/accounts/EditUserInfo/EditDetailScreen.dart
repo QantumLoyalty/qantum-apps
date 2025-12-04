@@ -28,7 +28,8 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
   late FocusNode _birthdayYYFocusNode;
 
   late UserInfoProvider _userInfoProvider;
-late AppLocalizations loc;
+  late AppLocalizations loc;
+
   @override
   void initState() {
     super.initState();
@@ -47,8 +48,7 @@ late AppLocalizations loc;
     }
 
     _birthdayDDController = TextEditingController(
-        text: ConditionBuilder
-            .on(() => dateTime != null && dateTime.day > 10,
+        text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
                 () => dateTime!.day.toString())
             .on(() => dateTime != null && dateTime.day < 10,
                 () => "0${dateTime!.day.toString()}")
@@ -141,6 +141,7 @@ late AppLocalizations loc;
                           ],
                           controller: _birthdayDDController,
                           focusNode: _birthdayDDFocusNode,
+                          enabled: false,
                           style: TextStyle(
                               color: AppThemeCustom.getTextFieldTextColor(
                                   context)),
@@ -182,6 +183,7 @@ late AppLocalizations loc;
                       ],
                       controller: _birthdayMMController,
                       focusNode: _birthdayMMFocusNode,
+                      enabled: false,
                       style: TextStyle(
                           color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
@@ -221,6 +223,7 @@ late AppLocalizations loc;
                             ],
                             controller: _birthdayYYController,
                             focusNode: _birthdayYYFocusNode,
+                            enabled: false,
                             style: TextStyle(
                                 color: AppThemeCustom.getTextFieldTextColor(
                                     context)),
@@ -255,8 +258,7 @@ late AppLocalizations loc;
                         date: _birthdayDDController.text.toString(),
                         month: _birthdayMMController.text.toString(),
                         year: _birthdayYYController.text.toString())) {
-                      AppHelper.showErrorMessage(
-                          context, loc.msgIncorrectDOB);
+                      AppHelper.showErrorMessage(context, loc.msgIncorrectDOB);
                     } else {
                       DateTime date = DateTime(
                           int.parse(_birthdayYYController.text.toString()),
@@ -274,7 +276,7 @@ late AppLocalizations loc;
                     }
                   },
                   style: AppThemeCustom.getCancelInfoButtonStyle(context),
-                      textColor: AppThemeCustom.getCancelInfoTextColor(context),
+                  textColor: AppThemeCustom.getCancelInfoTextColor(context),
                 )),
                 AppDimens.shape_20,
                 Expanded(
@@ -289,8 +291,7 @@ late AppLocalizations loc;
                         date: _birthdayDDController.text.toString(),
                         month: _birthdayMMController.text.toString(),
                         year: _birthdayYYController.text.toString())) {
-                      AppHelper.showErrorMessage(
-                          context, loc.msgIncorrectDOB);
+                      AppHelper.showErrorMessage(context, loc.msgIncorrectDOB);
                     } else {
                       DateTime date = DateTime(
                           int.parse(_birthdayYYController.text.toString()),
@@ -326,6 +327,5 @@ late AppLocalizations loc;
     _birthdayMMFocusNode.dispose();
     _birthdayYYFocusNode.dispose();
     super.dispose();
-
   }
 }

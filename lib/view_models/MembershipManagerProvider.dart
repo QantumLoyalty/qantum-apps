@@ -153,8 +153,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "userId": userId,
         "packageId": _selectedMembership!.id!,
         "packageName": _selectedMembership!.membershipName!,
-        "amount": (_selectedMembership!.calculatedPrice! * 1000).toInt(),
-        "currency": "usd",
+        "amount": (_selectedMembership!.calculatedPrice! * 100).toInt(),
+        "currency": "aud",
         "appType": AppHelper.getAppType(),
         "paymentType": "card"
       };
@@ -187,7 +187,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
 
       Map<String, dynamic> paymentParams = {
         "packageName": _selectedMembership!.membershipName!,
-        "paymentType": "reception"
+        "paymentType": "reception",
+        "packageId": _selectedMembership!.id!,
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .updatePaymentType(paymentParams: paymentParams);

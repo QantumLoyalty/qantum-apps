@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
@@ -34,6 +35,15 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   static const int DETAILS_EDIT_SCREEN = 1;
   static const int EMAIL_EDIT_SCREEN = 2;
   static const int MOBILE_EDIT_SCREEN = 3;
+
+  bool _isNavigated = false;
+
+  bool get isNavigated => _isNavigated;
+
+  markNavigated() {
+    _isNavigated = true;
+  }
+
 
   bool? _showLoader;
 
@@ -86,6 +96,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
+    if (_userModel != null) {
+      OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
+    }
+
+
 
     notifyListeners();
   }
@@ -114,10 +129,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   }
 
   bool _isFetching = false;
+  Timer? profileTimer;
 
   runFetchProfileTimer() async {
     await fetchUserProfile();
-    Timer timer = Timer.periodic(
+    profileTimer = Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTime), (value) async {
       if (!_isFetching) {
         _isFetching = true;
@@ -125,6 +141,15 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         _isFetching = false;
       }
     });
+  }
+
+  stopFetchProfileTimer() {
+    logEvent(
+        "PROFILE TIMER STATUS:: ${profileTimer != null && profileTimer!.isActive}");
+    if (profileTimer != null && profileTimer!.isActive) {
+      profileTimer!.cancel();
+      profileTimer = null;
+    }
   }
 
   uploadDeviceDetail() async {
@@ -353,7 +378,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  verifyOTPAccount({required String OTP,required AppLocalizations loc}) async {
+  verifyOTPAccount({required String OTP, required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -405,7 +430,10 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  verifyEmailOTPAccount({required String phone, required String OTP, required AppLocalizations loc}) async {
+  verifyEmailOTPAccount(
+      {required String phone,
+      required String OTP,
+      required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -459,7 +487,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   }
 
   verifyNewPhoneOTP(
-      {required Map<String, dynamic> params, required String OTP,required AppLocalizations loc}) async {
+      {required Map<String, dynamic> params,
+      required String OTP,
+      required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -609,7 +639,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  updateCommunicationPreferences({bool? sms, bool? email,required AppLocalizations loc}) async {
+  updateCommunicationPreferences(
+      {bool? sms, bool? email, required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -707,7 +738,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
-  sendOTPNewPhone({required String phone,required AppLocalizations loc}) async {
+  sendOTPNewPhone(
+      {required String phone, required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -744,7 +776,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  sendOTPEmail(String phone,{required AppLocalizations loc}) async {
+  sendOTPEmail(String phone, {required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -775,7 +807,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  reSendOTPEmail(String phone,{required AppLocalizations loc}) async {
+  reSendOTPEmail(String phone, {required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -807,7 +839,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  reSendOTPNewPhone(String phone,{required AppLocalizations loc}) async {
+  reSendOTPNewPhone(String phone, {required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;

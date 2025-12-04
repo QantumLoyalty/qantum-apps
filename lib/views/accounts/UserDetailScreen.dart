@@ -28,6 +28,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   late SharedPreferenceHelper _sharedPreferenceHelper;
   late AppLocalizations loc;
   late Flavor flavor;
+
   @override
   void initState() {
     super.initState();
@@ -152,8 +153,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                             },
                                             child: Text(loc.txtYes,
                                                 style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .primaryColor))),
+                                                    color: AppThemeCustom
+                                                        .getAlertDialogTextButtonColor(
+                                                            context)))),
                                       ],
                                     );
                                   });

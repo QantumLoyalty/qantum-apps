@@ -16,6 +16,7 @@ class SpecialOffersScreen extends StatefulWidget {
 class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
   late SpecialOffersProvider _specialOffersProvider;
   final _filter = ["All", "WMLC", "Fielders"];
+  final _filterSR = ["ALL", "HOTEL", "BOTTLE SHOP"];
   late Flavor selectedFlavor;
 
   @override
@@ -26,6 +27,8 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     _specialOffersProvider.fetchSpecialOffersTimer();
     selectedFlavor = FlavorConfig.instance.flavor!;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,8 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                       const EdgeInsets.only(left: 10, right: 10, bottom: 5),
                   child: Column(
                     children: [
-                      (selectedFlavor == Flavor.aceRewards)
+                      (selectedFlavor == Flavor.aceRewards ||
+                              selectedFlavor == Flavor.starReward)
                           ? SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -60,7 +64,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
-                                      _filter[index],
+                                      selectedFlavor == Flavor.aceRewards
+                                          ? _filter[index]
+                                          : _filterSR[index],
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium
@@ -73,7 +79,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                   );
                                 },
                                 scrollDirection: Axis.horizontal,
-                                itemCount: _filter.length,
+                                itemCount: selectedFlavor == Flavor.aceRewards
+                                    ? _filter.length
+                                    : _filterSR.length,
                               ),
                             )
                           : Container(),

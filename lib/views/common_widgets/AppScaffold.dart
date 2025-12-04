@@ -28,16 +28,14 @@ class AppScaffold extends StatelessWidget {
       decoration: AppHelper.appBackground(context),
       child: Stack(
         children: [
-
           (flavor == Flavor.bluewater)
               ? const BluewaterScaffoldBackground()
               : Container(),
-
           Scaffold(
             appBar: appBar,
             body: body,
-            backgroundColor: Colors.transparent,
-            //backgroundColor: scaffoldBackground ?? Colors.transparent,
+            //  backgroundColor: Colors.transparent,
+            backgroundColor: scaffoldBackground ?? Colors.transparent,
             floatingActionButton: floatingActionButton,
             floatingActionButtonLocation: floatingActionButtonLocation,
           ),
@@ -53,7 +51,6 @@ class AppScaffold extends StatelessWidget {
                             "assets/aceRewards/scaffold_background.png")),
                   ))
               : Container(),
-
         ],
       ),
     );

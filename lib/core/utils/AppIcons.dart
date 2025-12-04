@@ -220,6 +220,20 @@ class AppIcons {
         default:
           return "assets/bluewaterCaptainsClub/card_deckhand.png";
       }
+    } else if (selectedFlavor == Flavor.flinders) {
+      switch (membershipType.toLowerCase().trim()) {
+        case "staff":
+          return "assets/flindersStreetWharves/card_staff.png";
+        case "member":
+          return "assets/flindersStreetWharves/card_member.png";
+        case "corporate":
+          return "assets/flindersStreetWharves/card_corporate.png";
+        case "vip":
+          return "assets/flindersStreetWharves/card_vip.png";
+
+        default:
+          return "assets/flindersStreetWharves/card_staff.png";
+      }
     } else {
       switch (membershipType.toLowerCase()) {
         case "valued" || "staff" || "pre 3 months staff":

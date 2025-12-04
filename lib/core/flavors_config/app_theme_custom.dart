@@ -149,7 +149,7 @@ class AppThemeCustom {
         return AppColors.nst_back_color;
       case Flavor.aceRewards:
         return AppColors.ar_back_color_2;
-      case Flavor.queens || Flavor.brisbane:
+      case Flavor.queens || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
 
       default:
@@ -182,6 +182,9 @@ class AppThemeCustom {
       case Flavor.mhbc || Flavor.clh || Flavor.montaukTavern:
         return Theme.of(context).scaffoldBackgroundColor;
 
+      case Flavor.flinders:
+        return Theme.of(context).canvasColor;
+
       default:
         return null;
     }
@@ -194,6 +197,9 @@ class AppThemeCustom {
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return AppColors.mt_back_color_3;
+      case Flavor.flinders:
+        return AppColors.white;
+
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
@@ -202,7 +208,7 @@ class AppThemeCustom {
   static Color getProfileDialogCardTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh || Flavor.brisbane:
+      case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).disabledColor;
@@ -212,9 +218,9 @@ class AppThemeCustom {
   static Color getProfileDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.flinders:
         return AppColors.white;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -224,11 +230,11 @@ class AppThemeCustom {
   static Color getProfileDialogImage(BuildContext context) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.hogansReward:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.flinders:
         return AppColors.white;
 
       default:
@@ -243,7 +249,8 @@ class AppThemeCustom {
             Flavor.clh ||
             Flavor.northShoreTavern ||
             Flavor.queens ||
-            Flavor.brisbane:
+            Flavor.brisbane ||
+            Flavor.flinders:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -258,7 +265,7 @@ class AppThemeCustom {
   static Color? getPointsBalanceTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.flinders:
         return AppColors.white;
 
       default:
@@ -272,7 +279,8 @@ class AppThemeCustom {
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
             Flavor.aceRewards ||
-            Flavor.aceRewards || Flavor.bluewater:
+            Flavor.aceRewards ||
+            Flavor.bluewater:
         return AppColors.white;
 
       default:
@@ -461,7 +469,10 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
+      case Flavor.aceRewards ||
+            Flavor.queens ||
+            Flavor.bluewater ||
+            Flavor.woollahra:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -478,6 +489,18 @@ class AppThemeCustom {
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.flinders:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
@@ -502,6 +525,39 @@ class AppThemeCustom {
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+    }
+  }
+
+  static Color getAllMenuItemsTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        return AppColors.white;
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+    }
+  }
+
+  static Color getAllMenuItemsBorderColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        return AppColors.white;
+
+      default:
+        return Theme.of(context).iconTheme.color!;
+    }
+  }
+
+  static Color getAlertDialogTextButtonColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        return Theme.of(context).scaffoldBackgroundColor;
+
+      default:
+        return Theme.of(context).primaryColor;
     }
   }
 
@@ -593,7 +649,10 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards || Flavor.queens || Flavor.bluewater:
+      case Flavor.aceRewards ||
+            Flavor.queens ||
+            Flavor.bluewater ||
+            Flavor.woollahra:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -610,6 +669,18 @@ class AppThemeCustom {
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.flinders:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(
+                Theme.of(context).buttonTheme.colorScheme!.primary),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
@@ -655,7 +726,8 @@ class AppThemeCustom {
               Flavor.queens ||
               Flavor.mhbc ||
               Flavor.hogansReward ||
-              Flavor.bluewater:
+              Flavor.bluewater ||
+              Flavor.flinders || Flavor.aceRewards:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : null;
@@ -666,13 +738,33 @@ class AppThemeCustom {
     }
   }
 
+  static Color? getAccountSectionCustomCard(
+      BuildContext context, bool isEditable) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        {
+          if (isEditable) {
+            return AppColors.fw_back_color_3;
+          } else {
+            return Theme.of(context).cardColor.withValues(alpha: 0.10);
+          }
+        }
+
+      default:
+        return Theme.of(context).cardColor.withValues(alpha: 0.10);
+    }
+  }
+
   static Color? getAccountSectionItemStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.northShoreTavern || Flavor.brisbane:
+      case Flavor.northShoreTavern || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.aceRewards || Flavor.queens:
         return Theme.of(context).primaryColorDark;
+      case Flavor.flinders:
+        return AppColors.white;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -695,6 +787,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.northShoreTavern || Flavor.queens || Flavor.brisbane:
         return Theme.of(context).primaryColor;
+      case Flavor.flinders:
+        return AppColors.white;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -728,6 +822,15 @@ class AppThemeCustom {
         } else {
           return Theme.of(context).primaryColor;
         }
+      case Flavor.woollahra:
+        if (isFromEdit) {
+          return Theme.of(context).textSelectionTheme.selectionColor;
+        } else {
+          return Theme.of(context).primaryColor;
+        }
+
+      case Flavor.flinders:
+        return AppColors.white;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -759,7 +862,8 @@ class AppThemeCustom {
             Flavor.brisbane ||
             Flavor.hogansReward ||
             Flavor.woollahra ||
-            Flavor.bluewater:
+            Flavor.bluewater ||
+            Flavor.flinders || Flavor.aceRewards:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : Border.all(
@@ -795,7 +899,8 @@ class AppThemeCustom {
             Flavor.mhbc ||
             Flavor.brisbane ||
             Flavor.woollahra ||
-            Flavor.bluewater:
+            Flavor.bluewater ||
+            Flavor.flinders || Flavor.aceRewards:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : Theme.of(context).textSelectionTheme.selectionColor;
@@ -808,8 +913,10 @@ class AppThemeCustom {
   static Color getEditDetailsColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.flinders:
         return AppColors.white;
+      case Flavor.woollahra:
+        return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
@@ -830,8 +937,13 @@ class AppThemeCustom {
   static Color getCloseBtnDialogColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.montaukTavern || Flavor.aceRewards || Flavor.woollahra || Flavor.bluewater:
+      case Flavor.montaukTavern ||
+            Flavor.aceRewards ||
+            Flavor.woollahra ||
+            Flavor.bluewater:
         return Theme.of(context).primaryColorDark;
+      case Flavor.flinders:
+        return Theme.of(context).scaffoldBackgroundColor;
       case Flavor.queens:
         return AppColors.black;
       default:

@@ -32,6 +32,23 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   late Flavor flavor;
   late AppLocalizations loc;
 
+  final partnerOffersMissingApps = {
+    Flavor.bluewater,
+    Flavor.mhbc,
+    Flavor.starReward,
+    Flavor.queens,
+    Flavor.brisbane,
+    Flavor.hogansReward,
+    Flavor.woollahra,
+    Flavor.flinders,
+    Flavor.aceRewards,
+    Flavor.northShoreTavern
+  };
+  final partnerOffersAndPointsBalanceMissingApps = {
+    Flavor.clh,
+    Flavor.montaukTavern
+  };
+
   @override
   void initState() {
     super.initState();
@@ -47,8 +64,16 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
 
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
+
+      //checkForPushNotificationPermission();
+
+
     }
   }
+
+
+
+
 
   @override
   void didChangeDependencies() {
@@ -117,7 +142,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor: AppThemeCustom.getCustomHomeButtonsIconStyle(context, provider, provider.homeNavigationList[index].name),
+                            iconColor:
+                                AppThemeCustom.getCustomHomeButtonsIconStyle(
+                                    context,
+                                    provider,
+                                    provider.homeNavigationList[index].name),
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index].name)
@@ -163,12 +192,43 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               checkAndHideSeeAllOptionMenu(
                                   provider, "points balance");
 
-                              if (flavor == Flavor.bluewater &&
+                              final pointsBalanceOptionName =
+                                  provider.homeNavigationList[0].name;
+                              final partnerOffersOptionName =
+                                  provider.homeNavigationList[2].name;
+                              final selectedOptionName =
+                                  provider.homeNavigationList[index].name;
+
+                              if (partnerOffersMissingApps.contains(flavor) &&
+                                  selectedOptionName ==
+                                      partnerOffersOptionName) {
+                                /// DO NOTHING
+                              } else if (partnerOffersAndPointsBalanceMissingApps
+                                      .contains(flavor) &&
+                                  (selectedOptionName ==
+                                          pointsBalanceOptionName ||
+                                      selectedOptionName ==
+                                          partnerOffersOptionName)) {
+                                /// DO NOTHING
+                              } else {
+                                provider.updateSelectedOption(index);
+
+                                if (provider.homeNavigationList[index].name ==
+                                    provider.homeNavigationList[0].name) {
+                                  /// SHOW POINTS BALANCE DIALOG
+                                  provider.updatePointsBalanceVisibility(true);
+                                } else {
+                                  /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
+                                  checkAndHidePointsBalance(
+                                      provider, "FROM TOP ROW");
+                                }
+                              }
+
+                              /*if (flavor == Flavor.bluewater &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name) {
                                 /// DO NOTHING ///
-                              }
-                              else if (flavor == Flavor.mhbc &&
+                              } else if (flavor == Flavor.mhbc &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name) {
                                 /// DO NOTHING ///
@@ -218,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                   checkAndHidePointsBalance(
                                       provider, "FROM TOP ROW");
                                 }
-                              }
+                              }*/
                             },
                           ));
                         }),
@@ -231,13 +291,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
-                            iconColor:
-                                (provider.homeNavigationList[index + 3].name ==
-                                            AppStrings.txtSeeAll &&
-                                        (provider.moreButtonsMap == null ||
-                                            provider.moreButtonsMap!.isEmpty))
-                                    ? Colors.transparent
-                                    : null,
+                            iconColor: null,
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index + 3].name)
@@ -246,14 +300,9 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
                             textColor:
-                                (provider.homeNavigationList[index + 3].name ==
-                                            AppStrings.txtSeeAll &&
-                                        (provider.moreButtonsMap == null ||
-                                            provider.moreButtonsMap!.isEmpty))
-                                    ? Colors.transparent
-                                    : Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                            Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor,
                             decoration: BoxDecoration(
                                 color: (provider.selectedOption == index + 3)
                                     ? Theme.of(context)
@@ -340,7 +389,8 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   }
 
   Widget checkForSeeAllMenu(HomeProvider provider) {
-    return provider.showSeeAllMenu ? const AllMenuItemsWidget() : Container();
+    //return (provider.showSeeAllMenu) ? const AllMenuItemsWidget() : Container();
+     return (provider.showSeeAllMenu && (provider.moreButtonsMap!=null && provider.moreButtonsMap!.isNotEmpty)) ? const AllMenuItemsWidget() : Container();
   }
 
   checkAndHideSeeAllOptionMenu(HomeProvider provider, String from) {
@@ -354,5 +404,19 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
       provider.updatePointsBalanceVisibility(false);
     }
     cancelPointsDialogTimer();
+  }
+
+  checkForSeeAllMenuVisibility(HomeProvider provider, int index) {
+    return provider
+                .getTranslatedOptionsName(
+                    loc, provider.homeNavigationList[index + 3].name)
+                .replaceAll(" ", "\n")
+                .toUpperCase() ==
+            provider
+                .getTranslatedOptionsName(
+                    loc, provider.homeNavigationList[6].name)
+                .replaceAll(" ", "\n")
+                .toUpperCase() &&
+        (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
   }
 }

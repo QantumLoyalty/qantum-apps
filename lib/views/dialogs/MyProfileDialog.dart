@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/utils/AppColors.dart';
 import '/views/common_widgets/UserStatusTier.dart';
 import '/l10n/app_localizations.dart';
@@ -201,7 +202,8 @@ class MyProfileDialog with LoggingMixin {
                                           (flavor == Flavor.clh ||
                                                   flavor ==
                                                       Flavor.montaukTavern ||
-                                                  flavor == Flavor.starReward)
+                                                  flavor == Flavor.starReward ||
+                                                  flavor == Flavor.flinders)
                                               ? Container()
                                               : UserStatusTier()
                                         ],
@@ -264,9 +266,9 @@ class MyProfileDialog with LoggingMixin {
                                                           child: Text(
                                                             loc.txtYes,
                                                             style: TextStyle(
-                                                                color: Theme.of(
-                                                                        context)
-                                                                    .primaryColor),
+                                                                color: AppThemeCustom
+                                                                    .getAlertDialogTextButtonColor(
+                                                                        context)),
                                                           )),
                                                     ],
                                                   );
@@ -314,59 +316,70 @@ class MyProfileDialog with LoggingMixin {
                                         );
                                       }),
                                       InkWell(
-                                        onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text(loc.txtAlert),
-                                                  content: Text(loc.msgLogout),
-                                                  actions: [
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text(
-                                                          loc.txtNo,
-                                                          style:
-                                                              const TextStyle(
+                                        onTap: () async {
+                                          final confirmedLogout =
+                                              await showDialog<bool>(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(loc.txtAlert),
+                                                      content:
+                                                          Text(loc.msgLogout),
+                                                      actions: [
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(false);
+                                                            },
+                                                            child: Text(
+                                                              loc.txtNo,
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .grey),
-                                                        )),
-                                                    TextButton(
-                                                        onPressed: () async {
-                                                          /// CLEARING ALL PREFERENCE
-                                                          SharedPreferenceHelper
-                                                              sharedPreferenceHelper =
-                                                              await SharedPreferenceHelper
-                                                                  .getInstance();
-                                                          await sharedPreferenceHelper
-                                                              .clearAll();
-
-                                                          /// REMOVING ALL DIALOGS
-                                                          Navigator.pop(
-                                                              context);
-                                                          Navigator.pop(
-                                                              context);
-
-                                                          /// NAVIGATING TO LOGIN SCREEN
-                                                          AppNavigator
-                                                              .navigateReplacement(
-                                                                  context,
-                                                                  AppNavigator
-                                                                      .login);
-                                                        },
-                                                        child: Text(
-                                                          loc.txtYes,
-                                                          style: TextStyle(
-                                                              color: Theme.of(
+                                                            )),
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
                                                                       context)
-                                                                  .primaryColor),
-                                                        )),
-                                                  ],
-                                                );
-                                              });
+                                                                  .pop(true);
+                                                            },
+                                                            child: Text(
+                                                              loc.txtYes,
+                                                              style: TextStyle(
+                                                                  color: AppThemeCustom
+                                                                      .getAlertDialogTextButtonColor(
+                                                                          context)),
+                                                            )),
+                                                      ],
+                                                    );
+                                                  });
+
+                                          if (confirmedLogout != true) {
+                                            return;
+                                          }
+
+                                          try {
+                                            /// CLEARING ALL PREFERENCE
+                                            SharedPreferenceHelper
+                                                sharedPreferenceHelper =
+                                                await SharedPreferenceHelper
+                                                    .getInstance();
+                                            await sharedPreferenceHelper
+                                                .clearAll();
+
+                                            /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
+
+                                            await closingAllRepeatedTasksInProviders(
+                                                context);
+
+                                            /// REMOVING PROFILE DIALOG
+                                            Navigator.pop(context);
+
+                                            /// NAVIGATING TO LOGIN SCREEN
+                                            AppNavigator.navigateReplacement(
+                                                context, AppNavigator.login);
+                                          } catch (e) {}
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.all(5),
@@ -455,5 +468,13 @@ class MyProfileDialog with LoggingMixin {
             ),
           );
         });
+  }
+
+  closingAllRepeatedTasksInProviders(BuildContext context) async {
+    await Provider.of<UserInfoProvider>(context, listen: false)
+        .stopFetchProfileTimer();
+
+    await Provider.of<HomeProvider>(context, listen: false)
+        .stopGetAllOptionsTimer();
   }
 }
