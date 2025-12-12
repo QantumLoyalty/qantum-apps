@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -13,11 +14,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  late Flavor flavor;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 2), () {
+        flavor = FlavorConfig.instance.flavor!;
         _checkLoginStatus();
       });
     });
@@ -31,7 +35,10 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
 
       if (hasUserData) {
-        if (AppHelper.isClubApp()) {
+        /*if (AppHelper.isClubApp()) {
+
+
+
           /// CHECKING IF PURCHASED THE MEMBERSHIP
           if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
             /// ALREADY PURCHASED THE MEMBERSHIP
@@ -43,7 +50,49 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         } else {
           AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+        }*/
+
+        if (AppHelper.isClubApp()) {
+          /// TEMP CONDITION FOR MHBC APP ONLY
+          if (flavor == Flavor.mhbc) {
+            if (await AppHelper.checkIfUserIsNew()) {
+              /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
+              /// CHECKING IF PURCHASED THE MEMBERSHIP
+              if (await AppHelper
+                  .checkIfUserHasPurchasedTheMembership()) {
+                /// ALREADY PURCHASED THE MEMBERSHIP
+                AppNavigator.navigateAndClearStack(
+                    context, AppNavigator.home);
+              } else {
+                ///  DID NOT PURCHASED THE MEMBERSHIP
+                AppNavigator.navigateAndClearStack(
+                    context, AppNavigator.pendingPaymentScreen);
+              }
+            } else {
+              /// IF USER IS OLD
+              AppNavigator.navigateAndClearStack(
+                  context, AppNavigator.home);
+            }
+          } else {
+            /// FOR OTHER APPS
+            /// CHECKING IF PURCHASED THE MEMBERSHIP
+            if (await AppHelper
+                .checkIfUserHasPurchasedTheMembership()) {
+              /// ALREADY PURCHASED THE MEMBERSHIP
+              AppNavigator.navigateAndClearStack(
+                  context, AppNavigator.home);
+            } else {
+              ///  DID NOT PURCHASED THE MEMBERSHIP
+              AppNavigator.navigateAndClearStack(
+                  context, AppNavigator.pendingPaymentScreen);
+            }
+          }
+        } else {
+          AppNavigator.navigateAndClearStack(
+              context, AppNavigator.home);
         }
+
+
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }

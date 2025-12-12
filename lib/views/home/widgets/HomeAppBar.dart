@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import '../../../core/utils/AppColors.dart';
 import '/core/utils/AppHelper.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
@@ -64,9 +65,13 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               debugPrint(e.toString());
                               //throw 'Failed to set application brightness';
                             }
-
-                            await DigitalCardDialog.getInstance()
-                                .showDigitalCardDialog(context);
+                            if (provider.getUserInfo!.isUserStatusCancelled()) {
+                              await MembershipCancelledDialog.getInstance()
+                                  .showMembershipCancelledDialog(context);
+                            } else {
+                              await DigitalCardDialog.getInstance()
+                                  .showDigitalCardDialog(context);
+                            }
 
                             try {
                               await ScreenBrightness.instance
@@ -133,17 +138,22 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                     children: [
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Consumer<HomeProvider>(
-                            builder: (context, provider, child) {
+                        child: Consumer2<HomeProvider, UserInfoProvider>(
+                            builder:
+                                (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
-                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                              if (provider.showSeeAllMenu) {
-                                provider.updateShowAllMenuVisibility(
-                                    false, "my profile");
+                              if (userInfoProvider.getUserInfo != null &&
+                                  !userInfoProvider.getUserInfo!
+                                      .isUserStatusCancelled()) {
+                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                if (provider.showSeeAllMenu) {
+                                  provider.updateShowAllMenuVisibility(
+                                      false, "my profile");
+                                }
+                                MyProfileDialog.getInstance()
+                                    .showMyProfileDialog(context);
                               }
-                              MyProfileDialog.getInstance()
-                                  .showMyProfileDialog(context);
                             },
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -154,7 +164,12 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   AppIcons.my_profile,
                                   width: 34,
                                   height: 34,
-                                  color: Theme.of(context).iconTheme.color,
+                                  color:
+                                      (userInfoProvider.getUserInfo != null &&
+                                              userInfoProvider.getUserInfo!
+                                                  .isUserStatusCancelled())
+                                          ? AppColors.disable_color
+                                          : Theme.of(context).iconTheme.color,
                                 ),
                                 Text(
                                   AppLocalizations.of(context)!
@@ -163,9 +178,14 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.normal,
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor),
+                                      color: (userInfoProvider.getUserInfo !=
+                                                  null &&
+                                              userInfoProvider.getUserInfo!
+                                                  .isUserStatusCancelled())
+                                          ? AppColors.disable_color
+                                          : Theme.of(context)
+                                              .textSelectionTheme
+                                              .selectionColor),
                                 )
                               ],
                             ),

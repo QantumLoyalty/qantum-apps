@@ -44,7 +44,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     _isNavigated = true;
   }
 
-
   bool? _showLoader;
 
   bool? get showLoader => _showLoader;
@@ -99,8 +98,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
     }
-
-
 
     notifyListeners();
   }

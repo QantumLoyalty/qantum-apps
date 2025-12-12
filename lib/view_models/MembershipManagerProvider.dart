@@ -103,7 +103,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         .map((membership) => DropdownMenuEntry<MembershipModel>(
               value: membership,
               label:
-                  "${membership.membershipName} - \$${membership.calculatedPrice}",
+              "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
               labelWidget: Container(
                 margin: const EdgeInsets.only(top: 2),
                 decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 child: Text(
-                  "${membership.membershipName} - \$${membership.calculatedPrice}",
+                  "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,

@@ -567,4 +567,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get payAtReception => 'Please pay at reception';
+
+  @override
+  String get membership_unavailable_title => 'MEMBERSHIP\nNO LONGER\nAVAILABLE';
+
+  @override
+  String get contact_to_venue_text => 'Please get in touch with your venue to discuss.';
 }

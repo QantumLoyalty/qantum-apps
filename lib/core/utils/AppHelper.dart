@@ -556,7 +556,7 @@ class AppHelper with LoggingMixin {
       case Flavor.woollahra:
         return const Size(252, 114);
       case Flavor.flinders:
-        return const Size(96, 96);
+        return const Size(56, 56);
 
       default:
         return const Size(72, 72);
@@ -635,7 +635,7 @@ class AppHelper with LoggingMixin {
 
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
-    const clubFlavors = {Flavor.qantum, Flavor.aceRewards};
+    const clubFlavors = {Flavor.qantum, Flavor.aceRewards, Flavor.mhbc};
     return clubFlavors.contains(flavor);
   }
 
@@ -654,4 +654,22 @@ class AppHelper with LoggingMixin {
       return false;
     }
   }
+  /// TEMP FUNCTION FOR MHBC APP ONLY
+  static Future<bool> checkIfUserIsNew() async {
+    SharedPreferenceHelper sharedPreferencesHelper =
+    await SharedPreferenceHelper.getInstance();
+    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    if (userData != null) {
+      if (userData.type != null && userData.type!.toLowerCase()=="new") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+
+
 }

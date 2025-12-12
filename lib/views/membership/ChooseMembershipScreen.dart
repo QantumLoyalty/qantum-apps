@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '/view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -26,6 +27,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
   late AppLocalizations loc;
   late TextEditingController controller;
   late MembershipManagerProvider _membershipManagerProvider;
+  final formatter = NumberFormat("##0.00");
 
   @override
   void initState() {
@@ -100,7 +102,9 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                                   provider.updateDropdownValue(value!);
                                   setState(() {
                                     controller.text =
-                                        "${value.membershipName} - \$${value.calculatedPrice}";
+                                        "${value.membershipName} - \$${value.calculatedPrice != null ? formatter.format(value.calculatedPrice) : 0.00}";
+
+
                                   });
                                 },
                                 inputDecorationTheme: InputDecorationTheme(

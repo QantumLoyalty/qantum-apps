@@ -441,6 +441,8 @@ class AppColors {
 
   static Color get bright_sky_blue => const Color(0xFF28ABE2);
 
+  static Color get disable_color => const Color(0xFFC0C0C0);
+
   static Color getMembershipCategoryColor(String? membershipType) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch ((membershipType ?? "").toLowerCase()) {

@@ -104,7 +104,7 @@ android {
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
-            versionName "1.0.0"
+            versionName "1.0.3"
         }
         flinders {
             dimension "app"

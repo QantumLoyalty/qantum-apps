@@ -567,4 +567,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get payAtReception => 'कृपया रिसेप्शन पर भुगतान करें';
+
+  @override
+  String get membership_unavailable_title => 'सदस्यता\nअब उपलब्ध\nनहीं है';
+
+  @override
+  String get contact_to_venue_text => 'कृपया चर्चा के लिए अपने स्थल से संपर्क करें।';
 }

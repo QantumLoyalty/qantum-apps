@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
@@ -25,12 +26,14 @@ class OTPScreen extends StatefulWidget {
 class _OTPScreenState extends State<OTPScreen> {
   late TextEditingController _otpController;
   late AppLocalizations loc;
+  late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
     _otpController = TextEditingController();
     AppHelper.printMessage(widget.argument);
+    flavor = FlavorConfig.instance.flavor!;
   }
 
   @override
@@ -62,16 +65,39 @@ class _OTPScreenState extends State<OTPScreen> {
                 /// NAVIGATE TO HOME SCREEN
                 WidgetsBinding.instance.addPostFrameCallback((_) async {
                   if (AppHelper.isClubApp()) {
-                    /// CHECKING IF PURCHASED THE MEMBERSHIP
-                    if (await AppHelper
-                        .checkIfUserHasPurchasedTheMembership()) {
-                      /// ALREADY PURCHASED THE MEMBERSHIP
-                      AppNavigator.navigateAndClearStack(
-                          context, AppNavigator.home);
+                    /// TEMP CONDITION FOR MHBC APP ONLY
+                    if (flavor == Flavor.mhbc) {
+                      if (await AppHelper.checkIfUserIsNew()) {
+                        /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
+                        /// CHECKING IF PURCHASED THE MEMBERSHIP
+                        if (await AppHelper
+                            .checkIfUserHasPurchasedTheMembership()) {
+                          /// ALREADY PURCHASED THE MEMBERSHIP
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.home);
+                        } else {
+                          ///  DID NOT PURCHASED THE MEMBERSHIP
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.pendingPaymentScreen);
+                        }
+                      } else {
+                        /// IF USER IS OLD
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.home);
+                      }
                     } else {
-                      ///  DID NOT PURCHASED THE MEMBERSHIP
-                      AppNavigator.navigateAndClearStack(
-                          context, AppNavigator.pendingPaymentScreen);
+                      /// FOR OTHER APPS
+                      /// CHECKING IF PURCHASED THE MEMBERSHIP
+                      if (await AppHelper
+                          .checkIfUserHasPurchasedTheMembership()) {
+                        /// ALREADY PURCHASED THE MEMBERSHIP
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.home);
+                      } else {
+                        ///  DID NOT PURCHASED THE MEMBERSHIP
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.pendingPaymentScreen);
+                      }
                     }
                   } else {
                     AppNavigator.navigateAndClearStack(

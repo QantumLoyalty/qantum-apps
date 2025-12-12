@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
 import '../views/splash/SplashScreen.dart';
+import 'view_models/DocumentScanProvider.dart';
 import 'view_models/HomeProvider.dart';
+import 'view_models/MembershipManagerProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
@@ -38,6 +41,8 @@ void main() async {
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
      // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
+    Stripe.publishableKey = "pk_test_51S2fSX1zasRgJWaHc8UoT3ayEB2U53BX6fWezGboZ8rdKamJi6YwHmFXt21fsI5z05WE24WXaoNP7zgq9XErhPl300o8fHzM7I";
+    Stripe.instance.applySettings();
   });
 }
 
@@ -64,7 +69,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SignupProvider()),
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
-        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
+        ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
+        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
       ],
       child: Portal(
         child: MaterialApp(

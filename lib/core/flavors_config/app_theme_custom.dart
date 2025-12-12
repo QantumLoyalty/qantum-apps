@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 import '../utils/AppStrings.dart';
 import '/view_models/HomeProvider.dart';
 import '../utils/AppColors.dart';
@@ -691,7 +692,10 @@ class AppThemeCustom {
   }
 
   static Color? getCustomHomeButtonsIconStyle(
-      BuildContext context, HomeProvider provider, String itemName) {
+      BuildContext context,
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      String itemName) {
     if ((itemName == AppStrings.txtSeeAll &&
         (provider.moreButtonsMap == null ||
             provider.moreButtonsMap!.isEmpty))) {
@@ -707,33 +711,52 @@ class AppThemeCustom {
           return (provider.homeNavigationList[0].name == itemName ||
                   provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
-              : null;
+              : (userInfoProvider.getUserInfo != null &&
+                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                  ? AppColors.disable_color
+                  : null;
         case Flavor.clh:
           return (provider.homeNavigationList[0].name == itemName ||
                   provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
-              : null;
+              : (userInfoProvider.getUserInfo != null &&
+                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                  ? AppColors.disable_color
+                  : null;
         case Flavor.brisbane:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
-              : Theme.of(context).buttonTheme.colorScheme!.primary;
+              : (userInfoProvider.getUserInfo != null &&
+                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                  ? AppColors.disable_color
+                  : Theme.of(context).buttonTheme.colorScheme!.primary;
         case Flavor.woollahra:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
-              : null;
+              : (userInfoProvider.getUserInfo != null &&
+                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                  ? AppColors.disable_color
+                  : null;
         case Flavor.northShoreTavern ||
               Flavor.starReward ||
               Flavor.queens ||
               Flavor.mhbc ||
               Flavor.hogansReward ||
               Flavor.bluewater ||
-              Flavor.flinders || Flavor.aceRewards:
+              Flavor.flinders ||
+              Flavor.aceRewards:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
-              : null;
+              : (userInfoProvider.getUserInfo != null &&
+                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                  ? AppColors.disable_color
+                  : null;
 
         default:
-          return null;
+          return (userInfoProvider.getUserInfo != null &&
+                  userInfoProvider.getUserInfo!.isUserStatusCancelled())
+              ? AppColors.disable_color
+              : null;
       }
     }
   }
@@ -838,23 +861,34 @@ class AppThemeCustom {
   }
 
   static BoxBorder? getCustomHomeButtonsBorderStyle(
-      BuildContext context, HomeProvider provider, String itemName) {
+      BuildContext context,
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      String itemName) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.montaukTavern:
         return (provider.homeNavigationList[0].name == itemName ||
                 provider.homeNavigationList[2].name == itemName)
             ? null
-            : Border.all(
-                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                width: 1.5);
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5);
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
                 provider.homeNavigationList[2].name == itemName)
             ? null
-            : Border.all(
-                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                width: 1.5);
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5);
 
       case Flavor.northShoreTavern ||
             Flavor.starReward ||
@@ -863,34 +897,51 @@ class AppThemeCustom {
             Flavor.hogansReward ||
             Flavor.woollahra ||
             Flavor.bluewater ||
-            Flavor.flinders || Flavor.aceRewards:
+            Flavor.flinders ||
+            Flavor.aceRewards:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5);
+
+      default:
+        return (userInfoProvider.getUserInfo != null &&
+                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
             : Border.all(
                 color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
                 width: 1.5);
-
-      default:
-        return Border.all(
-            color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-            width: 1.5);
     }
   }
 
   static Color? getCustomHomeButtonsTextStyle(
-      BuildContext context, HomeProvider provider, String itemName) {
+      BuildContext context,
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      String itemName) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.montaukTavern:
         return (provider.homeNavigationList[0].name == itemName ||
                 provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : Theme.of(context).textSelectionTheme.selectionColor;
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? AppColors.disable_color
+                : Theme.of(context).textSelectionTheme.selectionColor;
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
                 provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : Theme.of(context).textSelectionTheme.selectionColor;
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? AppColors.disable_color
+                : Theme.of(context).textSelectionTheme.selectionColor;
 
       case Flavor.northShoreTavern ||
             Flavor.starReward ||
@@ -900,13 +951,20 @@ class AppThemeCustom {
             Flavor.brisbane ||
             Flavor.woollahra ||
             Flavor.bluewater ||
-            Flavor.flinders || Flavor.aceRewards:
+            Flavor.flinders ||
+            Flavor.aceRewards:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : Theme.of(context).textSelectionTheme.selectionColor;
+            : (userInfoProvider.getUserInfo != null &&
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? AppColors.disable_color
+                : Theme.of(context).textSelectionTheme.selectionColor;
 
       default:
-        return Theme.of(context).textSelectionTheme.selectionColor;
+        return (userInfoProvider.getUserInfo != null &&
+                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            ? AppColors.disable_color
+            : Theme.of(context).textSelectionTheme.selectionColor;
     }
   }
 
@@ -963,5 +1021,16 @@ class AppThemeCustom {
         return AppColors.white;
     }*/
     return AppColors.white;
+  }
+
+  static Color getTNCTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.starReward:
+        return AppColors.white;
+
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
   }
 }

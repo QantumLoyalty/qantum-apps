@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/network/APIList.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
 
@@ -44,12 +46,14 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
   late AppLocalizations loc;
+  late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
 
     logEvent("PARAMS ON SIGNUP: ${widget.argument}");
+    flavor = FlavorConfig.instance.flavor!;
     String firstName = "", lastName = "";
     if (widget.argument.containsKey('name')) {
       Map<String, String> namePart =
@@ -810,26 +814,27 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           }),*/
                       AppDimens.shape_20,
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            AppNavigator.navigateTo(
+                                context, AppNavigator.appWebView,
+                                arguments: APIList.TERMS_AND_CONDITIONS);
+                          },
                           child: RichText(
                             text: TextSpan(children: [
                               TextSpan(
                                   text: loc.txtView,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 13,
-                                      color: Theme.of(context)
-                                          .buttonTheme
-                                          .colorScheme!
-                                          .primary)),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color:
+                                        AppThemeCustom.getTNCTextColor(context),
+                                  )),
                               TextSpan(
                                   text: " ${loc.txtTermsAndConditions}",
                                   style: TextStyle(
                                       fontSize: 13,
-                                      color: Theme.of(context)
-                                          .buttonTheme
-                                          .colorScheme!
-                                          .primary,
+                                      color: AppThemeCustom.getTNCTextColor(
+                                          context),
                                       fontWeight: FontWeight.bold))
                             ]),
                           )),
@@ -839,70 +844,76 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
                               if (_postcodeController.text.isNotEmpty) {
-                              if (validateData(provider)) {
-                                if (provider.tcCheckStatus) {
-                                  Map<String, dynamic> params = {};
-                                  params['GivenNames'] =
-                                      _firstNameController.text;
-                                  params['Surname'] = _lastNameController.text;
-                                  params['DateOfBirth'] =
-                                      '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
-                                  if (_postcodeController.text.isNotEmpty) {
-                                    params['PostCode'] =
-                                        _postcodeController.text;
-                                  }
+                                if (validateData(provider)) {
+                                  if (provider.tcCheckStatus) {
+                                    Map<String, dynamic> params = {};
+                                    params['GivenNames'] =
+                                        _firstNameController.text;
+                                    params['Surname'] =
+                                        _lastNameController.text;
+                                    params['DateOfBirth'] =
+                                        '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
+                                    if (_postcodeController.text.isNotEmpty) {
+                                      params['PostCode'] =
+                                          _postcodeController.text;
+                                    }
 
-                                  params['Email'] = _emailController.text;
+                                    params['Email'] = _emailController.text;
 
-                                  if (provider.selectedGender![0]
-                                          .toUpperCase() ==
-                                      "M") {
-                                    params['Gender'] = "M";
-                                  } else if (provider.selectedGender![0]
-                                          .toUpperCase() ==
-                                      "F") {
-                                    params['Gender'] = "F";
+                                    if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "M") {
+                                      params['Gender'] = "M";
+                                    } else if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "F") {
+                                      params['Gender'] = "F";
+                                    } else {
+                                      params['Gender'] = "U";
+                                    }
+
+                                    /// TEMP CONDITION FOR MHBC APP ONLY ///
+                                    if (flavor == Flavor.mhbc) {
+                                      params['type'] = "new";
+                                    }
+
+                                    /// ADDING PARAMS IF APP IS A CLUB APP ///
+                                    if (widget.argument
+                                        .containsKey('license_front')) {
+                                      params['licence_front'] =
+                                          widget.argument['license_front'];
+                                    }
+                                    if (widget.argument
+                                        .containsKey('license_back')) {
+                                      params['licence_back'] =
+                                          widget.argument['license_back'];
+                                    }
+
+                                    if (_address1Controller.text.isNotEmpty) {
+                                      params['Suburb'] =
+                                          _address1Controller.text;
+                                    }
+
+                                    /////////////////////////////////////////
+
+                                    String phoneNo =
+                                        "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
+
+                                    params['State'] = "NA";
+
+                                    params['Address'] =
+                                        _addressController.text.toString();
+
+                                    AppHelper.printMessage(
+                                        "PARAMS:: $params -> $phoneNo");
+                                    userLoginProvider.signup(phoneNo, params,
+                                        loc: loc);
                                   } else {
-                                    params['Gender'] = "U";
+                                    AppHelper.showErrorMessage(context,
+                                        loc.msgCheckTermsAndConditions);
                                   }
-
-                                  /// ADDING PARAMS IF APP IS A CLUB APP ///
-                                  if (widget.argument
-                                      .containsKey('license_front')) {
-                                    params['licence_front'] =
-                                        widget.argument['license_front'];
-                                  }
-                                  if (widget.argument
-                                      .containsKey('license_back')) {
-                                    params['licence_back'] =
-                                        widget.argument['license_back'];
-                                  }
-
-                                  if (_address1Controller.text.isNotEmpty) {
-                                    params['Suburb'] = _address1Controller.text;
-                                  }
-
-                                  /////////////////////////////////////////
-
-                                  String phoneNo =
-                                      "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
-
-                                  params['State'] = "NA";
-
-                                  params['Address'] =
-                                      _addressController.text.toString();
-
-                                  AppHelper.printMessage(
-                                      "PARAMS:: $params -> $phoneNo");
-                                  userLoginProvider.signup(phoneNo, params,
-                                      loc: loc);
-                                } else {
-                                  AppHelper.showErrorMessage(
-                                      context, loc.msgCheckTermsAndConditions);
                                 }
-                              }
-                              }
-                              else {
+                              } else {
                                 AppHelper.showErrorMessage(
                                     context, loc.msgEmptyPostcode);
                               }

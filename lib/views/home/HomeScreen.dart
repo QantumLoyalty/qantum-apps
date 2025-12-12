@@ -6,6 +6,7 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
+import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppStrings.dart';
 import '../../data/models/HomeNavigatorModel.dart';
@@ -14,6 +15,7 @@ import '../../view_models/HomeProvider.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppScaffold.dart';
 import '../common_widgets/IconTextWidget.dart';
+import '../dialogs/MembershipCancelledDialog.dart';
 import '../dialogs/MyBenefitsDialog.dart';
 import 'widgets/AllMenuItemsWidget.dart';
 import 'widgets/HomeAppBar.dart';
@@ -31,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   late HomeProvider _homeProvider;
   late Flavor flavor;
   late AppLocalizations loc;
+  bool isMembershipCancelledDialogShown = false;
 
   final partnerOffersMissingApps = {
     Flavor.bluewater,
@@ -66,14 +69,8 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
       logEvent("SELECTED FLAVOR $flavor");
 
       //checkForPushNotificationPermission();
-
-
     }
   }
-
-
-
-
 
   @override
   void didChangeDependencies() {
@@ -108,6 +105,25 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
           padding: const EdgeInsets.all(10),
           child: Consumer2<HomeProvider, UserInfoProvider>(
               builder: (context, provider, userInfoProvider, child) {
+            if (userInfoProvider.getUserInfo != null &&
+                userInfoProvider.getUserInfo!.isUserStatusCancelled() &&
+                !isMembershipCancelledDialogShown) {
+
+
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!mounted) return;
+                // Ensure this route is current and the dialog hasn't already been shown
+                if ((ModalRoute.of(context)?.isCurrent ?? false) &&
+                    !isMembershipCancelledDialogShown) {
+                  setState(() {
+                    isMembershipCancelledDialogShown = true;
+                  });
+                  MembershipCancelledDialog.getInstance()
+                      .showMembershipCancelledDialog(context);
+                }
+              });
+            }
+
             return Column(
               children: [
                 const HomeAppBar(),
@@ -146,6 +162,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                 AppThemeCustom.getCustomHomeButtonsIconStyle(
                                     context,
                                     provider,
+                                    userInfoProvider,
                                     provider.homeNavigationList[index].name),
                             text: provider
                                 .getTranslatedOptionsName(loc,
@@ -156,6 +173,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                 AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,
                                     provider,
+                                    userInfoProvider,
                                     provider.homeNavigationList[index].name),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
@@ -170,10 +188,10 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                     .getCustomHomeButtonsBorderStyle(
                                         context,
                                         provider,
+                                        userInfoProvider,
                                         provider
                                             .homeNavigationList[index].name),
                                 borderRadius: BorderRadius.circular(10)),
-                            onClick: () {},
                             onDragStart: (value) {
                               /// HIDE POINTS BALANCE DIALOG
                               if (provider.homeNavigationList[index].name ==
@@ -184,47 +202,55 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               }
                             },
                             onTapUp: (value) async {
-                              /// HIDE POINTS BALANCE DIALOG
-                              startPointsDialogTimer();
+                              if (userInfoProvider.getUserInfo != null &&
+                                  !userInfoProvider.getUserInfo!
+                                      .isUserStatusCancelled()) {
+                                /// HIDE POINTS BALANCE DIALOG
+                                startPointsDialogTimer();
+                              }
                             },
                             onTapDown: (value) {
-                              /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                              checkAndHideSeeAllOptionMenu(
-                                  provider, "points balance");
+                              if (userInfoProvider.getUserInfo != null &&
+                                  !userInfoProvider.getUserInfo!
+                                      .isUserStatusCancelled()) {
+                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                checkAndHideSeeAllOptionMenu(
+                                    provider, "points balance");
 
-                              final pointsBalanceOptionName =
-                                  provider.homeNavigationList[0].name;
-                              final partnerOffersOptionName =
-                                  provider.homeNavigationList[2].name;
-                              final selectedOptionName =
-                                  provider.homeNavigationList[index].name;
+                                final pointsBalanceOptionName =
+                                    provider.homeNavigationList[0].name;
+                                final partnerOffersOptionName =
+                                    provider.homeNavigationList[2].name;
+                                final selectedOptionName =
+                                    provider.homeNavigationList[index].name;
 
-                              if (partnerOffersMissingApps.contains(flavor) &&
-                                  selectedOptionName ==
-                                      partnerOffersOptionName) {
-                                /// DO NOTHING
-                              } else if (partnerOffersAndPointsBalanceMissingApps
-                                      .contains(flavor) &&
-                                  (selectedOptionName ==
-                                          pointsBalanceOptionName ||
-                                      selectedOptionName ==
-                                          partnerOffersOptionName)) {
-                                /// DO NOTHING
-                              } else {
-                                provider.updateSelectedOption(index);
-
-                                if (provider.homeNavigationList[index].name ==
-                                    provider.homeNavigationList[0].name) {
-                                  /// SHOW POINTS BALANCE DIALOG
-                                  provider.updatePointsBalanceVisibility(true);
+                                if (partnerOffersMissingApps.contains(flavor) &&
+                                    selectedOptionName ==
+                                        partnerOffersOptionName) {
+                                  /// DO NOTHING
+                                } else if (partnerOffersAndPointsBalanceMissingApps
+                                        .contains(flavor) &&
+                                    (selectedOptionName ==
+                                            pointsBalanceOptionName ||
+                                        selectedOptionName ==
+                                            partnerOffersOptionName)) {
+                                  /// DO NOTHING
                                 } else {
-                                  /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
-                                  checkAndHidePointsBalance(
-                                      provider, "FROM TOP ROW");
-                                }
-                              }
+                                  provider.updateSelectedOption(index);
 
-                              /*if (flavor == Flavor.bluewater &&
+                                  if (provider.homeNavigationList[index].name ==
+                                      provider.homeNavigationList[0].name) {
+                                    /// SHOW POINTS BALANCE DIALOG
+                                    provider
+                                        .updatePointsBalanceVisibility(true);
+                                  } else {
+                                    /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
+                                    checkAndHidePointsBalance(
+                                        provider, "FROM TOP ROW");
+                                  }
+                                }
+
+                                /*if (flavor == Flavor.bluewater &&
                                   provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[2].name) {
                                 /// DO NOTHING ///
@@ -279,6 +305,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                       provider, "FROM TOP ROW");
                                 }
                               }*/
+                              }
                             },
                           ));
                         }),
@@ -291,7 +318,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
-                            iconColor: null,
+                            iconColor: (userInfoProvider.getUserInfo != null &&
+                                    userInfoProvider.getUserInfo!
+                                        .isUserStatusCancelled())
+                                ? AppColors.disable_color
+                                : null,
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index + 3].name)
@@ -299,77 +330,96 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                                 .toUpperCase(),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
-                            textColor:
-                            Theme.of(context)
+                            textColor: (userInfoProvider.getUserInfo != null &&
+                                    userInfoProvider.getUserInfo!
+                                        .isUserStatusCancelled())
+                                ? AppColors.disable_color
+                                : Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor,
                             decoration: BoxDecoration(
-                                color: (provider.selectedOption == index + 3)
-                                    ? Theme.of(context)
-                                        .iconTheme
-                                        .color!
-                                        .withValues(alpha: 0.5)
-                                    : Colors.transparent,
+                                color: (userInfoProvider.getUserInfo != null &&
+                                        userInfoProvider.getUserInfo!
+                                            .isUserStatusCancelled())
+                                    ? Colors.transparent
+                                    : ((provider.selectedOption == index + 3)
+                                        ? Theme.of(context)
+                                            .iconTheme
+                                            .color!
+                                            .withValues(alpha: 0.5)
+                                        : Colors.transparent),
                                 border: Border.all(
-                                    color: Theme.of(context)
-                                        .buttonTheme
-                                        .colorScheme!
-                                        .onSecondary,
+                                    color:
+                                        (userInfoProvider.getUserInfo != null &&
+                                                userInfoProvider.getUserInfo!
+                                                    .isUserStatusCancelled())
+                                            ? AppColors.disable_color
+                                            : Theme.of(context)
+                                                .buttonTheme
+                                                .colorScheme!
+                                                .onSecondary,
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
-                              /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
-                              checkAndHidePointsBalance(
-                                  provider, "FROM SECOND ROW");
+                              if (userInfoProvider.getUserInfo != null &&
+                                  !userInfoProvider.getUserInfo!
+                                      .isUserStatusCancelled()) {
+                                /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
+                                checkAndHidePointsBalance(
+                                    provider, "FROM SECOND ROW");
 
-                              if (provider.homeNavigationList[index + 3].name !=
-                                  provider.homeNavigationList[5].name) {
-                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                                if (provider.showSeeAllMenu == true &&
-                                    (provider.homeNavigationList[index + 3]
-                                            .name !=
-                                        provider.homeNavigationList[6].name)) {
-                                  provider.updateShowAllMenuVisibility(
-                                      false, "");
+                                if (provider
+                                        .homeNavigationList[index + 3].name !=
+                                    provider.homeNavigationList[5].name) {
+                                  /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                  if (provider.showSeeAllMenu == true &&
+                                      (provider.homeNavigationList[index + 3]
+                                              .name !=
+                                          provider
+                                              .homeNavigationList[6].name)) {
+                                    provider.updateShowAllMenuVisibility(
+                                        false, "");
+                                  }
+
+                                  provider.updateSelectedOption(index + 3);
                                 }
 
-                                provider.updateSelectedOption(index + 3);
-                              }
+                                if (provider
+                                        .homeNavigationList[index + 3].name ==
+                                    provider.homeNavigationList[4].name) {
+                                  /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                  checkAndHideSeeAllOptionMenu(provider,
+                                      "checkAndHideSeeAllOptionMenu mybenefits");
 
-                              if (provider.homeNavigationList[index + 3].name ==
-                                  provider.homeNavigationList[4].name) {
-                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                                checkAndHideSeeAllOptionMenu(provider,
-                                    "checkAndHideSeeAllOptionMenu mybenefits");
+                                  /// SHOW MY BENEFITS DIALOG
+                                  MyBenefitsDialog.getInstance()
+                                      .showBenefitsDialog(context);
+                                } else if (provider
+                                        .homeNavigationList[index + 3].name ==
+                                    provider.homeNavigationList[5].name) {
+                                  /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                  checkAndHideSeeAllOptionMenu(provider,
+                                      "checkAndHideSeeAllOptionMenu myAccountScreen");
 
-                                /// SHOW MY BENEFITS DIALOG
-                                MyBenefitsDialog.getInstance()
-                                    .showBenefitsDialog(context);
-                              } else if (provider
-                                      .homeNavigationList[index + 3].name ==
-                                  provider.homeNavigationList[5].name) {
-                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                                checkAndHideSeeAllOptionMenu(provider,
-                                    "checkAndHideSeeAllOptionMenu myAccountScreen");
+                                  AppNavigator.navigateTo(
+                                      context, AppNavigator.myAccountScreen);
 
-                                AppNavigator.navigateTo(
-                                    context, AppNavigator.myAccountScreen);
+                                  provider.updateSelectedOption(
+                                      provider.prevSelectedOption);
+                                } else if (provider
+                                        .homeNavigationList[index + 3].name ==
+                                    provider.homeNavigationList[6].name) {
+                                  /// SEE ALL DIALOG VISIBILITY
 
-                                provider.updateSelectedOption(
-                                    provider.prevSelectedOption);
-                              } else if (provider
-                                      .homeNavigationList[index + 3].name ==
-                                  provider.homeNavigationList[6].name) {
-                                /// SEE ALL DIALOG VISIBILITY
-
-                                if (provider.showSeeAllMenu) {
-                                  /// SEE ALL DIALOG IS VISIBLE WE NEED TO HIDE IT
-                                  provider.updateShowAllMenuVisibility(
-                                      false, "SeeAllMenu");
-                                } else {
-                                  /// SEE ALL DIALOG IS NOT VISIBLE WE NEED TO SHOW IT
-                                  provider.updateShowAllMenuVisibility(
-                                      true, "SeeAllMenu");
+                                  if (provider.showSeeAllMenu) {
+                                    /// SEE ALL DIALOG IS VISIBLE WE NEED TO HIDE IT
+                                    provider.updateShowAllMenuVisibility(
+                                        false, "SeeAllMenu");
+                                  } else {
+                                    /// SEE ALL DIALOG IS NOT VISIBLE WE NEED TO SHOW IT
+                                    provider.updateShowAllMenuVisibility(
+                                        true, "SeeAllMenu");
+                                  }
                                 }
                               }
                             },
@@ -390,7 +440,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
 
   Widget checkForSeeAllMenu(HomeProvider provider) {
     //return (provider.showSeeAllMenu) ? const AllMenuItemsWidget() : Container();
-     return (provider.showSeeAllMenu && (provider.moreButtonsMap!=null && provider.moreButtonsMap!.isNotEmpty)) ? const AllMenuItemsWidget() : Container();
+    return (provider.showSeeAllMenu &&
+            (provider.moreButtonsMap != null &&
+                provider.moreButtonsMap!.isNotEmpty))
+        ? const AllMenuItemsWidget()
+        : Container();
   }
 
   checkAndHideSeeAllOptionMenu(HomeProvider provider, String from) {

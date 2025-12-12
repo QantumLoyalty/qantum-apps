@@ -189,5 +189,7 @@
   "paymentUnsuccessful": "Payment unsuccessful",
   "tryAgain": "Try Again",
   "receptionPaymentMessage": "Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.",
-  "payAtReception": "Please pay at reception"
+  "payAtReception": "Please pay at reception",
+  "membership_unavailable_title": "MEMBERSHIP\nNO LONGER\nAVAILABLE",
+   "contact_to_venue_text": "Please get in touch with your venue to discuss."
 }

@@ -189,5 +189,7 @@
   "paymentUnsuccessful": "付款未成功",
   "tryAgain": "請再試一次",
   "receptionPaymentMessage": "您的资料已发送到前台。请与我们友好的工作人员联系以完成付款。\n\n您可以通过现金或银行卡支付。",
-  "payAtReception": "请在接待处付款"
+  "payAtReception": "请在接待处付款",
+  "membership_unavailable_title": "会员资格\n不再\n提供",
+  "contact_to_venue_text": "请与您的场馆联系以进行沟通。"
 }

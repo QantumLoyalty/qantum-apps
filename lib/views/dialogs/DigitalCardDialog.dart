@@ -298,9 +298,25 @@ class DigitalCardDialog {
   }
 
   String getScancode() {
-    Flavor flavor = FlavorConfig.instance.flavor!;
+    const Map<Flavor, String> _scanCodes = {
+      Flavor.mhbc: "MHBCAAAAA",
+      Flavor.clh: "CLH",
+      Flavor.northShoreTavern: "NST",
+      Flavor.montaukTavern: "MTT",
+      Flavor.hogansReward: "HWP",
+      Flavor.starReward: "SHG",
+      Flavor.aceRewards: "WML",
+      Flavor.queens: "QHG",
+      Flavor.brisbane: "BBCAAAAAA",
+      Flavor.woollahra: "WHT",
+      Flavor.flinders: "FSW",
+      Flavor.bluewater: "BBGAAAAAA",
+    };
 
-    if (flavor == Flavor.mhbc) {
+    return _scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
+
+    // Flavor flavor = FlavorConfig.instance.flavor!;
+    /* if (flavor == Flavor.mhbc) {
       return "MHBCAAAAA";
     } else if (flavor == Flavor.clh) {
       return "CLH";
@@ -326,6 +342,6 @@ class DigitalCardDialog {
       return "BBGAAAAAA";
     } else {
       return "ABC1234";
-    }
+    }*/
   }
 }

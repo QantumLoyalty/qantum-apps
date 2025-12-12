@@ -33,7 +33,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = await sharedPreferenceHelper.getUserData();
 
-      if (userData != null) {
+      if (userData != null && !userData.isUserStatusCancelled()) {
         String userTier = await AppHelper.getUserTierType(userData);
         NetworkResponse networkResponse =
             await AppDataService.getInstance().fetchPromotions(userTier);

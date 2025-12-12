@@ -47,7 +47,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = await sharedPreferenceHelper.getUserData();
 
-      if (userData != null) {
+      if (userData != null && !userData.isUserStatusCancelled()) {
         DateTime? dob;
         try {
           dob = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")

@@ -141,4 +141,7 @@ class AppStrings {
       'Are you sure you want to log out of the application?';
   static const String msgCancelAccount =
       'Are you sure you want to cancel your account?';
+
+  static const String textMemberCancelled ="member cancelled";
+
 }

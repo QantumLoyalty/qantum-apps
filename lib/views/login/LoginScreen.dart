@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-                            AppDimens.getCustomBoxShape(30),
+                            AppDimens.getCustomBoxShape(20),
                             AppButton(
                               text: loc.txtOk.toUpperCase(),
                               onClick: () {
@@ -245,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 20, right: 20, top: 10, bottom: 10),
+                                    left: 20, right: 20, top: 10, bottom: 5),
                                 child: RichText(
                                     text: TextSpan(
                                         children: _buildLocalizedChangeMyMobile(

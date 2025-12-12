@@ -567,6 +567,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get payAtReception => '請在接待處付款';
+
+  @override
+  String get membership_unavailable_title => '会员资格\n不再\n提供';
+
+  @override
+  String get contact_to_venue_text => '请与您的场馆联系以进行沟通。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1132,4 +1138,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get payAtReception => '请在接待处付款';
+
+  @override
+  String get membership_unavailable_title => '会员资格\n不再\n提供';
+
+  @override
+  String get contact_to_venue_text => '请与您的场馆联系以进行沟通。';
 }

@@ -1213,6 +1213,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please pay at reception'**
   String get payAtReception;
+
+  /// No description provided for @membership_unavailable_title.
+  ///
+  /// In en, this message translates to:
+  /// **'MEMBERSHIP\nNO LONGER\nAVAILABLE'**
+  String get membership_unavailable_title;
+
+  /// No description provided for @contact_to_venue_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Please get in touch with your venue to discuss.'**
+  String get contact_to_venue_text;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

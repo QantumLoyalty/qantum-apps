@@ -73,4 +73,9 @@ class APIList {
   ///  VENKAT'S API ///
   static get SCAN_DRIVING_LICENSE_IMAGES =>
       "https://licensedataextractorapp.blackfield-3f4ad4c0.australiaeast.azurecontainerapps.io/licensedataextract";
+
+  /// TERMS AND CONDITIONS URL ///
+  static get TERMS_AND_CONDITIONS =>"https://terms-conditions.com.au/q_app/";
+
+
 }
