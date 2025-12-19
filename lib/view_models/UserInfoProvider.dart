@@ -878,4 +878,35 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     version = appInfo.version;
     notifyListeners();
   }
+
+  bool? _uploadedSelfie;
+
+  bool? get uploadedSelfie => _uploadedSelfie;
+
+  uploadUserSelfieImage(String imagePath) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        notifyListeners();
+      });
+      NetworkResponse networkResponse =
+          await UserService.getInstance().uploadSelfie(imagePath);
+      logEvent("uploadUserSelfieImage >> ${networkResponse.response}");
+
+      _uploadedSelfie = !networkResponse.isError;
+    } catch (e) {
+      logEvent("reSendOTPNewPhone error:: ${e.toString()}");
+      _networkMessage = e.toString();
+      _uploadedSelfie = false;
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+  resetUploadedSelfie() {
+    _uploadedSelfie = null;
+  }
 }

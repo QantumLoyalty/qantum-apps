@@ -14,8 +14,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   late Flavor flavor;
+
   @override
   void initState() {
     super.initState();
@@ -58,11 +58,9 @@ class _SplashScreenState extends State<SplashScreen> {
             if (await AppHelper.checkIfUserIsNew()) {
               /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
               /// CHECKING IF PURCHASED THE MEMBERSHIP
-              if (await AppHelper
-                  .checkIfUserHasPurchasedTheMembership()) {
+              if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
                 /// ALREADY PURCHASED THE MEMBERSHIP
-                AppNavigator.navigateAndClearStack(
-                    context, AppNavigator.home);
+                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
               } else {
                 ///  DID NOT PURCHASED THE MEMBERSHIP
                 AppNavigator.navigateAndClearStack(
@@ -70,17 +68,14 @@ class _SplashScreenState extends State<SplashScreen> {
               }
             } else {
               /// IF USER IS OLD
-              AppNavigator.navigateAndClearStack(
-                  context, AppNavigator.home);
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
             }
           } else {
             /// FOR OTHER APPS
             /// CHECKING IF PURCHASED THE MEMBERSHIP
-            if (await AppHelper
-                .checkIfUserHasPurchasedTheMembership()) {
+            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
               /// ALREADY PURCHASED THE MEMBERSHIP
-              AppNavigator.navigateAndClearStack(
-                  context, AppNavigator.home);
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
             } else {
               ///  DID NOT PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(
@@ -88,11 +83,8 @@ class _SplashScreenState extends State<SplashScreen> {
             }
           }
         } else {
-          AppNavigator.navigateAndClearStack(
-              context, AppNavigator.home);
+          AppNavigator.navigateAndClearStack(context, AppNavigator.home);
         }
-
-
       } else {
         AppNavigator.navigateAndClearStack(context, AppNavigator.login);
       }

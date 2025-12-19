@@ -573,4 +573,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contact_to_venue_text => 'Please get in touch with your venue to discuss.';
+
+  @override
+  String get pleaseTakeSelfie => 'Please take a selfie';
+
+  @override
+  String get faceInWhiteFrame => 'Make sure your face is in the white frame and is clearly visible';
+
+  @override
+  String get uploadingSelfie => 'Please wait, while we are uploading your picture';
 }

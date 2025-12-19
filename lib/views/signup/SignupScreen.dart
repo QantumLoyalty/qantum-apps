@@ -216,11 +216,21 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         keyboardType: TextInputType.text,
                         controller: _firstNameController,
                         inputFormatters: <TextInputFormatter>[
-                          UpperCaseTextFormatter()
+                          UpperCaseTextFormatter(),
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r"[A-Za-z\s'\-]")),
                         ],
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          /*if (value!.isEmpty) {
                             return loc.msgEmptyFirstName;
+                          }
+                          return null;*/
+                          if (value == null || value.isEmpty) {
+                            return loc.msgEmptyFirstName;
+                          }
+                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                          if (!validName.hasMatch(value)) {
+                            return "Please avoid special characters";
                           }
                           return null;
                         },
@@ -259,13 +269,23 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         keyboardType: TextInputType.text,
                         controller: _lastNameController,
                         validator: (value) {
-                          if (value!.isEmpty) {
+                          /*if (value!.isEmpty) {
                             return loc.msgEmptyLastName;
+                          }
+                          return null;*/
+                          if (value == null || value.isEmpty) {
+                            return loc.msgEmptyLastName;
+                          }
+                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                          if (!validName.hasMatch(value)) {
+                            return "Please avoid special characters";
                           }
                           return null;
                         },
                         inputFormatters: <TextInputFormatter>[
-                          UpperCaseTextFormatter()
+                          UpperCaseTextFormatter(),
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r"[A-Za-z\s'\-]")),
                         ],
                         style: TextStyle(
                             color:
@@ -887,6 +907,12 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                         .containsKey('license_back')) {
                                       params['licence_back'] =
                                           widget.argument['license_back'];
+                                    }
+
+                                    if (widget.argument
+                                        .containsKey('expiryDate')) {
+                                      params['expiryDate'] =
+                                          widget.argument['expiryDate'];
                                     }
 
                                     if (_address1Controller.text.isNotEmpty) {

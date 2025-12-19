@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppHelper.dart';
 import '/data/models/UserModel.dart';
@@ -395,6 +400,40 @@ class UserService with LoggingMixin implements UserRepository {
             'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
           });
       networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> uploadSelfie(String filePath) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+
+      UserModel? user = await sharedPreferenceHelper.getUserData();
+      final request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+              "${APIList.UPLOAD_PROFILE_PIC}/${user!.bluizeUniqueUserId}/profile-image?appType=${AppHelper.getAppType()}"));
+      request.headers['Content-Type'] = 'multipart/form-data';
+      request.files.add(await http.MultipartFile.fromPath('image', filePath,
+          contentType: MediaType('image', 'png')));
+      logEvent(
+          "HEADERS: ${request.headers} --> ${request.files.map((f) => f.filename).toList()}");
+
+      final streamedResponse = await request.send();
+      if (streamedResponse.statusCode == 200) {
+        final respStr = await streamedResponse.stream.bytesToString();
+
+        networkResponse = NetworkResponse.success(
+            response: jsonDecode(respStr), responseMessage: "Success");
+      } else {
+        networkResponse = NetworkResponse.error(
+            responseMessage: "Error: ${streamedResponse.statusCode}");
+      }
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

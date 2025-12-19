@@ -105,6 +105,8 @@ class DocumentScanProvider extends ChangeNotifier with LoggingMixin {
       if (!response.isError) {
         Map<String, dynamic> data = response.response as Map<String, dynamic>;
 
+
+
         if (data.containsKey("front")) {
           _frontImageUrl = data["front"];
         }

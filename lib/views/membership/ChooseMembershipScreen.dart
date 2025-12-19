@@ -93,6 +93,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                         child: provider.menuEntries != null
                             ? DropdownMenu<MembershipModel>(
+                                menuHeight: 250,
                                 width: double.infinity,
                                 controller: controller,
                                 hintText: loc.selectMembership,
@@ -103,8 +104,6 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                                   setState(() {
                                     controller.text =
                                         "${value.membershipName} - \$${value.calculatedPrice != null ? formatter.format(value.calculatedPrice) : 0.00}";
-
-
                                   });
                                 },
                                 inputDecorationTheme: InputDecorationTheme(
@@ -153,9 +152,14 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     text: loc.next.toUpperCase(),
                     onClick: () {
                       if (provider.selectedMembership != null) {
-                        AppNavigator.navigateAndClearStack(
+                        /*  AppNavigator.navigateAndClearStack(
                           context,
                           AppNavigator.choosePaymentMethod,
+                        );
+                      */
+                        AppNavigator.navigateAndClearStack(
+                          context,
+                          AppNavigator.selfieUploadScreen,
                         );
                       } else {
                         AppHelper.showErrorMessage(

@@ -1225,6 +1225,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please get in touch with your venue to discuss.'**
   String get contact_to_venue_text;
+
+  /// No description provided for @pleaseTakeSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Please take a selfie'**
+  String get pleaseTakeSelfie;
+
+  /// No description provided for @faceInWhiteFrame.
+  ///
+  /// In en, this message translates to:
+  /// **'Make sure your face is in the white frame and is clearly visible'**
+  String get faceInWhiteFrame;
+
+  /// No description provided for @uploadingSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait, while we are uploading your picture'**
+  String get uploadingSelfie;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

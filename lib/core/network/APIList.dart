@@ -62,6 +62,9 @@ class APIList {
 
   static get FETCH_MEMBERSHIP_PLAN => BASE_URL + "club-package/club?";
 
+  static get UPLOAD_PROFILE_PIC => BASE_URL + "user/";
+
+
 
  //https://betaapi.s2w.com.au/club-package/club?appType=Qantum&timezone=Asia/Kolkata
 

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import '../core/navigation/route_observer.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -19,14 +21,14 @@ import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
       flavor: Flavor.mhbc,
       flavorValues: FlavorValues(
           appName: "Manly Harbour Boat Club", appVersion: "0.0.1"));
-  WidgetsFlutterBinding.ensureInitialized();
 
+  await dotenv.load(fileName: '.env.mhbc');
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
@@ -39,9 +41,11 @@ void main() async {
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
-     // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+      // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
-    Stripe.publishableKey = "pk_test_51S2fSX1zasRgJWaHc8UoT3ayEB2U53BX6fWezGboZ8rdKamJi6YwHmFXt21fsI5z05WE24WXaoNP7zgq9XErhPl300o8fHzM7I";
+
+    // Stripe.publishableKey = "pk_test_51S2fSX1zasRgJWaHc8UoT3ayEB2U53BX6fWezGboZ8rdKamJi6YwHmFXt21fsI5z05WE24WXaoNP7zgq9XErhPl300o8fHzM7I";
+    Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
     Stripe.instance.applySettings();
   });
 }
@@ -71,12 +75,14 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
-        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(
+            create: (context) => MembershipManagerProvider()),
       ],
       child: Portal(
         child: MaterialApp(
           onGenerateRoute: AppNavigator.generateRoute,
           debugShowCheckedModeBanner: false,
+          navigatorObservers: [routeObserver],
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

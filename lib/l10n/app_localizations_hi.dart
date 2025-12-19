@@ -573,4 +573,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get contact_to_venue_text => 'कृपया चर्चा के लिए अपने स्थल से संपर्क करें।';
+
+  @override
+  String get pleaseTakeSelfie => 'कृपया एक सेल्फी लें';
+
+  @override
+  String get faceInWhiteFrame => 'सुनिश्चित करें कि आपका चेहरा सफेद फ्रेम के अंदर हो और स्पष्ट रूप से दिखाई दे';
+
+  @override
+  String get uploadingSelfie => 'कृपया प्रतीक्षा करें, हम आपकी तस्वीर अपलोड कर रहे हैं';
 }

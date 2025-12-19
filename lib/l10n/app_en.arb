@@ -191,5 +191,8 @@
   "receptionPaymentMessage": "Your details have been sent to reception. Please see one of our friendly staff members to complete payment.\n\nYou can pay via cash or card.",
   "payAtReception": "Please pay at reception",
   "membership_unavailable_title": "MEMBERSHIP\nNO LONGER\nAVAILABLE",
-   "contact_to_venue_text": "Please get in touch with your venue to discuss."
+  "contact_to_venue_text": "Please get in touch with your venue to discuss.",
+  "pleaseTakeSelfie": "Please take a selfie",
+  "faceInWhiteFrame": "Make sure your face is in the white frame and is clearly visible",
+  "uploadingSelfie": "Please wait, while we are uploading your picture"
 }

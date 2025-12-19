@@ -26,7 +26,7 @@ class RecoverAccountVerificationScreen extends StatefulWidget {
 class _RecoverAccountVerificationScreenState
     extends State<RecoverAccountVerificationScreen> {
   late TextEditingController _otpController;
-  int remainingSec = 30;
+  int remainingSec = 60;
   bool enableResend = false;
   Timer? timer;
   late UserInfoProvider _userInfoProvider;
@@ -275,7 +275,7 @@ class _RecoverAccountVerificationScreenState
         _userInfoProvider.reSendOTPNewPhone(widget.params['newPhone'],loc: loc);
       }
       setState(() {
-        remainingSec = 30;
+        remainingSec = 60;
         enableResend = false;
       });
     }

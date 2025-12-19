@@ -10,6 +10,7 @@ import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
 import '../views/splash/SplashScreen.dart';
+import 'core/navigation/route_observer.dart';
 import 'view_models/HomeProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
@@ -73,6 +74,7 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           onGenerateRoute: AppNavigator.generateRoute,
           debugShowCheckedModeBanner: false,
+          navigatorObservers: [routeObserver],
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

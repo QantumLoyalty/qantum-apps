@@ -90,12 +90,11 @@ class UserModel {
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
     if (json.containsKey("StatusTier") && json["StatusTier"] != null) {
-   //   statusTier = "Member Cancelled";
       statusTier = json["StatusTier"];
     } else {
       statusTier = "";
     }
-
+    // statusTier = AppStrings.textMemberCancelled;
     requiredStatusPointsForNextTier =
         json.containsKey("RequiredStatusPointsForNextTier")
             ? json["RequiredStatusPointsForNextTier"]
@@ -232,7 +231,8 @@ class UserModel {
 
   bool isUserStatusCancelled() {
     if (statusTier != null &&
-        statusTier!.toString().toLowerCase().trim() == AppStrings.textMemberCancelled) {
+        statusTier!.toString().toLowerCase().trim() ==
+            AppStrings.textMemberCancelled) {
       return true;
     }
     return false;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../views/signup/SelfieUploadScreen.dart';
 import '/views/signup/DrivingLicenseScanScreen.dart';
 import '../../views/login/WelcomeScreen.dart';
 import '../../views/membership/ChooseMembershipScreen.dart';
@@ -62,6 +63,7 @@ class AppNavigator {
   static const String pendingPaymentScreen = "/pendingPaymentScreen";
   static const String choosePaymentMethod = "/choosePaymentMethod";
   static const String receptionPaymentScreen = "/receptionPaymentScreen";
+  static const String selfieUploadScreen = "/selfieUploadScreen";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -148,6 +150,8 @@ class AppNavigator {
         return MaterialPageRoute(builder: (_) => const UserDetailScreen());
       case clubAndMembership:
         return MaterialPageRoute(builder: (_) => ClubAndMembership());
+        case selfieUploadScreen:
+        return MaterialPageRoute(builder: (_) => const SelfieUploadScreen());
       case communicationPreference:
         return MaterialPageRoute(
             builder: (_) => const CommunicationPreference());

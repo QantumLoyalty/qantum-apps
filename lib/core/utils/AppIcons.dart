@@ -23,6 +23,7 @@ class AppIcons {
   static String lightBulb = "assets/common/lightbulb.png";
   static String cardMembershipCancelled =
       "assets/common/card_membership_cancelled.png";
+  static String cardTest = "assets/common/card_test.png";
 
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
@@ -38,6 +39,8 @@ class AppIcons {
     if (membershipType!.toLowerCase() ==
         AppStrings.textMemberCancelled.toLowerCase()) {
       return cardMembershipCancelled;
+    } else if (membershipType!.toLowerCase() == "test") {
+      return cardTest;
     } else {
       membershipType = membershipType!.toLowerCase().replaceAll(" ", "");
       Flavor selectedFlavor = FlavorConfig.instance.flavor!;

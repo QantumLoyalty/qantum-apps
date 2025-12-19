@@ -143,6 +143,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                 (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
+
                               if (userInfoProvider.getUserInfo != null &&
                                   !userInfoProvider.getUserInfo!
                                       .isUserStatusCancelled()) {

@@ -573,6 +573,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get contact_to_venue_text => '请与您的场馆联系以进行沟通。';
+
+  @override
+  String get pleaseTakeSelfie => '請拍攝一張自拍照';
+
+  @override
+  String get faceInWhiteFrame => '請確保您的臉部位於白色框內且清晰可見';
+
+  @override
+  String get uploadingSelfie => '請稍候，我們正在上傳您的照片';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1144,4 +1153,13 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get contact_to_venue_text => '请与您的场馆联系以进行沟通。';
+
+  @override
+  String get pleaseTakeSelfie => '請拍攝一張自拍照';
+
+  @override
+  String get faceInWhiteFrame => '請確保您的臉部位於白色框內且清晰可見';
+
+  @override
+  String get uploadingSelfie => '請稍候，我們正在上傳您的照片';
 }

@@ -192,5 +192,8 @@
   "receptionPaymentMessage": "您的資料已傳送至接待處。請聯繫我們友善的員工以完成付款。\n\n您可以使用現金或信用卡付款。",
   "payAtReception": "請在接待處付款",
   "membership_unavailable_title": "会员资格\n不再\n提供",
-  "contact_to_venue_text": "请与您的场馆联系以进行沟通。"
+  "contact_to_venue_text": "请与您的场馆联系以进行沟通。",
+  "pleaseTakeSelfie": "請拍攝一張自拍照",
+  "faceInWhiteFrame": "請確保您的臉部位於白色框內且清晰可見",
+  "uploadingSelfie": "請稍候，我們正在上傳您的照片"
 }

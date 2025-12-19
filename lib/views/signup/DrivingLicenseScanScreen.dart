@@ -124,6 +124,11 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                       provider.scannedData!["address"];
                 }
 
+                if (provider.scannedData!.containsKey('expiry_date')) {
+                  widget.arguments["expiryDate"] =
+                      provider.scannedData!["expiry_date"];
+                }
+
                 provider.uploadDrivingLicenseImages(_frontImage!, _backImage!);
               });
             });

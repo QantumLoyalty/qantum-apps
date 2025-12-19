@@ -165,7 +165,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                 provider.cancelAccount();
                               }
                             },
-                            text: loc.txtDeleteMyAccount.toUpperCase(),
+                            text: loc.txtCancelAccount.toUpperCase(),
                             textColor:
                                 AppThemeCustom.getAccountSectionDeleteTextStyle(
                                     context),
