@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../core/utils/AppColors.dart';
 import '/view_models/UserInfoProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '/core/utils/AppHelper.dart';
@@ -85,7 +86,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                       ),
                       AppDimens.shape_20,
-                      Theme(
+                      /* Theme(
                         data: Theme.of(context).copyWith(
                           colorScheme: Theme.of(context).colorScheme.copyWith(
                                 onSurfaceVariant: Colors.white,
@@ -144,7 +145,66 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                                 ),
                               )
                             : Container(),
-                      )
+                      )*/
+
+                      provider.membershipList.isNotEmpty
+                          ? Column(
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, position) {
+                                    MembershipModel membership =
+                                        provider.membershipList[position];
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 15),
+                                      child: ListTile(
+                                        onTap: () {
+                                          provider
+                                              .updateDropdownValue(membership);
+                                        },
+                                        tileColor:
+                                            provider.selectedMembership !=
+                                                        null &&
+                                                    provider.selectedMembership!
+                                                            .id ==
+                                                        membership.id
+                                                ? AppColors.white.withAlpha(50)
+                                                : Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: AppColors.white,
+                                                width: 1),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10))),
+                                        title: Text(
+                                          "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: provider.membershipList.length >= 2
+                                      ? 2
+                                      : provider.membershipList.length,
+                                ),
+                                AppDimens.shape_30,
+                                Text(
+                                  loc.msgForOtherMembershipSeeReception,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColors.white, fontSize: 17),
+                                ),
+                                AppDimens.shape_30,
+                              ],
+                            )
+                          : Container(),
                     ],
                   ))),
                   AppDimens.shape_20,

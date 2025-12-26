@@ -909,4 +909,50 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   resetUploadedSelfie() {
     _uploadedSelfie = null;
   }
+
+  bool? _showLogoutLoader;
+
+  bool? get showLogoutLoader => _showLogoutLoader;
+  bool? _logoutSuccess;
+
+  bool? get logoutSuccess => _logoutSuccess;
+
+  logoutUser() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLogoutLoader = true;
+        notifyListeners();
+      });
+      NetworkResponse networkResponse =
+          await UserService.getInstance().logout();
+      logEvent("logoutUser >> ${networkResponse.response}");
+
+      if (networkResponse.response != null) {
+        if (networkResponse.response is Map<String, dynamic> &&
+            (networkResponse.response as Map<String, dynamic>)
+                .containsKey("user")) {
+          _logoutSuccess = true;
+        } else {
+          _logoutSuccess = false;
+        }
+      }
+
+      //_uploadedSelfie = !networkResponse.isError;
+    } catch (e) {
+      logEvent("logoutUser error:: ${e.toString()}");
+      _networkMessage = e.toString();
+      // _uploadedSelfie = false;
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLogoutLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+  resetLogoutStatus() {
+    _showLogoutLoader = null;
+    _logoutSuccess = null;
+    notifyListeners();
+  }
 }

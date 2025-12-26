@@ -78,7 +78,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         } else {
                           ///  DID NOT PURCHASED THE MEMBERSHIP
                           AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.pendingPaymentScreen);
+                              context, AppNavigator.chooseMembershipScreen);
                         }
                       } else {
                         /// IF USER IS OLD

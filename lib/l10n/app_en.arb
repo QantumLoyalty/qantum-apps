@@ -140,7 +140,7 @@
   "txtYes": "Yes",
   "txtNo": "No",
   "msgLogout": "Are you sure you want to log out of the application?",
-  "msgCancelAccount": "Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.",
+  "msgCancelAccount": "Are you sure you want to delete your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.",
   "txtPlayerActivityStatementFor": "Player Activity Statement for",
   "txtDetails": "Details",
   "txtTotalAmountBet": "Total Amount Bet",
@@ -181,7 +181,7 @@
   "verifyingPayment": "Please wait, while we are verifying your payment",
   "name": "Name",
   "cardNumber": "Card Number",
-  "activateMessage": "Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.",
+  "activateMessage": "PLEASE PAY AT RECEPTION\n\nor\n\nSkip the queue and pay by card now",
   "payNow": "Pay Now",
   "waitingPayment": "Waiting for payment",
   "payReception": "PAY AT RECEPTION",
@@ -194,5 +194,7 @@
   "contact_to_venue_text": "Please get in touch with your venue to discuss.",
   "pleaseTakeSelfie": "Please take a selfie",
   "faceInWhiteFrame": "Make sure your face is in the white frame and is clearly visible",
-  "uploadingSelfie": "Please wait, while we are uploading your picture"
+  "uploadingSelfie": "Please wait, while we are uploading your picture",
+  "logoutMessage": "Just a moment, we’re logging you out.",
+  "msgForOtherMembershipSeeReception": "For all other memberships\n\nPlease see reception."
 }

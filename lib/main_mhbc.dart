@@ -75,8 +75,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
-        ChangeNotifierProvider(
-            create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
       ],
       child: Portal(
         child: MaterialApp(

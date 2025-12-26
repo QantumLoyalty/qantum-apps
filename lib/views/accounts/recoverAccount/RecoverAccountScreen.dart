@@ -24,11 +24,11 @@ class RecoverAccountScreen extends StatefulWidget {
 class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
   final TextEditingController _phoneController = TextEditingController();
   String countryCode = "+61";
-late AppLocalizations loc;
+  late AppLocalizations loc;
+
   @override
   Widget build(BuildContext context) {
-
-    loc=AppLocalizations.of(context)!;
+    loc = AppLocalizations.of(context)!;
 
     return AppScaffold(
       // backgroundColor: Theme.of(context).primaryColorDark,
@@ -40,7 +40,8 @@ late AppLocalizations loc;
               Future.delayed(Duration.zero, () {
                 Map<String, dynamic> params = {};
                 params['id'] = provider.tempUser!.id!;
-                params['bluizeUniqueUserId'] = provider.tempUser!.bluizeUniqueUserId!;
+                params['bluizeUniqueUserId'] =
+                    provider.tempUser!.bluizeUniqueUserId!;
                 params['email'] = provider.tempUser!.email!;
                 params['phone'] = provider.tempUser!.mobile!;
                 params['verifyOTPEmail'] = true;
@@ -52,9 +53,7 @@ late AppLocalizations loc;
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -69,6 +68,18 @@ late AppLocalizations loc;
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.chevron_left,
+                            size: 28,
+                            //  color: AppThemeCustom.getAccountHeaderColor(context),
+                          )),
+                    ),
                     Applogo(
                       hideTopLine: true,
                     ),
@@ -126,11 +137,11 @@ late AppLocalizations loc;
                               color: AppColors.black,
                             ),
                             textStyle: TextStyle(
-                                color: AppThemeCustom.getTextFieldTextColor(context)),
+                                color: AppThemeCustom.getTextFieldTextColor(
+                                    context)),
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;
-
                               });
                             },
                             initialSelection: "AU",
@@ -180,7 +191,8 @@ late AppLocalizations loc;
                         text: loc.txtSendVerificationCode.toUpperCase(),
                         onClick: () {
                           if (_phoneController.text.isNotEmpty) {
-                            provider.sendOTPEmail(_phoneController.text,loc: loc);
+                            provider.sendOTPEmail(_phoneController.text,
+                                loc: loc);
                           } else {
                             AppHelper.showErrorMessage(
                                 context, loc.msgIncorrectPhoneNumber);
@@ -191,7 +203,8 @@ late AppLocalizations loc;
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
+                      loaderMessage:
+                          provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],

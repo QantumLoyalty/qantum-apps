@@ -182,7 +182,7 @@
   "verifyingPayment": "請稍候，我們正在驗證您的付款",
   "name": "姓名",
   "cardNumber": "卡號",
-  "activateMessage": "選擇「立即付款」以啟動您的會員資格，立即開始累積積分與享受會員優惠。",
+  "activateMessage": "請至櫃檯付款\n\n或\n\n現在使用信用卡付款，免排隊",
   "payNow": "立即付款",
   "waitingPayment": "等待付款中",
   "payReception": "於櫃台付款",
@@ -195,5 +195,7 @@
   "contact_to_venue_text": "请与您的场馆联系以进行沟通。",
   "pleaseTakeSelfie": "請拍攝一張自拍照",
   "faceInWhiteFrame": "請確保您的臉部位於白色框內且清晰可見",
-  "uploadingSelfie": "請稍候，我們正在上傳您的照片"
+  "uploadingSelfie": "請稍候，我們正在上傳您的照片",
+  "logoutMessage": "請稍候，我們正在為您登出。",
+  "msgForOtherMembershipSeeReception": "如需其他會員方案\n\n請洽接待處。"
 }

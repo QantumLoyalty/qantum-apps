@@ -67,7 +67,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                         child: Column(
                           children: [
                             SizedBox(
-                                height: 220,
+                                height: 180,
+                                //height: 220,
                                 width: MediaQuery.of(context).size.width,
                                 child: provider.promotions!.largePromotions !=
                                             null &&
@@ -106,7 +107,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     .large);
                                                       },
                                                       child: SizedBox(
-                                                        height: 220,
+                                                        //height: 220,
+                                                        height: 160,
                                                         width: MediaQuery.of(
                                                                 context)
                                                             .size

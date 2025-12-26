@@ -2,6 +2,7 @@ enum Flavor {
   starReward,
   senseOfTaste,
   qantum,
+  qantumClub,
   maxx,
   mhbc,
   clh,

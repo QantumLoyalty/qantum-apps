@@ -55,6 +55,11 @@ android {
             applicationId "com.au.quantum.app"
             versionName "Qantum"
         }
+        qantumClub {
+            dimension "app"
+            applicationId "com.au.quantumclub.app"
+            versionName "Qantum"
+        }
         mhbc {
             dimension "app"
             applicationId "com.au.mhbc.app"

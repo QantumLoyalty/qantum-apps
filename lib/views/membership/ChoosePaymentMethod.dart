@@ -69,7 +69,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
             if (membershipProvider.isPaymentMethodUpdated!) {
               logEvent("navigateAndClearStack called!!!");
               AppNavigator.navigateTo(
-                  context, AppNavigator.receptionPaymentScreen);
+                  context, AppNavigator.pendingPaymentScreen);
 
               membershipProvider.resetUpdateMembershipPaymentResponse();
             } else {

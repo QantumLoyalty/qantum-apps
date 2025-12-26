@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../../core/utils/UpperCaseTextFormatter.dart';
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/mixins/dob_mixin.dart';
@@ -86,9 +87,21 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
               maxLines: 1,
               keyboardType: TextInputType.text,
               controller: _fullNameFieldController,
+              inputFormatters: <TextInputFormatter>[
+                UpperCaseTextFormatter(),
+                FilteringTextInputFormatter.allow(RegExp(r"[A-Za-z\s'\-]")),
+              ],
               validator: (value) {
-                if (value!.isEmpty) {
+                /*if (value!.isEmpty) {
                   return loc.msgEmptyFirstName;
+                }
+                return null;*/
+                if (value == null || value.isEmpty) {
+                  return loc.msgEmptyFirstName;
+                }
+                final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                if (!validName.hasMatch(value)) {
+                  return "Please avoid special characters";
                 }
                 return null;
               },

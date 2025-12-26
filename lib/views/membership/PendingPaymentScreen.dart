@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import '../../core/utils/AppHelper.dart';
+import '../../services/PaymentService.dart';
 import '/core/navigation/AppNavigator.dart';
 import '/views/common_widgets/AppButton.dart';
 import '/view_models/UserInfoProvider.dart';
@@ -22,13 +24,17 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     with LoggingMixin {
   AppLocalizations? loc;
   late UserInfoProvider userInfoProvider;
+  late MembershipManagerProvider membershipManagerProvider;
 
   @override
   void initState() {
     super.initState();
     userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
+    membershipManagerProvider =
+        Provider.of<MembershipManagerProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       userInfoProvider.runFetchProfileTimer();
+      membershipManagerProvider.checkSelectedMembershipInLocal();
     });
   }
 
@@ -45,8 +51,21 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
               provider.markNavigated();
             }
           });
+        }
 
-
+        if (membershipManagerProvider.isPaymentVerified != null) {
+          logEvent(
+              "isPaymentVerified: ${membershipManagerProvider.isPaymentVerified}");
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (membershipManagerProvider.isPaymentVerified!) {
+              logEvent("navigateAndClearStack called!!!");
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+              membershipManagerProvider.resetVerifyPaymentResponse();
+            } else {
+              AppHelper.showErrorMessage(context, loc!.msgCommonError);
+              membershipManagerProvider.resetVerifyPaymentResponse();
+            }
+          });
         }
 
         return Stack(
@@ -162,9 +181,16 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                       AppDimens.shape_30,
                       AppButton(
                           text: loc!.payNow.toUpperCase(),
-                          onClick: () {
-                            AppNavigator.navigateTo(
+                          onClick: () async {
+                            /*   AppNavigator.navigateTo(
                                 context, AppNavigator.chooseMembershipScreen);
+                         */
+                            await PaymentService.makePayment(
+                                context: context,
+                                loc: loc!,
+                                membershipManagerProvider:
+                                    membershipManagerProvider,
+                                userInfoProvider: userInfoProvider);
                           })
                     ],
                   ))),

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
+import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppColors.dart';
 import '/views/common_widgets/UserStatusTier.dart';
 import '/l10n/app_localizations.dart';
@@ -64,11 +65,11 @@ class MyProfileDialog with LoggingMixin {
                         height: MediaQuery.of(context).size.height *
                                 dialogHeightFactor -
                             dialogHeightBottomMargin,
-                        child: Stack(
-                          children: [
-                            Consumer<UserInfoProvider>(
-                                builder: (context, provider, child) {
-                              return Column(
+                        child: Consumer<UserInfoProvider>(
+                            builder: (context, provider, child) {
+                          return Stack(
+                            children: [
+                              Column(
                                 children: [
                                   Expanded(
                                     child: SingleChildScrollView(
@@ -286,7 +287,7 @@ class MyProfileDialog with LoggingMixin {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  loc.txtCancelAccount
+                                                  loc.txtDeleteMyAccount
                                                       .toUpperCase(),
                                                   style: TextStyle(
                                                       fontSize: 10,
@@ -315,104 +316,149 @@ class MyProfileDialog with LoggingMixin {
                                           ),
                                         );
                                       }),
-                                      InkWell(
-                                        onTap: () async {
-                                          final confirmedLogout =
-                                              await showDialog<bool>(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text(loc.txtAlert),
-                                                      content:
-                                                          Text(loc.msgLogout),
-                                                      actions: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(false);
-                                                            },
-                                                            child: Text(
-                                                              loc.txtNo,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .grey),
-                                                            )),
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(true);
-                                                            },
-                                                            child: Text(
-                                                              loc.txtYes,
-                                                              style: TextStyle(
-                                                                  color: AppThemeCustom
-                                                                      .getAlertDialogTextButtonColor(
-                                                                          context)),
-                                                            )),
-                                                      ],
-                                                    );
-                                                  });
+                                      Consumer<UserInfoProvider>(
+                                          builder: (context, provider, child) {
+                                        if (provider.logoutSuccess != null) {
+                                          if (provider.logoutSuccess!) {
+                                            WidgetsBinding.instance
+                                                .addPostFrameCallback(
+                                                    (_) async {
+                                              try {
+                                                /// CLEARING ALL PREFERENCE
+                                                SharedPreferenceHelper
+                                                    sharedPreferenceHelper =
+                                                    await SharedPreferenceHelper
+                                                        .getInstance();
+                                                await sharedPreferenceHelper
+                                                    .clearAll();
 
-                                          if (confirmedLogout != true) {
-                                            return;
+                                                /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
+
+                                                await closingAllRepeatedTasksInProviders(
+                                                    context);
+
+                                                /// REMOVING PROFILE DIALOG
+                                                Navigator.pop(context);
+
+                                                /// NAVIGATING TO LOGIN SCREEN
+                                                AppNavigator
+                                                    .navigateReplacement(
+                                                        context,
+                                                        AppNavigator.login);
+                                                provider.resetLogoutStatus();
+                                              } catch (e) {}
+                                            });
                                           }
+                                        }
 
-                                          try {
-                                            /// CLEARING ALL PREFERENCE
-                                            SharedPreferenceHelper
-                                                sharedPreferenceHelper =
-                                                await SharedPreferenceHelper
-                                                    .getInstance();
-                                            await sharedPreferenceHelper
-                                                .clearAll();
+                                        return InkWell(
+                                          onTap: () async {
+                                            final confirmedLogout =
+                                                await showDialog<bool>(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title:
+                                                            Text(loc.txtAlert),
+                                                        content:
+                                                            Text(loc.msgLogout),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(false);
+                                                              },
+                                                              child: Text(
+                                                                loc.txtNo,
+                                                                style: const TextStyle(
+                                                                    color: Colors
+                                                                        .grey),
+                                                              )),
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(true);
+                                                              },
+                                                              child: Text(
+                                                                loc.txtYes,
+                                                                style: TextStyle(
+                                                                    color: AppThemeCustom
+                                                                        .getAlertDialogTextButtonColor(
+                                                                            context)),
+                                                              )),
+                                                        ],
+                                                      );
+                                                    });
 
-                                            /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
+                                            if (confirmedLogout != true) {
+                                              return;
+                                            } else {
+                                              provider.logoutUser();
+                                            }
 
-                                            await closingAllRepeatedTasksInProviders(
-                                                context);
+                                            /*try {
+                                                  /// CLEARING ALL PREFERENCE
+                                                  SharedPreferenceHelper
+                                                      sharedPreferenceHelper =
+                                                      await SharedPreferenceHelper
+                                                          .getInstance();
+                                                  await sharedPreferenceHelper
+                                                      .clearAll();
 
-                                            /// REMOVING PROFILE DIALOG
-                                            Navigator.pop(context);
+                                                  /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
 
-                                            /// NAVIGATING TO LOGIN SCREEN
-                                            AppNavigator.navigateReplacement(
-                                                context, AppNavigator.login);
-                                          } catch (e) {}
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5),
-                                          child: Text(
-                                            loc.txtLogout.toUpperCase(),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w300,
-                                                color: AppThemeCustom
-                                                    .getProfileDialogTextColor(
-                                                        context)),
+                                                  await closingAllRepeatedTasksInProviders(
+                                                      context);
+
+                                                  /// REMOVING PROFILE DIALOG
+                                                  Navigator.pop(context);
+
+                                                  /// NAVIGATING TO LOGIN SCREEN
+                                                  AppNavigator.navigateReplacement(
+                                                      context, AppNavigator.login);
+                                                } catch (e) {}*/
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Text(
+                                              loc.txtLogout.toUpperCase(),
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: AppThemeCustom
+                                                      .getProfileDialogTextColor(
+                                                          context)),
+                                            ),
                                           ),
-                                        ),
-                                      ),
+                                        );
+                                      }),
                                     ],
                                   ),
                                 ],
-                              );
-                            }),
-                            (flavor == Flavor.aceRewards)
-                                ? Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: IgnorePointer(
-                                      child: Opacity(
-                                          opacity: 0.4,
-                                          child: Image.asset(
-                                              "assets/aceRewards/scaffold_background.png")),
-                                    ))
-                                : Container()
-                          ],
-                        ),
+                              ),
+                              provider.showLogoutLoader != null &&
+                                      provider.showLogoutLoader!
+                                  ? AppLoader(
+                                      loaderMessage: loc.logoutMessage,
+                                    )
+                                  : Container(),
+                              (flavor == Flavor.aceRewards)
+                                  ? Positioned(
+                                      bottom: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: IgnorePointer(
+                                        child: Opacity(
+                                            opacity: 0.4,
+                                            child: Image.asset(
+                                                "assets/aceRewards/scaffold_background.png")),
+                                      ))
+                                  : Container()
+                            ],
+                          );
+                        }),
                       ),
                       Positioned(
                           left: 0,

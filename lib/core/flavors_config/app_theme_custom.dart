@@ -9,7 +9,7 @@ class AppThemeCustom {
   static ButtonStyle getMoreInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return TextButton.styleFrom(
             minimumSize: const Size(85, 30),
             padding: EdgeInsets.zero,
@@ -54,7 +54,7 @@ class AppThemeCustom {
   static Color getMoreInfoTextStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return AppColors.white;
       case Flavor.maxx:
         return AppColors.max_button_color;
@@ -292,7 +292,7 @@ class AppThemeCustom {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -370,7 +370,7 @@ class AppThemeCustom {
   static Color getTextFieldBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.queens:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
       default:
         return Theme.of(context).cardColor;
@@ -380,7 +380,7 @@ class AppThemeCustom {
   static Color getTextFieldTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.queens:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       default:
         return AppColors.black;
@@ -390,7 +390,7 @@ class AppThemeCustom {
   static ButtonStyle getUpdateInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -514,7 +514,7 @@ class AppThemeCustom {
   static Color getUpdateInfoTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
@@ -576,7 +576,7 @@ class AppThemeCustom {
   static ButtonStyle getCancelInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(

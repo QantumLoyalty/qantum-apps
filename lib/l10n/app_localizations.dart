@@ -917,7 +917,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgCancelAccount.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
+  /// **'Are you sure you want to delete your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
   String get msgCancelAccount;
 
   /// No description provided for @txtPlayerActivityStatementFor.
@@ -1163,7 +1163,7 @@ abstract class AppLocalizations {
   /// No description provided for @activateMessage.
   ///
   /// In en, this message translates to:
-  /// **'Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.'**
+  /// **'PLEASE PAY AT RECEPTION\n\nor\n\nSkip the queue and pay by card now'**
   String get activateMessage;
 
   /// No description provided for @payNow.
@@ -1243,6 +1243,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please wait, while we are uploading your picture'**
   String get uploadingSelfie;
+
+  /// No description provided for @logoutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Just a moment, we’re logging you out.'**
+  String get logoutMessage;
+
+  /// No description provided for @msgForOtherMembershipSeeReception.
+  ///
+  /// In en, this message translates to:
+  /// **'For all other memberships\n\nPlease see reception.'**
+  String get msgForOtherMembershipSeeReception;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

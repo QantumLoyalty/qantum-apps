@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
+import '../data/local/SharedPreferenceHelper.dart';
 import '/core/utils/AppHelper.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/data/models/NetworkResponse.dart';
@@ -51,11 +52,15 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
 
   bool? get isPaymentMethodUpdated => _isPaymentMethodUpdated;
 
-
-
-
-  updateDropdownValue(MembershipModel value) {
+  updateDropdownValue(MembershipModel value) async {
     _selectedMembership = value;
+
+    /// STORING SELECTED MEMBERSHIP IN SHARED PREFERENCES
+    SharedPreferenceHelper sharedPreferenceHelper =
+        await SharedPreferenceHelper.getInstance();
+
+    await sharedPreferenceHelper.saveSelectedMembership(value);
+
     notifyListeners();
   }
 
@@ -84,6 +89,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
 
             logEvent("MEMBERSHIP LIST SIZE ${_membershipList.length}");
             if (_membershipList.isNotEmpty) {
+              updateDropdownValue(_membershipList[0]);
               createMembershipMenuEntries();
             }
           }
@@ -103,7 +109,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         .map((membership) => DropdownMenuEntry<MembershipModel>(
               value: membership,
               label:
-              "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
+                  "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
               labelWidget: Container(
                 margin: const EdgeInsets.only(top: 2),
                 decoration: BoxDecoration(
@@ -179,6 +185,22 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  checkSelectedMembershipInLocal() async {
+    if (_selectedMembership == null) {
+      /// STORING SELECTED MEMBERSHIP IN SHARED PREFERENCES
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      final hasMembershipData =
+          sharedPreferenceHelper.getSelectedMembership() != null;
+
+      if (hasMembershipData) {
+        _selectedMembership = sharedPreferenceHelper.getSelectedMembership();
+      }
+
+      notifyListeners();
+    }
+  }
+
   updateMembershipPaymentMethod({required AppLocalizations loc}) async {
     try {
       _showLoader = true;
@@ -195,16 +217,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
 
       logEvent(
           "Payment Intent Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
-      _isPaymentMethodUpdated=!networkResponse.isError;
-
-
-      /*_errorInResponse = networkResponse.isError;
-      if (!_errorInResponse!) {
-        _paymentIntentClientSecret =
-            (networkResponse.response as Map<String, dynamic>)["clientSecret"];
-        _paymentIntentId = (networkResponse.response
-            as Map<String, dynamic>)["paymentIntentId"];
-      }*/
+      _isPaymentMethodUpdated = !networkResponse.isError;
     } catch (e) {
       _errorInResponse = true;
       _networkResponseMessage = e.toString();

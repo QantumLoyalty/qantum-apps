@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
 import '../../../l10n/app_localizations.dart';
@@ -26,7 +27,7 @@ class RecoverAccountVerificationScreen extends StatefulWidget {
 class _RecoverAccountVerificationScreenState
     extends State<RecoverAccountVerificationScreen> {
   late TextEditingController _otpController;
-  int remainingSec = 60;
+  int remainingSec = 120;
   bool enableResend = false;
   Timer? timer;
   late UserInfoProvider _userInfoProvider;
@@ -71,9 +72,7 @@ class _RecoverAccountVerificationScreenState
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -90,9 +89,7 @@ class _RecoverAccountVerificationScreenState
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -115,10 +112,8 @@ class _RecoverAccountVerificationScreenState
               });
             } else {
               Future.delayed(Duration.zero, () {
-                AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgIssueInVerifyAccount);
+                AppHelper.showErrorMessage(context,
+                    provider.networkMessage ?? loc.msgIssueInVerifyAccount);
                 provider.resetNetworkResponse();
               });
             }
@@ -133,6 +128,18 @@ class _RecoverAccountVerificationScreenState
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(
+                            Icons.chevron_left,
+                            size: 28,
+                            //  color: AppThemeCustom.getAccountHeaderColor(context),
+                          )),
+                    ),
                     Applogo(
                       hideTopLine: true,
                     ),
@@ -189,7 +196,7 @@ class _RecoverAccountVerificationScreenState
                       decoration: InputDecoration(
                         counter: AppDimens.shape_5,
                         fillColor:
-                        AppThemeCustom.getTextFieldBackground(context),
+                            AppThemeCustom.getTextFieldBackground(context),
                         filled: true,
                         hintStyle:
                             TextStyle(color: Theme.of(context).hintColor),
@@ -212,10 +219,13 @@ class _RecoverAccountVerificationScreenState
                             borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
-                    AppDimens.shape_5,
+                    AppDimens.shape_15,
                     Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1))),
                           onPressed: () {
                             _resetResendCode();
                           },
@@ -233,7 +243,7 @@ class _RecoverAccountVerificationScreenState
                             ),
                           )),
                     ),
-                    AppDimens.shape_5,
+                    AppDimens.shape_15,
                     AppButton(
                         text: loc.txtSubmit.toUpperCase(),
                         onClick: () {
@@ -241,11 +251,13 @@ class _RecoverAccountVerificationScreenState
                             if (verifyOTPEmail) {
                               provider.verifyEmailOTPAccount(
                                   phone: widget.params['phone'],
-                                  OTP: _otpController.text,loc: loc);
+                                  OTP: _otpController.text,
+                                  loc: loc);
                             } else {
                               provider.verifyNewPhoneOTP(
                                   OTP: _otpController.text,
-                                  params: widget.params,loc: loc);
+                                  params: widget.params,
+                                  loc: loc);
                             }
                           } else {
                             AppHelper.showErrorMessage(
@@ -257,7 +269,8 @@ class _RecoverAccountVerificationScreenState
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
+                      loaderMessage:
+                          provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],
@@ -270,12 +283,13 @@ class _RecoverAccountVerificationScreenState
   void _resetResendCode() {
     if (remainingSec == 0) {
       if (verifyOTPEmail) {
-        _userInfoProvider.reSendOTPEmail(widget.params['phone'],loc: loc);
+        _userInfoProvider.reSendOTPEmail(widget.params['phone'], loc: loc);
       } else {
-        _userInfoProvider.reSendOTPNewPhone(widget.params['newPhone'],loc: loc);
+        _userInfoProvider.reSendOTPNewPhone(widget.params['newPhone'],
+            loc: loc);
       }
       setState(() {
-        remainingSec = 60;
+        remainingSec = 120;
         enableResend = false;
       });
     }

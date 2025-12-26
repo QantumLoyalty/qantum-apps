@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';

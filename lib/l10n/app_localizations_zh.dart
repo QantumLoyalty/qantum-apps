@@ -542,7 +542,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cardNumber => '卡號';
 
   @override
-  String get activateMessage => '選擇「立即付款」以啟動您的會員資格，立即開始累積積分與享受會員優惠。';
+  String get activateMessage => '請至櫃檯付款\n\n或\n\n現在使用信用卡付款，免排隊';
 
   @override
   String get payNow => '立即付款';
@@ -582,6 +582,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get uploadingSelfie => '請稍候，我們正在上傳您的照片';
+
+  @override
+  String get logoutMessage => '請稍候，我們正在為您登出。';
+
+  @override
+  String get msgForOtherMembershipSeeReception => '如需其他會員方案\n\n請洽接待處。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1122,7 +1128,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get cardNumber => '卡號';
 
   @override
-  String get activateMessage => '選擇「立即付款」以啟動您的會員資格，立即開始累積積分與享受會員優惠。';
+  String get activateMessage => '请到前台付款\n\n或\n\n现在刷卡支付，免排队';
 
   @override
   String get payNow => '立即付款';
@@ -1162,4 +1168,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get uploadingSelfie => '請稍候，我們正在上傳您的照片';
+
+  @override
+  String get logoutMessage => '请稍候，我们正在为您退出登录。';
+
+  @override
+  String get msgForOtherMembershipSeeReception => '如需其他会员方案\n\n请前往前台咨询。';
 }

@@ -419,7 +419,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgLogout => 'Are you sure you want to log out of the application?';
 
   @override
-  String get msgCancelAccount => 'Are you sure you want to cancel your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
+  String get msgCancelAccount => 'Are you sure you want to delete your account?\nOnce you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
 
   @override
   String get txtPlayerActivityStatementFor => 'Player Activity Statement for';
@@ -542,7 +542,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cardNumber => 'Card Number';
 
   @override
-  String get activateMessage => 'Select PAY NOW to activate your membership and instantly start earning points and Member Benefits.';
+  String get activateMessage => 'PLEASE PAY AT RECEPTION\n\nor\n\nSkip the queue and pay by card now';
 
   @override
   String get payNow => 'Pay Now';
@@ -582,4 +582,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get uploadingSelfie => 'Please wait, while we are uploading your picture';
+
+  @override
+  String get logoutMessage => 'Just a moment, we’re logging you out.';
+
+  @override
+  String get msgForOtherMembershipSeeReception => 'For all other memberships\n\nPlease see reception.';
 }

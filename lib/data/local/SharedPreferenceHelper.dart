@@ -4,6 +4,8 @@ import 'package:qantum_apps/data/local/AppSecureStore.dart';
 import 'package:qantum_apps/data/models/UserModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/MembershipModel.dart';
+
 class SharedPreferenceHelper {
   static SharedPreferences? _sharedPreferences;
 
@@ -13,6 +15,7 @@ class SharedPreferenceHelper {
   SharedPreferenceHelper._internal();
 
   static String USER = "user";
+  static String MEMBERSHIP = "membership";
   static String AUTH_TOKEN = "authToken";
   static String COUNTRY_CODE = "countryCode";
 
@@ -27,6 +30,19 @@ class SharedPreferenceHelper {
   saveUserData(UserModel user) async {
     await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
     //   await _appSecureStore!.write(key: USER, value: jsonEncode(user.toJson()));
+  }
+
+  saveSelectedMembership(MembershipModel membership) async {
+    await _sharedPreferences!
+        .setString(MEMBERSHIP, jsonEncode(membership.toJson()));
+  }
+
+  MembershipModel? getSelectedMembership() {
+    if (_sharedPreferences!.containsKey(MEMBERSHIP)) {
+      return MembershipModel.fromJson(
+          jsonDecode(_sharedPreferences!.getString(MEMBERSHIP)!));
+    }
+    return null;
   }
 
   UserModel? getUserData() {

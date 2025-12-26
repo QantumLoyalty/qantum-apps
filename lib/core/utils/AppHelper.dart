@@ -177,7 +177,7 @@ class AppHelper with LoggingMixin {
   static Color getAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.starReward:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
       case Flavor.maxx:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
@@ -211,7 +211,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -323,7 +323,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -442,7 +442,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -566,9 +566,10 @@ class AppHelper with LoggingMixin {
   static Future<String?> getDeviceToken() async {
     final oneSignalUser = OneSignal.User;
     final pushSubscription = OneSignal.User.pushSubscription;
+
+    ;
     printMessage("Push Subscription ${pushSubscription.optedIn}");
-    printMessage(
-        "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
+    printMessage("Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 
     return oneSignalUser.pushSubscription.id;
   }
@@ -578,6 +579,7 @@ class AppHelper with LoggingMixin {
     const appTypeMap = {
       Flavor.starReward: "StarReward",
       Flavor.qantum: "Qantum",
+      Flavor.qantumClub: "Qantum",
       Flavor.maxx: "MaxGaming",
       Flavor.clh: "Central",
       Flavor.mhbc: "Manly",
@@ -635,7 +637,7 @@ class AppHelper with LoggingMixin {
 
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
-    const clubFlavors = {Flavor.qantum, Flavor.aceRewards, Flavor.mhbc};
+    const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
     return clubFlavors.contains(flavor);
   }
 

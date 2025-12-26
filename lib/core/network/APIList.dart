@@ -1,11 +1,11 @@
 class APIList {
   // SANDBOX
- //static get BASE_URL => "https://betaapi.s2w.com.au/";
+  //static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
   static get BASE_URL => "http://3.24.55.180:8081/";
 
- // static get BASE_URL => "https://api.s2w.com.au/";
+  // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
 
@@ -64,13 +64,16 @@ class APIList {
 
   static get UPLOAD_PROFILE_PIC => BASE_URL + "user/";
 
+  static get LOGOUT => BASE_URL + "user/logout";
 
-
- //https://betaapi.s2w.com.au/club-package/club?appType=Qantum&timezone=Asia/Kolkata
+  //https://betaapi.s2w.com.au/club-package/club?appType=Qantum&timezone=Asia/Kolkata
 
   /// STRIPE APIS ///
-  static get CREATE_PAYMENT_INTENT => BASE_URL + "payment/create-payment-intent";
+  static get CREATE_PAYMENT_INTENT =>
+      BASE_URL + "payment/create-payment-intent";
+
   static get VERIFY_PAYMENT => BASE_URL + "payment/verify-payment";
+
   static get UPDATE_PAYMENT_TYPE => BASE_URL + "user/payment-update";
 
   ///  VENKAT'S API ///
@@ -78,7 +81,5 @@ class APIList {
       "https://licensedataextractorapp.blackfield-3f4ad4c0.australiaeast.azurecontainerapps.io/licensedataextract";
 
   /// TERMS AND CONDITIONS URL ///
-  static get TERMS_AND_CONDITIONS =>"https://terms-conditions.com.au/q_app/";
-
-
+  static get TERMS_AND_CONDITIONS => "https://terms-conditions.com.au/q_app/";
 }

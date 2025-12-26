@@ -542,7 +542,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get cardNumber => 'कार्ड नंबर';
 
   @override
-  String get activateMessage => 'अपनी सदस्यता सक्रिय करने और तुरंत अंक और सदस्य लाभ अर्जित करना शुरू करने के लिए PAY NOW चुनें।';
+  String get activateMessage => 'कृपया रिसेप्शन पर भुगतान करें\n\nया\n\nलाइन से बचें और अभी कार्ड से भुगतान करें';
 
   @override
   String get payNow => 'अभी भुगतान करें';
@@ -582,4 +582,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get uploadingSelfie => 'कृपया प्रतीक्षा करें, हम आपकी तस्वीर अपलोड कर रहे हैं';
+
+  @override
+  String get logoutMessage => 'कृपया थोड़ी देर प्रतीक्षा करें, हम आपको लॉग आउट कर रहे हैं।';
+
+  @override
+  String get msgForOtherMembershipSeeReception => 'अन्य सभी सदस्यताओं के लिए\n\nकृपया रिसेप्शन से संपर्क करें।';
 }

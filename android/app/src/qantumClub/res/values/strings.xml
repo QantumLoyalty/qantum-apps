@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Qantum Club</string>
+    <string name="default_notification_channel_id">com.au.qantumclub.app.urgent</string>
+</resources>
