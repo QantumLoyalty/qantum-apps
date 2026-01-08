@@ -377,6 +377,13 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 TextFormField(
                                   maxLines: 1,
                                   controller: _addressController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return loc.msgEmptyAddress;
+                                    }
+
+                                    return null;
+                                  },
                                   style: TextStyle(
                                       color:
                                           AppThemeCustom.getTextFieldTextColor(
@@ -417,6 +424,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 TextFormField(
                                   maxLines: 1,
                                   controller: _address1Controller,
+
                                   style: TextStyle(
                                       color:
                                           AppThemeCustom.getTextFieldTextColor(
@@ -774,13 +782,16 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   onChanged: (value) {
                                     provider.updateGender(value!);
                                   }),
-                              Text(
-                                loc.txtNonBinary,
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
-                                    fontSize: 12),
+                              Expanded(
+                                child: Text(
+                                  loc.txtNonBinary,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor,
+                                      fontSize: 12,),
+                                ),
                               )
                             ],
                           )),
@@ -930,10 +941,19 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     params['Address'] =
                                         _addressController.text.toString();
 
-                                    AppHelper.printMessage(
-                                        "PARAMS:: $params -> $phoneNo");
-                                    userLoginProvider.signup(phoneNo, params,
-                                        loc: loc);
+                                    AppHelper.printMessage("PARAMS:: $params -> $phoneNo");
+
+
+                                    if(widget.argument.containsKey('isTestUser'))
+                                      {
+                                        navigationSpecialCase();
+                                      }
+                                    else
+                                      {
+                                        userLoginProvider.signup(phoneNo, params, loc: loc);
+                                      }
+
+
                                   } else {
                                     AppHelper.showErrorMessage(context,
                                         loc.msgCheckTermsAndConditions);
@@ -962,6 +982,24 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       );
     }));
   }
+
+  navigationSpecialCase()
+  {
+    Map<String, String> args = {};
+    args['phoneNo'] = widget.argument['phoneNo']!;
+    args['countryCode'] = widget.argument['countryCode']!;
+    args['userId'] = widget.argument['userId']??"";
+    args['isTestUser'] = "true";
+
+
+    if (AppHelper.isClubApp()) {
+      args['fromRegistrationAndClubApp'] = 'true';
+    }
+
+    AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
+        arguments: args);
+  }
+
 
   bool validateData(SignupProvider provider) {
     if (_formKey.currentState!.validate() &&

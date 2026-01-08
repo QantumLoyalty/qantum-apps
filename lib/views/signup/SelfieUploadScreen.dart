@@ -6,8 +6,11 @@ import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/navigation/route_observer.dart';
+import '../../core/utils/AppHelper.dart';
+import '../common_widgets/AppButton.dart';
 import '/views/common_widgets/AppLoader.dart';
 import '/view_models/UserInfoProvider.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -19,7 +22,9 @@ import '../common_widgets/AppLogo.dart';
 import '/views/common_widgets/AppScaffold.dart';
 
 class SelfieUploadScreen extends StatefulWidget {
-  const SelfieUploadScreen({super.key});
+  Map<String, String>? arguments;
+
+  SelfieUploadScreen({super.key, this.arguments});
 
   @override
   State<SelfieUploadScreen> createState() => _SelfieUploadScreenState();
@@ -42,6 +47,7 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
   void initState() {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
+    _userInfoProvider.retrieveUserInfo();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initCamera();
@@ -144,16 +150,46 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context);
 
-    return Consumer<UserInfoProvider>(builder: (context, provider, child) {
+    return Consumer2<UserInfoProvider, MembershipManagerProvider>(
+        builder: (context, provider, membershipManagerProvider, child) {
       if (provider.uploadedSelfie != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          AppNavigator.navigateReplacement(
-            context,
-            AppNavigator.choosePaymentMethod,
-          );
+          if (provider.getUserInfo != null &&
+              provider.getUserInfo!.licenceFront != null &&
+              provider.getUserInfo!.licenceFront!.isNotEmpty &&
+              provider.getUserInfo!.licenceBack != null &&
+              provider.getUserInfo!.licenceBack!.isNotEmpty) {
+            /// CONDITION IF LICENCE IMAGES ARE UPLOADED
+
+            AppNavigator.navigateReplacement(
+              context,
+              AppNavigator.choosePaymentMethod,
+            );
+          } else {
+            membershipManagerProvider.updateMembershipPaymentMethod(loc: loc!);
+          }
         });
 
         provider.resetUploadedSelfie();
+      }
+
+      if (membershipManagerProvider.isPaymentMethodUpdated != null) {
+        logEvent(
+            "isPaymentMethodUpdated: ${membershipManagerProvider.isPaymentMethodUpdated}");
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (membershipManagerProvider.isPaymentMethodUpdated!) {
+            logEvent("navigateAndClearStack called!!!");
+            AppNavigator.navigateReplacement(
+              context,
+              AppNavigator.pendingPaymentScreen,
+            );
+
+            membershipManagerProvider.resetUpdateMembershipPaymentResponse();
+          } else {
+            AppHelper.showErrorMessage(context, loc!.msgCommonError);
+            membershipManagerProvider.resetUpdateMembershipPaymentResponse();
+          }
+        });
       }
 
       return AppScaffold(
@@ -286,6 +322,21 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
                   ),
                 ),
                 AppDimens.shape_30,
+                (widget.arguments != null &&
+                        widget.arguments!.containsKey('isTestUser'))
+                    ? AppButton(
+                        text: "Continue for Review".toUpperCase(),
+                        onClick: () {
+                          Map<String, String> args = {};
+                          args['isTestUser'] = "true";
+
+                          AppNavigator.navigateReplacement(
+                              context, AppNavigator.choosePaymentMethod,
+                              arguments: args);
+                        })
+                    : Container(),
+                AppDimens.shape_10,
+                AppDimens.shape_10,
                 Container(
                   width: MediaQuery.of(context).size.width * 0.7,
                   padding: const EdgeInsets.only(top: 15.0),

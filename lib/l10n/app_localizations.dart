@@ -581,7 +581,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgTermsAndConditionSignup.
   ///
   /// In en, this message translates to:
-  /// **'By pressing the JOIN NOW button I agree to the terms and conditions of the Qantum Loyalty program and I am at least 18 years of age.'**
+  /// **'By pressing the JOIN NOW button I agree to the terms and conditions of the Venue\'s Loyalty Program and I am at least 18 years of age.'**
   String get msgTermsAndConditionSignup;
 
   /// No description provided for @txtDeleteMyAccount.
@@ -697,6 +697,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last name can\'t be empty'**
   String get msgEmptyLastName;
+
+  /// No description provided for @msgEmptyAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid address to continue.'**
+  String get msgEmptyAddress;
 
   /// No description provided for @msgEmptyEmail.
   ///
@@ -1097,7 +1103,7 @@ abstract class AppLocalizations {
   /// No description provided for @noLicense.
   ///
   /// In en, this message translates to:
-  /// **'I don\'t have a license'**
+  /// **'I don\'t have a licence'**
   String get noLicense;
 
   /// No description provided for @chooseYourMembership.
@@ -1255,6 +1261,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'For all other memberships\n\nPlease see reception.'**
   String get msgForOtherMembershipSeeReception;
+
+  /// No description provided for @msgPaymentCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'The payment has been cancelled.'**
+  String get msgPaymentCancelled;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

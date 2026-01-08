@@ -3,6 +3,8 @@ import '../models/NetworkResponse.dart';
 abstract class AppDataRepository {
   Future<NetworkResponse> fetchPromotions(String membershipType);
 
+  Future<NetworkResponse> fetchSpecialOffersFilters();
+
   Future<NetworkResponse> fetchSpecialOffers(
       {required String membershipType,
       required String birthdayMonth,

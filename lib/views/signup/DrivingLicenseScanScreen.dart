@@ -199,6 +199,16 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                     }),
               ),
               AppDimens.shape_10,
+              (widget.arguments.containsKey('isTestUser'))
+                  ? AppButton(
+                      text: "Continue for Review".toUpperCase(),
+                      onClick: () {
+                        AppNavigator.navigateReplacement(
+                            context, AppNavigator.signup,
+                            arguments: widget.arguments);
+                      })
+                  : Container(),
+              AppDimens.shape_10,
             ],
           ),
           provider.showLoader != null && provider.showLoader!

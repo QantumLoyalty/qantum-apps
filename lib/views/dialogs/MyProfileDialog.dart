@@ -95,6 +95,8 @@ class MyProfileDialog with LoggingMixin {
                                           Text(
                                             "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
                                             textAlign: TextAlign.center,
+                                            textScaler:
+                                                const TextScaler.linear(1.0),
                                             style: TextStyle(
                                                 fontSize: 28,
                                                 fontWeight: FontWeight.bold,

@@ -66,6 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Map<String, String> args = {};
                 args['countryCode'] = countryCode;
                 args['phoneNo'] = _phoneController.text.toString();
+                //////////////////////////////
+                //// SPECIAL CASE FOR APPSTORE REVIEW ////
+                if (provider.userId != null) {
+                  args['userId'] = "${provider.userId}";
+                  args['isTestUser'] = "true";
+                }
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (AppHelper.isClubApp()) {
                     AppNavigator.navigateReplacement(

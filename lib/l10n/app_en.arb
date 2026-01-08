@@ -84,7 +84,7 @@
   "txtMyDetails": "My Details",
   "txtView": "View",
   "txtTermsAndConditions": "Terms & Conditions",
-  "msgTermsAndConditionSignup": "By pressing the JOIN NOW button I agree to the terms and conditions of the Qantum Loyalty program and I am at least 18 years of age.",
+  "msgTermsAndConditionSignup": "By pressing the JOIN NOW button I agree to the terms and conditions of the Venue's Loyalty Program and I am at least 18 years of age.",
   "txtDeleteMyAccount": "Delete my account",
   "txtViewTermsConditions": "View T&C's",
   "txtMyProfile": "My Profile",
@@ -104,6 +104,7 @@
   "msgMobileNumberUpdated": "Your new mobile number has been registered.",
   "msgEmptyFirstName": "First name can't be empty",
   "msgEmptyLastName": "Last name can't be empty",
+  "msgEmptyAddress": "Please enter a valid address to continue.",
   "msgEmptyEmail": "Email can't be empty",
   "msgIncorrectEmail": "Enter correct email address",
   "msgEmptyPostcode": "Postcode can't be empty",
@@ -170,7 +171,7 @@
   "registerToContinue": "Register to continue",
   "register": "Register",
   "alreadyHaveAnAccount": "Already have an account?",
-  "noLicense": "I don't have a license",
+  "noLicense": "I don't have a licence",
   "chooseYourMembership": "Choose your membership",
   "selectMembership": "Select membership",
   "next": "Next",
@@ -196,5 +197,6 @@
   "faceInWhiteFrame": "Make sure your face is in the white frame and is clearly visible",
   "uploadingSelfie": "Please wait, while we are uploading your picture",
   "logoutMessage": "Just a moment, we’re logging you out.",
-  "msgForOtherMembershipSeeReception": "For all other memberships\n\nPlease see reception."
+  "msgForOtherMembershipSeeReception": "For all other memberships\n\nPlease see reception.",
+  "msgPaymentCancelled": "The payment has been cancelled."
 }

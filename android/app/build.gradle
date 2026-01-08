@@ -63,7 +63,7 @@ android {
         mhbc {
             dimension "app"
             applicationId "com.au.mhbc.app"
-            versionName "Manly Harbour Boat Club"
+            versionName "1.0.8"
         }
         clh {
             dimension "app"

@@ -251,7 +251,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtTermsAndConditions => 'नियम और शर्तें';
 
   @override
-  String get msgTermsAndConditionSignup => 'मैं Qantum लॉयल्टी प्रोग्राम की शर्तों और नियमों से सहमत हूँ और पुष्टि करता हूँ कि मेरी आयु कम से कम 18 वर्ष है। पंजीकरण आगे बढ़ाने के लिए \'अभी शामिल हों\' बटन दबाएँ।';
+  String get msgTermsAndConditionSignup => 'मैं स्थल के लॉयल्टी प्रोग्राम की शर्तों और नियमों से सहमत हूँ और पुष्टि करता हूँ कि मेरी आयु कम से कम 18 वर्ष है। पंजीकरण आगे बढ़ाने के लिए \'अभी शामिल हों\' बटन दबाएँ।';
 
   @override
   String get txtDeleteMyAccount => 'मेरा खाता हटाएं';
@@ -309,6 +309,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgEmptyLastName => 'अंतिम नाम खाली नहीं हो सकता';
+
+  @override
+  String get msgEmptyAddress => 'कृपया आगे बढ़ने के लिए सही पता दर्ज करें।';
 
   @override
   String get msgEmptyEmail => 'ईमेल खाली नहीं हो सकता';
@@ -588,4 +591,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgForOtherMembershipSeeReception => 'अन्य सभी सदस्यताओं के लिए\n\nकृपया रिसेप्शन से संपर्क करें।';
+
+  @override
+  String get msgPaymentCancelled => 'भुगतान रद्द कर दिया गया है।';
 }

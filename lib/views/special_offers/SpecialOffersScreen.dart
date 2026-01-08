@@ -24,11 +24,10 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     super.initState();
     _specialOffersProvider =
         Provider.of<SpecialOffersProvider>(context, listen: false);
-    _specialOffersProvider.fetchSpecialOffersTimer();
+   // _specialOffersProvider.getSpecialOffersFilters();
+     _specialOffersProvider.fetchSpecialOffersTimer();
     selectedFlavor = FlavorConfig.instance.flavor!;
   }
-
-
 
   @override
   Widget build(BuildContext context) {

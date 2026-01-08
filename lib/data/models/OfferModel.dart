@@ -84,6 +84,7 @@ class OfferModel {
     if (expiryDate != null) {
       data['expiryDate'] = expiryDate!;
     }
+    
     return data;
   }
 

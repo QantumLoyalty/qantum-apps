@@ -48,8 +48,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        statusPoints != 0
-                            ? Countup(
+                     //   statusPoints != 0 ?
+                        Countup(
                             begin: 0,
                             end: (provider.getUserInfo != null &&
                                 provider.getUserInfo!.statusPoints !=
@@ -62,12 +62,12 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 color: AppThemeCustom
                                     .getProfileDialogTextColor(context),
                                 fontWeight: FontWeight.w900,
-                                fontSize: 24))
-                            : Container(),
+                                fontSize: 24)),
+                            //: Container(),
                         RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(children: [
-                            if(statusPoints != 0)
+                        //    if(statusPoints != 0)
                               TextSpan(
                                   text:
                                   'of ${provider.getUserInfo != null

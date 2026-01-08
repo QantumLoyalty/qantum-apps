@@ -251,7 +251,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtTermsAndConditions => 'Terms & Conditions';
 
   @override
-  String get msgTermsAndConditionSignup => 'By pressing the JOIN NOW button I agree to the terms and conditions of the Qantum Loyalty program and I am at least 18 years of age.';
+  String get msgTermsAndConditionSignup => 'By pressing the JOIN NOW button I agree to the terms and conditions of the Venue\'s Loyalty Program and I am at least 18 years of age.';
 
   @override
   String get txtDeleteMyAccount => 'Delete my account';
@@ -309,6 +309,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgEmptyLastName => 'Last name can\'t be empty';
+
+  @override
+  String get msgEmptyAddress => 'Please enter a valid address to continue.';
 
   @override
   String get msgEmptyEmail => 'Email can\'t be empty';
@@ -509,7 +512,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alreadyHaveAnAccount => 'Already have an account?';
 
   @override
-  String get noLicense => 'I don\'t have a license';
+  String get noLicense => 'I don\'t have a licence';
 
   @override
   String get chooseYourMembership => 'Choose your membership';
@@ -588,4 +591,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgForOtherMembershipSeeReception => 'For all other memberships\n\nPlease see reception.';
+
+  @override
+  String get msgPaymentCancelled => 'The payment has been cancelled.';
 }

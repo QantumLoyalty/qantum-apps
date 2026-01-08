@@ -15,7 +15,9 @@ import '../../view_models/UserInfoProvider.dart';
 import 'widgets/BottomInfoWidget.dart';
 
 class ChoosePaymentMethod extends StatefulWidget {
-  const ChoosePaymentMethod({super.key});
+  Map<String, String>? arguments;
+
+  ChoosePaymentMethod({super.key, this.arguments});
 
   @override
   State<ChoosePaymentMethod> createState() => _ChoosePaymentMethodState();
@@ -103,6 +105,16 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
                       membershipProvider.updateMembershipPaymentMethod(
                           loc: loc);
                     }),
+                AppDimens.shape_30,
+                (widget.arguments != null &&
+                        widget.arguments!.containsKey('isTestUser'))
+                    ? AppButton(
+                        text: "Continue for Review".toUpperCase(),
+                        onClick: () {
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.home);
+                        })
+                    : Container(),
                 Expanded(child: Container()),
                 BottomInfoWidget(
                   message: loc.membershipRequiresApproval,
@@ -125,19 +137,66 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
     try {
       logEvent("User Info:: ${infoProvider.getUserInfo}");
 
+      // 1️⃣ Create PaymentIntent (backend)
+      await _membershipManagerProvider.createPaymentIntent(
+        loc: loc,
+        userId: infoProvider.getUserInfo!.id!,
+      );
+
+      final clientSecret = _membershipManagerProvider.paymentIntentClientSecret;
+
+      if (clientSecret != null) {
+        // 3️⃣ Init Payment Sheet
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+            style: ThemeMode.dark,
+            paymentIntentClientSecret: clientSecret,
+            merchantDisplayName: 'Qantum',
+          ),
+        );
+
+        // 4️⃣ Present Payment Sheet
+        await Stripe.instance.presentPaymentSheet();
+
+        // 5️⃣ (Optional) Verify locally — webhook is source of truth
+        await _membershipManagerProvider.verifyPayment(
+          loc: loc,
+          userId: infoProvider.getUserInfo!.id!,
+        );
+      }
+    } on StripeException catch (e) {
+      logEvent("makePayment Error: $e");
+      if (!mounted) return;
+      AppHelper.showErrorMessage(context, loc.msgPaymentCancelled);
+    }
+  }
+
+/*makePayment(UserInfoProvider infoProvider) async {
+    try {
+      logEvent("User Info:: ${infoProvider.getUserInfo}");
+
       /// CALLING CREATE PAYMENT INTENT API FOR GETTING THE INITIAL PARAMETERS ///
       await _membershipManagerProvider.createPaymentIntent(
           loc: loc, userId: infoProvider.getUserInfo!.id!);
       logEvent(
           "paymentIntentClientSecret: ${_membershipManagerProvider.paymentIntentClientSecret}");
       if (_membershipManagerProvider.paymentIntentClientSecret != null) {
+
+
+
+        await Stripe.instance.applySettings(
+
+
+        );
+
         /// INSTANTIATING THE PAYMENT SHEET AND PRESENTING IT TO THE USER ///
         await Stripe.instance.initPaymentSheet(
-            paymentSheetParameters: SetupPaymentSheetParameters(
-                style: ThemeMode.dark,
-                paymentIntentClientSecret:
-                    _membershipManagerProvider.paymentIntentClientSecret!,
-                merchantDisplayName: 'Qantum'));
+          paymentSheetParameters: SetupPaymentSheetParameters(
+              style: ThemeMode.dark,
+              paymentIntentClientSecret:
+                  _membershipManagerProvider.paymentIntentClientSecret!,
+              merchantDisplayName: 'Qantum'),
+        );
         await Stripe.instance.presentPaymentSheet();
 
         /// VERIFYING THE PAYMENT AND UPDATING THE MEMBERSHIP STATUS ///
@@ -147,7 +206,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
     } on StripeException catch (e) {
       logEvent("makePayment Error: $e");
       if (!mounted) return;
-      AppHelper.showErrorMessage(context, e.error.message ?? "Payment Failed");
+      AppHelper.showErrorMessage(context, loc.msgPaymentCancelled);
     }
-  }
+  }*/
 }

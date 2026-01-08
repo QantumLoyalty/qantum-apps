@@ -44,8 +44,10 @@ void main() async {
       // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
 
-    // Stripe.publishableKey = "pk_test_51S2fSX1zasRgJWaHc8UoT3ayEB2U53BX6fWezGboZ8rdKamJi6YwHmFXt21fsI5z05WE24WXaoNP7zgq9XErhPl300o8fHzM7I";
     Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+    Stripe.stripeAccountId = dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? '';
+    //  Stripe.publishableKey = 'pk_test_51S2fSC0KsUuwyXPgvWtijdxhuaKCHCxSe0JDXQcPvkJk0Du4631BxCPKAGKE0DfYR81wjbOa86RwK3TcHQvy8NOU00k5v5CnXq';
+    print("STRIPE_PUBLISHABLE_KEY >> ${dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? ''} AND STRIPE_CONNECTED_ACCOUNT_ID >> ${dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? ''}");
     Stripe.instance.applySettings();
   });
 }
@@ -75,7 +77,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
-        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(
+            create: (context) => MembershipManagerProvider()),
       ],
       child: Portal(
         child: MaterialApp(
@@ -98,9 +101,13 @@ class _MyAppState extends State<MyApp> {
           initialRoute: AppNavigator.splash,
           home: const SplashScreen(),
           builder: (context, child) {
+            final mediaQuery = MediaQuery.of(context);
+
+            final scale = mediaQuery.textScaler.scale(1.0).clamp(1.0, 1.2);
+
             return MediaQuery(
                 data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
+                    .copyWith(textScaler: TextScaler.linear(1.0)),
                 child: child!);
           },
         ),

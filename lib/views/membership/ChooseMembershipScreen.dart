@@ -17,7 +17,9 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class ChooseMembershipScreen extends StatefulWidget {
-  ChooseMembershipScreen({super.key});
+  Map<String, String>? arguments;
+
+  ChooseMembershipScreen({super.key, this.arguments});
 
   @override
   State<ChooseMembershipScreen> createState() => _ChooseMembershipScreenState();
@@ -212,15 +214,15 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     text: loc.next.toUpperCase(),
                     onClick: () {
                       if (provider.selectedMembership != null) {
-                        /*  AppNavigator.navigateAndClearStack(
-                          context,
-                          AppNavigator.choosePaymentMethod,
-                        );
-                      */
+                        Map<String, String> args = {};
+                        if (widget.arguments != null &&
+                            widget.arguments!.containsKey("isTestUser")) {
+                          args['isTestUser'] = "true";
+                        }
+
                         AppNavigator.navigateAndClearStack(
-                          context,
-                          AppNavigator.selfieUploadScreen,
-                        );
+                            context, AppNavigator.selfieUploadScreen,
+                            arguments: args);
                       } else {
                         AppHelper.showErrorMessage(
                             context, loc.selectMembershipPlan);

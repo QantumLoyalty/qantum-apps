@@ -27,6 +27,10 @@ class UserLoginProvider extends ChangeNotifier {
 
   bool? get isRegistered => _isRegistered;
 
+  bool? _isTestUser;
+
+  bool? get isTestUser => _isTestUser;
+
   String? _networkMessage;
 
   String? get networkMessage => _networkMessage;
@@ -50,7 +54,12 @@ class UserLoginProvider extends ChangeNotifier {
 
         if (response['registered'] != null) {
           if (response['registered'] as bool) {
-            _isExistingUser = true;
+            if (response.containsKey('test') && response['test'] == true) {
+              _isTestUser = true;
+              _isExistingUser = false;
+            } else {
+              _isExistingUser = true;
+            }
           } else {
             _isExistingUser = false;
           }
@@ -83,6 +92,7 @@ class UserLoginProvider extends ChangeNotifier {
       _isExistingUser = null;
       _networkError = null;
       _networkMessage = null;
+      _isTestUser = null;
       notifyListeners();
     });
   }

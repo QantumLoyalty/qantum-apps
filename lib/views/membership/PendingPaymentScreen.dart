@@ -166,32 +166,67 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                         ],
                       ),
                       AppDimens.shape_60,
-                      Padding(
-                        padding: const EdgeInsets.only(left: 35, right: 35),
-                        child: Text(
-                          loc!.activateMessage,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
-                        ),
-                      ),
-                      AppDimens.shape_30,
-                      AppButton(
-                          text: loc!.payNow.toUpperCase(),
-                          onClick: () async {
-                            /*   AppNavigator.navigateTo(
-                                context, AppNavigator.chooseMembershipScreen);
-                         */
-                            await PaymentService.makePayment(
-                                context: context,
-                                loc: loc!,
-                                membershipManagerProvider:
-                                    membershipManagerProvider,
-                                userInfoProvider: userInfoProvider);
-                          })
+                      (provider.getUserInfo != null &&
+                              provider.getUserInfo!.licenceFront != null &&
+                              provider.getUserInfo!.licenceFront!.isNotEmpty &&
+                              provider.getUserInfo!.licenceBack != null &&
+                              provider.getUserInfo!.licenceBack!.isNotEmpty)
+                          ? Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 35, right: 35),
+                                  child: Text(
+                                    loc!.activateMessage,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor),
+                                  ),
+                                ),
+                                AppDimens.shape_30,
+                                AppButton(
+                                    text: loc!.payNow.toUpperCase(),
+                                    onClick: () async {
+                                      await PaymentService.makePayment(
+                                          context: context,
+                                          loc: loc!,
+                                          membershipManagerProvider:
+                                              membershipManagerProvider,
+                                          userInfoProvider: userInfoProvider);
+                                    }),
+
+                                AppDimens.shape_20,
+
+                                  (provider.getUserInfo != null &&
+                                    provider.getUserInfo!.bluizeUniqueUserId=="4a9ec9ef-aa36-49c0-ba3b-e6b36b14d07b")
+                                    ? AppButton(
+                                    text: "Continue for Review".toUpperCase(),
+                                    onClick: () {
+                                      AppNavigator.navigateAndClearStack(
+                                          context, AppNavigator.home);
+                                    })
+                                    : Container(),
+
+
+                              ],
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 35, right: 35),
+                              child: Text(
+                                loc!.payAtReception.toUpperCase(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor),
+                              ),
+                            ),
                     ],
                   ))),
                   AppDimens.shape_10,

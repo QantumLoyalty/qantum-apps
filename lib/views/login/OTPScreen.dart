@@ -67,23 +67,31 @@ class _OTPScreenState extends State<OTPScreen> {
                   if (AppHelper.isClubApp()) {
                     /// TEMP CONDITION FOR MHBC APP ONLY
                     if (flavor == Flavor.mhbc) {
-                      if (await AppHelper.checkIfUserIsNew()) {
-                        /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
-                        /// CHECKING IF PURCHASED THE MEMBERSHIP
-                        if (await AppHelper
-                            .checkIfUserHasPurchasedTheMembership()) {
-                          /// ALREADY PURCHASED THE MEMBERSHIP
+                      if (widget.argument.containsKey('isTestUser')) {
+
+                        Map<String, String> args = {};
+                        args['isTestUser'] = "true";
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.chooseMembershipScreen,arguments: args);
+                      } else {
+                        if (await AppHelper.checkIfUserIsNew()) {
+                          /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
+                          /// CHECKING IF PURCHASED THE MEMBERSHIP
+                          if (await AppHelper
+                              .checkIfUserHasPurchasedTheMembership()) {
+                            /// ALREADY PURCHASED THE MEMBERSHIP
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.home);
+                          } else {
+                            ///  DID NOT PURCHASED THE MEMBERSHIP
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.chooseMembershipScreen);
+                          }
+                        } else {
+                          /// IF USER IS OLD
                           AppNavigator.navigateAndClearStack(
                               context, AppNavigator.home);
-                        } else {
-                          ///  DID NOT PURCHASED THE MEMBERSHIP
-                          AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.chooseMembershipScreen);
                         }
-                      } else {
-                        /// IF USER IS OLD
-                        AppNavigator.navigateAndClearStack(
-                            context, AppNavigator.home);
                       }
                     } else {
                       /// FOR OTHER APPS

@@ -898,7 +898,8 @@ class AppThemeCustom {
             Flavor.woollahra ||
             Flavor.bluewater ||
             Flavor.flinders ||
-            Flavor.aceRewards:
+            Flavor.aceRewards ||
+            Flavor.mhbc:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&

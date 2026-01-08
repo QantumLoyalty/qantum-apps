@@ -125,13 +125,31 @@ class AppNavigator {
       case welcomeScreen:
         return MaterialPageRoute(builder: (_) => WelcomeScreen());
       case chooseMembershipScreen:
-        return MaterialPageRoute(builder: (_) => ChooseMembershipScreen());
+        {
+          Map<String, String>? argumentss;
+          if (args != null) {
+            argumentss = args as Map<String, String>;
+          }
+
+          return MaterialPageRoute(
+              builder: (_) => ChooseMembershipScreen(arguments: argumentss));
+        }
+
       case membershipPaymentScreen:
         return MaterialPageRoute(builder: (_) => MembershipPaymentScreen());
       case pendingPaymentScreen:
         return MaterialPageRoute(builder: (_) => PendingPaymentScreen());
       case choosePaymentMethod:
-        return MaterialPageRoute(builder: (_) => ChoosePaymentMethod());
+        {
+          Map<String, String>? argumentss;
+          if (args != null) {
+            argumentss = args as Map<String, String>;
+          }
+
+          return MaterialPageRoute(
+              builder: (_) => ChoosePaymentMethod(arguments: argumentss));
+        }
+
       case receptionPaymentScreen:
         return MaterialPageRoute(builder: (_) => ReceptionPaymentScreen());
 
@@ -150,8 +168,17 @@ class AppNavigator {
         return MaterialPageRoute(builder: (_) => const UserDetailScreen());
       case clubAndMembership:
         return MaterialPageRoute(builder: (_) => ClubAndMembership());
-        case selfieUploadScreen:
-        return MaterialPageRoute(builder: (_) => const SelfieUploadScreen());
+      case selfieUploadScreen:
+        {
+          Map<String, String>? argumentss;
+          if (args != null) {
+            argumentss = args as Map<String, String>;
+          }
+          return MaterialPageRoute(
+              builder: (_) => SelfieUploadScreen(
+                    arguments: argumentss,
+                  ));
+        }
       case communicationPreference:
         return MaterialPageRoute(
             builder: (_) => const CommunicationPreference());

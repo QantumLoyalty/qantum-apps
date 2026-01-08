@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
+import 'package:qantum_apps/core/enums/OffersFilterType.dart';
 import '../../data/models/OfferModel.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/NetworkResponse.dart';
@@ -33,6 +34,66 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
   OfferModel? get selectedOffer => _selectedOffer;
 
   Timer? _fetchSpecialOfferTimer;
+
+  String? _filterResponse;
+  bool? _isErrorOnFilterResponse;
+
+  String? get filterResponse => _filterResponse;
+
+  bool? get isErrorOnFilterResponse => _isErrorOnFilterResponse;
+
+  List<String>? _offersFilters;
+
+  List<String>? get offersFilters => _offersFilters;
+
+  getSpecialOffersFilters() async {
+    try {
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().fetchSpecialOffersFilters();
+      logEvent(networkResponse);
+
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        var apiResponse = networkResponse.response as Map<String, dynamic>;
+        if (apiResponse.containsKey('success') &&
+            (apiResponse['success'] as bool)) {
+          if (apiResponse.containsKey('data')) {
+            var filterData = apiResponse['data'] as Map<String, dynamic>;
+            _isErrorOnFilterResponse = false;
+
+            if (filterData.containsKey('menu_Type') &&
+                filterData['menu_Type'].toString().toLowerCase() ==
+                    OffersFilterType.multiple.name) {
+              if (filterData.containsKey('filter_Type')) {
+                _offersFilters = [];
+
+                filterData['filter_Type'].forEach((item) {
+                  _offersFilters!.add(item);
+                });
+              }
+            }
+
+            getSpecialOffers(showLoader: true);
+          } else {
+            _isErrorOnFilterResponse = true;
+            _filterResponse =
+                "Error while fetching the special offers filters!";
+          }
+        } else {
+          _isErrorOnFilterResponse = true;
+          _filterResponse = networkResponse.responseMessage;
+        }
+      } else {
+        _isErrorOnFilterResponse = true;
+        _filterResponse = "Error while fetching the special offers filters!";
+      }
+    } catch (e) {
+      _isErrorOnFilterResponse = true;
+      _filterResponse = e.toString();
+    } finally {
+      notifyListeners();
+    }
+  }
 
   getSpecialOffers({bool? showLoader}) async {
     try {

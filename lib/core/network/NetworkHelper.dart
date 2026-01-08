@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/models/NetworkResponse.dart';
@@ -74,7 +76,7 @@ class NetworkHelper with LoggingMixin{
     try {
       logEvent("URL:: $url HEADERS:: $headers");
       var response = await client.get(url, headers: headers);
-      logEvent("$url --> Response${response.body}");
+      debugPrint("$url --> Response${response.body}",wrapWidth: 1024);
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));

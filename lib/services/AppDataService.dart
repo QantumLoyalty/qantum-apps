@@ -279,4 +279,24 @@ class AppDataService extends AppDataRepository with LoggingMixin {
     }
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> fetchSpecialOffersFilters() async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var url = Uri.parse(APIList.FETCH_SPECIAL_OFFERS_FILTERS);
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+      );
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

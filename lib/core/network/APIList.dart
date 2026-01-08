@@ -4,7 +4,6 @@ class APIList {
 
   // LIVE
   static get BASE_URL => "http://3.24.55.180:8081/";
-
   // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
@@ -43,6 +42,8 @@ class APIList {
   static get VERIFY_OTP_EMAIL => BASE_URL + "user/otp-verify-email/";
 
   static get FETCH_PROMOTIONS => BASE_URL + "promotion/getBycategory?category=";
+
+  static get FETCH_SPECIAL_OFFERS_FILTERS => BASE_URL + "offer/button/get";
 
   static get FETCH_VOUCHERS => BASE_URL + "offer/getbyrating?ratingLevel=";
 

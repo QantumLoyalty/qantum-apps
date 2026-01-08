@@ -251,7 +251,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtTermsAndConditions => '条款与条件';
 
   @override
-  String get msgTermsAndConditionSignup => '我同意Qantum忠诚度计划的条款和条件，并确认我已年满18周岁。要继续注册，请点击“立即加入”按钮。';
+  String get msgTermsAndConditionSignup => '按下「立即加入」按鈕，即表示我同意該場館會員忠誠計劃的條款與條件，並且我已年滿 18 歲。';
 
   @override
   String get txtDeleteMyAccount => '删除我的账户';
@@ -309,6 +309,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgEmptyLastName => '姓氏不能为空';
+
+  @override
+  String get msgEmptyAddress => '請輸入有效的地址以繼續。';
 
   @override
   String get msgEmptyEmail => '邮箱不能为空';
@@ -588,6 +591,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgForOtherMembershipSeeReception => '如需其他會員方案\n\n請洽接待處。';
+
+  @override
+  String get msgPaymentCancelled => '付款已取消。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -837,7 +843,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get txtTermsAndConditions => '条款与条件';
 
   @override
-  String get msgTermsAndConditionSignup => '点击“立即加入”按钮，即表示我同意 Qantum 忠诚度计划的条款与条件，并且我已年满 18 岁。';
+  String get msgTermsAndConditionSignup => '点击“立即加入”按钮，即表示我同意该场所会员忠诚计划的条款和条件，并且我已年满 18 周岁。';
 
   @override
   String get txtDeleteMyAccount => '删除我的账户';
@@ -895,6 +901,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgEmptyLastName => '姓氏不能为空';
+
+  @override
+  String get msgEmptyAddress => '请输入有效的地址以继续。';
 
   @override
   String get msgEmptyEmail => '邮箱不能为空';
@@ -1174,4 +1183,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgForOtherMembershipSeeReception => '如需其他会员方案\n\n请前往前台咨询。';
+
+  @override
+  String get msgPaymentCancelled => '付款已取消。';
 }

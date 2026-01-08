@@ -16,7 +16,7 @@ class PaymentService {
     return _instance!;
   }
 
-  static Future<void>  makePayment({
+  static Future<void> makePayment({
     required BuildContext context,
     required AppLocalizations loc,
     required MembershipManagerProvider membershipManagerProvider,
@@ -35,7 +35,8 @@ class PaymentService {
                 style: ThemeMode.dark,
                 paymentIntentClientSecret:
                     membershipManagerProvider.paymentIntentClientSecret!,
-                merchantDisplayName: 'Qantum'));
+                merchantDisplayName: 'Qantum',
+            ));
         await Stripe.instance.presentPaymentSheet();
         await membershipManagerProvider.verifyPayment(
           loc: loc,
@@ -43,8 +44,10 @@ class PaymentService {
         );
       }
     } on StripeException catch (e) {
+      print("makePayment Error: $e");
+
       if (!Navigator.of(context).mounted) return;
-      AppHelper.showErrorMessage(context, e.error.message ?? "Payment Failed");
+      AppHelper.showErrorMessage(context, loc.msgPaymentCancelled);
     }
   }
 }

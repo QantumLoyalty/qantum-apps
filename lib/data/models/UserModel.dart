@@ -32,6 +32,8 @@ class UserModel {
   String? paymentType;
   String? packageName;
   String? type;
+  String? licenceFront;
+  String? licenceBack;
 
   UserModel(
       {this.id,
@@ -64,7 +66,9 @@ class UserModel {
       this.packageName,
       this.paymentStatus,
       this.paymentType,
-      this.type});
+      this.type,
+      this.licenceFront,
+      this.licenceBack});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
@@ -95,6 +99,18 @@ class UserModel {
       statusTier = "";
     }
     // statusTier = AppStrings.textMemberCancelled;
+
+    if (json.containsKey("licence_front") && json["licence_front"] != null) {
+      licenceFront = json["licence_front"];
+    } else {
+      licenceFront = "";
+    }
+    if (json.containsKey("licence_back") && json["licence_back"] != null) {
+      licenceBack = json["licence_back"];
+    } else {
+      licenceBack = "";
+    }
+
     requiredStatusPointsForNextTier =
         json.containsKey("RequiredStatusPointsForNextTier")
             ? json["RequiredStatusPointsForNextTier"]
@@ -158,6 +174,8 @@ class UserModel {
     data['paymentType'] = paymentType ?? "";
     data['paymentStatus'] = paymentStatus ?? "";
     data['type'] = type ?? "";
+    data['licence_front'] = licenceFront ?? "";
+    data['licence_back'] = licenceBack ?? "";
 
     return data;
   }
@@ -226,12 +244,12 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id,Id: $bluizeUniqueUserId, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type}';
+    return 'UserModel{id: $id,Id: $bluizeUniqueUserId, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack}';
   }
 
   bool isUserStatusCancelled() {
     if (statusTier != null &&
-        statusTier!.toString().toLowerCase().trim() ==
+          statusTier!.toString().toLowerCase().trim() ==
             AppStrings.textMemberCancelled) {
       return true;
     }
