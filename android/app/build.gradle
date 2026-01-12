@@ -63,7 +63,7 @@ android {
         mhbc {
             dimension "app"
             applicationId "com.au.mhbc.app"
-            versionName "1.0.8"
+            versionName "1.0.9"
         }
         clh {
             dimension "app"

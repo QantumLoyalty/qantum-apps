@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/services/DeeplinkService.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -15,6 +16,8 @@ import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   FlavorConfig(
@@ -46,6 +49,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  //final DeeplinkService _deeplinkService = DeeplinkService();
+
   @override
   void initState() {
     super.initState();
@@ -65,6 +70,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Portal(
         child: MaterialApp(
+          key: navigatorKey,
           onGenerateRoute: AppNavigator.generateRoute,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [

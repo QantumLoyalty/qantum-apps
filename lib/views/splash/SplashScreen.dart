@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/services/DeeplinkService.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
@@ -15,15 +16,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late Flavor flavor;
+  final DeeplinkService _deepLinkService = DeeplinkService();
+  Uri? deepLink;
+  bool _isOpenedFromDeepLink = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(seconds: 2), () {
-        flavor = FlavorConfig.instance.flavor!;
-        _checkLoginStatus();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Future.delayed(const Duration(seconds: 2));
+      flavor = FlavorConfig.instance.flavor!;
+
+      _deepLinkService.init((link) {
+        _isOpenedFromDeepLink = true;
       });
+
+      _checkLoginStatus();
     });
   }
 
@@ -35,23 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
 
       if (hasUserData) {
-        /*if (AppHelper.isClubApp()) {
-
-
-
-          /// CHECKING IF PURCHASED THE MEMBERSHIP
-          if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
-            /// ALREADY PURCHASED THE MEMBERSHIP
-            AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-          } else {
-            ///  DID NOT PURCHASED THE MEMBERSHIP
-            AppNavigator.navigateAndClearStack(
-                context, AppNavigator.pendingPaymentScreen);
-          }
-        } else {
-          AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-        }*/
-
         if (AppHelper.isClubApp()) {
           /// TEMP CONDITION FOR MHBC APP ONLY
           if (flavor == Flavor.mhbc) {

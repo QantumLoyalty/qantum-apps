@@ -43,11 +43,8 @@ void main() async {
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
       // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
-
     Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
     Stripe.stripeAccountId = dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? '';
-    //  Stripe.publishableKey = 'pk_test_51S2fSC0KsUuwyXPgvWtijdxhuaKCHCxSe0JDXQcPvkJk0Du4631BxCPKAGKE0DfYR81wjbOa86RwK3TcHQvy8NOU00k5v5CnXq';
-    print("STRIPE_PUBLISHABLE_KEY >> ${dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? ''} AND STRIPE_CONNECTED_ACCOUNT_ID >> ${dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? ''}");
     Stripe.instance.applySettings();
   });
 }

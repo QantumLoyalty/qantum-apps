@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                             .screen),
                     (provider.showPointsBalance)
                         ? const PointsBalanceWidget()
-                        : Container(),
+                        : const SizedBox.shrink(),
                     checkForSeeAllMenu(provider)
                   ],
                 )),
@@ -439,12 +439,11 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   }
 
   Widget checkForSeeAllMenu(HomeProvider provider) {
-    //return (provider.showSeeAllMenu) ? const AllMenuItemsWidget() : Container();
     return (provider.showSeeAllMenu &&
             (provider.moreButtonsMap != null &&
                 provider.moreButtonsMap!.isNotEmpty))
         ? const AllMenuItemsWidget()
-        : Container();
+        : const SizedBox.shrink();
   }
 
   checkAndHideSeeAllOptionMenu(HomeProvider provider, String from) {

@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.3+10
 ###################################
 # MHBC
-version:  1.0.8+74
+version:  1.0.9+76
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.3+55
@@ -130,6 +130,7 @@ dependencies:
   flutter_stripe: ^12.0.2
 #  easy_geofencing: ^0.2.0
   flutter_dotenv: ^6.0.0
+  app_links:
 
 
 dev_dependencies:
