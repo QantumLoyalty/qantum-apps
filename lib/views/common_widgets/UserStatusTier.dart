@@ -1,6 +1,8 @@
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/l10n/app_localizations.dart';
 import '/view_models/UserInfoProvider.dart';
@@ -14,17 +16,17 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
 
   late AppLocalizations loc;
   num statusPoints = 0;
+  late Flavor flavor;
 
   @override
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
-
+    flavor = FlavorConfig.instance.flavor!;
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
       statusPoints = (provider.getUserInfo != null &&
-          provider.getUserInfo!.statusPoints != null)
+              provider.getUserInfo!.statusPoints != null)
           ? provider.getUserInfo!.statusPoints!
           : 0;
-
 
       return Padding(
         padding: const EdgeInsets.only(top: 15, bottom: 15),
@@ -48,45 +50,36 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                     //   statusPoints != 0 ?
+                        //   statusPoints != 0 ?
                         Countup(
                             begin: 0,
                             end: (provider.getUserInfo != null &&
-                                provider.getUserInfo!.statusPoints !=
-                                    null)
-                                ? provider.getUserInfo!.statusPoints!
-                                .toDouble()
+                                    provider.getUserInfo!.statusPoints != null)
+                                ? provider.getUserInfo!.statusPoints!.toDouble()
                                 : 0,
                             duration: const Duration(seconds: 1),
                             style: TextStyle(
-                                color: AppThemeCustom
-                                    .getProfileDialogTextColor(context),
+                                color: AppThemeCustom.getProfileDialogTextColor(
+                                    context),
                                 fontWeight: FontWeight.w900,
                                 fontSize: 24)),
-                            //: Container(),
+                        //: Container(),
                         RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(children: [
-                        //    if(statusPoints != 0)
-                              TextSpan(
-                                  text:
-                                  'of ${provider.getUserInfo != null
-                                      ? ((provider.getUserInfo!.statusPoints ??
-                                      0) + (provider.getUserInfo!
-                                      .requiredStatusPointsForNextTier ?? 0))
-                                      : "-"}',
-                                  style: TextStyle(
-                                      color: AppThemeCustom
-                                          .getProfileDialogTextColor(context),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 20))
-                                  ,
+                            //    if(statusPoints != 0)
                             TextSpan(
                                 text:
-                                '\n\nStatus credits\nfor ${provider
-                                    .getUserInfo != null ? provider.getUserInfo!
-                                    .nextStatusTier ?? "" : ""}'
-                                    .toUpperCase(),
+                                    'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
+                                style: TextStyle(
+                                    color: AppThemeCustom
+                                        .getProfileDialogTextColor(context),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20)),
+                            TextSpan(
+                                text:
+                                    '\n\nStatus credits required\nto advance to ${provider.getUserInfo != null ? provider.getUserInfo!.nextStatusTier ?? "" : ""}'
+                                        .toUpperCase(),
                                 style: TextStyle(
                                     color: AppThemeCustom
                                         .getProfileDialogTextColor(context),
@@ -127,7 +120,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                     : 0,
                                 provider.getUserInfo != null
                                     ? provider.getUserInfo!
-                                    .requiredStatusPointsForNextTier
+                                        .requiredStatusPointsForNextTier
                                     : 0),
                             width: 0.05,
                             sizeUnit: GaugeSizeUnit.factor,
@@ -143,13 +136,13 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                     : 0,
                                 provider.getUserInfo != null
                                     ? provider.getUserInfo!
-                                    .requiredStatusPointsForNextTier
+                                        .requiredStatusPointsForNextTier
                                     : 0),
                             markerWidth: 25,
                             markerHeight: 25,
                             markerType: MarkerType.image,
                             color: (provider.getUserInfo != null &&
-                                provider.getUserInfo!.statusPoints != null)
+                                    provider.getUserInfo!.statusPoints != null)
                                 ? AppColors.white
                                 : Colors.transparent,
                             imageUrl: 'assets/common/play.png',
@@ -162,13 +155,16 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
               ),
             ),
             AppDimens.shape_15,
-            Text(
-              loc.txtHowToEarnStatusCredits,
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: AppThemeCustom.getProfileDialogTextColor(context),
-                  fontSize: 13),
-            ),
+            (flavor == Flavor.mhbc)
+                ? const SizedBox.shrink()
+                : Text(
+                    loc.txtHowToEarnStatusCredits,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color:
+                            AppThemeCustom.getProfileDialogTextColor(context),
+                        fontSize: 13),
+                  ),
             AppDimens.shape_15,
           ],
         ),

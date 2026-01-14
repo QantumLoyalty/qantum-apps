@@ -35,7 +35,7 @@ class Applogo extends StatelessWidget {
                   ),
                   iconPadding != null
                       ? AppDimens.getCustomBoxShape(iconPadding!)
-                      : AppDimens.shape_20
+                      : AppDimens.shape_10
                 ],
               ),
         Image.asset(AppIcons.app_logo,
@@ -44,7 +44,7 @@ class Applogo extends StatelessWidget {
                 customIconHeight ?? AppHelper.getAppIconSize(context).height),
         iconPadding != null
             ? AppDimens.getCustomBoxShape(iconPadding!)
-            : AppDimens.shape_20
+            : AppDimens.shape_10
       ],
     );
   }

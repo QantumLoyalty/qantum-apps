@@ -540,8 +540,7 @@ class AppHelper with LoggingMixin {
   static Size getAppIconSize(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc ||
-            Flavor.montaukTavern ||
+      case Flavor.montaukTavern ||
             Flavor.hogansReward ||
             Flavor.clh ||
             Flavor.queens:
@@ -555,6 +554,8 @@ class AppHelper with LoggingMixin {
 
       case Flavor.woollahra:
         return const Size(252, 114);
+      case Flavor.mhbc:
+        return const Size(142, 30);
       case Flavor.flinders:
         return const Size(56, 56);
 
@@ -569,7 +570,8 @@ class AppHelper with LoggingMixin {
 
     ;
     printMessage("Push Subscription ${pushSubscription.optedIn}");
-    printMessage("Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
+    printMessage(
+        "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 
     return oneSignalUser.pushSubscription.id;
   }
@@ -656,13 +658,14 @@ class AppHelper with LoggingMixin {
       return false;
     }
   }
+
   /// TEMP FUNCTION FOR MHBC APP ONLY
   static Future<bool> checkIfUserIsNew() async {
     SharedPreferenceHelper sharedPreferencesHelper =
-    await SharedPreferenceHelper.getInstance();
+        await SharedPreferenceHelper.getInstance();
     UserModel? userData = await sharedPreferencesHelper.getUserData();
     if (userData != null) {
-      if (userData.type != null && userData.type!.toLowerCase()=="new") {
+      if (userData.type != null && userData.type!.toLowerCase() == "new") {
         return true;
       } else {
         return false;
@@ -671,7 +674,4 @@ class AppHelper with LoggingMixin {
       return false;
     }
   }
-
-
-
 }

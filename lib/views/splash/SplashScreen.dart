@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       _deepLinkService.init((link) {
         _isOpenedFromDeepLink = true;
+        print("App Opened From DeepLink");
       });
 
       _checkLoginStatus();

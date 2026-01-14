@@ -197,7 +197,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                             Text(
                               loc.msgPleaseRegister,
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                   color: Theme.of(context)
                                       .textSelectionTheme
@@ -734,7 +734,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 ],
                               ),
                             ),
-                            AppDimens.shape_10,
+                            AppDimens.shape_5,
                             Row(
                               children: [
                                 Expanded(
@@ -800,7 +800,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 )),
                               ],
                             ),
-                            AppDimens.shape_10,
+                            AppDimens.shape_5,
                             InkWell(
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -832,21 +832,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               },
                             ),
 
-                            /*CheckboxListTile(
-                                controlAffinity: ListTileControlAffinity.leading,
-                                value: provider.tcCheckStatus,
-                                title: Text(
-                                  AppStrings.msgTermsAndConditionSignup,
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
-                                      fontSize: 11),
-                                ),
-                                onChanged: (value) {
-                                  provider.updateTCCheckStatus(value!);
-                                }),*/
-                            AppDimens.shape_20,
+                            AppDimens.shape_10,
                             InkWell(
                                 onTap: () {
                                   AppNavigator.navigateTo(
@@ -879,7 +865,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                       ),
                     ),
                   ),
-                  AppDimens.shape_20,
+                  AppDimens.shape_10,
                   AppButton(
                       text: loc.txtJoinNow.toUpperCase(),
                       onClick: () {

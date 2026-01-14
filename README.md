@@ -20,3 +20,9 @@
 ### MAX GAMING APP
 ### COMMAND TO RUN THE APP : flutter run apk --flavor maxx -t lib/main_max.dart
 ### COMMAND TO BUILD THE APP : flutter run apk --release --flavor maxx -t lib/main_max.dart
+
+### COMMAND FOR TEST THE DEEP LINK
+adb shell am start \                                    
+-a android.intent.action.VIEW \
+-d "https://betaapi.s2w.com.au"
+

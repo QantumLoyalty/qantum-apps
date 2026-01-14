@@ -1027,7 +1027,7 @@ class AppThemeCustom {
   static Color getTNCTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.starReward:
+      case Flavor.starReward || Flavor.mhbc:
         return AppColors.white;
 
       default:
