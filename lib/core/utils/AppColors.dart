@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../flavors_config/flavor_config.dart';
 
 class AppColors {
+
   /// QANTUM THEME ///
 
   static Color get qa_back_color => const Color(0xFF002D72);
@@ -446,7 +447,10 @@ class AppColors {
 
   static Color get kc_text_color => const Color(0xFFFFFFFF);
 
-  static Color get kc_floating_button_icon_color => const Color(0xFF34A5DF);
+  static Color get kc_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get kc_profile_cross_background_color => const Color(0xFF375F94);
+
 
 
 

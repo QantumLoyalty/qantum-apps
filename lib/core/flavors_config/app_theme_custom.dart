@@ -1000,6 +1000,8 @@ class AppThemeCustom {
         return AppColors.nst_back_color;
       case Flavor.woollahra:
         return Theme.of(context).canvasColor;
+      case Flavor.kingscliff:
+        return AppColors.kc_profile_cross_background_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
