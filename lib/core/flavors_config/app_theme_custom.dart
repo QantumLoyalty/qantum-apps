@@ -216,6 +216,16 @@ class AppThemeCustom {
     }
   }
 
+  static Color getProfileEditHeadingTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.kingscliff:
+        return Theme.of(context).dividerColor;
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+    }
+  }
+
   static Color getProfileDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -410,7 +420,7 @@ class AppThemeCustom {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -591,7 +601,7 @@ class AppThemeCustom {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -779,15 +789,17 @@ class AppThemeCustom {
     }
   }
 
-  static Color? getAccountSectionItemStyle(BuildContext context) {
+  static Color? getAccountSectionItemStyle(BuildContext context,{bool? isCommunication}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.northShoreTavern || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.aceRewards || Flavor.queens:
-        return Theme.of(context).primaryColorDark;
+        return isCommunication!=null?AppColors.white:Theme.of(context).primaryColorDark;
       case Flavor.flinders:
         return AppColors.white;
+      case Flavor.kingscliff:
+        return isCommunication!=null?AppColors.white:Theme.of(context).primaryColorDark;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;

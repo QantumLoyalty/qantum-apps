@@ -14,7 +14,8 @@ enum Flavor {
   brisbane,
   woollahra,
   bluewater,
-  flinders
+  flinders,
+  kingscliff
 }
 
 class FlavorValues {

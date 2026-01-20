@@ -1305,4 +1305,88 @@ class AppThemes {
       }),
     ),*/
       );
+
+  static ThemeData get kingscliffTheme => ThemeData(
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.kc_primary_color),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: AppColors.sr_text_field_text_color,
+        selectionColor: AppColors.sr_text_color,
+        cursorColor: AppColors.sr_text_field_text_color,
+      ),
+      textTheme: TextTheme(
+          bodyLarge: TextStyle(color: AppColors.sr_text_field_text_color)),
+      buttonTheme: ButtonThemeData(
+          textTheme: ButtonTextTheme.accent,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              onPrimary: AppColors.max_text_color,
+              onSecondary: AppColors.kc_button_border_color,
+              secondary: AppColors.kc_button_color,
+              primary: AppColors.transparent),
+          buttonColor: AppColors.kc_button_color),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.sr_button_color,
+          secondary: AppColors.white,
+          surface: AppColors.sr_button_color),
+      primaryColorDark: AppColors.kc_primary_color,
+      primaryColor: AppColors.kc_primary_color_dark,
+      cardColor: AppColors.kc_card_color,
+      canvasColor: AppColors.kc_scaffold_bg_color,
+      scaffoldBackgroundColor: AppColors.kc_scaffold_bg_color,
+      dividerColor: AppColors.kc_divider_color,
+      hintColor: AppColors.kc_hint_text_color,
+      iconTheme: IconThemeData(color: AppColors.white),
+      radioTheme: RadioThemeData(
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.white;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.sr_text_color;
+          }
+          return AppColors.white;
+        }),
+      ),
+      disabledColor: AppColors.kc_disabled_color,
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.kc_primary_color),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.white,
+          unselectedItemColor: AppColors.kc_text_color),
+      checkboxTheme: CheckboxThemeData(
+        checkColor:
+        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.kc_text_color;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.kc_hint_text_color;
+          }
+          return AppColors.kc_text_color;
+        }),
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return Colors.transparent;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.white;
+          }
+          return Colors.transparent;
+        }),
+      ),
+      progressIndicatorTheme:
+      ProgressIndicatorThemeData(color: AppColors.kc_primary_color),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.kc_floating_button_icon_color),
+      switchTheme: SwitchThemeData(
+          trackColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.kc_divider_color
+              : AppColors.white),
+          thumbColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.white
+              : AppColors.kc_divider_color)));
+
 }

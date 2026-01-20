@@ -231,7 +231,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -343,7 +343,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -457,7 +457,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -549,7 +549,7 @@ class AppHelper with LoggingMixin {
       case Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.brisbane ||
-            Flavor.bluewater:
+            Flavor.bluewater||Flavor.kingscliff:
         return const Size(142, 58);
 
       case Flavor.woollahra:
@@ -631,6 +631,8 @@ class AppHelper with LoggingMixin {
           return "Member";
         case Flavor.northShoreTavern:
           return "Silver";
+        case Flavor.kingscliff:
+          return "Valued";
         default:
           return "Valued";
       }

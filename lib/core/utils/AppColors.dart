@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import '../flavors_config/flavor_config.dart';
 
 class AppColors {
@@ -422,6 +424,34 @@ class AppColors {
 
   static Color get fw_canvas_color => const Color(0xFFb7c9ce);
 
+  /// KingsCliff Color///
+
+  static Color get kc_primary_color => const Color(0xFF34A5DF);
+
+  static Color get kc_primary_color_dark => const Color(0xFF375E93);
+
+  static Color get kc_button_color => const Color(0xFF34A5DF);
+
+  static Color get kc_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get kc_divider_color => const Color(0xFF34A5DE);
+
+  static Color get kc_hint_text_color => const Color(0x63ffffff);
+
+  static Color get kc_card_color => const Color(0xFFFFFFFF);
+
+  static Color get kc_scaffold_bg_color => const Color(0xFF1D345B);
+
+  static Color get kc_disabled_color => const Color(0xFF33A4DE);
+
+  static Color get kc_text_color => const Color(0xFFFFFFFF);
+
+  static Color get kc_floating_button_icon_color => const Color(0xFF34A5DF);
+
+
+
+
+
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
 
@@ -442,6 +472,8 @@ class AppColors {
   static Color get bright_sky_blue => const Color(0xFF28ABE2);
 
   static Color get disable_color => const Color(0xFFC0C0C0);
+
+  static Color get transparent =>  Colors.transparent;
 
   static Color getMembershipCategoryColor(String? membershipType) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;

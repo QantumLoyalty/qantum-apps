@@ -116,8 +116,11 @@ android {
             applicationId "com.au.flinders.app"
             versionName "1.0.0"
         }
-
-
+        kingscliff {
+            dimension "app"
+            applicationId "com.au.kingscliff.app"
+            versionName "1.0.0"
+        }
     }
 
 

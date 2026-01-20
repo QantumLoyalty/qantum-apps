@@ -26,3 +26,5 @@ adb shell am start \
 -a android.intent.action.VIEW \
 -d "https://betaapi.s2w.com.au"
 
+### Kingscliff app build ios
+### flutter build ipa --release --flavor kingscliff -t lib/main_kc.dart

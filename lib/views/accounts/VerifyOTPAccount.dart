@@ -127,8 +127,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                        color: AppThemeCustom.getProfileEditHeadingTextColor(context),
                       ),
                     ),
                     AppDimens.shape_5,

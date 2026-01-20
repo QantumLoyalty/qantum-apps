@@ -56,8 +56,14 @@ class MyProfileDialog with LoggingMixin {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: AppThemeCustom.getMyProfileCardBackground(
-                                context),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                flavor == Flavor.kingscliff? AppColors.kc_primary_color:AppThemeCustom.getMyProfileCardBackground(context),
+                                flavor == Flavor.kingscliff? AppColors.kc_primary_color_dark:AppThemeCustom.getMyProfileCardBackground(context),
+                              ],
+                            ),
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
