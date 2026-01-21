@@ -1324,9 +1324,9 @@ class AppThemes {
               primary: AppColors.transparent),
           buttonColor: AppColors.kc_button_color),
       colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: AppColors.sr_button_color,
+          primary: AppColors.white,
           secondary: AppColors.white,
-          surface: AppColors.sr_button_color),
+          surface: AppColors.white),
       primaryColorDark: AppColors.kc_primary_color,
       primaryColor: AppColors.kc_primary_color_dark,
       cardColor: AppColors.kc_card_color,

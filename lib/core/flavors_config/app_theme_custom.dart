@@ -211,6 +211,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
+      case Flavor.kingscliff:
+        return AppColors.kc_scaffold_bg_color;
       default:
         return Theme.of(context).disabledColor;
     }
@@ -769,7 +771,7 @@ class AppThemeCustom {
               Flavor.hogansReward ||
               Flavor.bluewater ||
               Flavor.flinders ||
-              Flavor.aceRewards:
+              Flavor.aceRewards||Flavor.kingscliff:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : (userInfoProvider.getUserInfo != null &&
@@ -926,7 +928,7 @@ class AppThemeCustom {
             Flavor.bluewater ||
             Flavor.flinders ||
             Flavor.aceRewards ||
-            Flavor.mhbc:
+            Flavor.mhbc||Flavor.kingscliff:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -980,7 +982,7 @@ class AppThemeCustom {
             Flavor.woollahra ||
             Flavor.bluewater ||
             Flavor.flinders ||
-            Flavor.aceRewards:
+            Flavor.aceRewards||Flavor.kingscliff:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (userInfoProvider.getUserInfo != null &&
@@ -1016,7 +1018,7 @@ class AppThemeCustom {
       case Flavor.woollahra:
         return Theme.of(context).canvasColor;
       case Flavor.kingscliff:
-        return AppColors.kc_profile_cross_background_color;
+        return AppColors.kc_primary_color_dark;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }

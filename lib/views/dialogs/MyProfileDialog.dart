@@ -57,8 +57,8 @@ class MyProfileDialog with LoggingMixin {
                       Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                               colors: [
                                 flavor == Flavor.kingscliff? AppColors.kc_primary_color:AppThemeCustom.getMyProfileCardBackground(context),
                                 flavor == Flavor.kingscliff? AppColors.kc_primary_color_dark:AppThemeCustom.getMyProfileCardBackground(context),
