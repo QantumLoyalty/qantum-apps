@@ -168,6 +168,9 @@ android {
             dimension "app"
             applicationId "com.au.kingscliff.app"
             versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
     }
 
