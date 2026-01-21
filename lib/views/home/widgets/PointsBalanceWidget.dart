@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppDimens.dart';
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../view_models/UserInfoProvider.dart';
@@ -25,6 +26,8 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
       duration: const Duration(seconds: 1),
     );
     _fadeAnim = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
+
+    Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
 
     // _controller.forward(); // start fade out
   }
@@ -59,37 +62,98 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                 borderRadius: BorderRadius.circular(10)),
             child:
                 Consumer<UserInfoProvider>(builder: (context, provider, child) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!
-                        .txtPointsBalance
-                        .toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 16,
-                        color:
-                            AppThemeCustom.getPointsBalanceTextColor(context),
-                        fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    formatPoints((provider.getUserInfo!.pointsValue ?? 0)),
-                    //formatPoints(500000),
-                    style: TextStyle(
-                        fontSize: 42,
-                        color:
-                            AppThemeCustom.getPointsBalanceTextColor(context),
-                        fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: AppThemeCustom.getPointsBalancePointTextColor(
-                            context)),
-                  ),
-                ],
-              );
+              return (provider.internetStatus != null)
+                  ? provider.internetStatus!
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .txtPointsBalance
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color:
+                                      AppThemeCustom.getPointsBalanceTextColor(
+                                          context),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              formatPoints(
+                                  (provider.getUserInfo!.pointsValue ?? 0)),
+                              style: TextStyle(
+                                  fontSize: 42,
+                                  color:
+                                      AppThemeCustom.getPointsBalanceTextColor(
+                                          context),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppThemeCustom
+                                      .getPointsBalancePointTextColor(context)),
+                            ),
+                          ],
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .txtPointsBalance
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color:
+                                      AppThemeCustom.getPointsBalanceTextColor(
+                                          context),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.unavailable,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color:
+                                      AppThemeCustom.getPointsBalanceTextColor(
+                                          context),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            AppDimens.shape_10,
+                            Text(
+                              AppLocalizations.of(context)!.msgNoInternet,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppThemeCustom.getPointsBalanceTextColor(
+                                    context),
+                              ),
+                            ),
+                          ],
+                        )
+                  : const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          height: 16,
+
+                        ),
+                        AppDimens.shape_10,
+                        SizedBox(
+                          width: 180,
+                          height: 42,
+
+                        ),
+                        AppDimens.shape_10,
+                        SizedBox(
+                          width: 180,
+                          height: 12,
+
+                        ),
+                      ],
+                    );
             }),
           ),
         ),

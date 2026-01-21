@@ -1267,6 +1267,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The payment has been cancelled.'**
   String get msgPaymentCancelled;
+
+  /// No description provided for @unavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unavailable'**
+  String get unavailable;
+
+  /// No description provided for @msgNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not connected to the internet'**
+  String get msgNoInternet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

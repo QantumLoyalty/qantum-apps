@@ -594,4 +594,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgPaymentCancelled => 'The payment has been cancelled.';
+
+  @override
+  String get unavailable => 'Unavailable';
+
+  @override
+  String get msgNoInternet => 'You are not connected to the internet';
 }

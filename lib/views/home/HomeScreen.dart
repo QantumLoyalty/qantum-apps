@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -28,12 +30,15 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with LoggingMixin, WidgetsBindingObserver {
   Timer? _pointsDialogTimer;
   late HomeProvider _homeProvider;
+  late UserInfoProvider _userInfoProvider;
   late Flavor flavor;
   late AppLocalizations loc;
   bool isMembershipCancelledDialogShown = false;
+  bool _isCustomTabOpening = false;
 
   final partnerOffersMissingApps = {
     Flavor.bluewater,
@@ -56,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   void initState() {
     super.initState();
     if (context.mounted) {
-      Provider.of<UserInfoProvider>(context, listen: false).retrieveUserInfo();
-      Provider.of<UserInfoProvider>(context, listen: false)
-          .runFetchProfileTimer();
-      Provider.of<UserInfoProvider>(context, listen: false)
-          .uploadDeviceDetail();
-      Provider.of<UserInfoProvider>(context, listen: false).checkForAppUpdate();
+      WidgetsBinding.instance.addObserver(this);
+      _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
+      _userInfoProvider.retrieveUserInfo();
+      _userInfoProvider.runFetchProfileTimer();
+      _userInfoProvider.uploadDeviceDetail();
+      _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
 
@@ -79,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   }
 
   startPointsDialogTimer() {
-    _pointsDialogTimer = Timer(const Duration(seconds: 2), () {
+    _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
       _homeProvider.updatePointsBalanceVisibility(false);
     });
   }
@@ -93,7 +98,15 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
   @override
   void dispose() {
     cancelPointsDialogTimer();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _isCustomTabOpening = false;
+    }
   }
 
   @override
@@ -108,8 +121,6 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
             if (userInfoProvider.getUserInfo != null &&
                 userInfoProvider.getUserInfo!.isUserStatusCancelled() &&
                 !isMembershipCancelledDialogShown) {
-
-
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (!mounted) return;
                 // Ensure this route is current and the dialog hasn't already been shown
@@ -122,6 +133,46 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                       .showMembershipCancelledDialog(context);
                 }
               });
+            }
+
+            if (userInfoProvider.getUserInfo != null &&
+                provider.deeplinkPayloads != null) {
+              if (provider.startChewzieScreen != null &&
+                  provider.startChewzieScreen! &&
+                  !_isCustomTabOpening) {
+                _isCustomTabOpening = true;
+
+                WidgetsBinding.instance.addPostFrameCallback((_) async {
+                  final decodedLink =
+                      Uri.decodeComponent(provider.deeplinkPayloads!);
+
+                  final uri = Uri.parse(decodedLink);
+
+                  final jsonPayload = {
+                    "memberId": "${userInfoProvider.getUserInfo!.cardNumber}",
+                  };
+
+                  final base64Payload =
+                      base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
+                  final updatedUri = uri.replace(
+                    queryParameters: {
+                      ...uri.queryParameters, // keep existing params
+                      'memberData': base64Payload, // add yours
+                    },
+                  );
+
+                  await launchDeepLinkURL(updatedUri);
+                  provider.resetDeepLinkNavigation();
+                  _isCustomTabOpening = false;
+
+                  /* AppNavigator.navigateTo(context, AppNavigator.appWebView,
+                      arguments: updatedUri.toString());*/
+                });
+
+                /*Future.delayed(Duration.zero, () {
+                  provider.resetDeepLinkNavigation();
+                });*/
+              }
             }
 
             return Column(
@@ -471,5 +522,26 @@ class _HomeScreenState extends State<HomeScreen> with LoggingMixin {
                 .replaceAll(" ", "\n")
                 .toUpperCase() &&
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
+  }
+
+  int i = 0;
+
+  Future<void> launchDeepLinkURL(Uri uri) async {
+    print("Called URI ${uri.toString()}");
+    print("Launch Count ${i++}");
+    await launchUrl(uri,
+        customTabsOptions: CustomTabsOptions(
+          showTitle: false,
+          urlBarHidingEnabled: true,
+          shareState: CustomTabsShareState.off,
+          colorSchemes: CustomTabsColorSchemes.defaults(
+            toolbarColor: Theme.of(context).primaryColor,
+          ),
+        ),
+        safariVCOptions: SafariViewControllerOptions(
+          barCollapsingEnabled: true,
+          preferredBarTintColor: Theme.of(context).primaryColor,
+          dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+        ));
   }
 }

@@ -25,6 +25,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   String? get networkMessage => _networkMessage;
 
+  List<OfferModel>? _specialOffersOriginal;
   List<OfferModel>? _specialOffers;
 
   List<OfferModel>? get specialOffers => _specialOffers;
@@ -46,8 +47,47 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   List<String>? get offersFilters => _offersFilters;
 
-  getSpecialOffersFilters() async {
+  String? _selectedFilter;
+
+  String? get selectedFilter => _selectedFilter;
+
+  updateSelectedFilter(String? value) {
+    if (value == null) {
+      _selectedFilter = "ALL";
+    } else {
+      _selectedFilter = value;
+    }
+    applyFilterOnOffers();
+    notifyListeners();
+  }
+
+  applyFilterOnOffers() {
+    if (_specialOffersOriginal != null && _specialOffersOriginal!.isNotEmpty) {
+      if (_selectedFilter == null || _selectedFilter == "ALL") {
+        _specialOffers = null;
+        _specialOffers = _specialOffersOriginal;
+      } else {
+        _specialOffers = _specialOffersOriginal!
+            .where((value) =>
+                value.appears != null &&
+                value.appears!.toUpperCase() == _selectedFilter!.toUpperCase())
+            .toList();
+      }
+
+      notifyListeners();
+    }
+  }
+
+  getSpecialOffersFilters({bool? showLoader}) async {
     try {
+
+      if (showLoader != null && showLoader) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _showLoader = true;
+          notifyListeners();
+        });
+      }
+
       NetworkResponse networkResponse =
           await AppDataService.getInstance().fetchSpecialOffersFilters();
       logEvent(networkResponse);
@@ -64,16 +104,16 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
             if (filterData.containsKey('menu_Type') &&
                 filterData['menu_Type'].toString().toLowerCase() ==
                     OffersFilterType.multiple.name) {
-              if (filterData.containsKey('filter_Type')) {
-                _offersFilters = [];
+              _offersFilters = ['ALL'];
 
+              if (filterData.containsKey('filter_Type')) {
                 filterData['filter_Type'].forEach((item) {
                   _offersFilters!.add(item);
                 });
               }
             }
 
-            getSpecialOffers(showLoader: true);
+            getSpecialOffers(showLoader: false);
           } else {
             _isErrorOnFilterResponse = true;
             _filterResponse =
@@ -91,6 +131,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       _isErrorOnFilterResponse = true;
       _filterResponse = e.toString();
     } finally {
+      _showLoader = false;
       notifyListeners();
     }
   }
@@ -143,12 +184,13 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
           if (response.keys.contains("success") &&
               (response["success"] as bool) &&
               (response.keys.contains("data"))) {
-            _specialOffers = [];
+            _specialOffersOriginal = [];
             response["data"].forEach((item) {
-              _specialOffers!.add(OfferModel.fromJson(item));
+              _specialOffersOriginal!.add(OfferModel.fromJson(item));
             });
 
             logEvent("SPECIAL OFFERS LIST SIZE ${_specialOffers?.length}");
+            applyFilterOnOffers();
           }
         }
       }
@@ -169,12 +211,15 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
   bool get isFetching => _isFetching;
 
   fetchSpecialOffersTimer() async {
-    await getSpecialOffers(showLoader: true);
+    //await getSpecialOffers(showLoader: true);
+    await getSpecialOffersFilters();
+
     _fetchSpecialOfferTimer = Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTime), (value) async {
       if (!_isFetching) {
         _isFetching = true;
-        await getSpecialOffers(showLoader: false);
+        //  await getSpecialOffers(showLoader: false);
+        await getSpecialOffersFilters();
         _isFetching = false;
       }
     });

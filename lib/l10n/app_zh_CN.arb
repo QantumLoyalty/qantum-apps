@@ -198,5 +198,7 @@
   "logoutMessage": "请稍候，我们正在为您退出登录。",
   "msgForOtherMembershipSeeReception": "如需其他会员方案\n\n请前往前台咨询。",
   "msgPaymentCancelled": "付款已取消。",
-  "msgEmptyAddress": "请输入有效的地址以继续。"
+  "msgEmptyAddress": "请输入有效的地址以继续。",
+  "unavailable": "不可用",
+  "msgNoInternet": "您未连接到互联网"
 }

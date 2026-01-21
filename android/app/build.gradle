@@ -38,83 +38,131 @@ android {
         starReward {
             dimension "app"
             applicationId "com.au.starhotels.app"
-            versionName "Star Reward"
+            versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "stargroup-applink.chewzie.net"
+            ]
         }
         senseOfTaste {
             dimension "app"
             applicationId "com.au.senseoftaste.app"
             versionName "Sense of Taste"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         maxx {
             dimension "app"
             applicationId "com.au.max.app"
             versionName "Max Gaming"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         qantum {
             dimension "app"
             applicationId "com.au.quantum.app"
             versionName "Qantum"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         qantumClub {
             dimension "app"
             applicationId "com.au.quantumclub.app"
             versionName "Qantum"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         mhbc {
             dimension "app"
             applicationId "com.au.mhbc.app"
             versionName "1.0.9"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         clh {
             dimension "app"
             applicationId "com.au.clh.app"
             versionName "Central Lane Hotel"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         montaukTavern {
             dimension "app"
             applicationId "com.au.montauk.app"
             versionName "Montauk Tavern"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         hogansReward {
             dimension "app"
             applicationId "com.au.hogansreward.app"
             versionName "Hogan's Reward"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         northShoreTavern {
             dimension "app"
             applicationId "com.au.northshoretavern.app"
             versionName "North Shore Tavern"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         aceRewards {
             dimension "app"
             applicationId "com.au.acerewards.app"
             versionName "Ace Rewards"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         queens {
             dimension "app"
             applicationId "com.au.queenshotel.app"
             versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
 
         brisbane {
             dimension "app"
             applicationId "com.au.brisbanebrewing.app"
             versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         woollahra {
             dimension "app"
             applicationId "com.au.woollahra.app"
             versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
             versionName "1.0.3"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         flinders {
             dimension "app"
             applicationId "com.au.flinders.app"
             versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
         }
         kingscliff {
             dimension "app"

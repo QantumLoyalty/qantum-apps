@@ -20,6 +20,9 @@ class _AppWebViewState extends State<AppWebView> {
   @override
   void initState() {
     super.initState();
+
+    print("WEB VIEW URL: ${widget.url}");
+
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(onPageFinished: (String url) {

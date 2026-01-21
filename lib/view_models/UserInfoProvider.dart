@@ -114,7 +114,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           logEvent("Event:: Updated user:: ${userModel.toString()}");
           SharedPreferenceHelper sharedPreferenceHelper =
               await SharedPreferenceHelper.getInstance();
-          sharedPreferenceHelper.saveUserData(userModel);
+          await sharedPreferenceHelper.saveUserData(userModel);
           _userModel = userModel;
         }
 
@@ -592,7 +592,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         params["Surname"] = tempUser!.lastName;
         params["Email"] = tempUser!.email;
         params["Mobile"] = tempUser!.mobile;
-        params["DateOfBirth"] = tempUser!.dateOfBirth;
+       // params["DateOfBirth"] = tempUser!.dateOfBirth;
         NetworkResponse networkResponse =
             await UserService.getInstance().updateUserProfile(params);
         logEvent("UPDATE USER INFO:: ${networkResponse.response}");
@@ -875,7 +875,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   getAppInfo() async {
     final appInfo = await PackageInfo.fromPlatform();
     logEvent('${appInfo.version} ${appInfo.appName}');
-    version = appInfo.version;
+    version = "${appInfo.version} (${appInfo.buildNumber})";
     notifyListeners();
   }
 
@@ -954,5 +954,16 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     _showLogoutLoader = null;
     _logoutSuccess = null;
     notifyListeners();
+  }
+
+  bool? _internetStatus;
+
+  bool? get internetStatus => _internetStatus;
+
+  checkInternetStatus() async {
+    _internetStatus = await AppHelper.checkInternetConnection();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }

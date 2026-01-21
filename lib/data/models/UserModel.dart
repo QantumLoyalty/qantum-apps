@@ -157,8 +157,8 @@ class UserModel {
     data['Suburb'] = suburb ?? "";
     data['State'] = state ?? "";
     data['DateJoined'] = dateJoined ?? "";
-    data['PointsBalance'] = pointsBalance ?? 0.0;
-    data['PointsValue'] = pointsValue ?? 0.0;
+    data['PointsBalance'] = pointsValue ?? 0.0;
+    data['PointsValue'] = pointsBalance ?? 0.0;
     data['StatusPoints'] = statusPoints ?? 0.0;
     data['StatusTier'] = statusTier ?? "";
     data['RequiredStatusPointsForNextTier'] =
