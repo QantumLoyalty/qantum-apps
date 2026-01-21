@@ -234,7 +234,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward || Flavor.kingscliff:
+      case Flavor.starReward:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -602,42 +602,6 @@ class AppHelper with LoggingMixin {
   }
 
   static String getUserTierType(UserModel userData) {
-    if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
-      if (userData.statusTier!.toLowerCase() == "") {
-        return "STAFF PRE 3MTH";
-      } else {
-        return userData.statusTier!;
-      }
-    } else {
-      /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
-      FlavorConfig flavorConfig = FlavorConfig.instance;
-      switch (flavorConfig.flavor) {
-        case Flavor.mhbc:
-          return "Crewmate";
-        case Flavor.montaukTavern:
-          return "Member";
-        case Flavor.clh:
-          return "Member";
-        case Flavor.hogansReward:
-          return "Bronze";
-        case Flavor.queens:
-          return "Queens";
-        case Flavor.aceRewards:
-          return "Tens";
-        case Flavor.brisbane:
-          return "Member";
-        case Flavor.woollahra:
-          return "Regulars";
-        case Flavor.bluewater:
-          return "Deckhand";
-        case Flavor.flinders:
-          return "Member";
-        case Flavor.northShoreTavern:
-          return "Silver";
-        case Flavor.kingscliff:
-          return "Valued";
-        default:
-          return "Valued";
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
     if (flavorConfig.flavor == Flavor.starReward) {
@@ -683,6 +647,8 @@ class AppHelper with LoggingMixin {
             return "Member";
           case Flavor.northShoreTavern:
             return "Silver";
+          case Flavor.kingscliff:
+            return "Valued";
           default:
             return "Valued";
         }
