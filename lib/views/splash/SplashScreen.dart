@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qantum_apps/services/DeeplinkService.dart';
+import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
@@ -29,7 +31,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
       _deepLinkService.init((link) {
         _isOpenedFromDeepLink = true;
-        print("App Opened From DeepLink");
+
+        final encodedLink = link.queryParameters['link'];
+        if (encodedLink == null) return;
+
+        Provider.of<HomeProvider>(context, listen: false)
+            .setDeepLinkParams(encodedLink);
+
+        /*final decodedLink = Uri.decodeComponent(encodedLink);
+        final innerUri = Uri.parse(decodedLink);
+
+        final encodedData = innerUri.queryParameters['data'];
+        if (encodedData == null) return;
+
+        AppHelper.decodeBase64Payload(encodedData);*/
       });
 
       _checkLoginStatus();

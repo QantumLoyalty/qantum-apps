@@ -199,5 +199,7 @@
   "logoutMessage": "請稍候，我們正在為您登出。",
   "msgForOtherMembershipSeeReception": "如需其他會員方案\n\n請洽接待處。",
   "msgPaymentCancelled": "付款已取消。",
-  "msgEmptyAddress": "請輸入有效的地址以繼續。"
+  "msgEmptyAddress": "請輸入有效的地址以繼續。",
+  "unavailable": "不可用",
+  "msgNoInternet": "您未连接到互联网"
 }

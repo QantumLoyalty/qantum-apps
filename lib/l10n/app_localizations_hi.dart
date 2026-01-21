@@ -594,4 +594,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgPaymentCancelled => 'भुगतान रद्द कर दिया गया है।';
+
+  @override
+  String get unavailable => 'Unavailable';
+
+  @override
+  String get msgNoInternet => 'You are not connected to the internet';
 }

@@ -594,6 +594,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgPaymentCancelled => '付款已取消。';
+
+  @override
+  String get unavailable => '不可用';
+
+  @override
+  String get msgNoInternet => '您未连接到互联网';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1186,4 +1192,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgPaymentCancelled => '付款已取消。';
+
+  @override
+  String get unavailable => '不可用';
+
+  @override
+  String get msgNoInternet => '您未连接到互联网';
 }

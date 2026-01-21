@@ -198,5 +198,7 @@
   "uploadingSelfie": "Please wait, while we are uploading your picture",
   "logoutMessage": "Just a moment, we’re logging you out.",
   "msgForOtherMembershipSeeReception": "For all other memberships\n\nPlease see reception.",
-  "msgPaymentCancelled": "The payment has been cancelled."
+  "msgPaymentCancelled": "The payment has been cancelled.",
+  "unavailable": "Unavailable",
+  "msgNoInternet": "You are not connected to the internet"
 }

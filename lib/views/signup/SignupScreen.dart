@@ -833,7 +833,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                             ),
 
                             AppDimens.shape_10,
-                            InkWell(
+                            /*InkWell(
                                 onTap: () {
                                   AppNavigator.navigateTo(
                                       context, AppNavigator.appWebView,
@@ -857,7 +857,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                 context),
                                             fontWeight: FontWeight.bold))
                                   ]),
-                                )),
+                                )),*/
 
 
                           ],

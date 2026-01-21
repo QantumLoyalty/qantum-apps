@@ -198,5 +198,7 @@
   "logoutMessage": "कृपया थोड़ी देर प्रतीक्षा करें, हम आपको लॉग आउट कर रहे हैं।",
   "msgForOtherMembershipSeeReception": "अन्य सभी सदस्यताओं के लिए\n\nकृपया रिसेप्शन से संपर्क करें।",
   "msgPaymentCancelled": "भुगतान रद्द कर दिया गया है।",
-  "msgEmptyAddress": "कृपया आगे बढ़ने के लिए सही पता दर्ज करें।"
+  "msgEmptyAddress": "कृपया आगे बढ़ने के लिए सही पता दर्ज करें।",
+  "unavailable": "Unavailable",
+  "msgNoInternet": "You are not connected to the internet"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
@@ -34,6 +35,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
   void initState() {
     super.initState();
     Provider.of<UserInfoProvider>(context, listen: false).getUsersBenefits();
+    Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
 
     homeProvider = Provider.of<HomeProvider>(context, listen: false);
   }
@@ -110,40 +112,68 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                   borderRadius: BorderRadius.circular(10)),
                               child: Stack(
                                 children: [
-                                  (provider.benefitItems != null &&
-                                          provider.benefitItems!.isNotEmpty)
-                                      ? Positioned.fill(
-                                          top: 0,
-                                          left: 0,
-                                          right: 0,
-                                          bottom: 0,
-                                          child: ListView.builder(
-                                            itemCount:
-                                                provider.benefitItems!.length -
-                                                    1,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Row(
-                                                children: [
-                                                  AppDimens.shape_10,
-                                                  Icon(
-                                                    Icons.check_circle,
-                                                    size: 16,
-                                                    color: AppColors
-                                                        .getMembershipCategoryColor(
-                                                            provider
-                                                                .getUserInfo!
-                                                                .statusTier),
-                                                  ),
-                                                  Expanded(
-                                                      child: Html(
-                                                    data: provider
-                                                        .benefitItems![index],
+                                  (provider.internetStatus != null)
+                                      ? (provider.internetStatus!
+                                          ? (provider.benefitItems != null &&
+                                                  provider
+                                                      .benefitItems!.isNotEmpty)
+                                              ? Positioned.fill(
+                                                  top: 0,
+                                                  left: 0,
+                                                  right: 0,
+                                                  bottom: 0,
+                                                  child: ListView.builder(
+                                                    itemCount: provider
+                                                            .benefitItems!
+                                                            .length -
+                                                        1,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Row(
+                                                        children: [
+                                                          AppDimens.shape_10,
+                                                          Icon(
+                                                            Icons.check_circle,
+                                                            size: 16,
+                                                            color: AppColors
+                                                                .getMembershipCategoryColor(provider
+                                                                    .getUserInfo!
+                                                                    .statusTier),
+                                                          ),
+                                                          Expanded(
+                                                              child: Html(
+                                                            data: provider
+                                                                    .benefitItems![
+                                                                index],
+                                                          ))
+                                                        ],
+                                                      );
+                                                    },
                                                   ))
+                                              : Container()
+                                          : Center(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons.wifi_off,
+                                                    size: 30,
+                                                    color: AppColors.black,
+                                                  ),
+                                                  AppDimens.shape_10,
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .msgNoInternet,
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: AppColors.black,
+                                                    ),
+                                                  ),
                                                 ],
-                                              );
-                                            },
-                                          ))
+                                              ),
+                                            ))
                                       : Container(),
                                   (provider.showLoader != null &&
                                           provider.showLoader!)

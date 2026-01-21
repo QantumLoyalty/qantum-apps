@@ -89,13 +89,19 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                 (provider.getUserInfo != null)
                                     ? ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          AppIcons.getCardBackground(
-                                              AppHelper.getUserTierType(
-                                                  provider.getUserInfo!)),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
+                                        child: Material(
+                                            shape: RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    color: AppColors.white,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: Image.asset(
+                                              AppIcons.getCardBackground(
+                                                  AppHelper.getUserTierType(
+                                                      provider.getUserInfo!)),
+                                              fit: BoxFit.cover,
+                                            )))
                                     : Container(),
                                 Align(
                                   alignment: Alignment.center,
@@ -143,7 +149,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                 (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
-
                               if (userInfoProvider.getUserInfo != null &&
                                   !userInfoProvider.getUserInfo!
                                       .isUserStatusCancelled()) {

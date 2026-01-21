@@ -28,7 +28,12 @@ class SharedPreferenceHelper {
   }
 
   saveUserData(UserModel user) async {
-    await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
+    try {
+      await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
+    } catch (e) {
+      print("Error while saving the user: $e");
+    }
+
     //   await _appSecureStore!.write(key: USER, value: jsonEncode(user.toJson()));
   }
 

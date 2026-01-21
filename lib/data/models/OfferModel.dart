@@ -15,6 +15,7 @@ class OfferModel {
   String? qrURL;
   bool? active;
   String? expiryDate;
+  String? appears;
 
   OfferModel(
       {this.header,
@@ -31,7 +32,8 @@ class OfferModel {
       this.updatedAt,
       this.id,
       this.qrURL,
-      this.expiryDate});
+      this.expiryDate,
+      this.appears});
 
   OfferModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
@@ -52,6 +54,10 @@ class OfferModel {
     qrURL = json['qr_url'] ?? "";
     active = json['active'] ?? false;
     expiryDate = json['expiryDate'] ?? "";
+
+    if (json.containsKey('appears')) {
+      appears = json['appears'];
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -84,13 +90,16 @@ class OfferModel {
     if (expiryDate != null) {
       data['expiryDate'] = expiryDate!;
     }
-    
+    if (appears != null) {
+      data['appears'] = appears!;
+    }
+
     return data;
   }
 
   @override
   String toString() {
-    return 'OfferModel{header: $header, description: $description, voucherType: $voucherType, ratingLevel: $ratingLevel, expiry: $expiry, validDays: $validDaysOfWeek, validTime: $validTime, triggerValue: $triggerValue, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt,id: $id, qrURL: $qrURL}';
+    return 'OfferModel{header: $header, description: $description, voucherType: $voucherType, ratingLevel: $ratingLevel, expiry: $expiry, validDays: $validDaysOfWeek, validTime: $validTime, triggerValue: $triggerValue, image: $image, status: $status, createdAt: $createdAt, updatedAt: $updatedAt,id: $id, qrURL: $qrURL, appears: $appears}';
   }
 }
 

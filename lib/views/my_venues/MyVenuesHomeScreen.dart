@@ -23,15 +23,17 @@ class MyVenuesHomeScreen extends StatefulWidget {
 class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     with SingleTickerProviderStateMixin {
   double scaleValue = 1.0;
+  double largeAdvHeight = 180.0;
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
+  late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
     Provider.of<PromotionsProvider>(context, listen: false)
         .fetchPromotionsTimer();
-
+    flavor = FlavorConfig.instance.flavor!;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 100),
       vsync: this,
@@ -60,6 +62,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
         Expanded(
           child: Consumer2<PromotionsProvider, HomeProvider>(
               builder: (context, provider, homeProvider, child) {
+
+
+                largeAdvHeight= (flavor == Flavor.mhbc) ? 180 : 210;
+
             return Stack(
               children: [
                 provider.promotions != null
@@ -67,8 +73,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                         child: Column(
                           children: [
                             SizedBox(
-                                height: 180,
-                                //height: 220,
+                                height: largeAdvHeight,
                                 width: MediaQuery.of(context).size.width,
                                 child: provider.promotions!.largePromotions !=
                                             null &&
@@ -107,8 +112,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     .large);
                                                       },
                                                       child: SizedBox(
-                                                        //height: 220,
-                                                        height: 160,
+                                                        height: largeAdvHeight,
                                                         width: MediaQuery.of(
                                                                 context)
                                                             .size

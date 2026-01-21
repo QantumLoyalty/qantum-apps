@@ -241,4 +241,23 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
       _fetchSeeAllTimer = null;
     }
   }
+
+  String? _deeplinkPayloads;
+
+  String? get deeplinkPayloads => _deeplinkPayloads;
+  bool? _startChewzieScreen;
+
+  bool? get startChewzieScreen => _startChewzieScreen;
+
+  setDeepLinkParams(String data) {
+    _deeplinkPayloads = data;
+    _startChewzieScreen = true;
+    notifyListeners();
+  }
+
+  resetDeepLinkNavigation() {
+    _deeplinkPayloads = null;
+    _startChewzieScreen = null;
+    notifyListeners();
+  }
 }

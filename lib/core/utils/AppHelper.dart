@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -599,40 +602,54 @@ class AppHelper with LoggingMixin {
   }
 
   static String getUserTierType(UserModel userData) {
-    if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
-      if (userData.statusTier!.toLowerCase() == "") {
-        return "STAFF PRE 3MTH";
+    FlavorConfig flavorConfig = FlavorConfig.instance;
+
+    if (flavorConfig.flavor == Flavor.starReward) {
+      if (userData.membershipCategory != null &&
+          userData.membershipCategory!.isNotEmpty) {
+        if (userData.membershipCategory!.toLowerCase() == "") {
+          return "STAFF PRE 3MTH";
+        } else {
+          return userData.membershipCategory!;
+        }
       } else {
-        return userData.statusTier!;
+        return "Valued";
       }
     } else {
-      /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
-      FlavorConfig flavorConfig = FlavorConfig.instance;
-      switch (flavorConfig.flavor) {
-        case Flavor.mhbc:
-          return "Crewmate";
-        case Flavor.montaukTavern:
-          return "Member";
-        case Flavor.clh:
-          return "Member";
-        case Flavor.hogansReward:
-          return "Bronze";
-        case Flavor.queens:
-          return "Queens";
-        case Flavor.aceRewards:
-          return "Tens";
-        case Flavor.brisbane:
-          return "Member";
-        case Flavor.woollahra:
-          return "Regulars";
-        case Flavor.bluewater:
-          return "Deckhand";
-        case Flavor.flinders:
-          return "Member";
-        case Flavor.northShoreTavern:
-          return "Silver";
-        default:
-          return "Valued";
+      if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
+        if (userData.statusTier!.toLowerCase() == "") {
+          return "STAFF PRE 3MTH";
+        } else {
+          return userData.statusTier!;
+        }
+      } else {
+        /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
+        switch (flavorConfig.flavor) {
+          case Flavor.mhbc:
+            return "Crewmate";
+          case Flavor.montaukTavern:
+            return "Member";
+          case Flavor.clh:
+            return "Member";
+          case Flavor.hogansReward:
+            return "Bronze";
+          case Flavor.queens:
+            return "Queens";
+          case Flavor.aceRewards:
+            return "Tens";
+          case Flavor.brisbane:
+            return "Member";
+          case Flavor.woollahra:
+            return "Regulars";
+          case Flavor.bluewater:
+            return "Deckhand";
+          case Flavor.flinders:
+            return "Member";
+          case Flavor.northShoreTavern:
+            return "Silver";
+          default:
+            return "Valued";
+        }
       }
     }
   }
@@ -673,5 +690,28 @@ class AppHelper with LoggingMixin {
     } else {
       return false;
     }
+  }
+
+  static void decodeBase64Payload(String encodedData) {
+    try {
+      final normalized = base64.normalize(encodedData);
+      final decodedBytes = base64.decode(normalized);
+      final jsonString = utf8.decode(decodedBytes);
+
+      final Map<String, dynamic> payload = jsonDecode(jsonString);
+
+      print("DECODED DATA: $payload");
+    } catch (e) {
+      // log error
+      print("DECODING ERROR: $e");
+    }
+  }
+
+  static Future<bool> checkInternetConnection() async {
+    final results = await Connectivity().checkConnectivity();
+
+    print("Internet Status: $results");
+
+    return !results.contains(ConnectivityResult.none);
   }
 }
