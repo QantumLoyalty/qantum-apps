@@ -477,6 +477,10 @@ class AppColors {
 
   static Color get disable_color => const Color(0xFFC0C0C0);
 
+  static Color get white_shadow => const Color(0x80FFFFFF);
+
+
+
   static Color get transparent =>  Colors.transparent;
 
   static Color getMembershipCategoryColor(String? membershipType) {

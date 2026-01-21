@@ -2,15 +2,16 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '/core/flavors_config/flavor_config.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
-import '../../views/dialogs/ErrorDialog.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../view_models/UserLoginProvider.dart';
+import '../../views/dialogs/ErrorDialog.dart';
 import '../common_widgets/AppButton.dart';
 import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
@@ -154,9 +155,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 0.5,
-                                      color: Theme.of(context).dividerColor),
+                                      color:flavor == Flavor.kingscliff
+                                          ? AppColors.white.withOpacity(0.1):Theme.of(context).dividerColor),
                                   color: AppThemeCustom.getTextFieldBackground(
-                                      context),
+                                      context,
+                                      isShadow: true),
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: AppColors.black,
                                     ),
                                     textStyle: TextStyle(
-                                        color: Theme.of(context)
+                                        color: flavor == Flavor.kingscliff
+                                            ? AppColors.white:Theme.of(context)
                                             .textSelectionTheme
                                             .selectionHandleColor),
                                     onChanged: (code) {
@@ -186,7 +190,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: VerticalDivider(
                                         width: 1,
                                         thickness: 1,
-                                        color: Theme.of(context).dividerColor,
+                                        color: flavor == Flavor.kingscliff
+                                            ? AppColors.white:Theme.of(context).dividerColor,
                                       )),
                                   Expanded(
                                     child: Padding(
@@ -202,13 +207,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         style: TextStyle(
                                             color: AppThemeCustom
                                                 .getTextFieldTextColor(
-                                                    context)),
+                                                    context,isShadow: true)),
                                         decoration: InputDecoration(
                                           counterText: "",
                                           hintText: "0400000000",
                                           hintStyle: TextStyle(
-                                              color:
-                                                  Theme.of(context).hintColor),
+                                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true)),
                                           fillColor: Colors.transparent,
                                           filled: true,
                                           border: InputBorder.none,

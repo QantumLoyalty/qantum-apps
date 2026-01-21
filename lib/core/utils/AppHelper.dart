@@ -234,7 +234,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -346,7 +346,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -460,7 +460,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward:
+      case Flavor.starReward||Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(

@@ -317,7 +317,7 @@ class AppThemeCustom {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward:
+      case Flavor.starReward|| Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -377,21 +377,36 @@ class AppThemeCustom {
     }
   }
 
-  static Color getTextFieldBackground(BuildContext context) {
+  static Color getTextFieldBackground(BuildContext context,{bool? isShadow}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
+      case Flavor.kingscliff:
+        return isShadow !=null? AppColors.white_shadow:Theme.of(context).cardColor;
       default:
         return Theme.of(context).cardColor;
     }
   }
 
-  static Color getTextFieldTextColor(BuildContext context) {
+  static Color getHintTextFieldColor(BuildContext context,{bool? isShadow}) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.kingscliff:
+        return isShadow !=null?  AppColors.white.withOpacity(0.39):Theme.of(context).hintColor;
+      default:
+        return Theme.of(context).hintColor;
+    }
+  }
+
+
+  static Color getTextFieldTextColor(BuildContext context,{bool? isShadow}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
         return Theme.of(context).textSelectionTheme.selectionColor!;
+      case Flavor.kingscliff:
+        return isShadow !=null? AppColors.white:AppColors.black;
       default:
         return AppColors.black;
     }
