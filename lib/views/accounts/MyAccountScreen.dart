@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
+import '../../core/network/APIList.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/MyAccountProvider.dart';
@@ -88,14 +89,20 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                         context)),
                             onTap: () {
                               AppHelper.printMessage(
-                                  myAccountProvider.accountOptions[
-                                      myAccountProvider.accountOptions.keys
-                                          .elementAt(index)]!);
-                              AppNavigator.navigateTo(
-                                  context,
-                                  myAccountProvider.accountOptions[
-                                      myAccountProvider.accountOptions.keys
-                                          .elementAt(index)]!);
+                                  "CLICKED ONE: ${myAccountProvider.accountOptions[myAccountProvider.accountOptions.keys.elementAt(index)]!}");
+                              if (myAccountProvider.accountOptions.keys
+                                      .elementAt(index) ==
+                                  "txtTermsAndConditions") {
+                                AppNavigator.navigateTo(
+                                    context, AppNavigator.appWebView,
+                                    arguments: APIList.TERMS_AND_CONDITIONS);
+                              } else {
+                                AppNavigator.navigateTo(
+                                    context,
+                                    myAccountProvider.accountOptions[
+                                        myAccountProvider.accountOptions.keys
+                                            .elementAt(index)]!);
+                              }
                             },
                           );
                         },

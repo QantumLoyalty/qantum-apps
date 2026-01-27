@@ -104,7 +104,6 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_HOME_BUTTONS;
-      logEvent(URL);
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',

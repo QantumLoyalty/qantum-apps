@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -111,7 +112,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             networkResponse.response as Map<String, dynamic>;
         if (response.containsKey("user")) {
           UserModel userModel = UserModel.fromJson(response["user"]);
-          logEvent("Event:: Updated user:: ${userModel.toString()}");
+          debugPrint("Event:: Updated user:: ${userModel.toString()}",wrapWidth: 1024);
           SharedPreferenceHelper sharedPreferenceHelper =
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);

@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen>
   late Flavor flavor;
   late AppLocalizations loc;
   bool isMembershipCancelledDialogShown = false;
-  bool _isCustomTabOpening = false;
+
 
   final partnerOffersMissingApps = {
     Flavor.bluewater,
@@ -74,15 +74,48 @@ class _HomeScreenState extends State<HomeScreen>
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
 
-      //checkForPushNotificationPermission();
     }
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    print("didChangeDependencies HOME");
+  bool _deepLinkHandled = false;
+
+  void _tryOpenDeepLink(
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      ) {
+    if (_deepLinkHandled) return;
+
+    if (provider.startChewzieScreen != true) return;
+    if (provider.deeplinkPayloads == null) return;
+    if (userInfoProvider.getUserInfo == null) return;
+
+    _deepLinkHandled = true;
+
+    final decodedLink =
+    Uri.decodeComponent(provider.deeplinkPayloads!);
+
+    final uri = Uri.parse(decodedLink);
+
+    final jsonPayload = {
+      "memberId": userInfoProvider.getUserInfo!.cardNumber,
+    };
+
+    final base64Payload =
+    base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
+
+    final updatedUri = uri.replace(
+      queryParameters: {
+        ...uri.queryParameters,
+        'memberData': base64Payload,
+      },
+    );
+
+    // 🚀 Fire and forget — no await
+    launchDeepLinkURL(updatedUri);
+
+    provider.resetDeepLinkNavigation();
   }
+
 
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
@@ -103,12 +136,6 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      _isCustomTabOpening = false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,46 +162,7 @@ class _HomeScreenState extends State<HomeScreen>
                 }
               });
             }
-
-            if (userInfoProvider.getUserInfo != null &&
-                provider.deeplinkPayloads != null) {
-              if (provider.startChewzieScreen != null &&
-                  provider.startChewzieScreen! &&
-                  !_isCustomTabOpening) {
-                _isCustomTabOpening = true;
-
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  final decodedLink =
-                      Uri.decodeComponent(provider.deeplinkPayloads!);
-
-                  final uri = Uri.parse(decodedLink);
-
-                  final jsonPayload = {
-                    "memberId": "${userInfoProvider.getUserInfo!.cardNumber}",
-                  };
-
-                  final base64Payload =
-                      base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
-                  final updatedUri = uri.replace(
-                    queryParameters: {
-                      ...uri.queryParameters, // keep existing params
-                      'memberData': base64Payload, // add yours
-                    },
-                  );
-
-                  await launchDeepLinkURL(updatedUri);
-                  provider.resetDeepLinkNavigation();
-                  _isCustomTabOpening = false;
-
-                  /* AppNavigator.navigateTo(context, AppNavigator.appWebView,
-                      arguments: updatedUri.toString());*/
-                });
-
-                /*Future.delayed(Duration.zero, () {
-                  provider.resetDeepLinkNavigation();
-                });*/
-              }
-            }
+            _tryOpenDeepLink(provider, userInfoProvider);
 
             return Column(
               children: [
@@ -525,11 +513,9 @@ class _HomeScreenState extends State<HomeScreen>
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
   }
 
-  int i = 0;
+
 
   Future<void> launchDeepLinkURL(Uri uri) async {
-    print("Called URI ${uri.toString()}");
-    print("Launch Count ${i++}");
     await launchUrl(uri,
         customTabsOptions: CustomTabsOptions(
           showTitle: false,
