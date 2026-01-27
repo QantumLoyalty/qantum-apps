@@ -87,8 +87,9 @@ class UserModel {
     state = json.containsKey("State") ? json["State"] ?? "" : "";
     dateJoined = json.containsKey("DateJoined") ? json["DateJoined"] : "";
 
-    pointsValue =
-        json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
+    /*pointsValue = 4003.55;
+    pointsBalance = 40.0355;*/
+    pointsValue = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
     pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
 
     statusPoints =

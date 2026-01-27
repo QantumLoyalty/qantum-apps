@@ -81,6 +81,8 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                             Text(
                               formatPoints(
                                   (provider.getUserInfo!.pointsValue ?? 0)),
+
+
                               style: TextStyle(
                                   fontSize: 42,
                                   color:
@@ -162,12 +164,24 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
   }
 
   String formatPoints(num points) {
+
     var formatter = NumberFormat("#,##0", "en_US");
-    return formatter.format(points.toInt());
+  /*  return formatter.format(points.toInt());*/
+// Truncate instead of round
+    final truncated = points.truncate();
+
+    return formatter.format(truncated);
+
   }
 
   String formatPointsValue(num pointsValue) {
     var formatter = NumberFormat("#,##0.00", "en_US");
-    return formatter.format(pointsValue);
+   // return formatter.format(pointsValue.truncate());
+    // Truncate to 2 decimal places instead of rounding
+    final truncated =
+        (pointsValue * 100).truncateToDouble() / 100;
+
+    return formatter.format(truncated);
+
   }
 }

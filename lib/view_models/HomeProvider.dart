@@ -204,12 +204,11 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
               _moreButtonsMap!.remove(5);
               _moreButtonsMap!.remove(6);
             }
-            logEvent(_moreButtonsMap);
+
           }
         }
       }
 
-      logEvent(networkResponse);
     } catch (e) {
       logEvent(e.toString());
     } finally {

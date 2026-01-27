@@ -29,9 +29,7 @@ class NetworkHelper with LoggingMixin{
       required Map<String, dynamic> body}) async {
     late NetworkResponse networkResponse;
     try {
-      logEvent("URL:: $url BODY:: $body HEADERS:: $headers");
       var response = await client.post(url, headers: headers, body: jsonEncode(body));
-      logEvent(response.toString());
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -52,9 +50,7 @@ class NetworkHelper with LoggingMixin{
         required Map<String, dynamic> body}) async {
     late NetworkResponse networkResponse;
     try {
-      logEvent("URL:: $url BODY:: $body HEADERS:: $headers");
       var response = await client.put(url, headers: headers, body: jsonEncode(body));
-      logEvent(response.toString());
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -74,9 +70,7 @@ class NetworkHelper with LoggingMixin{
       {required Uri url, Map<String, String>? headers}) async {
     late NetworkResponse networkResponse;
     try {
-      logEvent("URL:: $url HEADERS:: $headers");
       var response = await client.get(url, headers: headers);
-      debugPrint("$url --> Response${response.body}",wrapWidth: 1024);
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));

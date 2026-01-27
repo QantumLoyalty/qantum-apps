@@ -23,6 +23,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
     "txtClubSponsorship": AppNavigator.clubAndMembership,
+    "txtTermsAndConditions": "",
+
   };
 
   final Map<String, String> _accountOptionsOthers = {
@@ -74,6 +76,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtSponsorship;
       case "txtClubSponsorship":
         return loc.txtClubSponsorship;
+        case "txtTermsAndConditions":
+        return loc.txtTermsAndConditions;
 
       default:
         return key; // fallback
