@@ -202,7 +202,7 @@ class MyProfileDialog with LoggingMixin {
                                                       style: TextStyle(
                                                           color: AppThemeCustom
                                                               .getEditDetailsColor(
-                                                                  context),
+                                                                  context,isText:true),
                                                           fontSize: 10),
                                                     )
                                                   ],

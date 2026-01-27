@@ -44,7 +44,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.3+9
 ###################################
 #QANTUM
-version: 1.0.0+61
+#version: 1.0.0+61
 ###################################
 # ACE REWARDS
 #version: 1.0.0+12
@@ -66,6 +66,9 @@ version: 1.0.0+61
 ###################################
 # Kingscliff
 # version: 1.0.0+2
+###################################
+# drinkRewards
+version: 1.0.0+1
 
 environment:
   sdk: ^3.5.3
@@ -179,8 +182,10 @@ flutter:
     - assets/northShoreTavern/
     - assets/aceRewards/
     - assets/flindersStreetWharves/
+    - assets/drinkRewards/
     - .env.mhbc
     - .env.qantum
+    - .env.kc
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

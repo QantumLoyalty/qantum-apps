@@ -214,7 +214,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -234,7 +234,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward||Flavor.kingscliff:
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -326,7 +326,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -346,7 +346,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward||Flavor.kingscliff:
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -445,7 +445,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -460,7 +460,14 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward||Flavor.kingscliff:
+      case Flavor.maxx:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.dr_button_color),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -552,7 +559,9 @@ class AppHelper with LoggingMixin {
       case Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.brisbane ||
-            Flavor.bluewater:
+            Flavor.bluewater ||
+            Flavor.kingscliff ||
+            Flavor.drinkRewards:
         return const Size(142, 58);
 
       case Flavor.woollahra:
@@ -649,6 +658,8 @@ class AppHelper with LoggingMixin {
             return "Silver";
           case Flavor.kingscliff:
             return "Valued";
+          case Flavor.drinkRewards:
+            return "Club";
           default:
             return "Valued";
         }

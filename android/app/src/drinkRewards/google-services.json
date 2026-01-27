@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "105704728102",
+    "project_id": "rewardsstar-2d8dc",
+    "storage_bucket": "rewardsstar-2d8dc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056025182878:android:f575906e2dce9f3fc9318f",
+        "android_client_info": {
+          "package_name": "com.au.drinkRewards.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNDsrRqxj_t98IsVjrH8orZzFZOQ6V1zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

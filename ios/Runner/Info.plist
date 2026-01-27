@@ -38,12 +38,12 @@
 	<string>App requires access to location for better offers suggestions</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to your photo library to save or choose photos.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>NSUserActivityTypeBrowsingWeb</string>
+	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-    <key>NSUserActivityTypes</key>
-    <array>
-        <string>NSUserActivityTypeBrowsingWeb</string>
-    </array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

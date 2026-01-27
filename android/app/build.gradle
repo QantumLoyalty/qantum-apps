@@ -172,6 +172,14 @@ android {
                     deeplinkHost: "disabled.invalid"
             ]
         }
+        drinkRewards {
+            dimension "app"
+            applicationId "com.au.drinkRewards.app"
+            versionName "1.0.0"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
+        }
     }
 
 

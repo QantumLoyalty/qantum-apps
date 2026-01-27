@@ -451,8 +451,24 @@ class AppColors {
 
   static Color get kc_profile_cross_background_color => const Color(0xFF375F94);
 
+/// DrinkRewards Theme
+  static Color get dr_primary_color => const Color(0xFF6c0471);
 
+  static Color get dr_primary_color_dark => const Color(0xFF400244);
 
+  static Color get dr_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get dr_button_color => const Color(0xFFB044B4);
+
+  static Color get dr_text_color => const Color(0xFFffffff);
+
+  static Color get dr_text_field_text_color => const Color(0xFF000000);
+
+  static Color get dr_hint_text_color => const Color(0x63ffffff);
+
+  static Color get dr_canvas_color => const Color(0xFF3D0240);
+
+  static Color get dr_account_header_color => const Color(0xFF18062e);
 
 
 
