@@ -658,7 +658,8 @@ class AppHelper with LoggingMixin {
 
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
-    const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
+    //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
+    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc};
     return clubFlavors.contains(flavor);
   }
 
