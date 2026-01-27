@@ -19,7 +19,7 @@
 
 ### MAX GAMING APP
 ### COMMAND TO RUN THE APP : flutter run apk --flavor maxx -t lib/main_max.dart
-### COMMAND TO BUILD THE APP : flutter run apk --release --flavor maxx -t lib/main_max.dart
+### COMMAND TO BUILD THE APP : flutter build apk --release --flavor maxx -t lib/main_max.dart
 
 ### COMMAND FOR TEST THE DEEP LINK
 adb shell am start \                                    
