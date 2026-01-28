@@ -312,6 +312,7 @@ class DigitalCardDialog {
       Flavor.flinders: "FSW",
       Flavor.bluewater: "BBGAAAAAA",
       Flavor.kingscliff: "KBH",
+      Flavor.drinkRewards: "DHQ",
     };
 
     return _scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";

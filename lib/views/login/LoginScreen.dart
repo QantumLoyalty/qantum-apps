@@ -155,8 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 0.5,
-                                      color:flavor == Flavor.kingscliff
-                                          ? AppColors.white.withOpacity(0.1):Theme.of(context).dividerColor),
+                                      color: AppThemeCustom
+                                          .getContainerBorderColor(context)),
                                   color: AppThemeCustom.getTextFieldBackground(
                                       context,
                                       isShadow: true),
@@ -173,9 +173,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     textStyle: TextStyle(
                                         color: flavor == Flavor.kingscliff
-                                            ? AppColors.white:Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionHandleColor),
+                                            ? AppColors.white
+                                            : Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionHandleColor),
                                     onChanged: (code) {
                                       setState(() {
                                         countryCode = code.dialCode!;
@@ -191,7 +192,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         width: 1,
                                         thickness: 1,
                                         color: flavor == Flavor.kingscliff
-                                            ? AppColors.white:Theme.of(context).dividerColor,
+                                            ? AppColors.white
+                                            : Theme.of(context).dividerColor,
                                       )),
                                   Expanded(
                                     child: Padding(
@@ -206,13 +208,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                         controller: _phoneController,
                                         style: TextStyle(
                                             color: AppThemeCustom
-                                                .getTextFieldTextColor(
-                                                    context,isShadow: true)),
+                                                .getTextFieldTextColor(context,
+                                                    isShadow: true)),
                                         decoration: InputDecoration(
                                           counterText: "",
                                           hintText: "0400000000",
                                           hintStyle: TextStyle(
-                                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true)),
+                                              color: AppThemeCustom
+                                                  .getHintTextFieldColor(
+                                                      context,
+                                                      isShadow: true)),
                                           fillColor: Colors.transparent,
                                           filled: true,
                                           border: InputBorder.none,
@@ -289,13 +294,17 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[0],
             style: TextStyle(
-                color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color: flavor == Flavor.drinkRewards
+                    ? AppColors.dr_button_color
+                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text before
       TextSpan(
         text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
         style: TextStyle(
-            color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+            color: flavor == Flavor.drinkRewards
+                ? AppColors.dr_button_color
+                : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
             fontWeight: FontWeight.w900,
             fontSize: 14),
       ),
@@ -303,7 +312,9 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[1],
             style: TextStyle(
-                color: Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color: flavor == Flavor.drinkRewards
+                    ? AppColors.dr_button_color
+                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text after
     ];

@@ -389,15 +389,38 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.qantum ||
             Flavor.qantumClub ||
-            Flavor.queens ||
-            Flavor.drinkRewards:
+            Flavor.queens:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
       case Flavor.kingscliff:
         return isShadow != null
             ? AppColors.white_shadow
             : Theme.of(context).cardColor;
+      case Flavor.drinkRewards:
+        return AppColors.dr_box_shadow;
       default:
         return Theme.of(context).cardColor;
+    }
+  }
+
+  static Color getContainerBorderColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.drinkRewards:
+        return AppColors.transparent;
+      case Flavor.kingscliff:
+        return AppColors.white.withOpacity(0.1);
+      default:
+        return Theme.of(context).dividerColor;
+    }
+  }
+
+  static Color? getHomeScreenProfileIconColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.drinkRewards:
+        return AppColors.white;
+      default:
+        return Theme.of(context).iconTheme.color;
     }
   }
 
@@ -871,7 +894,7 @@ class AppThemeCustom {
     }
   }
 
-  static Color? getUserInfoItemStyle(BuildContext context, bool isFromEdit) {
+  static Color? getUserInfoItemStyle(BuildContext context, bool isFromEdit,{bool? isHeading}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.northShoreTavern:
@@ -907,6 +930,9 @@ class AppThemeCustom {
 
       case Flavor.flinders:
         return AppColors.white;
+
+      case Flavor.drinkRewards:
+        return isHeading!=null?AppColors.dr_button_color:Theme.of(context).textSelectionTheme.selectionColor;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;

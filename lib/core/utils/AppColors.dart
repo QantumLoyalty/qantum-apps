@@ -470,6 +470,8 @@ class AppColors {
 
   static Color get dr_account_header_color => const Color(0xFF18062e);
 
+  static Color get dr_box_shadow => const Color(0x80FFFFFF);
+
 
 
   /// COMMON COLORS ///

@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Drinks HQ Branded</string>
+    <string name="app_name">Drinks HQ Rewards</string>
     <string name="default_notification_channel_id">com.au.drinkRewards.app.urgent</string>
 </resources>

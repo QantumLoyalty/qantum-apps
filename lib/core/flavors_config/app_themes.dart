@@ -1423,12 +1423,12 @@ class AppThemes {
         fillColor:
         WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
-            return AppColors.dr_hint_text_color;
+            return AppColors.dr_text_color;
           }
           if (states.contains(WidgetState.selected)) {
             return AppColors.dr_text_color;
           }
-          return AppColors.dr_hint_text_color;
+          return AppColors.dr_text_color;
         }),
       ),
       disabledColor: AppColors.dr_button_color,

@@ -326,7 +326,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
+      case Flavor.qantum || Flavor.qantumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -337,6 +337,14 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.drinkRewards:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.maxx:
         return ButtonStyle(
             shadowColor:
