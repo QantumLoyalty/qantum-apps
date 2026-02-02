@@ -157,11 +157,11 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                           SizedBox(
                               height: 60,
                               child: VerticalDivider(
-                                width: 0.2,
-                                thickness: 0.2,
                                 color: flavor == Flavor.kingscliff
                                     ? AppColors.white
                                     : Theme.of(context).dividerColor,
+                                width: 0.5,
+                                thickness: 0.5,
                               )),
                           Expanded(
                             child: Padding(

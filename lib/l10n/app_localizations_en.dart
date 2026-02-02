@@ -104,7 +104,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtEnterVerificationCode => 'Enter the verification code';
 
   @override
-  String get msgEnterVerificationCode => 'We sent a code to mobile number ending in ';
+  String get msgEnterVerificationCode => 'We sent a code to mobile number ';
 
   @override
   String get txtSubmit => 'Submit';

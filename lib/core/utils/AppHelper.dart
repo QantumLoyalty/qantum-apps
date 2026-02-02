@@ -580,7 +580,7 @@ class AppHelper with LoggingMixin {
         return const Size(56, 56);
 
       default:
-        return const Size(72, 72);
+        return const Size(68, 68);
     }
   }
 

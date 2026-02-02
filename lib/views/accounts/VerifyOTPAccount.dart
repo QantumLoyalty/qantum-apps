@@ -132,7 +132,8 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     ),
                     AppDimens.shape_5,
                     Text(
-                      "${loc.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
+                      "${loc.msgEnterVerificationCode}${provider.getUserInfo != null ? provider.getUserInfo!.mobile ?? "" : ""}",
+                      //"${loc.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.normal,

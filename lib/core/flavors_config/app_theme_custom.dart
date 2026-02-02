@@ -181,8 +181,9 @@ class AppThemeCustom {
   static Color? getAccountBackground(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh || Flavor.montaukTavern ||Flavor.drinkRewards:
+      case Flavor.mhbc || Flavor.clh || Flavor.montaukTavern:
         return Theme.of(context).scaffoldBackgroundColor;
+
       case Flavor.flinders:
         return Theme.of(context).canvasColor;
 
@@ -211,6 +212,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
+        case Flavor.starReward:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return AppColors.kc_scaffold_bg_color;
       case Flavor.drinkRewards:

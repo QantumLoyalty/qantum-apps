@@ -287,7 +287,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgEnterVerificationCode.
   ///
   /// In en, this message translates to:
-  /// **'We sent a code to mobile number ending in '**
+  /// **'We sent a code to mobile number '**
   String get msgEnterVerificationCode;
 
   /// No description provided for @txtSubmit.

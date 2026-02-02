@@ -29,7 +29,7 @@
   "txtThereWasError": "कोई त्रुटि हुई!",
   "msgRecoverEmailError": "इस खाते के साथ कोई ईमेल पंजीकृत नहीं था। कृपया वेन्यू समर्थन से संपर्क करें।",
   "txtEnterVerificationCode": "सत्यापन कोड दर्ज करें",
-  "msgEnterVerificationCode": "हमने आपके मोबाइल नंबर पर कोड भेजा है (अंतिम अंक) ",
+  "msgEnterVerificationCode": "हमने आपके मोबाइल नंबर पर कोड भेजा है ",
   "txtSubmit": "जमा करें",
   "txtRedeem": "भुनाएं",
   "txtMoreInfo": "अधिक जानकारी",

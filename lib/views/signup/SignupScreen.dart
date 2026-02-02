@@ -228,6 +228,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   return loc.msgEmptyFirstName;
                                 }
                                 return null;*/
+
                                 if (value == null || value.isEmpty) {
                                   return loc.msgEmptyFirstName;
                                 }
@@ -235,6 +236,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 if (!validName.hasMatch(value)) {
                                   return "Please avoid special characters";
                                 }
+
                                 return null;
                               },
                               style: TextStyle(
@@ -914,8 +916,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               if (provider.tcCheckStatus) {
                                 Map<String, dynamic> params = {};
                                 params['GivenNames'] =
-                                    _firstNameController.text;
-                                params['Surname'] = _lastNameController.text;
+                                    _firstNameController.text.toString().trim();
+                                params['Surname'] = _lastNameController.text.toString().trim();
                                 params['DateOfBirth'] =
                                     '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
                                 if (_postcodeController.text.isNotEmpty) {

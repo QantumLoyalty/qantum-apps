@@ -150,6 +150,8 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - sms_autofill (0.0.1):
+    - Flutter
   - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
@@ -234,6 +236,7 @@ DEPENDENCIES:
   - screen_protector (from `.symlinks/plugins/screen_protector/ios`)
   - secure_content (from `.symlinks/plugins/secure_content/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sms_autofill (from `.symlinks/plugins/sms_autofill/ios`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
@@ -301,6 +304,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/secure_content/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sms_autofill:
+    :path: ".symlinks/plugins/sms_autofill/ios"
   sqflite_darwin:
     :path: ".symlinks/plugins/sqflite_darwin/darwin"
   stripe_ios:
@@ -340,6 +345,7 @@ SPEC CHECKSUMS:
   ScreenProtectorKit: 83a6281b02c7a5902ee6eac4f5045f674e902ae4
   secure_content: 42b1b4b7092869d5f6f36ac374b0afe21886b746
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  sms_autofill: b36b2147535657fea83d7f3898d7831de70bd8e4
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   Stripe: ae1b368097280ad027c1ec4a817a0a78bb74a6ee
   stripe_ios: 4d9a7e2f67c5edacc634a0d0565603e081856b4f
