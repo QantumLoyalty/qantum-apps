@@ -613,7 +613,8 @@ class AppHelper with LoggingMixin {
       Flavor.queens: "Queens",
       Flavor.brisbane: "Brisbane",
       Flavor.bluewater: "Bluewater",
-      Flavor.flinders: "Flinders"
+      Flavor.flinders: "Flinders",
+      Flavor.drinkRewards: "Drinks",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }
@@ -621,7 +622,7 @@ class AppHelper with LoggingMixin {
   static String getUserTierType(UserModel userData) {
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
-    if (flavorConfig.flavor == Flavor.starReward) {
+    if (flavorConfig.flavor == Flavor.starReward||flavorConfig.flavor == Flavor.drinkRewards) {
       if (userData.membershipCategory != null &&
           userData.membershipCategory!.isNotEmpty) {
         if (userData.membershipCategory!.toLowerCase() == "") {
@@ -667,7 +668,7 @@ class AppHelper with LoggingMixin {
           case Flavor.kingscliff:
             return "Valued";
           case Flavor.drinkRewards:
-            return "Club";
+            return "Explorer";
           default:
             return "Valued";
         }

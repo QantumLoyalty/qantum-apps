@@ -38,7 +38,6 @@ android {
         starReward {
             dimension "app"
             applicationId "com.au.starhotels.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "stargroup-applink.chewzie.net"
             ]
@@ -46,7 +45,6 @@ android {
         senseOfTaste {
             dimension "app"
             applicationId "com.au.senseoftaste.app"
-            versionName "Sense of Taste"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -54,7 +52,6 @@ android {
         maxx {
             dimension "app"
             applicationId "com.au.max.app"
-            versionName "Max Gaming"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -62,7 +59,6 @@ android {
         qantum {
             dimension "app"
             applicationId "com.au.quantum.app"
-            versionName "Qantum"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -70,7 +66,6 @@ android {
         qantumClub {
             dimension "app"
             applicationId "com.au.quantumclub.app"
-            versionName "Qantum"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -78,7 +73,6 @@ android {
         mhbc {
             dimension "app"
             applicationId "com.au.mhbc.app"
-            versionName "1.0.9"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -86,7 +80,6 @@ android {
         clh {
             dimension "app"
             applicationId "com.au.clh.app"
-            versionName "Central Lane Hotel"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -94,7 +87,6 @@ android {
         montaukTavern {
             dimension "app"
             applicationId "com.au.montauk.app"
-            versionName "Montauk Tavern"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -102,7 +94,6 @@ android {
         hogansReward {
             dimension "app"
             applicationId "com.au.hogansreward.app"
-            versionName "Hogan's Reward"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -110,7 +101,6 @@ android {
         northShoreTavern {
             dimension "app"
             applicationId "com.au.northshoretavern.app"
-            versionName "North Shore Tavern"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -118,7 +108,6 @@ android {
         aceRewards {
             dimension "app"
             applicationId "com.au.acerewards.app"
-            versionName "Ace Rewards"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -126,7 +115,6 @@ android {
         queens {
             dimension "app"
             applicationId "com.au.queenshotel.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -135,7 +123,6 @@ android {
         brisbane {
             dimension "app"
             applicationId "com.au.brisbanebrewing.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -143,7 +130,6 @@ android {
         woollahra {
             dimension "app"
             applicationId "com.au.woollahra.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -151,7 +137,6 @@ android {
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
-            versionName "1.0.3"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -159,7 +144,6 @@ android {
         flinders {
             dimension "app"
             applicationId "com.au.flinders.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -167,7 +151,6 @@ android {
         kingscliff {
             dimension "app"
             applicationId "com.au.kingscliff.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]
@@ -175,7 +158,6 @@ android {
         drinkRewards {
             dimension "app"
             applicationId "com.au.drinkRewards.app"
-            versionName "1.0.0"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]

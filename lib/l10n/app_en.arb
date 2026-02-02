@@ -155,7 +155,7 @@
   "msgProfileUpdateError": "Oops... something went wrong while updating your profile.",
   "msgProfileUpdateLoading": "Please wait while we update your profile...",
   "msgOtpIssue": "There was a problem sending the OTP. Please try again.",
-  "msgVerificationCodeSentToEmail": "We sent a verification code to your email address.",
+  "msgVerificationCodeSentToEmail": "       We sent a verification code to your email address.",
   "msgVerificationCodeSentToPhone": "We sent a verification code to the mobile number ending in",
   "msgIssueInVerifyAccount": "There was a problem verifying your account. Please try again.",
   "msgEnterNewMobile": "Please enter your new mobile number",
