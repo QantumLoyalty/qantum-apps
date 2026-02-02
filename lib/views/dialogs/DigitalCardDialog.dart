@@ -133,6 +133,19 @@ class DigitalCardDialog {
                                                               context),
                                                       fontSize: 18),
                                                 ),
+                                                AppDimens.shape_5,
+                                                (showMembershipCategory(userData
+                                                        .membershipCategory))
+                                                    ? Text(
+                                                        '#${userData.bluizeId}',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: AppThemeCustom
+                                                                .getCardDialogsTextColor(
+                                                                    context),
+                                                            fontSize: 14))
+                                                    : Container(),
                                                 AppDimens.shape_20,
                                                 Text(
                                                   "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",

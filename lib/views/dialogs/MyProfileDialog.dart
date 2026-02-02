@@ -107,7 +107,7 @@ class MyProfileDialog with LoggingMixin {
                                           Text(
                                             "${loc.txtCard} # ${provider.getUserInfo!.cardNumber}",
                                             style: TextStyle(
-                                                fontSize: 12,
+                                                fontSize: 14,
                                                 color: AppThemeCustom
                                                     .getProfileDialogCardTextColor(
                                                         context)),

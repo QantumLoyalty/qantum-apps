@@ -104,7 +104,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtEnterVerificationCode => '输入验证码';
 
   @override
-  String get msgEnterVerificationCode => '我们已向尾号为 的手机号码发送验证码';
+  String get msgEnterVerificationCode => '我們已將驗證碼發送到手機號碼';
 
   @override
   String get txtSubmit => '提交';
@@ -702,7 +702,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get txtEnterVerificationCode => '输入验证码';
 
   @override
-  String get msgEnterVerificationCode => '我们已向尾号为 的手机号码发送验证码';
+  String get msgEnterVerificationCode => '我们已将验证码发送到手机号码';
 
   @override
   String get txtSubmit => '提交';

@@ -149,8 +149,8 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                           SizedBox(
                               height: 60,
                               child: VerticalDivider(
-                                width: 0.2,
-                                thickness: 0.2,
+                                width: 0.5,
+                                thickness: 0.5,
                                 color: Theme.of(context).dividerColor,
                               )),
                           Expanded(

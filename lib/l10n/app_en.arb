@@ -35,7 +35,7 @@
   "txtThereWasError": "There was an error!",
   "msgRecoverEmailError": "There was no email registered with this account. Please contact venue support.",
   "txtEnterVerificationCode": "Enter the verification code",
-  "msgEnterVerificationCode": "We sent a code to mobile number ending in ",
+  "msgEnterVerificationCode": "We sent a code to mobile number ",
   "txtSubmit": "Submit",
   "txtRedeem": "Redeem",
   "txtMoreInfo": "More Info",

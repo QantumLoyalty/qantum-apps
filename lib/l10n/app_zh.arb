@@ -39,7 +39,7 @@
   "txtThereWasError": "发生错误！",
   "msgRecoverEmailError": "此账户未注册邮箱，请联系场馆客服。",
   "txtEnterVerificationCode": "输入验证码",
-  "msgEnterVerificationCode": "我们已向尾号为 的手机号码发送验证码",
+  "msgEnterVerificationCode": "我們已將驗證碼發送到手機號碼",
   "txtSubmit": "提交",
   "txtRedeem": "兑换",
   "txtMoreInfo": "更多信息",

@@ -279,9 +279,8 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           int.parse(_birthdayDDController.text.toString()));
                       DateFormat dateTimeFormat =
                           DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
-
                       provider.updateTempUser(
-                          name: _fullNameFieldController.text.toString(),
+                          name: _fullNameFieldController.text.toString().trim(),
                           dob: dateTimeFormat.format(date));
 
                       provider.updateSelectedEditScreen(

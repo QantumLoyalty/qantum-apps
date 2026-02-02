@@ -211,6 +211,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
+        case Flavor.starReward:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
       default:
         return Theme.of(context).disabledColor;
     }

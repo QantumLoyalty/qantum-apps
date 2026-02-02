@@ -71,7 +71,7 @@ class IconTextWidget extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                       color: textColor,
-                      fontSize: AppHelper.getFontSize(context, 10)),
+                      fontSize: AppHelper.getFontSize(context, 12)),
                 ),
               )
             ],

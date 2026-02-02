@@ -701,9 +701,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       if (name.contains(" ")) {
         List<String> nameArr = name.split(" ");
 
-        _tempUser!.firstName = nameArr[0];
+        _tempUser!.firstName = nameArr[0].trim();
         _tempUser!.lastName =
-            nameArr.where((item) => item != nameArr[0]).toString();
+            nameArr.where((item) => item != nameArr[0]).toString().trim();
 
         if (_tempUser!.lastName!.contains("(")) {
           _tempUser!.lastName = _tempUser!.lastName!.replaceAll("(", "");

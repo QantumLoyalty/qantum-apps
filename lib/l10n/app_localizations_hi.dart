@@ -104,7 +104,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtEnterVerificationCode => 'सत्यापन कोड दर्ज करें';
 
   @override
-  String get msgEnterVerificationCode => 'हमने आपके मोबाइल नंबर पर कोड भेजा है (अंतिम अंक) ';
+  String get msgEnterVerificationCode => 'हमने आपके मोबाइल नंबर पर कोड भेजा है ';
 
   @override
   String get txtSubmit => 'जमा करें';

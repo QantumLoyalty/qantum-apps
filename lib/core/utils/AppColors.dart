@@ -77,7 +77,7 @@ class AppColors {
 
   static Color get sr_card_color => const Color(0xFFFFFFFF);
 
-  static Color get sr_divider_color => const Color(0xFF9d5555);
+  static Color get sr_divider_color => const Color(0xFFd9d9d9);
 
   static Color get sr_disable_color => const Color(0xFF081427);
 
