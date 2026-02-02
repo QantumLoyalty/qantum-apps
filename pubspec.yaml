@@ -68,7 +68,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.0+2
 ###################################
 # drinkRewards
-version: 1.0.0+4
+version: 1.0.0+3
 
 environment:
   sdk: ^3.5.3
