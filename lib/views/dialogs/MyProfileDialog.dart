@@ -99,24 +99,21 @@ class MyProfileDialog with LoggingMixin {
                                                   size: 40,
                                                 ),
                                           Text(
-                                            "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
+                                            "${provider.getUserInfo?.firstName ?? ''} ${provider.getUserInfo?.lastName ?? ''}",
                                             textAlign: TextAlign.center,
-                                            textScaler:
-                                                const TextScaler.linear(1.0),
+                                            textScaler: const TextScaler.linear(1.0),
                                             style: TextStyle(
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.bold,
-                                                color: AppThemeCustom
-                                                    .getProfileDialogTextColor(
-                                                        context)),
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppThemeCustom.getProfileDialogTextColor(context),
+                                            ),
                                           ),
                                           Text(
-                                            "${loc.txtCard} # ${provider.getUserInfo!.cardNumber}",
+                                            "${loc.txtCard} # ${provider.getUserInfo?.cardNumber ?? ''}",
                                             style: TextStyle(
-                                                fontSize: 14,
-                                                color: AppThemeCustom
-                                                    .getProfileDialogCardTextColor(
-                                                        context)),
+                                              fontSize: 14,
+                                              color: AppThemeCustom.getProfileDialogCardTextColor(context),
+                                            ),
                                           ),
                                           AppDimens.shape_20,
                                           IconTextWidget(
