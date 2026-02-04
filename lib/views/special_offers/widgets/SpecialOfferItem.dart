@@ -23,26 +23,33 @@ class SpecialOfferItem extends StatelessWidget {
       height: 100,
       child: InkWell(
         onTap: () async {
-          await Provider.of<SpecialOffersProvider>(context, listen: false)
-              .getOfferByID(offerID: offer.id!);
+          var internetStatus = await AppHelper.checkInternetConnection();
+          if (internetStatus) {
+            await Provider.of<SpecialOffersProvider>(context, listen: false)
+                .getOfferByID(offerID: offer.id!);
 
-          if (context.mounted) {
-            Provider.of<HomeProvider>(context, listen: false)
-                .updateShowAllMenuVisibility(false, "Special Offers Item");
+            if (context.mounted) {
+              Provider.of<HomeProvider>(context, listen: false)
+                  .updateShowAllMenuVisibility(false, "Special Offers Item");
 
-            if (Provider.of<SpecialOffersProvider>(context, listen: false)
-                    .selectedOffer !=
-                null) {
-              Provider.of<SpecialOffersProvider>(context, listen: false)
-                  .selectedOffer!
-                  .expiryDate = offer.expiryDate;
+              if (Provider.of<SpecialOffersProvider>(context, listen: false)
+                      .selectedOffer !=
+                  null) {
+                Provider.of<SpecialOffersProvider>(context, listen: false)
+                    .selectedOffer!
+                    .expiryDate = offer.expiryDate;
 
-              await SpecialOfferDetailDialog.getInstance()
-                  .showSpecialOfferDialog(context);
+                await SpecialOfferDetailDialog.getInstance()
+                    .showSpecialOfferDialog(context);
+              }
+            } else {
+              if (!context.mounted) return;
+              AppHelper.showErrorMessage(context, "Something went wrong.");
             }
           } else {
             if (!context.mounted) return;
-            AppHelper.showErrorMessage(context, "Something went wrong.");
+            AppHelper.showErrorMessage(
+                context, AppLocalizations.of(context)!.msgNoInternet);
           }
         },
         child: Stack(
@@ -111,9 +118,9 @@ class SpecialOfferItem extends StatelessWidget {
                             Text(
                               '${AppLocalizations.of(context)!.txtValidTo} ${offer.expiryDate}',
                               style: TextStyle(
-                                fontSize: 8,
-                                color: AppThemeCustom.getOffersExpiryColor(context)
-                              ),
+                                  fontSize: 8,
+                                  color: AppThemeCustom.getOffersExpiryColor(
+                                      context)),
                             )
                           ],
                         ),
@@ -129,11 +136,9 @@ class SpecialOfferItem extends StatelessWidget {
               child: CircleAvatar(
                 radius: 15,
                 backgroundColor: AppColors.white,
-                child: Icon(
-                  Icons.chevron_right,
-                  size: 25,
-                  color: AppThemeCustom.getCloseBtnDialogColor(context)
-                ),
+                child: Icon(Icons.chevron_right,
+                    size: 25,
+                    color: AppThemeCustom.getCloseBtnDialogColor(context)),
               ),
             )
           ],
