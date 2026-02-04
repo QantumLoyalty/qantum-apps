@@ -41,9 +41,18 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       FocusScope.of(context).requestFocus(_otpFocusNode);
       SystemChannels.textInput.invokeMethod('TextInput.show');
+
     });
+    getAppSignature();
     listenForCode();
   }
+
+  getAppSignature() async
+  {
+    String appSignature=await SmsAutoFill().getAppSignature;
+    print("APP SIGNATURE: $appSignature");
+  }
+
 
   @override
   void dispose() {

@@ -599,5 +599,5 @@ class AppLocalizationsHi extends AppLocalizations {
   String get unavailable => 'Unavailable';
 
   @override
-  String get msgNoInternet => 'You are not connected to the internet';
+  String get msgNoInternet => 'आप इंटरनेट से कनेक्ट नहीं हैं।\nकृपया अपना कनेक्शन जाँचें और फिर से प्रयास करें।';
 }

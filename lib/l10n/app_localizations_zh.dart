@@ -599,7 +599,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unavailable => '不可用';
 
   @override
-  String get msgNoInternet => '您未连接到互联网';
+  String get msgNoInternet => '您未连接到互联网。\n请检查您的网络连接并重试。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1197,5 +1197,5 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get unavailable => '不可用';
 
   @override
-  String get msgNoInternet => '您未连接到互联网';
+  String get msgNoInternet => '您未连接到互联网。\n请检查您的网络连接并重试。';
 }

@@ -1277,7 +1277,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgNoInternet.
   ///
   /// In en, this message translates to:
-  /// **'You are not connected to the internet'**
+  /// **'You are not connected to the internet\nCheck your connection and try again.'**
   String get msgNoInternet;
 }
 

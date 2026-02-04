@@ -117,10 +117,7 @@ class SpecialOfferDetailDialog {
                                               Text(
                                                 '${AppLocalizations.of(context)!.txtValidTo} ${offerProvider.selectedOffer!.expiryDate}',
                                                 style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .buttonTheme
-                                                        .colorScheme!
-                                                        .primary,
+                                                    color: AppThemeCustom.getOffersExpiryColor(context),
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.w500),
