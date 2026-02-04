@@ -112,10 +112,7 @@ class SpecialOfferItem extends StatelessWidget {
                               '${AppLocalizations.of(context)!.txtValidTo} ${offer.expiryDate}',
                               style: TextStyle(
                                 fontSize: 8,
-                                color: Theme.of(context)
-                                    .buttonTheme
-                                    .colorScheme!
-                                    .primary,
+                                color: AppThemeCustom.getOffersExpiryColor(context)
                               ),
                             )
                           ],

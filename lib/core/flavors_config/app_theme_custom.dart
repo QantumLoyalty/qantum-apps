@@ -211,7 +211,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
-        case Flavor.starReward:
+      case Flavor.starReward:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       default:
         return Theme.of(context).disabledColor;
@@ -1007,6 +1007,17 @@ class AppThemeCustom {
         return Theme.of(context).scaffoldBackgroundColor;
       case Flavor.queens:
         return AppColors.black;
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
+
+  static Color getOffersExpiryColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.bluewater:
+        return Theme.of(context).primaryColorDark;
+
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }

@@ -599,5 +599,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unavailable => 'Unavailable';
 
   @override
-  String get msgNoInternet => 'You are not connected to the internet';
+  String get msgNoInternet => 'You are not connected to the internet\nCheck your connection and try again.';
 }

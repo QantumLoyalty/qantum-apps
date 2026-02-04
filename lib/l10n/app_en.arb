@@ -200,5 +200,5 @@
   "msgForOtherMembershipSeeReception": "For all other memberships\n\nPlease see reception.",
   "msgPaymentCancelled": "The payment has been cancelled.",
   "unavailable": "Unavailable",
-  "msgNoInternet": "You are not connected to the internet"
+  "msgNoInternet": "You are not connected to the internet\nCheck your connection and try again."
 }

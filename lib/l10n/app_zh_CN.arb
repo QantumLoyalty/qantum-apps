@@ -200,5 +200,5 @@
   "msgPaymentCancelled": "付款已取消。",
   "msgEmptyAddress": "请输入有效的地址以继续。",
   "unavailable": "不可用",
-  "msgNoInternet": "您未连接到互联网"
+  "msgNoInternet": "您未连接到互联网。\n请检查您的网络连接并重试。"
 }
