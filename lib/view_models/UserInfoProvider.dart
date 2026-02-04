@@ -920,29 +920,34 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   logoutUser() async {
     try {
+      // 🚨 STOP PROFILE TIMER IMMEDIATELY
+      stopFetchProfileTimer();
+
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLogoutLoader = true;
         notifyListeners();
       });
+
       NetworkResponse networkResponse =
-          await UserService.getInstance().logout();
+      await UserService.getInstance().logout();
+
       logEvent("logoutUser >> ${networkResponse.response}");
 
-      if (networkResponse.response != null) {
-        if (networkResponse.response is Map<String, dynamic> &&
-            (networkResponse.response as Map<String, dynamic>)
-                .containsKey("user")) {
-          _logoutSuccess = true;
-        } else {
-          _logoutSuccess = false;
-        }
-      }
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic> &&
+          (networkResponse.response as Map<String, dynamic>)
+              .containsKey("user")) {
+        _logoutSuccess = true;
 
-      //_uploadedSelfie = !networkResponse.isError;
+        // 🧹 CLEAR USER STATE
+        _userModel = null;
+        _tempUser = null;
+      } else {
+        _logoutSuccess = false;
+      }
     } catch (e) {
       logEvent("logoutUser error:: ${e.toString()}");
       _networkMessage = e.toString();
-      // _uploadedSelfie = false;
     } finally {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLogoutLoader = false;
@@ -950,6 +955,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
     }
   }
+
 
   resetLogoutStatus() {
     _showLogoutLoader = null;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ void main() async {
       flavor: Flavor.drinkRewards,
       flavorValues: FlavorValues(appName: "Drink Rewards", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env.dr');
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -31,8 +33,7 @@ void main() async {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     // Initialize with your OneSignal App ID
-    OneSignal.initialize("51576229-054d-457c-8ac1-0305d3a1e071");
-    // Use this method to prompt for push notifications.
+    OneSignal.initialize(dotenv.env['ONESIGNAL_API_KEY'] ?? '');    // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
