@@ -114,9 +114,17 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                         context),
                                     size: 18,
                                   ),
-                                  onClick: () {
-                                    AppNavigator.navigateTo(
-                                        context, AppNavigator.verifyOTPAccount);
+                                  onClick: () async {
+                                    bool hasInternet = await AppHelper
+                                        .checkInternetConnection();
+
+                                    if (hasInternet) {
+                                      AppNavigator.navigateTo(context,
+                                          AppNavigator.verifyOTPAccount);
+                                    } else {
+                                      AppHelper.showErrorMessage(
+                                          context, loc.msgNoInternet);
+                                    }
                                   },
                                   style:
                                       AppHelper.getAccountsButtonStyle(context),
@@ -131,38 +139,45 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           child: AppCustomButton(
                             style: AppHelper.getDeleteButtonStyle(context),
                             onClick: () async {
-                              var response = await showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: Text(loc.txtAlert),
-                                      content: Text(loc.msgCancelAccount),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context, false);
-                                            },
-                                            child: Text(
-                                              loc.txtNo,
-                                              style:
-                                                  TextStyle(color: Colors.grey),
-                                            )),
-                                        TextButton(
-                                            onPressed: () async {
-                                              Navigator.pop(context, true);
-                                            },
-                                            child: Text(loc.txtYes,
+                              bool hasInternet =
+                                  await AppHelper.checkInternetConnection();
+                              if (hasInternet) {
+                                var response = await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text(loc.txtAlert),
+                                        content: Text(loc.msgCancelAccount),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context, false);
+                                              },
+                                              child: Text(
+                                                loc.txtNo,
                                                 style: TextStyle(
-                                                    color: AppThemeCustom
-                                                        .getAlertDialogTextButtonColor(
-                                                            context)))),
-                                      ],
-                                    );
-                                  });
+                                                    color: Colors.grey),
+                                              )),
+                                          TextButton(
+                                              onPressed: () async {
+                                                Navigator.pop(context, true);
+                                              },
+                                              child: Text(loc.txtYes,
+                                                  style: TextStyle(
+                                                      color: AppThemeCustom
+                                                          .getAlertDialogTextButtonColor(
+                                                              context)))),
+                                        ],
+                                      );
+                                    });
 
-                              if (response) {
-                                /// CANCEL ACCOUNT ///
-                                provider.cancelAccount();
+                                if (response) {
+                                  /// CANCEL ACCOUNT ///
+                                  provider.cancelAccount();
+                                }
+                              } else {
+                                AppHelper.showErrorMessage(
+                                    context, loc.msgNoInternet);
                               }
                             },
                             text: loc.txtDeleteMyAccount.toUpperCase(),

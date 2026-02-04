@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
+import 'package:qantum_apps/views/common_widgets/NoInternetLayout.dart';
 import '../../core/enums/AdvertisementEnums.dart';
 import '/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -60,99 +62,102 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Column(
       children: [
         Expanded(
-          child: Consumer2<PromotionsProvider, HomeProvider>(
-              builder: (context, provider, homeProvider, child) {
-
-
-                largeAdvHeight= (flavor == Flavor.mhbc) ? 180 : 210;
+          child: Consumer3<PromotionsProvider, HomeProvider,
+                  InternetStatusProvider>(
+              builder:
+                  (context, provider, homeProvider, internetProvider, child) {
+            largeAdvHeight = (flavor == Flavor.mhbc) ? 180 : 210;
 
             return Stack(
               children: [
-                provider.promotions != null
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                                height: largeAdvHeight,
-                                width: MediaQuery.of(context).size.width,
-                                child: provider.promotions!.largePromotions !=
-                                            null &&
-                                        provider.promotions!.largePromotions!
-                                            .isNotEmpty
-                                    ? CarouselSlider.builder(
-                                        itemCount: provider.promotions!
-                                            .largePromotions!.length,
-                                        itemBuilder:
-                                            (context, index, position) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5, right: 5),
-                                            child: Stack(
-                                              children: [
-                                                Center(
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        homeProvider
-                                                            .updateShowAllMenuVisibility(
-                                                                false,
-                                                                "Large Promotions Item");
+                internetProvider.hasInternet
+                    ? provider.promotions != null
+                        ? SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: largeAdvHeight,
+                                    width: MediaQuery.of(context).size.width,
+                                    child:
+                                        provider.promotions!.largePromotions !=
+                                                    null &&
+                                                provider.promotions!
+                                                    .largePromotions!.isNotEmpty
+                                            ? CarouselSlider.builder(
+                                                itemCount: provider.promotions!
+                                                    .largePromotions!.length,
+                                                itemBuilder:
+                                                    (context, index, position) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5, right: 5),
+                                                    child: Stack(
+                                                      children: [
+                                                        Center(
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            child: InkWell(
+                                                              onTap: () {
+                                                                homeProvider
+                                                                    .updateShowAllMenuVisibility(
+                                                                        false,
+                                                                        "Large Promotions Item");
 
-                                                        PromotionDetailDialog
-                                                                .getInstance()
-                                                            .showPromotionDetailDialog(
-                                                                context,
-                                                                provider.promotions!
-                                                                        .largePromotions![
-                                                                    index],
-                                                                AdvertisementEnums
-                                                                    .large);
-                                                      },
-                                                      child: SizedBox(
-                                                        height: largeAdvHeight,
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl: provider
-                                                                  .promotions!
-                                                                  .largePromotions![
-                                                                      index]
-                                                                  .imageUrl ??
-                                                              "",
-                                                          placeholder:
-                                                              (context, _) {
-                                                            return const Stack(
-                                                              children: [
-                                                                Center(
-                                                                  child: SizedBox(
-                                                                      width: 50,
-                                                                      height:
-                                                                          50,
-                                                                      child:
-                                                                          CircularProgressIndicator()),
+                                                                PromotionDetailDialog
+                                                                        .getInstance()
+                                                                    .showPromotionDetailDialog(
+                                                                        context,
+                                                                        provider
+                                                                            .promotions!
+                                                                            .largePromotions![index],
+                                                                        AdvertisementEnums.large);
+                                                              },
+                                                              child: SizedBox(
+                                                                height:
+                                                                    largeAdvHeight,
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl: provider
+                                                                          .promotions!
+                                                                          .largePromotions![
+                                                                              index]
+                                                                          .imageUrl ??
+                                                                      "",
+                                                                  placeholder:
+                                                                      (context,
+                                                                          _) {
+                                                                    return const Stack(
+                                                                      children: [
+                                                                        Center(
+                                                                          child: SizedBox(
+                                                                              width: 50,
+                                                                              height: 50,
+                                                                              child: CircularProgressIndicator()),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                  errorWidget:
+                                                                      (context,
+                                                                          _,
+                                                                          obj) {
+                                                                    return PromotionsPlaceHolder(
+                                                                        size: Size(
+                                                                            MediaQuery.of(context).size.width,
+                                                                            200));
+                                                                  },
+                                                                  fit: BoxFit
+                                                                      .cover,
                                                                 ),
-                                                              ],
-                                                            );
-                                                          },
-                                                          errorWidget: (context,
-                                                              _, obj) {
-                                                            return PromotionsPlaceHolder(
-                                                                size: Size(
-                                                                    MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width,
-                                                                    200));
-                                                          },
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ), /*AspectRatio(
+                                                              ), /*AspectRatio(
                                                         aspectRatio: 16 / 9,
                                                         child:
                                                             CachedNetworkImage(
@@ -190,228 +195,224 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),*/
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                        options: CarouselOptions(
-                                            autoPlay: false,
-                                            reverse: false,
-                                            enableInfiniteScroll: false,
-                                            enlargeCenterPage: false,
-                                            viewportFraction: 0.8,
-                                            initialPage: 0,
-                                            onPageChanged:
-                                                (index, reason) async {}),
-                                      )
-                                    : Container()),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 12, right: 12, top: 10),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, position) {
-                                    return (provider.promotions!
-                                                    .smallPromotions !=
-                                                null &&
-                                            provider.promotions!
-                                                .smallPromotions!.isNotEmpty)
-                                        ? Container(
-                                            margin:
-                                                const EdgeInsets.only(top: 0),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 130,
-                                            child: CarouselSlider.builder(
-                                              itemCount: ((provider
-                                                              .promotions!
-                                                              .smallPromotions!
-                                                              .length /
-                                                          2)
-                                                      .floor() +
-                                                  provider
-                                                          .promotions!
-                                                          .smallPromotions!
-                                                          .length %
-                                                      2),
-                                              itemBuilder:
-                                                  (context, index, position) {
-                                                return Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            homeProvider
-                                                                .updateShowAllMenuVisibility(
-                                                                    false,
-                                                                    "Large Promotions Item");
-                                                            PromotionDetailDialog
-                                                                    .getInstance()
-                                                                .showPromotionDetailDialog(
-                                                                    context,
-                                                                    provider.promotions!
-                                                                            .smallPromotions![
-                                                                        2 *
-                                                                            index],
-                                                                    AdvertisementEnums
-                                                                        .small);
-                                                          },
-                                                          child: AspectRatio(
-                                                            aspectRatio: 1,
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              height: 130,
-                                                              fit: BoxFit.cover,
-                                                              imageUrl: provider
-                                                                      .promotions!
-                                                                      .smallPromotions![2 *
-                                                                          index]
-                                                                      .imageUrl ??
-                                                                  "",
-                                                              placeholder:
-                                                                  (context, _) {
-                                                                return const Stack(
-                                                                  children: [
-                                                                    Center(
-                                                                      child: SizedBox(
-                                                                          width:
-                                                                              30,
-                                                                          height:
-                                                                              30,
-                                                                          child:
-                                                                              CircularProgressIndicator()),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                              errorWidget:
-                                                                  (context, a,
-                                                                      object) {
-                                                                return PromotionsPlaceHolder(
-                                                                  size: Size(
-                                                                      MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width,
-                                                                      130),
-                                                                );
-                                                              },
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
-                                                    AppDimens.shape_10,
-                                                    Expanded(
-                                                      child: (2 * index + 1 <=
-                                                              provider
-                                                                      .promotions!
-                                                                      .smallPromotions!
-                                                                      .length -
-                                                                  1)
-                                                          ? ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  homeProvider
-                                                                      .updateShowAllMenuVisibility(
+                                                  );
+                                                },
+                                                options: CarouselOptions(
+                                                    autoPlay: false,
+                                                    reverse: false,
+                                                    enableInfiniteScroll: false,
+                                                    enlargeCenterPage: false,
+                                                    viewportFraction: 0.8,
+                                                    initialPage: 0,
+                                                    onPageChanged: (index,
+                                                        reason) async {}),
+                                              )
+                                            : Container()),
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12, right: 12, top: 10),
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemBuilder: (context, position) {
+                                        return (provider.promotions!
+                                                        .smallPromotions !=
+                                                    null &&
+                                                provider
+                                                    .promotions!
+                                                    .smallPromotions!
+                                                    .isNotEmpty)
+                                            ? Container(
+                                                margin: const EdgeInsets.only(
+                                                    top: 0),
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: 130,
+                                                child: CarouselSlider.builder(
+                                                  itemCount: ((provider
+                                                                  .promotions!
+                                                                  .smallPromotions!
+                                                                  .length /
+                                                              2)
+                                                          .floor() +
+                                                      provider
+                                                              .promotions!
+                                                              .smallPromotions!
+                                                              .length %
+                                                          2),
+                                                  itemBuilder: (context, index,
+                                                      position) {
+                                                    return Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            child: InkWell(
+                                                              onTap: () {
+                                                                homeProvider
+                                                                    .updateShowAllMenuVisibility(
+                                                                        false,
+                                                                        "Large Promotions Item");
+                                                                PromotionDetailDialog
+                                                                        .getInstance()
+                                                                    .showPromotionDetailDialog(
+                                                                        context,
+                                                                        provider.promotions!.smallPromotions![2 *
+                                                                            index],
+                                                                        AdvertisementEnums
+                                                                            .small);
+                                                              },
+                                                              child:
+                                                                  AspectRatio(
+                                                                aspectRatio: 1,
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  height: 130,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  imageUrl: provider
+                                                                          .promotions!
+                                                                          .smallPromotions![2 *
+                                                                              index]
+                                                                          .imageUrl ??
+                                                                      "",
+                                                                  placeholder:
+                                                                      (context,
+                                                                          _) {
+                                                                    return const Stack(
+                                                                      children: [
+                                                                        Center(
+                                                                          child: SizedBox(
+                                                                              width: 30,
+                                                                              height: 30,
+                                                                              child: CircularProgressIndicator()),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                  errorWidget:
+                                                                      (context,
+                                                                          a,
+                                                                          object) {
+                                                                    return PromotionsPlaceHolder(
+                                                                      size: Size(
+                                                                          MediaQuery.of(context)
+                                                                              .size
+                                                                              .width,
+                                                                          130),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        AppDimens.shape_10,
+                                                        Expanded(
+                                                          child: (2 * index +
+                                                                      1 <=
+                                                                  provider
+                                                                          .promotions!
+                                                                          .smallPromotions!
+                                                                          .length -
+                                                                      1)
+                                                              ? ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10),
+                                                                  child:
+                                                                      InkWell(
+                                                                    onTap: () {
+                                                                      homeProvider.updateShowAllMenuVisibility(
                                                                           false,
                                                                           "Large Promotions Item");
 
-                                                                  PromotionDetailDialog.getInstance().showPromotionDetailDialog(
-                                                                      context,
-                                                                      provider
-                                                                          .promotions!
-                                                                          .smallPromotions![2 *
-                                                                              index +
-                                                                          1],
-                                                                      AdvertisementEnums
-                                                                          .small);
-                                                                },
-                                                                child:
-                                                                    AspectRatio(
-                                                                  aspectRatio:
-                                                                      1,
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    imageUrl: provider
-                                                                            .promotions!
-                                                                            .smallPromotions![2 * index +
-                                                                                1]
-                                                                            .imageUrl ??
-                                                                        "",
-                                                                    placeholder:
-                                                                        (context,
-                                                                            _) {
-                                                                      return const Stack(
-                                                                        children: [
-                                                                          Center(
-                                                                            child: SizedBox(
-                                                                                width: 30,
-                                                                                height: 30,
-                                                                                child: CircularProgressIndicator()),
-                                                                          ),
-                                                                        ],
-                                                                      );
+                                                                      PromotionDetailDialog.getInstance().showPromotionDetailDialog(
+                                                                          context,
+                                                                          provider
+                                                                              .promotions!
+                                                                              .smallPromotions![2 *
+                                                                                  index +
+                                                                              1],
+                                                                          AdvertisementEnums
+                                                                              .small);
                                                                     },
-                                                                    errorWidget:
-                                                                        (context,
+                                                                    child:
+                                                                        AspectRatio(
+                                                                      aspectRatio:
+                                                                          1,
+                                                                      child:
+                                                                          CachedNetworkImage(
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        imageUrl:
+                                                                            provider.promotions!.smallPromotions![2 * index + 1].imageUrl ??
+                                                                                "",
+                                                                        placeholder:
+                                                                            (context,
+                                                                                _) {
+                                                                          return const Stack(
+                                                                            children: [
+                                                                              Center(
+                                                                                child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator()),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        },
+                                                                        errorWidget: (context,
                                                                             a,
                                                                             object) {
-                                                                      return PromotionsPlaceHolder(
-                                                                        size: Size(
-                                                                            MediaQuery.of(context).size.width,
-                                                                            130),
-                                                                      );
-                                                                    },
+                                                                          return PromotionsPlaceHolder(
+                                                                            size:
+                                                                                Size(MediaQuery.of(context).size.width, 130),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                              options: CarouselOptions(
-                                                  aspectRatio: 5 / 9,
-                                                  autoPlay: false,
-                                                  reverse: false,
-                                                  enableInfiniteScroll: false,
-                                                  enlargeCenterPage: true,
-                                                  viewportFraction: 0.8,
-                                                  initialPage: 0,
-                                                  onPageChanged:
-                                                      (index, reason) async {}),
-                                            ),
-                                          )
-                                        : Container();
-                                  },
-                                  itemCount: 1,
-                                )),
-                          ],
-                        ),
-                      )
-                    : Container(),
+                                                                )
+                                                              : Container(),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                  options: CarouselOptions(
+                                                      aspectRatio: 5 / 9,
+                                                      autoPlay: false,
+                                                      reverse: false,
+                                                      enableInfiniteScroll:
+                                                          false,
+                                                      enlargeCenterPage: true,
+                                                      viewportFraction: 0.8,
+                                                      initialPage: 0,
+                                                      onPageChanged: (index,
+                                                          reason) async {}),
+                                                ),
+                                              )
+                                            : Container();
+                                      },
+                                      itemCount: 1,
+                                    )),
+                              ],
+                            ),
+                          )
+                        : Container()
+                    : NoInternetLayout(),
                 provider.showLoader != null && provider.showLoader!
                     ? AppLoader()
                     : Container()

@@ -241,45 +241,56 @@ class MyProfileDialog with LoggingMixin {
 
                                         return InkWell(
                                           onTap: () async {
-                                            var response = await showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text(loc.txtAlert),
-                                                    content: Text(
-                                                        loc.msgCancelAccount),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context, false);
-                                                          },
-                                                          child: Text(
-                                                            loc.txtNo,
-                                                            style:
-                                                                const TextStyle(
-                                                                    color: Colors
-                                                                        .grey),
-                                                          )),
-                                                      TextButton(
-                                                          onPressed: () async {
-                                                            Navigator.pop(
-                                                                context, true);
-                                                          },
-                                                          child: Text(
-                                                            loc.txtYes,
-                                                            style: TextStyle(
-                                                                color: AppThemeCustom
-                                                                    .getAlertDialogTextButtonColor(
-                                                                        context)),
-                                                          )),
-                                                    ],
-                                                  );
-                                                });
+                                            bool hasInternet = await AppHelper
+                                                .checkInternetConnection();
 
-                                            if (response) {
-                                              /// CANCEL ACCOUNT ///
-                                              provider.cancelAccount();
+                                            if (hasInternet) {
+                                              var response = await showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      title: Text(loc.txtAlert),
+                                                      content: Text(
+                                                          loc.msgCancelAccount),
+                                                      actions: [
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context,
+                                                                  false);
+                                                            },
+                                                            child: Text(
+                                                              loc.txtNo,
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .grey),
+                                                            )),
+                                                        TextButton(
+                                                            onPressed:
+                                                                () async {
+                                                              Navigator.pop(
+                                                                  context,
+                                                                  true);
+                                                            },
+                                                            child: Text(
+                                                              loc.txtYes,
+                                                              style: TextStyle(
+                                                                  color: AppThemeCustom
+                                                                      .getAlertDialogTextButtonColor(
+                                                                          context)),
+                                                            )),
+                                                      ],
+                                                    );
+                                                  });
+
+                                              if (response) {
+                                                /// CANCEL ACCOUNT ///
+                                                provider.cancelAccount();
+                                              }
+                                            } else {
+                                              Navigator.pop(context);
+                                              AppHelper.showErrorMessage(
+                                                  context, loc.msgNoInternet);
                                             }
                                           },
                                           child: Padding(
@@ -355,6 +366,11 @@ class MyProfileDialog with LoggingMixin {
 
                                         return InkWell(
                                           onTap: () async {
+
+                                            bool hasInternet=await AppHelper.checkInternetConnection();
+                                            if(hasInternet)
+                                              {
+
                                             final confirmedLogout =
                                                 await showDialog<bool>(
                                                     context: context,
@@ -421,7 +437,15 @@ class MyProfileDialog with LoggingMixin {
                                                   AppNavigator.navigateReplacement(
                                                       context, AppNavigator.login);
                                                 } catch (e) {}*/
-                                          },
+
+                                              }
+                                            else {
+                                              Navigator.pop(context);
+                                              AppHelper.showErrorMessage(
+                                                  context, loc.msgNoInternet);
+                                            }
+
+                                              },
                                           child: Padding(
                                             padding: const EdgeInsets.all(5),
                                             child: Text(

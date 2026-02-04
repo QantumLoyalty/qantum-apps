@@ -368,7 +368,7 @@ class UserService with LoggingMixin implements UserRepository {
     NetworkResponse networkResponse;
     try {
       logEvent("URL:${APIList.CHECK_APP_UPDATE} --> PARAMS: $params");
-      var response = await NetworkHelper.instance.putCall(
+      var response = await NetworkHelper.instance.postCall(
           url: Uri.parse(APIList.CHECK_APP_UPDATE),
           headers: {
             'Content-Type': 'application/json',

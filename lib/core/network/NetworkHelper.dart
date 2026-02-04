@@ -79,7 +79,9 @@ class NetworkHelper with LoggingMixin {
     if (internetError != null) return internetError;
     late NetworkResponse networkResponse;
     try {
+      AppHelper.printMessage(">>> ${url.toString()}");
       var response = await client.get(url, headers: headers);
+      AppHelper.printMessage(">>> ${response.body.toString()}");
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -88,6 +90,7 @@ class NetworkHelper with LoggingMixin {
             response: jsonDecode(response.body), responseMessage: 'Error!!');
       }
     } catch (e) {
+      AppHelper.printMessage(">>> ${e.toString()}");
       networkResponse =
           NetworkResponse.error(response: null, responseMessage: e.toString());
     }

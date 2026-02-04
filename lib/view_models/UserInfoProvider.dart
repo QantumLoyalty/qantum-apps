@@ -177,7 +177,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
       NetworkResponse networkResponse =
           await UserService.getInstance().checkForAppUpdate(params);
-      logEvent("uploadDeviceDetail response: $networkResponse");
+      logEvent("checkForAppUpdate response: $networkResponse");
     } catch (e) {
       logEvent(e.toString());
     }
