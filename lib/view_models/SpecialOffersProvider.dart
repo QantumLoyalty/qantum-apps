@@ -73,14 +73,15 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
                 value.appears!.toUpperCase() == _selectedFilter!.toUpperCase())
             .toList();
       }
-
-      notifyListeners();
+    } else {
+      _specialOffers = [];
     }
+
+    notifyListeners();
   }
 
   getSpecialOffersFilters({bool? showLoader}) async {
     try {
-
       if (showLoader != null && showLoader) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _showLoader = true;
@@ -98,18 +99,20 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
         if (apiResponse.containsKey('success') &&
             (apiResponse['success'] as bool)) {
           if (apiResponse.containsKey('data')) {
-            var filterData = apiResponse['data'] as Map<String, dynamic>;
-            _isErrorOnFilterResponse = false;
+            if (apiResponse['data'] != null) {
+              var filterData = apiResponse['data'] as Map<String, dynamic>;
+              _isErrorOnFilterResponse = false;
 
-            if (filterData.containsKey('menu_Type') &&
-                filterData['menu_Type'].toString().toLowerCase() ==
-                    OffersFilterType.multiple.name) {
-              _offersFilters = ['ALL'];
+              if (filterData.containsKey('menu_Type') &&
+                  filterData['menu_Type'].toString().toLowerCase() ==
+                      OffersFilterType.multiple.name) {
+                _offersFilters = ['ALL'];
 
-              if (filterData.containsKey('filter_Type')) {
-                filterData['filter_Type'].forEach((item) {
-                  _offersFilters!.add(item);
-                });
+                if (filterData.containsKey('filter_Type')) {
+                  filterData['filter_Type'].forEach((item) {
+                    _offersFilters!.add(item);
+                  });
+                }
               }
             }
 
@@ -189,7 +192,8 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
               _specialOffersOriginal!.add(OfferModel.fromJson(item));
             });
 
-            logEvent("SPECIAL OFFERS LIST SIZE ${_specialOffers?.length}");
+            logEvent(
+                "SPECIAL OFFERS LIST SIZE ${_specialOffersOriginal?.length}");
             applyFilterOnOffers();
           }
         }

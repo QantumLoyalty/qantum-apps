@@ -600,4 +600,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgNoInternet => 'आप इंटरनेट से कनेक्ट नहीं हैं।\nकृपया अपना कनेक्शन जाँचें और फिर से प्रयास करें।';
+
+  @override
+  String get msgNoOffers => 'ऑफ़र उपलब्ध नहीं हैं';
 }

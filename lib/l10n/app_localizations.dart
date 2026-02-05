@@ -1279,6 +1279,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You are not connected to the internet\nCheck your connection and try again.'**
   String get msgNoInternet;
+
+  /// No description provided for @msgNoOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'No offers found!'**
+  String get msgNoOffers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

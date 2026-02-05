@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../view_models/SpecialOffersProvider.dart';
@@ -26,7 +27,6 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     super.initState();
     _specialOffersProvider =
         Provider.of<SpecialOffersProvider>(context, listen: false);
-    // _specialOffersProvider.getSpecialOffersFilters();
     _specialOffersProvider.fetchSpecialOffersTimer();
     selectedFlavor = FlavorConfig.instance.flavor!;
   }
@@ -201,32 +201,54 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                             )
                           : const SizedBox.shrink(),
                       Expanded(
-                        child: (provider.specialOffers != null &&
-                                provider.specialOffers!.isNotEmpty)
-                            ? RefreshIndicator(
-                                backgroundColor:
-                                    Theme.of(context).primaryColorDark,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
-                                onRefresh: () async {
-                                  Provider.of<SpecialOffersProvider>(context,
-                                          listen: false)
-                                      .getSpecialOffers();
-                                },
-                                child: ListView.separated(
-                                  itemBuilder: (context, index) {
-                                    return SpecialOfferItem(
-                                      offer: provider.specialOffers![index],
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return AppDimens.shape_10;
-                                  },
-                                  itemCount: provider.specialOffers!.length,
-                                ),
-                              )
+                        child: (provider.specialOffers != null)
+                            ? (provider.specialOffers!.isNotEmpty)
+                                ? RefreshIndicator(
+                                    backgroundColor:
+                                        Theme.of(context).primaryColorDark,
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor,
+                                    onRefresh: () async {
+                                      Provider.of<SpecialOffersProvider>(
+                                              context,
+                                              listen: false)
+                                          .getSpecialOffers();
+                                    },
+                                    child: ListView.separated(
+                                      itemBuilder: (context, index) {
+                                        return SpecialOfferItem(
+                                          offer: provider.specialOffers![index],
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return AppDimens.shape_10;
+                                      },
+                                      itemCount: provider.specialOffers!.length,
+                                    ),
+                                  )
+                                : Center(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(
+                                        Icons.new_releases_rounded,
+                                        size: 50,
+                                      ),
+                                      AppDimens.shape_15,
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .msgNoOffers,
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionColor,
+                                            fontSize: 18),
+                                      )
+                                    ],
+                                  ),
+                                )
                             : SizedBox.shrink(),
                       ),
                     ],
