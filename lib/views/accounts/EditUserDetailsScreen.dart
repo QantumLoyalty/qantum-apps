@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '../common_widgets/AppLogoHeader.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -74,8 +75,7 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color:
-                          Theme.of(context).textSelectionTheme.selectionColor,
+                      color:AppThemeCustom.getProfileEditHeadingTextColor(context),
                     ),
                   ),
                   AppDimens.shape_20,

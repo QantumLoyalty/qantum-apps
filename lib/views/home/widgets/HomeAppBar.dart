@@ -175,7 +175,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                               userInfoProvider.getUserInfo!
                                                   .isUserStatusCancelled())
                                           ? AppColors.disable_color
-                                          : Theme.of(context).iconTheme.color,
+                                          : AppThemeCustom.getHomeScreenProfileIconColor(context),
                                 ),
                                 Text(
                                   AppLocalizations.of(context)!

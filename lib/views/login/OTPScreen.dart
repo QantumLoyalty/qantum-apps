@@ -221,17 +221,16 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                               ],
                               controller: _otpController,
                               style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionHandleColor),
+                                  color:  AppThemeCustom
+                                      .getTextFieldTextColor(
+                                      context,isShadow: true)),
                               decoration: InputDecoration(
                                 counter: AppDimens.shape_5,
                                 fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context),
+                                AppThemeCustom.getTextFieldBackground(context,isShadow: true),
                                 filled: true,
-                                hintStyle: TextStyle(
-                                    color: Theme.of(context).hintColor),
+                                hintStyle:
+                                TextStyle(color:AppThemeCustom.getHintTextFieldColor(context,isShadow: true)),
                                 hintText: 'XXXX',
                                 border: OutlineInputBorder(
                                     borderSide: const BorderSide(

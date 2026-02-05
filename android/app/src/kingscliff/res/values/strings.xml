@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Kingscliff</string>
+    <string name="default_notification_channel_id">com.au.kingscliff.app.urgent</string>
+</resources>

@@ -31,7 +31,7 @@ class DetailCard extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: AppThemeCustom.getUserInfoItemStyle(
-                            context, editable)),
+                            context, editable,isHeading: true)),
                   ),
                 ),
                 editable

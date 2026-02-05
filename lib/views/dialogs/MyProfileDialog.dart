@@ -56,8 +56,14 @@ class MyProfileDialog with LoggingMixin {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: AppThemeCustom.getMyProfileCardBackground(
-                                context),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                flavor == Flavor.kingscliff? AppColors.kc_primary_color:AppThemeCustom.getMyProfileCardBackground(context),
+                                flavor == Flavor.kingscliff? AppColors.kc_primary_color_dark:AppThemeCustom.getMyProfileCardBackground(context),
+                              ],
+                            ),
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.only(left: 25, right: 25),
@@ -93,24 +99,21 @@ class MyProfileDialog with LoggingMixin {
                                                   size: 40,
                                                 ),
                                           Text(
-                                            "${provider.getUserInfo!.firstName} ${provider.getUserInfo!.lastName}",
+                                            "${provider.getUserInfo?.firstName ?? ''} ${provider.getUserInfo?.lastName ?? ''}",
                                             textAlign: TextAlign.center,
-                                            textScaler:
-                                                const TextScaler.linear(1.0),
+                                            textScaler: const TextScaler.linear(1.0),
                                             style: TextStyle(
-                                                fontSize: 28,
-                                                fontWeight: FontWeight.bold,
-                                                color: AppThemeCustom
-                                                    .getProfileDialogTextColor(
-                                                        context)),
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppThemeCustom.getProfileDialogTextColor(context),
+                                            ),
                                           ),
                                           Text(
-                                            "${loc.txtCard} # ${provider.getUserInfo!.cardNumber}",
+                                            "${loc.txtCard} # ${provider.getUserInfo?.cardNumber ?? ''}",
                                             style: TextStyle(
-                                                fontSize: 14,
-                                                color: AppThemeCustom
-                                                    .getProfileDialogCardTextColor(
-                                                        context)),
+                                              fontSize: 14,
+                                              color: AppThemeCustom.getProfileDialogCardTextColor(context),
+                                            ),
                                           ),
                                           AppDimens.shape_20,
                                           IconTextWidget(
@@ -119,7 +122,7 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.cake,
                                             iconSize: 18,
                                             text: AppHelper.formatDate(provider
-                                                .getUserInfo!.dateOfBirth),
+                                                .getUserInfo?.dateOfBirth??''),
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -133,7 +136,7 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.phone_android_outlined,
                                             iconSize: 18,
                                             text:
-                                                "${provider.getUserInfo!.mobile}",
+                                                "${provider.getUserInfo?.mobile??""}",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -147,7 +150,7 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.email_outlined,
                                             iconSize: 18,
                                             text:
-                                                "${provider.getUserInfo!.email}",
+                                                "${provider.getUserInfo?.email??""}",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -196,7 +199,7 @@ class MyProfileDialog with LoggingMixin {
                                                       style: TextStyle(
                                                           color: AppThemeCustom
                                                               .getEditDetailsColor(
-                                                                  context),
+                                                                  context,isText:true),
                                                           fontSize: 10),
                                                     )
                                                   ],

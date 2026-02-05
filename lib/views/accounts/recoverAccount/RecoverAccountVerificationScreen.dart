@@ -134,10 +134,10 @@ class _RecoverAccountVerificationScreenState
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: const Icon(
+                          child:  Icon(
                             Icons.chevron_left,
                             size: 28,
-                            //  color: AppThemeCustom.getAccountHeaderColor(context),
+                             color: AppThemeCustom.getAccountHeaderColor(context),
                           )),
                     ),
                     Applogo(

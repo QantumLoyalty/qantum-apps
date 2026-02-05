@@ -240,19 +240,18 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 return null;
                               },
                               style: TextStyle(
-                                  color: AppThemeCustom.getTextFieldTextColor(
-                                      context)),
+                                  color:
+                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
                               decoration: InputDecoration(
                                 fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context),
+                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
                                 filled: true,
                                 errorStyle: TextStyle(color: Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor,),
                                 hintText: loc.txtFirstName,
                                 hintStyle: TextStyle(
-                                    color: Theme.of(context).hintColor,
+                                    color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                     fontWeight: FontWeight.w400),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
@@ -297,16 +296,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     RegExp(r"[A-Za-z\s'\-]")),
                               ],
                               style: TextStyle(
-                                  color: AppThemeCustom.getTextFieldTextColor(
-                                      context)),
+                                  color:
+                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
                               decoration: InputDecoration(
                                 fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context),
+                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
                                 filled: true,
                                 hintText: loc.txtLastName,
                                 hintStyle: TextStyle(
-                                    color: Theme.of(context).hintColor,
+                                    color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                     fontWeight: FontWeight.w400),
                                 errorStyle: TextStyle(color: Theme.of(context)
                                     .textSelectionTheme
@@ -335,8 +333,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               keyboardType: TextInputType.emailAddress,
                               controller: _emailController,
                               style: TextStyle(
-                                  color: AppThemeCustom.getTextFieldTextColor(
-                                      context)),
+                                  color:
+                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return loc.msgEmptyEmail;
@@ -349,12 +347,11 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               },
                               decoration: InputDecoration(
                                 fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context),
+                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
                                 filled: true,
                                 hintText: loc.hintEmail,
                                 hintStyle: TextStyle(
-                                    color: Theme.of(context).hintColor,
+                                    color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                     fontWeight: FontWeight.w400),
                                 errorStyle: TextStyle(color: Theme.of(context)
                                     .textSelectionTheme
@@ -404,19 +401,18 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           return null;
                                         },
                                         style: TextStyle(
-                                            color: AppThemeCustom
-                                                .getTextFieldTextColor(
-                                                    context)),
+                                            color:
+                                                AppThemeCustom.getTextFieldTextColor(
+                                                    context,isShadow: true)),
                                         decoration: InputDecoration(
                                             counterText: "",
                                             hintText: "${loc.txtAddress} 1",
                                             fillColor:
                                                 AppThemeCustom.getTextFieldBackground(
-                                                    context),
+                                                    context,isShadow: true),
                                             filled: true,
                                             hintStyle: TextStyle(
-                                              color:
-                                                  Theme.of(context).hintColor,
+                                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                               fontWeight: FontWeight.w400,
                                             ),
                                             errorStyle: TextStyle(color: Theme.of(context)
@@ -448,19 +444,18 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                         maxLines: 1,
                                         controller: _address1Controller,
                                         style: TextStyle(
-                                            color: AppThemeCustom
-                                                .getTextFieldTextColor(
-                                                    context)),
+                                            color:
+                                                AppThemeCustom.getTextFieldTextColor(
+                                                    context,isShadow: true)),
                                         decoration: InputDecoration(
                                             counterText: "",
                                             hintText: "${loc.txtAddress} 2",
                                             fillColor:
                                                 AppThemeCustom.getTextFieldBackground(
-                                                    context),
+                                                    context,isShadow: true),
                                             filled: true,
                                             hintStyle: TextStyle(
-                                              color:
-                                                  Theme.of(context).hintColor,
+                                              color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                               fontWeight: FontWeight.w400,
                                             ),
                                             enabledBorder: OutlineInputBorder(
@@ -520,18 +515,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           controller: _postcodeController,
                                           style: TextStyle(
                                               color: AppThemeCustom
-                                                  .getTextFieldTextColor(
-                                                      context)),
+                                                  .getTextFieldTextColor(context,isShadow: true)),
                                           decoration: InputDecoration(
                                               counterText: "",
                                               hintText: "5555",
-                                              fillColor:
-                                                  AppThemeCustom.getTextFieldBackground(
-                                                      context),
+                                              fillColor: AppThemeCustom
+                                                  .getTextFieldBackground(context,isShadow: true),
                                               filled: true,
                                               hintStyle: TextStyle(
-                                                color:
-                                                    Theme.of(context).hintColor,
+                                                color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                                 fontWeight: FontWeight.w400,
                                               ),
                                               enabledBorder: OutlineInputBorder(
@@ -583,7 +575,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                 decoration: BoxDecoration(
                                                     color: AppThemeCustom
                                                         .getTextFieldBackground(
-                                                            context),
+                                                            context,isShadow: true),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
@@ -610,7 +602,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                           style: TextStyle(
                                                               color: AppThemeCustom
                                                                   .getTextFieldTextColor(
-                                                                      context)),
+                                                                      context,isShadow: true)),
                                                           onChanged: (value) {
                                                             if (value.length ==
                                                                 2) {
@@ -643,9 +635,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                               counterText: "",
                                                               hintText: "DD",
                                                               hintStyle: TextStyle(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .hintColor,
+                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
@@ -678,7 +668,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                           style: TextStyle(
                                                               color: AppThemeCustom
                                                                   .getTextFieldTextColor(
-                                                                      context)),
+                                                                      context,isShadow: true)),
                                                           focusNode:
                                                               _birthdayMMFocusNode,
                                                           onChanged: (value) {
@@ -713,9 +703,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                               counterText: "",
                                                               hintText: "MM",
                                                               hintStyle: TextStyle(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .hintColor,
+                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
@@ -748,14 +736,12 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                           style: TextStyle(
                                                               color: AppThemeCustom
                                                                   .getTextFieldTextColor(
-                                                                      context)),
+                                                                      context,isShadow: true)),
                                                           decoration: InputDecoration(
                                                               counterText: "",
                                                               hintText: "YYYY",
                                                               hintStyle: TextStyle(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .hintColor,
+                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),

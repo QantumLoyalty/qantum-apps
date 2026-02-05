@@ -214,7 +214,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -234,7 +234,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -337,6 +337,14 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.drinkRewards:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.maxx:
         return ButtonStyle(
             shadowColor:
@@ -346,7 +354,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(AppColors.white));
-      case Flavor.starReward:
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -445,7 +453,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -460,7 +468,14 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.starReward:
+      case Flavor.maxx:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(color: AppColors.dr_button_color),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      case Flavor.starReward || Flavor.kingscliff:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -552,7 +567,9 @@ class AppHelper with LoggingMixin {
       case Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.brisbane ||
-            Flavor.bluewater:
+            Flavor.bluewater ||
+            Flavor.kingscliff ||
+            Flavor.drinkRewards:
         return const Size(142, 58);
 
       case Flavor.woollahra:
@@ -596,7 +613,8 @@ class AppHelper with LoggingMixin {
       Flavor.queens: "Queens",
       Flavor.brisbane: "Brisbane",
       Flavor.bluewater: "Bluewater",
-      Flavor.flinders: "Flinders"
+      Flavor.flinders: "Flinders",
+      Flavor.drinkRewards: "Drinks",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }
@@ -604,7 +622,7 @@ class AppHelper with LoggingMixin {
   static String getUserTierType(UserModel userData) {
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
-    if (flavorConfig.flavor == Flavor.starReward) {
+    if (flavorConfig.flavor == Flavor.starReward||flavorConfig.flavor == Flavor.drinkRewards) {
       if (userData.membershipCategory != null &&
           userData.membershipCategory!.isNotEmpty) {
         if (userData.membershipCategory!.toLowerCase() == "") {
@@ -647,6 +665,10 @@ class AppHelper with LoggingMixin {
             return "Member";
           case Flavor.northShoreTavern:
             return "Silver";
+          case Flavor.kingscliff:
+            return "Valued";
+          case Flavor.drinkRewards:
+            return "Explorer";
           default:
             return "Valued";
         }
@@ -656,7 +678,8 @@ class AppHelper with LoggingMixin {
 
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
-    const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
+    //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
+    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc};
     return clubFlavors.contains(flavor);
   }
 

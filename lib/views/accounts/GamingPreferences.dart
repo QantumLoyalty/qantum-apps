@@ -72,7 +72,7 @@ class GamingPreferences extends StatelessWidget {
                             trailing: Icon(Icons.chevron_right,
                                 color:
                                     AppThemeCustom.getAccountSectionItemStyle(
-                                        context)),
+                                        context,isCommunication: true)),
                             title: Text(
                               translateContent(AppLocalizations.of(context)!,
                                   items.keys.elementAt(item)),
@@ -80,7 +80,7 @@ class GamingPreferences extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context)),
+                                          context,isCommunication: true)),
                             ),
                             subtitle: Text(
                               translateContent(AppLocalizations.of(context)!,
@@ -88,7 +88,7 @@ class GamingPreferences extends StatelessWidget {
                               style: TextStyle(
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context)),
+                                          context,isCommunication: true)),
                             ),
                             onTap: () {},
                           ),

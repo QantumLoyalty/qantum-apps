@@ -245,6 +245,20 @@ class AppIcons {
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
+      }else if (selectedFlavor == Flavor.drinkRewards) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "club":
+            return "assets/drinkRewards/card_club.png";
+          case "reserve":
+            return "assets/drinkRewards/card_reserve.png";
+          case "masters":
+            return "assets/drinkRewards/card_masters.png";
+          case "staff":
+            return "assets/drinkRewards/card_staff.png";
+
+          default:
+            return "assets/drinkRewards/card_explorer.png";
+        }
       } else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":

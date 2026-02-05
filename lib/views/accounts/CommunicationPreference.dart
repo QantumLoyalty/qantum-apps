@@ -112,7 +112,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   loc.txtCommunicationChannel,
                                   style: TextStyle(
                                       color: AppThemeCustom
-                                          .getAccountSectionItemStyle(context),
+                                          .getAccountSectionItemStyle(context,isCommunication: true,isHeadingCommunication: true),
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -120,7 +120,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   loc.msgNotificationPreference,
                                   style: TextStyle(
                                       color: AppThemeCustom
-                                          .getAccountSectionItemStyle(context),
+                                          .getAccountSectionItemStyle(context,isCommunication: true),
                                       fontSize: 12),
                                 ),
                                 SwitchListTile(
@@ -141,7 +141,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     style: TextStyle(
                                         color: AppThemeCustom
                                             .getAccountSectionItemStyle(
-                                                context),
+                                                context,isCommunication: true),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -163,7 +163,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     style: TextStyle(
                                         color: AppThemeCustom
                                             .getAccountSectionItemStyle(
-                                                context),
+                                                context,isCommunication: true),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -177,7 +177,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             style: TextStyle(
                                 color:
                                     AppThemeCustom.getAccountSectionItemStyle(
-                                        context),
+                                        context,isCommunication: true,isHeadingCommunication: true),
                                 fontSize: 12),
                           ),
                         ],

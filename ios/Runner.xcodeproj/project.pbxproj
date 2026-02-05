@@ -74,18 +74,22 @@
 		0A13E3A6748E07E0B45E1805 /* Pods-Runner.debug-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-acerewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-acerewards.xcconfig"; sourceTree = "<group>"; };
 		0B324D356851059D438C6113 /* Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig"; sourceTree = "<group>"; };
 		0C22821011D5F80B7A8FFF83 /* Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
+		0F567937BEB46C2B57336377 /* Pods-OneSignalNotificationServiceExtension.profile-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-kingscliff.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		0FC4B4B88D4438751A77C37C /* Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		1089DFC44B0D942407A4A793 /* Pods-RunnerTests.debug-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-flinders.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-flinders.xcconfig"; sourceTree = "<group>"; };
 		11A1F198614048084693F509 /* Pods-RunnerTests.release-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-northshoretavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		151DD0468896E2B629D945C8 /* Pods-OneSignalNotificationServiceExtension.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-max.xcconfig"; sourceTree = "<group>"; };
+		1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
+		19088FE29C4D08E43FCD1053 /* Pods-Runner.profile-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-kingscliff.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		19E0DAC768F566239D7259DA /* Pods-RunnerTests.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-acerewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-acerewards.xcconfig"; sourceTree = "<group>"; };
 		1C4617468B0A40327614E53D /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB3F1B0F48ACD25BB3E8DBF /* Pods-Runner.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		1E6E116AA631F6DE07C9F015 /* Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig"; sourceTree = "<group>"; };
 		1E980CF6050672F749430FFD /* Pods-OneSignalNotificationServiceExtension.profile-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-flinders.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-flinders.xcconfig"; sourceTree = "<group>"; };
 		20EAFA268A2BB88024701168 /* Pods-RunnerTests.profile-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-clh.xcconfig"; sourceTree = "<group>"; };
+		21C7674DF6A752545CF85FFA /* Pods-RunnerTests.profile-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		22EBFED4966B2CFD525C16BC /* Pods-OneSignalNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		230901BB2DB8FBBC00E89009 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		230D7E6F2DB1120D00650354 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -125,11 +129,13 @@
 		3D1B134A3B80D1E2049A36B5 /* Pods-Runner.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		3D309861B26C8B5D3AC6EDA3 /* Pods-RunnerTests.profile-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-woollahra.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-woollahra.xcconfig"; sourceTree = "<group>"; };
 		3EEF905F7859FC169AA11CD0 /* Pods-Runner.release-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-clh.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-clh.xcconfig"; sourceTree = "<group>"; };
+		40E916E12617159700828E4B /* Pods-OneSignalNotificationServiceExtension.release-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-kingscliff.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		436D321760337CC5C005F23B /* Pods-RunnerTests.profile-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-brisbane.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-brisbane.xcconfig"; sourceTree = "<group>"; };
 		4544537F573E7677B9AF3775 /* Pods-Runner.debug-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-queens.xcconfig"; sourceTree = "<group>"; };
 		4727B554A96ABFDD4888A197 /* Pods-RunnerTests.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-max.xcconfig"; sourceTree = "<group>"; };
 		4A66764E1ADEB394D58BC8F8 /* Pods-RunnerTests.release-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-woollahra.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-woollahra.xcconfig"; sourceTree = "<group>"; };
 		4A73E110DB6FED13B13DA10B /* Pods-Runner.profile-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-bluewater.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-bluewater.xcconfig"; sourceTree = "<group>"; };
+		4BF43850EBA059032D16DF1E /* Pods-Runner.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		4EAB29EA5BAB25F4B8C17B28 /* Pods-RunnerTests.release-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-brisbane.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-brisbane.xcconfig"; sourceTree = "<group>"; };
 		4F4AAE6729CD246DE15B2E53 /* Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-max.xcconfig"; sourceTree = "<group>"; };
 		501233E54F2E10639E921520 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +147,7 @@
 		5BCA30D87B3338DA07891C28 /* Pods-Runner.profile-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-woollahra.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-woollahra.xcconfig"; sourceTree = "<group>"; };
 		5C0BDEA0E4E59B20F3F5E5D6 /* Pods-RunnerTests.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		5C88EF9D89266E740E9D8C99 /* Pods-RunnerTests.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
+		5D5FE245433D74F0DA0BF157 /* Pods-Runner.release-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-kingscliff.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		5EFC4CEFEC53D7F7F5F3666F /* Pods-Runner.profile-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-northshoretavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		5F7F6F55BDCBD6504B00BE6B /* Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig"; sourceTree = "<group>"; };
 		609FDB786D428E6D0CB54B04 /* Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -160,9 +167,11 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76335D36FE08AA3084E14778 /* Pods-RunnerTests.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-max.xcconfig"; sourceTree = "<group>"; };
+		78AE4F2D8DA802264C6AA8DF /* Pods-RunnerTests.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		799597E9CE7F2F8E49D625F1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		79AB768D85B76E1374E1371B /* Pods-RunnerTests.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-clh.xcconfig"; sourceTree = "<group>"; };
 		7A87D7BC3F22559517FEF326 /* Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-bluewater.xcconfig"; sourceTree = "<group>"; };
+		7AF843528A68DDD426679489 /* Pods-Runner.debug-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-drinkrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7DD5D67C45A2429D270B165C /* Pods-RunnerTests.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
 		7EAA8791D766D1CA2FC6B796 /* Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-brisbane.xcconfig"; sourceTree = "<group>"; };
@@ -191,12 +200,16 @@
 		A51E8D05A908A11384106D21 /* Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig"; sourceTree = "<group>"; };
 		A847C8338847509A1210D07B /* Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
 		AA2DB6F5FBB00BC182B8254C /* Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig"; sourceTree = "<group>"; };
+		AADEDC5726C28629192327DC /* Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		B0B1562966EBC85C63B6C452 /* Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		B0E0503AD23D068FB4F6AE10 /* Pods-Runner.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-max.xcconfig"; sourceTree = "<group>"; };
+		B1C0797DB4715988E9401FDB /* Pods-RunnerTests.release-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-kingscliff.xcconfig"; sourceTree = "<group>"; };
+		B32B25420A0E914B22F29542 /* Pods-RunnerTests.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		B354B58ACEF9A8E64E0A454A /* Pods-Runner.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		B517E886DCF61152469EA9D9 /* Pods-RunnerTests.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-starrewards.xcconfig"; sourceTree = "<group>"; };
 		B64A9757BEE30AC0FCBC01A5 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		B66BEA5B4F19F81A074CED36 /* Pods-Runner.profile-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-hogansreward.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-hogansreward.xcconfig"; sourceTree = "<group>"; };
+		B73E56667B4B4617508FC0FC /* Pods-Runner.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		B99B89C5E65F2171F5C2D4B6 /* Pods-RunnerTests.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		BD3E1D68AD1FA29D40393034 /* Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig"; sourceTree = "<group>"; };
 		BD7FB8CE6B25727B9B0DB167 /* Pods-RunnerTests.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-qantum.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +219,7 @@
 		C93477CCC8E0C4BD98259ECB /* Pods-RunnerTests.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		C97DF7DE6A395410BE67E599 /* Pods-OneSignalNotificationServiceExtension.release-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-brisbane.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-brisbane.xcconfig"; sourceTree = "<group>"; };
 		CBC4738BFA9D465D09BF40A6 /* Pods-RunnerTests.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
+		CCBEE8FF520B606739218A77 /* Pods-RunnerTests.debug-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		CD44C519058EEEABAEA6E7D4 /* Pods-RunnerTests.release-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-clh.xcconfig"; sourceTree = "<group>"; };
 		CD7C38E14A6580BA2DCD707D /* Pods-Runner.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-qantum.xcconfig"; sourceTree = "<group>"; };
 		CE815196DD362F1DB4D5D9D8 /* Pods-Runner.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-max.xcconfig"; sourceTree = "<group>"; };
@@ -220,15 +234,19 @@
 		E3C39D08E6CB5B707B0DDB88 /* Pods-RunnerTests.debug-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-northshoretavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		E48693BB7B61277854C2A8E9 /* Pods-Runner.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
 		E488DE30BD7BD20E9DF68883 /* Pods-RunnerTests.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-qantum.xcconfig"; sourceTree = "<group>"; };
+		E553F420DB1EB0099259E0D1 /* Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		E70A361DCFD221F3B5194D4B /* Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; sourceTree = "<group>"; };
 		E77CAC662C439BF88977CC49 /* Pods-RunnerTests.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-mhbc.xcconfig"; sourceTree = "<group>"; };
+		EA1CD033989C9E8BBA374E52 /* Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		ECE00306A57F675A8A4B4237 /* Pods-Runner.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-acerewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-acerewards.xcconfig"; sourceTree = "<group>"; };
 		EDB4C7AEA47B29DAD8332ECE /* Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; sourceTree = "<group>"; };
 		F1B77E56B5ECCBABA4CA8F2D /* Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig"; sourceTree = "<group>"; };
 		F204EA8B2072D2719B724D9B /* Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig"; sourceTree = "<group>"; };
+		F3810244091ADDE1BB91156A /* Pods-Runner.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		F42AE5C6DD6247B82C127D7F /* Pods-RunnerTests.debug-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-acerewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-acerewards.xcconfig"; sourceTree = "<group>"; };
 		F45F2DA78BFBA7290EF14FD3 /* Pods-OneSignalNotificationServiceExtension.release-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-woollahra.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-woollahra.xcconfig"; sourceTree = "<group>"; };
 		F6DAF28B0EC5F588327A0509 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		F7A6BF682B6256C9CA35D86D /* Pods-OneSignalNotificationServiceExtension.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		FBA1E898A8EE08EDB54AE5F1 /* Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
 		FE8041BD1A53FDC72D60D1DA /* Pods-RunnerTests.profile-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-queens.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-queens.xcconfig"; sourceTree = "<group>"; };
 		FF43AD53955AC25B1E3A87CF /* Pods-RunnerTests.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -458,6 +476,24 @@
 				1089DFC44B0D942407A4A793 /* Pods-RunnerTests.debug-flinders.xcconfig */,
 				6B00470CFDC1DBE859707FAA /* Pods-RunnerTests.release-flinders.xcconfig */,
 				0124E472E51CDD84CC8DE4BB /* Pods-RunnerTests.profile-flinders.xcconfig */,
+				F7A6BF682B6256C9CA35D86D /* Pods-OneSignalNotificationServiceExtension.debug-kingscliff.xcconfig */,
+				40E916E12617159700828E4B /* Pods-OneSignalNotificationServiceExtension.release-kingscliff.xcconfig */,
+				0F567937BEB46C2B57336377 /* Pods-OneSignalNotificationServiceExtension.profile-kingscliff.xcconfig */,
+				F3810244091ADDE1BB91156A /* Pods-Runner.debug-kingscliff.xcconfig */,
+				5D5FE245433D74F0DA0BF157 /* Pods-Runner.release-kingscliff.xcconfig */,
+				19088FE29C4D08E43FCD1053 /* Pods-Runner.profile-kingscliff.xcconfig */,
+				B32B25420A0E914B22F29542 /* Pods-RunnerTests.debug-kingscliff.xcconfig */,
+				B1C0797DB4715988E9401FDB /* Pods-RunnerTests.release-kingscliff.xcconfig */,
+				21C7674DF6A752545CF85FFA /* Pods-RunnerTests.profile-kingscliff.xcconfig */,
+				EA1CD033989C9E8BBA374E52 /* Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig */,
+				AADEDC5726C28629192327DC /* Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig */,
+				E553F420DB1EB0099259E0D1 /* Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig */,
+				7AF843528A68DDD426679489 /* Pods-Runner.debug-drinkrewards.xcconfig */,
+				B73E56667B4B4617508FC0FC /* Pods-Runner.release-drinkrewards.xcconfig */,
+				4BF43850EBA059032D16DF1E /* Pods-Runner.profile-drinkrewards.xcconfig */,
+				CCBEE8FF520B606739218A77 /* Pods-RunnerTests.debug-drinkrewards.xcconfig */,
+				78AE4F2D8DA802264C6AA8DF /* Pods-RunnerTests.release-drinkrewards.xcconfig */,
+				1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -7276,6 +7312,884 @@
 			};
 			name = Profile;
 		};
+		3D33F6AD2F1E716F006FB87D /* Debug-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-kingscliff";
+		};
+		3D33F6AE2F1E716F006FB87D /* Debug-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = Kingscliff;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-kingscliff";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-hogansreward.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-kingscliff";
+		};
+		3D33F6AF2F1E716F006FB87D /* Debug-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B32B25420A0E914B22F29542 /* Pods-RunnerTests.debug-kingscliff.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-kingscliff";
+		};
+		3D33F6B02F1E716F006FB87D /* Debug-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7A6BF682B6256C9CA35D86D /* Pods-OneSignalNotificationServiceExtension.debug-kingscliff.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug-kingscliff";
+		};
+		3D33F6B12F1E7186006FB87D /* Profile-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-kingscliff";
+		};
+		3D33F6B22F1E7186006FB87D /* Profile-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = Kingscliff;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-kingscliff";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-mhbc.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-kingscliff";
+		};
+		3D33F6B32F1E7186006FB87D /* Profile-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21C7674DF6A752545CF85FFA /* Pods-RunnerTests.profile-kingscliff.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-kingscliff";
+		};
+		3D33F6B42F1E7186006FB87D /* Profile-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F567937BEB46C2B57336377 /* Pods-OneSignalNotificationServiceExtension.profile-kingscliff.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Profile-kingscliff";
+		};
+		3D33F6B52F1E7198006FB87D /* Release-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-kingscliff";
+		};
+		3D33F6B62F1E7198006FB87D /* Release-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = Kingscliff;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-kingscliff";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-mhbc.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-kingscliff";
+		};
+		3D33F6B72F1E7198006FB87D /* Release-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1C0797DB4715988E9401FDB /* Pods-RunnerTests.release-kingscliff.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-kingscliff";
+		};
+		3D33F6B82F1E7198006FB87D /* Release-kingscliff */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40E916E12617159700828E4B /* Pods-OneSignalNotificationServiceExtension.release-kingscliff.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingscliff.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-kingscliff";
+		};
+		3D965DAC2F28CB440028D46E /* Debug-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-drinkrewards";
+		};
+		3D965DAD2F28CB440028D46E /* Debug-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Drink HQ Rewards";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-drinkrewards";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-starrewards.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-drinkrewards";
+		};
+		3D965DAE2F28CB440028D46E /* Debug-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCBEE8FF520B606739218A77 /* Pods-RunnerTests.debug-drinkrewards.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-drinkrewards";
+		};
+		3D965DAF2F28CB440028D46E /* Debug-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA1CD033989C9E8BBA374E52 /* Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug-drinkrewards";
+		};
+		3D965DB02F28CB540028D46E /* Release-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-drinkrewards";
+		};
+		3D965DB12F28CB540028D46E /* Release-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Drink HQ Rewards";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-drinkrewards";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-starrewards.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-drinkrewards";
+		};
+		3D965DB22F28CB540028D46E /* Release-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78AE4F2D8DA802264C6AA8DF /* Pods-RunnerTests.release-drinkrewards.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-drinkrewards";
+		};
+		3D965DB32F28CB540028D46E /* Release-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AADEDC5726C28629192327DC /* Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-drinkrewards";
+		};
+		3D965DB42F28CB620028D46E /* Profile-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-drinkrewards";
+		};
+		3D965DB52F28CB620028D46E /* Profile-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Drink HQ Rewards";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-drinkrewards";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-starrewards.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-drinkrewards";
+		};
+		3D965DB62F28CB620028D46E /* Profile-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-drinkrewards";
+		};
+		3D965DB72F28CB620028D46E /* Profile-drinkrewards */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E553F420DB1EB0099259E0D1 /* Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drinkrewards.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Profile-drinkrewards";
+		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -7464,9 +8378,11 @@
 				2398E4BD2ECC479400EE6346 /* Debug-bluewater */,
 				23364CF02EC461BD001651A3 /* Debug-woollahra */,
 				23C765A92E9FB24400A6D570 /* Debug-acerewards */,
+				3D33F6B02F1E716F006FB87D /* Debug-kingscliff */,
 				235B5CED2DC9D72D004A8F1C /* Debug-max */,
 				23F3528E2E05655B001614F3 /* Debug-montaukTavern */,
 				235B5CEE2DC9D72D004A8F1C /* Debug-starrewards */,
+				3D965DAF2F28CB440028D46E /* Debug-drinkrewards */,
 				234E069B2E0009A400C1E77F /* Debug-clh */,
 				235B5CEF2DC9D72D004A8F1C /* Debug-qantum */,
 				236ED3F72DDAE45D00B1E8B8 /* Debug-mhbc */,
@@ -7481,6 +8397,7 @@
 				2398E4C12ECC47BC00EE6346 /* Release-bluewater */,
 				235B5CF22DC9D72D004A8F1C /* Release-qantum */,
 				235B5CF32DC9D72D004A8F1C /* Release-starrewards */,
+				3D965DB32F28CB540028D46E /* Release-drinkrewards */,
 				234E069F2E0009BB00C1E77F /* Release-clh */,
 				236ED3EF2DDAE43F00B1E8B8 /* Release-mhbc */,
 				23E0D05F2EC1E11E002504CC /* Release-brisbane */,
@@ -7488,10 +8405,12 @@
 				23FAB62F2E8F93BC002B9565 /* Release-northShoreTavern */,
 				237FCD442E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AD2E9FB25E00A6D570 /* Release-acerewards */,
+				3D33F6B82F1E7198006FB87D /* Release-kingscliff */,
 				235B5CF42DC9D72D004A8F1C /* Profile */,
 				235B5CF52DC9D72D004A8F1C /* Profile-max */,
 				235B5CF62DC9D72D004A8F1C /* Profile-qantum */,
 				235B5CF72DC9D72D004A8F1C /* Profile-starrewards */,
+				3D965DB72F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A32E0009C800C1E77F /* Profile-clh */,
 				2398E4C52ECC47CE00EE6346 /* Profile-bluewater */,
 				23F3529A2E0565A4001614F3 /* Profile-montaukTavern */,
@@ -7502,10 +8421,11 @@
 				237FCD402E65525A00DDAA37 /* Profile-hogansreward */,
 				23364CF82EC46209001651A3 /* Profile-woollahra */,
 				23C765B12E9FB27100A6D570 /* Profile-acerewards */,
+				3D33F6B42F1E7186006FB87D /* Profile-kingscliff */,
 				2376E70F2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-acerewards";
+			defaultConfigurationName = "Debug-kingscliff";
 		};
 		331C8087294A63A400263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */ = {
 			isa = XCConfigurationList;
@@ -7516,9 +8436,11 @@
 				2398E4BC2ECC479400EE6346 /* Debug-bluewater */,
 				23364CEF2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A82E9FB24400A6D570 /* Debug-acerewards */,
+				3D33F6AF2F1E716F006FB87D /* Debug-kingscliff */,
 				23ED95D92D6C8838005C5478 /* Debug-max */,
 				23F3528D2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241D2D8C048D006147DE /* Debug-starrewards */,
+				3D965DAE2F28CB440028D46E /* Debug-drinkrewards */,
 				234E069A2E0009A400C1E77F /* Debug-clh */,
 				235EB8502D268E7A00621146 /* Debug-qantum */,
 				236ED3F62DDAE45D00B1E8B8 /* Debug-mhbc */,
@@ -7533,6 +8455,7 @@
 				2398E4C02ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8532D268E9000621146 /* Release-qantum */,
 				238424202D8C04A6006147DE /* Release-starrewards */,
+				3D965DB22F28CB540028D46E /* Release-drinkrewards */,
 				234E069E2E0009BB00C1E77F /* Release-clh */,
 				236ED3EE2DDAE43F00B1E8B8 /* Release-mhbc */,
 				23E0D05E2EC1E11E002504CC /* Release-brisbane */,
@@ -7540,10 +8463,12 @@
 				23FAB62E2E8F93BC002B9565 /* Release-northShoreTavern */,
 				237FCD432E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AC2E9FB25E00A6D570 /* Release-acerewards */,
+				3D33F6B72F1E7198006FB87D /* Release-kingscliff */,
 				331C808A294A63A400263BE5 /* Profile */,
 				23ED95DF2D6C8879005C5478 /* Profile-max */,
 				235EB8562D268E9E00621146 /* Profile-qantum */,
 				238424232D8C04BB006147DE /* Profile-starrewards */,
+				3D965DB62F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A22E0009C800C1E77F /* Profile-clh */,
 				2398E4C42ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352992E0565A4001614F3 /* Profile-montaukTavern */,
@@ -7554,10 +8479,11 @@
 				237FCD3F2E65525A00DDAA37 /* Profile-hogansreward */,
 				23364CF72EC46209001651A3 /* Profile-woollahra */,
 				23C765B02E9FB27100A6D570 /* Profile-acerewards */,
+				3D33F6B32F1E7186006FB87D /* Profile-kingscliff */,
 				2376E70E2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-acerewards";
+			defaultConfigurationName = "Debug-kingscliff";
 		};
 		97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */ = {
 			isa = XCConfigurationList;
@@ -7568,9 +8494,11 @@
 				2398E4BA2ECC479400EE6346 /* Debug-bluewater */,
 				23364CED2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A62E9FB24400A6D570 /* Debug-acerewards */,
+				3D33F6AD2F1E716F006FB87D /* Debug-kingscliff */,
 				23ED95D72D6C8838005C5478 /* Debug-max */,
 				23F3528B2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241B2D8C048D006147DE /* Debug-starrewards */,
+				3D965DAC2F28CB440028D46E /* Debug-drinkrewards */,
 				234E06982E0009A400C1E77F /* Debug-clh */,
 				235EB84E2D268E7A00621146 /* Debug-qantum */,
 				236ED3F42DDAE45D00B1E8B8 /* Debug-mhbc */,
@@ -7585,6 +8513,7 @@
 				2398E4BE2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8512D268E9000621146 /* Release-qantum */,
 				2384241E2D8C04A6006147DE /* Release-starrewards */,
+				3D965DB02F28CB540028D46E /* Release-drinkrewards */,
 				234E069C2E0009BB00C1E77F /* Release-clh */,
 				236ED3EC2DDAE43F00B1E8B8 /* Release-mhbc */,
 				23E0D05C2EC1E11E002504CC /* Release-brisbane */,
@@ -7592,10 +8521,12 @@
 				23FAB62C2E8F93BC002B9565 /* Release-northShoreTavern */,
 				237FCD412E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AA2E9FB25E00A6D570 /* Release-acerewards */,
+				3D33F6B52F1E7198006FB87D /* Release-kingscliff */,
 				249021D3217E4FDB00AE95B9 /* Profile */,
 				23ED95DD2D6C8879005C5478 /* Profile-max */,
 				235EB8542D268E9E00621146 /* Profile-qantum */,
 				238424212D8C04BB006147DE /* Profile-starrewards */,
+				3D965DB42F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A02E0009C800C1E77F /* Profile-clh */,
 				2398E4C22ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352972E0565A4001614F3 /* Profile-montaukTavern */,
@@ -7606,10 +8537,11 @@
 				237FCD3D2E65525A00DDAA37 /* Profile-hogansreward */,
 				23364CF52EC46209001651A3 /* Profile-woollahra */,
 				23C765AE2E9FB27100A6D570 /* Profile-acerewards */,
+				3D33F6B12F1E7186006FB87D /* Profile-kingscliff */,
 				2376E70C2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-acerewards";
+			defaultConfigurationName = "Debug-kingscliff";
 		};
 		97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */ = {
 			isa = XCConfigurationList;
@@ -7620,9 +8552,11 @@
 				2398E4BB2ECC479400EE6346 /* Debug-bluewater */,
 				23364CEE2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A72E9FB24400A6D570 /* Debug-acerewards */,
+				3D33F6AE2F1E716F006FB87D /* Debug-kingscliff */,
 				23ED95D82D6C8838005C5478 /* Debug-max */,
 				23F3528C2E05655B001614F3 /* Debug-montaukTavern */,
 				2384241C2D8C048D006147DE /* Debug-starrewards */,
+				3D965DAD2F28CB440028D46E /* Debug-drinkrewards */,
 				234E06992E0009A400C1E77F /* Debug-clh */,
 				235EB84F2D268E7A00621146 /* Debug-qantum */,
 				236ED3F52DDAE45D00B1E8B8 /* Debug-mhbc */,
@@ -7637,6 +8571,7 @@
 				2398E4BF2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8522D268E9000621146 /* Release-qantum */,
 				2384241F2D8C04A6006147DE /* Release-starrewards */,
+				3D965DB12F28CB540028D46E /* Release-drinkrewards */,
 				234E069D2E0009BB00C1E77F /* Release-clh */,
 				236ED3ED2DDAE43F00B1E8B8 /* Release-mhbc */,
 				23E0D05D2EC1E11E002504CC /* Release-brisbane */,
@@ -7644,10 +8579,12 @@
 				23FAB62D2E8F93BC002B9565 /* Release-northShoreTavern */,
 				237FCD422E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AB2E9FB25E00A6D570 /* Release-acerewards */,
+				3D33F6B62F1E7198006FB87D /* Release-kingscliff */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
 				23ED95DE2D6C8879005C5478 /* Profile-max */,
 				235EB8552D268E9E00621146 /* Profile-qantum */,
 				238424222D8C04BB006147DE /* Profile-starrewards */,
+				3D965DB52F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A12E0009C800C1E77F /* Profile-clh */,
 				2398E4C32ECC47CE00EE6346 /* Profile-bluewater */,
 				23F352982E0565A4001614F3 /* Profile-montaukTavern */,
@@ -7658,10 +8595,11 @@
 				237FCD3E2E65525A00DDAA37 /* Profile-hogansreward */,
 				23364CF62EC46209001651A3 /* Profile-woollahra */,
 				23C765AF2E9FB27100A6D570 /* Profile-acerewards */,
+				3D33F6B22F1E7186006FB87D /* Profile-kingscliff */,
 				2376E70D2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-acerewards";
+			defaultConfigurationName = "Debug-kingscliff";
 		};
 /* End XCConfigurationList section */
 	};
