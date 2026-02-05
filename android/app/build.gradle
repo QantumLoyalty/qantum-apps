@@ -151,7 +151,7 @@ android {
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
-            versionName "1.0.3"
+            versionName "1.0.4"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]

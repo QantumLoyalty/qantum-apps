@@ -600,6 +600,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgNoInternet => '您未连接到互联网。\n请检查您的网络连接并重试。';
+
+  @override
+  String get msgNoOffers => '未找到优惠！';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1198,4 +1201,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgNoInternet => '您未连接到互联网。\n请检查您的网络连接并重试。';
+
+  @override
+  String get msgNoOffers => '未找到优惠！';
 }

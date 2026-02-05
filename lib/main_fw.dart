@@ -11,6 +11,7 @@ import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
 import '../views/splash/SplashScreen.dart';
 import 'view_models/HomeProvider.dart';
+import 'view_models/InternetStatusProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
@@ -73,6 +74,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(
             create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
       child: Portal(
         child: MaterialApp(

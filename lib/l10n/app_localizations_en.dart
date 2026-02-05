@@ -600,4 +600,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgNoInternet => 'You are not connected to the internet\nCheck your connection and try again.';
+
+  @override
+  String get msgNoOffers => 'No offers found!';
 }
