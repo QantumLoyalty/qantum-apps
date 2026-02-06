@@ -35,7 +35,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.9+81
 ###################################
 # MONTAUK TAVERN
-#version:  1.0.3+55
+#version:  1.0.4+1
 ###################################
 # CENTRAL LANE HOTEL
 #version:  1.0.4+65
@@ -47,16 +47,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+62
 ###################################
 # ACE REWARDS
-#version: 1.0.0+12
+#version: 1.0.0+13
 ###################################
 # QUEENS HOTEL
 #version: 1.0.0+2
 ###################################
 # BRISBANE BREWING
-#version: 1.0.2+7
+version: 1.0.3+8
 ###################################
 # WOOLLAHRA HOTEL
-#version: 1.0.0+1
+#version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
 #version: 1.0.4+7
@@ -65,10 +65,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+4
 ###################################
 # Kingscliff
-version: 1.0.0+4
+#version: 1.0.0+5
 ###################################
 # drinkRewards
-#version: 1.0.0+4
+#version: 1.0.0+5
 
 environment:
   sdk: ^3.5.3
