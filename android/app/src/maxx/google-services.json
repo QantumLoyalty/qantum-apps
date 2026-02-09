@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1056025182878",
-    "project_id": "qantum-42fb6",
-    "storage_bucket": "qantum-42fb6.firebasestorage.app"
+    "project_number": "398190562585",
+    "project_id": "maxgaming-95420",
+    "storage_bucket": "maxgaming-95420.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056025182878:android:391e6b6dc7a452f8c9318f",
+        "mobilesdk_app_id": "1:398190562585:android:d04da21948fd2dba9b4988",
         "android_client_info": {
-          "package_name": "com.au.kingscliff.app"
+          "package_name": "com.au.max.app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDNDsrRqxj_t98IsVjrH8orZzFZOQ6V1zQ"
+          "current_key": "AIzaSyCBZO4fHV77atNjEhyqf2TD_FvoBZ1nr24"
         }
       ],
       "services": {

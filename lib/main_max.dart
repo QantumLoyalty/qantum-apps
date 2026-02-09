@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'view_models/InternetStatusProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
 import 'core/flavors_config/app_themes.dart';
 import 'core/flavors_config/flavor_config.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SignupProvider()),
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
-        ChangeNotifierProvider(create: (context) => SpecialOffersProvider())
+        ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
+        ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
       child: Portal(
           child: MaterialApp(

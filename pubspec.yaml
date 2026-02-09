@@ -26,22 +26,22 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version:  1.0.0+56
 ###################################
 # MAX
-#version:  1.0.0+57
+#version:  1.0.0+58
 ###################################
 # HOGAN'S REWARD
-#version: 1.0.3+10
+# version: 1.0.4+11
 ###################################
 # MHBC
 #version:  1.0.9+81
 ###################################
 # MONTAUK TAVERN
-version:  1.0.4+56
+#version:  1.0.4+56
 ###################################
 # CENTRAL LANE HOTEL
-#version:  1.0.4+65
+version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
-#version: 1.0.3+9
+#version: 1.0.4+10
 ###################################
 #QANTUM
 #version: 1.0.0+62
@@ -62,7 +62,7 @@ version:  1.0.4+56
 #version: 1.0.4+7
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.0+4
+#version: 1.0.1+5
 ###################################
 # Kingscliff
 #version: 1.0.0+5
