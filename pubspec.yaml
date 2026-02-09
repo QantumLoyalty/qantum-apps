@@ -35,7 +35,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.9+81
 ###################################
 # MONTAUK TAVERN
-#version:  1.0.4+1
+version:  1.0.4+56
 ###################################
 # CENTRAL LANE HOTEL
 #version:  1.0.4+65
@@ -53,7 +53,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 # BRISBANE BREWING
-version: 1.0.3+8
+#version: 1.0.3+8
 ###################################
 # WOOLLAHRA HOTEL
 #version: 1.0.0+2
