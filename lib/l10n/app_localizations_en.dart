@@ -464,7 +464,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgOtpIssue => 'There was a problem sending the OTP. Please try again.';
 
   @override
-  String get msgVerificationCodeSentToEmail => 'We sent a verification code to your email address.';
+  String get msgVerificationCodeSentToEmail => '       We sent a verification code to your email address.';
 
   @override
   String get msgVerificationCodeSentToPhone => 'We sent a verification code to the mobile number ending in';
@@ -603,4 +603,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgNoOffers => 'No offers found!';
+
+  @override
+  String get cannotEditSeeVenue => 'CANNOT EDIT\nSEE VENUE';
 }

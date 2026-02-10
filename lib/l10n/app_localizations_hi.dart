@@ -603,4 +603,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgNoOffers => 'ऑफ़र उपलब्ध नहीं हैं';
+
+  @override
+  String get cannotEditSeeVenue => 'संपादन संभव नहीं है\nवेन्यू देखें';
 }

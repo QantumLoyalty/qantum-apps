@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-# version:  1.0.0+75
+#version:  1.0.0+76
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -32,19 +32,19 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.4+11
 ###################################
 # MHBC
-#version:  1.0.9+81
+version:  1.0.9+82
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
 ###################################
 # CENTRAL LANE HOTEL
-version:  1.0.5+66
+#version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
 #version: 1.0.4+10
 ###################################
 #QANTUM
-#version: 1.0.0+62
+#version: 1.0.0+63
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13

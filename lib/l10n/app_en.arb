@@ -201,6 +201,7 @@
   "msgPaymentCancelled": "The payment has been cancelled.",
   "unavailable": "Unavailable",
   "msgNoInternet": "You are not connected to the internet\nCheck your connection and try again.",
-  "msgNoOffers": "No offers found!"
+  "msgNoOffers": "No offers found!",
+  "cannotEditSeeVenue": "CANNOT EDIT\nSEE VENUE"
 
 }

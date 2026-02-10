@@ -44,18 +44,21 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
     try {
       dateTime = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
           .parse(_userInfoProvider.tempUser!.dateOfBirth ?? "");
+
+      print("PARSED DATE: $dateTime ---> DAY: ${dateTime.day}");
+
     } catch (e) {
       AppHelper.printMessage("Exception in parsing birthdate $e");
     }
 
     _birthdayDDController = TextEditingController(
-        text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
+        text: ConditionBuilder.on(() => dateTime != null && dateTime.day >= 10,
                 () => dateTime!.day.toString())
             .on(() => dateTime != null && dateTime.day < 10,
                 () => "0${dateTime!.day.toString()}")
             .build(orElse: () => ""));
     _birthdayMMController = TextEditingController(
-        text: ConditionBuilder.on(() => dateTime != null && dateTime.month > 10,
+        text: ConditionBuilder.on(() => dateTime != null && dateTime.month >= 10,
                 () => dateTime!.month.toString())
             .on(() => dateTime != null && dateTime.month < 10,
                 () => "0${dateTime!.month.toString()}")
@@ -154,7 +157,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           ],
                           controller: _birthdayDDController,
                           focusNode: _birthdayDDFocusNode,
-                          enabled: false,
+                          enabled: true,
                           style: TextStyle(
                               color: AppThemeCustom.getTextFieldTextColor(
                                   context)),
@@ -196,7 +199,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                       ],
                       controller: _birthdayMMController,
                       focusNode: _birthdayMMFocusNode,
-                      enabled: false,
+                      enabled: true,
                       style: TextStyle(
                           color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
@@ -236,7 +239,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                             ],
                             controller: _birthdayYYController,
                             focusNode: _birthdayYYFocusNode,
-                            enabled: false,
+                            enabled: true,
                             style: TextStyle(
                                 color: AppThemeCustom.getTextFieldTextColor(
                                     context)),

@@ -603,6 +603,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgNoOffers => '未找到优惠！';
+
+  @override
+  String get cannotEditSeeVenue => '无法编辑\n请查看场地';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1204,4 +1207,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgNoOffers => '未找到优惠！';
+
+  @override
+  String get cannotEditSeeVenue => '无法编辑\n请查看场地';
 }

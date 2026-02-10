@@ -24,6 +24,7 @@ class DetailCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Text(
@@ -35,7 +36,7 @@ class DetailCard extends StatelessWidget {
                   ),
                 ),
                 editable
-                    ? InkWell(
+                    ? /*InkWell(
                         onTap: () {
                           provider.updateSelectedEditScreen(
                               UserInfoProvider.DETAILS_EDIT_SCREEN);
@@ -64,7 +65,20 @@ class DetailCard extends StatelessWidget {
                               )
                             ],
                           ),
-                        ))
+                        ))*/
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 0, bottom: 0),
+                  child: Text(
+                  AppLocalizations.of(context)!
+                      .cannotEditSeeVenue,
+                  style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  color:
+                  AppThemeCustom.getUserInfoItemStyle(
+                  context, editable))),
+                )
                     : Container(),
               ],
             ),

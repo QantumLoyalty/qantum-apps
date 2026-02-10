@@ -1007,7 +1007,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgVerificationCodeSentToEmail.
   ///
   /// In en, this message translates to:
-  /// **'We sent a verification code to your email address.'**
+  /// **'       We sent a verification code to your email address.'**
   String get msgVerificationCodeSentToEmail;
 
   /// No description provided for @msgVerificationCodeSentToPhone.
@@ -1285,6 +1285,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No offers found!'**
   String get msgNoOffers;
+
+  /// No description provided for @cannotEditSeeVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'CANNOT EDIT\nSEE VENUE'**
+  String get cannotEditSeeVenue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

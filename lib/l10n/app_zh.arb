@@ -202,6 +202,7 @@
   "msgEmptyAddress": "請輸入有效的地址以繼續。",
   "unavailable": "不可用",
   "msgNoInternet": "您未连接到互联网。\n请检查您的网络连接并重试。",
-  "msgNoOffers": "未找到优惠！"
+  "msgNoOffers": "未找到优惠！",
+  "cannotEditSeeVenue": "无法编辑\n请查看场地"
 
 }

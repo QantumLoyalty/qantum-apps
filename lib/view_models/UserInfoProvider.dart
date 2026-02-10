@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '/l10n/app_localizations.dart';
@@ -593,7 +594,18 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         params["Surname"] = tempUser!.lastName;
         params["Email"] = tempUser!.email;
         params["Mobile"] = tempUser!.mobile;
-       // params["DateOfBirth"] = tempUser!.dateOfBirth;
+
+/*
+        String datePart = tempUser!.dateOfBirth!;
+        if (datePart.contains('T')) datePart = datePart.split('T')[0];
+        params["DateOfBirth"] = datePart;
+*/
+
+        //params["DateOfBirth"] = tempUser!.dateOfBirth;
+
+
+        logEvent(params);
+
         NetworkResponse networkResponse =
             await UserService.getInstance().updateUserProfile(params);
         logEvent("UPDATE USER INFO:: ${networkResponse.response}");
