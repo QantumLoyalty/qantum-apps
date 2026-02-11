@@ -168,7 +168,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
           .createPaymentIntent(paymentParams: paymentParams);
 
       logEvent(
-          "Payment Intent Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
+          "Payment Intent Params $paymentParams Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
       _errorInResponse = networkResponse.isError;
       if (!_errorInResponse!) {
         _paymentIntentClientSecret =
@@ -243,12 +243,14 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "packageId": _selectedMembership!.id!,
         "appType": AppHelper.getAppType(),
         "paymentIntentId": _paymentIntentId,
+        "paymentType": "card",
+        "packageName": _selectedMembership!.membershipName!
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .verifyPayment(paymentParams: paymentParams);
 
       logEvent(
-          "Verify Payment Response: ${networkResponse.responseMessage} ===> isError: ${networkResponse.isError} ==> ${networkResponse.response}");
+          "Verify Payment Params: $paymentParams Response: ${networkResponse.responseMessage} ===> isError: ${networkResponse.isError} ==> ${networkResponse.response}");
       _isPaymentVerified = !networkResponse.isError;
     } catch (e) {
       _isPaymentVerified = false;

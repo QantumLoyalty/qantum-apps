@@ -606,6 +606,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get cannotEditSeeVenue => '无法编辑\n请查看场地';
+
+  @override
+  String get msgErrorInDLScanning => '掃描時發生錯誤，請拍攝您的原始駕駛執照並重試。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1210,4 +1213,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get cannotEditSeeVenue => '无法编辑\n请查看场地';
+
+  @override
+  String get msgErrorInDLScanning => '扫描时发生错误，请拍摄您的原始驾驶执照并重试。';
 }

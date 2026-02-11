@@ -203,6 +203,7 @@
   "unavailable": "不可用",
   "msgNoInternet": "您未连接到互联网。\n请检查您的网络连接并重试。",
   "msgNoOffers": "未找到优惠！",
-  "cannotEditSeeVenue": "无法编辑\n请查看场地"
+  "cannotEditSeeVenue": "无法编辑\n请查看场地",
+  "msgErrorInDLScanning": "掃描時發生錯誤，請拍攝您的原始駕駛執照並重試。"
 
 }

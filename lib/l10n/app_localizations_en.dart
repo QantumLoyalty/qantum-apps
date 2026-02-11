@@ -606,4 +606,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cannotEditSeeVenue => 'CANNOT EDIT\nSEE VENUE';
+
+  @override
+  String get msgErrorInDLScanning => 'Error in scanning, please click your original driving licence and try again';
 }

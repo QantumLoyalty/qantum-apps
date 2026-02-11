@@ -606,4 +606,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get cannotEditSeeVenue => 'संपादन संभव नहीं है\nवेन्यू देखें';
+
+  @override
+  String get msgErrorInDLScanning => 'स्कैनिंग में त्रुटि हुई है, कृपया अपने मूल ड्राइविंग लाइसेंस की फोटो क्लिक करें और फिर से प्रयास करें।';
 }

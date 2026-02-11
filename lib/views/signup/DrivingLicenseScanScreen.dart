@@ -108,7 +108,9 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
         Consumer<DocumentScanProvider>(builder: (context, provider, child) {
       if (provider.isErrorInScan != null) {
         if (provider.isErrorInScan!) {
-          AppHelper.showErrorMessage(context, "Error in scanning!!");
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            AppHelper.showErrorMessage(context, loc!.msgErrorInDLScanning);
+          });
         } else {
           if (provider.scannedData != null) {
             Future.delayed(Duration.zero, () {

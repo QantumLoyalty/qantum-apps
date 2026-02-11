@@ -1291,6 +1291,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'CANNOT EDIT\nSEE VENUE'**
   String get cannotEditSeeVenue;
+
+  /// No description provided for @msgErrorInDLScanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Error in scanning, please click your original driving licence and try again'**
+  String get msgErrorInDLScanning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
