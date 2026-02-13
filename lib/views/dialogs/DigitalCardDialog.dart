@@ -226,7 +226,43 @@ class DigitalCardDialog {
                                                           ),
                                                         ],
                                                       )
-                                                    : Container()
+                                                    : Container(),
+                                                ((userMembershipExpiry(userData
+                                                                .membershipExpiryDate)) !=
+                                                            null &&
+                                                        (userMembershipExpiry(
+                                                                userData
+                                                                    .membershipExpiryDate))!
+                                                            .isNotEmpty)
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 12),
+                                                        child: Text(
+                                                          "Membership Expiry: ${(userMembershipExpiry(userData.membershipExpiryDate))}",
+                                                          style: TextStyle(
+                                                              shadows: [
+                                                                Shadow(
+                                                                  offset:
+                                                                      const Offset(
+                                                                          1.0,
+                                                                          1.0),
+                                                                  blurRadius:
+                                                                      3.0,
+                                                                  color: AppColors
+                                                                      .black
+                                                                      .withValues(
+                                                                          alpha:
+                                                                              0.5),
+                                                                )
+                                                              ],
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 14),
+                                                        ),
+                                                      )
+                                                    : Container(),
                                               ],
                                             ),
                                           )
@@ -307,6 +343,26 @@ class DigitalCardDialog {
       }
     } else {
       return false;
+    }
+  }
+
+  String? userMembershipExpiry(String? membershipExpiry) {
+    Flavor flavor = FlavorConfig.instance.flavor!;
+
+    if (flavor == Flavor.mhbc) {
+      if (membershipExpiry == null || membershipExpiry.isEmpty) return null;
+
+      try {
+        DateFormat dateTimeFormat = DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+        DateFormat newDateTimeFormat = DateFormat("dd MMM, yyyy");
+        return newDateTimeFormat
+            .format((dateTimeFormat.parse(membershipExpiry)));
+      } catch (e) {
+        print(e.toString());
+        return null;
+      }
+    } else {
+      return null;
     }
   }
 

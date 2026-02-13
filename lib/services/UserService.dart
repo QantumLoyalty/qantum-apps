@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -100,12 +101,17 @@ class UserService with LoggingMixin implements UserRepository {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
+      print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
+      print("URL: ${APIList.GET_PROFILE}");
       var response = await NetworkHelper.instance
           .postCall(url: Uri.parse(APIList.GET_PROFILE), headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
       }, body: {});
       networkResponse = response;
+
+
+      debugPrint("USER FULL : ${networkResponse.response}", wrapWidth: 1024);
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

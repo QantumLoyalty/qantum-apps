@@ -622,7 +622,8 @@ class AppHelper with LoggingMixin {
   static String getUserTierType(UserModel userData) {
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
-    if (flavorConfig.flavor == Flavor.starReward||flavorConfig.flavor == Flavor.drinkRewards) {
+    if (flavorConfig.flavor == Flavor.starReward ||
+        flavorConfig.flavor == Flavor.drinkRewards) {
       if (userData.membershipCategory != null &&
           userData.membershipCategory!.isNotEmpty) {
         if (userData.membershipCategory!.toLowerCase() == "") {
@@ -736,5 +737,25 @@ class AppHelper with LoggingMixin {
     print("Internet Status: $results");
 
     return !results.contains(ConnectivityResult.none);
+  }
+
+  static bool checkIfMembershipActive(UserModel user) {
+    if (user.membershipExpiryDate != null &&
+        user.membershipExpiryDate!.isNotEmpty) {
+
+      print("ServerTime ${user.serverTime}");
+
+      if (user.serverTime != null && user.serverTime!.isNotEmpty) {
+        DateTime expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
+        DateTime serverTime = DateTime.parse(user.serverTime!).toUtc();
+
+        return serverTime.isAfter(expiry);
+      }
+
+      return true;
+    }
+    print("Membership Expiry Data ${user.membershipExpiryDate}");
+
+    return false;
   }
 }

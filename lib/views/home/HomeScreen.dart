@@ -4,6 +4,8 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -39,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen>
   late AppLocalizations loc;
   bool isMembershipCancelledDialogShown = false;
 
-
   final partnerOffersMissingApps = {
     Flavor.bluewater,
     Flavor.mhbc,
@@ -59,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.montaukTavern
   };
 
+  bool _hasRedirectedToMembershipBuy = false;
+
   @override
   void initState() {
     super.initState();
@@ -74,16 +77,15 @@ class _HomeScreenState extends State<HomeScreen>
 
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
-
     }
   }
 
   bool _deepLinkHandled = false;
 
   void _tryOpenDeepLink(
-      HomeProvider provider,
-      UserInfoProvider userInfoProvider,
-      ) {
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+  ) {
     if (_deepLinkHandled) return;
 
     if (provider.startChewzieScreen != true) return;
@@ -92,8 +94,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     _deepLinkHandled = true;
 
-    final decodedLink =
-    Uri.decodeComponent(provider.deeplinkPayloads!);
+    final decodedLink = Uri.decodeComponent(provider.deeplinkPayloads!);
 
     final uri = Uri.parse(decodedLink);
 
@@ -101,8 +102,7 @@ class _HomeScreenState extends State<HomeScreen>
       "memberId": userInfoProvider.getUserInfo!.cardNumber,
     };
 
-    final base64Payload =
-    base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
+    final base64Payload = base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
 
     final updatedUri = uri.replace(
       queryParameters: {
@@ -116,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen>
 
     provider.resetDeepLinkNavigation();
   }
-
 
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
@@ -136,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen>
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +162,18 @@ class _HomeScreenState extends State<HomeScreen>
               });
             }
             _tryOpenDeepLink(provider, userInfoProvider);
+
+            if (userInfoProvider.getUserInfo != null) {
+              if ((userInfoProvider.membershipStatus ==
+                      MembershipStatus.inactive) &&
+                  !_hasRedirectedToMembershipBuy) {
+                _hasRedirectedToMembershipBuy = true;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  AppNavigator.navigateReplacement(
+                      context, AppNavigator.chooseMembershipScreen);
+                });
+              }
+            }
 
             return Column(
               children: [
@@ -513,8 +523,6 @@ class _HomeScreenState extends State<HomeScreen>
                 .toUpperCase() &&
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
   }
-
-
 
   Future<void> launchDeepLinkURL(Uri uri) async {
     await launchUrl(uri,
