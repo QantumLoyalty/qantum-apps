@@ -35,7 +35,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   Map<String, String> get accountOptions {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.maxx:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.maxx:
         return _accountOptions;
       case Flavor.mhbc:
         return _accountOptionsMHBC;

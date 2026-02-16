@@ -8,9 +8,9 @@ class AppColors {
 
   /// QANTUM THEME ///
 
-  static Color get qa_back_color => const Color(0xFF002D72);
+  static Color get qa_primary_color => const Color(0xFF002D72);
 
-  static Color get qa_back_color_2 => const Color(0xFF070526);
+  static Color get qa_primary_color_dark => const Color(0xFF070526);
 
   static Color get qa_floating_button_icon_color => const Color(0xFFFFFFFF);
 
@@ -31,6 +31,7 @@ class AppColors {
   static Color get qa_divider_color => const Color(0xFFFFFFFF);
 
   static Color get qa_disable_color => const Color(0xFF28ABE2);
+
 
   /// MAX THEME ///
 
@@ -507,7 +508,7 @@ class AppColors {
       case "valued":
         {
           switch (selectedFlavor) {
-            case Flavor.qantum:
+            case Flavor.qantum||Flavor.qantumClub:
               return const Color(0xFF14ad53);
             case Flavor.maxx:
               return const Color(0xFFdb023d);

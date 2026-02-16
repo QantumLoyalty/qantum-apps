@@ -103,7 +103,7 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                                   fontWeight: FontWeight.w500,
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context)),
+                                          context,isHeadingCommunication: true,isCommunication: true)),
                             ),
                             AppDimens.shape_15,
                             TextFormField(

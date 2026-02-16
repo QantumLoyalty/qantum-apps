@@ -4,7 +4,7 @@ import '../utils/AppColors.dart';
 
 class AppThemes {
   static ThemeData get qantumTheme => ThemeData(
-      drawerTheme: DrawerThemeData(backgroundColor: AppColors.qa_back_color),
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.qa_primary_color),
       textSelectionTheme: TextSelectionThemeData(
         selectionHandleColor: AppColors.qa_text_color,
         selectionColor: AppColors.qa_text_color,
@@ -24,11 +24,11 @@ class AppThemes {
           primary: AppColors.qa_button_color,
           secondary: AppColors.qa_button_color,
           surface: AppColors.qa_button_color),
-      primaryColor: AppColors.qa_back_color,
-      primaryColorDark: AppColors.qa_back_color_2,
+      primaryColor: AppColors.qa_primary_color,
+      primaryColorDark: AppColors.qa_primary_color_dark,
       cardColor: AppColors.qa_card_color,
       canvasColor: AppColors.qa_back_color_3,
-      scaffoldBackgroundColor: AppColors.qa_back_color_2,
+      scaffoldBackgroundColor: AppColors.qa_primary_color_dark,
       dividerColor: AppColors.qa_divider_color,
       hintColor: AppColors.qa_hint_text_color,
       iconTheme: IconThemeData(color: AppColors.qa_button_color),
@@ -45,7 +45,7 @@ class AppThemes {
         }),
       ),
       disabledColor: AppColors.qa_button_color,
-      appBarTheme: AppBarTheme(backgroundColor: AppColors.qa_back_color),
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.qa_primary_color),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: AppColors.white,
           unselectedItemColor: AppColors.qa_text_color),
@@ -72,7 +72,7 @@ class AppThemes {
         }),
       ),
       progressIndicatorTheme:
-          ProgressIndicatorThemeData(color: AppColors.qa_back_color),
+          ProgressIndicatorThemeData(color: AppColors.qa_primary_color),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.qa_button_color,
           foregroundColor: AppColors.qa_floating_button_icon_color),
@@ -84,7 +84,7 @@ class AppThemes {
           thumbColor: MaterialStateProperty.resolveWith((state) =>
               state.contains(MaterialState.selected)
                   ? AppColors.white
-                  : AppColors.qa_back_color_2)));
+                  : AppColors.qa_primary_color_dark)));
 
   static ThemeData get maxTheme => ThemeData(
       drawerTheme: DrawerThemeData(backgroundColor: AppColors.max_back_color),
@@ -1391,7 +1391,7 @@ class AppThemes {
 
 
   static ThemeData get drinkRewardTheme => ThemeData(
-      drawerTheme: DrawerThemeData(backgroundColor: AppColors.qa_back_color),
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.dr_primary_color),
       textSelectionTheme: TextSelectionThemeData(
         selectionHandleColor: AppColors.qa_text_color,
         selectionColor: AppColors.qa_text_color,
@@ -1459,7 +1459,7 @@ class AppThemes {
         }),
       ),
       progressIndicatorTheme:
-      ProgressIndicatorThemeData(color: AppColors.qa_back_color),
+      ProgressIndicatorThemeData(color: AppColors.dr_primary_color),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.dr_button_color,
           foregroundColor: AppColors.qa_floating_button_icon_color),

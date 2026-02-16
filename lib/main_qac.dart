@@ -6,6 +6,7 @@ import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import 'view_models/DocumentScanProvider.dart';
 import 'view_models/MembershipManagerProvider.dart';
 import 'core/flavors_config/app_themes.dart';
@@ -26,7 +27,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
       flavor: Flavor.qantumClub,
-      flavorValues: FlavorValues(appName: "Qantum", appVersion: "0.0.1"));
+      flavorValues: FlavorValues(appName: "Qantum Club", appVersion: "0.0.1"));
 
   await dotenv.load(fileName: '.env.qantum');
   SystemChrome.setPreferredOrientations(
@@ -35,7 +36,7 @@ void main() async {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     // Initialize with your OneSignal App ID
-    OneSignal.initialize("c2e3ab66-0907-4413-83a9-97fe94ccfdb9");
+    OneSignal.initialize("c978f3c0-e442-438b-a21e-9751c916cb58");
     // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
       child: Portal(
           child: MaterialApp(

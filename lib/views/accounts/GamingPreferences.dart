@@ -80,7 +80,7 @@ class GamingPreferences extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context,isCommunication: true)),
+                                          context,isCommunication: true,isHeadingCommunication: true)),
                             ),
                             subtitle: Text(
                               translateContent(AppLocalizations.of(context)!,

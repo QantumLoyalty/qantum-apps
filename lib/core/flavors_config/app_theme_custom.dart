@@ -18,7 +18,7 @@ class AppThemeCustom {
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Theme.of(context).primaryColorDark),
                 borderRadius: BorderRadius.circular(80)),
-            backgroundColor: AppColors.qa_back_color_2);
+            backgroundColor: AppColors.qa_primary_color_dark);
       case Flavor.maxx:
         return TextButton.styleFrom(
             minimumSize: const Size(85, 30),
@@ -867,6 +867,10 @@ class AppThemeCustom {
         return (isCommunication != null && isHeadingCommunication !=null)
             ? AppColors.dr_button_color
             : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.qantumClub||Flavor.qantum:
+        return (isCommunication != null && isHeadingCommunication !=null)
+            ? AppColors.qa_disable_color
+            : Theme.of(context).textSelectionTheme.selectionColor;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -936,6 +940,11 @@ class AppThemeCustom {
 
       case Flavor.drinkRewards:
         return isHeading!=null?AppColors.dr_button_color:Theme.of(context).textSelectionTheme.selectionColor;
+
+      case Flavor.qantumClub||Flavor.qantum:
+        return isHeading!=null?AppColors.qa_disable_color:Theme.of(context).textSelectionTheme.selectionColor;
+
+
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -1064,6 +1073,8 @@ class AppThemeCustom {
         return Theme.of(context).primaryColor;
       case Flavor.drinkRewards:
         return isText!=null?Theme.of(context).textSelectionTheme.selectionColor!:AppColors.dr_button_color;
+      case Flavor.qantumClub||Flavor.qantum:
+        return AppColors.qa_disable_color;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }

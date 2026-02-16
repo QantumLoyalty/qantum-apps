@@ -71,6 +71,7 @@
 		077078D55363E240B3B297BA /* Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
 		0785E6693562995905FCBD27 /* Pods-RunnerTests.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-max.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-max.xcconfig"; sourceTree = "<group>"; };
 		08E0A26928266677F3B49F6F /* Pods-Runner.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-mhbc.xcconfig"; sourceTree = "<group>"; };
+		0A13C6E59B57D7E165AD2A11 /* Pods-Runner.profile-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-qantumclub.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		0A13E3A6748E07E0B45E1805 /* Pods-Runner.debug-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-acerewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-acerewards.xcconfig"; sourceTree = "<group>"; };
 		0B324D356851059D438C6113 /* Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig"; sourceTree = "<group>"; };
 		0C22821011D5F80B7A8FFF83 /* Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		19088FE29C4D08E43FCD1053 /* Pods-Runner.profile-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-kingscliff.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		19E0DAC768F566239D7259DA /* Pods-RunnerTests.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-acerewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-acerewards.xcconfig"; sourceTree = "<group>"; };
+		1A1D8FE74F20A0D5429176AC /* Pods-OneSignalNotificationServiceExtension.release-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-qantumclub.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		1C4617468B0A40327614E53D /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DB3F1B0F48ACD25BB3E8DBF /* Pods-Runner.release-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		1E6E116AA631F6DE07C9F015 /* Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-clh.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		3480B84A37FCEFD966B16E9E /* Pods-Runner.release-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-flinders.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-flinders.xcconfig"; sourceTree = "<group>"; };
 		38A2F0F13879D10B8482B251 /* Pods-Runner.profile-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-starrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-starrewards.xcconfig"; sourceTree = "<group>"; };
 		3926C61A63BA72EFD1E4DE43 /* Pods-OneSignalNotificationServiceExtension.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
+		3A0BBB4957842ED928CCE338 /* Pods-OneSignalNotificationServiceExtension.debug-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-qantumclub.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3C25246F43EA19EE34444C66 /* Pods-Runner.debug-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-woollahra.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-woollahra.xcconfig"; sourceTree = "<group>"; };
 		3CB1D3980386E0C9164EB1A3 /* Pods-OneSignalNotificationServiceExtension.release-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-queens.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-queens.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 		84FE58E8E4061CE4D2EBDCBC /* Pods-Runner.release-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-northshoretavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		8CA307F1F69A9671EEAE4C5F /* Pods-RunnerTests.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-bluewater.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-bluewater.xcconfig"; sourceTree = "<group>"; };
 		8DF5E9DBBC10284DB47E495F /* Pods-Runner.profile-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-queens.xcconfig"; sourceTree = "<group>"; };
+		8E3041934A834100D33BD123 /* Pods-RunnerTests.release-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-qantumclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-qantumclub.xcconfig"; sourceTree = "<group>"; };
+		930A683BE42877A9C8F05F02 /* Pods-RunnerTests.profile-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-qantumclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		94D556EF40D5BD50BD73FE28 /* Pods-Runner.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		95A54843773DB1A236286145 /* Pods-RunnerTests.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
@@ -191,6 +196,7 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99CA42ED5D0B7B9C707D0DF4 /* Pods-Runner.debug-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-qantumclub.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		99E9D3BC77A44D23B8E6D81E /* Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		9B65FB1CD1C9C9C4B7BD356B /* Pods-OneSignalNotificationServiceExtension.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-mhbc.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-mhbc.xcconfig"; sourceTree = "<group>"; };
 		9CF3C447FC86F0588EDB932B /* Pods-OneSignalNotificationServiceExtension.release-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-hogansreward.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 		B0B1562966EBC85C63B6C452 /* Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		B0E0503AD23D068FB4F6AE10 /* Pods-Runner.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-max.xcconfig"; sourceTree = "<group>"; };
 		B1C0797DB4715988E9401FDB /* Pods-RunnerTests.release-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-kingscliff.xcconfig"; sourceTree = "<group>"; };
+		B2EEC51E396EF9E4B679F3F0 /* Pods-Runner.release-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-qantumclub.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		B32B25420A0E914B22F29542 /* Pods-RunnerTests.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
 		B354B58ACEF9A8E64E0A454A /* Pods-Runner.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-qantum.xcconfig"; sourceTree = "<group>"; };
 		B517E886DCF61152469EA9D9 /* Pods-RunnerTests.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +235,7 @@
 		D3B79F5F49A44096DE864580 /* Pods-Runner.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-qantum.xcconfig"; sourceTree = "<group>"; };
 		D42CC59356109C9C31837EAB /* Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		D84560143DF99AA185F441F8 /* Pods-OneSignalNotificationServiceExtension.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-qantum.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-qantum.xcconfig"; sourceTree = "<group>"; };
+		DAA102C5AC38510E402D21BE /* Pods-RunnerTests.debug-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-qantumclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		DE867CB214B6FC82D2ED5C21 /* Pods-Runner.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		DE9A44D4C4A919A8EC158C51 /* Pods-Runner.release-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-brisbane.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-brisbane.xcconfig"; sourceTree = "<group>"; };
 		E279AD53CE488D00C17B1E18 /* Pods-Runner.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +248,7 @@
 		EA1CD033989C9E8BBA374E52 /* Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		ECE00306A57F675A8A4B4237 /* Pods-Runner.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-acerewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-acerewards.xcconfig"; sourceTree = "<group>"; };
 		EDB4C7AEA47B29DAD8332ECE /* Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; sourceTree = "<group>"; };
+		EE6D1502D0C77CCE90AB6C3E /* Pods-OneSignalNotificationServiceExtension.profile-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-qantumclub.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		F1B77E56B5ECCBABA4CA8F2D /* Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-clh.xcconfig"; sourceTree = "<group>"; };
 		F204EA8B2072D2719B724D9B /* Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		F3810244091ADDE1BB91156A /* Pods-Runner.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
@@ -494,6 +503,15 @@
 				CCBEE8FF520B606739218A77 /* Pods-RunnerTests.debug-drinkrewards.xcconfig */,
 				78AE4F2D8DA802264C6AA8DF /* Pods-RunnerTests.release-drinkrewards.xcconfig */,
 				1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */,
+				3A0BBB4957842ED928CCE338 /* Pods-OneSignalNotificationServiceExtension.debug-qantumclub.xcconfig */,
+				1A1D8FE74F20A0D5429176AC /* Pods-OneSignalNotificationServiceExtension.release-qantumclub.xcconfig */,
+				EE6D1502D0C77CCE90AB6C3E /* Pods-OneSignalNotificationServiceExtension.profile-qantumclub.xcconfig */,
+				99CA42ED5D0B7B9C707D0DF4 /* Pods-Runner.debug-qantumclub.xcconfig */,
+				B2EEC51E396EF9E4B679F3F0 /* Pods-Runner.release-qantumclub.xcconfig */,
+				0A13C6E59B57D7E165AD2A11 /* Pods-Runner.profile-qantumclub.xcconfig */,
+				DAA102C5AC38510E402D21BE /* Pods-RunnerTests.debug-qantumclub.xcconfig */,
+				8E3041934A834100D33BD123 /* Pods-RunnerTests.release-qantumclub.xcconfig */,
+				930A683BE42877A9C8F05F02 /* Pods-RunnerTests.profile-qantumclub.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -7751,6 +7769,445 @@
 			};
 			name = "Release-kingscliff";
 		};
+		3D78CC992F3C99F30009F7A2 /* Debug-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-qantumClub";
+		};
+		3D78CC9A2F3C99F30009F7A2 /* Debug-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Qantum Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-qantum";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-qantum.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-qantumClub";
+		};
+		3D78CC9B2F3C99F30009F7A2 /* Debug-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAA102C5AC38510E402D21BE /* Pods-RunnerTests.debug-qantumclub.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-qantumClub";
+		};
+		3D78CC9C2F3C99F30009F7A2 /* Debug-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0BBB4957842ED928CCE338 /* Pods-OneSignalNotificationServiceExtension.debug-qantumclub.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug-qantumClub";
+		};
+		3D78CC9D2F3C9A010009F7A2 /* Profile-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-qantumClub";
+		};
+		3D78CC9E2F3C9A010009F7A2 /* Profile-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Qantum Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-qantum";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-qantum.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-qantumClub";
+		};
+		3D78CC9F2F3C9A010009F7A2 /* Profile-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 930A683BE42877A9C8F05F02 /* Pods-RunnerTests.profile-qantumclub.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-qantumClub";
+		};
+		3D78CCA02F3C9A010009F7A2 /* Profile-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE6D1502D0C77CCE90AB6C3E /* Pods-OneSignalNotificationServiceExtension.profile-qantumclub.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Profile-qantumClub";
+		};
+		3D78CCA12F3C9A0A0009F7A2 /* Release-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-qantumClub";
+		};
+		3D78CCA22F3C9A0A0009F7A2 /* Release-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Qantum Club";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-qantum";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-qantum.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-qantumClub";
+		};
+		3D78CCA32F3C9A0A0009F7A2 /* Release-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E3041934A834100D33BD123 /* Pods-RunnerTests.release-qantumclub.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-qantumClub";
+		};
+		3D78CCA42F3C9A0A0009F7A2 /* Release-qantumClub */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A1D8FE74F20A0D5429176AC /* Pods-OneSignalNotificationServiceExtension.release-qantumclub.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qantumclub.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-qantumClub";
+		};
 		3D965DAC2F28CB440028D46E /* Debug-drinkrewards */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8385,6 +8842,7 @@
 				3D965DAF2F28CB440028D46E /* Debug-drinkrewards */,
 				234E069B2E0009A400C1E77F /* Debug-clh */,
 				235B5CEF2DC9D72D004A8F1C /* Debug-qantum */,
+				3D78CC9C2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F72DDAE45D00B1E8B8 /* Debug-mhbc */,
 				23E0D05B2EC1E0E3002504CC /* Debug-brisbanse */,
 				2376E7072EB8C760000187BE /* Debug-queens */,
@@ -8396,6 +8854,7 @@
 				23364CF42EC461F5001651A3 /* Release-woollahra */,
 				2398E4C12ECC47BC00EE6346 /* Release-bluewater */,
 				235B5CF22DC9D72D004A8F1C /* Release-qantum */,
+				3D78CCA42F3C9A0A0009F7A2 /* Release-qantumClub */,
 				235B5CF32DC9D72D004A8F1C /* Release-starrewards */,
 				3D965DB32F28CB540028D46E /* Release-drinkrewards */,
 				234E069F2E0009BB00C1E77F /* Release-clh */,
@@ -8409,6 +8868,7 @@
 				235B5CF42DC9D72D004A8F1C /* Profile */,
 				235B5CF52DC9D72D004A8F1C /* Profile-max */,
 				235B5CF62DC9D72D004A8F1C /* Profile-qantum */,
+				3D78CCA02F3C9A010009F7A2 /* Profile-qantumClub */,
 				235B5CF72DC9D72D004A8F1C /* Profile-starrewards */,
 				3D965DB72F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A32E0009C800C1E77F /* Profile-clh */,
@@ -8443,6 +8903,7 @@
 				3D965DAE2F28CB440028D46E /* Debug-drinkrewards */,
 				234E069A2E0009A400C1E77F /* Debug-clh */,
 				235EB8502D268E7A00621146 /* Debug-qantum */,
+				3D78CC9B2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F62DDAE45D00B1E8B8 /* Debug-mhbc */,
 				23E0D05A2EC1E0E3002504CC /* Debug-brisbanse */,
 				2376E7062EB8C760000187BE /* Debug-queens */,
@@ -8454,6 +8915,7 @@
 				23364CF32EC461F5001651A3 /* Release-woollahra */,
 				2398E4C02ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8532D268E9000621146 /* Release-qantum */,
+				3D78CCA32F3C9A0A0009F7A2 /* Release-qantumClub */,
 				238424202D8C04A6006147DE /* Release-starrewards */,
 				3D965DB22F28CB540028D46E /* Release-drinkrewards */,
 				234E069E2E0009BB00C1E77F /* Release-clh */,
@@ -8467,6 +8929,7 @@
 				331C808A294A63A400263BE5 /* Profile */,
 				23ED95DF2D6C8879005C5478 /* Profile-max */,
 				235EB8562D268E9E00621146 /* Profile-qantum */,
+				3D78CC9F2F3C9A010009F7A2 /* Profile-qantumClub */,
 				238424232D8C04BB006147DE /* Profile-starrewards */,
 				3D965DB62F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A22E0009C800C1E77F /* Profile-clh */,
@@ -8501,6 +8964,7 @@
 				3D965DAC2F28CB440028D46E /* Debug-drinkrewards */,
 				234E06982E0009A400C1E77F /* Debug-clh */,
 				235EB84E2D268E7A00621146 /* Debug-qantum */,
+				3D78CC992F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F42DDAE45D00B1E8B8 /* Debug-mhbc */,
 				23E0D0582EC1E0E3002504CC /* Debug-brisbanse */,
 				2376E7042EB8C760000187BE /* Debug-queens */,
@@ -8512,6 +8976,7 @@
 				23364CF12EC461F5001651A3 /* Release-woollahra */,
 				2398E4BE2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8512D268E9000621146 /* Release-qantum */,
+				3D78CCA12F3C9A0A0009F7A2 /* Release-qantumClub */,
 				2384241E2D8C04A6006147DE /* Release-starrewards */,
 				3D965DB02F28CB540028D46E /* Release-drinkrewards */,
 				234E069C2E0009BB00C1E77F /* Release-clh */,
@@ -8525,6 +8990,7 @@
 				249021D3217E4FDB00AE95B9 /* Profile */,
 				23ED95DD2D6C8879005C5478 /* Profile-max */,
 				235EB8542D268E9E00621146 /* Profile-qantum */,
+				3D78CC9D2F3C9A010009F7A2 /* Profile-qantumClub */,
 				238424212D8C04BB006147DE /* Profile-starrewards */,
 				3D965DB42F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A02E0009C800C1E77F /* Profile-clh */,
@@ -8559,6 +9025,7 @@
 				3D965DAD2F28CB440028D46E /* Debug-drinkrewards */,
 				234E06992E0009A400C1E77F /* Debug-clh */,
 				235EB84F2D268E7A00621146 /* Debug-qantum */,
+				3D78CC9A2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F52DDAE45D00B1E8B8 /* Debug-mhbc */,
 				23E0D0592EC1E0E3002504CC /* Debug-brisbanse */,
 				2376E7052EB8C760000187BE /* Debug-queens */,
@@ -8570,6 +9037,7 @@
 				23364CF22EC461F5001651A3 /* Release-woollahra */,
 				2398E4BF2ECC47BC00EE6346 /* Release-bluewater */,
 				235EB8522D268E9000621146 /* Release-qantum */,
+				3D78CCA22F3C9A0A0009F7A2 /* Release-qantumClub */,
 				2384241F2D8C04A6006147DE /* Release-starrewards */,
 				3D965DB12F28CB540028D46E /* Release-drinkrewards */,
 				234E069D2E0009BB00C1E77F /* Release-clh */,
@@ -8583,6 +9051,7 @@
 				249021D4217E4FDB00AE95B9 /* Profile */,
 				23ED95DE2D6C8879005C5478 /* Profile-max */,
 				235EB8552D268E9E00621146 /* Profile-qantum */,
+				3D78CC9E2F3C9A010009F7A2 /* Profile-qantumClub */,
 				238424222D8C04BB006147DE /* Profile-starrewards */,
 				3D965DB52F28CB620028D46E /* Profile-drinkrewards */,
 				234E06A12E0009C800C1E77F /* Profile-clh */,

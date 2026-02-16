@@ -100,7 +100,7 @@ class PASStatement extends StatelessWidget {
                           loc.txtDetails,
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              color:  AppThemeCustom.getAccountSectionItemStyle(context,isCommunication: true)),
+                              color:  AppThemeCustom.getAccountSectionItemStyle(context,isCommunication: true,isHeadingCommunication: true)),
                         ),
                         AppDimens.shape_10,
                         Row(
@@ -236,7 +236,7 @@ class PASStatement extends StatelessWidget {
                           loc.txtPerformance,
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              color: AppThemeCustom.getAccountSectionItemStyle(context,isCommunication: true)),
+                              color: AppThemeCustom.getAccountSectionItemStyle(context,isCommunication: true,isHeadingCommunication: true)),
                         ),
                         AppDimens.shape_10,
                         SizedBox(
