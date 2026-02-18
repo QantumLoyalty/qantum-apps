@@ -4,6 +4,7 @@ enum Flavor {
   qantum,
   qantumClub,
   maxx,
+  maxClub,
   mhbc,
   clh,
   montaukTavern,

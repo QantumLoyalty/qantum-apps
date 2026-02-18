@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398190562585",
+    "project_id": "maxgaming-95420",
+    "storage_bucket": "maxgaming-95420.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398190562585:android:d04da21948fd2dba9b4988",
+        "android_client_info": {
+          "package_name": "com.au.max.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBZO4fHV77atNjEhyqf2TD_FvoBZ1nr24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

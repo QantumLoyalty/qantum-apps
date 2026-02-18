@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.4+11
 ###################################
 # MHBC
-version:  1.0.9+84
+#version:  1.0.9+84
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -44,7 +44,10 @@ version:  1.0.9+84
 #version: 1.0.4+10
 ###################################
 #QANTUM
-#version: 1.0.0+63
+version: 1.0.0+64
+###################################
+#QANTUM Club
+#version: 1.0.0+1
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -176,6 +179,7 @@ flutter:
     - assets/qantum/
     - assets/qantumClub/
     - assets/max/
+    - assets/maxClub/
     - assets/starReward/
     - assets/manlyHarbourBoatClub/
     - assets/centralLaneHotel/
