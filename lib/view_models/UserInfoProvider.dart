@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
@@ -107,8 +108,15 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     notifyListeners();
   }
 
+  FetchProfileState _fetchProfileState=FetchProfileState.idle;
+
+  FetchProfileState get fetchProfileState=>_fetchProfileState;
+
   fetchUserProfile() async {
     try {
+
+      _fetchProfileState=FetchProfileState.loading;
+
       NetworkResponse networkResponse =
           await UserService.getInstance().fetchUserProfile();
       if (!networkResponse.isError) {
@@ -139,11 +147,14 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           } else {
             membershipStatus = MembershipStatus.active;
           }
+
+          _fetchProfileState=FetchProfileState.loaded;
         }
 
         notifyListeners();
       }
     } catch (e) {
+      _fetchProfileState=FetchProfileState.error;
       logEvent("Event:: Fetch profile error ${e.toString()}");
     }
   }

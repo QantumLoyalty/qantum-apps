@@ -25,6 +25,10 @@ class AppIcons {
       "assets/common/card_membership_cancelled.png";
   static String cardTest = "assets/common/card_test.png";
 
+  static String payByCard = "assets/common/pay_by_card.png";
+  static String payAtReception = "assets/common/pay_at_reception.png";
+
+
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     if (selectedFlavor == Flavor.northShoreTavern) {

@@ -4,6 +4,7 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -166,11 +167,11 @@ class _HomeScreenState extends State<HomeScreen>
             if (userInfoProvider.getUserInfo != null) {
               if ((userInfoProvider.membershipStatus ==
                       MembershipStatus.inactive) &&
-                  !_hasRedirectedToMembershipBuy) {
+                  !_hasRedirectedToMembershipBuy && userInfoProvider.fetchProfileState==FetchProfileState.loaded) {
                 _hasRedirectedToMembershipBuy = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   AppNavigator.navigateReplacement(
-                      context, AppNavigator.chooseMembershipScreen);
+                      context, AppNavigator.renewMembershipScreen);
                 });
               }
             }

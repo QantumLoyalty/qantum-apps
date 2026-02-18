@@ -88,66 +88,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                       ),
                       AppDimens.shape_20,
-                      /* Theme(
-                        data: Theme.of(context).copyWith(
-                          colorScheme: Theme.of(context).colorScheme.copyWith(
-                                onSurfaceVariant: Colors.white,
-                              ),
-                        ),
-                        child: provider.menuEntries != null
-                            ? DropdownMenu<MembershipModel>(
-                                menuHeight: 250,
-                                width: double.infinity,
-                                controller: controller,
-                                hintText: loc.selectMembership,
-                                initialSelection: provider.selectedMembership,
-                                dropdownMenuEntries: provider.menuEntries!,
-                                onSelected: (MembershipModel? value) {
-                                  provider.updateDropdownValue(value!);
-                                  setState(() {
-                                    controller.text =
-                                        "${value.membershipName} - \$${value.calculatedPrice != null ? formatter.format(value.calculatedPrice) : 0.00}";
-                                  });
-                                },
-                                inputDecorationTheme: InputDecorationTheme(
-                                  filled: true,
-                                  fillColor: Colors.white.withAlpha(80),
-                                  iconColor: Colors.white,
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 12),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.white, width: 1),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide: const BorderSide(
-                                        color: Colors.white, width: 2),
-                                  ),
-                                ),
-                                menuStyle: const MenuStyle(
-                                  backgroundColor: WidgetStatePropertyAll(
-                                      Colors.transparent),
-                                  surfaceTintColor: WidgetStatePropertyAll(
-                                      Colors.transparent),
-                                  padding:
-                                      WidgetStatePropertyAll(EdgeInsets.zero),
-                                  elevation: WidgetStatePropertyAll(0),
-                                  fixedSize: WidgetStatePropertyAll(
-                                      Size.fromWidth(double.infinity)),
-                                  maximumSize: WidgetStatePropertyAll(
-                                      Size.fromWidth(double.infinity)),
-                                ),
-                                textStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )
-                            : Container(),
-                      )*/
+
 
                       provider.membershipList.isNotEmpty
                           ? Column(
@@ -214,15 +155,35 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     text: loc.next.toUpperCase(),
                     onClick: () {
                       if (provider.selectedMembership != null) {
-                        Map<String, String> args = {};
-                        if (widget.arguments != null &&
-                            widget.arguments!.containsKey("isTestUser")) {
-                          args['isTestUser'] = "true";
-                        }
 
-                        AppNavigator.navigateAndClearStack(
-                            context, AppNavigator.selfieUploadScreen,
-                            arguments: args);
+                        if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
+                          {
+                            /// CONDITION FOR MEMBERSHIP RENEWAL
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.choosePaymentMethod);
+                          }
+                        else
+                          {
+                            /// CONDITION FOR FRESH MEMBERSHIP PURCHASE FROM REGISTRATION
+
+                            Map<String, String> args = {};
+                            if (widget.arguments != null &&
+                                widget.arguments!.containsKey("isTestUser")) {
+                              args['isTestUser'] = "true";
+                            }
+
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.selfieUploadScreen,
+                                arguments: args);
+                          }
+
+
+
+
+
+
+
+
                       } else {
                         AppHelper.showErrorMessage(
                             context, loc.selectMembershipPlan);

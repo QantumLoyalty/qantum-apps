@@ -743,13 +743,15 @@ class AppHelper with LoggingMixin {
     if (user.membershipExpiryDate != null &&
         user.membershipExpiryDate!.isNotEmpty) {
 
-      print("ServerTime ${user.serverTime}");
+      print("Membership Expiry: ${user.membershipExpiryDate} ServerTime ${user.serverTime}");
 
       if (user.serverTime != null && user.serverTime!.isNotEmpty) {
         DateTime expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
         DateTime serverTime = DateTime.parse(user.serverTime!).toUtc();
 
-        return serverTime.isAfter(expiry);
+        print("Membership status: ${serverTime.isBefore(expiry)}");
+        return serverTime.isBefore(expiry);
+       // return serverTime.isAfter(expiry);
       }
 
       return true;

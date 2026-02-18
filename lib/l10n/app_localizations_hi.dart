@@ -609,4 +609,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgErrorInDLScanning => 'स्कैनिंग में त्रुटि हुई है, कृपया अपने मूल ड्राइविंग लाइसेंस की फोटो क्लिक करें और फिर से प्रयास करें।';
+
+  @override
+  String get membershipRenewalTime => 'सदस्यता नवीनीकरण का समय!';
+
+  @override
+  String get yourMembershipExpired => 'आपकी सदस्यता समाप्त हो गई है';
+
+  @override
+  String get renewNow => 'नवीनीकरण करें';
+
+  @override
+  String get paymentOptions => 'भुगतान विकल्प';
 }

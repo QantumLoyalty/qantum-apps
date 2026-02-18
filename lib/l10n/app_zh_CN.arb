@@ -203,5 +203,9 @@
   "msgNoInternet": "您未连接到互联网。\n请检查您的网络连接并重试。",
   "msgNoOffers": "未找到优惠！",
   "cannotEditSeeVenue": "无法编辑\n请查看场地",
-  "msgErrorInDLScanning":"扫描时发生错误，请拍摄您的原始驾驶执照并重试。"
+  "msgErrorInDLScanning":"扫描时发生错误，请拍摄您的原始驾驶执照并重试。",
+  "membershipRenewalTime": "会员续费时间！",
+  "yourMembershipExpired": "您的会员资格已过期",
+  "renewNow": "立即续费",
+  "paymentOptions": "付款选项"
 }
