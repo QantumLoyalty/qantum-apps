@@ -1,0 +1,1 @@
+enum MembershipStatus {loading,active, inactive}

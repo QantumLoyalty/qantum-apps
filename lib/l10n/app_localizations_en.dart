@@ -609,4 +609,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgErrorInDLScanning => 'Error in scanning, please click your original driving licence and try again';
+
+  @override
+  String get membershipRenewalTime => 'Membership Renewal Time!';
+
+  @override
+  String get yourMembershipExpired => 'Your membership has expired';
+
+  @override
+  String get renewNow => 'Renew Now';
+
+  @override
+  String get paymentOptions => 'Payment Options';
 }

@@ -609,6 +609,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgErrorInDLScanning => '掃描時發生錯誤，請拍攝您的原始駕駛執照並重試。';
+
+  @override
+  String get membershipRenewalTime => '會員續期時間！';
+
+  @override
+  String get yourMembershipExpired => '您的會員資格已過期';
+
+  @override
+  String get renewNow => '立即續期';
+
+  @override
+  String get paymentOptions => '付款选项';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1216,4 +1228,16 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgErrorInDLScanning => '扫描时发生错误，请拍摄您的原始驾驶执照并重试。';
+
+  @override
+  String get membershipRenewalTime => '会员续费时间！';
+
+  @override
+  String get yourMembershipExpired => '您的会员资格已过期';
+
+  @override
+  String get renewNow => '立即续费';
+
+  @override
+  String get paymentOptions => '付款选项';
 }

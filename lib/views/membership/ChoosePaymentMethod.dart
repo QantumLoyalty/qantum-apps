@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' hide Card;
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppIcons.dart';
+import '../../services/PaymentService.dart';
 import '/views/common_widgets/AppButton.dart';
 import '../common_widgets/AppLoader.dart';
 import '../common_widgets/AppLogo.dart';
@@ -87,24 +89,55 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
               children: [
                 Applogo(),
                 AppDimens.shape_30,
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  child: InkWell(
-                    onTap: () {
-                      makePayment(userInfoProvider);
-                    },
-                    child: Image.asset(
-                      "assets/common/pay_by_card.png",
-                    ),
+
+                Text(
+                  loc.paymentOptions,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context)
+                        .textSelectionTheme
+                        .selectionColor,
                   ),
                 ),
                 AppDimens.shape_30,
-                AppButton(
-                    text: loc.payReception,
-                    onClick: () {
-                      membershipProvider.updateMembershipPaymentMethod(
-                          loc: loc);
-                    }),
+
+                Row(children: [
+                   ImageIcon(AssetImage(AppIcons.payByCard),size: 42,),
+                  AppDimens.shape_10,
+                  Expanded(
+                    child: AppButton(
+                        text: loc.payByCard.toUpperCase(),
+                        onClick: () async {
+                        //  makePayment(userInfoProvider);
+                          await PaymentService.makePayment(
+                              context: context,
+                              loc: loc,
+                              membershipManagerProvider:
+                              _membershipManagerProvider,
+                              userInfoProvider: userInfoProvider);
+
+                        }),
+                  ),
+                ],),
+
+                AppDimens.shape_30,
+                Row(
+                  children: [
+
+                     ImageIcon(AssetImage(AppIcons.payAtReception),size: 42,),
+
+                    AppDimens.shape_10,
+                    Expanded(
+                      child: AppButton(
+                          text: loc.payReception,
+                          onClick: () {
+                            membershipProvider.updateMembershipPaymentMethod(
+                                loc: loc);
+                          }),
+                    ),
+                  ],
+                ),
                 AppDimens.shape_30,
                 (widget.arguments != null &&
                         widget.arguments!.containsKey('isTestUser'))

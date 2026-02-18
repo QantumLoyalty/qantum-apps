@@ -1297,6 +1297,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error in scanning, please click your original driving licence and try again'**
   String get msgErrorInDLScanning;
+
+  /// No description provided for @membershipRenewalTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership Renewal Time!'**
+  String get membershipRenewalTime;
+
+  /// No description provided for @yourMembershipExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your membership has expired'**
+  String get yourMembershipExpired;
+
+  /// No description provided for @renewNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew Now'**
+  String get renewNow;
+
+  /// No description provided for @paymentOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Options'**
+  String get paymentOptions;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

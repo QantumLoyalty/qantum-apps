@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:qantum_apps/core/enums/FetchProfileState.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/BenefitsModel.dart';
@@ -41,6 +43,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   bool _isNavigated = false;
 
   bool get isNavigated => _isNavigated;
+
+  MembershipStatus membershipStatus = MembershipStatus.loading;
 
   markNavigated() {
     _isNavigated = true;
@@ -104,8 +108,15 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     notifyListeners();
   }
 
+  FetchProfileState _fetchProfileState=FetchProfileState.idle;
+
+  FetchProfileState get fetchProfileState=>_fetchProfileState;
+
   fetchUserProfile() async {
     try {
+
+      _fetchProfileState=FetchProfileState.loading;
+
       NetworkResponse networkResponse =
           await UserService.getInstance().fetchUserProfile();
       if (!networkResponse.isError) {
@@ -113,16 +124,37 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             networkResponse.response as Map<String, dynamic>;
         if (response.containsKey("user")) {
           UserModel userModel = UserModel.fromJson(response["user"]);
-          debugPrint("Event:: Updated user:: ${userModel.toString()}",wrapWidth: 1024);
+          debugPrint("Event:: Updated user:: ${userModel.toString()}",
+              wrapWidth: 1024);
           SharedPreferenceHelper sharedPreferenceHelper =
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);
           _userModel = userModel;
+
+          if (AppHelper.isClubApp()) {
+            if (response.containsKey("serverTime")) {
+              _userModel!.serverTime = response["serverTime"];
+            }
+
+            logEvent(
+                "Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
+
+            if (AppHelper.checkIfMembershipActive(_userModel!)) {
+              membershipStatus = MembershipStatus.active;
+            } else {
+              membershipStatus = MembershipStatus.inactive;
+            }
+          } else {
+            membershipStatus = MembershipStatus.active;
+          }
+
+          _fetchProfileState=FetchProfileState.loaded;
         }
 
         notifyListeners();
       }
     } catch (e) {
+      _fetchProfileState=FetchProfileState.error;
       logEvent("Event:: Fetch profile error ${e.toString()}");
     }
   }
@@ -603,7 +635,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
         //params["DateOfBirth"] = tempUser!.dateOfBirth;
 
-
         logEvent(params);
 
         NetworkResponse networkResponse =
@@ -941,7 +972,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
 
       NetworkResponse networkResponse =
-      await UserService.getInstance().logout();
+          await UserService.getInstance().logout();
 
       logEvent("logoutUser >> ${networkResponse.response}");
 
@@ -967,7 +998,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
     }
   }
-
 
   resetLogoutStatus() {
     _showLogoutLoader = null;
