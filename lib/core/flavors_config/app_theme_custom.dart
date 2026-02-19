@@ -19,7 +19,7 @@ class AppThemeCustom {
                 side: BorderSide(color: Theme.of(context).primaryColorDark),
                 borderRadius: BorderRadius.circular(80)),
             backgroundColor: AppColors.qa_primary_color_dark);
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return TextButton.styleFrom(
             minimumSize: const Size(85, 30),
             padding: EdgeInsets.zero,
@@ -57,7 +57,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub:
         return AppColors.white;
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return AppColors.max_button_color;
       case Flavor.starReward:
         return AppColors.sr_back_color;
@@ -320,7 +320,7 @@ class AppThemeCustom {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -410,7 +410,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.drinkRewards:
         return AppColors.transparent;
-      case Flavor.kingscliff:
+      case Flavor.kingscliff||Flavor.maxClub||Flavor.maxx:
         return AppColors.white.withOpacity(0.1);
       default:
         return Theme.of(context).dividerColor;
@@ -436,6 +436,18 @@ class AppThemeCustom {
             : Theme.of(context).hintColor;
       default:
         return Theme.of(context).hintColor;
+    }
+  }
+
+  static Color getTextFormFieldInnerDividerColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.kingscliff:
+        return AppColors.white;
+      case Flavor.maxClub||Flavor.maxx:
+        return AppColors.max_hint_text_color;
+      default:
+        return Theme.of(context).dividerColor;
     }
   }
 
@@ -468,7 +480,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -583,7 +595,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub ||Flavor.drinkRewards:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
       case Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
@@ -651,7 +663,7 @@ class AppThemeCustom {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(

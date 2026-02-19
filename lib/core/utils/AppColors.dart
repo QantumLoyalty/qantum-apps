@@ -510,7 +510,7 @@ class AppColors {
           switch (selectedFlavor) {
             case Flavor.qantum||Flavor.qantumClub:
               return const Color(0xFF14ad53);
-            case Flavor.maxx:
+            case Flavor.maxx||Flavor.maxClub:
               return const Color(0xFFdb023d);
             case Flavor.starReward:
               return const Color(0xFFc72224);

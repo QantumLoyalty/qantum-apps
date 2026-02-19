@@ -158,7 +158,7 @@ class AppThemes {
           ProgressIndicatorThemeData(color: AppColors.max_back_color),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.white,
-          foregroundColor: AppColors.max_floating_button_icon_color),
+          foregroundColor: AppColors.max_back_color_3),
       switchTheme: SwitchThemeData(
           trackColor: MaterialStateProperty.resolveWith((state) =>
               state.contains(MaterialState.selected)

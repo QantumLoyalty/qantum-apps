@@ -182,7 +182,7 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
 
       case Flavor.hogansReward ||
@@ -202,7 +202,7 @@ class AppHelper with LoggingMixin {
   static Color getEditAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
       case Flavor.brisbane:
         return Theme.of(context).primaryColor;
@@ -225,7 +225,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -345,7 +345,7 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -461,14 +461,14 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx||Flavor.maxClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -603,6 +603,7 @@ class AppHelper with LoggingMixin {
       Flavor.qantum: "Qantum",
       Flavor.qantumClub: "Qantum",
       Flavor.maxx: "MaxGaming",
+      Flavor.maxClub: "MaxGaming",
       Flavor.clh: "Central",
       Flavor.mhbc: "Manly",
       Flavor.montaukTavern: "Montauk",

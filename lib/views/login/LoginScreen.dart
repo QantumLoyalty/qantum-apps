@@ -187,14 +187,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     initialSelection: "AU",
                                   ),
                                   SizedBox(
-                                      height: 60,
-                                      child: VerticalDivider(
+                                    height: 60,
+                                    child: VerticalDivider(
                                         width: 1,
                                         thickness: 1,
-                                        color: flavor == Flavor.kingscliff
-                                            ? AppColors.white
-                                            : Theme.of(context).dividerColor,
-                                      )),
+                                        color: AppThemeCustom
+                                            .getTextFormFieldInnerDividerColor(
+                                          context,
+                                        )),
+                                  ),
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
