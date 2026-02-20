@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -41,18 +43,15 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       FocusScope.of(context).requestFocus(_otpFocusNode);
       SystemChannels.textInput.invokeMethod('TextInput.show');
-
     });
     getAppSignature();
     listenForCode();
   }
 
-  getAppSignature() async
-  {
-    String appSignature=await SmsAutoFill().getAppSignature;
+  getAppSignature() async {
+    String appSignature = await SmsAutoFill().getAppSignature;
     print("APP SIGNATURE: $appSignature");
   }
-
 
   @override
   void dispose() {
@@ -84,6 +83,10 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                 /// NAVIGATE TO HOME SCREEN
                 WidgetsBinding.instance.addPostFrameCallback((_) async {
                   if (AppHelper.isClubApp()) {
+                    MembershipStatus membershipStatus =
+                        await AppHelper.checkIfUserHasPurchasedTheMembership();
+                    print("MEMBERSHIP STATUS: ${membershipStatus.toString()}");
+
                     /// TEMP CONDITION FOR MHBC APP ONLY
                     if (flavor == Flavor.mhbc) {
                       if (widget.argument.containsKey('isTestUser')) {
@@ -96,15 +99,29 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         if (await AppHelper.checkIfUserIsNew()) {
                           /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
                           /// CHECKING IF PURCHASED THE MEMBERSHIP
-                          if (await AppHelper
-                              .checkIfUserHasPurchasedTheMembership()) {
+                          if (membershipStatus == MembershipStatus.active) {
                             /// ALREADY PURCHASED THE MEMBERSHIP
+                            /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
+
                             AppNavigator.navigateAndClearStack(
                                 context, AppNavigator.home);
-                          } else {
+                          } else if (membershipStatus ==
+                              MembershipStatus.inactive) {
+                            await context
+                                .read<UserInfoProvider>()
+                                .retrieveUserInfo();
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.renewMembershipScreen);
+                          } else if (membershipStatus ==
+                              MembershipStatus.notMember) {
                             ///  DID NOT PURCHASED THE MEMBERSHIP
                             AppNavigator.navigateAndClearStack(
                                 context, AppNavigator.chooseMembershipScreen);
+                          } else if (membershipStatus ==
+                              MembershipStatus.pendingPayment) {
+                            /// PENDING PAYMENT
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.pendingPaymentScreen);
                           }
                         } else {
                           /// IF USER IS OLD
@@ -115,7 +132,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                     } else {
                       /// FOR OTHER APPS
                       /// CHECKING IF PURCHASED THE MEMBERSHIP
-                      if (await AppHelper
+                      /*if (await AppHelper
                           .checkIfUserHasPurchasedTheMembership()) {
                         /// ALREADY PURCHASED THE MEMBERSHIP
                         AppNavigator.navigateAndClearStack(
@@ -124,6 +141,25 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         ///  DID NOT PURCHASED THE MEMBERSHIP
                         AppNavigator.navigateAndClearStack(
                             context, AppNavigator.pendingPaymentScreen);
+                      }*/
+                      if (membershipStatus == MembershipStatus.active) {
+                        /// ALREADY PURCHASED THE MEMBERSHIP
+                        /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
+
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.home);
+                      } else if (membershipStatus ==
+                          MembershipStatus.inactive) {
+                        await context
+                            .read<UserInfoProvider>()
+                            .retrieveUserInfo();
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.renewMembershipScreen);
+                      } else if (membershipStatus ==
+                          MembershipStatus.notMember) {
+                        ///  DID NOT PURCHASED THE MEMBERSHIP
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.chooseMembershipScreen);
                       }
                     }
                   } else {
@@ -179,7 +215,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                             AppDimens.shape_5,
                             Text(
                               "${loc.msgEnterVerificationCode}${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",
-                            //  "${loc.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
+                              //  "${loc.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.normal,
@@ -221,16 +257,20 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                               ],
                               controller: _otpController,
                               style: TextStyle(
-                                  color:  AppThemeCustom
-                                      .getTextFieldTextColor(
-                                      context,isShadow: true)),
+                                  color: AppThemeCustom.getTextFieldTextColor(
+                                      context,
+                                      isShadow: true)),
                               decoration: InputDecoration(
                                 counter: AppDimens.shape_5,
                                 fillColor:
-                                AppThemeCustom.getTextFieldBackground(context,isShadow: true),
+                                    AppThemeCustom.getTextFieldBackground(
+                                        context,
+                                        isShadow: true),
                                 filled: true,
-                                hintStyle:
-                                TextStyle(color:AppThemeCustom.getHintTextFieldColor(context,isShadow: true)),
+                                hintStyle: TextStyle(
+                                    color: AppThemeCustom.getHintTextFieldColor(
+                                        context,
+                                        isShadow: true)),
                                 hintText: 'XXXX',
                                 border: OutlineInputBorder(
                                     borderSide: const BorderSide(

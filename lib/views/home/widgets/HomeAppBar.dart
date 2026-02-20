@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import '../../../core/utils/AppColors.dart';
+import '../../../core/utils/FlavorConstants.dart';
 import '../../dialogs/AppUpdateDialog.dart';
 import '/core/utils/AppHelper.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
@@ -100,7 +101,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                                     BorderRadius.circular(8)),
                                             child: Image.asset(
                                               AppIcons.getCardBackground(
-                                                  AppHelper.getUserTierType(
+                                                  FlavorConstants.getUserTierType(
                                                       provider.getUserInfo!)),
                                               fit: BoxFit.cover,
                                             )))

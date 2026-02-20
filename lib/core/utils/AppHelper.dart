@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -574,8 +575,6 @@ class AppHelper with LoggingMixin {
 
       case Flavor.woollahra:
         return const Size(252, 114);
-      case Flavor.maxClub:
-        return const Size(200, 130);
       case Flavor.mhbc:
         return const Size(142, 30);
       case Flavor.flinders:
@@ -622,84 +621,49 @@ class AppHelper with LoggingMixin {
     return appTypeMap[flavor] ?? "Qantum";
   }
 
-  static String getUserTierType(UserModel userData) {
-    FlavorConfig flavorConfig = FlavorConfig.instance;
-
-    if (flavorConfig.flavor == Flavor.starReward ||
-        flavorConfig.flavor == Flavor.drinkRewards) {
-      if (userData.membershipCategory != null &&
-          userData.membershipCategory!.isNotEmpty) {
-        if (userData.membershipCategory!.toLowerCase() == "") {
-          return "STAFF PRE 3MTH";
-        } else {
-          return userData.membershipCategory!;
-        }
-      } else {
-        return "Valued";
-      }
-    } else {
-      if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
-        if (userData.statusTier!.toLowerCase() == "") {
-          return "STAFF PRE 3MTH";
-        } else {
-          return userData.statusTier!;
-        }
-      } else {
-        /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
-        switch (flavorConfig.flavor) {
-          case Flavor.mhbc:
-            return "Crewmate";
-          case Flavor.montaukTavern:
-            return "Member";
-          case Flavor.clh:
-            return "Member";
-          case Flavor.hogansReward:
-            return "Bronze";
-          case Flavor.queens:
-            return "Queens";
-          case Flavor.aceRewards:
-            return "Tens";
-          case Flavor.brisbane:
-            return "Member";
-          case Flavor.woollahra:
-            return "Regulars";
-          case Flavor.bluewater:
-            return "Deckhand";
-          case Flavor.flinders:
-            return "Member";
-          case Flavor.northShoreTavern:
-            return "Silver";
-          case Flavor.kingscliff:
-            return "Valued";
-          case Flavor.drinkRewards:
-            return "Explorer";
-          default:
-            return "Valued";
-        }
-      }
-    }
-  }
-
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
     //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
-    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc , Flavor.qantumClub, Flavor.maxClub};
+    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc, Flavor.qantumClub};
     return clubFlavors.contains(flavor);
   }
 
-  static Future<bool> checkIfUserHasPurchasedTheMembership() async {
+  static Future<MembershipStatus> checkIfUserHasPurchasedTheMembership() async {
     SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    UserModel? userData = sharedPreferencesHelper.getUserData();
     if (userData != null) {
-      if (userData.paymentStatus!.isNotEmpty &&
-          userData.paymentStatus!.toLowerCase() == 'success') {
-        return true;
+      print(userData);
+
+      if (userData.paymentType != null && userData.paymentType!.isNotEmpty) {
+        if (userData.paymentType!.toLowerCase() == "reception") {
+          return MembershipStatus.pendingPayment;
+        } else {
+          if (userData.paymentType!.toLowerCase() == "card") {
+            if (userData.paymentStatus!.isNotEmpty &&
+                userData.paymentStatus!.toLowerCase() == 'success') {
+              if (AppHelper.checkIfMembershipActive(userData)) {
+                return MembershipStatus.active;
+              } else {
+                return MembershipStatus.inactive;
+              }
+            } else {
+              return MembershipStatus.notMember;
+            }
+          } else {
+            if (AppHelper.checkIfMembershipActive(userData)) {
+              return MembershipStatus.active;
+            } else {
+              return MembershipStatus.inactive;
+            }
+          }
+        }
       } else {
-        return false;
+        return MembershipStatus.notMember;
       }
     } else {
-      return false;
+      print("User data not found in shared preferences");
+      return MembershipStatus.notMember;
     }
   }
 

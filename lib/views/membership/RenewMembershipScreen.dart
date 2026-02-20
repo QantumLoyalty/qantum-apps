@@ -30,10 +30,9 @@ class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
               children: [
                 Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                                        children: [
+                  child: Column(
+                    children: [
                       Applogo(),
-                      
                       AppDimens.shape_30,
                       Text(
                         loc!.membershipRenewalTime,
@@ -57,13 +56,12 @@ class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
                       AppButton(
                         text: loc!.renewNow.toUpperCase(),
                         onClick: () {
-
-                          Map<String,String> params=Map();
-                          params['fromRenewMembership']="true";
+                          Map<String, String> params = Map();
+                          params['fromRenewMembership'] = "true";
 
                           AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.chooseMembershipScreen,arguments: params);
-                      
+                              context, AppNavigator.chooseMembershipScreen,
+                              arguments: params);
                         },
                       ),
                       AppDimens.shape_30,
@@ -126,9 +124,9 @@ class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
                         ],
                       ),
                       AppDimens.shape_10,
-                                        ],
-                                      ),
-                    )),
+                    ],
+                  ),
+                )),
                 AppDimens.shape_10,
                 BottomInfoWidget(
                   message: loc!.membershipRequiresApproval,

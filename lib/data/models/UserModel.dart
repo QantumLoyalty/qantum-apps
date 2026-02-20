@@ -182,6 +182,7 @@ class UserModel {
     data['licence_front'] = licenceFront ?? "";
     data['licence_back'] = licenceBack ?? "";
     data['ExpiryDate'] = membershipExpiryDate ?? "";
+    data['serverTime'] = serverTime ?? "";
 
     return data;
   }
@@ -250,7 +251,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id,Id: $bluizeUniqueUserId, firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
+    return 'UserModel{id: $id,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
   }
 
   bool isUserStatusCancelled() {

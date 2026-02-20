@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../services/PaymentService.dart';
@@ -45,7 +46,9 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
       builder: (context, provider, child) {
         if (provider.getUserInfo != null && !provider.isNavigated) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
+            MembershipStatus membershipStatus =
+                await AppHelper.checkIfUserHasPurchasedTheMembership();
+            if (membershipStatus == MembershipStatus.active) {
               /// ALREADY PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(context, AppNavigator.home);
               provider.markNavigated();
@@ -198,20 +201,19 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                                               membershipManagerProvider,
                                           userInfoProvider: userInfoProvider);
                                     }),
-
                                 AppDimens.shape_20,
-
-                                  (provider.getUserInfo != null &&
-                                    provider.getUserInfo!.bluizeUniqueUserId=="4a9ec9ef-aa36-49c0-ba3b-e6b36b14d07b")
+                                (provider.getUserInfo != null &&
+                                        provider.getUserInfo!
+                                                .bluizeUniqueUserId ==
+                                            "4a9ec9ef-aa36-49c0-ba3b-e6b36b14d07b")
                                     ? AppButton(
-                                    text: "Continue for Review".toUpperCase(),
-                                    onClick: () {
-                                      AppNavigator.navigateAndClearStack(
-                                          context, AppNavigator.home);
-                                    })
+                                        text:
+                                            "Continue for Review".toUpperCase(),
+                                        onClick: () {
+                                          AppNavigator.navigateAndClearStack(
+                                              context, AppNavigator.home);
+                                        })
                                     : Container(),
-
-
                               ],
                             )
                           : Padding(

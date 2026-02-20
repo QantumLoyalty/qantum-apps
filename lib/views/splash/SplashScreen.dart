@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/services/DeeplinkService.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -60,18 +61,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if (hasUserData) {
         if (AppHelper.isClubApp()) {
+          MembershipStatus membershipStatus =
+              await AppHelper.checkIfUserHasPurchasedTheMembership();
+
           /// TEMP CONDITION FOR MHBC APP ONLY
           if (flavor == Flavor.mhbc) {
             if (await AppHelper.checkIfUserIsNew()) {
               /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
               /// CHECKING IF PURCHASED THE MEMBERSHIP
-              if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
-                /// ALREADY PURCHASED THE MEMBERSHIP
-                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-              } else {
+              if (membershipStatus == MembershipStatus.notMember) {
                 ///  DID NOT PURCHASED THE MEMBERSHIP
                 AppNavigator.navigateAndClearStack(
                     context, AppNavigator.pendingPaymentScreen);
+              } else {
+                /// ALREADY PURCHASED THE MEMBERSHIP MAY BE ACTIVE OR EXPIRED
+                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
               }
             } else {
               /// IF USER IS OLD
@@ -80,13 +84,13 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             /// FOR OTHER APPS
             /// CHECKING IF PURCHASED THE MEMBERSHIP
-            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
-              /// ALREADY PURCHASED THE MEMBERSHIP
-              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-            } else {
+            if (membershipStatus == MembershipStatus.notMember) {
               ///  DID NOT PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(
                   context, AppNavigator.pendingPaymentScreen);
+            } else {
+              /// ALREADY PURCHASED THE MEMBERSHIP
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
             }
           }
         } else {

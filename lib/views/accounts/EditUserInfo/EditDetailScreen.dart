@@ -44,9 +44,6 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
     try {
       dateTime = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
           .parse(_userInfoProvider.tempUser!.dateOfBirth ?? "");
-
-      print("PARSED DATE: $dateTime ---> DAY: ${dateTime.day}");
-
     } catch (e) {
       AppHelper.printMessage("Exception in parsing birthdate $e");
     }
@@ -58,7 +55,8 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 () => "0${dateTime!.day.toString()}")
             .build(orElse: () => ""));
     _birthdayMMController = TextEditingController(
-        text: ConditionBuilder.on(() => dateTime != null && dateTime.month >= 10,
+        text: ConditionBuilder.on(
+                () => dateTime != null && dateTime.month >= 10,
                 () => dateTime!.month.toString())
             .on(() => dateTime != null && dateTime.month < 10,
                 () => "0${dateTime!.month.toString()}")
@@ -335,6 +333,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
 
   @override
   void dispose() {
+    _fullNameFieldController.dispose();
     _birthdayDDController.dispose();
     _birthdayMMController.dispose();
     _birthdayYYController.dispose();

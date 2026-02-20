@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/enums/OffersFilterType.dart';
 import '../../data/models/OfferModel.dart';
 import '../core/utils/AppHelper.dart';
+import '../core/utils/FlavorConstants.dart';
 import '../data/models/NetworkResponse.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../data/local/SharedPreferenceHelper.dart';
@@ -170,7 +171,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
         final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
 
-        final String userStatusTier = await AppHelper.getUserTierType(userData);
+        final String userStatusTier =  FlavorConstants.getUserTierType(userData);
 
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchSpecialOffers(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
+import '../core/utils/FlavorConstants.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/models/PromotionModel.dart';
@@ -34,7 +35,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       UserModel? userData = await sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
-        String userTier = await AppHelper.getUserTierType(userData);
+        String userTier =  FlavorConstants.getUserTierType(userData);
         NetworkResponse networkResponse =
             await AppDataService.getInstance().fetchPromotions(userTier);
         _isError = networkResponse.isError;

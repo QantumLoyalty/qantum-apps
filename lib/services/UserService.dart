@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:qantum_apps/core/utils/FlavorConstants.dart';
 
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppHelper.dart';
@@ -397,7 +398,7 @@ class UserService with LoggingMixin implements UserRepository {
 
       UserModel? user = await sharedPreferenceHelper.getUserData();
 
-      final String userStatusTier = await AppHelper.getUserTierType(user!);
+      final String userStatusTier = FlavorConstants.getUserTierType(user!);
 
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.GET_USERS_BENEFITS + "type=$userStatusTier"),

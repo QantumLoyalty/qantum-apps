@@ -35,6 +35,11 @@ class UserLoginProvider extends ChangeNotifier {
 
   String? get networkMessage => _networkMessage;
 
+
+  UserModel? loggedInUser;
+
+
+
   login(String phoneNo) async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showLoader = true;
@@ -196,11 +201,17 @@ class UserLoginProvider extends ChangeNotifier {
 
         _networkMessage = response['message'];
         if (!_networkError!) {
-          AppHelper.printMessage("SAVING RESPONSE");
+
+          debugPrint(response.toString(),wrapWidth: 1024);
           Map<String, dynamic> data = response['user'] as Map<String, dynamic>;
-          AppHelper.printMessage(
-              "PARSED USER DATA::: ${UserModel.fromJson(data)}");
-          await sharedPreferencesHelper.saveUserData(UserModel.fromJson(data));
+
+          loggedInUser= UserModel.fromJson(data);
+          if (response.containsKey("serverTime")) {
+            loggedInUser!.serverTime = response["serverTime"];
+          }
+          AppHelper.printMessage("PARSED USER DATA::: ${loggedInUser!.toString()}");
+
+          await sharedPreferencesHelper.saveUserData(loggedInUser!);
           await sharedPreferencesHelper.saveAuthToken(response['token']);
           await sharedPreferencesHelper.saveCountryCode(countryCode);
         }

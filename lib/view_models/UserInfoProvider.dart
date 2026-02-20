@@ -101,6 +101,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
+
+    print("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}");
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
     }

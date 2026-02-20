@@ -1,1 +1,1 @@
-enum MembershipStatus {loading,active, inactive}
+enum MembershipStatus { loading, active, inactive, notMember ,pendingPayment}

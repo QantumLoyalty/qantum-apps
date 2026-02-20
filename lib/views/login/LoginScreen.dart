@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           /// DISPLAYING NETWORK RESPONSE
           if (provider.networkError != null &&
-              provider.networkMessage != null) {
+              provider.networkMessage != null)  {
             Future.delayed(Duration.zero, () {
               if (provider.networkError!) {
                 ErrorDialog.getInstance().showErrorDialog(context,
