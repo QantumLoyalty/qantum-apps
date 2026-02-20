@@ -207,5 +207,14 @@
   "membershipRenewalTime": "सदस्यता नवीनीकरण का समय!",
   "yourMembershipExpired": "आपकी सदस्यता समाप्त हो गई है",
   "renewNow": "नवीनीकरण करें",
-  "paymentOptions": "भुगतान विकल्प"
+  "paymentOptions": "भुगतान विकल्प",
+  "appUpdate": "ऐप अपडेट",
+  "msgNewVersionAvailable":"### का नया संस्करण उपलब्ध है!",
+  "msgNewAppVersionAvailable":"संस्करण ### अब उपलब्ध है!",
+  "msgYouHaveVersion":"आपके पास संस्करण ### है",
+  "releaseNotes":"रिलीज़ नोट्स:",
+  "msgLikeToUpdate":"क्या आप इसे अभी अपडेट करना चाहेंगे?" ,
+  "ignore": "अनदेखा करें",
+  "later":"बाद में",
+  "updateNow": "अभी अपडेट करें"
 }

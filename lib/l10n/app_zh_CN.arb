@@ -207,5 +207,14 @@
   "membershipRenewalTime": "会员续费时间！",
   "yourMembershipExpired": "您的会员资格已过期",
   "renewNow": "立即续费",
-  "paymentOptions": "付款选项"
+  "paymentOptions": "付款选项",
+  "appUpdate": "应用更新",
+  "msgNewVersionAvailable":"### 的新版本现已推出！",
+  "msgNewAppVersionAvailable":"版本 ### 现已可用！",
+  "msgYouHaveVersion":"您当前使用的版本是 ###",
+  "releaseNotes":"发布说明：",
+  "msgLikeToUpdate":"您现在要更新吗？" ,
+  "ignore": "忽略",
+  "later":"稍后",
+  "updateNow": "立即更新"
 }

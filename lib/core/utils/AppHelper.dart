@@ -754,7 +754,7 @@ class AppHelper with LoggingMixin {
 
         print("Membership status: ${serverTime.isBefore(expiry)}");
         return serverTime.isBefore(expiry);
-       // return serverTime.isAfter(expiry);
+        //return serverTime.isAfter(expiry);
       }
 
       return true;

@@ -1321,6 +1321,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Payment Options'**
   String get paymentOptions;
+
+  /// No description provided for @appUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'App Update'**
+  String get appUpdate;
+
+  /// No description provided for @msgNewVersionAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version of ### is available!'**
+  String get msgNewVersionAvailable;
+
+  /// No description provided for @msgNewAppVersionAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Version ### is now available!'**
+  String get msgNewAppVersionAvailable;
+
+  /// No description provided for @msgYouHaveVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'You have version ###'**
+  String get msgYouHaveVersion;
+
+  /// No description provided for @releaseNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Release Notes:'**
+  String get releaseNotes;
+
+  /// No description provided for @msgLikeToUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to update it now?'**
+  String get msgLikeToUpdate;
+
+  /// No description provided for @ignore.
+  ///
+  /// In en, this message translates to:
+  /// **'IGNORE'**
+  String get ignore;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'LATER'**
+  String get later;
+
+  /// No description provided for @updateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'UPDATE NOW'**
+  String get updateNow;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

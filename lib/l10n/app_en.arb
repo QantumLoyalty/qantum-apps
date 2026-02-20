@@ -207,6 +207,15 @@
   "membershipRenewalTime": "Membership Renewal Time!",
   "yourMembershipExpired": "Your membership has expired",
   "renewNow": "Renew Now",
-  "paymentOptions": "Payment Options"
+  "paymentOptions": "Payment Options",
+  "appUpdate": "App Update",
+  "msgNewVersionAvailable":"A new version of ### is available!",
+  "msgNewAppVersionAvailable":"Version ### is now available!",
+  "msgYouHaveVersion":"You have version ###",
+  "releaseNotes":"Release Notes:",
+  "msgLikeToUpdate":"Would you like to update it now?" ,
+  "ignore": "IGNORE",
+  "later":"LATER",
+  "updateNow": "UPDATE NOW"
 
 }

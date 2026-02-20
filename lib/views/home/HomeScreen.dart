@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -78,6 +79,8 @@ class _HomeScreenState extends State<HomeScreen>
 
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
+
+
     }
   }
 
@@ -167,7 +170,8 @@ class _HomeScreenState extends State<HomeScreen>
             if (userInfoProvider.getUserInfo != null) {
               if ((userInfoProvider.membershipStatus ==
                       MembershipStatus.inactive) &&
-                  !_hasRedirectedToMembershipBuy && userInfoProvider.fetchProfileState==FetchProfileState.loaded) {
+                  !_hasRedirectedToMembershipBuy && userInfoProvider.fetchProfileState==FetchProfileState.loaded)
+              {
                 _hasRedirectedToMembershipBuy = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   AppNavigator.navigateReplacement(

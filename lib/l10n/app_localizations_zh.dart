@@ -621,6 +621,33 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get paymentOptions => '付款选项';
+
+  @override
+  String get appUpdate => '應用程式更新';
+
+  @override
+  String get msgNewVersionAvailable => '### 的新版本現已推出！';
+
+  @override
+  String get msgNewAppVersionAvailable => '版本 ### 現已可用！';
+
+  @override
+  String get msgYouHaveVersion => '您目前使用的版本是 ###';
+
+  @override
+  String get releaseNotes => '發行說明：';
+
+  @override
+  String get msgLikeToUpdate => '您現在要更新嗎？';
+
+  @override
+  String get ignore => '忽略';
+
+  @override
+  String get later => '稍後';
+
+  @override
+  String get updateNow => '立即更新';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1240,4 +1267,31 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get paymentOptions => '付款选项';
+
+  @override
+  String get appUpdate => '应用更新';
+
+  @override
+  String get msgNewVersionAvailable => '### 的新版本现已推出！';
+
+  @override
+  String get msgNewAppVersionAvailable => '版本 ### 现已可用！';
+
+  @override
+  String get msgYouHaveVersion => '您当前使用的版本是 ###';
+
+  @override
+  String get releaseNotes => '发布说明：';
+
+  @override
+  String get msgLikeToUpdate => '您现在要更新吗？';
+
+  @override
+  String get ignore => '忽略';
+
+  @override
+  String get later => '稍后';
+
+  @override
+  String get updateNow => '立即更新';
 }

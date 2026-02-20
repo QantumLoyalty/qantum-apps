@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import '../../../core/utils/AppColors.dart';
+import '../../dialogs/AppUpdateDialog.dart';
 import '/core/utils/AppHelper.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../l10n/app_localizations.dart';
@@ -71,6 +72,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             } else {
                               await DigitalCardDialog.getInstance()
                                   .showDigitalCardDialog(context);
+                            //  AppUpdateDialog.getInstance().showAppUpdateDialog(context);
                             }
 
                             try {

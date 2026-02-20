@@ -621,4 +621,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paymentOptions => 'Payment Options';
+
+  @override
+  String get appUpdate => 'App Update';
+
+  @override
+  String get msgNewVersionAvailable => 'A new version of ### is available!';
+
+  @override
+  String get msgNewAppVersionAvailable => 'Version ### is now available!';
+
+  @override
+  String get msgYouHaveVersion => 'You have version ###';
+
+  @override
+  String get releaseNotes => 'Release Notes:';
+
+  @override
+  String get msgLikeToUpdate => 'Would you like to update it now?';
+
+  @override
+  String get ignore => 'IGNORE';
+
+  @override
+  String get later => 'LATER';
+
+  @override
+  String get updateNow => 'UPDATE NOW';
 }

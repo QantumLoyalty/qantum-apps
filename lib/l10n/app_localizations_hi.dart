@@ -621,4 +621,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get paymentOptions => 'भुगतान विकल्प';
+
+  @override
+  String get appUpdate => 'ऐप अपडेट';
+
+  @override
+  String get msgNewVersionAvailable => '### का नया संस्करण उपलब्ध है!';
+
+  @override
+  String get msgNewAppVersionAvailable => 'संस्करण ### अब उपलब्ध है!';
+
+  @override
+  String get msgYouHaveVersion => 'आपके पास संस्करण ### है';
+
+  @override
+  String get releaseNotes => 'रिलीज़ नोट्स:';
+
+  @override
+  String get msgLikeToUpdate => 'क्या आप इसे अभी अपडेट करना चाहेंगे?';
+
+  @override
+  String get ignore => 'अनदेखा करें';
+
+  @override
+  String get later => 'बाद में';
+
+  @override
+  String get updateNow => 'अभी अपडेट करें';
 }
