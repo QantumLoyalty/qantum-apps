@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
+import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import 'view_models/InternetStatusProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
 import 'core/flavors_config/app_themes.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
+        ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
+        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
       child: Portal(

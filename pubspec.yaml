@@ -44,7 +44,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+10
 ###################################
 #QANTUM
-version: 1.0.0+65
+#version: 1.0.0+65
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -72,6 +72,10 @@ version: 1.0.0+65
 ###################################
 #QANTUMClub
 #version: 1.0.0+2
+###################################
+#MAX Club
+version: 1.0.0+1
+
 environment:
   sdk: ^3.5.3
 

@@ -56,6 +56,13 @@ android {
                     deeplinkHost: "disabled.invalid"
             ]
         }
+        maxClub {
+            dimension "app"
+            applicationId "com.au.maxclub.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
+        }
         qantum {
             dimension "app"
             applicationId "com.au.quantum.app"

@@ -574,6 +574,8 @@ class AppHelper with LoggingMixin {
 
       case Flavor.woollahra:
         return const Size(252, 114);
+      case Flavor.maxClub:
+        return const Size(200, 130);
       case Flavor.mhbc:
         return const Size(142, 30);
       case Flavor.flinders:
@@ -681,7 +683,7 @@ class AppHelper with LoggingMixin {
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
     //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
-    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc , Flavor.qantumClub};
+    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc , Flavor.qantumClub, Flavor.maxClub};
     return clubFlavors.contains(flavor);
   }
 
