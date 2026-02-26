@@ -81,7 +81,7 @@ android {
             dimension "app"
             applicationId "com.au.mhbc.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "app.clevaq.com"
             ]
         }
         clh {
@@ -165,6 +165,13 @@ android {
         drinkRewards {
             dimension "app"
             applicationId "com.au.drinkRewards.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
+        }
+        wonthaggi {
+            dimension "app"
+            applicationId "com.au.wonthaggi.app"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid"
             ]

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../core/enums/FetchProfileState.dart';
+import '../../core/enums/MembershipStatus.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '/view_models/UserInfoProvider.dart';
 import '/views/common_widgets/AppScaffold.dart';
@@ -15,6 +17,7 @@ class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
   AppLocalizations? loc;
 
   RenewMembershipScreen({super.key});
+  bool _hasRedirectedToHome = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,21 @@ class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
 
     return AppScaffold(body: SafeArea(
         child: Consumer<UserInfoProvider>(builder: (context, provider, child) {
+
+          if (provider.getUserInfo != null) {
+            if ((provider.membershipStatus ==
+                MembershipStatus.active) &&
+                !_hasRedirectedToHome && provider.fetchProfileState==FetchProfileState.loaded)
+            {
+              _hasRedirectedToHome = true;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                AppNavigator.navigateAndClearStack(
+                    context, AppNavigator.home);
+              });
+            }
+          }
+
+
       return Stack(
         children: [
           Padding(

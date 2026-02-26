@@ -189,7 +189,7 @@ class AppHelper with LoggingMixin {
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
             Flavor.queens ||
-            Flavor.brisbane:
+            Flavor.brisbane || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
 
       case Flavor.flinders:
@@ -205,7 +205,7 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.maxx||Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
@@ -302,7 +302,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.queens:
+      case Flavor.queens || Flavor.wonthaggi:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -327,7 +327,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -520,7 +520,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.northShoreTavern || Flavor.queens:
+      case Flavor.northShoreTavern || Flavor.queens || Flavor.wonthaggi:
         return ButtonStyle(
             shadowColor: WidgetStatePropertyAll(
                 Theme.of(context).primaryColor.withValues(alpha: 0.1)),

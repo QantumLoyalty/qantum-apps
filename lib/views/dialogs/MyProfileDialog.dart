@@ -136,7 +136,7 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.phone_android_outlined,
                                             iconSize: 18,
                                             text:
-                                                "${provider.getUserInfo?.mobile??""}",
+                                                provider.getUserInfo?.mobile??"",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -150,7 +150,7 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.email_outlined,
                                             iconSize: 18,
                                             text:
-                                                "${provider.getUserInfo?.email??""}",
+                                                provider.getUserInfo?.email??"",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),

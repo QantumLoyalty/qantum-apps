@@ -474,6 +474,36 @@ class AppColors {
   static Color get dr_box_shadow => const Color(0x80FFFFFF);
 
 
+  /// WONTHAGGI THEME
+  static Color get wt_sf_color => const Color(0xFF222E5A);
+
+  static Color get wt_back_color => const Color(0xFFF7F1E2);
+
+  static Color get wt_floating_button_icon_color => const Color(0xFF222E5A);
+
+  static Color get wt_back_color_2 => const Color(0xFFF2F0E7);
+
+  static Color get wt_back_color_3 => const Color(0xFFB8C9CE);
+
+  static Color get wt_text_color => const Color(0xFF222E5A);
+
+  static Color get wt_text_field_text_color => const Color(0xFF000000);
+
+  static Color get wt_hint_text_color => const Color(0x66222E5A);
+
+  static Color get wt_button_color => const Color(0xFF222E5A);
+
+  static Color get wt_button_border_color => const Color(0xFF222E5A);
+
+  static Color get wt_card_color => const Color(0xFFFFFFFF);
+
+  static Color get wt_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get wt_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get wt_canvas_color => const Color(0xFF222E5A);
+
+
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);

@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.4+11
 ###################################
 # MHBC
-version:  1.0.10+87
+version:  1.0.10+88
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -74,7 +74,10 @@ version:  1.0.10+87
 #version: 1.0.0+2
 ###################################
 #MAX Club
-version: 1.0.0+1
+#version: 1.0.0+1
+###################################
+#WONTHAGGI
+#version: 1.0.0+1
 
 environment:
   sdk: ^3.5.3
@@ -194,6 +197,7 @@ flutter:
     - assets/flindersStreetWharves/
     - assets/drinkRewards/
     - assets/kingscliff/
+    - assets/wonthaggi/
     - .env.mhbc
     - .env.qantum
     - .env.kc

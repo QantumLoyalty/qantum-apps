@@ -155,7 +155,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                               },
                                               child: Text(
                                                 loc.txtNo,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.grey),
                                               )),
                                           TextButton(
