@@ -13,10 +13,17 @@ import '../common_widgets/AppLogo.dart';
 import '/core/mixins/logging_mixin.dart';
 import 'widgets/BottomInfoWidget.dart';
 
-class RenewMembershipScreen extends StatelessWidget with LoggingMixin {
-  AppLocalizations? loc;
+class RenewMembershipScreen extends StatefulWidget with LoggingMixin {
 
   RenewMembershipScreen({super.key});
+
+  @override
+  State<RenewMembershipScreen> createState() => _RenewMembershipScreenState();
+}
+
+class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
+  AppLocalizations? loc;
+
   bool _hasRedirectedToHome = false;
 
   @override

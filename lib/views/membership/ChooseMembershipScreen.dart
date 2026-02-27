@@ -158,9 +158,11 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
 
                         if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
                           {
+
+
                             /// CONDITION FOR MEMBERSHIP RENEWAL
                             AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.choosePaymentMethod);
+                                context, AppNavigator.choosePaymentMethod,arguments: widget.arguments);
                           }
                         else
                           {

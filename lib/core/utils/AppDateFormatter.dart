@@ -2,10 +2,7 @@ import 'package:intl/intl.dart';
 
 import '../flavors_config/flavor_config.dart';
 
-
-class AppDateFormatter
-{
-
+class AppDateFormatter {
   static String? userMembershipExpiry(String? membershipExpiry) {
     Flavor flavor = FlavorConfig.instance.flavor!;
 
@@ -26,6 +23,19 @@ class AppDateFormatter
     }
   }
 
+  static String? dobForClevaQ(String? dob) {
+    if (dob == null) return null;
 
+    try {
+      final parsedDob = DateTime.parse(dob);
 
+      final year = parsedDob.year % 100; // last 2 digits
+      return "${parsedDob.day.toString().padLeft(2, '0')}"
+          "${parsedDob.month.toString().padLeft(2, '0')}"
+          "${year.toString().padLeft(2, '0')}";
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

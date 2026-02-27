@@ -32,7 +32,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.4+11
 ###################################
 # MHBC
-#version:  1.0.10+88
+#version:  1.0.10+90
+
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -149,6 +150,7 @@ dependencies:
   connectivity_plus: ^7.0.0
   flutter_custom_tabs: ^2.4.1
   sms_autofill: ^2.4.1
+  syncfusion_flutter_barcodes:
 #  url_launcher:
 
 

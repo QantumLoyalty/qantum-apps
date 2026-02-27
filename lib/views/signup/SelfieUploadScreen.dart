@@ -166,7 +166,7 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
               AppNavigator.choosePaymentMethod,
             );
           } else {
-            membershipManagerProvider.updateMembershipPaymentMethod(loc: loc!);
+            membershipManagerProvider.updateMembershipPaymentMethod(loc: loc!,renewType: "none");
           }
         });
 

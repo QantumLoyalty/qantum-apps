@@ -148,7 +148,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
   }
 
   createPaymentIntent(
-      {required String userId, required AppLocalizations loc}) async {
+      {required String userId, required AppLocalizations loc,required String renewType}) async {
     try {
       _showLoader = true;
       _paymentIntentClientSecret = null;
@@ -162,7 +162,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "amount": (_selectedMembership!.calculatedPrice! * 100).toInt(),
         "currency": "aud",
         "appType": AppHelper.getAppType(),
-        "paymentType": "card"
+        "paymentType": "card",
+        "renewType":renewType
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .createPaymentIntent(paymentParams: paymentParams);
@@ -201,7 +202,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  updateMembershipPaymentMethod({required AppLocalizations loc}) async {
+  updateMembershipPaymentMethod({required AppLocalizations loc, String? renewType}) async {
     try {
       _showLoader = true;
       _loaderMessage = loc.msgCommonLoader;
@@ -211,6 +212,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "packageName": _selectedMembership!.membershipName!,
         "paymentType": "reception",
         "packageId": _selectedMembership!.id!,
+        "renewType":renewType??"none"
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .updatePaymentType(paymentParams: paymentParams);

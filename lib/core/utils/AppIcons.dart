@@ -27,6 +27,9 @@ class AppIcons {
 
   static String payByCard = "assets/common/pay_by_card.png";
   static String payAtReception = "assets/common/pay_at_reception.png";
+  static String unitedFuelsBanner = "assets/common/united-logo-white.png";
+  static String unitedFuelsHero = "assets/common/hero-image.jpg";
+  static String unitedFuelsRounded7c = "assets/common/rounded-7c.png";
 
 
   static String getHeaderIcon() {

@@ -6,6 +6,7 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -76,8 +77,6 @@ class _HomeScreenState extends State<HomeScreen>
 
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
-
-
     }
   }
 
@@ -89,10 +88,16 @@ class _HomeScreenState extends State<HomeScreen>
   ) {
     if (_deepLinkHandled) return;
 
-    if (provider.startChewzieScreen != true) return;
     if (provider.deeplinkPayloads == null) return;
     if (userInfoProvider.getUserInfo == null) return;
 
+    if (flavor == Flavor.starReward) {
+      _handleChewzie(provider, userInfoProvider);
+    } else if (flavor == Flavor.mhbc) {
+      _handleClevaQ(provider, userInfoProvider);
+    }
+
+    /*
     _deepLinkHandled = true;
 
     final decodedLink = Uri.decodeComponent(provider.deeplinkPayloads!);
@@ -115,6 +120,49 @@ class _HomeScreenState extends State<HomeScreen>
     // 🚀 Fire and forget — no await
     launchDeepLinkURL(updatedUri);
 
+    provider.resetDeepLinkNavigation();*/
+  }
+
+  void _handleChewzie(
+      HomeProvider provider, UserInfoProvider userInfoProvider) {
+    if (provider.startChewzieScreen != true) return;
+
+    _deepLinkHandled = true;
+
+    final decodedLink = Uri.decodeComponent(provider.deeplinkPayloads!);
+    final uri = Uri.parse(decodedLink);
+
+    final jsonPayload = {
+      "memberId": userInfoProvider.getUserInfo!.cardNumber,
+    };
+
+    final base64Payload = base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
+
+    final updatedUri = uri.replace(
+      queryParameters: {
+        ...uri.queryParameters,
+        'memberData': base64Payload,
+      },
+    );
+
+    launchDeepLinkURL(updatedUri);
+    provider.resetDeepLinkNavigation();
+  }
+
+  void _handleClevaQ(HomeProvider provider, UserInfoProvider userInfoProvider) {
+    _deepLinkHandled = true;
+
+    final uri = Uri.parse(provider.deeplinkPayloads!);
+    final updatedUri = uri.replace(pathSegments: [
+      ...uri.pathSegments,
+      'qantumMember',
+      userInfoProvider.getUserInfo!.cardNumber ?? "",
+      AppDateFormatter.dobForClevaQ(
+              userInfoProvider.getUserInfo!.dateOfBirth) ??
+          ""
+    ]);
+    print("DEEPLINK URL: ${updatedUri.toString()}");
+    launchDeepLinkURL(updatedUri);
     provider.resetDeepLinkNavigation();
   }
 
@@ -167,8 +215,9 @@ class _HomeScreenState extends State<HomeScreen>
             if (userInfoProvider.getUserInfo != null) {
               if ((userInfoProvider.membershipStatus ==
                       MembershipStatus.inactive) &&
-                  !_hasRedirectedToMembershipBuy && userInfoProvider.fetchProfileState==FetchProfileState.loaded)
-              {
+                  !_hasRedirectedToMembershipBuy &&
+                  userInfoProvider.fetchProfileState ==
+                      FetchProfileState.loaded) {
                 _hasRedirectedToMembershipBuy = true;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   AppNavigator.navigateReplacement(

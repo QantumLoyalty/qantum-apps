@@ -71,9 +71,21 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
               "isPaymentMethodUpdated: ${membershipProvider.isPaymentMethodUpdated}");
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (membershipProvider.isPaymentMethodUpdated!) {
+
+              if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
+                {
+                  AppNavigator.navigateAndClearStack(
+                      context, AppNavigator.home);
+                }
+              else
+                {
+                  AppNavigator.navigateTo(
+                      context, AppNavigator.pendingPaymentScreen);
+                }
+
+
               logEvent("navigateAndClearStack called!!!");
-              AppNavigator.navigateTo(
-                  context, AppNavigator.pendingPaymentScreen);
+
 
               membershipProvider.resetUpdateMembershipPaymentResponse();
             } else {
@@ -110,12 +122,18 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
                         text: loc.payByCard.toUpperCase(),
                         onClick: () async {
                         //  makePayment(userInfoProvider);
+                          String renewType="none";
+
+                          if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
+                          {
+                            renewType="renew";
+                          }
                           await PaymentService.makePayment(
                               context: context,
                               loc: loc,
                               membershipManagerProvider:
                               _membershipManagerProvider,
-                              userInfoProvider: userInfoProvider);
+                              userInfoProvider: userInfoProvider,renewType: renewType);
 
                         }),
                   ),
@@ -132,8 +150,17 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
                       child: AppButton(
                           text: loc.payReception,
                           onClick: () {
+
+                            String renewType="none";
+
+                            if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
+                              {
+                                renewType="renew";
+                              }
+
+
                             membershipProvider.updateMembershipPaymentMethod(
-                                loc: loc);
+                                loc: loc,renewType: renewType);
                           }),
                     ),
                   ],
@@ -169,11 +196,18 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
   makePayment(UserInfoProvider infoProvider) async {
     try {
       logEvent("User Info:: ${infoProvider.getUserInfo}");
+      String renewType="none";
+
+      if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
+      {
+        renewType="renew";
+      }
 
       // 1️⃣ Create PaymentIntent (backend)
       await _membershipManagerProvider.createPaymentIntent(
         loc: loc,
         userId: infoProvider.getUserInfo!.id!,
+        renewType: renewType
       );
 
       final clientSecret = _membershipManagerProvider.paymentIntentClientSecret;

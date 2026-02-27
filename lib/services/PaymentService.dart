@@ -21,11 +21,14 @@ class PaymentService {
     required AppLocalizations loc,
     required MembershipManagerProvider membershipManagerProvider,
     required UserInfoProvider userInfoProvider,
+    required String renewType
   }) async {
     try {
       await membershipManagerProvider.createPaymentIntent(
         loc: loc,
         userId: userInfoProvider.getUserInfo!.id!,
+        renewType: renewType
+
       );
 
       final clientSecret = membershipManagerProvider.paymentIntentClientSecret;

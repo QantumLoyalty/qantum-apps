@@ -1,0 +1,4 @@
+enum DeepLinkType {
+  chewzie,
+  clevaq
+}

@@ -31,13 +31,29 @@ class _SplashScreenState extends State<SplashScreen> {
       flavor = FlavorConfig.instance.flavor!;
 
       _deepLinkService.init((link) {
+
+        if (_isOpenedFromDeepLink) return;
         _isOpenedFromDeepLink = true;
 
-        final encodedLink = link.queryParameters['link'];
-        if (encodedLink == null) return;
 
-        Provider.of<HomeProvider>(context, listen: false)
-            .setDeepLinkParams(encodedLink);
+
+if(flavor==Flavor.starReward)
+  {
+    final encodedLink = link.queryParameters['link'];
+    if (encodedLink == null) return;
+
+    Provider.of<HomeProvider>(context, listen: false)
+        .setDeepLinkParams(encodedLink);
+
+  }
+else if(flavor ==Flavor.mhbc)
+  {
+    print("DEEP LINK BEFORE: ${link.toString()}");
+    Provider.of<HomeProvider>(context, listen: false)
+        .setDeepLinkParams(link.toString());
+
+  }
+
 
         /*final decodedLink = Uri.decodeComponent(encodedLink);
         final innerUri = Uri.parse(decodedLink);

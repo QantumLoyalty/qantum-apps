@@ -199,7 +199,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                                           loc: loc!,
                                           membershipManagerProvider:
                                               membershipManagerProvider,
-                                          userInfoProvider: userInfoProvider);
+                                          userInfoProvider: userInfoProvider,renewType: "none");
                                     }),
                                 AppDimens.shape_20,
                                 (provider.getUserInfo != null &&
