@@ -3,11 +3,9 @@ import 'package:qantum_apps/core/utils/AppColors.dart';
 import 'package:qantum_apps/core/utils/AppDimens.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/views/common_widgets/AppButton.dart';
-import 'package:qantum_apps/views/common_widgets/AppScaffold.dart';
+import 'package:qantum_apps/views/partners_offer/widget/BarcodeView.dart';
 import 'package:qantum_apps/views/partners_offer/widget/UnitedTermsList.dart';
 import 'package:qantum_apps/views/partners_offer/widget/UnitedTopHeader.dart';
-import 'package:syncfusion_flutter_barcodes/barcodes.dart';
-
 import '../../../core/utils/AppIcons.dart';
 
 class UnitedFuelMainScreen extends StatelessWidget {
@@ -39,7 +37,7 @@ class UnitedFuelMainScreen extends StatelessWidget {
                                   child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Save on fuels",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -55,44 +53,14 @@ class UnitedFuelMainScreen extends StatelessWidget {
                                 ],
                               )),
                               Image.asset(
-                                AppIcons.unitedFuelsRounded7c,
+                                AppIcons.unitedFuelsRounded4c,
                                 width: 80,
                                 height: 80,
                               )
                             ],
                           ),
-                          AppDimens.shape_20,
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 80,
-                            child: SfBarcodeGenerator(
-                              value: 'Qantum',
-                              symbology: Code128(),
-                              textSpacing: 2,
-                              //    symbology: QRCode(),
-                            ),
-                          ),
-                          AppDimens.shape_10,
-                          Text(
-                            "Scan this barcode in-store to redeem",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          InkWell(
-                              child: Padding(padding: const EdgeInsets.only(left: 8,right: 8,top: 5,bottom: 5),child: Text(
-                                "View barcode in landscape",
-                                style: TextStyle(
-                                    color: AppColors.blue,
-                                    decorationColor: AppColors.blue,
-                                    decoration: TextDecoration.underline),
-                              ))),
-
-                          AppDimens.shape_30,
-
-                          UnitedTermsList()
-
-
-
+                           BarcodeView(alignment: BarcodeView.VERTICAL,),
+                          const UnitedTermsList()
                         ],
                       ),
                     ),
@@ -111,8 +79,4 @@ class UnitedFuelMainScreen extends StatelessWidget {
           ),
         ));
   }
-
-
-
-
 }
