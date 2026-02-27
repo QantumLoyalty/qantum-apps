@@ -84,7 +84,7 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                     provider
                         .updateSelectedEditScreen(UserInfoProvider.EDIT_SCREEN);
                   },
-                  style: AppThemeCustom.getUpdateInfoButtonStyle(context),
+                  style: AppThemeCustom.getCancelInfoButtonStyle(context),
                   textColor: AppThemeCustom.getCancelInfoTextColor(context),
                 )),
                 AppDimens.shape_20,
