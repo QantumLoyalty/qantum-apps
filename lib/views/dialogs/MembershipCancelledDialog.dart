@@ -10,7 +10,6 @@ import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:secure_content/secure_content.dart';
 import '../../core/utils/AppColors.dart';
 import '../../data/local/SharedPreferenceHelper.dart';

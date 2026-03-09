@@ -18,6 +18,7 @@ class FlavorConstants {
       Flavor.bluewater: "BBGAAAAAA",
       Flavor.kingscliff: "KBH",
       Flavor.drinkRewards: "DHQ",
+      Flavor.wonthaggi: "WCC",
     };
 
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
@@ -62,6 +63,7 @@ class FlavorConstants {
           Flavor.northShoreTavern: "Silver",
           Flavor.kingscliff: "Valued",
           Flavor.drinkRewards: "Explorer",
+          Flavor.wonthaggi: "Valued",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";

@@ -617,6 +617,7 @@ class AppHelper with LoggingMixin {
       Flavor.bluewater: "Bluewater",
       Flavor.flinders: "Flinders",
       Flavor.drinkRewards: "Drinks",
+      Flavor.wonthaggi: "WCC",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

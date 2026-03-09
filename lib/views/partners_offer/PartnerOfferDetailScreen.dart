@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 import '/core/navigation/AppNavigator.dart';
 import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class PartnerOfferDetailScreen extends StatelessWidget {
   const PartnerOfferDetailScreen({super.key});
@@ -103,11 +103,24 @@ class PartnerOfferDetailScreen extends StatelessWidget {
                       ],
                     ),
                     AppDimens.shape_20,
-                    QrImageView(
+                   /* QrImageView(
                       backgroundColor: AppColors.white,
                       data: '1234567890',
                       size: 150,
                       version: QrVersions.auto,
+                    ),*/
+                    Container(
+                      color: AppColors.white,
+                      padding: const EdgeInsets.all(8),
+                      child: SizedBox(
+                        height: 150,
+                        width: 150,
+                        child: SfBarcodeGenerator(
+                          value: '1234567890',
+                          symbology:QRCode(),
+                          showValue: false,
+                        ),
+                      ),
                     ),
                     AppDimens.shape_20,
                   ],

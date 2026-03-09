@@ -99,7 +99,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
-  qr_flutter: ^4.1.0
   carousel_slider: ^5.0.0
   screen_brightness: ^2.1.1
   secure_content: ^1.0.1
