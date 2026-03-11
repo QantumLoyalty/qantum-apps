@@ -36,6 +36,7 @@ class UserModel {
   String? licenceBack;
   String? membershipExpiryDate;
   String? serverTime;
+  String? unitedFuelCardHash;
 
   UserModel(
       {this.id,
@@ -70,7 +71,7 @@ class UserModel {
       this.paymentType,
       this.type,
       this.licenceFront,
-      this.licenceBack,this.membershipExpiryDate,this.serverTime});
+      this.licenceBack,this.membershipExpiryDate,this.serverTime,this.unitedFuelCardHash});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
@@ -90,6 +91,7 @@ class UserModel {
     dateJoined = json.containsKey("DateJoined") ? json["DateJoined"] : "";
     membershipExpiryDate = json.containsKey("ExpiryDate") ? json["ExpiryDate"] : "";
     serverTime = json.containsKey("serverTime") ? json["serverTime"] : "";
+    unitedFuelCardHash = json.containsKey("card_hash") ? json["card_hash"] : "";
 
     /*pointsValue = 4003.55;
     pointsBalance = 40.0355;*/
@@ -183,6 +185,7 @@ class UserModel {
     data['licence_back'] = licenceBack ?? "";
     data['ExpiryDate'] = membershipExpiryDate ?? "";
     data['serverTime'] = serverTime ?? "";
+    data['card_hash'] = unitedFuelCardHash ?? "";
 
     return data;
   }
@@ -251,7 +254,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
+    return 'UserModel{id: $id, unitedFuelCardHash: $unitedFuelCardHash,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
   }
 
   bool isUserStatusCancelled() {

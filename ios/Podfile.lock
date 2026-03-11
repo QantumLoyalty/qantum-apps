@@ -210,6 +210,8 @@ PODS:
     - StripeUICore (= 24.16.2)
   - StripeUICore (24.16.2):
     - StripeCore (= 24.16.2)
+  - url_launcher_ios (0.0.1):
+    - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -239,6 +241,7 @@ DEPENDENCIES:
   - sms_autofill (from `.symlinks/plugins/sms_autofill/ios`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
 
 SPEC REPOS:
@@ -310,6 +313,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite_darwin/darwin"
   stripe_ios:
     :path: ".symlinks/plugins/stripe_ios/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
@@ -356,6 +361,7 @@ SPEC CHECKSUMS:
   StripePaymentSheet: f4f5b71cef665f05a185c29b2d4b59e7dd8c117d
   StripePaymentsUI: d489e73bf790da1c74e642021475b1a09a4a4500
   StripeUICore: 723e5024c83acb5ba5e71335e110a471b182a74d
+  url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
   webview_flutter_wkwebview: 1821ceac936eba6f7984d89a9f3bcb4dea99ebb2
 
 PODFILE CHECKSUM: e0f66f9d155654268845d28cd2e1cab9d6e079e8

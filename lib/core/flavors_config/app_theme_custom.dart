@@ -819,7 +819,6 @@ class AppThemeCustom {
                   ? AppColors.disable_color
                   : null;
         case Flavor.northShoreTavern ||
-              Flavor.starReward ||
               Flavor.queens ||
               Flavor.mhbc ||
               Flavor.hogansReward ||
@@ -1005,7 +1004,6 @@ class AppThemeCustom {
                     width: 1.5);
 
       case Flavor.northShoreTavern ||
-            Flavor.starReward ||
             Flavor.queens ||
             Flavor.brisbane ||
             Flavor.hogansReward ||
@@ -1061,7 +1059,7 @@ class AppThemeCustom {
                 : Theme.of(context).textSelectionTheme.selectionColor;
 
       case Flavor.northShoreTavern ||
-            Flavor.starReward ||
+
             Flavor.queens ||
             Flavor.hogansReward ||
             Flavor.mhbc ||

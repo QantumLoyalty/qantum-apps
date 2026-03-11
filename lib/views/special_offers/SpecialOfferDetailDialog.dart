@@ -132,12 +132,11 @@ class SpecialOfferDetailDialog {
                                           backgroundColor: AppColors.white,
                                           size: 180,
                                         ),*/
-                                        Container(
-                                          color: AppColors.white,
-                                          padding: const EdgeInsets.all(8),
+                                        Container(color: AppColors.white,
+                                         // padding: const EdgeInsets.all(8),
                                           child: SizedBox(
-                                            height: 180,
-                                            width: 180,
+                                            height: 210,
+                                            width: 210,
                                             child: SfBarcodeGenerator(
                                               value: offerProvider.selectedOffer != null
                                                   ? offerProvider.selectedOffer!.qrURL

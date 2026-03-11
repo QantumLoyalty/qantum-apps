@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
+import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
 import '/views/membership/RenewMembershipScreen.dart';
 import '../../views/signup/SelfieUploadScreen.dart';
 import '/views/signup/DrivingLicenseScanScreen.dart';
@@ -68,6 +69,8 @@ class AppNavigator {
   static const String selfieUploadScreen = "/selfieUploadScreen";
   static const String renewMembershipScreen = "/renewMembershipScreen";
   static const String unitedFuelMainScreen = "/unitedFuelMainScreen";
+  static const String unitedFuelsBarcodeLandscape =
+      "/unitedFuelsBarcodeLandscape";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -141,7 +144,7 @@ class AppNavigator {
 
       case membershipPaymentScreen:
         return MaterialPageRoute(builder: (_) => MembershipPaymentScreen());
-        case renewMembershipScreen:
+      case renewMembershipScreen:
         return MaterialPageRoute(builder: (_) => RenewMembershipScreen());
       case pendingPaymentScreen:
         return MaterialPageRoute(builder: (_) => PendingPaymentScreen());
@@ -159,8 +162,10 @@ class AppNavigator {
       case receptionPaymentScreen:
         return MaterialPageRoute(builder: (_) => ReceptionPaymentScreen());
 
-case unitedFuelMainScreen:
+      case unitedFuelMainScreen:
         return MaterialPageRoute(builder: (_) => UnitedFuelMainScreen());
+      case unitedFuelsBarcodeLandscape:
+        return MaterialPageRoute(builder: (_) => UnitedFuelsBarcodeLandscape());
 
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());

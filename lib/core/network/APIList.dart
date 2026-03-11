@@ -67,9 +67,17 @@ class APIList {
 
   static get LOGOUT => BASE_URL + "user/logout";
 
-  //https://betaapi.s2w.com.au/club-package/club?appType=Qantum&timezone=Asia/Kolkata
 
-  /// STRIPE APIS ///
+  /// UNITED FUELS APIS ///
+ static get VALIDATE_USER => BASE_URL + "fuel/validate/";
+ static get REGISTER_USER_WITH_UNITED => BASE_URL + "fuel/create";
+ static get FETCH_BARCODE => BASE_URL + "fuel/barcode/";
+
+
+
+
+
+ /// STRIPE APIS ///
   static get CREATE_PAYMENT_INTENT =>
       BASE_URL + "payment/create-payment-intent";
 

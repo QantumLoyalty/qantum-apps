@@ -13,6 +13,7 @@ import 'view_models/InternetStatusProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
+import 'view_models/UnitedFuelsProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
       child: Portal(
         child: MaterialApp(
