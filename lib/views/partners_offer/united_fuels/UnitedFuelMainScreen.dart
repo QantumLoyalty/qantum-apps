@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
-import 'package:qantum_apps/views/partners_offer/widget/UnitedDataPart.dart';
 import '../../../view_models/UnitedFuelsProvider.dart';
 import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
@@ -32,8 +31,6 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appLoc = AppLocalizations.of(context);
-
     return Scaffold(
         backgroundColor: AppColors.white,
         body: SafeArea(
@@ -92,7 +89,7 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
                                       )
                                     ],
                                   ),
-                            //    const  UnitedDataPart()
+
                                   BarcodeView(
                                     alignment: BarcodeView.PORTRAIT,
                                   ),

@@ -105,7 +105,7 @@ class AppHelper with LoggingMixin {
 
   static showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message,
+       content: Text(message,
           style: TextStyle(
             color: AppColors.white,
           )),

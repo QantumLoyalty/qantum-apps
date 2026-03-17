@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.0+78
+#version:  1.0.0+79
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -151,6 +151,8 @@ dependencies:
   sms_autofill: ^2.4.1
   syncfusion_flutter_barcodes:
   url_launcher:
+  liquid_glass_easy: ^1.1.1
+  flutter_scratch_card: ^1.0.1
 
 
 dev_dependencies:

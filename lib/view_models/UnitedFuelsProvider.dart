@@ -23,7 +23,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
       isLoading = true;
       resetDefaultValues();
       notifyListeners();
-      //cardHash = "wkM9yjP8Em9";
+    //  cardHash = "wkM9yjP8Em9";
       cardHash = userData?.unitedFuelCardHash;
 
       if (cardHash == null || cardHash!.isEmpty) {

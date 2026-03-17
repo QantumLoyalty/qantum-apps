@@ -1,5 +1,6 @@
 class APIList {
   // SANDBOX
+
  //static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
@@ -66,6 +67,7 @@ class APIList {
   static get UPLOAD_PROFILE_PIC => BASE_URL + "user/";
 
   static get LOGOUT => BASE_URL + "user/logout";
+  static get RESEND_OTP => BASE_URL + "user/otp-resent/";
 
 
   /// UNITED FUELS APIS ///

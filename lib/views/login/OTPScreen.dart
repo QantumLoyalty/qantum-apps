@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +34,9 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
   late Flavor flavor;
   late UserLoginProvider _loginProvider;
   final FocusNode _otpFocusNode = FocusNode();
+  int remainingSec = 30;
+  bool enableResend = false;
+  Timer? timer;
 
   @override
   void initState() {
@@ -44,6 +49,17 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
       FocusScope.of(context).requestFocus(_otpFocusNode);
       SystemChannels.textInput.invokeMethod('TextInput.show');
     });
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (remainingSec != 0) {
+        setState(() {
+          remainingSec--;
+        });
+      } else {
+        setState(() {
+          enableResend = true;
+        });
+      }
+    });
     getAppSignature();
     listenForCode();
   }
@@ -55,9 +71,24 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
 
   @override
   void dispose() {
+    if (timer != null && timer!.isActive) {
+      timer!.cancel();
+    }
     _otpFocusNode.dispose();
     _otpController.dispose();
     super.dispose();
+  }
+
+  void _resetResendCode() {
+    if (remainingSec == 0) {
+
+      _loginProvider.resendOTP(phoneNo: "${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",loc: loc);
+
+      setState(() {
+        remainingSec = 30;
+        enableResend = false;
+      });
+    }
   }
 
   @override
@@ -66,6 +97,27 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     return AppScaffold(
       body: SafeArea(
         child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
+
+          /// CHECKING FOR OTP SEND CASE
+          if (provider.otpSent != null) {
+            if (provider.otpSent!) {
+              Future.delayed(Duration.zero, () {
+                AppHelper.showSuccessMessage(context,
+                    provider.networkMessage ?? loc.msgOtpSent);
+                provider.resetNetworkResponseStatus();
+              });
+            } else {
+              Future.delayed(Duration.zero, () {
+                AppHelper.showErrorMessage(
+                    context,
+                    provider.networkMessage ??
+                        loc.msgOtpIssue);
+                provider.resetNetworkResponseStatus();
+              });
+            }
+          }
+
+         /// CHECKING FOR OTP VERIFY CASE
           if (provider.networkError != null) {
             if (provider.networkError!) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -290,6 +342,27 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                                     borderRadius: BorderRadius.circular(10)),
                               ),
                             ),
+                            AppDimens.shape_5,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: TextButton(
+                                  onPressed: () {
+                                    _resetResendCode();
+                                  },
+                                  child: Text(
+                                    "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
+                                    style: TextStyle(
+                                      color: remainingSec == 0
+                                          ? Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor
+                                          : Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor!
+                                          .withValues(alpha: 0.5),
+                                    ),
+                                  )),
+                            ),
                             AppDimens.shape_20,
                             AppButton(
                                 text: loc.txtSubmit,
@@ -305,7 +378,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
               ),
               provider.showLoader
                   ? AppLoader(
-                      loaderMessage: loc.msgVerifyingOTP,
+                      loaderMessage: provider.loaderMessage,
                     )
                   : Container()
             ],
@@ -321,7 +394,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
       _loginProvider.verifyOTP(
           userId: widget.argument['userId'].toString(),
           countryCode: widget.argument['countryCode'].toString(),
-          otp: _otpController.text);
+          otp: _otpController.text,loc: loc);
     } else {
       AppHelper.showErrorMessage(context, loc.msgIncorrectOTP);
     }

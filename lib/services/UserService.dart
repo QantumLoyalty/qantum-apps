@@ -465,4 +465,23 @@ class UserService with LoggingMixin implements UserRepository {
     }
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> resendOTP({required String phoneNumber}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+
+      var response = await NetworkHelper.instance
+          .getCall(url: Uri.parse(APIList.RESEND_OTP+"$phoneNumber?appType=${AppHelper.getAppType()}"), headers: {
+        'Content-Type': 'application/json',
+       // 'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+      });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

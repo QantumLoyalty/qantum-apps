@@ -11,6 +11,8 @@ class UserLoginProvider extends ChangeNotifier {
 
   bool get showLoader => _showLoader;
 
+  String loaderMessage = "";
+
   bool? _networkError;
 
   bool? get networkError => _networkError;
@@ -35,10 +37,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   String? get networkMessage => _networkMessage;
 
-
   UserModel? loggedInUser;
-
-
 
   login(String phoneNo) async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -158,6 +157,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   resetNetworkResponseStatus() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      otpSent=null;
       _networkError = null;
       _networkMessage = null;
       notifyListeners();
@@ -176,10 +176,11 @@ class UserLoginProvider extends ChangeNotifier {
   verifyOTP(
       {required String userId,
       required String otp,
-      required String countryCode}) async {
+      required String countryCode,required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
+        loaderMessage=loc.msgVerifyingOTP;
         notifyListeners();
       });
       Map<String, dynamic> params = {};
@@ -201,21 +202,72 @@ class UserLoginProvider extends ChangeNotifier {
 
         _networkMessage = response['message'];
         if (!_networkError!) {
-
-          debugPrint(response.toString(),wrapWidth: 1024);
+          debugPrint(response.toString(), wrapWidth: 1024);
           Map<String, dynamic> data = response['user'] as Map<String, dynamic>;
 
-          loggedInUser= UserModel.fromJson(data);
+          loggedInUser = UserModel.fromJson(data);
           if (response.containsKey("serverTime")) {
             loggedInUser!.serverTime = response["serverTime"];
           }
-          AppHelper.printMessage("PARSED USER DATA::: ${loggedInUser!.toString()}");
+          AppHelper.printMessage(
+              "PARSED USER DATA::: ${loggedInUser!.toString()}");
 
           await sharedPreferencesHelper.saveUserData(loggedInUser!);
           await sharedPreferencesHelper.saveAuthToken(response['token']);
           await sharedPreferencesHelper.saveCountryCode(countryCode);
         }
       }
+    } catch (e) {
+      _networkError = true;
+      _networkMessage = e.toString();
+      AppHelper.printMessage(_networkMessage);
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+
+
+  bool? otpSent;
+
+
+
+  resendOTP({required String phoneNo,required AppLocalizations loc}) async {
+    try {
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        loaderMessage=loc.msgResendOTP;
+        notifyListeners();
+      });
+
+
+      NetworkResponse networkResponse =
+          await UserService.getInstance().resendOTP(phoneNumber: phoneNo);
+
+      otpSent = networkResponse.isError;
+
+      if (networkResponse.response != null) {
+        if (networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+          networkResponse.response as Map<String, dynamic>;
+          if (response.containsKey('message')) {
+            _networkMessage = response['message'];
+          } else {
+            _networkMessage = networkResponse.responseMessage;
+          }
+        } else {
+          _networkMessage = networkResponse.responseMessage;
+        }
+      } else {
+        _networkMessage = networkResponse.responseMessage;
+      }
+
+
+
     } catch (e) {
       _networkError = true;
       _networkMessage = e.toString();

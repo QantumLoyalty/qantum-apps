@@ -45,6 +45,7 @@ abstract class UserRepository {
   Future<NetworkResponse> checkForAppUpdate(Map<String, dynamic> params);
 
   Future<NetworkResponse> uploadSelfie(String filePath);
+  Future<NetworkResponse> resendOTP({required String phoneNumber});
 
   Future<NetworkResponse> logout();
 }

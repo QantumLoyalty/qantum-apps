@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
+import 'package:qantum_apps/views/dialogs/ScratchCardDialog.dart';
 import '../../../core/utils/AppColors.dart';
 import '../../../core/utils/FlavorConstants.dart';
 import '../../dialogs/AppUpdateDialog.dart';
@@ -73,7 +74,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             } else {
                               await DigitalCardDialog.getInstance()
                                   .showDigitalCardDialog(context);
-                            //  AppUpdateDialog.getInstance().showAppUpdateDialog(context);
                             }
 
                             try {
@@ -83,6 +83,11 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               logEvent(e.toString());
                               // throw 'Failed to reset application brightness';
                             }
+
+                        //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
+
+
+
                           },
                           child: SizedBox(
                             width: 80,
