@@ -2,113 +2,188 @@ import 'dart:convert';
 
 import 'package:qantum_apps/data/local/AppSecureStore.dart';
 import 'package:qantum_apps/data/models/UserModel.dart';
+import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/MembershipModel.dart';
 
 class SharedPreferenceHelper {
   static SharedPreferences? _sharedPreferences;
-
-  // static AppSecureStore? _appSecureStore;
+  static AppSecureStore? _appSecureStore;
   static SharedPreferenceHelper? _instance;
 
   SharedPreferenceHelper._internal();
 
-  static String USER = "user";
-  static String MEMBERSHIP = "membership";
-  static String AUTH_TOKEN = "authToken";
-  static String COUNTRY_CODE = "countryCode";
+  static const String USER = "user";
+  static const String MEMBERSHIP = "membership";
+  static const String AUTH_TOKEN = "authToken";
+  static const String COUNTRY_CODE = "countryCode";
 
   static Future<SharedPreferenceHelper> getInstance() async {
     _instance ??= SharedPreferenceHelper._internal();
-    _sharedPreferences = await SharedPreferences.getInstance();
-    //  _appSecureStore = AppSecureStore();
-
+    _sharedPreferences ??= await SharedPreferences.getInstance();
+    _appSecureStore ??= AppSecureStore();
     return _instance!;
   }
 
-  saveUserData(UserModel user) async {
+  /// ---------------- USER ----------------
+
+  Future<void> saveUserData(UserModel user) async {
     try {
-      await _sharedPreferences!.setString(USER, jsonEncode(user.toJson()));
+      await _appSecureStore!
+          .write(key: USER, value: jsonEncode(user.toJson()));
     } catch (e) {
-      print("Error while saving the user: $e");
+      print("Error while saving user: $e");
     }
-
-    //   await _appSecureStore!.write(key: USER, value: jsonEncode(user.toJson()));
   }
 
-  saveSelectedMembership(MembershipModel membership) async {
-    await _sharedPreferences!
-        .setString(MEMBERSHIP, jsonEncode(membership.toJson()));
-  }
-
-  MembershipModel? getSelectedMembership() {
-    if (_sharedPreferences!.containsKey(MEMBERSHIP)) {
-      return MembershipModel.fromJson(
-          jsonDecode(_sharedPreferences!.getString(MEMBERSHIP)!));
-    }
-    return null;
-  }
-
-  UserModel? getUserData() {
-    if (_sharedPreferences!.containsKey(USER)) {
-      return UserModel.fromJson(
-          jsonDecode(_sharedPreferences!.getString(USER)!));
-    }
-    return null;
-
-    /*if (_sharedPreferences!.containsKey(USER)) {
-      UserModel user =
-          UserModel.fromJson(jsonDecode(_sharedPreferences!.getString(USER)!));
-      await saveUserData(user);
-      await _sharedPreferences!.remove(USER);
-      return user;
-    } else {
+  Future<UserModel?> getUserData() async {
+    try {
+      /// 1️⃣ Check secure storage first
       if (await _appSecureStore!.containsKey(key: USER)) {
-        return UserModel.fromJson(
-            jsonDecode(_appSecureStore!.read(key: USER) as String));
+        final data = await _appSecureStore!.read(key: USER);
+        return UserModel.fromJson(jsonDecode(data!));
       }
-      return null;
-    }*/
-  }
 
-  saveAuthToken(String authToken) {
-    _sharedPreferences!.setString(AUTH_TOKEN, authToken);
-    // _appSecureStore!.write(key: AUTH_TOKEN, value: authToken);
-  }
+      /// 2️⃣ Fallback to SharedPref (existing users)
+      if (_sharedPreferences!.containsKey(USER)) {
+        UserModel user = UserModel.fromJson(
+            jsonDecode(_sharedPreferences!.getString(USER)!));
 
-  saveCountryCode(String countryCode) {
-    _sharedPreferences!.setString(COUNTRY_CODE, countryCode);
-  }
+        /// migrate to secure storage
+        await saveUserData(user);
 
-  getCountryCode() {
-    if (_sharedPreferences!.containsKey(COUNTRY_CODE)) {
-      return _sharedPreferences!.getString(COUNTRY_CODE)!;
+        /// remove old data
+        await _sharedPreferences!.remove(USER);
+
+        return user;
+      }
+    } catch (e) {
+      print("Error while reading user: $e");
     }
+
     return null;
   }
 
-  String? getAuthToken() {
+  /// ---------------- AUTH TOKEN ----------------
+
+  Future<void> saveAuthToken(String authToken) async {
+    await _appSecureStore!.write(key: AUTH_TOKEN, value: authToken);
+  }
+
+  Future<String?> getAuthToken() async {
+    /// 1️⃣ Check secure storage
+    if (await _appSecureStore!.containsKey(key: AUTH_TOKEN)) {
+      return await _appSecureStore!.read(key: AUTH_TOKEN);
+    }
+
+    /// 2️⃣ Fallback for existing users
     if (_sharedPreferences!.containsKey(AUTH_TOKEN)) {
-      return _sharedPreferences!.getString(AUTH_TOKEN)!;
-    }
-    return null;
-
-    /*if (_sharedPreferences!.containsKey(AUTH_TOKEN)) {
       String authToken = _sharedPreferences!.getString(AUTH_TOKEN)!;
-      await saveAuthToken(authToken);
+
+      /// migrate
+      await _appSecureStore!.write(key: AUTH_TOKEN, value: authToken);
+
+      /// remove old
       await _sharedPreferences!.remove(AUTH_TOKEN);
+
       return authToken;
-    } else {
-      if (await _appSecureStore!.containsKey(key: AUTH_TOKEN)) {
-        return _appSecureStore!.read(key: AUTH_TOKEN);
-      }
-      return null;
-    }*/
+    }
+
+    return null;
   }
 
-  clearAll() async {
+  /// ---------------- MEMBERSHIP ----------------
+  /// Not sensitive → keep in SharedPreferences
+
+  Future<void> saveSelectedMembership(MembershipModel membership) async {
+    await _appSecureStore!
+        .write(key: MEMBERSHIP, value: jsonEncode(membership.toJson()));
+  }
+
+  Future<MembershipModel?> getSelectedMembership() async {
+
+    /// 1️⃣ Check secure storage first
+    if (await _appSecureStore!.containsKey(key: MEMBERSHIP)) {
+      final data = await _appSecureStore!.read(key: MEMBERSHIP);
+      if (data != null) {
+        return MembershipModel.fromJson(jsonDecode(data));
+      }
+    }
+
+    /// 2️⃣ Fallback to SharedPreferences (old users)
+    if (_sharedPreferences!.containsKey(MEMBERSHIP)) {
+      final membershipData = _sharedPreferences!.getString(MEMBERSHIP);
+
+      if (membershipData != null) {
+        await _appSecureStore!.write(key: MEMBERSHIP, value: membershipData);
+        await _sharedPreferences!.remove(MEMBERSHIP);
+
+        return MembershipModel.fromJson(jsonDecode(membershipData));
+      }
+    }
+
+    return null;
+  }
+
+  /// ---------------- COUNTRY CODE ----------------
+
+  Future<void> saveCountryCode(String countryCode) async {
+    await _appSecureStore!.write(key: COUNTRY_CODE, value: countryCode);
+  }
+
+  Future<String?> getCountryCode() async {
+
+    /// 1️⃣ Check secure storage
+    if (await _appSecureStore!.containsKey(key: COUNTRY_CODE)) {
+      return await _appSecureStore!.read(key: COUNTRY_CODE);
+    }
+
+    /// 2️⃣ Fallback to SharedPreferences
+    if (_sharedPreferences!.containsKey(COUNTRY_CODE)) {
+      final code = _sharedPreferences!.getString(COUNTRY_CODE);
+
+      if (code != null) {
+        await _appSecureStore!.write(key: COUNTRY_CODE, value: code);
+        await _sharedPreferences!.remove(COUNTRY_CODE);
+        return code;
+      }
+    }
+
+    return null;
+  }
+
+  /// ---------------- CLEAR ----------------
+
+  Future<void> clearAll() async {
     await _sharedPreferences!.clear();
-    //_appSecureStore!.deleteAll();
+    await _appSecureStore!.deleteAll();
+  }
+
+  Future<void> migrateOldStorage() async {
+    try {
+      /// migrate user
+      if (!await _appSecureStore!.containsKey(key: USER) &&
+          _sharedPreferences!.containsKey(USER)) {
+
+        final userData = _sharedPreferences!.getString(USER);
+        if (userData != null) {
+          await _appSecureStore!.write(key: USER, value: userData);
+          await _sharedPreferences!.remove(USER);
+        }
+      }
+
+      /// migrate token
+      if (!await _appSecureStore!.containsKey(key: AUTH_TOKEN) &&
+          _sharedPreferences!.containsKey(AUTH_TOKEN)) {
+
+        final token = _sharedPreferences!.getString(AUTH_TOKEN);
+        if (token != null) {
+          await _appSecureStore!.write(key: AUTH_TOKEN, value: token);
+          await _sharedPreferences!.remove(AUTH_TOKEN);
+        }
+      }
+
+    } catch (e) {
+      print("Migration error: $e");
+    }
   }
 }

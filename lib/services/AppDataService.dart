@@ -21,6 +21,17 @@ class AppDataService extends AppDataRepository with LoggingMixin {
     return _instance!;
   }
 
+  Future<Map<String, String>> getAuthHeaders() async {
+    final helper = await SharedPreferenceHelper.getInstance();
+    final token = await helper.getAuthToken();
+
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+  }
+
+
   @override
   Future<NetworkResponse> fetchPartnerOffers() {
     // TODO: implement fetchPartnerOffers
@@ -36,10 +47,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           await SharedPreferenceHelper.getInstance();
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.FETCH_PROMOTIONS + membershipType),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-          });
+          headers: await getAuthHeaders());
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -63,10 +71,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone";
       logEvent(URL);
       var response =
-          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-      });
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL),
+              headers: await getAuthHeaders());
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -85,10 +91,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var URL = APIList.FETCH_VOUCHER_BY_ID + "$offerID?user_id=$userID";
       logEvent(URL);
       var response =
-          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-      });
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL),  headers: await getAuthHeaders());
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -105,10 +108,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_HOME_BUTTONS;
       var response =
-          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
-      });
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: await getAuthHeaders());
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -126,10 +126,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var URL = APIList.UPDATE_COUPON_CODE;
       logEvent(URL);
       var response =
-          await NetworkHelper.instance.putCall(url: Uri.parse(URL), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-      }, body: {
+          await NetworkHelper.instance.putCall(url: Uri.parse(URL), headers: await getAuthHeaders(), body: {
         'coupon_codes': couponCode
       });
       networkResponse = response;
@@ -140,69 +137,99 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   }
 
   @override
-  Future<NetworkResponse> fetchDLInformation(
-      {required String frontImagePath, required String backImagePath}) async {
-    NetworkResponse networkResponse;
+  Future<NetworkResponse> fetchDLInformation({
+    required String frontImagePath,
+    required String backImagePath,
+  }) async {
     try {
       final request = http.MultipartRequest(
-          'POST', Uri.parse(APIList.SCAN_DRIVING_LICENSE_IMAGES));
-      request.headers['Content-Type'] = 'multipart/form-data';
-      request.files
-          .add(await http.MultipartFile.fromPath('frontimage', frontImagePath));
-      request.files
-          .add(await http.MultipartFile.fromPath('backimage', backImagePath));
+        'POST',
+        Uri.parse(APIList.SCAN_DRIVING_LICENSE_IMAGES),
+      );
+
+      // ✅ add auth headers
+      final headers = await getAuthHeaders();
+      request.headers.addAll(headers);
+
+      request.files.add(
+        await http.MultipartFile.fromPath('frontimage', frontImagePath),
+      );
+
+      request.files.add(
+        await http.MultipartFile.fromPath('backimage', backImagePath),
+      );
+
       final streamedResponse = await request.send();
+
+      final respStr = await streamedResponse.stream.bytesToString();
+
       if (streamedResponse.statusCode == 200) {
-        final respStr = await streamedResponse.stream.bytesToString();
-
-        networkResponse = NetworkResponse.success(
-            response: jsonDecode(respStr), responseMessage: "Success");
+        return NetworkResponse.success(
+          response: jsonDecode(respStr),
+          responseMessage: "Success",
+        );
       } else {
-        print(
-            "RESPONSE: ${streamedResponse.statusCode}: MESSAGE: ${streamedResponse.reasonPhrase}");
-        networkResponse = NetworkResponse.error(
-            responseMessage: "Error: ${streamedResponse.statusCode}");
+        return NetworkResponse.error(
+          responseMessage: "Error: ${streamedResponse.statusCode}",
+        );
       }
-      // networkResponse = response;
     } catch (e) {
-      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+      return NetworkResponse.error(responseMessage: e.toString());
     }
-    return networkResponse;
   }
-
   @override
-  Future<NetworkResponse> uploadDLImages(
-      {required String frontImagePath, required String backImagePath}) async {
-    NetworkResponse networkResponse;
+  Future<NetworkResponse> uploadDLImages({
+    required String frontImagePath,
+    required String backImagePath,
+  }) async {
     try {
       logEvent(
           "URL: ${APIList.UPLOAD_DRIVING_LICENSE_IMAGES}, Front: $frontImagePath, Back: $backImagePath");
+
       final request = http.MultipartRequest(
-          'POST', Uri.parse(APIList.UPLOAD_DRIVING_LICENSE_IMAGES));
-      request.headers['Content-Type'] = 'multipart/form-data';
-      request.files.add(await http.MultipartFile.fromPath(
-          'front', frontImagePath,
-          contentType: MediaType('image', 'png')));
-      request.files.add(await http.MultipartFile.fromPath('back', backImagePath,
-          contentType: MediaType('image', 'png')));
+        'POST',
+        Uri.parse(APIList.UPLOAD_DRIVING_LICENSE_IMAGES),
+      );
+
+      // ✅ add auth headers
+      final headers = await getAuthHeaders();
+      request.headers.addAll(headers);
+
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'front',
+          frontImagePath,
+          contentType: MediaType('image', 'png'),
+        ),
+      );
+
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'back',
+          backImagePath,
+          contentType: MediaType('image', 'png'),
+        ),
+      );
+
       logEvent(
           "HEADERS: ${request.headers} --> ${request.files.map((f) => f.filename).toList()}");
 
       final streamedResponse = await request.send();
-      if (streamedResponse.statusCode == 200) {
-        final respStr = await streamedResponse.stream.bytesToString();
+      final respStr = await streamedResponse.stream.bytesToString();
 
-        networkResponse = NetworkResponse.success(
-            response: jsonDecode(respStr), responseMessage: "Success");
+      if (streamedResponse.statusCode == 200) {
+        return NetworkResponse.success(
+          response: jsonDecode(respStr),
+          responseMessage: "Success",
+        );
       } else {
-        networkResponse = NetworkResponse.error(
-            responseMessage: "Error: ${streamedResponse.statusCode}");
+        return NetworkResponse.error(
+          responseMessage: "Error: ${streamedResponse.statusCode}",
+        );
       }
-      // networkResponse = response;
     } catch (e) {
-      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+      return NetworkResponse.error(responseMessage: e.toString());
     }
-    return networkResponse;
   }
 
   @override
@@ -216,9 +243,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           "timezone=$currentTimeZone&appType=$appType");
       //var url = Uri.parse(APIList.FETCH_MEMBERSHIP_PLAN + "timezone=$currentTimeZone&appType=$appType");
 
-      var response = await NetworkHelper.instance.getCall(url: url, headers: {
-        'Content-Type': 'application/json',
-      });
+      var response = await NetworkHelper.instance.getCall(url: url, headers: await getAuthHeaders());
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -252,10 +277,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var url = Uri.parse(APIList.UPDATE_PAYMENT_TYPE);
       networkResponse = await NetworkHelper.instance.putCall(
           url: url,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-          },
+          headers: await getAuthHeaders(),
           body: paymentParams);
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -288,11 +310,7 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       var url = Uri.parse(APIList.FETCH_SPECIAL_OFFERS_FILTERS);
       networkResponse = await NetworkHelper.instance.getCall(
         url: url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-        },
-      );
+          headers: await getAuthHeaders());
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }

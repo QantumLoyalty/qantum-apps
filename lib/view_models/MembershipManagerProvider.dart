@@ -195,7 +195,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
           sharedPreferenceHelper.getSelectedMembership() != null;
 
       if (hasMembershipData) {
-        _selectedMembership = sharedPreferenceHelper.getSelectedMembership();
+        _selectedMembership = await sharedPreferenceHelper.getSelectedMembership();
       }
 
       notifyListeners();

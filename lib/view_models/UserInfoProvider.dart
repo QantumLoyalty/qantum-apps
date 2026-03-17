@@ -100,7 +100,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   retrieveUserInfo() async {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
-    _userModel ??= sharedPreferenceHelper.getUserData();
+    _userModel ??= await sharedPreferenceHelper.getUserData();
 
     print("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}");
     if (_userModel != null) {
@@ -335,8 +335,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       Map<String, String> params = {};
-      params["countryCode"] = sharedPreferenceHelper.getCountryCode();
-
+      params["countryCode"] =
+          await sharedPreferenceHelper.getCountryCode() ?? "";
       NetworkResponse networkResponse =
           await UserService.getInstance().sendOTPAccount(params);
       logEvent("SEND OTP RESPONSE:: $networkResponse");
@@ -378,7 +378,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       Map<String, String> params = {};
-      params["countryCode"] = sharedPreferenceHelper.getCountryCode();
+      params["countryCode"] =   await sharedPreferenceHelper.getCountryCode() ?? "";
 
       NetworkResponse networkResponse =
           await UserService.getInstance().resendOTPAccount(params);
@@ -421,7 +421,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       Map<String, String> params = {};
-      params["countryCode"] = sharedPreferenceHelper.getCountryCode();
+      params["countryCode"] =  await sharedPreferenceHelper.getCountryCode() ?? "";
       params["otp"] = OTP;
 
       NetworkResponse networkResponse =

@@ -31,7 +31,6 @@ class AppIcons {
   static String unitedFuelsHero = "assets/common/hero-image.png";
   static String unitedFuelsRounded4c = "assets/common/rounded-4c.png";
 
-
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     if (selectedFlavor == Flavor.northShoreTavern) {
@@ -252,7 +251,7 @@ class AppIcons {
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
-      }else if (selectedFlavor == Flavor.drinkRewards) {
+      } else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
             return "assets/drinkRewards/card_club.png";

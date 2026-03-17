@@ -632,7 +632,7 @@ class AppHelper with LoggingMixin {
   static Future<MembershipStatus> checkIfUserHasPurchasedTheMembership() async {
     SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = sharedPreferencesHelper.getUserData();
+    UserModel? userData = await sharedPreferencesHelper.getUserData();
     if (userData != null) {
       print(userData);
 

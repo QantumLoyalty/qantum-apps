@@ -72,7 +72,10 @@ else if(flavor ==Flavor.mhbc)
     if (!mounted) return;
     try {
       final sharedPreferenceHelper = await SharedPreferenceHelper.getInstance();
-      final hasUserData = sharedPreferenceHelper.getUserData() != null;
+      await sharedPreferenceHelper.migrateOldStorage();
+      final user = await sharedPreferenceHelper.getUserData();
+      final token = await sharedPreferenceHelper.getAuthToken();
+      final hasUserData = user != null;
       if (!mounted) return;
 
       if (hasUserData) {

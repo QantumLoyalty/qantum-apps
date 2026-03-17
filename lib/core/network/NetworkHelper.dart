@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qantum_apps/core/utils/AppHelper.dart';
 
+import '../../data/local/SharedPreferenceHelper.dart';
 import '../../data/models/NetworkResponse.dart';
 import '../mixins/logging_mixin.dart';
 
@@ -24,79 +25,148 @@ class NetworkHelper with LoggingMixin {
     return NetworkHelper();
   }
 
-  Future<NetworkResponse> postCall(
-      {required Uri url,
-      Map<String, String>? headers,
-      required Map<String, dynamic> body}) async {
+  /// Build headers automatically with auth token
+  Future<Map<String, String>> _buildHeaders(
+      Map<String, String>? headers) async {
+    headers ??= {};
+
+    headers['Content-Type'] = 'application/json';
+
+    try {
+      final helper = await SharedPreferenceHelper.getInstance();
+      final token = await helper.getAuthToken();
+
+      if (token != null) {
+        headers['Authorization'] = 'Bearer $token';
+      }
+    } catch (e) {
+      log("Error attaching token: $e");
+    }
+
+    return headers;
+  }
+
+  /// POST CALL
+  Future<NetworkResponse> postCall({
+    required Uri url,
+    Map<String, String>? headers,
+    required Map<String, dynamic> body,
+  }) async {
     final internetError = await _checkInternetOrFail();
     if (internetError != null) return internetError;
 
     late NetworkResponse networkResponse;
+
     try {
+      headers = await _buildHeaders(headers);
+
+      AppHelper.printMessage(">>> POST ${url.toString()}");
+
       var response =
-          await client.post(url, headers: headers, body: jsonEncode(body));
+      await client.post(url, headers: headers, body: jsonEncode(body));
+
+      AppHelper.printMessage(">>> ${response.body}");
+
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
-            responseMessage: 'Success!!', response: jsonDecode(response.body));
+          responseMessage: 'Success!!',
+          response: jsonDecode(response.body),
+        );
       } else {
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+          response: jsonDecode(response.body),
+          responseMessage: 'Error!!',
+        );
       }
     } catch (e) {
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: e.toString());
     }
+
     return networkResponse;
   }
 
-  Future<NetworkResponse> putCall(
-      {required Uri url,
-      Map<String, String>? headers,
-      required Map<String, dynamic> body}) async {
+  /// PUT CALL
+  Future<NetworkResponse> putCall({
+    required Uri url,
+    Map<String, String>? headers,
+    required Map<String, dynamic> body,
+  }) async {
     final internetError = await _checkInternetOrFail();
     if (internetError != null) return internetError;
+
     late NetworkResponse networkResponse;
+
     try {
+      headers = await _buildHeaders(headers);
+
+      AppHelper.printMessage(">>> PUT ${url.toString()}");
+
       var response =
-          await client.put(url, headers: headers, body: jsonEncode(body));
+      await client.put(url, headers: headers, body: jsonEncode(body));
+
+      AppHelper.printMessage(">>> ${response.body}");
+
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
-            responseMessage: 'Success!!', response: jsonDecode(response.body));
+          responseMessage: 'Success!!',
+          response: jsonDecode(response.body),
+        );
       } else {
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+          response: jsonDecode(response.body),
+          responseMessage: 'Error!!',
+        );
       }
     } catch (e) {
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: e.toString());
     }
+
     return networkResponse;
   }
 
-  Future<NetworkResponse> getCall(
-      {required Uri url, Map<String, String>? headers}) async {
+  /// GET CALL
+  Future<NetworkResponse> getCall({
+    required Uri url,
+    Map<String, String>? headers,
+  }) async {
     final internetError = await _checkInternetOrFail();
     if (internetError != null) return internetError;
+
     late NetworkResponse networkResponse;
+
     try {
-      AppHelper.printMessage(">>> ${url.toString()}");
+      headers = await _buildHeaders(headers);
+
+      AppHelper.printMessage(">>> GET ${url.toString()}");
+
       var response = await client.get(url, headers: headers);
-      AppHelper.printMessage(">>> ${response.body.toString()}");
+
+      AppHelper.printMessage(">>> ${response.body}");
+
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
-            responseMessage: 'Success!!', response: jsonDecode(response.body));
+          responseMessage: 'Success!!',
+          response: jsonDecode(response.body),
+        );
       } else {
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+          response: jsonDecode(response.body),
+          responseMessage: 'Error!!',
+        );
       }
     } catch (e) {
       AppHelper.printMessage(">>> ${e.toString()}");
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: e.toString());
     }
+
     return networkResponse;
   }
 
+  /// INTERNET CHECK
   Future<NetworkResponse?> _checkInternetOrFail() async {
     final hasInternet = await AppHelper.checkInternetConnection();
 
@@ -104,7 +174,7 @@ class NetworkHelper with LoggingMixin {
       return NetworkResponse.error(
         response: null,
         responseMessage:
-            "You are not connected to the internet Check your connection and try again.",
+        "You are not connected to the internet. Check your connection and try again.",
       );
     }
 
