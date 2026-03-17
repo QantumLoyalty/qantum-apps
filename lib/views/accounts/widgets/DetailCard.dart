@@ -92,7 +92,9 @@ class DetailCard extends StatelessWidget {
             ),
             AppDimens.shape_5,
             Text(
-              "DOB ${editable ? AppHelper.formatDate(provider.tempUser!.dateOfBirth) : "**/**/****"}",
+                "DOB ${editable && provider.tempUser?.dateOfBirth != null
+                    ? AppHelper.formatDate(provider.tempUser!.dateOfBirth)
+                    : "**/**/****"}",
               style: TextStyle(
                   color: editable
                       ? AppThemeCustom.getUserInfoItemStyle(context, editable)

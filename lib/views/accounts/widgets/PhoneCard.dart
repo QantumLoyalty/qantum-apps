@@ -19,7 +19,8 @@ class PhoneCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: BoxDecoration(
-              color: AppThemeCustom.getAccountSectionCustomCard(context, editable),
+              color:
+                  AppThemeCustom.getAccountSectionCustomCard(context, editable),
               borderRadius: BorderRadius.circular(5)),
           padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
           child: Column(
@@ -35,7 +36,8 @@ class PhoneCard extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: AppThemeCustom.getUserInfoItemStyle(
-                              context, editable,isHeading: true)),
+                              context, editable,
+                              isHeading: true)),
                     ),
                   ),
                   editable
@@ -75,8 +77,9 @@ class PhoneCard extends StatelessWidget {
               AppDimens.shape_5,
               Text(
                 editable
-                    ? provider.tempUser!.mobile!
-                    : AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile!),
+                    ? (provider.tempUser?.mobile ?? "")
+                    : AppHelper.maskPhoneNumber(
+                        provider.getUserInfo?.mobile ?? ""),
                 style: TextStyle(
                     color: editable
                         ? AppThemeCustom.getUserInfoItemStyle(context, editable)
