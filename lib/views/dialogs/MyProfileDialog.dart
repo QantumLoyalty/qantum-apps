@@ -209,7 +209,7 @@ class MyProfileDialog with LoggingMixin {
                                                   flavor ==
                                                       Flavor.montaukTavern ||
                                                   flavor == Flavor.starReward ||
-                                                  flavor == Flavor.flinders)
+                                                  flavor == Flavor.flinders||flavor == Flavor.drinkRewards)
                                               ? Container()
                                               : UserStatusTier()
                                         ],
