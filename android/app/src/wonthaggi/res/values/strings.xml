@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Wonthaggi</string>
+    <string name="app_name">Wonthaggi Country Club</string>
     <string name="default_notification_channel_id">com.au.wonthaggi.app.urgent</string>
 </resources>

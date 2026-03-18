@@ -28,3 +28,6 @@ adb shell am start \
 
 ### Kingscliff app build ios
 ### flutter build ipa --release --flavor kingscliff -t lib/main_kc.dart
+### flutter build ipa --release --flavor wonthaggi -t lib/main_wt.dart
+
+

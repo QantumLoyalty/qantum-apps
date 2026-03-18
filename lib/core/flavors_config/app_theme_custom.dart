@@ -826,7 +826,7 @@ class AppThemeCustom {
               Flavor.flinders ||
               Flavor.aceRewards ||
               Flavor.kingscliff ||
-                  Flavor.drinkRewards:
+                  Flavor.drinkRewards||Flavor.wonthaggi:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : (userInfoProvider.getUserInfo != null &&
@@ -1013,7 +1013,7 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.mhbc ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards:
+            Flavor.drinkRewards||Flavor.wonthaggi:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -1069,7 +1069,7 @@ class AppThemeCustom {
             Flavor.flinders ||
             Flavor.aceRewards ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards:
+            Flavor.drinkRewards||Flavor.wonthaggi:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (userInfoProvider.getUserInfo != null &&
