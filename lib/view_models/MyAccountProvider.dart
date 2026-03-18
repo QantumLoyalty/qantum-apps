@@ -21,8 +21,6 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   };
   final Map<String, String> _accountOptionsSR = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
-    "txtCommunicationPreferences": AppNavigator.communicationPreference,
-    "txtClubSponsorship": AppNavigator.clubAndMembership,
     "txtTermsAndConditions": "",
 
   };

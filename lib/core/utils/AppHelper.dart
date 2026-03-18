@@ -13,8 +13,8 @@ import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
-  /// MAKE IT DEFAULT 5
-  static int defaultRequestTime = 5;
+  /// MAKE IT DEFAULT 10
+  static int defaultRequestTime = 10;
 
   static printMessage(dynamic printableItem) {
     if (kDebugMode) {

@@ -96,31 +96,6 @@ class _HomeScreenState extends State<HomeScreen>
     } else if (flavor == Flavor.mhbc) {
       _handleClevaQ(provider, userInfoProvider);
     }
-
-    /*
-    _deepLinkHandled = true;
-
-    final decodedLink = Uri.decodeComponent(provider.deeplinkPayloads!);
-
-    final uri = Uri.parse(decodedLink);
-
-    final jsonPayload = {
-      "memberId": userInfoProvider.getUserInfo!.cardNumber,
-    };
-
-    final base64Payload = base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
-
-    final updatedUri = uri.replace(
-      queryParameters: {
-        ...uri.queryParameters,
-        'memberData': base64Payload,
-      },
-    );
-
-    // 🚀 Fire and forget — no await
-    launchDeepLinkURL(updatedUri);
-
-    provider.resetDeepLinkNavigation();*/
   }
 
   void _handleChewzie(

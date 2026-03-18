@@ -36,6 +36,8 @@ class MyProfileDialog with LoggingMixin {
     AppLocalizations loc = AppLocalizations.of(context)!;
     Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
 
+
+
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),

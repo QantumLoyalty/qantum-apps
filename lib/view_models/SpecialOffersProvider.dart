@@ -217,9 +217,9 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   fetchSpecialOffersTimer() async {
     //await getSpecialOffers(showLoader: true);
-    await getSpecialOffersFilters();
+    await getSpecialOffersFilters(showLoader: true);
 
-   /* _fetchSpecialOfferTimer = Timer.periodic(
+    _fetchSpecialOfferTimer = Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTime), (value) async {
       if (!_isFetching) {
         _isFetching = true;
@@ -227,7 +227,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
         await getSpecialOffersFilters();
         _isFetching = false;
       }
-    });*/
+    });
   }
 
   stopSpecialOffersTimer() {

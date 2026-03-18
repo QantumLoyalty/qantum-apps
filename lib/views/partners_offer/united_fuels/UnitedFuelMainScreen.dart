@@ -38,8 +38,56 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
             children: [
               AppDimens.shape_10,
               UnitedTopHeader(),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Save on fuels",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                AppNavigator.navigateTo(context,
+                                    AppNavigator.appWebView,
+                                    arguments:
+                                    "https://servicestations.unitedpetroleum.com.au/?fuelCards=acceptsUPDiscountFuelCards");
+                              },
+                              child: Text(
+                                "Find your nearest participating\nUnited service station",
+                                style: TextStyle(
+                                    color: AppColors.blue,
+                                    decorationColor:
+                                    AppColors.blue,
+                                    decoration:
+                                    TextDecoration.underline),
+                              ),
+                            )
+                          ],
+                        )),
+                    Image.asset(
+                      AppIcons.unitedFuelsRounded4c,
+                      width: 80,
+                      height: 80,
+                    )
+                  ],
+                ),
+              ),
               Expanded(child: Consumer<UnitedFuelsProvider>(
                   builder: (context, provider, child) {
+
+                    print("isError: ${provider.isError} >> errorMessage: $provider.errorMessage");
+
+
                 return Stack(
                   children: [
                     (provider.barcode != null && provider.barcode!.isNotEmpty)
@@ -48,7 +96,7 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
                                 children: [
-                                  Row(
+                               /*   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -88,8 +136,7 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
                                         height: 80,
                                       )
                                     ],
-                                  ),
-
+                                  ),*/
                                   BarcodeView(
                                     alignment: BarcodeView.PORTRAIT,
                                   ),
@@ -99,14 +146,18 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
                             ),
                           )
                         : const SizedBox.shrink(),
-
                     (provider.isError && provider.errorMessage.isNotEmpty)
                         ? Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(provider.errorMessage,style: TextStyle(color: AppColors.error_red,fontSize: 18,fontWeight: FontWeight.w300),),
-                        ):const SizedBox.shrink(),
-
-
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              provider.errorMessage,
+                              style: TextStyle(
+                                  color: AppColors.error_red,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                     provider.isLoading ? AppLoader() : const SizedBox.shrink()
                   ],
                 );

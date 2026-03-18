@@ -65,13 +65,13 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
   fetchPromotionsTimer() async {
     await getPromotions();
-   /* Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
+    Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
         (value) async {
       if (!_isFetching) {
         _isFetching = true;
         await getPromotions();
         _isFetching = false;
       }
-    });*/
+    });
   }
 }

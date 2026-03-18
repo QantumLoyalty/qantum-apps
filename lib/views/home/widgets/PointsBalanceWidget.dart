@@ -28,6 +28,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
     _fadeAnim = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
     Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
+    Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile();
 
     // _controller.forward(); // start fade out
   }

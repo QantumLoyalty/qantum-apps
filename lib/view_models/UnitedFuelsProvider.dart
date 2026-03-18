@@ -23,9 +23,9 @@ class UnitedFuelsProvider extends ChangeNotifier {
       isLoading = true;
       resetDefaultValues();
       notifyListeners();
-   //   cardHash = "wkM9yjP8Em9";
-      cardHash = "Jvj8JKZ3kQP";
-     // cardHash = userData?.unitedFuelCardHash;
+      //   cardHash = "wkM9yjP8Em9";
+     // cardHash = "Jvj8JKZ3kQP";
+       cardHash = userData?.unitedFuelCardHash;
 
       if (cardHash == null || cardHash!.isEmpty) {
         /// CHECKING USER VALIDATION
@@ -43,7 +43,6 @@ class UnitedFuelsProvider extends ChangeNotifier {
     }
   }
 
-
   resetDefaultValues() {
     cardHash = null;
     barcode = null;
@@ -59,7 +58,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
           await UnitedFuelsService.getInstance()
               .validateUser(userData.mobile ?? "");
 
-    /*  NetworkResponse validateUserResponse =
+      /*  NetworkResponse validateUserResponse =
           await UnitedFuelsService.getInstance().validateUser("0420611631");
 */
       print("Validate User Response:$validateUserResponse");
@@ -69,7 +68,8 @@ class UnitedFuelsProvider extends ChangeNotifier {
         if (responseData.containsKey("success") &&
             responseData["success"] == true &&
             responseData.containsKey("data")) {
-          Map<String, dynamic> userData = responseData["data"] as Map<String,dynamic>;
+          Map<String, dynamic> userData =
+              responseData["data"] as Map<String, dynamic>;
           cardHash = userData["card_hash"];
           print("Fetched Card Hash:$cardHash");
 
@@ -89,7 +89,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
           Map<String, String> registrationParams = {
             "first_name": userData.firstName ?? "",
             "last_name": userData.lastName ?? "",
-          //  "mobile_number": "0420611631",
+            //  "mobile_number": "0420611631",
             "mobile_number": userData.mobile ?? "",
             "email_address": userData.email ?? "",
             "postcode": userData.postCode ?? ""
@@ -97,17 +97,16 @@ class UnitedFuelsProvider extends ChangeNotifier {
           print("Registration Params:$registrationParams");
           await registerUserWithUnitedFuels(
               registrationParams, currentTimeZone);
-        }
-        else
-          {
-            isError = true;
-            if (responseData.containsKey("message")) {
-              errorMessage = (responseData["message"]);
-              errorMessage =  "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
-            } else {
-              errorMessage = validateUserResponse.responseMessage;
-            }
+        } else {
+          isError = true;
+          if (responseData.containsKey("message")) {
+            errorMessage = (responseData["message"]);
+            errorMessage =
+                "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+          } else {
+            errorMessage = validateUserResponse.responseMessage;
           }
+        }
       }
     } catch (e) {
       isError = true;
@@ -135,8 +134,20 @@ class UnitedFuelsProvider extends ChangeNotifier {
           print("Fetched Barcode:$barcode");
         } else {
           isError = true;
-          errorMessage = fetchBarcodeResponse.responseMessage ??
-              "An error occurred while fetching the barcode.";
+          errorMessage = "An error occurred while fetching the barcode.";
+        }
+      } else {
+        isError = true;
+        if (fetchBarcodeResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> responseData =
+              fetchBarcodeResponse.response as Map<String, dynamic>;
+          if (responseData.containsKey("message")) {
+            errorMessage = (responseData["message"]);
+          } else {
+            errorMessage = "An error occurred while fetching the barcode.";
+          }
+        } else {
+          errorMessage = fetchBarcodeResponse.responseMessage;
         }
       }
     } catch (e) {

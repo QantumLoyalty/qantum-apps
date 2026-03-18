@@ -167,7 +167,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   runFetchProfileTimer() async {
     await fetchUserProfile();
     profileTimer = Timer.periodic(
-        Duration(seconds: AppHelper.defaultRequestTime), (value) async {
+        Duration(seconds: 120), (value) async {
       if (!_isFetching) {
         _isFetching = true;
         await fetchUserProfile();
