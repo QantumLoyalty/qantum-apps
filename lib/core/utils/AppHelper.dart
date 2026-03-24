@@ -215,7 +215,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards||Flavor.edp:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -327,7 +327,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi||Flavor.edp:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -454,7 +454,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards||Flavor.edp:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -573,7 +573,7 @@ class AppHelper with LoggingMixin {
             Flavor.drinkRewards:
         return const Size(142, 58);
 
-      case Flavor.woollahra:
+      case Flavor.woollahra||Flavor.edp:
         return const Size(252, 114);
       case Flavor.mhbc:
         return const Size(142, 30);
@@ -617,7 +617,8 @@ class AppHelper with LoggingMixin {
       Flavor.bluewater: "Bluewater",
       Flavor.flinders: "Flinders",
       Flavor.drinkRewards: "Drinks",
-      Flavor.wonthaggi: "Qantum",
+      Flavor.wonthaggi: "Wonthaggi",
+      Flavor.edp: "Qantum",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

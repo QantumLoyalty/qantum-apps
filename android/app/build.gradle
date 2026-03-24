@@ -176,6 +176,13 @@ android {
                     deeplinkHost: "disabled.invalid"
             ]
         }
+        edp {
+            dimension "app"
+            applicationId "com.au.edp.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
+        }
     }
 
 

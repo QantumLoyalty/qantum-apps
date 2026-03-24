@@ -221,6 +221,8 @@ class AppThemeCustom {
         return AppColors.kc_scaffold_bg_color;
       case Flavor.drinkRewards:
         return AppColors.dr_button_color;
+      case Flavor.edp:
+        return AppColors.edp_back_color;
 
       default:
         return Theme.of(context).disabledColor;
@@ -306,6 +308,9 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.bluewater:
         return AppColors.white;
+
+      case Flavor.edp:
+        return AppColors.edp_button_color;
 
       default:
         return Theme.of(context).disabledColor;
@@ -403,6 +408,8 @@ class AppThemeCustom {
             : Theme.of(context).cardColor;
       case Flavor.drinkRewards:
         return AppColors.dr_box_shadow;
+      case Flavor.edp:
+        return AppColors.edp_textformField_background_color;
       default:
         return Theme.of(context).cardColor;
     }
@@ -460,7 +467,7 @@ class AppThemeCustom {
       case Flavor.qantum ||
             Flavor.qantumClub ||
             Flavor.queens ||
-            Flavor.drinkRewards:
+            Flavor.drinkRewards||Flavor.edp:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return isShadow != null ? AppColors.white : AppColors.black;
@@ -472,7 +479,7 @@ class AppThemeCustom {
   static ButtonStyle getUpdateInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards || Flavor.wonthaggi:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -649,6 +656,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.brisbane:
         return AppColors.white;
+      case Flavor.edp:
+        return AppColors.edp_button_color;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
@@ -658,7 +667,7 @@ class AppThemeCustom {
   static ButtonStyle getCancelInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub ||Flavor.drinkRewards || Flavor.wonthaggi:
+      case Flavor.qantum || Flavor.qantumClub ||Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -833,6 +842,14 @@ class AppThemeCustom {
                       userInfoProvider.getUserInfo!.isUserStatusCancelled())
                   ? AppColors.disable_color
                   : null;
+        case Flavor.edp:
+          return (provider.homeNavigationList[2].name == itemName)
+              ? Colors.transparent
+              : (userInfoProvider.getUserInfo != null &&
+              userInfoProvider.getUserInfo!.isUserStatusCancelled())
+              ? AppColors.edp_button_color
+              : AppColors.edp_button_color;
+
 
         default:
           return (userInfoProvider.getUserInfo != null &&
@@ -875,7 +892,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.northShoreTavern || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.aceRewards || Flavor.queens || Flavor.wonthaggi:
+      case Flavor.aceRewards || Flavor.queens:
         return isCommunication != null
             ? AppColors.white
             : Theme.of(context).primaryColorDark;
@@ -893,6 +910,10 @@ class AppThemeCustom {
         return (isCommunication != null && isHeadingCommunication !=null)
             ? AppColors.qa_disable_color
             : Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.wonthaggi:
+        return (isCommunication != null && isHeadingCommunication !=null)
+            ? AppColors.wt_back_color
+            : Theme.of(context).primaryColorDark;;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -923,53 +944,61 @@ class AppThemeCustom {
     }
   }
 
-  static Color? getUserInfoItemStyle(BuildContext context, bool isFromEdit,{bool? isHeading}) {
-    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-    switch (selectedFlavor) {
+  static Color? getUserInfoItemStyle(
+      BuildContext context,
+      bool isFromEdit, {
+        bool? isHeading,
+      }) {
+    final theme = Theme.of(context);
+    final selectionColor = theme.textSelectionTheme.selectionColor;
+    final primaryColor = theme.primaryColor;
+
+    final flavor = FlavorConfig.instance.flavor!;
+
+    // Common edit behavior
+    if (isFromEdit &&
+        flavor != Flavor.flinders &&
+        flavor != Flavor.drinkRewards &&
+        flavor != Flavor.edp &&
+        flavor != Flavor.qantumClub &&
+        flavor != Flavor.qantum) {
+      return selectionColor;
+    }
+
+    switch (flavor) {
       case Flavor.northShoreTavern:
-        if (isFromEdit) {
-          return Theme.of(context).textSelectionTheme.selectionColor;
-        } else {
-          return Theme.of(context).primaryColor;
-        }
-      case Flavor.aceRewards:
-        if (isFromEdit) {
-          return Theme.of(context).textSelectionTheme.selectionColor;
-        } else {
-          return Theme.of(context).primaryColorDark;
-        }
-      case Flavor.queens:
-        if (isFromEdit) {
-          return Theme.of(context).textSelectionTheme.selectionColor;
-        } else {
-          return AppColors.black;
-        }
       case Flavor.brisbane:
-        if (isFromEdit) {
-          return Theme.of(context).textSelectionTheme.selectionColor;
-        } else {
-          return Theme.of(context).primaryColor;
-        }
-      case Flavor.woollahra || Flavor.wonthaggi:
-        if (isFromEdit) {
-          return Theme.of(context).textSelectionTheme.selectionColor;
-        } else {
-          return Theme.of(context).primaryColor;
-        }
+      case Flavor.woollahra:
+      case Flavor.wonthaggi:
+        return primaryColor;
+
+      case Flavor.aceRewards:
+        return isFromEdit ? selectionColor : theme.primaryColorDark;
+
+      case Flavor.queens:
+        return isFromEdit ? selectionColor : AppColors.black;
 
       case Flavor.flinders:
         return AppColors.white;
 
       case Flavor.drinkRewards:
-        return isHeading!=null?AppColors.dr_button_color:Theme.of(context).textSelectionTheme.selectionColor;
+        return (isHeading == true)
+            ? AppColors.dr_button_color
+            : selectionColor;
 
-      case Flavor.qantumClub||Flavor.qantum:
-        return isHeading!=null?AppColors.qa_disable_color:Theme.of(context).textSelectionTheme.selectionColor;
+      case Flavor.edp:
+        return (isHeading == true && isFromEdit)
+            ? AppColors.edp_button_color
+            : selectionColor;
 
-
+      case Flavor.qantumClub:
+      case Flavor.qantum:
+        return (isHeading == true)
+            ? AppColors.qa_disable_color
+            : selectionColor;
 
       default:
-        return Theme.of(context).textSelectionTheme.selectionColor;
+        return selectionColor;
     }
   }
 
@@ -1013,7 +1042,7 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.mhbc ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards||Flavor.wonthaggi:
+            Flavor.drinkRewards||Flavor.wonthaggi||Flavor.edp:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -1069,7 +1098,7 @@ class AppThemeCustom {
             Flavor.flinders ||
             Flavor.aceRewards ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards||Flavor.wonthaggi:
+            Flavor.drinkRewards||Flavor.wonthaggi||Flavor.edp:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (userInfoProvider.getUserInfo != null &&
@@ -1096,6 +1125,8 @@ class AppThemeCustom {
         return isText!=null?Theme.of(context).textSelectionTheme.selectionColor!:AppColors.dr_button_color;
       case Flavor.qantumClub||Flavor.qantum:
         return AppColors.qa_disable_color;
+      case Flavor.edp:
+        return AppColors.edp_back_color_2;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
@@ -1110,6 +1141,8 @@ class AppThemeCustom {
         return Theme.of(context).canvasColor;
       case Flavor.kingscliff:
         return AppColors.kc_primary_color_dark;
+      case Flavor.edp:
+        return AppColors.edp_button_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
+
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -54,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.kingscliff,
     Flavor.drinkRewards,
     Flavor.wonthaggi,
+    Flavor.edp,
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
@@ -399,7 +402,9 @@ class _HomeScreenState extends State<HomeScreen>
                                     userInfoProvider.getUserInfo!
                                         .isUserStatusCancelled())
                                 ? AppColors.disable_color
-                                : null,
+                                : flavor == Flavor.edp
+                                    ? AppColors.edp_button_color
+                                    : null,
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index + 3].name)

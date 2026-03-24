@@ -20,19 +20,19 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.2+82
+#version:  1.0.2+82
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
 ###################################
 # MAX
-#version:  1.0.0+58
+#version:  1.0.0+59
 ###################################
 # HOGAN'S REWARD
 # version: 1.0.4+11
 ###################################
 # MHBC
-#version:  1.0.10+90
+#version:  1.0.10+91
 
 ###################################
 # MONTAUK TAVERN
@@ -79,8 +79,10 @@ version:  1.0.2+82
 #version: 1.0.0+1
 ###################################
 #WONTHAGGI
-#version: 1.0.0+2
-
+#version: 1.0.0+3
+###################################
+#EDP
+#version: 1.0.0+1
 environment:
   sdk: ^3.5.3
 
@@ -202,10 +204,12 @@ flutter:
     - assets/drinkRewards/
     - assets/kingscliff/
     - assets/wonthaggi/
+    - assets/edp/
     - .env.mhbc
     - .env.qantum
     - .env.kc
     - .env.dr
+    - .env.edp
 
   #   - images/a_dot_ham.jpeg
 

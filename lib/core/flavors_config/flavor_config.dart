@@ -18,7 +18,8 @@ enum Flavor {
   flinders,
   kingscliff,
   drinkRewards,
-  wonthaggi
+  wonthaggi,
+  edp
 }
 
 class FlavorValues {

@@ -64,6 +64,7 @@ class FlavorConstants {
           Flavor.kingscliff: "Valued",
           Flavor.drinkRewards: "Explorer",
           Flavor.wonthaggi: "Valued",
+          Flavor.edp: "Staff",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";

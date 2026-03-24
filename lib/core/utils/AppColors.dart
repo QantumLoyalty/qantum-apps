@@ -504,6 +504,40 @@ class AppColors {
   static Color get wt_canvas_color => const Color(0xFF222E5A);
 
 
+  /// EDP COLOR
+
+
+  static Color get edp_sf_color => Colors.black;
+
+  static Color get edp_back_color =>  Colors.black;
+
+  static Color get edp_floating_button_icon_color =>  Colors.white;
+
+  static Color get edp_back_color_2 =>  Colors.black;
+
+  static Color get edp_text_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_hint_text_color => const Color(0x39FFFFFF);
+
+  static Color get edp_button_color => const Color(0xFF72B42F);
+
+  static Color get edp_button_border_color => const Color(0xFF72B42F);
+
+  static Color get edp_card_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_divider_color =>  const Color(0x80FFFFFF);
+
+  static Color get edp_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get edp_canvas_color => const Color(0xFF285FA9);
+
+  static Color get edp_textformField_background_color => const Color(0xFF707070);
+
+
+
+
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
