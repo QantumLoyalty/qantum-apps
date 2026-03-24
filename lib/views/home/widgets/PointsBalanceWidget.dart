@@ -28,7 +28,8 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
     _fadeAnim = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
     Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
-    Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile();
+    Provider.of<UserInfoProvider>(context, listen: false)
+        .fetchUserProfile("true");
 
     // _controller.forward(); // start fade out
   }
@@ -82,8 +83,6 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                             Text(
                               formatPoints(
                                   (provider.getUserInfo!.pointsValue ?? 0)),
-
-
                               style: TextStyle(
                                   fontSize: 42,
                                   color:
@@ -141,19 +140,16 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                         SizedBox(
                           width: 180,
                           height: 16,
-
                         ),
                         AppDimens.shape_10,
                         SizedBox(
                           width: 180,
                           height: 42,
-
                         ),
                         AppDimens.shape_10,
                         SizedBox(
                           width: 180,
                           height: 12,
-
                         ),
                       ],
                     );
@@ -165,24 +161,20 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
   }
 
   String formatPoints(num points) {
-
     var formatter = NumberFormat("#,##0", "en_US");
-  /*  return formatter.format(points.toInt());*/
+    /*  return formatter.format(points.toInt());*/
 // Truncate instead of round
     final truncated = points.truncate();
 
     return formatter.format(truncated);
-
   }
 
   String formatPointsValue(num pointsValue) {
     var formatter = NumberFormat("#,##0.00", "en_US");
-   // return formatter.format(pointsValue.truncate());
+    // return formatter.format(pointsValue.truncate());
     // Truncate to 2 decimal places instead of rounding
-    final truncated =
-        (pointsValue * 100).truncateToDouble() / 100;
+    final truncated = (pointsValue * 100).truncateToDouble() / 100;
 
     return formatter.format(truncated);
-
   }
 }

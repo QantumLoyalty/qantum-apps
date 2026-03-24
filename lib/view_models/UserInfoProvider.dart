@@ -114,13 +114,13 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   FetchProfileState get fetchProfileState=>_fetchProfileState;
 
-  fetchUserProfile() async {
+  fetchUserProfile(String fetchFromBluize) async {
     try {
 
       _fetchProfileState=FetchProfileState.loading;
 
       NetworkResponse networkResponse =
-          await UserService.getInstance().fetchUserProfile();
+          await UserService.getInstance().fetchUserProfile(fetchFromBluize: fetchFromBluize);
       if (!networkResponse.isError) {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;
@@ -164,13 +164,13 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   bool _isFetching = false;
   Timer? profileTimer;
 
-  runFetchProfileTimer() async {
-    await fetchUserProfile();
+  runFetchProfileTimer({required String fetchFromBluize} ) async {
+    await fetchUserProfile(fetchFromBluize);
     profileTimer = Timer.periodic(
-        Duration(seconds: 120), (value) async {
+        Duration(seconds: 30), (value) async {
       if (!_isFetching) {
         _isFetching = true;
-        await fetchUserProfile();
+        await fetchUserProfile(fetchFromBluize);
         _isFetching = false;
       }
     });

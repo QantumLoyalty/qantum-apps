@@ -34,7 +34,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     membershipManagerProvider =
         Provider.of<MembershipManagerProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      userInfoProvider.runFetchProfileTimer();
+      userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       membershipManagerProvider.checkSelectedMembershipInLocal();
     });
   }

@@ -97,20 +97,24 @@ class UserService with LoggingMixin implements UserRepository {
   }
 
   @override
-  Future<NetworkResponse> fetchUserProfile() async {
+  Future<NetworkResponse> fetchUserProfile(
+      {required String fetchFromBluize}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
-      print("URL: ${APIList.GET_PROFILE}");
-      var response = await NetworkHelper.instance
-          .postCall(url: Uri.parse(APIList.GET_PROFILE), headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
-      }, body: {});
-      networkResponse = response;
+     // print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
 
+      String URL=APIList.GET_PROFILE + "?fetchFromBluize=$fetchFromBluize";
+      print("URL: $URL");
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(URL),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
+          },
+          body: {});
+      networkResponse = response;
 
       debugPrint("USER FULL : ${networkResponse.response}", wrapWidth: 1024);
     } catch (e) {
@@ -473,11 +477,13 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      var response = await NetworkHelper.instance
-          .getCall(url: Uri.parse(APIList.RESEND_OTP+"$phoneNumber?appType=${AppHelper.getAppType()}"), headers: {
-        'Content-Type': 'application/json',
-       // 'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-      });
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(APIList.RESEND_OTP +
+              "$phoneNumber?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());

@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen>
       WidgetsBinding.instance.addObserver(this);
       _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
       _userInfoProvider.retrieveUserInfo();
-      _userInfoProvider.runFetchProfileTimer();
+      _userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       _userInfoProvider.uploadDeviceDetail();
       _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen>
       _homeProvider.updatePointsBalanceVisibility(false);
     });
   }
-
+    
   cancelPointsDialogTimer() {
     if (_pointsDialogTimer != null && _pointsDialogTimer!.isActive) {
       _pointsDialogTimer!.cancel();

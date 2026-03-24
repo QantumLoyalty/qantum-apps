@@ -674,6 +674,9 @@ class AppHelper with LoggingMixin {
         await SharedPreferenceHelper.getInstance();
     UserModel? userData = await sharedPreferencesHelper.getUserData();
     if (userData != null) {
+
+      print("userData.type >> ${userData.type}");
+
       if (userData.type != null && userData.type!.toLowerCase() == "new") {
         return true;
       } else {

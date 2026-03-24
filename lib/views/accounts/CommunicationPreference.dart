@@ -28,7 +28,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
   void initState() {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
-    _userInfoProvider.fetchUserProfile();
+   // _userInfoProvider.fetchUserProfile();
     flavor = FlavorConfig.instance.flavor!;
   }
 

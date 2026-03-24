@@ -17,7 +17,7 @@ abstract class UserRepository {
 
   Future<NetworkResponse> cancelAccount();
 
-  Future<NetworkResponse> fetchUserProfile();
+  Future<NetworkResponse> fetchUserProfile({required String fetchFromBluize});
 
   Future<NetworkResponse> updateUserProfile(Map<String, dynamic> params);
 

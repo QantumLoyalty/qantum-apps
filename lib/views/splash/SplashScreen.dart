@@ -31,29 +31,20 @@ class _SplashScreenState extends State<SplashScreen> {
       flavor = FlavorConfig.instance.flavor!;
 
       _deepLinkService.init((link) {
-
         if (_isOpenedFromDeepLink) return;
         _isOpenedFromDeepLink = true;
 
+        if (flavor == Flavor.starReward) {
+          final encodedLink = link.queryParameters['link'];
+          if (encodedLink == null) return;
 
-
-if(flavor==Flavor.starReward)
-  {
-    final encodedLink = link.queryParameters['link'];
-    if (encodedLink == null) return;
-
-    Provider.of<HomeProvider>(context, listen: false)
-        .setDeepLinkParams(encodedLink);
-
-  }
-else if(flavor ==Flavor.mhbc)
-  {
-    print("DEEP LINK BEFORE: ${link.toString()}");
-    Provider.of<HomeProvider>(context, listen: false)
-        .setDeepLinkParams(link.toString());
-
-  }
-
+          Provider.of<HomeProvider>(context, listen: false)
+              .setDeepLinkParams(encodedLink);
+        } else if (flavor == Flavor.mhbc) {
+          print("DEEP LINK BEFORE: ${link.toString()}");
+          Provider.of<HomeProvider>(context, listen: false)
+              .setDeepLinkParams(link.toString());
+        }
 
         /*final decodedLink = Uri.decodeComponent(encodedLink);
         final innerUri = Uri.parse(decodedLink);
@@ -85,8 +76,10 @@ else if(flavor ==Flavor.mhbc)
             if (await AppHelper.checkIfUserIsNew()) {
               /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
               /// CHECKING IF PURCHASED THE MEMBERSHIP
-              if (membershipStatus == MembershipStatus.notMember) {
+              if (membershipStatus == MembershipStatus.notMember ||
+                  membershipStatus == MembershipStatus.pendingPayment) {
                 ///  DID NOT PURCHASED THE MEMBERSHIP
+
                 AppNavigator.navigateAndClearStack(
                     context, AppNavigator.pendingPaymentScreen);
               } else {
