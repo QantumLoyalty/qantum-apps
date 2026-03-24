@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
@@ -13,18 +14,19 @@ import 'core/navigation/AppNavigator.dart';
 import 'view_models/HomeProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
+import 'view_models/UnitedFuelsProvider.dart' show UnitedFuelsProvider;
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'views/splash/SplashScreen.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   FlavorConfig(
       flavor: Flavor.maxClub,
       flavorValues: FlavorValues(appName: "Max Club", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-
+  await dotenv.load(fileName: '.env.maxc');
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
@@ -35,6 +37,9 @@ void main() async {
     // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
+    Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+    Stripe.stripeAccountId = dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? '';
+    Stripe.instance.applySettings();
   });
 }
 
@@ -55,7 +60,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
+
       child: Portal(
           child: MaterialApp(
         onGenerateRoute: AppNavigator.generateRoute,
