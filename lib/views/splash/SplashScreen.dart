@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             /// FOR OTHER APPS
             /// CHECKING IF PURCHASED THE MEMBERSHIP
-            if (membershipStatus == MembershipStatus.notMember) {
+            if (membershipStatus == MembershipStatus.notMember || membershipStatus == MembershipStatus.pendingPayment) {
               ///  DID NOT PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(
                   context, AppNavigator.pendingPaymentScreen);

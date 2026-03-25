@@ -261,7 +261,7 @@ class DigitalCardDialog with LoggingMixin {
       "INVITE ONLY",
       "STAFF",
     };
-    if (flavor != Flavor.mhbc ||
+    if (flavor != Flavor.mhbc || flavor != Flavor.maxClub ||
         membershipCategory == null ||
         membershipCategory.isEmpty) {
       return false;
