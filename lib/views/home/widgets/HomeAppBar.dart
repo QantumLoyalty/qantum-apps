@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:qantum_apps/views/dialogs/ScratchCardDialog.dart';
 import '../../../core/utils/AppColors.dart';
@@ -68,7 +69,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               debugPrint(e.toString());
                               //throw 'Failed to set application brightness';
                             }
-                            if (provider.getUserInfo!.isUserStatusCancelled()) {
+                            /*if (provider.getUserInfo!.isUserStatusCancelled()) {
                               await MembershipCancelledDialog.getInstance()
                                   .showMembershipCancelledDialog(context);
                             } else {
@@ -81,13 +82,10 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   .setSystemScreenBrightness(screenBrightness);
                             } catch (e) {
                               logEvent(e.toString());
-                              // throw 'Failed to reset application brightness';
-                            }
+                            }*/
 
-                        //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
-
-
-
+                            //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
+                            EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(
                             width: 80,
@@ -106,8 +104,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                                     BorderRadius.circular(8)),
                                             child: Image.asset(
                                               AppIcons.getCardBackground(
-                                                  FlavorConstants.getUserTierType(
-                                                      provider.getUserInfo!)),
+                                                  FlavorConstants
+                                                      .getUserTierType(provider
+                                                          .getUserInfo!)),
                                               fit: BoxFit.cover,
                                             )))
                                     : Container(),
@@ -183,7 +182,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                               userInfoProvider.getUserInfo!
                                                   .isUserStatusCancelled())
                                           ? AppColors.disable_color
-                                          : AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                          : AppThemeCustom
+                                              .getHomeScreenProfileIconColor(
+                                                  context),
                                 ),
                                 Text(
                                   AppLocalizations.of(context)!

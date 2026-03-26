@@ -30,6 +30,7 @@ class AppIcons {
   static String unitedFuelsBanner = "assets/common/united-logo-white.png";
   static String unitedFuelsHero = "assets/common/hero-image.png";
   static String unitedFuelsRounded4c = "assets/common/rounded-4c.png";
+  static String renew = "assets/common/renew.png";
 
 
   static String getHeaderIcon() {
