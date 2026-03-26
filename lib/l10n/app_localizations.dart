@@ -1375,6 +1375,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'UPDATE NOW'**
   String get updateNow;
+
+  /// No description provided for @msgUnableConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect. Please check your internet connection and try again.'**
+  String get msgUnableConnect;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

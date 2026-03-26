@@ -239,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AppHelper.verifyPhoneNumber(
                                         _phoneController.text)) {
                                   provider.login(
-                                      "$countryCode${_phoneController.text}");
+                                      "$countryCode${_phoneController.text}",context);
                                 } else {
                                   AppHelper.showErrorMessage(
                                       context, loc.msgIncorrectPhoneNumber);

@@ -216,6 +216,7 @@
   "msgLikeToUpdate":"Would you like to update it now?" ,
   "ignore": "IGNORE",
   "later":"LATER",
-  "updateNow": "UPDATE NOW"
+  "updateNow": "UPDATE NOW",
+  "msgUnableConnect":"Unable to connect. Please check your internet connection and try again."
 
 }

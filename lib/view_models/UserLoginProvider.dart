@@ -39,39 +39,34 @@ class UserLoginProvider extends ChangeNotifier {
 
   UserModel? loggedInUser;
 
-  login(String phoneNo) async {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showLoader = true;
-      notifyListeners();
-    });
+  Future<void> login(String phoneNo, BuildContext context) async {
+    _showLoader = true;
+    notifyListeners();
+
     try {
-      NetworkResponse networkResponse =
-          await UserService.getInstance().login(phoneNo);
+      final networkResponse =
+      await UserService.getInstance().login(phoneNo);
+
       _networkError = networkResponse.isError;
 
-      if (networkResponse.response != null &&
-          networkResponse.response is Map<String, dynamic>) {
-        Map<String, dynamic> response =
-            networkResponse.response as Map<String, dynamic>;
+      if (networkResponse.response is Map<String, dynamic>) {
+        final response = networkResponse.response as Map<String, dynamic>;
 
         _networkMessage = response['message'];
 
-        if (response['registered'] != null) {
-          if (response['registered'] as bool) {
-            if (response.containsKey('test') && response['test'] == true) {
-              _isTestUser = true;
-              _isExistingUser = false;
-            } else {
-              _isExistingUser = true;
-            }
+        final isRegistered = response['registered'];
+
+        if (isRegistered != null) {
+          if (isRegistered == true) {
+            _isTestUser = response['test'] == true;
+            _isExistingUser = !_isTestUser!;
           } else {
             _isExistingUser = false;
           }
 
-          if (response['user'] != null) {
-            if ((response['user'] as Map<String, dynamic>)['Id'] != null) {
-              _userId = (response['user'] as Map<String, dynamic>)['Id'];
-            }
+          final user = response['user'];
+          if (user is Map<String, dynamic> && user['Id'] != null) {
+            _userId = user['Id'];
           }
         } else {
           _isExistingUser = null;
@@ -80,14 +75,27 @@ class UserLoginProvider extends ChangeNotifier {
         _networkMessage = networkResponse.responseMessage;
       }
     } catch (e) {
-      AppHelper.printMessage(">>> ${e.toString()}");
+      AppHelper.printMessage(">>> error ${e.toString()}");
+
       _networkError = true;
-      _networkMessage = e.toString();
+
+      String error = e.toString().toLowerCase();
+
+      // ✅ Strong error handling
+      if (error.contains('socketexception') ||
+          error.contains('failed host lookup') ||
+          error.contains('clientexception') ||
+          error.contains('network is unreachable') ||
+          error.contains('connection failed') ||
+          error.contains('timed out')) {
+        _networkMessage =
+            AppLocalizations.of(context)!.msgUnableConnect;
+      } else {
+        _networkMessage = "Something went wrong. Please try again.";
+      }
     } finally {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showLoader = false;
-        notifyListeners();
-      });
+      _showLoader = false;
+      notifyListeners();
     }
   }
 

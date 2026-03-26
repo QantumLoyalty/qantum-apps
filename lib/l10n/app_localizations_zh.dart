@@ -648,6 +648,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get updateNow => '立即更新';
+
+  @override
+  String get msgUnableConnect => '无法连接。请检查您的网络连接并重试。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1294,4 +1297,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get updateNow => '立即更新';
+
+  @override
+  String get msgUnableConnect => '無法連線。請檢查您的網路連線並再試一次。';
 }

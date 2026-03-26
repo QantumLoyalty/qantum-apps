@@ -648,4 +648,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateNow => 'UPDATE NOW';
+
+  @override
+  String get msgUnableConnect => 'Unable to connect. Please check your internet connection and try again.';
 }

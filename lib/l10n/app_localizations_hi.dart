@@ -648,4 +648,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get updateNow => 'अभी अपडेट करें';
+
+  @override
+  String get msgUnableConnect => 'कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।';
 }
