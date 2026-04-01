@@ -200,21 +200,29 @@ class AppColors {
 
   /// SENSE OF TASTE THEME ///
 
-  static Color get sot_back_color => const Color(0xFFc69c6e);
+  static Color get sot_back_color => const Color(0xFF24272a);
 
-  static Color get sot_back_color_2 => const Color(0xFFc69c6e);
+  static Color get sot_back_color_2 => const Color(0xFF24272a);
 
-  static Color get sot_text_color => const Color(0xFF4e4e4e);
+  static Color get sot_text_color => const Color(0xFFFFFFFF);
 
-  static Color get sot_text_field_text_color => const Color(0xFFd4b491);
+  static Color get sot_text_field_text_color => const Color(0xFFFFFFFF);
 
-  static Color get sot_hint_text_color => const Color(0xFF6D6D6D);
+  static Color get sot_hint_text_color => const Color(0x61FFFFFF);
 
-  static Color get sot_button_color => const Color(0xFF4e4e4e);
+  static Color get sot_button_color => const Color(0xFFC79C6E);
 
-  static Color get sot_card_color => const Color(0xFF444444);
+  static Color get sot_card_color => const Color(0xFF000000);
 
-  static Color get sot_divider_color => const Color(0xFFd4b491);
+  static Color get sot_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get sot_scaffold_bg_color => const Color(0xFFC79C6E);
+
+  static Color get sot_disabled_color => const Color(0xFFC79C6E);
+
+  static Color get sot_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get sot_profile_cross_background_color => const Color(0xFFC79C6E);
 
   /// NORTH SHORE TAVERN ///
 

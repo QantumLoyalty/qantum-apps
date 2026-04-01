@@ -327,7 +327,7 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi||Flavor.edp:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi||Flavor.edp||Flavor.senseOfTaste:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -579,7 +579,8 @@ class AppHelper with LoggingMixin {
         return const Size(142, 30);
       case Flavor.flinders:
         return const Size(56, 56);
-
+      case Flavor.senseOfTaste:
+        return const Size(200, 70);
       default:
         return const Size(68, 68);
     }
@@ -608,7 +609,7 @@ class AppHelper with LoggingMixin {
       Flavor.clh: "Central",
       Flavor.mhbc: "Manly",
       Flavor.montaukTavern: "Montauk",
-      Flavor.senseOfTaste: "Sense",
+      Flavor.senseOfTaste: "Qantum",
       Flavor.hogansReward: "Hogan",
       Flavor.northShoreTavern: "North",
       Flavor.aceRewards: "Ace",

@@ -156,6 +156,7 @@
 		501233E54F2E10639E921520 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		507FCA95687BC4B38D125FB9 /* Pods-Runner.profile-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-mhbc.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-mhbc.xcconfig"; sourceTree = "<group>"; };
 		525F55CF66DD630171EDABAF /* Pods-Runner.debug-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-bluewater.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-bluewater.xcconfig"; sourceTree = "<group>"; };
+		551D1C508B89BDE2C6457124 /* Pods-RunnerTests.profile-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-senseoftaste.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		55FC9A1B0902B5FDAB38314F /* Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-woollahra.xcconfig"; sourceTree = "<group>"; };
 		571D68D29C871C683BEBF31A /* Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-qantum.xcconfig"; sourceTree = "<group>"; };
 		5833F8298208E1A931000F38 /* Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-bluewater.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +168,7 @@
 		5F7F6F55BDCBD6504B00BE6B /* Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-acerewards.xcconfig"; sourceTree = "<group>"; };
 		609FDB786D428E6D0CB54B04 /* Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-starrewards.xcconfig"; sourceTree = "<group>"; };
 		6170C9EFAE8D9F7414798CE3 /* Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; sourceTree = "<group>"; };
+		61B7089F957B8783DEB2C4E9 /* Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		6210A1C3E480CC4E318B9430 /* Pods-RunnerTests.release-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-maxclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-maxclub.xcconfig"; sourceTree = "<group>"; };
 		64F8D333B193A6790302F72C /* Pods-RunnerTests.profile-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-maxclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-maxclub.xcconfig"; sourceTree = "<group>"; };
 		66AEB420E4D98CBA1BE82F31 /* Pods-RunnerTests.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		8CA307F1F69A9671EEAE4C5F /* Pods-RunnerTests.release-bluewater.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-bluewater.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-bluewater.xcconfig"; sourceTree = "<group>"; };
 		8DF5E9DBBC10284DB47E495F /* Pods-Runner.profile-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-queens.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-queens.xcconfig"; sourceTree = "<group>"; };
 		8E3041934A834100D33BD123 /* Pods-RunnerTests.release-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-qantumclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-qantumclub.xcconfig"; sourceTree = "<group>"; };
+		90DEC8D12BC71F8061667500 /* Pods-RunnerTests.debug-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-senseoftaste.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		930A683BE42877A9C8F05F02 /* Pods-RunnerTests.profile-qantumclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-qantumclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-qantumclub.xcconfig"; sourceTree = "<group>"; };
 		94D556EF40D5BD50BD73FE28 /* Pods-Runner.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		95A54843773DB1A236286145 /* Pods-RunnerTests.profile-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-montauktavern.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 		A847C8338847509A1210D07B /* Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
 		AA2DB6F5FBB00BC182B8254C /* Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-acerewards.xcconfig"; sourceTree = "<group>"; };
 		AADEDC5726C28629192327DC /* Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
+		ABA0357C3A399B04FA7BBDBE /* Pods-OneSignalNotificationServiceExtension.release-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-senseoftaste.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		AC086F796628E829CDDBA62B /* Pods-OneSignalNotificationServiceExtension.release-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-maxclub.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-maxclub.xcconfig"; sourceTree = "<group>"; };
 		B0B1562966EBC85C63B6C452 /* Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		B0E0503AD23D068FB4F6AE10 /* Pods-Runner.debug-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-max.xcconfig"; sourceTree = "<group>"; };
@@ -237,8 +241,10 @@
 		B66BEA5B4F19F81A074CED36 /* Pods-Runner.profile-hogansreward.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-hogansreward.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-hogansreward.xcconfig"; sourceTree = "<group>"; };
 		B73E56667B4B4617508FC0FC /* Pods-Runner.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		B99B89C5E65F2171F5C2D4B6 /* Pods-RunnerTests.debug-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-qantum.xcconfig"; sourceTree = "<group>"; };
+		BA08FDF25B18926676AF325D /* Pods-Runner.profile-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-senseoftaste.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		BD3E1D68AD1FA29D40393034 /* Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-flinders.xcconfig"; sourceTree = "<group>"; };
 		BD7FB8CE6B25727B9B0DB167 /* Pods-RunnerTests.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-qantum.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-qantum.xcconfig"; sourceTree = "<group>"; };
+		BE497693DB5D415B65F948C8 /* Pods-OneSignalNotificationServiceExtension.profile-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-senseoftaste.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		C342C0D8D9DC75BFD07B1FE0 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		C396484FED4935B3C03B4474 /* Pods-Runner.release-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-woollahra.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-woollahra.xcconfig"; sourceTree = "<group>"; };
 		C3BFA8F383A49B4A3FC710AB /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +259,7 @@
 		CD7C38E14A6580BA2DCD707D /* Pods-Runner.release-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-qantum.xcconfig"; sourceTree = "<group>"; };
 		CE815196DD362F1DB4D5D9D8 /* Pods-Runner.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-max.xcconfig"; sourceTree = "<group>"; };
 		CEA3DAF636DA78725A65CEA1 /* Pods-Runner.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-max.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-max.xcconfig"; sourceTree = "<group>"; };
+		CEE0812E8DACBAD0F1422D46 /* Pods-Runner.release-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-senseoftaste.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		D1A95A47957936447D105E4F /* Pods-Runner.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-clh.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-clh.xcconfig"; sourceTree = "<group>"; };
 		D3B79F5F49A44096DE864580 /* Pods-Runner.profile-qantum.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-qantum.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-qantum.xcconfig"; sourceTree = "<group>"; };
 		D42CC59356109C9C31837EAB /* Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-northshoretavern.xcconfig"; sourceTree = "<group>"; };
@@ -271,6 +278,7 @@
 		E553F420DB1EB0099259E0D1 /* Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		E70A361DCFD221F3B5194D4B /* Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-max.xcconfig"; sourceTree = "<group>"; };
 		E77CAC662C439BF88977CC49 /* Pods-RunnerTests.release-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-mhbc.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-mhbc.xcconfig"; sourceTree = "<group>"; };
+		E8466C955D9706E56F33C145 /* Pods-Runner.debug-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-senseoftaste.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		EA1CD033989C9E8BBA374E52 /* Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		ECE00306A57F675A8A4B4237 /* Pods-Runner.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-acerewards.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-acerewards.xcconfig"; sourceTree = "<group>"; };
 		EDB4C7AEA47B29DAD8332ECE /* Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-acerewards.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +293,7 @@
 		F859E4869A070EBFACDE5436 /* Pods-OneSignalNotificationServiceExtension.debug-edp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-edp.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-edp.xcconfig"; sourceTree = "<group>"; };
 		FBA1E898A8EE08EDB54AE5F1 /* Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-mhbc.xcconfig"; sourceTree = "<group>"; };
 		FE8041BD1A53FDC72D60D1DA /* Pods-RunnerTests.profile-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-queens.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-queens.xcconfig"; sourceTree = "<group>"; };
+		FE89EA6A8983288EEF32ACE8 /* Pods-RunnerTests.release-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-senseoftaste.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		FF43AD53955AC25B1E3A87CF /* Pods-RunnerTests.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -566,6 +575,15 @@
 				E3C7103416C58960B159E4AB /* Pods-RunnerTests.debug-edp.xcconfig */,
 				C5576A4A4097B49AAB2DF986 /* Pods-RunnerTests.release-edp.xcconfig */,
 				02466FE63B5743736A8AFF58 /* Pods-RunnerTests.profile-edp.xcconfig */,
+				61B7089F957B8783DEB2C4E9 /* Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig */,
+				ABA0357C3A399B04FA7BBDBE /* Pods-OneSignalNotificationServiceExtension.release-senseoftaste.xcconfig */,
+				BE497693DB5D415B65F948C8 /* Pods-OneSignalNotificationServiceExtension.profile-senseoftaste.xcconfig */,
+				E8466C955D9706E56F33C145 /* Pods-Runner.debug-senseoftaste.xcconfig */,
+				CEE0812E8DACBAD0F1422D46 /* Pods-Runner.release-senseoftaste.xcconfig */,
+				BA08FDF25B18926676AF325D /* Pods-Runner.profile-senseoftaste.xcconfig */,
+				90DEC8D12BC71F8061667500 /* Pods-RunnerTests.debug-senseoftaste.xcconfig */,
+				FE89EA6A8983288EEF32ACE8 /* Pods-RunnerTests.release-senseoftaste.xcconfig */,
+				551D1C508B89BDE2C6457124 /* Pods-RunnerTests.profile-senseoftaste.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -10018,6 +10036,445 @@
 			};
 			name = "Profile-maxClub";
 		};
+		3DF9DDFE2F7BF28A002DDB2F /* Debug-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-senseOfTaste";
+		};
+		3DF9DDFF2F7BF28A002DDB2F /* Debug-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Sense Of Taste";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-senseoftaste";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-hogansreward.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Debug-senseOfTaste";
+		};
+		3DF9DE002F7BF28A002DDB2F /* Debug-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90DEC8D12BC71F8061667500 /* Pods-RunnerTests.debug-senseoftaste.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Debug-senseOfTaste";
+		};
+		3DF9DE012F7BF28A002DDB2F /* Debug-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61B7089F957B8783DEB2C4E9 /* Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug-senseOfTaste";
+		};
+		3DF9DE022F7BF296002DDB2F /* Release-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-senseOfTaste";
+		};
+		3DF9DE032F7BF296002DDB2F /* Release-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Sense Of Taste";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-senseoftaste";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-mhbc.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Release-senseOfTaste";
+		};
+		3DF9DE042F7BF296002DDB2F /* Release-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE89EA6A8983288EEF32ACE8 /* Pods-RunnerTests.release-senseoftaste.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Release-senseOfTaste";
+		};
+		3DF9DE052F7BF296002DDB2F /* Release-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABA0357C3A399B04FA7BBDBE /* Pods-OneSignalNotificationServiceExtension.release-senseoftaste.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release-senseOfTaste";
+		};
+		3DF9DE062F7BF2AD002DDB2F /* Profile-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Profile-senseOfTaste";
+		};
+		3DF9DE072F7BF2AD002DDB2F /* Profile-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
+			buildSettings = {
+				APP_DISPLAY_NAME = "Sense Of Taste";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-senseoftaste";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-hogansreward.entitlements";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = "Profile-senseOfTaste";
+		};
+		3DF9DE082F7BF2AD002DDB2F /* Profile-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 551D1C508B89BDE2C6457124 /* Pods-RunnerTests.profile-senseoftaste.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.au.starhotels.qantumApps.RunnerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
+			};
+			name = "Profile-senseOfTaste";
+		};
+		3DF9DE092F7BF2AD002DDB2F /* Profile-senseOfTaste */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE497693DB5D415B65F948C8 /* Pods-OneSignalNotificationServiceExtension.profile-senseoftaste.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4FHRW3JTA;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.senseoftaste.au.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Profile-senseOfTaste";
+		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -10208,6 +10665,7 @@
 				23364CF02EC461BD001651A3 /* Debug-woollahra */,
 				23C765A92E9FB24400A6D570 /* Debug-acerewards */,
 				3D33F6B02F1E716F006FB87D /* Debug-kingscliff */,
+				3DF9DE012F7BF28A002DDB2F /* Debug-senseOfTaste */,
 				3DB6900C2F6BDB3500E0DC75 /* Debug-edp */,
 				235B5CED2DC9D72D004A8F1C /* Debug-max */,
 				3DD6BA072F45E66C002FEB94 /* Debug-maxClub */,
@@ -10242,6 +10700,7 @@
 				237FCD442E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AD2E9FB25E00A6D570 /* Release-acerewards */,
 				3D33F6B82F1E7198006FB87D /* Release-kingscliff */,
+				3DF9DE052F7BF296002DDB2F /* Release-senseOfTaste */,
 				235B5CF42DC9D72D004A8F1C /* Profile */,
 				235B5CF52DC9D72D004A8F1C /* Profile-max */,
 				3DD6BA0F2F45E67F002FEB94 /* Profile-maxClub */,
@@ -10262,6 +10721,7 @@
 				23364CF82EC46209001651A3 /* Profile-woollahra */,
 				23C765B12E9FB27100A6D570 /* Profile-acerewards */,
 				3D33F6B42F1E7186006FB87D /* Profile-kingscliff */,
+				3DF9DE092F7BF2AD002DDB2F /* Profile-senseOfTaste */,
 				2376E70F2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -10278,6 +10738,7 @@
 				23364CEF2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A82E9FB24400A6D570 /* Debug-acerewards */,
 				3D33F6AF2F1E716F006FB87D /* Debug-kingscliff */,
+				3DF9DE002F7BF28A002DDB2F /* Debug-senseOfTaste */,
 				3DB6900B2F6BDB3500E0DC75 /* Debug-edp */,
 				23ED95D92D6C8838005C5478 /* Debug-max */,
 				3DD6BA062F45E66C002FEB94 /* Debug-maxClub */,
@@ -10312,6 +10773,7 @@
 				237FCD432E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AC2E9FB25E00A6D570 /* Release-acerewards */,
 				3D33F6B72F1E7198006FB87D /* Release-kingscliff */,
+				3DF9DE042F7BF296002DDB2F /* Release-senseOfTaste */,
 				331C808A294A63A400263BE5 /* Profile */,
 				23ED95DF2D6C8879005C5478 /* Profile-max */,
 				3DD6BA0E2F45E67F002FEB94 /* Profile-maxClub */,
@@ -10332,6 +10794,7 @@
 				23364CF72EC46209001651A3 /* Profile-woollahra */,
 				23C765B02E9FB27100A6D570 /* Profile-acerewards */,
 				3D33F6B32F1E7186006FB87D /* Profile-kingscliff */,
+				3DF9DE082F7BF2AD002DDB2F /* Profile-senseOfTaste */,
 				2376E70E2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -10348,6 +10811,7 @@
 				23364CED2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A62E9FB24400A6D570 /* Debug-acerewards */,
 				3D33F6AD2F1E716F006FB87D /* Debug-kingscliff */,
+				3DF9DDFE2F7BF28A002DDB2F /* Debug-senseOfTaste */,
 				3DB690092F6BDB3500E0DC75 /* Debug-edp */,
 				23ED95D72D6C8838005C5478 /* Debug-max */,
 				3DD6BA042F45E66C002FEB94 /* Debug-maxClub */,
@@ -10382,6 +10846,7 @@
 				237FCD412E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AA2E9FB25E00A6D570 /* Release-acerewards */,
 				3D33F6B52F1E7198006FB87D /* Release-kingscliff */,
+				3DF9DE022F7BF296002DDB2F /* Release-senseOfTaste */,
 				249021D3217E4FDB00AE95B9 /* Profile */,
 				23ED95DD2D6C8879005C5478 /* Profile-max */,
 				3DD6BA0C2F45E67F002FEB94 /* Profile-maxClub */,
@@ -10402,6 +10867,7 @@
 				23364CF52EC46209001651A3 /* Profile-woollahra */,
 				23C765AE2E9FB27100A6D570 /* Profile-acerewards */,
 				3D33F6B12F1E7186006FB87D /* Profile-kingscliff */,
+				3DF9DE062F7BF2AD002DDB2F /* Profile-senseOfTaste */,
 				2376E70C2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -10418,6 +10884,7 @@
 				23364CEE2EC461BD001651A3 /* Debug-woollahra */,
 				23C765A72E9FB24400A6D570 /* Debug-acerewards */,
 				3D33F6AE2F1E716F006FB87D /* Debug-kingscliff */,
+				3DF9DDFF2F7BF28A002DDB2F /* Debug-senseOfTaste */,
 				3DB6900A2F6BDB3500E0DC75 /* Debug-edp */,
 				23ED95D82D6C8838005C5478 /* Debug-max */,
 				3DD6BA052F45E66C002FEB94 /* Debug-maxClub */,
@@ -10452,6 +10919,7 @@
 				237FCD422E6552E800DDAA37 /* Release-hogansreward */,
 				23C765AB2E9FB25E00A6D570 /* Release-acerewards */,
 				3D33F6B62F1E7198006FB87D /* Release-kingscliff */,
+				3DF9DE032F7BF296002DDB2F /* Release-senseOfTaste */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
 				23ED95DE2D6C8879005C5478 /* Profile-max */,
 				3DD6BA0D2F45E67F002FEB94 /* Profile-maxClub */,
@@ -10472,6 +10940,7 @@
 				23364CF62EC46209001651A3 /* Profile-woollahra */,
 				23C765AF2E9FB27100A6D570 /* Profile-acerewards */,
 				3D33F6B22F1E7186006FB87D /* Profile-kingscliff */,
+				3DF9DE072F7BF2AD002DDB2F /* Profile-senseOfTaste */,
 				2376E70D2EB8C7A1000187BE /* Profile-queens */,
 			);
 			defaultConfigurationIsVisible = 0;

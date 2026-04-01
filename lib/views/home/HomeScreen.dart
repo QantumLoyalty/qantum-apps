@@ -416,6 +416,8 @@ class _HomeScreenState extends State<HomeScreen>
                                     userInfoProvider.getUserInfo!
                                         .isUserStatusCancelled())
                                 ? AppColors.disable_color
+                                : flavor == Flavor.senseOfTaste
+                                ? AppColors.sot_button_color
                                 : Theme.of(context)
                                     .textSelectionTheme
                                     .selectionColor,

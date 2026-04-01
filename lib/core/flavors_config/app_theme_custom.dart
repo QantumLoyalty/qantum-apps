@@ -118,6 +118,8 @@ class AppThemeCustom {
         return Theme.of(context).primaryColorDark;
       case Flavor.bluewater:
         return Theme.of(context).canvasColor;
+      case Flavor.senseOfTaste:
+        return Theme.of(context).cardColor;
 
       default:
         return Theme.of(context).scaffoldBackgroundColor;
@@ -156,7 +158,8 @@ class AppThemeCustom {
         return AppColors.ar_back_color_2;
       case Flavor.queens || Flavor.brisbane || Flavor.woollahra || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
-
+      case Flavor.senseOfTaste:
+        return AppColors.sot_card_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
@@ -223,6 +226,8 @@ class AppThemeCustom {
         return AppColors.dr_button_color;
       case Flavor.edp:
         return AppColors.edp_back_color;
+      case Flavor.senseOfTaste:
+        return AppColors.sot_back_color;
 
       default:
         return Theme.of(context).disabledColor;
@@ -274,7 +279,7 @@ class AppThemeCustom {
             Flavor.northShoreTavern ||
             Flavor.queens ||
             Flavor.brisbane ||
-            Flavor.flinders || Flavor.wonthaggi:
+            Flavor.flinders || Flavor.wonthaggi||Flavor.senseOfTaste:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -402,7 +407,7 @@ class AppThemeCustom {
             Flavor.qantumClub ||
             Flavor.queens:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
-      case Flavor.kingscliff:
+      case Flavor.kingscliff||Flavor.senseOfTaste:
         return isShadow != null
             ? AppColors.white_shadow
             : Theme.of(context).cardColor;
@@ -430,7 +435,7 @@ class AppThemeCustom {
   static Color? getHomeScreenProfileIconColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.drinkRewards:
+      case Flavor.drinkRewards||Flavor.senseOfTaste:
         return AppColors.white;
       default:
         return Theme.of(context).iconTheme.color;
@@ -467,7 +472,7 @@ class AppThemeCustom {
       case Flavor.qantum ||
             Flavor.qantumClub ||
             Flavor.queens ||
-            Flavor.drinkRewards||Flavor.edp:
+            Flavor.drinkRewards||Flavor.edp||Flavor.senseOfTaste:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return isShadow != null ? AppColors.white : AppColors.black;
@@ -479,7 +484,7 @@ class AppThemeCustom {
   static ButtonStyle getUpdateInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp||Flavor.senseOfTaste:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -623,6 +628,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.flinders:
         return AppColors.white;
+      case Flavor.senseOfTaste:
+        return AppColors.sot_button_color;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -667,7 +674,7 @@ class AppThemeCustom {
   static ButtonStyle getCancelInfoButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub ||Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp:
+      case Flavor.qantum || Flavor.qantumClub ||Flavor.drinkRewards || Flavor.wonthaggi||Flavor.edp||Flavor.senseOfTaste:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -850,7 +857,13 @@ class AppThemeCustom {
               ? AppColors.edp_button_color
               : AppColors.edp_button_color;
 
-
+        case Flavor.senseOfTaste:
+          return (provider.homeNavigationList[2].name == itemName)
+              ? Colors.transparent
+              : (userInfoProvider.getUserInfo != null &&
+              userInfoProvider.getUserInfo!.isUserStatusCancelled())
+              ? AppColors.sot_button_color
+              : AppColors.sot_button_color;
         default:
           return (userInfoProvider.getUserInfo != null &&
                   userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -961,7 +974,8 @@ class AppThemeCustom {
         flavor != Flavor.drinkRewards &&
         flavor != Flavor.edp &&
         flavor != Flavor.qantumClub &&
-        flavor != Flavor.qantum) {
+        flavor != Flavor.qantum&&
+        flavor != Flavor.senseOfTaste) {
       return selectionColor;
     }
 
@@ -996,7 +1010,10 @@ class AppThemeCustom {
         return (isHeading == true)
             ? AppColors.qa_disable_color
             : selectionColor;
-
+      case Flavor.senseOfTaste:
+        return (isHeading == true && isFromEdit)
+            ? AppColors.sot_button_color
+            : selectionColor;
       default:
         return selectionColor;
     }
@@ -1042,7 +1059,7 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.mhbc ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards||Flavor.wonthaggi||Flavor.edp:
+            Flavor.drinkRewards||Flavor.wonthaggi||Flavor.edp||Flavor.senseOfTaste:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -1088,7 +1105,6 @@ class AppThemeCustom {
                 : Theme.of(context).textSelectionTheme.selectionColor;
 
       case Flavor.northShoreTavern ||
-
             Flavor.queens ||
             Flavor.hogansReward ||
             Flavor.mhbc ||
@@ -1105,7 +1121,13 @@ class AppThemeCustom {
                     userInfoProvider.getUserInfo!.isUserStatusCancelled())
                 ? AppColors.disable_color
                 : Theme.of(context).textSelectionTheme.selectionColor;
-
+      case Flavor.senseOfTaste:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : (userInfoProvider.getUserInfo != null &&
+            userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            ? AppColors.disable_color
+            : AppColors.sot_button_color;
       default:
         return (userInfoProvider.getUserInfo != null &&
                 userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -1127,6 +1149,8 @@ class AppThemeCustom {
         return AppColors.qa_disable_color;
       case Flavor.edp:
         return AppColors.edp_back_color_2;
+      case Flavor.senseOfTaste:
+        return AppColors.black;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }

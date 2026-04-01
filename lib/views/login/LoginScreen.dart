@@ -232,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             AppDimens.getCustomBoxShape(20),
-                            AppButton(
+                             AppButton(
                               text: loc.txtOk.toUpperCase(),
                               onClick: () {
                                 if (_phoneController.text.isNotEmpty &&

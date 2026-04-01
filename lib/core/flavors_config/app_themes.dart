@@ -1255,8 +1255,8 @@ class AppThemes {
   static ThemeData get sotTheme => ThemeData(
       drawerTheme: DrawerThemeData(backgroundColor: AppColors.sot_back_color),
       textSelectionTheme: TextSelectionThemeData(
-        selectionHandleColor: AppColors.sot_text_color,
-        selectionColor: AppColors.sot_text_color,
+        selectionHandleColor: AppColors.sot_text_field_text_color,
+        selectionColor: AppColors.sr_text_color,
         cursorColor: AppColors.sot_text_field_text_color,
       ),
       textTheme: TextTheme(
@@ -1264,30 +1264,43 @@ class AppThemes {
       buttonTheme: ButtonThemeData(
           textTheme: ButtonTextTheme.accent,
           colorScheme: ColorScheme.fromSwatch().copyWith(
-              secondary: Colors.white, primary: AppColors.sot_button_color),
+              onPrimary: AppColors.sot_text_color,
+              onSecondary: AppColors.sot_button_color,
+              secondary: AppColors.sot_button_color,
+              primary: AppColors.sot_button_color),
           buttonColor: AppColors.sot_button_color),
       colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: AppColors.sot_button_color,
-          secondary: AppColors.sot_button_color,
-          surface: AppColors.sot_button_color),
-      /* bottomAppBarTheme: BottomAppBarTheme(
-        color: AppColors.oceanBlueThemeBottomNavigationBarColor),
-    iconTheme: IconThemeData(color: AppColors.oceanBlueThemeBodyIconColor),
-*/
-      primaryColor: AppColors.sot_back_color,
-      primaryColorDark: AppColors.sot_back_color_2,
+          primary: AppColors.white,
+          secondary: AppColors.white,
+          surface: AppColors.white),
+      primaryColorDark: AppColors.sot_back_color,
+      primaryColor: AppColors.sot_back_color_2,
       cardColor: AppColors.sot_card_color,
-      canvasColor: AppColors.sot_back_color,
-      scaffoldBackgroundColor: AppColors.sot_back_color,
+      canvasColor: AppColors.sot_scaffold_bg_color,
+      scaffoldBackgroundColor: AppColors.sot_scaffold_bg_color,
       dividerColor: AppColors.sot_divider_color,
       hintColor: AppColors.sot_hint_text_color,
-      appBarTheme: AppBarTheme(backgroundColor: AppColors.sot_back_color),
+      iconTheme: IconThemeData(color: AppColors.sot_button_color),
+      radioTheme: RadioThemeData(
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.white;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.sot_text_color;
+          }
+          return AppColors.white;
+        }),
+      ),
+      disabledColor: AppColors.sot_disabled_color,
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.sot_back_color_2),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: AppColors.white,
-          unselectedItemColor: AppColors.sot_divider_color),
+          unselectedItemColor: AppColors.sot_back_color_2),
       checkboxTheme: CheckboxThemeData(
         checkColor:
-            WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
             return AppColors.sot_text_color;
           }
@@ -1297,7 +1310,7 @@ class AppThemes {
           return AppColors.sot_text_color;
         }),
         fillColor:
-            WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
           if (states.contains(WidgetState.disabled)) {
             return Colors.transparent;
           }
@@ -1307,89 +1320,21 @@ class AppThemes {
           return Colors.transparent;
         }),
       ),
-      radioTheme: RadioThemeData(
-        fillColor:
-            WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
-            return AppColors.sot_hint_text_color;
-          }
-          if (states.contains(WidgetState.selected)) {
-            return AppColors.sot_text_color;
-          }
-          return AppColors.sot_hint_text_color;
-        }),
-      ),
-      iconTheme: IconThemeData(color: AppColors.black)
+      progressIndicatorTheme:
+      ProgressIndicatorThemeData(color: AppColors.sot_back_color_2),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.transparent,
+          foregroundColor: AppColors.sot_floating_button_icon_color),
+      switchTheme: SwitchThemeData(
+          trackColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.sot_button_color
+              : AppColors.white),
+          thumbColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.white
+              : AppColors.sot_button_color)));
 
-      /*secondaryHeaderColor: AppColors.oceanBlueThemeTextTitleColor,
-    unselectedWidgetColor: AppColors.oceanBlueThemeLeftDrawerColor,
-    hintColor: AppColors.oceanBlueThemeTextHintColor,
-    focusColor: AppColors.oceanBlueThemeSelectedBottomNavigationIconColor,
-    disabledColor: AppColors.oceanBlueThemeButtonDisableColor,
-    indicatorColor: AppColors.oceanBlueThemeBodyIconColor,
-    highlightColor: AppColors.oceanBlueThemeAppTabBarIconsColor,
-    primaryColorLight: AppColors.oceanBlueThemePrimaryLightColor,
-    splashColor: AppColors.oceanBlueThemeGradientColor,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.oceanBlueThemeBottomNavigationBarColor,
-      selectedItemColor: AppColors.oceanBlueThemeBodyIconColor,
-      unselectedItemColor: AppColors.oceanBlueThemeBottomNavigationIconColor,
-    ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.oceanBlueThemeBottomNavigationBarColor,
-      foregroundColor: AppColors.oceanBlueThemeBottomNavigationBarColor,
-      iconTheme:
-      IconThemeData(color: AppColors.oceanBlueThemeAppTabBarIconsColor),
-      actionsIconTheme: const IconThemeData(
-          color: AppColors.oceanBlueThemeAppTabBarIconsColor),
-    ),
-    checkboxTheme: CheckboxThemeData(
-      fillColor:
-      WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return null;
-        }
-        if (states.contains(WidgetState.selected)) {
-          return AppColors.oceanBlueThemeSmallCardColor;
-        }
-        return null;
-      }),
-    ),
-    radioTheme: RadioThemeData(
-      fillColor:
-      WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return null;
-        }
-        if (states.contains(WidgetState.selected)) {
-          return AppColors.oceanBlueThemeSmallCardColor;
-        }
-        return null;
-      }),
-    ),
-    switchTheme: SwitchThemeData(
-      thumbColor:
-      WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return null;
-        }
-        if (states.contains(WidgetState.selected)) {
-          return AppColors.oceanBlueThemeSmallCardColor;
-        }
-        return null;
-      }),
-      trackColor:
-      WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return null;
-        }
-        if (states.contains(WidgetState.selected)) {
-          return AppColors.oceanBlueThemeSmallCardColor;
-        }
-        return null;
-      }),
-    ),*/
-      );
 
   static ThemeData get kingscliffTheme => ThemeData(
       drawerTheme: DrawerThemeData(backgroundColor: AppColors.kc_primary_color),

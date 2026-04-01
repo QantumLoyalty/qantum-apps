@@ -10,7 +10,6 @@ import '../../views/membership/ChoosePaymentMethod.dart';
 import '../../views/membership/MembershipPaymentScreen.dart';
 import '../../views/membership/PendingPaymentScreen.dart';
 import '../../views/membership/ReceptionPaymentScreen.dart';
-import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
 import '../../views/accounts/GamingPreferences.dart';
@@ -27,11 +26,8 @@ import '../../views/accounts/VerifyOTPAccount.dart';
 import '../../views/home/HomeScreen.dart';
 import '../../views/login/LoginScreen.dart';
 import '../../views/login/OTPScreen.dart';
-import '../../views/partners_offer/PartnerOfferDetailScreen.dart';
-import '../../views/promotions/PromotionDetailScreen.dart';
 import '../../views/signup/SignupScreen.dart';
 import '../../views/splash/SplashScreen.dart';
-import '../../views/whats_on/WhatsOnDetailScreen.dart';
 
 class AppNavigator {
   static const String splash = "/splash";
@@ -40,7 +36,6 @@ class AppNavigator {
   static const String home = "/home";
   static const String signup = "/signup";
   static const String promotionDetail = "/promotionDetail";
-  static const String partnerOfferDetail = "/partnerOfferDetail";
   static const String whatsOnDetailScreen = "/whatsOnDetailScreen";
   static const String specialOfferDetailScreen = "/specialOfferDetailScreen";
   static const String myAccountScreen = "/myAccountScreen";
@@ -169,13 +164,6 @@ class AppNavigator {
 
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-      case promotionDetail:
-        return MaterialPageRoute(builder: (_) => const PromotionDetailScreen());
-      case partnerOfferDetail:
-        return MaterialPageRoute(
-            builder: (_) => const PartnerOfferDetailScreen());
-      case whatsOnDetailScreen:
-        return MaterialPageRoute(builder: (_) => const WhatsOnDetailScreen());
       case myAccountScreen:
         return MaterialPageRoute(builder: (_) => MyAccountScreen());
       case userDetailScreen:
@@ -222,11 +210,7 @@ class AppNavigator {
             builder: (_) => RecoverAccountVerificationScreen(
                   params: args as Map<String, dynamic>,
                 ));
-      case appWebView:
-        return MaterialPageRoute(
-            builder: (_) => AppWebView(
-                  url: args as String,
-                ));
+
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
