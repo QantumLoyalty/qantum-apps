@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen>
       _homeProvider.updatePointsBalanceVisibility(false);
     });
   }
-    
+
   cancelPointsDialogTimer() {
     if (_pointsDialogTimer != null && _pointsDialogTimer!.isActive) {
       _pointsDialogTimer!.cancel();
@@ -238,8 +238,10 @@ class _HomeScreenState extends State<HomeScreen>
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor:
-                                AppThemeCustom.getCustomHomeButtonsIconStyle(
+                            iconColor: provider.selectedOption == index &&
+                                    flavor == Flavor.senseOfTaste
+                                ? AppColors.white
+                                : AppThemeCustom.getCustomHomeButtonsIconStyle(
                                     context,
                                     provider,
                                     userInfoProvider,
@@ -249,8 +251,10 @@ class _HomeScreenState extends State<HomeScreen>
                                     provider.homeNavigationList[index].name)
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            textColor:
-                                AppThemeCustom.getCustomHomeButtonsTextStyle(
+                            textColor: provider.selectedOption == index &&
+                                    flavor == Flavor.senseOfTaste
+                                ? AppColors.white
+                                : AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,
                                     provider,
                                     userInfoProvider,
@@ -259,18 +263,23 @@ class _HomeScreenState extends State<HomeScreen>
                             textSize: 13,
                             decoration: BoxDecoration(
                                 color: (provider.selectedOption == index)
-                                    ? Theme.of(context)
-                                        .iconTheme
-                                        .color!
-                                        .withValues(alpha: 0.5)
+                                    ? flavor == Flavor.senseOfTaste
+                                        ? AppColors.button_shadow
+                                        : Theme.of(context)
+                                            .iconTheme
+                                            .color!
+                                            .withValues(alpha: 0.5)
                                     : Colors.transparent,
-                                border: AppThemeCustom
-                                    .getCustomHomeButtonsBorderStyle(
+                                border: provider.selectedOption == index &&
+                                        flavor == Flavor.senseOfTaste
+                                    ? Border.all(color: AppColors.white)
+                                    : AppThemeCustom
+                                        .getCustomHomeButtonsBorderStyle(
                                         context,
                                         provider,
                                         userInfoProvider,
-                                        provider
-                                            .homeNavigationList[index].name),
+                                        provider.homeNavigationList[index].name,
+                                      ),
                                 borderRadius: BorderRadius.circular(10)),
                             onDragStart: (value) {
                               /// HIDE POINTS BALANCE DIALOG
@@ -398,7 +407,10 @@ class _HomeScreenState extends State<HomeScreen>
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
-                            iconColor: (userInfoProvider.getUserInfo != null &&
+                            iconColor:  provider.selectedOption == index+3 &&
+                                flavor == Flavor.senseOfTaste
+                                ? AppColors.white
+                                : (userInfoProvider.getUserInfo != null &&
                                     userInfoProvider.getUserInfo!
                                         .isUserStatusCancelled())
                                 ? AppColors.disable_color
@@ -412,17 +424,23 @@ class _HomeScreenState extends State<HomeScreen>
                                 .toUpperCase(),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
-                            textColor: (userInfoProvider.getUserInfo != null &&
+                            textColor:provider.selectedOption == index+3 &&
+                                flavor == Flavor.senseOfTaste
+                                ? AppColors.white
+                                :  (userInfoProvider.getUserInfo != null &&
                                     userInfoProvider.getUserInfo!
                                         .isUserStatusCancelled())
                                 ? AppColors.disable_color
                                 : flavor == Flavor.senseOfTaste
-                                ? AppColors.sot_button_color
-                                : Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                                    ? AppColors.sot_button_color
+                                    : Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor,
                             decoration: BoxDecoration(
-                                color: (userInfoProvider.getUserInfo != null &&
+                                color:provider.selectedOption == index+3 &&
+                                    flavor == Flavor.senseOfTaste
+                                    ? AppColors.button_shadow
+                                    :  (userInfoProvider.getUserInfo != null &&
                                         userInfoProvider.getUserInfo!
                                             .isUserStatusCancelled())
                                     ? Colors.transparent
@@ -434,7 +452,10 @@ class _HomeScreenState extends State<HomeScreen>
                                         : Colors.transparent),
                                 border: Border.all(
                                     color:
-                                        (userInfoProvider.getUserInfo != null &&
+                                    provider.selectedOption == index+3 &&
+                                        flavor == Flavor.senseOfTaste
+                                        ? AppColors.white
+                                        :  (userInfoProvider.getUserInfo != null &&
                                                 userInfoProvider.getUserInfo!
                                                     .isUserStatusCancelled())
                                             ? AppColors.disable_color

@@ -38,6 +38,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         mini: true,
+        elevation: 0,
+        highlightElevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
         onPressed: () {
           Navigator.pop(context);
