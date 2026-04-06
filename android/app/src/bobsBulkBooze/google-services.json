@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056025182878:android:bf382acfdb742410c9318f",
+        "mobilesdk_app_id": "1:1056025182878:android:007c8a0ecd0535bcc9318f",
         "android_client_info": {
-          "package_name": "com.au.senseoftaste.app"
+          "package_name": "com.au.bobsBulkBooze.app"
         }
       },
       "oauth_client": [],

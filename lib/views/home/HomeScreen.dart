@@ -287,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen>
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
                             iconColor: provider.selectedOption == index &&
-                                    flavor == Flavor.senseOfTaste
+                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                 ? AppColors.white
                                 : AppThemeCustom.getCustomHomeButtonsIconStyle(
                                     context,
@@ -300,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
                             textColor: provider.selectedOption == index &&
-                                    flavor == Flavor.senseOfTaste
+                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                 ? AppColors.white
                                 : AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,
@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen>
                             textSize: 13,
                             decoration: BoxDecoration(
                                 color: (provider.selectedOption == index)
-                                    ? flavor == Flavor.senseOfTaste
+                                    ?   (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                         ? AppColors.button_shadow
                                         : Theme.of(context)
                                             .iconTheme
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             .withValues(alpha: 0.5)
                                     : Colors.transparent,
                                 border: provider.selectedOption == index &&
-                                        flavor == Flavor.senseOfTaste
+                                    (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                     ? Border.all(color: AppColors.white)
                                     : AppThemeCustom
                                         .getCustomHomeButtonsBorderStyle(
@@ -462,15 +462,13 @@ class _HomeScreenState extends State<HomeScreen>
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
                             iconColor:  provider.selectedOption == index+3 &&
-                                flavor == Flavor.senseOfTaste
+                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                 ? AppColors.white
-                                : (userInfoProvider.getUserInfo != null &&
-                                    userInfoProvider.getUserInfo!
-                                        .isUserStatusCancelled())
-                                ? AppColors.disable_color
-                                : flavor == Flavor.edp
-                                    ? AppColors.edp_button_color
-                                    : null,
+                                : AppThemeCustom.getCustomHomeButtonsIconStyle(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.homeNavigationList[index+3].name),
                             text: provider
                                 .getTranslatedOptionsName(loc,
                                     provider.homeNavigationList[index + 3].name)
@@ -479,20 +477,16 @@ class _HomeScreenState extends State<HomeScreen>
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
                             textColor:provider.selectedOption == index+3 &&
-                                flavor == Flavor.senseOfTaste
+                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                 ? AppColors.white
-                                :  (userInfoProvider.getUserInfo != null &&
-                                    userInfoProvider.getUserInfo!
-                                        .isUserStatusCancelled())
-                                ? AppColors.disable_color
-                                : flavor == Flavor.senseOfTaste
-                                    ? AppColors.sot_button_color
-                                    : Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                : AppThemeCustom.getCustomHomeButtonsTextStyle(
+                                context,
+                                provider,
+                                userInfoProvider,
+                                provider.homeNavigationList[index+3].name),
                             decoration: BoxDecoration(
                                 color:provider.selectedOption == index+3 &&
-                                    flavor == Flavor.senseOfTaste
+                                    (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
                                     ? AppColors.button_shadow
                                     :  (userInfoProvider.getUserInfo != null &&
                                         userInfoProvider.getUserInfo!
@@ -504,20 +498,16 @@ class _HomeScreenState extends State<HomeScreen>
                                             .color!
                                             .withValues(alpha: 0.5)
                                         : Colors.transparent),
-                                border: Border.all(
-                                    color:
-                                    provider.selectedOption == index+3 &&
-                                        flavor == Flavor.senseOfTaste
-                                        ? AppColors.white
-                                        :  (userInfoProvider.getUserInfo != null &&
-                                                userInfoProvider.getUserInfo!
-                                                    .isUserStatusCancelled())
-                                            ? AppColors.disable_color
-                                            : Theme.of(context)
-                                                .buttonTheme
-                                                .colorScheme!
-                                                .onSecondary,
-                                    width: 1.5),
+                                border: provider.selectedOption == index+3 &&
+                                    (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
+                                    ? Border.all(color: AppColors.white)
+                                    : AppThemeCustom
+                                    .getCustomHomeButtonsBorderStyle(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.homeNavigationList[index+3].name,
+                                ),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
                               if (userInfoProvider.getUserInfo != null &&

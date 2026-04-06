@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Bobs Bulk Booze</string>
+    <string name="default_notification_channel_id">com.au.bobsBulkBooze.app.urgent</string>
+</resources>

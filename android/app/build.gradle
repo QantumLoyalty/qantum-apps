@@ -183,6 +183,13 @@ android {
                     deeplinkHost: "disabled.invalid"
             ]
         }
+        bobsBulkBooze {
+            dimension "app"
+            applicationId "com.au.bobsBulkBooze.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid"
+            ]
+        }
     }
 
 

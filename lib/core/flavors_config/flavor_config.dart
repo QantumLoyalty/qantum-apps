@@ -19,7 +19,8 @@ enum Flavor {
   kingscliff,
   drinkRewards,
   wonthaggi,
-  edp
+  edp,
+  bobsBulkBooze
 }
 
 class FlavorValues {

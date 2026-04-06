@@ -543,7 +543,31 @@ class AppColors {
 
   static Color get edp_textformField_background_color => const Color(0xFF707070);
 
+  /// Bobs bulk booze color
 
+  static Color get bob_back_color => const Color(0xFFff8f00);
+
+  static Color get bob_back_color_2 => const Color(0xFFff8f00);
+
+  static Color get bob_text_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_hint_text_color => const Color(0x61FFFFFF);
+
+  static Color get bob_button_color => const Color(0xFF971B2F);
+
+  static Color get bob_card_color => const Color(0xFF971B2F);
+
+  static Color get bob_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_scaffold_bg_color => const Color(0xFF971B2F);
+
+  static Color get bob_disabled_color => const Color(0xFF49141D);
+
+  static Color get bob_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_profile_cross_background_color => const Color(0xFFFFFFFF);
 
 
 
