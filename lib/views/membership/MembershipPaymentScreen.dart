@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppIcons.dart';
@@ -11,7 +12,9 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class MembershipPaymentScreen extends StatefulWidget {
-  const MembershipPaymentScreen({super.key});
+  MembershipFlowSource? membershipFlowSource;
+
+  MembershipPaymentScreen({super.key, this.membershipFlowSource});
 
   @override
   State<MembershipPaymentScreen> createState() =>

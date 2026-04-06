@@ -1316,6 +1316,12 @@ abstract class AppLocalizations {
   /// **'Renew Now'**
   String get renewNow;
 
+  /// No description provided for @renewMembership.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew Membership'**
+  String get renewMembership;
+
   /// No description provided for @paymentOptions.
   ///
   /// In en, this message translates to:
@@ -1381,6 +1387,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to connect. Please check your internet connection and try again.'**
   String get msgUnableConnect;
+
+  /// No description provided for @renewalOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Renewals\nNow Open'**
+  String get renewalOpen;
+
+  /// No description provided for @yourMembershipExpires.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Membership expires'**
+  String get yourMembershipExpires;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

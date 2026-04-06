@@ -37,6 +37,10 @@ class UserModel {
   String? membershipExpiryDate;
   String? serverTime;
   String? unitedFuelCardHash;
+  String? packageId;
+  String? comingPackageId;
+  String? comingPackageName;
+  String? comingPaymentType;
 
   UserModel(
       {this.id,
@@ -71,7 +75,14 @@ class UserModel {
       this.paymentType,
       this.type,
       this.licenceFront,
-      this.licenceBack,this.membershipExpiryDate,this.serverTime,this.unitedFuelCardHash});
+      this.licenceBack,
+      this.membershipExpiryDate,
+      this.serverTime,
+      this.unitedFuelCardHash,
+      this.packageId,
+      this.comingPackageId,
+      this.comingPackageName,
+      this.comingPaymentType});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
@@ -89,13 +100,25 @@ class UserModel {
     suburb = json.containsKey("Suburb") ? json["Suburb"] : "";
     state = json.containsKey("State") ? json["State"] ?? "" : "";
     dateJoined = json.containsKey("DateJoined") ? json["DateJoined"] : "";
-    membershipExpiryDate = json.containsKey("ExpiryDate") ? json["ExpiryDate"] : "";
+    membershipExpiryDate =
+        json.containsKey("ExpiryDate") ? json["ExpiryDate"] : "";
     serverTime = json.containsKey("serverTime") ? json["serverTime"] : "";
     unitedFuelCardHash = json.containsKey("card_hash") ? json["card_hash"] : "";
+    packageId = json.containsKey("packageId") ? json["packageId"] : null;
+
+    comingPackageId =
+        json.containsKey("comingPackageId") ? json["comingPackageId"] : null;
+    comingPackageName = json.containsKey("comingPackageName")
+        ? json["comingPackageName"]
+        : null;
+    comingPaymentType = json.containsKey("comingPaymentType")
+        ? json["comingPaymentType"]
+        : null;
 
     /*pointsValue = 4003.55;
     pointsBalance = 40.0355;*/
-    pointsValue = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
+    pointsValue =
+        json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
     pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
 
     statusPoints =
@@ -186,6 +209,11 @@ class UserModel {
     data['ExpiryDate'] = membershipExpiryDate ?? "";
     data['serverTime'] = serverTime ?? "";
     data['card_hash'] = unitedFuelCardHash ?? "";
+    data['packageId'] = packageId;
+
+    data['comingPackageId'] = comingPackageId ?? "";
+    data['comingPackageName'] = comingPackageName ?? "";
+    data['comingPaymentType'] = comingPaymentType ?? "";
 
     return data;
   }
@@ -254,12 +282,12 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id, unitedFuelCardHash: $unitedFuelCardHash,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
+    return 'UserModel{id: $id, packageId :$packageId, comingPackageId: $comingPackageId comingPaymentType:$comingPaymentType comingPackageName:$comingPackageName , unitedFuelCardHash: $unitedFuelCardHash,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
   }
 
   bool isUserStatusCancelled() {
     if (statusTier != null &&
-          statusTier!.toString().toLowerCase().trim() ==
+        statusTier!.toString().toLowerCase().trim() ==
             AppStrings.textMemberCancelled) {
       return true;
     }

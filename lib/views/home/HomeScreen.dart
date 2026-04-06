@@ -8,6 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
+import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -77,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen>
       _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
-
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
     }
@@ -204,6 +206,52 @@ class _HomeScreenState extends State<HomeScreen>
               }
             }
 
+            /// CHECKING & GETTING THE USER MEMBERSHIP PLAN
+            if (userInfoProvider.getUserInfo != null &&
+                AppHelper.isClubApp() &&
+                !provider.clubPackageCheckStatus) {
+              provider.getClubPackageInfo(
+                  membershipID: userInfoProvider.getUserInfo!.packageId);
+
+              // provider.resetClubPackageCheckStatus();
+            }
+
+            /// CHECKING FOR THE EARLY BIRD DIALOG
+            if (userInfoProvider.getUserInfo != null &&
+                !provider.checkEarlyBirdCondition &&
+                provider.selectedMembership != null) {
+//              _showEarlyBirdDialogIfNeeded();
+
+              logEvent(
+                  "ENTERED IN \"CHECKING FOR THE EARLY BIRD DIALOG BLOCK\"");
+              if (provider.selectedMembership!.earlyBirdPeriod != null &&
+                  provider.selectedMembership!.earlyBirdRenewalDate != null &&
+                  provider
+                      .selectedMembership!.earlyBirdRenewalDate!.isNotEmpty) {
+                /// CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP
+                if (!AppDateFormatter.ifUserPurchasedMembership(
+                    usersMembershipExpiry:
+                        userInfoProvider.getUserInfo!.membershipExpiryDate!,
+                    membershipExpiry:
+                        provider.selectedMembership!.renewalDate!)) {
+                  logEvent(
+                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+
+                  /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
+
+                  if (AppDateFormatter.isCurrentDateUnderEarlyBirdRange(
+                      earlyBirdPeriod:
+                          provider.selectedMembership!.earlyBirdPeriod!)) {
+                    logEvent(
+                        "ENTERED IN \"CHECKING CURRENT DAY FALLING UNDER EARLY BIRD DATE RANGE\"");
+                    _showEarlyBirdDialogIfNeeded();
+                  }
+                }
+              }
+
+              provider.resetCheckEarlyBirdCondition();
+            }
+
             return Column(
               children: [
                 const HomeAppBar(),
@@ -299,9 +347,13 @@ class _HomeScreenState extends State<HomeScreen>
                               }
                             },
                             onTapDown: (value) {
+                              print("Tap down called for index $index");
+
                               if (userInfoProvider.getUserInfo != null &&
                                   !userInfoProvider.getUserInfo!
                                       .isUserStatusCancelled()) {
+                                print("Entered in if block for index $index");
+
                                 /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                                 checkAndHideSeeAllOptionMenu(
                                     provider, "points balance");
@@ -394,6 +446,8 @@ class _HomeScreenState extends State<HomeScreen>
                                       provider, "FROM TOP ROW");
                                 }
                               }*/
+                              } else {
+                                print("issue in user status");
                               }
                             },
                           ));
@@ -593,5 +647,19 @@ class _HomeScreenState extends State<HomeScreen>
           preferredBarTintColor: Theme.of(context).primaryColor,
           dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
         ));
+  }
+
+  _showEarlyBirdDialogIfNeeded() async {
+    final prefs = await SharedPreferenceHelper.getInstance();
+    final lastShownDate = prefs.getLastEarlyBirdDialogDate();
+    final today = AppDateFormatter.formatDateForEarlyBird(DateTime.now());
+    logEvent("lastShownDate >> $lastShownDate");
+    if (lastShownDate != today) {
+      await EarlyRenewalMembershipDialog.getInstance()
+          .showRenewalMembershipDialog(
+              context: context,
+              currentMembership: _homeProvider.selectedMembership!);
+      await prefs.saveLastEarlyBirdDialogDate(today!);
+    }
   }
 }

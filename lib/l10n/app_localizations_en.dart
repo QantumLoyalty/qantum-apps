@@ -620,6 +620,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get renewNow => 'Renew Now';
 
   @override
+  String get renewMembership => 'Renew Membership';
+
+  @override
   String get paymentOptions => 'Payment Options';
 
   @override
@@ -651,4 +654,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgUnableConnect => 'Unable to connect. Please check your internet connection and try again.';
+
+  @override
+  String get renewalOpen => 'Renewals\nNow Open';
+
+  @override
+  String get yourMembershipExpires => 'Your Membership expires';
 }

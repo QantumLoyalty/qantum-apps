@@ -228,10 +228,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> createPaymentIntent(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
-      var url = Uri.parse(APIList.CREATE_PAYMENT_INTENT);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.CREATE_PAYMENT_INTENT_EARLY_BIRD
+          : APIList.CREATE_PAYMENT_INTENT);
+      print(url.toString());
       networkResponse = await NetworkHelper.instance.postCall(
           url: url,
           headers: {'Content-Type': 'application/json'},
@@ -244,12 +248,15 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> updatePaymentType(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var url = Uri.parse(APIList.UPDATE_PAYMENT_TYPE);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.UPDATE_PAYMENT_TYPE_EARLY_BIRD
+          : APIList.UPDATE_PAYMENT_TYPE);
       networkResponse = await NetworkHelper.instance.putCall(
           url: url,
           headers: {
@@ -265,10 +272,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> verifyPayment(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
-      var url = Uri.parse(APIList.VERIFY_PAYMENT);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.VERIFY_PAYMENT_EARLY_BIRD
+          : APIList.VERIFY_PAYMENT);
+      print("VERIFY PAYMENT: ${url.toString()} >> PARAMS: $paymentParams");
       networkResponse = await NetworkHelper.instance.postCall(
           url: url,
           headers: {'Content-Type': 'application/json'},
@@ -286,6 +297,28 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var url = Uri.parse(APIList.FETCH_SPECIAL_OFFERS_FILTERS);
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+      );
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> getMembershipPlansById(
+      {required String membershipID}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var url = Uri.parse(APIList.CLUB_PACKAGE_CHECK +
+          '$membershipID&appType=${AppHelper.getAppType()}');
       networkResponse = await NetworkHelper.instance.getCall(
         url: url,
         headers: {

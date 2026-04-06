@@ -18,6 +18,7 @@ class SharedPreferenceHelper {
   static String MEMBERSHIP = "membership";
   static String AUTH_TOKEN = "authToken";
   static String COUNTRY_CODE = "countryCode";
+  static String LAST_EARLY_BIRD_DATE = "lastEarlyBirdDate";
 
   static Future<SharedPreferenceHelper> getInstance() async {
     _instance ??= SharedPreferenceHelper._internal();
@@ -105,6 +106,18 @@ class SharedPreferenceHelper {
       }
       return null;
     }*/
+  }
+
+  saveLastEarlyBirdDialogDate(String date) {
+    print("LastEarlyBirdDialogDate >>> $date");
+    _sharedPreferences!.setString(LAST_EARLY_BIRD_DATE, date);
+  }
+
+  String? getLastEarlyBirdDialogDate() {
+    if (_sharedPreferences!.containsKey(LAST_EARLY_BIRD_DATE)) {
+      return _sharedPreferences!.getString(LAST_EARLY_BIRD_DATE)!;
+    }
+    return null;
   }
 
   clearAll() async {

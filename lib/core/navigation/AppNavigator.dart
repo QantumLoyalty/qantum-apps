@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
+import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
+import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
 import '/views/membership/RenewMembershipScreen.dart';
@@ -60,6 +63,8 @@ class AppNavigator {
   static const String membershipPaymentScreen = "/membershipPaymentScreen";
   static const String pendingPaymentScreen = "/pendingPaymentScreen";
   static const String choosePaymentMethod = "/choosePaymentMethod";
+  static const String earlyBirdRenewalMembershipScreen =
+      "/earlyBirdRenewalMembershipScreen";
   static const String receptionPaymentScreen = "/receptionPaymentScreen";
   static const String selfieUploadScreen = "/selfieUploadScreen";
   static const String renewMembershipScreen = "/renewMembershipScreen";
@@ -138,11 +143,36 @@ class AppNavigator {
         }
 
       case membershipPaymentScreen:
-        return MaterialPageRoute(builder: (_) => MembershipPaymentScreen());
+        {
+          MembershipFlowSource? flowSource;
+          if (args != null) {
+            flowSource = args as MembershipFlowSource;
+          }
+
+          return MaterialPageRoute(
+              builder: (_) => MembershipPaymentScreen(
+                    membershipFlowSource: flowSource,
+                  ));
+        }
       case renewMembershipScreen:
-        return MaterialPageRoute(builder: (_) => RenewMembershipScreen());
+        {
+          return MaterialPageRoute(builder: (_) => RenewMembershipScreen());
+        }
       case pendingPaymentScreen:
-        return MaterialPageRoute(builder: (_) => PendingPaymentScreen());
+        {
+          String? screenFlowSource;
+
+          if (args != null) {
+            screenFlowSource = args as String;
+          }
+          return MaterialPageRoute(
+              builder: (_) => PendingPaymentScreen(
+                    fromScreenFlow: screenFlowSource,
+                  ));
+        }
+      case earlyBirdRenewalMembershipScreen:
+        return MaterialPageRoute(
+            builder: (_) => EarlyBirdRenewalMembershipScreen());
       case choosePaymentMethod:
         {
           Map<String, String>? argumentss;

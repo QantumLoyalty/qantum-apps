@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' hide Card;
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import 'package:qantum_apps/core/utils/AppIcons.dart';
 import '../../services/PaymentService.dart';
 import '/views/common_widgets/AppButton.dart';
@@ -39,6 +40,9 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<UserInfoProvider>(context, listen: false).retrieveUserInfo();
     });
+    /*logEvent("widget.arguments >> ${widget.arguments}");
+    logEvent(
+        "Selected Membership >> ${_membershipManagerProvider.selectedMembership.toString()}");*/
   }
 
   @override
@@ -71,21 +75,24 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
               "isPaymentMethodUpdated: ${membershipProvider.isPaymentMethodUpdated}");
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (membershipProvider.isPaymentMethodUpdated!) {
+              /*if (widget.arguments != null &&
+                  widget.arguments!.containsKey("fromRenewMembership")) {
+                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+              } else {
+                AppNavigator.navigateTo(
+                    context, AppNavigator.pendingPaymentScreen);
+              }*/
 
-              if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
-                {
-                  AppNavigator.navigateAndClearStack(
-                      context, AppNavigator.home);
-                }
-              else
-                {
-                  AppNavigator.navigateTo(
-                      context, AppNavigator.pendingPaymentScreen);
-                }
+              String? membershipFlowSource;
+              if (widget.arguments != null &&
+                  widget.arguments!.containsKey("fromRenewMembership")) {
+                membershipFlowSource = MembershipFlowSource.renew.name;
+              }
 
-
+              AppNavigator.navigateTo(
+                  context, AppNavigator.pendingPaymentScreen,
+                  arguments: membershipFlowSource);
               logEvent("navigateAndClearStack called!!!");
-
 
               membershipProvider.resetUpdateMembershipPaymentResponse();
             } else {
@@ -101,66 +108,87 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
               children: [
                 Applogo(),
                 AppDimens.shape_30,
-
                 Text(
                   loc.paymentOptions,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                    color: Theme.of(context)
-                        .textSelectionTheme
-                        .selectionColor,
+                    color: Theme.of(context).textSelectionTheme.selectionColor,
                   ),
                 ),
                 AppDimens.shape_30,
+                Row(
+                  children: [
+                    ImageIcon(
+                      AssetImage(AppIcons.payByCard),
+                      size: 42,
+                    ),
+                    AppDimens.shape_10,
+                    Expanded(
+                      child: AppButton(
+                          text: loc.payByCard.toUpperCase(),
+                          onClick: () async {
+                            //  makePayment(userInfoProvider);
+                            String renewType = "none";
+                            String? paymentFlowSource;
 
-                Row(children: [
-                   ImageIcon(AssetImage(AppIcons.payByCard),size: 42,),
-                  AppDimens.shape_10,
-                  Expanded(
-                    child: AppButton(
-                        text: loc.payByCard.toUpperCase(),
-                        onClick: () async {
-                        //  makePayment(userInfoProvider);
-                          String renewType="none";
+                            if (widget.arguments != null &&
+                                widget.arguments!
+                                    .containsKey("fromRenewMembership")) {
+                              renewType = "renew";
+                            }
 
-                          if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
-                          {
-                            renewType="renew";
-                          }
-                          await PaymentService.makePayment(
-                              context: context,
-                              loc: loc,
-                              membershipManagerProvider:
-                              _membershipManagerProvider,
-                              userInfoProvider: userInfoProvider,renewType: renewType);
+                            if (widget.arguments != null &&
+                                widget.arguments!
+                                    .containsKey("membershipFlowSource")) {
+                              paymentFlowSource =
+                                  widget.arguments!["membershipFlowSource"];
+                            }
 
-                        }),
-                  ),
-                ],),
-
+                            await PaymentService.makePayment(
+                                context: context,
+                                loc: loc,
+                                membershipManagerProvider:
+                                    _membershipManagerProvider,
+                                userInfoProvider: userInfoProvider,
+                                renewType: renewType,
+                                paymentFlowSource: paymentFlowSource);
+                          }),
+                    ),
+                  ],
+                ),
                 AppDimens.shape_30,
                 Row(
                   children: [
-
-                     ImageIcon(AssetImage(AppIcons.payAtReception),size: 42,),
-
+                    ImageIcon(
+                      AssetImage(AppIcons.payAtReception),
+                      size: 42,
+                    ),
                     AppDimens.shape_10,
                     Expanded(
                       child: AppButton(
                           text: loc.payReception,
                           onClick: () {
+                            String renewType = "none";
+                            String? paymentFlowSource;
 
-                            String renewType="none";
+                            if (widget.arguments != null &&
+                                widget.arguments!
+                                    .containsKey("fromRenewMembership")) {
+                              renewType = "renew";
+                            }
 
-                            if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
-                              {
-                                renewType="renew";
-                              }
-
+                            if (widget.arguments != null &&
+                                widget.arguments!
+                                    .containsKey("membershipFlowSource")) {
+                              paymentFlowSource =
+                                  widget.arguments!["membershipFlowSource"];
+                            }
 
                             membershipProvider.updateMembershipPaymentMethod(
-                                loc: loc,renewType: renewType);
+                                loc: loc,
+                                renewType: renewType,
+                                paymentFlowSource: paymentFlowSource);
                           }),
                     ),
                   ],
@@ -193,22 +221,21 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
     )));
   }
 
-  makePayment(UserInfoProvider infoProvider) async {
+/*makePayment(UserInfoProvider infoProvider) async {
     try {
       logEvent("User Info:: ${infoProvider.getUserInfo}");
-      String renewType="none";
+      String renewType = "none";
 
-      if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
-      {
-        renewType="renew";
+      if (widget.arguments != null &&
+          widget.arguments!.containsKey("fromRenewMembership")) {
+        renewType = "renew";
       }
 
       // 1️⃣ Create PaymentIntent (backend)
       await _membershipManagerProvider.createPaymentIntent(
-        loc: loc,
-        userId: infoProvider.getUserInfo!.id!,
-        renewType: renewType
-      );
+          loc: loc,
+          userId: infoProvider.getUserInfo!.id!,
+          renewType: renewType, );
 
       final clientSecret = _membershipManagerProvider.paymentIntentClientSecret;
 
@@ -236,7 +263,7 @@ class _ChoosePaymentMethodState extends State<ChoosePaymentMethod>
       if (!mounted) return;
       AppHelper.showErrorMessage(context, loc.msgPaymentCancelled);
     }
-  }
+  }*/
 
 /*makePayment(UserInfoProvider infoProvider) async {
     try {

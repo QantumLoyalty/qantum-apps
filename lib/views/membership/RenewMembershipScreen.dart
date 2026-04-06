@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
+import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
 import '../../core/enums/FetchProfileState.dart';
 import '../../core/enums/MembershipStatus.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -14,6 +16,7 @@ import '/core/mixins/logging_mixin.dart';
 import 'widgets/BottomInfoWidget.dart';
 
 class RenewMembershipScreen extends StatefulWidget with LoggingMixin {
+
 
   RenewMembershipScreen({super.key});
 
@@ -32,20 +35,17 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
 
     return AppScaffold(body: SafeArea(
         child: Consumer<UserInfoProvider>(builder: (context, provider, child) {
-
-          if (provider.getUserInfo != null) {
-            if ((provider.membershipStatus ==
-                MembershipStatus.active) &&
-                !_hasRedirectedToHome && provider.fetchProfileState==FetchProfileState.loaded)
-            {
-              _hasRedirectedToHome = true;
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                AppNavigator.navigateAndClearStack(
-                    context, AppNavigator.home);
-              });
-            }
+      if (provider.getUserInfo != null) {
+          if ((provider.membershipStatus == MembershipStatus.active) &&
+              !_hasRedirectedToHome &&
+              provider.fetchProfileState == FetchProfileState.loaded) {
+            _hasRedirectedToHome = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
+            });
           }
 
+      }
 
       return Stack(
         children: [
@@ -84,10 +84,12 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                           Map<String, String> params = Map();
                           params['fromRenewMembership'] = "true";
 
-                          AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.chooseMembershipScreen,
+                          AppNavigator.navigateAndClearStack(context, AppNavigator.chooseMembershipScreen,
                               arguments: params);
-                        },
+
+
+
+                          },
                       ),
                       AppDimens.shape_30,
                       Row(

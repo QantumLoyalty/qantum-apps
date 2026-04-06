@@ -207,6 +207,7 @@
   "membershipRenewalTime": "सदस्यता नवीनीकरण का समय!",
   "yourMembershipExpired": "आपकी सदस्यता समाप्त हो गई है",
   "renewNow": "नवीनीकरण करें",
+  "renewMembership": "सदस्यता नवीनीकरण करें",
   "paymentOptions": "भुगतान विकल्प",
   "appUpdate": "ऐप अपडेट",
   "msgNewVersionAvailable":"### का नया संस्करण उपलब्ध है!",
@@ -217,5 +218,7 @@
   "ignore": "अनदेखा करें",
   "later":"बाद में",
   "updateNow": "अभी अपडेट करें",
-  "msgUnableConnect":"कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।"
+  "msgUnableConnect":"कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।",
+  "renewalOpen":"नवीनीकरण\nअब खुला है",
+  "yourMembershipExpires":"आपकी सदस्यता समाप्त हो रही है"
 }

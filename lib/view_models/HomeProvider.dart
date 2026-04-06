@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
@@ -204,11 +205,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
               _moreButtonsMap!.remove(5);
               _moreButtonsMap!.remove(6);
             }
-
           }
         }
       }
-
     } catch (e) {
       logEvent(e.toString());
     } finally {
@@ -258,5 +257,61 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     _deeplinkPayloads = null;
     _startChewzieScreen = null;
     notifyListeners();
+  }
+
+  bool clubPackageCheckStatus = false;
+  MembershipModel? _selectedMembership;
+
+  MembershipModel? get selectedMembership => _selectedMembership;
+  bool checkEarlyBirdCondition = false;
+
+  getClubPackageInfo({String? membershipID}) async {
+    if (membershipID == null) return;
+
+    clubPackageCheckStatus = true;
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      notifyListeners();
+    });
+
+    try{
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .getMembershipPlansById(membershipID: membershipID!);
+      print("GET PACKAGE INFO:  $networkResponse");
+
+      if (!networkResponse.isError && networkResponse.response != null) {
+        Map<String, dynamic> response =
+        networkResponse.response as Map<String, dynamic>;
+        if (response["success"] as bool && response.containsKey("data")) {
+          _selectedMembership = MembershipModel.fromJson(
+              (response["data"] as Map<String, dynamic>));
+
+          logEvent('SELECTED PACKAGE:: ${_selectedMembership.toString()}');
+        }
+      }
+    }
+    catch(e)
+    {
+      logEvent("getClubPackageInfo: ${e.toString()}");
+    }
+    finally{
+     // clubPackageCheckStatus = false;
+     WidgetsBinding.instance.addPostFrameCallback((_){
+       notifyListeners();
+     });
+    }
+  }
+
+  resetClubPackageCheckStatus() {
+    clubPackageCheckStatus = true;
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      notifyListeners();
+    });
+  }
+
+  resetCheckEarlyBirdCondition() {
+    checkEarlyBirdCondition = true;
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      notifyListeners();
+    });
   }
 }

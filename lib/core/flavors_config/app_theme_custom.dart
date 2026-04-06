@@ -1224,4 +1224,25 @@ class AppThemeCustom {
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
   }
+
+  static Color getEarlyBirdButtonColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.maxClub:
+        return Theme.of(context).primaryColorDark;
+
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
+  static Color getEarlyBirdDialogTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.maxClub:
+        return AppColors.white;
+
+      default:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
 }

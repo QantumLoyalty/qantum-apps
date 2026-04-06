@@ -121,6 +121,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
       NetworkResponse networkResponse =
           await UserService.getInstance().fetchUserProfile(fetchFromBluize: fetchFromBluize);
+
+      debugPrint("Event:: Updated user1:: ${networkResponse.toString()}",wrapWidth: 1024);
+
       if (!networkResponse.isError) {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;

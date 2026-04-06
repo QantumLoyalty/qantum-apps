@@ -620,6 +620,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get renewNow => '立即續期';
 
   @override
+  String get renewMembership => '续会籍 / 续会员';
+
+  @override
   String get paymentOptions => '付款选项';
 
   @override
@@ -651,6 +654,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgUnableConnect => '无法连接。请检查您的网络连接并重试。';
+
+  @override
+  String get renewalOpen => '續訂現已開放';
+
+  @override
+  String get yourMembershipExpires => '您的會員資格即將到期';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1269,6 +1278,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get renewNow => '立即续费';
 
   @override
+  String get renewMembership => '续费会员 / 续订会员';
+
+  @override
   String get paymentOptions => '付款选项';
 
   @override
@@ -1300,4 +1312,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgUnableConnect => '無法連線。請檢查您的網路連線並再試一次。';
+
+  @override
+  String get renewalOpen => '续订现已开放';
+
+  @override
+  String get yourMembershipExpires => '您的会员即将到期';
 }

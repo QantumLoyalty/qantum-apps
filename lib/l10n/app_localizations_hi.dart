@@ -620,6 +620,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get renewNow => 'नवीनीकरण करें';
 
   @override
+  String get renewMembership => 'सदस्यता नवीनीकरण करें';
+
+  @override
   String get paymentOptions => 'भुगतान विकल्प';
 
   @override
@@ -651,4 +654,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgUnableConnect => 'कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।';
+
+  @override
+  String get renewalOpen => 'नवीनीकरण\nअब खुला है';
+
+  @override
+  String get yourMembershipExpires => 'आपकी सदस्यता समाप्त हो रही है';
 }

@@ -88,8 +88,6 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                       ),
                       AppDimens.shape_20,
-
-
                       provider.membershipList.isNotEmpty
                           ? Column(
                               children: [
@@ -155,37 +153,26 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                     text: loc.next.toUpperCase(),
                     onClick: () {
                       if (provider.selectedMembership != null) {
+                        if ((widget.arguments != null &&
+                            widget.arguments!
+                                .containsKey("fromRenewMembership"))) {
+                          /// CONDITION FOR MEMBERSHIP RENEWAL
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.choosePaymentMethod,
+                              arguments: widget.arguments);
+                        } else {
+                          /// CONDITION FOR FRESH MEMBERSHIP PURCHASE FROM REGISTRATION
 
-                        if(widget.arguments!=null && widget.arguments!.containsKey("fromRenewMembership"))
-                          {
-
-
-                            /// CONDITION FOR MEMBERSHIP RENEWAL
-                            AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.choosePaymentMethod,arguments: widget.arguments);
-                          }
-                        else
-                          {
-                            /// CONDITION FOR FRESH MEMBERSHIP PURCHASE FROM REGISTRATION
-
-                            Map<String, String> args = {};
-                            if (widget.arguments != null &&
-                                widget.arguments!.containsKey("isTestUser")) {
-                              args['isTestUser'] = "true";
-                            }
-
-                            AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.selfieUploadScreen,
-                                arguments: args);
+                          Map<String, String> args = {};
+                          if (widget.arguments != null &&
+                              widget.arguments!.containsKey("isTestUser")) {
+                            args['isTestUser'] = "true";
                           }
 
-
-
-
-
-
-
-
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.selfieUploadScreen,
+                              arguments: args);
+                        }
                       } else {
                         AppHelper.showErrorMessage(
                             context, loc.selectMembershipPlan);

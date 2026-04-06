@@ -1,10 +1,10 @@
 class APIList {
   // SANDBOX
 
- static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
- // static get BASE_URL => "http://3.24.55.180:8081/";
+  // static get BASE_URL => "http://3.24.55.180:8081/";
   // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
@@ -67,25 +67,33 @@ class APIList {
   static get UPLOAD_PROFILE_PIC => BASE_URL + "user/";
 
   static get LOGOUT => BASE_URL + "user/logout";
+
   static get RESEND_OTP => BASE_URL + "user/otp-resent/";
 
+  static get CLUB_PACKAGE_CHECK => BASE_URL + "club-package/user?packageId=";
 
   /// UNITED FUELS APIS ///
- static get VALIDATE_USER => BASE_URL + "fuel/validate/";
- static get REGISTER_USER_WITH_UNITED => BASE_URL + "fuel/create";
- static get FETCH_BARCODE => BASE_URL + "fuel/barcode/";
+  static get VALIDATE_USER => BASE_URL + "fuel/validate/";
 
+  static get REGISTER_USER_WITH_UNITED => BASE_URL + "fuel/create";
 
+  static get FETCH_BARCODE => BASE_URL + "fuel/barcode/";
 
-
-
- /// STRIPE APIS ///
+  /// STRIPE APIS ///
   static get CREATE_PAYMENT_INTENT =>
       BASE_URL + "payment/create-payment-intent";
 
+  static get CREATE_PAYMENT_INTENT_EARLY_BIRD =>
+      BASE_URL + "payment/create-payment-early";
+
   static get VERIFY_PAYMENT => BASE_URL + "payment/verify-payment";
 
+  static get VERIFY_PAYMENT_EARLY_BIRD =>
+      BASE_URL + "payment/verify-payment-early";
+
   static get UPDATE_PAYMENT_TYPE => BASE_URL + "user/payment-update";
+
+  static get UPDATE_PAYMENT_TYPE_EARLY_BIRD=> BASE_URL + "user/early-payment-update";
 
   ///  VENKAT'S API ///
   static get SCAN_DRIVING_LICENSE_IMAGES =>
@@ -93,7 +101,6 @@ class APIList {
 
   /// TERMS AND CONDITIONS URL ///
 //  static get TERMS_AND_CONDITIONS => "https://terms-conditions.com.au/q_app/";
-  static get TERMS_AND_CONDITIONS => "https://terms-conditions.com.au/star-rewards-loyalty/";
-
-
+  static get TERMS_AND_CONDITIONS =>
+      "https://terms-conditions.com.au/star-rewards-loyalty/";
 }

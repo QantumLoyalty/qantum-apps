@@ -75,7 +75,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 #MAX Club
-version: 1.0.0+2
+version: 1.0.0+8
 ###################################
 #WONTHAGGI
 #version: 1.0.0+3

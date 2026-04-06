@@ -69,7 +69,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               debugPrint(e.toString());
                               //throw 'Failed to set application brightness';
                             }
-                            /*if (provider.getUserInfo!.isUserStatusCancelled()) {
+                            if (provider.getUserInfo!.isUserStatusCancelled()) {
                               await MembershipCancelledDialog.getInstance()
                                   .showMembershipCancelledDialog(context);
                             } else {
@@ -82,10 +82,10 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   .setSystemScreenBrightness(screenBrightness);
                             } catch (e) {
                               logEvent(e.toString());
-                            }*/
+                            }
 
                             //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
-                            EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
+                          //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(
                             width: 80,

@@ -15,7 +15,9 @@ import '../common_widgets/AppLogo.dart';
 import 'widgets/BottomInfoWidget.dart';
 
 class PendingPaymentScreen extends StatefulWidget {
-  const PendingPaymentScreen({super.key});
+  String? fromScreenFlow;
+
+  PendingPaymentScreen({super.key, this.fromScreenFlow});
 
   @override
   State<PendingPaymentScreen> createState() => _PendingPaymentScreenState();
@@ -37,6 +39,9 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
       userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       membershipManagerProvider.checkSelectedMembershipInLocal();
     });
+
+    print(
+        "PendingPaymentScreen initialized with fromScreenFlow: ${widget.fromScreenFlow}");
   }
 
   @override
@@ -44,6 +49,21 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     loc = AppLocalizations.of(context)!;
     return AppScaffold(body: SafeArea(child: Consumer<UserInfoProvider>(
       builder: (context, provider, child) {
+        /*print("VISIBILITY CONDITION >>> ${((provider.getUserInfo != null &&
+            provider.getUserInfo!.licenceFront != null &&
+            provider
+                .getUserInfo!.licenceFront!.isNotEmpty &&
+            provider.getUserInfo!.licenceBack != null &&
+            provider
+                .getUserInfo!.licenceBack!.isNotEmpty) ||
+            (widget.fromScreenFlow != null &&
+                widget.fromScreenFlow == "renewal"))}");
+        */
+        print(
+            "VISIBILITY LICENCE CONDITION >>> ${((provider.getUserInfo != null && provider.getUserInfo!.licenceFront != null && provider.getUserInfo!.licenceFront!.isNotEmpty && provider.getUserInfo!.licenceBack != null && provider.getUserInfo!.licenceBack!.isNotEmpty))}");
+        print(
+            "VISIBILITY fromScreenFlow CONDITION >>>  ${widget.fromScreenFlow != null && widget.fromScreenFlow == "renew"}");
+
         if (provider.getUserInfo != null && !provider.isNavigated) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             MembershipStatus membershipStatus =
@@ -169,11 +189,15 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                         ],
                       ),
                       AppDimens.shape_60,
-                      (provider.getUserInfo != null &&
-                              provider.getUserInfo!.licenceFront != null &&
-                              provider.getUserInfo!.licenceFront!.isNotEmpty &&
-                              provider.getUserInfo!.licenceBack != null &&
-                              provider.getUserInfo!.licenceBack!.isNotEmpty)
+                      ((provider.getUserInfo != null &&
+                                  provider.getUserInfo!.licenceFront != null &&
+                                  provider
+                                      .getUserInfo!.licenceFront!.isNotEmpty &&
+                                  provider.getUserInfo!.licenceBack != null &&
+                                  provider
+                                      .getUserInfo!.licenceBack!.isNotEmpty) ||
+                              (widget.fromScreenFlow != null &&
+                                  widget.fromScreenFlow == "renew"))
                           ? Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -199,7 +223,8 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                                           loc: loc!,
                                           membershipManagerProvider:
                                               membershipManagerProvider,
-                                          userInfoProvider: userInfoProvider,renewType: "none");
+                                          userInfoProvider: userInfoProvider,
+                                          renewType: "none");
                                     }),
                                 AppDimens.shape_20,
                                 (provider.getUserInfo != null &&

@@ -37,4 +37,6 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> updatePaymentType(
       {required Map<String, dynamic> paymentParams});
+
+  Future<NetworkResponse> getMembershipPlansById({required String membershipID});
 }

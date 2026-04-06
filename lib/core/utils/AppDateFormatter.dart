@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/data/models/EarlyBirdPeriod.dart';
 
 import '../flavors_config/flavor_config.dart';
 import '../mixins/logging_mixin.dart';
@@ -8,7 +10,7 @@ class AppDateFormatter {
   static String? userMembershipExpiry(String? membershipExpiry) {
     Flavor flavor = FlavorConfig.instance.flavor!;
 
-    if (flavor == Flavor.mhbc) {
+    if (flavor == Flavor.mhbc || flavor ==Flavor.maxClub) {
       if (membershipExpiry == null || membershipExpiry.isEmpty) return null;
 
       try {
@@ -67,6 +69,48 @@ class AppDateFormatter {
     }
   }
 
+  static String? formatDateForEarlyBird(DateTime date) {
+    try {
+      return DateFormat('dd/MM/yyyy').format(date);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  static bool ifUserPurchasedMembership(
+      {required String usersMembershipExpiry,
+      required String membershipExpiry}) {
+    try {
+      AppHelper.printMessage("UsersMembershipExpiry: $usersMembershipExpiry --- MembershipExpiry: $membershipExpiry");
+      DateFormat dateTimeFormat = DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+      DateTime usersPlanExpiry = dateTimeFormat.parse(usersMembershipExpiry);
+      DateTime planExpiry = dateTimeFormat.parse(membershipExpiry);
 
 
+
+      return usersPlanExpiry.isAfter(planExpiry);
+    } catch (e) {
+      AppHelper.printMessage("ifUserPurchasedMembership: ${e.toString()}");
+      return false;
+    }
+  }
+
+  static bool isCurrentDateUnderEarlyBirdRange(
+      {required EarlyBirdPeriod earlyBirdPeriod}) {
+    try {
+      AppHelper.printMessage("EarlyBirdPeriod: $earlyBirdPeriod");
+      DateFormat dateTimeFormat = DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+      DateTime rangeStartDate =
+          dateTimeFormat.parse(earlyBirdPeriod.startDate!);
+      DateTime rangeEndDate = dateTimeFormat.parse(earlyBirdPeriod.endDate!);
+      DateTime today = DateTime.now();
+      return ((today.isAfter(rangeStartDate) ||
+              today.isAtSameMomentAs(rangeStartDate)) &&
+          (today.isBefore(rangeEndDate) ||
+              today.isAtSameMomentAs(rangeEndDate)));
+    } catch (e) {
+      return false;
+    }
+  }
 }
