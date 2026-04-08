@@ -12,7 +12,6 @@ import '../core/utils/AppStrings.dart';
 import '../data/models/HomeNavigatorModel.dart';
 import '../views/my_venues/MyVenuesHomeScreen.dart';
 import '../views/partners_offer/PartnerOffersScreen.dart';
-import '../views/profile/MyProfileScreen.dart';
 import '../views/special_offers/SpecialOffersScreen.dart';
 
 class HomeProvider extends ChangeNotifier with LoggingMixin {
@@ -67,7 +66,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
         name: "txtMyAccount",
-        screen: const MyProfileScreen(),
+        screen: Container(),
         icon: Icons.account_circle_outlined,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
