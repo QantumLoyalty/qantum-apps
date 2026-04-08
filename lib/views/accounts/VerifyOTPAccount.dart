@@ -12,7 +12,7 @@ import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../common_widgets/AppCustomButton.dart';
 import '../common_widgets/AppLoader.dart';
-
+import 'package:sms_autofill/sms_autofill.dart';
 
 class VerifyOTPAccount extends StatefulWidget {
   const VerifyOTPAccount({super.key});
@@ -21,7 +21,7 @@ class VerifyOTPAccount extends StatefulWidget {
   State<VerifyOTPAccount> createState() => _VerifyOTPAccountState();
 }
 
-class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
+class _VerifyOTPAccountState extends State<VerifyOTPAccount> with CodeAutoFill {
   late TextEditingController _otpController;
   late FocusNode _otpFocusNode;
   int remainingSec = 30;
@@ -52,6 +52,8 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
         });
       }
     });
+
+    listenForCode();
   }
 
   @override
@@ -65,16 +67,14 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
           if (provider.otpSent != null) {
             if (provider.otpSent!) {
               Future.delayed(Duration.zero, () {
-                AppHelper.showSuccessMessage(context,
-                    provider.networkMessage ?? loc.msgOtpSent);
+                AppHelper.showSuccessMessage(
+                    context, provider.networkMessage ?? loc.msgOtpSent);
                 provider.resetNetworkResponse();
               });
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -127,7 +127,8 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: AppThemeCustom.getProfileEditHeadingTextColor(context),
+                        color: AppThemeCustom.getProfileEditHeadingTextColor(
+                            context),
                       ),
                     ),
                     AppDimens.shape_5,
@@ -158,12 +159,18 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                     TextFormField(
                       maxLines: 1,
                       maxLength: 4,
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                       textAlign: TextAlign.start,
                       keyboardType: TextInputType.number,
+                      autofillHints: const [AutofillHints.oneTimeCode],
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly
                       ],
+                      onChanged: (value) {
+                        if (value.length == 4) {
+                          verifyOTP(_otpController.text);
+                        }
+                      },
                       controller: _otpController,
                       focusNode: _otpFocusNode,
                       style: TextStyle(
@@ -221,12 +228,7 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
                       textColor:
                           AppHelper.getEditAccountsButtonTextColor(context),
                       onClick: () {
-                        if (_otpController.text.isNotEmpty) {
-                          provider.verifyOTPAccount(OTP: _otpController.text,loc: loc);
-                        } else {
-                          AppHelper.showErrorMessage(
-                              context, loc.msgIncorrectOTP);
-                        }
+                        verifyOTP(_otpController.text);
                       },
                       style: AppHelper.getEditAccountsButtonStyle(context),
                     ),
@@ -265,5 +267,22 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> {
     _otpFocusNode.dispose();
     _otpController.dispose();
     super.dispose();
+  }
+
+  @override
+  void codeUpdated() {
+    if (code != null && code!.length == 4) {
+      _otpController.text = code!;
+      verifyOTP(code!);
+      FocusScope.of(context).unfocus();
+    }
+  }
+
+  verifyOTP(String? code) {
+    if (code != null && code.isNotEmpty && code.length == 4) {
+      _userInfoProvider.verifyOTPAccount(OTP: _otpController.text, loc: loc);
+    } else {
+      AppHelper.showErrorMessage(context, loc.msgIncorrectOTP);
+    }
   }
 }

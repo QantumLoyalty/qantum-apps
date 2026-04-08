@@ -9,6 +9,7 @@ import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/core/extensions/spacer_extension.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
 
@@ -255,7 +256,9 @@ class _HomeScreenState extends State<HomeScreen>
             return Column(
               children: [
                 const HomeAppBar(),
-                AppDimens.shape_20,
+                // AppDimens.shape_20,
+
+                20.h,
                 Expanded(
                     child: Stack(
                   children: [
@@ -287,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen>
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
                             iconColor: provider.selectedOption == index &&
-                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
+                                    flavor == Flavor.senseOfTaste
                                 ? AppColors.white
                                 : AppThemeCustom.getCustomHomeButtonsIconStyle(
                                     context,
@@ -300,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
                             textColor: provider.selectedOption == index &&
-                                (flavor == Flavor.senseOfTaste||flavor == Flavor.bobsBulkBooze)
+                                    flavor == Flavor.senseOfTaste
                                 ? AppColors.white
                                 : AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,

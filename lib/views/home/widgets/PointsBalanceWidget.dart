@@ -28,8 +28,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
     _fadeAnim = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
     Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
-    Provider.of<UserInfoProvider>(context, listen: false)
-        .fetchUserProfile("true");
+  //  Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile("true");
 
     // _controller.forward(); // start fade out
   }
@@ -82,7 +81,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                             ),
                             Text(
                               formatPoints(
-                                  (provider.getUserInfo!.pointsValue ?? 0)),
+                                  (provider.getUserInfo!.pointsBalance ?? 0)),
                               style: TextStyle(
                                   fontSize: 42,
                                   color:
@@ -91,7 +90,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "\$${formatPointsValue((provider.getUserInfo!.pointsBalance ?? 0))}",
+                              "\$${formatPointsValue((provider.getUserInfo!.pointsValue ?? 0))}",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

@@ -24,6 +24,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.blue,
+      statusBarIconBrightness: Brightness.light, // Android
+      statusBarBrightness: Brightness.dark, // iOS
+    ),
+  );
   FlavorConfig(
       flavor: Flavor.mhbc,
       flavorValues: FlavorValues(
@@ -75,7 +82,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
-        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
+        ChangeNotifierProvider(
+            create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
       child: Portal(
@@ -106,7 +114,15 @@ class _MyAppState extends State<MyApp> {
             return MediaQuery(
                 data: MediaQuery.of(context)
                     .copyWith(textScaler: TextScaler.linear(1.0)),
-                child: child!);
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: const SystemUiOverlayStyle(
+                        statusBarBrightness: Brightness.dark,
+                        statusBarColor: Colors.transparent,
+                        statusBarIconBrightness: Brightness.light),
+                    child: child ?? const SizedBox())
+
+
+            );
           },
         ),
       ),

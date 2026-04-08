@@ -117,9 +117,13 @@ class UserModel {
 
     /*pointsValue = 4003.55;
     pointsBalance = 40.0355;*/
-    pointsValue =
-        json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
+/*
+    pointsValue = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
     pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
+*/
+
+    pointsValue = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
+    pointsBalance = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
 
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
@@ -187,8 +191,12 @@ class UserModel {
     data['Suburb'] = suburb ?? "";
     data['State'] = state ?? "";
     data['DateJoined'] = dateJoined ?? "";
-    data['PointsBalance'] = pointsValue ?? 0.0;
-    data['PointsValue'] = pointsBalance ?? 0.0;
+    //data['PointsBalance'] = pointsValue ?? 0.0;
+   // data['PointsValue'] = pointsBalance ?? 0.0;
+    data['PointsBalance'] = pointsBalance ?? 0.0;
+    data['PointsValue'] = pointsValue ?? 0.0;
+
+
     data['StatusPoints'] = statusPoints ?? 0.0;
     data['StatusTier'] = statusTier ?? "";
     data['RequiredStatusPointsForNextTier'] =
