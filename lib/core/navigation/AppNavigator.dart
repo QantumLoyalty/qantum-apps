@@ -4,6 +4,7 @@ import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
 import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
+import '../../views/web_view/AppWebView.dart';
 import '/views/membership/RenewMembershipScreen.dart';
 import '../../views/signup/SelfieUploadScreen.dart';
 import '/views/signup/DrivingLicenseScanScreen.dart';
@@ -229,6 +230,11 @@ class AppNavigator {
       case recoverAccountEmailFailure:
         return MaterialPageRoute(
             builder: (_) => const RecoverAccountEmailFailure());
+      case appWebView:
+        return MaterialPageRoute(
+            builder: (_) => AppWebView(
+              url: args as String,
+            ));
       case recoverAccountNewPhone:
         return MaterialPageRoute(
             builder: (_) => RecoverAccountNewPhone(
