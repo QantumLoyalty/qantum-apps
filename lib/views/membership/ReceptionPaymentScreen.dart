@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '/views/common_widgets/AppButton.dart';
-import '../../core/navigation/AppNavigator.dart';
 import '/views/common_widgets/AppScaffold.dart';
+import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../l10n/app_localizations.dart';
 import '../common_widgets/AppLogo.dart';

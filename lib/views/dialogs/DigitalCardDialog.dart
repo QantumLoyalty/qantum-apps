@@ -6,15 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
+import 'package:secure_content/secure_content.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
-import '../../core/utils/FlavorConstants.dart';
-import '../../l10n/app_localizations.dart';
+
 import '/core/flavors_config/flavor_config.dart';
+import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
-import 'package:secure_content/secure_content.dart';
-import '../../core/utils/AppColors.dart';
+import '../../core/utils/FlavorConstants.dart';
 import '../../data/models/UserModel.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/UserInfoProvider.dart';
 
 class DigitalCardDialog with LoggingMixin {
@@ -87,7 +88,7 @@ class DigitalCardDialog with LoggingMixin {
                                           CrossAxisAlignment.center,
                                       children: [
                                         AppDimens.shape_20,
-                                      /*  ClipRRect(
+                                        /*  ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: QrImageView(
@@ -98,7 +99,8 @@ class DigitalCardDialog with LoggingMixin {
                                           ),
                                         ),*/
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Container(
                                             color: AppColors.white,
                                             padding: const EdgeInsets.all(10),
@@ -106,7 +108,8 @@ class DigitalCardDialog with LoggingMixin {
                                               height: 180,
                                               width: 180,
                                               child: SfBarcodeGenerator(
-                                                value: '$cardPrefix${provider.getUserInfo!.cardNumber}',
+                                                value:
+                                                    '$cardPrefix${provider.getUserInfo!.cardNumber}',
                                                 symbology: QRCode(),
                                                 showValue: false,
                                               ),
@@ -114,7 +117,8 @@ class DigitalCardDialog with LoggingMixin {
                                           ),
                                         ),
                                         AppDimens.shape_20,
-                                        Expanded(child: SingleChildScrollView(
+                                        Expanded(
+                                            child: SingleChildScrollView(
                                           child: Column(
                                             children: [
                                               Text(
@@ -123,10 +127,10 @@ class DigitalCardDialog with LoggingMixin {
                                                     shadows: textShadows,
                                                     color: AppThemeCustom
                                                         .getCardDialogsTextColor(
-                                                        context),
+                                                            context),
                                                     fontSize: 32,
                                                     fontWeight:
-                                                    FontWeight.bold),
+                                                        FontWeight.bold),
                                               ),
                                               Text(
                                                 AppLocalizations.of(context)!
@@ -135,36 +139,36 @@ class DigitalCardDialog with LoggingMixin {
                                                     shadows: textShadows,
                                                     color: AppThemeCustom
                                                         .getCardDialogsTextColor(
-                                                        context),
+                                                            context),
                                                     fontSize: 18),
                                               ),
                                               AppDimens.shape_5,
                                               (showMembershipCategory(userData
-                                                  .membershipCategory))
+                                                      .membershipCategory))
                                                   ? Column(
-                                                children: [
-                                                  Text(
-                                                    "${userData.membershipCategory}",
-                                                    style: TextStyle(
-                                                        shadows:
-                                                        textShadows,
-                                                        color: AppThemeCustom
-                                                            .getCardDialogsTextColor(
-                                                            context),
-                                                        fontSize: 16),
-                                                  ),
-                                                  AppDimens.shape_5,
-                                                  Text(
-                                                      '#${userData.bluizeId}',
-                                                      textAlign: TextAlign
-                                                          .center,
-                                                      style: TextStyle(
-                                                          color: AppThemeCustom
-                                                              .getCardDialogsTextColor(
-                                                              context),
-                                                          fontSize: 14))
-                                                ],
-                                              )
+                                                      children: [
+                                                        Text(
+                                                          "${userData.membershipCategory}",
+                                                          style: TextStyle(
+                                                              shadows:
+                                                                  textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 16),
+                                                        ),
+                                                        AppDimens.shape_5,
+                                                        Text(
+                                                            '#${userData.bluizeId}',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                color: AppThemeCustom
+                                                                    .getCardDialogsTextColor(
+                                                                        context),
+                                                                fontSize: 14))
+                                                      ],
+                                                    )
                                                   : const SizedBox.shrink(),
                                               AppDimens.shape_20,
                                               Text(
@@ -174,29 +178,28 @@ class DigitalCardDialog with LoggingMixin {
                                                     shadows: textShadows,
                                                     color: AppThemeCustom
                                                         .getCardDialogsTextColor(
-                                                        context),
+                                                            context),
                                                     fontSize: 14),
                                               ),
                                               (membershipExpiry != null &&
-                                                  membershipExpiry
-                                                      .isNotEmpty)
+                                                      membershipExpiry
+                                                          .isNotEmpty)
                                                   ? Padding(
-                                                padding:
-                                                const EdgeInsets.only(
-                                                    top: 12),
-                                                child: Text(
-                                                  "Membership Expiry: $membershipExpiry",
-                                                  style: TextStyle(
-                                                      shadows:
-                                                      textShadows,
-                                                      color: AppThemeCustom
-                                                          .getCardDialogsTextColor(
-                                                          context),
-                                                      fontSize: 14),
-                                                ),
-                                              )
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 12),
+                                                      child: Text(
+                                                        "Membership Expiry: $membershipExpiry",
+                                                        style: TextStyle(
+                                                            shadows:
+                                                                textShadows,
+                                                            color: AppThemeCustom
+                                                                .getCardDialogsTextColor(
+                                                                    context),
+                                                            fontSize: 14),
+                                                      ),
+                                                    )
                                                   : const SizedBox.shrink(),
-
                                               AppDimens.shape_30
                                             ],
                                           ),
@@ -261,7 +264,8 @@ class DigitalCardDialog with LoggingMixin {
       "INVITE ONLY",
       "STAFF",
     };
-    if (flavor != Flavor.mhbc || flavor != Flavor.maxClub ||
+    if (flavor != Flavor.mhbc ||
+        flavor != Flavor.maxClub ||
         membershipCategory == null ||
         membershipCategory.isEmpty) {
       return false;

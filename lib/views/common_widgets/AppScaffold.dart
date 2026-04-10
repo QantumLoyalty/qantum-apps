@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/common_widgets/BluewaterScaffoldBackground.dart';
+
 import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
 

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/UpperCaseTextFormatter.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/mixins/dob_mixin.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
+import '../../../core/utils/UpperCaseTextFormatter.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppCustomButton.dart';
 

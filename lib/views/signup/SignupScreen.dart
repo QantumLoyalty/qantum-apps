@@ -583,8 +583,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                   child: TextFormField(
                                                     maxLines: 1,
                                                     maxLength: 2,
-                                                    textAlign:
-                                                        TextAlign.center,
+                                                    textAlign: TextAlign.center,
                                                     keyboardType:
                                                         TextInputType
                                                             .number,

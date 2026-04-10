@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '/l10n/app_localizations.dart';
-import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppColors.dart';
+import '../../core/utils/AppDimens.dart';
 
 class ErrorDialog {
   static final ErrorDialog _errorDialog = ErrorDialog._internal();
@@ -63,6 +64,5 @@ class ErrorDialog {
             ),
           );
         });
-
   }
 }

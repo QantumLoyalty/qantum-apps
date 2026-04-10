@@ -1,11 +1,13 @@
 import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
+
 import '/core/flavors_config/app_theme_custom.dart';
-import '../../core/enums/AdvertisementEnums.dart';
 import '/core/navigation/AppNavigator.dart';
+import '../../core/enums/AdvertisementEnums.dart';
 import '../../data/models/PromotionModel.dart';
 import '../my_venues/widgets/PromotionsPlaceHolder.dart';
 
@@ -42,7 +44,7 @@ class PromotionDetailDialog {
                               /*color: Theme.of(context)
                                   .textSelectionTheme
                                   .selectionColor,*/
-                            color: AppColors.white,
+                              color: AppColors.white,
                               borderRadius: BorderRadius.circular(10)),
                           margin: const EdgeInsets.only(left: 15, right: 15),
                           width: MediaQuery.of(context).size.width,
@@ -134,7 +136,9 @@ class PromotionDetailDialog {
                                   icon: Icon(
                                     Icons.clear,
                                     size: 30,
-                                    color: AppThemeCustom.getCloseBtnDialogColor(context),
+                                    color:
+                                        AppThemeCustom.getCloseBtnDialogColor(
+                                            context),
                                   )),
                             ))
                       ],

@@ -68,7 +68,6 @@ class _FortuneWheelSampleState extends State<FortuneWheelSample>
     _animation = Tween<double>(begin: -10.0, end: 10.0)
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(_controller);
-
   }
 
   @override

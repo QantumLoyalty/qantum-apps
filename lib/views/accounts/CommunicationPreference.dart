@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/flavors_config/flavor_config.dart';
-import '../common_widgets/BluewaterBackground.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
-import '../../core/utils/AppHelper.dart';
-import '../../views/common_widgets/AppLoader.dart';
-import '../../view_models/UserInfoProvider.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
+import '../../view_models/UserInfoProvider.dart';
+import '../../views/common_widgets/AppLoader.dart';
 import '../common_widgets/AppScaffold.dart';
+import '../common_widgets/BluewaterBackground.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class CommunicationPreference extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
   void initState() {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
-   // _userInfoProvider.fetchUserProfile();
+    // _userInfoProvider.fetchUserProfile();
     flavor = FlavorConfig.instance.flavor!;
   }
 
@@ -112,7 +113,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   loc.txtCommunicationChannel,
                                   style: TextStyle(
                                       color: AppThemeCustom
-                                          .getAccountSectionItemStyle(context,isCommunication: true,isHeadingCommunication: true),
+                                          .getAccountSectionItemStyle(context,
+                                              isCommunication: true,
+                                              isHeadingCommunication: true),
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -120,7 +123,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                   loc.msgNotificationPreference,
                                   style: TextStyle(
                                       color: AppThemeCustom
-                                          .getAccountSectionItemStyle(context,isCommunication: true),
+                                          .getAccountSectionItemStyle(context,
+                                              isCommunication: true),
                                       fontSize: 12),
                                 ),
                                 SwitchListTile(
@@ -140,8 +144,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     loc.txtSMS,
                                     style: TextStyle(
                                         color: AppThemeCustom
-                                            .getAccountSectionItemStyle(
-                                                context,isCommunication: true),
+                                            .getAccountSectionItemStyle(context,
+                                                isCommunication: true),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -162,8 +166,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                     loc.txtEmail,
                                     style: TextStyle(
                                         color: AppThemeCustom
-                                            .getAccountSectionItemStyle(
-                                                context,isCommunication: true),
+                                            .getAccountSectionItemStyle(context,
+                                                isCommunication: true),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
@@ -177,7 +181,9 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                             style: TextStyle(
                                 color:
                                     AppThemeCustom.getAccountSectionItemStyle(
-                                        context,isCommunication: true,isHeadingCommunication: true),
+                                        context,
+                                        isCommunication: true,
+                                        isHeadingCommunication: true),
                                 fontSize: 12),
                           ),
                         ],

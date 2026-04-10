@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           /// DISPLAYING NETWORK RESPONSE
           if (provider.networkError != null &&
-              provider.networkMessage != null)  {
+              provider.networkMessage != null) {
             Future.delayed(Duration.zero, () {
               if (provider.networkError!) {
                 ErrorDialog.getInstance().showErrorDialog(context,
@@ -232,14 +232,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             AppDimens.getCustomBoxShape(20),
-                             AppButton(
+                            AppButton(
                               text: loc.txtOk.toUpperCase(),
                               onClick: () {
                                 if (_phoneController.text.isNotEmpty &&
                                     AppHelper.verifyPhoneNumber(
                                         _phoneController.text)) {
                                   provider.login(
-                                      "$countryCode${_phoneController.text}",context);
+                                      "$countryCode${_phoneController.text}",
+                                      context);
                                 } else {
                                   AppHelper.showErrorMessage(
                                       context, loc.msgIncorrectPhoneNumber);
@@ -295,16 +296,20 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[0],
             style: TextStyle(
-                color: flavor == Flavor.drinkRewards
-                    ? AppColors.dr_button_color
+                color: (flavor == Flavor.bobsBulkBooze ||
+                        flavor == Flavor.senseOfTaste ||
+                        flavor == Flavor.drinkRewards)
+                    ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
                     : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text before
       TextSpan(
         text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
         style: TextStyle(
-            color: flavor == Flavor.drinkRewards
-                ? AppColors.dr_button_color
+            color: (flavor == Flavor.bobsBulkBooze ||
+                    flavor == Flavor.senseOfTaste ||
+                    flavor == Flavor.drinkRewards)
+                ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
                 : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
             fontWeight: FontWeight.w900,
             fontSize: 14),
@@ -313,8 +318,10 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[1],
             style: TextStyle(
-                color: flavor == Flavor.drinkRewards
-                    ? AppColors.dr_button_color
+                color: (flavor == Flavor.bobsBulkBooze ||
+                        flavor == Flavor.senseOfTaste ||
+                        flavor == Flavor.drinkRewards)
+                    ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
                     : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text after

@@ -1,24 +1,24 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
-import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
-import '../../core/utils/AppColors.dart';
-import '../../view_models/MembershipManagerProvider.dart';
+
 import '/core/navigation/AppNavigator.dart';
 import '/core/utils/AppDateFormatter.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
-import '/views/common_widgets/AppButton.dart';
+import '../../core/utils/AppColors.dart';
 import '../../l10n/app_localizations.dart';
+import '../../view_models/MembershipManagerProvider.dart';
 
 class EarlyRenewalMembershipDialog {
-  static final EarlyRenewalMembershipDialog _earlyRenewalMembershipDialog = EarlyRenewalMembershipDialog._instance();
+  static final EarlyRenewalMembershipDialog _earlyRenewalMembershipDialog =
+      EarlyRenewalMembershipDialog._instance();
 
   EarlyRenewalMembershipDialog._instance();
 
@@ -26,7 +26,9 @@ class EarlyRenewalMembershipDialog {
     return _earlyRenewalMembershipDialog;
   }
 
-  showRenewalMembershipDialog({required BuildContext context,required MembershipModel currentMembership}) {
+  showRenewalMembershipDialog(
+      {required BuildContext context,
+      required MembershipModel currentMembership}) {
     AppLocalizations loc = AppLocalizations.of(context)!;
     final media = MediaQuery.of(context).size;
     final dialogHeight = media.height * 0.5;
@@ -100,7 +102,7 @@ class EarlyRenewalMembershipDialog {
                                               .parse(provider.getUserInfo!
                                                   .membershipExpiryDate!)) ??
                                       "",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                     color: AppThemeCustom
@@ -115,14 +117,20 @@ class EarlyRenewalMembershipDialog {
                               text: loc.renewNow,
                               style: ButtonStyle(
                                   backgroundColor: WidgetStatePropertyAll(
-                                      AppThemeCustom.getEarlyBirdButtonColor(context))),
+                                      AppThemeCustom.getEarlyBirdButtonColor(
+                                          context))),
                               onClick: () {
                                 Navigator.pop(context);
-                                context.read<MembershipManagerProvider>().updateDropdownValue(currentMembership);
+                                context
+                                    .read<MembershipManagerProvider>()
+                                    .updateDropdownValue(currentMembership);
                                 /*Map<String, String> params = {};
                                 params['membershipFlowSource'] =
                                     MembershipFlowSource.earlyBird.name;*/
-                                AppNavigator.navigateTo(context, AppNavigator.earlyBirdRenewalMembershipScreen);
+                                AppNavigator.navigateTo(
+                                    context,
+                                    AppNavigator
+                                        .earlyBirdRenewalMembershipScreen);
                               }),
                           //AppDimens.shape_30
                         ],

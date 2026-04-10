@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
@@ -82,10 +83,11 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child:  Icon(
+                          child: Icon(
                             Icons.chevron_left,
                             size: 28,
-                            color: AppThemeCustom.getAccountHeaderColor(context),
+                            color:
+                                AppThemeCustom.getAccountHeaderColor(context),
                           )),
                     ),
                     Applogo(
@@ -131,7 +133,8 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 0.5,
-                              color:AppThemeCustom.getContainerBorderColor(context)),
+                              color: AppThemeCustom.getContainerBorderColor(
+                                  context)),
                           color: AppThemeCustom.getTextFieldBackground(context),
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(

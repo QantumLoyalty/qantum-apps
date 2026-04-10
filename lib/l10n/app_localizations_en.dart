@@ -659,5 +659,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get renewalOpen => 'Renewals\nNow Open';
 
   @override
+  String get txtWeeklyDeals => 'Weekly Deals';
+
+  @override
   String get yourMembershipExpires => 'Your Membership expires';
 }

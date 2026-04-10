@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../views/common_widgets/AppLoader.dart';
 import '../../views/common_widgets/AppScaffold.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class AppWebView extends StatefulWidget {
   String url;

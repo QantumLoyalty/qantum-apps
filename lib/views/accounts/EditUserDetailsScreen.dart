@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import '../common_widgets/AppLogoHeader.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
-import '../../views/common_widgets/AppScaffold.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../view_models/UserInfoProvider.dart';
+import '../../views/common_widgets/AppScaffold.dart';
+import '../common_widgets/AppLogoHeader.dart';
 import 'EditUserInfo/EditDetailScreen.dart';
 import 'EditUserInfo/EditMailScreen.dart';
 import 'EditUserInfo/EditPhoneScreen.dart';
@@ -37,7 +37,6 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getCustomScaffoldBackground(context),
       body: SafeArea(child:
@@ -75,7 +74,8 @@ class _EditUserDetailsScreenState extends State<EditUserDetailsScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color:AppThemeCustom.getProfileEditHeadingTextColor(context),
+                      color: AppThemeCustom.getProfileEditHeadingTextColor(
+                          context),
                     ),
                   ),
                   AppDimens.shape_20,

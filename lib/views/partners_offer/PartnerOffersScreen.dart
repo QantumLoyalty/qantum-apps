@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '/views/partners_offer/widget/PartnerOfferItem.dart';
 
+import '/views/partners_offer/widget/PartnerOfferItem.dart';
 import '../../core/utils/AppDimens.dart';
 
 class PartnerOffersScreen extends StatefulWidget {

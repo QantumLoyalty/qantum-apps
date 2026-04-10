@@ -570,7 +570,7 @@ class AppHelper with LoggingMixin {
             Flavor.brisbane ||
             Flavor.bluewater ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards:
+            Flavor.drinkRewards||Flavor.bobsBulkBooze:
         return const Size(142, 58);
 
       case Flavor.woollahra||Flavor.edp:

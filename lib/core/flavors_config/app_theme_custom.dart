@@ -345,7 +345,7 @@ class AppThemeCustom {
       case Flavor.edp:
         return AppColors.edp_textformField_background_color;
       case Flavor.bobsBulkBooze:
-        return AppColors.white_shadow;
+        return AppColors.white.withOpacity(0.39);
       default:
         return Theme.of(context).cardColor;
     }
@@ -853,7 +853,14 @@ class AppThemeCustom {
             return Theme.of(context).cardColor.withValues(alpha: 0.10);
           }
         }
-
+      case Flavor.bobsBulkBooze:
+        {
+          if (isEditable) {
+            return Theme.of(context).cardColor.withValues(alpha: 0.10);
+          } else {
+            return AppColors.white_opacity;
+          }
+        }
       default:
         return Theme.of(context).cardColor.withValues(alpha: 0.10);
     }

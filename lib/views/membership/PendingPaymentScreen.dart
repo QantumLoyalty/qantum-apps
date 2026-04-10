@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
-import '../../core/utils/AppHelper.dart';
-import '../../services/PaymentService.dart';
+
 import '/core/navigation/AppNavigator.dart';
-import '/views/common_widgets/AppButton.dart';
 import '/view_models/UserInfoProvider.dart';
+import '/views/common_widgets/AppButton.dart';
 import '/views/common_widgets/AppScaffold.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/PaymentService.dart';
 import '../common_widgets/AppLogo.dart';
 import 'widgets/BottomInfoWidget.dart';
 

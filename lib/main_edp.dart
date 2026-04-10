@@ -26,9 +26,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   FlavorConfig(
       flavor: Flavor.edp,
-      flavorValues: FlavorValues(appName: "EDP", appVersion: "0.0.1"));
+      flavorValues: FlavorValues(appName: "Edp", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env.edp');
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -36,7 +35,7 @@ void main() async {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     // Initialize with your OneSignal App ID
-    OneSignal.initialize(dotenv.env['ONESIGNAL_API_KEY'] ?? '');    // Use this method to prompt for push notifications.
+    OneSignal.initialize("22ec9bfd-f547-4ceb-9b86-2039ae84009b");
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
@@ -100,8 +99,14 @@ class _MyAppState extends State<MyApp> {
           builder: (context, child) {
             return MediaQuery(
                 data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: child!);
+                    .copyWith(textScaler: TextScaler.linear(1.0)),
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: const SystemUiOverlayStyle(
+                        statusBarBrightness: Brightness.dark,
+                        statusBarColor: Colors.transparent,
+                        statusBarIconBrightness: Brightness.light),
+                    child: child ?? const SizedBox())
+            );
           },
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
 import '../../../core/utils/AppColors.dart';
@@ -30,8 +31,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
 
   @override
   Widget build(BuildContext context) {
-
-    loc=AppLocalizations.of(context)!;
+    loc = AppLocalizations.of(context)!;
 
     return AppScaffold(
       // backgroundColor: Theme.of(context).primaryColorDark,
@@ -58,9 +58,7 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponse();
               });
             }
@@ -107,7 +105,8 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 0.5,
-                              color:AppThemeCustom.getContainerBorderColor(context)),
+                              color: AppThemeCustom.getContainerBorderColor(
+                                  context)),
                           color: AppThemeCustom.getTextFieldBackground(context),
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(
@@ -127,7 +126,6 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;
-
                               });
                             },
                             initialSelection: "AU",
@@ -151,7 +149,8 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                                 ],
                                 controller: _phoneController,
                                 style: TextStyle(
-                                    color: AppThemeCustom.getTextFieldTextColor(context)),
+                                    color: AppThemeCustom.getTextFieldTextColor(
+                                        context)),
                                 decoration: InputDecoration(
                                   counterText: "",
                                   hintText: "0400000000",
@@ -176,7 +175,8 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
                           if (_phoneController.text.isNotEmpty) {
                             provider.sendOTPNewPhone(
                                 phone:
-                                    '$countryCode${_phoneController.text.toString()}',loc: loc);
+                                    '$countryCode${_phoneController.text.toString()}',
+                                loc: loc);
                           } else {
                             AppHelper.showErrorMessage(
                                 context, loc.msgIncorrectPhoneNumber);
@@ -187,7 +187,8 @@ class _RecoverAccountNewPhoneState extends State<RecoverAccountNewPhone> {
               ),
               provider.showLoader != null && provider.showLoader!
                   ? AppLoader(
-                      loaderMessage: provider.loaderMessage ?? loc.msgPleaseWait,
+                      loaderMessage:
+                          provider.loaderMessage ?? loc.msgPleaseWait,
                     )
                   : Container()
             ],

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stripe/flutter_stripe.dart' hide Card;
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import 'package:qantum_apps/core/utils/AppIcons.dart';
-import '../../services/PaymentService.dart';
-import '/views/common_widgets/AppButton.dart';
-import '../common_widgets/AppLoader.dart';
-import '../common_widgets/AppLogo.dart';
+
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppDimens.dart';
+import '/views/common_widgets/AppButton.dart';
 import '/views/common_widgets/AppScaffold.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/PaymentService.dart';
 import '../../view_models/MembershipManagerProvider.dart';
 import '../../view_models/UserInfoProvider.dart';
+import '../common_widgets/AppLoader.dart';
+import '../common_widgets/AppLogo.dart';
 import 'widgets/BottomInfoWidget.dart';
 
 class ChoosePaymentMethod extends StatefulWidget {

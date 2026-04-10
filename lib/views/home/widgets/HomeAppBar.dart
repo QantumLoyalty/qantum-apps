@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
-import 'package:qantum_apps/views/dialogs/ScratchCardDialog.dart';
-import '../../../core/utils/AppColors.dart';
-import '../../../core/utils/FlavorConstants.dart';
-import '../../dialogs/AppUpdateDialog.dart';
-import '/core/utils/AppHelper.dart';
-import '../../../core/flavors_config/app_theme_custom.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:screen_brightness/screen_brightness.dart';
+
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
 import '/view_models/HomeProvider.dart';
 import '/view_models/UserInfoProvider.dart';
 import '/views/dialogs/MyProfileDialog.dart';
-import 'package:screen_brightness/screen_brightness.dart';
+import '../../../core/flavors_config/app_theme_custom.dart';
+import '../../../core/utils/AppColors.dart';
+import '../../../core/utils/FlavorConstants.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../dialogs/DigitalCardDialog.dart';
 
 class HomeAppBar extends StatelessWidget with LoggingMixin {
@@ -85,7 +82,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             }
 
                             //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
-                          //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
+                            //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(
                             width: 80,

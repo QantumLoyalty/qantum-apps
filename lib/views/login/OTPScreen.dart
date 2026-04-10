@@ -81,8 +81,10 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
 
   void _resetResendCode() {
     if (remainingSec == 0) {
-
-      _loginProvider.resendOTP(phoneNo: "${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",loc: loc);
+      _loginProvider.resendOTP(
+          phoneNo:
+              "${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",
+          loc: loc);
 
       setState(() {
         remainingSec = 30;
@@ -97,27 +99,24 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     return AppScaffold(
       body: SafeArea(
         child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
-
           /// CHECKING FOR OTP SEND CASE
           if (provider.otpSent != null) {
             if (provider.otpSent!) {
               Future.delayed(Duration.zero, () {
-                AppHelper.showSuccessMessage(context,
-                    provider.networkMessage ?? loc.msgOtpSent);
+                AppHelper.showSuccessMessage(
+                    context, provider.networkMessage ?? loc.msgOtpSent);
                 provider.resetNetworkResponseStatus();
               });
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
-                    context,
-                    provider.networkMessage ??
-                        loc.msgOtpIssue);
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
                 provider.resetNetworkResponseStatus();
               });
             }
           }
 
-         /// CHECKING FOR OTP VERIFY CASE
+          /// CHECKING FOR OTP VERIFY CASE
           if (provider.networkError != null) {
             if (provider.networkError!) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -354,12 +353,12 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                                     style: TextStyle(
                                       color: remainingSec == 0
                                           ? Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor
+                                              .textSelectionTheme
+                                              .selectionColor
                                           : Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor!
-                                          .withValues(alpha: 0.5),
+                                              .textSelectionTheme
+                                              .selectionColor!
+                                              .withValues(alpha: 0.5),
                                     ),
                                   )),
                             ),
@@ -394,7 +393,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
       _loginProvider.verifyOTP(
           userId: widget.argument['userId'].toString(),
           countryCode: widget.argument['countryCode'].toString(),
-          otp: _otpController.text,loc: loc);
+          otp: _otpController.text,
+          loc: loc);
     } else {
       AppHelper.showErrorMessage(context, loc.msgIncorrectOTP);
     }

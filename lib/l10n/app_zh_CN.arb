@@ -220,5 +220,6 @@
   "updateNow": "立即更新",
   "msgUnableConnect":"無法連線。請檢查您的網路連線並再試一次。",
   "renewalOpen":"续订现已开放",
-  "yourMembershipExpires":"您的会员即将到期"
+  "yourMembershipExpires":"您的会员即将到期",
+  "txtWeeklyDeals": "每週優惠"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppDimens.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../view_models/UserInfoProvider.dart';
@@ -28,7 +29,7 @@ class _PointsBalanceWidgetState extends State<PointsBalanceWidget>
     _fadeAnim = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
 
     Provider.of<UserInfoProvider>(context, listen: false).checkInternetStatus();
-  //  Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile("true");
+    //  Provider.of<UserInfoProvider>(context, listen: false).fetchUserProfile("true");
 
     // _controller.forward(); // start fade out
   }

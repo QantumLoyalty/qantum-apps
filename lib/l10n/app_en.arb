@@ -220,6 +220,7 @@
   "updateNow": "UPDATE NOW",
   "msgUnableConnect":"Unable to connect. Please check your internet connection and try again.",
   "renewalOpen":"Renewals\nNow Open",
+  "txtWeeklyDeals":"Weekly Deals",
   "yourMembershipExpires":"Your Membership expires"
 
 }

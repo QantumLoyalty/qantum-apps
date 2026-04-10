@@ -103,18 +103,23 @@ class MyProfileDialog with LoggingMixin {
                                           Text(
                                             "${provider.getUserInfo?.firstName ?? ''} ${provider.getUserInfo?.lastName ?? ''}",
                                             textAlign: TextAlign.center,
-                                            textScaler: const TextScaler.linear(1.0),
+                                            textScaler:
+                                                const TextScaler.linear(1.0),
                                             style: TextStyle(
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold,
-                                              color: AppThemeCustom.getProfileDialogTextColor(context),
+                                              color: AppThemeCustom
+                                                  .getProfileDialogTextColor(
+                                                      context),
                                             ),
                                           ),
                                           Text(
                                             "${loc.txtCard} # ${provider.getUserInfo?.cardNumber ?? ''}",
                                             style: TextStyle(
                                               fontSize: 14,
-                                              color: AppThemeCustom.getProfileDialogCardTextColor(context),
+                                              color: AppThemeCustom
+                                                  .getProfileDialogCardTextColor(
+                                                      context),
                                             ),
                                           ),
                                           AppDimens.shape_20,
@@ -124,7 +129,8 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.cake,
                                             iconSize: 18,
                                             text: AppHelper.formatDate(provider
-                                                .getUserInfo?.dateOfBirth??''),
+                                                    .getUserInfo?.dateOfBirth ??
+                                                ''),
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -138,7 +144,8 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.phone_android_outlined,
                                             iconSize: 18,
                                             text:
-                                                provider.getUserInfo?.mobile??"",
+                                                provider.getUserInfo?.mobile ??
+                                                    "",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -151,8 +158,8 @@ class MyProfileDialog with LoggingMixin {
                                                 IconTextWidget.HORIZONTAL,
                                             icon: Icons.email_outlined,
                                             iconSize: 18,
-                                            text:
-                                                provider.getUserInfo?.email??"",
+                                            text: provider.getUserInfo?.email ??
+                                                "",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -201,7 +208,8 @@ class MyProfileDialog with LoggingMixin {
                                                       style: TextStyle(
                                                           color: AppThemeCustom
                                                               .getEditDetailsColor(
-                                                                  context,isText:true),
+                                                                  context,
+                                                                  isText: true),
                                                           fontSize: 10),
                                                     )
                                                   ],
@@ -211,7 +219,11 @@ class MyProfileDialog with LoggingMixin {
                                                   flavor ==
                                                       Flavor.montaukTavern ||
                                                   flavor == Flavor.starReward ||
-                                                  flavor == Flavor.flinders||flavor == Flavor.drinkRewards)
+                                                  flavor == Flavor.flinders ||
+                                                  flavor ==
+                                                      Flavor.drinkRewards ||
+                                                  flavor ==
+                                                      Flavor.bobsBulkBooze)
                                               ? Container()
                                               : UserStatusTier()
                                         ],
@@ -371,57 +383,57 @@ class MyProfileDialog with LoggingMixin {
 
                                         return InkWell(
                                           onTap: () async {
+                                            bool hasInternet = await AppHelper
+                                                .checkInternetConnection();
+                                            if (hasInternet) {
+                                              final confirmedLogout =
+                                                  await showDialog<bool>(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              loc.txtAlert),
+                                                          content: Text(
+                                                              loc.msgLogout),
+                                                          actions: [
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop(
+                                                                          false);
+                                                                },
+                                                                child: Text(
+                                                                  loc.txtNo,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey),
+                                                                )),
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop(
+                                                                          true);
+                                                                },
+                                                                child: Text(
+                                                                  loc.txtYes,
+                                                                  style: TextStyle(
+                                                                      color: AppThemeCustom
+                                                                          .getAlertDialogTextButtonColor(
+                                                                              context)),
+                                                                )),
+                                                          ],
+                                                        );
+                                                      });
 
-                                            bool hasInternet=await AppHelper.checkInternetConnection();
-                                            if(hasInternet)
-                                              {
+                                              if (confirmedLogout != true) {
+                                                return;
+                                              } else {
+                                                provider.logoutUser();
+                                              }
 
-                                            final confirmedLogout =
-                                                await showDialog<bool>(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return AlertDialog(
-                                                        title:
-                                                            Text(loc.txtAlert),
-                                                        content:
-                                                            Text(loc.msgLogout),
-                                                        actions: [
-                                                          TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(false);
-                                                              },
-                                                              child: Text(
-                                                                loc.txtNo,
-                                                                style: const TextStyle(
-                                                                    color: Colors
-                                                                        .grey),
-                                                              )),
-                                                          TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(true);
-                                                              },
-                                                              child: Text(
-                                                                loc.txtYes,
-                                                                style: TextStyle(
-                                                                    color: AppThemeCustom
-                                                                        .getAlertDialogTextButtonColor(
-                                                                            context)),
-                                                              )),
-                                                        ],
-                                                      );
-                                                    });
-
-                                            if (confirmedLogout != true) {
-                                              return;
-                                            } else {
-                                              provider.logoutUser();
-                                            }
-
-                                            /*try {
+                                              /*try {
                                                   /// CLEARING ALL PREFERENCE
                                                   SharedPreferenceHelper
                                                       sharedPreferenceHelper =
@@ -442,15 +454,12 @@ class MyProfileDialog with LoggingMixin {
                                                   AppNavigator.navigateReplacement(
                                                       context, AppNavigator.login);
                                                 } catch (e) {}*/
-
-                                              }
-                                            else {
+                                            } else {
                                               Navigator.pop(context);
                                               AppHelper.showErrorMessage(
                                                   context, loc.msgNoInternet);
                                             }
-
-                                              },
+                                          },
                                           child: Padding(
                                             padding: const EdgeInsets.all(5),
                                             child: Text(

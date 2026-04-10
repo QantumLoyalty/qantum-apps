@@ -596,6 +596,8 @@ class AppColors {
 
   static Color get button_shadow => const Color(0x2EFFFFFF);
 
+  static Color get white_opacity => const Color(0x27FFFFFF);
+
 
 
   static Color get transparent =>  Colors.transparent;

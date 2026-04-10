@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/views/common_widgets/AppLoader.dart';
+import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
-import '/views/common_widgets/AppLoader.dart';
-import '../../../core/utils/AppDimens.dart';
 import '../../common_widgets/AppCustomButton.dart';
 import '../widgets/DetailCard.dart';
 import '../widgets/PhoneCard.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
@@ -18,7 +19,8 @@ class RecoveryEmailCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: BoxDecoration(
-              color: AppThemeCustom.getAccountSectionCustomCard(context, editable),
+              color:
+                  AppThemeCustom.getAccountSectionCustomCard(context, editable),
               borderRadius: BorderRadius.circular(5)),
           padding: const EdgeInsets.only(top: 10, bottom: 10, left: 12),
           child: Column(
@@ -34,7 +36,8 @@ class RecoveryEmailCard extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: AppThemeCustom.getUserInfoItemStyle(
-                              context, editable,isHeading: true)),
+                              context, editable,
+                              isHeading: true)),
                     ),
                   ),
                   editable

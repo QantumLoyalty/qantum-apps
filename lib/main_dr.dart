@@ -100,9 +100,15 @@ class _MyAppState extends State<MyApp> {
           builder: (context, child) {
             return MediaQuery(
                 data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: child!);
-          },
+                    .copyWith(textScaler: TextScaler.linear(1.0)),
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: const SystemUiOverlayStyle(
+                        statusBarBrightness: Brightness.dark,
+                        statusBarColor: Colors.transparent,
+                        statusBarIconBrightness: Brightness.light),
+                    child: child ?? const SizedBox())
+            );
+            },
         ),
       ),
     );

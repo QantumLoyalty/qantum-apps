@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/navigation/AppNavigator.dart';
 
-import '../../dialogs/PartnerOfferDialog.dart';
-
 class PartnerOfferItem extends StatelessWidget {
   String imagePath;
 
@@ -12,12 +10,14 @@ class PartnerOfferItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(8), ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: () {
-      AppNavigator.navigateTo(context, AppNavigator.unitedFuelMainScreen);
+            AppNavigator.navigateTo(context, AppNavigator.unitedFuelMainScreen);
           },
           child: Image.asset(
             imagePath,
@@ -29,7 +29,10 @@ class PartnerOfferItem extends StatelessWidget {
                 color: Colors.grey[300],
                 width: double.infinity,
                 height: 110,
-                child: const Icon(Icons.image_not_supported,size: 72,),
+                child: const Icon(
+                  Icons.image_not_supported,
+                  size: 72,
+                ),
               );
             },
           ),

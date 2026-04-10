@@ -220,20 +220,19 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                           onPressed: () {
                             Navigator.pop(context);
 
-                            homeProvider.updateSelectedOption(
-                                homeProvider.prevSelectedOption);
-                          },
-                          icon: const Icon(
-                            Icons.clear,
-                            size: 30,
-                            color: Colors.white,
-                          )),
-                    ))
-              ],
-            ),
+                          homeProvider.updateSelectedOption(
+                              homeProvider.prevSelectedOption);
+                        },
+                        icon: const Icon(
+                          Icons.clear,
+                          size: 30,
+                          color: Colors.white,
+                        )),
+                  ))
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

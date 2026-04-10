@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
 import '/l10n/app_localizations.dart';
@@ -6,7 +7,7 @@ import '/l10n/app_localizations.dart';
 class AppLoader extends StatelessWidget {
   String? loaderMessage;
 
-   AppLoader({super.key,this.loaderMessage});
+  AppLoader({super.key, this.loaderMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,8 @@ class AppLoader extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
         child: Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -27,7 +29,7 @@ class AppLoader extends StatelessWidget {
                     )),
                 AppDimens.shape_15,
                 Text(
-                  loaderMessage??AppLocalizations.of(context)!.txtLoading,
+                  loaderMessage ?? AppLocalizations.of(context)!.txtLoading,
                   style: const TextStyle(fontSize: 15),
                 ),
               ],

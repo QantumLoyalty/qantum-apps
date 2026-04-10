@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import '../core/mixins/logging_mixin.dart';
@@ -76,7 +77,11 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         type: HomeNavigatorModel.typeDialog),
   ];
 
-  String getTranslatedOptionsName(AppLocalizations loc, String key) {
+  String getTranslatedOptionsName(
+      AppLocalizations loc,
+      String key, {
+        Flavor? flavor,
+      }) {
     switch (key) {
       case "txtPointsBalance":
         return loc.txtPointsBalance;
@@ -87,6 +92,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
       case "txtMyVenue":
         return loc.txtMyVenue;
       case "txtMyBenefits":
+        if (flavor == Flavor.bobsBulkBooze) {
+          return loc.txtWeeklyDeals;
+        }
         return loc.txtMyBenefits;
       case "txtMyAccount":
         return loc.txtMyAccount;
@@ -96,6 +104,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         return key;
     }
   }
+
 
   List<HomeNavigatorModel> get homeNavigationList => _homeNavigationList;
   final List<HomeNavigatorModel> _seeAllOptionsList = [

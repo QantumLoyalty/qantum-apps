@@ -659,6 +659,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get renewalOpen => '續訂現已開放';
 
   @override
+  String get txtWeeklyDeals => '每周优惠';
+
+  @override
   String get yourMembershipExpires => '您的會員資格即將到期';
 }
 
@@ -1315,6 +1318,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get renewalOpen => '续订现已开放';
+
+  @override
+  String get txtWeeklyDeals => '每週優惠';
 
   @override
   String get yourMembershipExpires => '您的会员即将到期';

@@ -659,5 +659,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get renewalOpen => 'नवीनीकरण\nअब खुला है';
 
   @override
+  String get txtWeeklyDeals => 'साप्ताहिक ऑफ़र';
+
+  @override
   String get yourMembershipExpires => 'आपकी सदस्यता समाप्त हो रही है';
 }

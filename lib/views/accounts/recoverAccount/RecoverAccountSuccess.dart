@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../../core/navigation/AppNavigator.dart';
-import '../../common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLogo.dart';
+import '../../common_widgets/AppScaffold.dart';
 
 class RecoverAccountSuccess extends StatelessWidget {
   const RecoverAccountSuccess({super.key});
