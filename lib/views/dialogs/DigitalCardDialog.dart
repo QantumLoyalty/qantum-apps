@@ -88,7 +88,7 @@ class DigitalCardDialog with LoggingMixin {
                                           CrossAxisAlignment.center,
                                       children: [
                                         AppDimens.shape_20,
-                                        /*  ClipRRect(
+                                      /*  ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: QrImageView(
@@ -99,8 +99,7 @@ class DigitalCardDialog with LoggingMixin {
                                           ),
                                         ),*/
                                         ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                           child: Container(
                                             color: AppColors.white,
                                             padding: const EdgeInsets.all(10),
@@ -108,8 +107,7 @@ class DigitalCardDialog with LoggingMixin {
                                               height: 180,
                                               width: 180,
                                               child: SfBarcodeGenerator(
-                                                value:
-                                                    '$cardPrefix${provider.getUserInfo!.cardNumber}',
+                                                value: '$cardPrefix${provider.getUserInfo!.cardNumber}',
                                                 symbology: QRCode(),
                                                 showValue: false,
                                               ),
@@ -117,8 +115,7 @@ class DigitalCardDialog with LoggingMixin {
                                           ),
                                         ),
                                         AppDimens.shape_20,
-                                        Expanded(
-                                            child: SingleChildScrollView(
+                                        Expanded(child: SingleChildScrollView(
                                           child: Column(
                                             children: [
                                               Text(
@@ -127,7 +124,7 @@ class DigitalCardDialog with LoggingMixin {
                                                     shadows: textShadows,
                                                     color: AppThemeCustom
                                                         .getCardDialogsTextColor(
-                                                            context),
+                                                        context),
                                                     fontSize: 32,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -178,28 +175,29 @@ class DigitalCardDialog with LoggingMixin {
                                                     shadows: textShadows,
                                                     color: AppThemeCustom
                                                         .getCardDialogsTextColor(
-                                                            context),
+                                                        context),
                                                     fontSize: 14),
                                               ),
                                               (membershipExpiry != null &&
-                                                      membershipExpiry
-                                                          .isNotEmpty)
+                                                  membershipExpiry
+                                                      .isNotEmpty)
                                                   ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 12),
-                                                      child: Text(
-                                                        "Membership Expiry: $membershipExpiry",
-                                                        style: TextStyle(
-                                                            shadows:
-                                                                textShadows,
-                                                            color: AppThemeCustom
-                                                                .getCardDialogsTextColor(
-                                                                    context),
-                                                            fontSize: 14),
-                                                      ),
-                                                    )
+                                                padding:
+                                                const EdgeInsets.only(
+                                                    top: 12),
+                                                child: Text(
+                                                  "Membership Expiry: $membershipExpiry",
+                                                  style: TextStyle(
+                                                      shadows:
+                                                      textShadows,
+                                                      color: AppThemeCustom
+                                                          .getCardDialogsTextColor(
+                                                          context),
+                                                      fontSize: 14),
+                                                ),
+                                              )
                                                   : const SizedBox.shrink(),
+
                                               AppDimens.shape_30
                                             ],
                                           ),
@@ -265,11 +263,17 @@ class DigitalCardDialog with LoggingMixin {
       "STAFF",
     };
     if (flavor != Flavor.mhbc ||
-        flavor != Flavor.maxClub ||
         membershipCategory == null ||
         membershipCategory.isEmpty) {
       return false;
     }
+/*
+    if (flavor != Flavor.mhbc || flavor != Flavor.maxClub ||
+        membershipCategory == null ||
+        membershipCategory.isEmpty) {
+      return false;
+    }
+*/
 
     return !hiddenCategories.contains(membershipCategory.toUpperCase());
   }

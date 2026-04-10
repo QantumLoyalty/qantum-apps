@@ -38,6 +38,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
         Provider.of<MembershipManagerProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
+      userInfoProvider.resetNavigated();
       membershipManagerProvider.checkSelectedMembershipInLocal();
     });
 
@@ -50,25 +51,20 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     loc = AppLocalizations.of(context)!;
     return AppScaffold(body: SafeArea(child: Consumer<UserInfoProvider>(
       builder: (context, provider, child) {
-        /*print("VISIBILITY CONDITION >>> ${((provider.getUserInfo != null &&
-            provider.getUserInfo!.licenceFront != null &&
-            provider
-                .getUserInfo!.licenceFront!.isNotEmpty &&
-            provider.getUserInfo!.licenceBack != null &&
-            provider
-                .getUserInfo!.licenceBack!.isNotEmpty) ||
-            (widget.fromScreenFlow != null &&
-                widget.fromScreenFlow == "renewal"))}");
-        */
-        print(
+        /* logEvent(
             "VISIBILITY LICENCE CONDITION >>> ${((provider.getUserInfo != null && provider.getUserInfo!.licenceFront != null && provider.getUserInfo!.licenceFront!.isNotEmpty && provider.getUserInfo!.licenceBack != null && provider.getUserInfo!.licenceBack!.isNotEmpty))}");
-        print(
+        logEvent(
             "VISIBILITY fromScreenFlow CONDITION >>>  ${widget.fromScreenFlow != null && widget.fromScreenFlow == "renew"}");
-
+*/
+        logEvent("THIS METHOD IS FOR IF PAYMENT IS UPDATED FROM S2W");
         if (provider.getUserInfo != null && !provider.isNavigated) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
             MembershipStatus membershipStatus =
-                await AppHelper.checkIfUserHasPurchasedTheMembership();
+                await AppHelper.checkIfUserHasPurchasedTheMembership(
+                    user: provider.getUserInfo);
+
+            logEvent("MEMBERSHIP STATUS:$membershipStatus");
+
             if (membershipStatus == MembershipStatus.active) {
               /// ALREADY PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(context, AppNavigator.home);
@@ -77,6 +73,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
           });
         }
 
+        logEvent("THIS METHOD IS AN ONLINE PAYMENT IS MADE FROM APP");
         if (membershipManagerProvider.isPaymentVerified != null) {
           logEvent(
               "isPaymentVerified: ${membershipManagerProvider.isPaymentVerified}");

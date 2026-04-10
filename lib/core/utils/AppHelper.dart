@@ -105,7 +105,7 @@ class AppHelper with LoggingMixin {
 
   static showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-       content: Text(message,
+      content: Text(message,
           style: TextStyle(
             color: AppColors.white,
           )),
@@ -183,13 +183,14 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
-      case Flavor.maxx||Flavor.maxClub:
+      case Flavor.maxx || Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
 
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
             Flavor.queens ||
-            Flavor.brisbane || Flavor.wonthaggi:
+            Flavor.brisbane ||
+            Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
 
       case Flavor.flinders:
@@ -203,7 +204,7 @@ class AppHelper with LoggingMixin {
   static Color getEditAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.maxx||Flavor.maxClub:
+      case Flavor.maxx || Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
       case Flavor.brisbane || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
@@ -215,7 +216,11 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards||Flavor.edp||Flavor.bobsBulkBooze:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.drinkRewards ||
+            Flavor.edp ||
+            Flavor.bobsBulkBooze:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -226,7 +231,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-      case Flavor.maxx||Flavor.maxClub:
+      case Flavor.maxx || Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -327,7 +332,12 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.wonthaggi||Flavor.edp||Flavor.senseOfTaste||Flavor.bobsBulkBooze:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.wonthaggi ||
+            Flavor.edp ||
+            Flavor.senseOfTaste ||
+            Flavor.bobsBulkBooze:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -346,7 +356,7 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx||Flavor.maxClub:
+      case Flavor.maxx || Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -454,7 +464,10 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards||Flavor.edp:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.drinkRewards ||
+            Flavor.edp:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -462,7 +475,7 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx||Flavor.maxClub||Flavor.bobsBulkBooze:
+      case Flavor.maxx || Flavor.maxClub || Flavor.bobsBulkBooze:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -573,7 +586,7 @@ class AppHelper with LoggingMixin {
             Flavor.drinkRewards||Flavor.bobsBulkBooze:
         return const Size(142, 58);
 
-      case Flavor.woollahra||Flavor.edp:
+      case Flavor.woollahra || Flavor.edp:
         return const Size(252, 114);
       case Flavor.mhbc:
         return const Size(142, 30);
@@ -628,18 +641,38 @@ class AppHelper with LoggingMixin {
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
     //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
-    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc, Flavor.qantumClub,Flavor.maxClub};
+    const clubFlavors = {
+      Flavor.aceRewards,
+      Flavor.mhbc,
+      Flavor.qantumClub,
+      Flavor.maxClub
+    };
     return clubFlavors.contains(flavor);
   }
 
-  static Future<MembershipStatus> checkIfUserHasPurchasedTheMembership() async {
-    SharedPreferenceHelper sharedPreferencesHelper =
+  static Future<MembershipStatus> checkIfUserHasPurchasedTheMembership(
+      {UserModel? user}) async {
+    /*SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = sharedPreferencesHelper.getUserData();
+    UserModel? userData = sharedPreferencesHelper.getUserData();*/
+
+    UserModel? userData;
+
+    if (user != null) {
+      userData = user;
+    } else {
+      SharedPreferenceHelper sharedPreferencesHelper =
+          await SharedPreferenceHelper.getInstance();
+      userData = sharedPreferencesHelper.getUserData();
+    }
+
     if (userData != null) {
-      print(userData);
+      debugPrint(
+          "Event:: checkIfUserHasPurchasedTheMembership:: ${userData.toString()}",
+          wrapWidth: 1024);
 
       if (userData.paymentType != null && userData.paymentType!.isNotEmpty) {
+        print("PAYMENT TYPE ${userData.paymentType}");
         if (userData.paymentType!.toLowerCase() == "reception") {
           return MembershipStatus.pendingPayment;
         } else {
@@ -677,7 +710,6 @@ class AppHelper with LoggingMixin {
         await SharedPreferenceHelper.getInstance();
     UserModel? userData = await sharedPreferencesHelper.getUserData();
     if (userData != null) {
-
       print("userData.type >> ${userData.type}");
 
       if (userData.type != null && userData.type!.toLowerCase() == "new") {
@@ -716,19 +748,31 @@ class AppHelper with LoggingMixin {
   static bool checkIfMembershipActive(UserModel user) {
     if (user.membershipExpiryDate != null &&
         user.membershipExpiryDate!.isNotEmpty) {
-
-      print("Membership Expiry: ${user.membershipExpiryDate} ServerTime ${user.serverTime}");
+      print(
+          "Membership Expiry: ${user.membershipExpiryDate} ServerTime ${user.serverTime}");
 
       if (user.serverTime != null && user.serverTime!.isNotEmpty) {
-        DateTime expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
+        /*DateTime expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
         DateTime serverTime = DateTime.parse(user.serverTime!).toUtc();
+*/
 
-        print("Membership status: ${serverTime.isBefore(expiry)}");
+        final server = DateTime.parse(user.serverTime!).toUtc();
+        final expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
+
+        final serverDateOnly =
+            DateTime.utc(server.year, server.month, server.day);
+        final expiryDateOnly =
+            DateTime.utc(expiry.year, expiry.month, expiry.day);
+        print("Membership status: ${serverDateOnly.isBefore(expiryDateOnly)}");
+        return serverDateOnly.isBefore(expiryDateOnly) ||
+            serverDateOnly.isAtSameMomentAs(expiryDateOnly);
+
+        /*    print("Membership status: ${serverTime.isBefore(expiry)}");
         return serverTime.isBefore(expiry);
-        //return serverTime.isAfter(expiry);
+        //return serverTime.isAfter(expiry);*/
       }
 
-      return true;
+      return false;
     }
     print("Membership Expiry Data ${user.membershipExpiryDate}");
 

@@ -221,8 +221,6 @@ class _HomeScreenState extends State<HomeScreen>
             if (userInfoProvider.getUserInfo != null &&
                 !provider.checkEarlyBirdCondition &&
                 provider.selectedMembership != null) {
-//              _showEarlyBirdDialogIfNeeded();
-
               logEvent(
                   "ENTERED IN \"CHECKING FOR THE EARLY BIRD DIALOG BLOCK\"");
               if (provider.selectedMembership!.earlyBirdPeriod != null &&
@@ -234,9 +232,8 @@ class _HomeScreenState extends State<HomeScreen>
                     usersMembershipExpiry:
                         userInfoProvider.getUserInfo!.membershipExpiryDate!,
                     membershipExpiry:
-                        provider.selectedMembership!.renewalDate!)) {
-                  logEvent(
-                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+                        provider.selectedMembership!.expiryEarlyBirdRenewalDate!)) {
+                  logEvent("ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
 
                   /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
 

@@ -219,6 +219,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+
+
   updateMembershipPaymentMethod(
       {required AppLocalizations loc,
       String? renewType,

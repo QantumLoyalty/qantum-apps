@@ -84,10 +84,8 @@ class AppDateFormatter {
     try {
       AppHelper.printMessage("UsersMembershipExpiry: $usersMembershipExpiry --- MembershipExpiry: $membershipExpiry");
       DateFormat dateTimeFormat = DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
-      DateTime usersPlanExpiry = dateTimeFormat.parse(usersMembershipExpiry);
-      DateTime planExpiry = dateTimeFormat.parse(membershipExpiry);
-
-
+      DateTime usersPlanExpiry = DateTime.parse(usersMembershipExpiry);
+      DateTime planExpiry = DateTime.parse(membershipExpiry);
 
       return usersPlanExpiry.isAfter(planExpiry);
     } catch (e) {

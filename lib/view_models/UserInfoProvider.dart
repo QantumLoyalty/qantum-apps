@@ -50,6 +50,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     _isNavigated = true;
   }
 
+  resetNavigated() {
+    _isNavigated = false;
+    notifyListeners();
+  }
+
   bool? _showLoader;
 
   bool? get showLoader => _showLoader;
@@ -102,7 +107,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
 
-    print("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}");
+    print(
+        "Event:: Retrieved user info from shared preference :: ${_userModel.toString()}");
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
     }
@@ -110,19 +116,19 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     notifyListeners();
   }
 
-  FetchProfileState _fetchProfileState=FetchProfileState.idle;
+  FetchProfileState _fetchProfileState = FetchProfileState.idle;
 
-  FetchProfileState get fetchProfileState=>_fetchProfileState;
+  FetchProfileState get fetchProfileState => _fetchProfileState;
 
   fetchUserProfile(String fetchFromBluize) async {
     try {
+      _fetchProfileState = FetchProfileState.loading;
 
-      _fetchProfileState=FetchProfileState.loading;
+      NetworkResponse networkResponse = await UserService.getInstance()
+          .fetchUserProfile(fetchFromBluize: fetchFromBluize);
 
-      NetworkResponse networkResponse =
-          await UserService.getInstance().fetchUserProfile(fetchFromBluize: fetchFromBluize);
-
-      debugPrint("Event:: Updated user1:: ${networkResponse.toString()}",wrapWidth: 1024);
+      debugPrint("Event:: Updated user1:: ${networkResponse.toString()}",
+          wrapWidth: 1024);
 
       if (!networkResponse.isError) {
         Map<String, dynamic> response =
@@ -141,8 +147,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               _userModel!.serverTime = response["serverTime"];
             }
 
-            logEvent(
-                "Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
+            logEvent("Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
 
             if (AppHelper.checkIfMembershipActive(_userModel!)) {
               membershipStatus = MembershipStatus.active;
@@ -153,13 +158,13 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             membershipStatus = MembershipStatus.active;
           }
 
-          _fetchProfileState=FetchProfileState.loaded;
+          _fetchProfileState = FetchProfileState.loaded;
         }
 
         notifyListeners();
       }
     } catch (e) {
-      _fetchProfileState=FetchProfileState.error;
+      _fetchProfileState = FetchProfileState.error;
       logEvent("Event:: Fetch profile error ${e.toString()}");
     }
   }
@@ -167,10 +172,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   bool _isFetching = false;
   Timer? profileTimer;
 
-  runFetchProfileTimer({required String fetchFromBluize} ) async {
+  runFetchProfileTimer({required String fetchFromBluize}) async {
     await fetchUserProfile(fetchFromBluize);
-    profileTimer = Timer.periodic(
-        Duration(seconds: 30), (value) async {
+    profileTimer = Timer.periodic(Duration(seconds: 30), (value) async {
       if (!_isFetching) {
         _isFetching = true;
         await fetchUserProfile(fetchFromBluize);

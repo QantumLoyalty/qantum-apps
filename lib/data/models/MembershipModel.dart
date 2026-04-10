@@ -9,6 +9,7 @@ class MembershipModel {
   int? remainingDays;
   double? calculatedPrice;
   String? earlyBirdRenewalDate;
+  String? expiryEarlyBirdRenewalDate;
   EarlyBirdPeriod? earlyBirdPeriod;
 
   MembershipModel(
@@ -19,7 +20,7 @@ class MembershipModel {
       this.renewalDate,
       this.remainingDays,
       this.calculatedPrice,
-      this.earlyBirdPeriod});
+      this.earlyBirdPeriod,this.expiryEarlyBirdRenewalDate});
 
   MembershipModel.fromJson(Map<String, dynamic> json) {
     id = json["_id"] ?? "";
@@ -42,6 +43,7 @@ class MembershipModel {
         ? EarlyBirdPeriod.fromJson(json['earlyBirdPeriod'])
         : null;
     earlyBirdRenewalDate = json['earlyBirdRenewalDate'];
+    expiryEarlyBirdRenewalDate = json['expiryEarlyBirdRenewalDate'] ?? null;
   }
 
   Map<String, dynamic> toJson() {
@@ -57,11 +59,12 @@ class MembershipModel {
       data['earlyBirdPeriod'] = earlyBirdPeriod!.toJson();
     }
     data['earlyBirdRenewalDate'] = earlyBirdRenewalDate;
+    data['expiryEarlyBirdRenewalDate'] = expiryEarlyBirdRenewalDate;
     return data;
   }
 
   @override
   String toString() {
-    return 'MembershipModel{id: $id, membershipName: $membershipName, originalPrice: $originalPrice, proRataApplied: $proRataApplied, renewalDate: $renewalDate, remainingDays: $remainingDays, calculatedPrice: $calculatedPrice, earlyBirdRenewalDate: $earlyBirdRenewalDate, earlyBirdPeriod: $earlyBirdPeriod}';
+    return 'MembershipModel{id: $id, expiryEarlyBirdRenewalDate: $expiryEarlyBirdRenewalDate, membershipName: $membershipName, originalPrice: $originalPrice, proRataApplied: $proRataApplied, renewalDate: $renewalDate, remainingDays: $remainingDays, calculatedPrice: $calculatedPrice, earlyBirdRenewalDate: $earlyBirdRenewalDate, earlyBirdPeriod: $earlyBirdPeriod}';
   }
 }
