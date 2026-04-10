@@ -223,7 +223,8 @@ class MyProfileDialog with LoggingMixin {
                                                   flavor ==
                                                       Flavor.drinkRewards ||
                                                   flavor ==
-                                                      Flavor.bobsBulkBooze)
+                                                      Flavor.bobsBulkBooze||flavor ==
+                                                      Flavor.senseOfTaste)
                                               ? Container()
                                               : UserStatusTier()
                                         ],

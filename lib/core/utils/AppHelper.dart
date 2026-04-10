@@ -593,7 +593,7 @@ class AppHelper with LoggingMixin {
       case Flavor.flinders:
         return const Size(56, 56);
       case Flavor.senseOfTaste:
-        return const Size(200, 70);
+        return const Size(280, 80);
       default:
         return const Size(68, 68);
     }
