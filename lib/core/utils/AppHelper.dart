@@ -622,7 +622,6 @@ class AppHelper with LoggingMixin {
       Flavor.clh: "Central",
       Flavor.mhbc: "Manly",
       Flavor.montaukTavern: "Montauk",
-      Flavor.senseOfTaste: "Qantum",
       Flavor.hogansReward: "Hogan",
       Flavor.northShoreTavern: "North",
       Flavor.aceRewards: "Ace",
@@ -634,6 +633,8 @@ class AppHelper with LoggingMixin {
       Flavor.wonthaggi: "Wonthaggi",
       Flavor.edp: "Qantum",
       Flavor.woollahra: "Woollahra",
+      Flavor.senseOfTaste: "Qantum",
+      Flavor.bobsBulkBooze: "Qantum",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

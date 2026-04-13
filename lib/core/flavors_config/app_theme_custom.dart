@@ -288,7 +288,7 @@ class AppThemeCustom {
             Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
-            Flavor.senseOfTaste||Flavor.bobsBulkBooze:
+            Flavor.senseOfTaste||Flavor.bobsBulkBooze||Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -336,7 +336,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
-      case Flavor.kingscliff || Flavor.senseOfTaste:
+      case Flavor.kingscliff:
         return isShadow != null
             ? AppColors.white_shadow
             : Theme.of(context).cardColor;
@@ -344,7 +344,7 @@ class AppThemeCustom {
         return AppColors.dr_box_shadow;
       case Flavor.edp:
         return AppColors.edp_textformField_background_color;
-      case Flavor.bobsBulkBooze:
+      case Flavor.bobsBulkBooze||Flavor.senseOfTaste:
         return AppColors.white.withOpacity(0.39);
       default:
         return Theme.of(context).cardColor;
@@ -407,11 +407,12 @@ class AppThemeCustom {
             Flavor.queens ||
             Flavor.drinkRewards ||
             Flavor.edp ||
-            Flavor.senseOfTaste ||
-            Flavor.bobsBulkBooze:
+            Flavor.senseOfTaste:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return isShadow != null ? AppColors.white : AppColors.black;
+      case Flavor.bobsBulkBooze:
+        return AppColors.white;
       default:
         return AppColors.black;
     }
@@ -853,14 +854,8 @@ class AppThemeCustom {
             return Theme.of(context).cardColor.withValues(alpha: 0.10);
           }
         }
-      case Flavor.bobsBulkBooze:
-        {
-          if (isEditable) {
-            return Theme.of(context).cardColor.withValues(alpha: 0.10);
-          } else {
-            return AppColors.white_opacity;
-          }
-        }
+      case Flavor.bobsBulkBooze||Flavor.senseOfTaste||Flavor.woollahra:
+        return AppColors.white_opacity;
       default:
         return Theme.of(context).cardColor.withValues(alpha: 0.10);
     }
