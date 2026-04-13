@@ -1,5 +1,5 @@
 PODS:
-  - app_links (7.0.0):
+  - app_links (6.4.1):
     - Flutter
   - camera_avfoundation (0.0.1):
     - Flutter
@@ -131,6 +131,9 @@ PODS:
     - OneSignalXCFramework/OneSignalOutcomes
   - package_info_plus (0.4.5):
     - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
   - PromisesObjC (2.4.0)
@@ -233,6 +236,7 @@ DEPENDENCIES:
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - OneSignalXCFramework (< 6.0, >= 5.0.0)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - screen_brightness_ios (from `.symlinks/plugins/screen_brightness_ios/ios`)
   - screen_capture_event (from `.symlinks/plugins/screen_capture_event/ios`)
@@ -295,6 +299,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/onesignal_flutter/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   screen_brightness_ios:
@@ -319,7 +325,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
 
 SPEC CHECKSUMS:
-  app_links: a754cbec3c255bd4bbb4d236ecc06f28cd9a7ce8
+  app_links: 3dbc685f76b1693c66a6d9dd1e9ab6f73d97dc0a
   camera_avfoundation: 5675ca25298b6f81fa0a325188e7df62cc217741
   connectivity_plus: cb623214f4e1f6ef8fe7403d580fdad517d2f7dd
   Firebase: d99ac19b909cd2c548339c2241ecd0d1599ab02e
@@ -341,6 +347,7 @@ SPEC CHECKSUMS:
   onesignal_flutter: e2e682f7c4b0604ddba445d4f8ea6e79c77dabe1
   OneSignalXCFramework: 943852e7d70d719f73e9669d48620aeec1b93022
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
+  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   screen_brightness_ios: 9953fd7da5bd480f1a93990daeec2eb42d4f3b52
