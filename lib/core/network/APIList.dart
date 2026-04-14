@@ -1,10 +1,10 @@
 class APIList {
   // SANDBOX
 
- static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
-  // static get BASE_URL => "http://3.24.55.180:8081/";
+//   static get BASE_URL => "http://3.24.55.180:8081/";
   // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
@@ -93,7 +93,8 @@ class APIList {
 
   static get UPDATE_PAYMENT_TYPE => BASE_URL + "user/payment-update";
 
-  static get UPDATE_PAYMENT_TYPE_EARLY_BIRD=> BASE_URL + "user/early-payment-update";
+  static get UPDATE_PAYMENT_TYPE_EARLY_BIRD =>
+      BASE_URL + "user/early-payment-update";
 
   ///  VENKAT'S API ///
   static get SCAN_DRIVING_LICENSE_IMAGES =>
