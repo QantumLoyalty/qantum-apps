@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -583,7 +584,9 @@ class AppHelper with LoggingMixin {
             Flavor.brisbane ||
             Flavor.bluewater ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards||Flavor.bobsBulkBooze:
+            Flavor.drinkRewards ||
+            Flavor.bobsBulkBooze ||
+            Flavor.edp:
         return const Size(142, 58);
 
       case Flavor.woollahra || Flavor.edp:
@@ -631,7 +634,7 @@ class AppHelper with LoggingMixin {
       Flavor.flinders: "Flinders",
       Flavor.drinkRewards: "Drinks",
       Flavor.wonthaggi: "Wonthaggi",
-      Flavor.edp: "Qantum",
+      Flavor.edp: "EDP",
       Flavor.woollahra: "Woollahra",
       Flavor.senseOfTaste: "Qantum",
       Flavor.bobsBulkBooze: "Qantum",
