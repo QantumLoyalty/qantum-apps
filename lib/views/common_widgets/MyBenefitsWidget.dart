@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import '../../core/utils/FlavorConstants.dart';
 import '/core/utils/AppHelper.dart';
 
@@ -32,6 +33,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
 
   late HomeProvider homeProvider;
   String? cardBackground;
+  late  Flavor flavor;
 
   @override
   void initState() {
@@ -43,6 +45,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
       homeProvider = Provider.of<HomeProvider>(context, listen: false);
       cardBackground = AppIcons.getCardBackground(
           FlavorConstants.getUserTierType(userInfoProvider.getUserInfo!));
+      flavor = FlavorConfig.instance.flavor!;
     });
   }
 
@@ -62,22 +65,27 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: flavor == Flavor.bobsBulkBooze
+                          ?AppColors.bob_button_color:Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(10)),
                   margin: const EdgeInsets.only(left: 25, right: 25),
                   width: media.size.width,
                   height: dialogHeight - 80,
                   child: Container(
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(
-                              AppIcons.getCardBackground(
-                                  FlavorConstants
-                                      .getUserTierType(
-                                      userInfoProvider
-                                          .getUserInfo!)),
-                            ))),
+                      image: flavor == Flavor.bobsBulkBooze
+                          ? null
+                          : DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
+                          AppIcons.getCardBackground(
+                            FlavorConstants.getUserTierType(
+                              userInfoProvider.getUserInfo!,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     child: Consumer<UserInfoProvider>(
                         builder: (context, provider, child) {
                       return Container(
@@ -86,7 +94,8 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
+                          flavor == Flavor.senseOfTaste ?Image.asset("assets/senseOfTaste/app_log_black.png",height: 100,width: 140,):
+                                  flavor ==Flavor.bobsBulkBooze?Image.asset(AppIcons.app_logo,height: 100,width: 140,):Text(
                               FlavorConstants.getUserTierType(provider.getUserInfo!)
                                   .toUpperCase(),
                               style: TextStyle(

@@ -241,8 +241,9 @@ class DigitalCardDialog with LoggingMixin {
                               bottom: 50,
                               child: CircleAvatar(
                                 backgroundColor: Theme.of(context).primaryColor,
-                                backgroundImage:
-                                    ExactAssetImage(cardBackground),
+                                backgroundImage: flavor == Flavor.senseOfTaste
+                                    ? null
+                                    : ExactAssetImage(cardBackground),
                                 radius: 30,
                                 child: IconButton(
                                     onPressed: () {
