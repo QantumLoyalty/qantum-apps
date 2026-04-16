@@ -63,7 +63,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     HomeNavigatorModel(
         name: "txtMyBenefits",
         screen: Container(),
-        icon: Icons.restaurant,
+        icon: FlavorConfig.instance.flavor == Flavor.bobsBulkBooze
+            ? Icons.attach_money
+            : Icons.restaurant,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
         name: "txtMyAccount",
