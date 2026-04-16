@@ -819,7 +819,8 @@ class AppThemeCustom {
                   ? AppColors.sot_button_color
                   : AppColors.sot_button_color;
         case Flavor.bobsBulkBooze:
-          return (provider.homeNavigationList[2].name == itemName)
+          return (provider.homeNavigationList[0].name == itemName ||
+              provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : (userInfoProvider.getUserInfo != null &&
                       userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -1031,8 +1032,8 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste ||
-            Flavor.bobsBulkBooze:
+            Flavor.senseOfTaste
+         :
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -1042,7 +1043,17 @@ class AppThemeCustom {
                     color:
                         Theme.of(context).buttonTheme.colorScheme!.onSecondary,
                     width: 1.5);
-
+      case Flavor.bobsBulkBooze:
+        return (provider.homeNavigationList[0].name == itemName ||
+            provider.homeNavigationList[2].name == itemName)
+            ? null
+            : (userInfoProvider.getUserInfo != null &&
+            userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
+            : Border.all(
+            color:
+            Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+            width: 1.5);
       default:
         return (userInfoProvider.getUserInfo != null &&
                 userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -1104,7 +1115,8 @@ class AppThemeCustom {
                 ? AppColors.disable_color
                 : AppColors.sot_button_color;
       case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[2].name == itemName)
+        return (provider.homeNavigationList[0].name == itemName ||
+            provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (userInfoProvider.getUserInfo != null &&
             userInfoProvider.getUserInfo!.isUserStatusCancelled())

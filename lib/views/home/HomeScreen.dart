@@ -61,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.drinkRewards,
     Flavor.wonthaggi,
     Flavor.edp,
-    Flavor.bobsBulkBooze,
     Flavor.senseOfTaste,
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
-    Flavor.montaukTavern
+    Flavor.montaukTavern,
+    Flavor.bobsBulkBooze,
   };
 
   bool _hasRedirectedToMembershipBuy = false;
@@ -288,18 +288,27 @@ class _HomeScreenState extends State<HomeScreen>
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor: provider.selectedOption == index &&
-                                (flavor == Flavor.senseOfTaste ||
-                                    flavor == Flavor.bobsBulkBooze||flavor == Flavor.edp)
-                                ? provider.homeNavigationList[2].name ==
-                                provider.homeNavigationList[index].name
-                                ? AppColors.transparent
-                                : AppColors.white
-                                : AppThemeCustom.getCustomHomeButtonsIconStyle(
-                                    context,
-                                    provider,
-                                    userInfoProvider,
-                                    provider.homeNavigationList[index].name),
+                                iconColor: (provider.selectedOption == index &&
+                                    (flavor == Flavor.senseOfTaste ||
+                                        flavor == Flavor.edp ||
+                                        flavor == Flavor.bobsBulkBooze))
+                                    ? (
+                                    (flavor == Flavor.bobsBulkBooze
+                                        ? (provider.homeNavigationList[0].name ==
+                                        provider.homeNavigationList[index].name ||
+                                        provider.homeNavigationList[2].name ==
+                                            provider.homeNavigationList[index].name)
+                                        : provider.homeNavigationList[2].name ==
+                                        provider.homeNavigationList[index].name)
+                                        ? AppColors.transparent
+                                        : AppColors.white
+                                )
+                                    : AppThemeCustom.getCustomHomeButtonsIconStyle(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.homeNavigationList[index].name,
+                                ),
                             text: provider
                                 .getTranslatedOptionsName(
                                   loc,
@@ -308,13 +317,21 @@ class _HomeScreenState extends State<HomeScreen>
                                 )
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            textColor: provider.selectedOption == index &&
-                                    (flavor == Flavor.senseOfTaste ||
-                                        flavor == Flavor.bobsBulkBooze||flavor == Flavor.edp)
-                                ? provider.homeNavigationList[2].name ==
-                                        provider.homeNavigationList[index].name
+                            textColor:(provider.selectedOption == index &&
+                                (flavor == Flavor.senseOfTaste ||
+                                    flavor == Flavor.edp ||
+                                    flavor == Flavor.bobsBulkBooze))
+                                ? (
+                                (flavor == Flavor.bobsBulkBooze
+                                    ? (provider.homeNavigationList[0].name ==
+                                    provider.homeNavigationList[index].name ||
+                                    provider.homeNavigationList[2].name ==
+                                        provider.homeNavigationList[index].name)
+                                    : provider.homeNavigationList[2].name ==
+                                    provider.homeNavigationList[index].name)
                                     ? AppColors.transparent
                                     : AppColors.white
+                            )
                                 : AppThemeCustom.getCustomHomeButtonsTextStyle(
                                     context,
                                     provider,
@@ -337,21 +354,27 @@ class _HomeScreenState extends State<HomeScreen>
                                             .color!
                                             .withValues(alpha: 0.5)
                                     : Colors.transparent,
-                                border: provider.selectedOption == index &&
-                                        (flavor == Flavor.senseOfTaste ||
-                                            flavor == Flavor.bobsBulkBooze||flavor == Flavor.edp)
-                                    ? provider.homeNavigationList[2].name ==
-                                            provider
-                                                .homeNavigationList[index].name
+                                border: (provider.selectedOption == index &&
+                                    (flavor == Flavor.senseOfTaste ||
+                                        flavor == Flavor.edp ||
+                                        flavor == Flavor.bobsBulkBooze))
+                                    ? (
+                                    (flavor == Flavor.bobsBulkBooze
+                                        ? (provider.homeNavigationList[0].name ==
+                                        provider.homeNavigationList[index].name ||
+                                        provider.homeNavigationList[2].name ==
+                                            provider.homeNavigationList[index].name)
+                                        : provider.homeNavigationList[2].name ==
+                                        provider.homeNavigationList[index].name)
                                         ? null
                                         : Border.all(color: AppColors.white)
-                                    : AppThemeCustom
-                                        .getCustomHomeButtonsBorderStyle(
-                                        context,
-                                        provider,
-                                        userInfoProvider,
-                                        provider.homeNavigationList[index].name,
-                                      ),
+                                )
+                                    : AppThemeCustom.getCustomHomeButtonsBorderStyle(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.homeNavigationList[index].name,
+                                ),
                                 borderRadius: BorderRadius.circular(10)),
                             onDragStart: (value) {
                               /// HIDE POINTS BALANCE DIALOG
