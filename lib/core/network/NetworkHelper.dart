@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qantum_apps/core/utils/AppHelper.dart';
@@ -39,12 +40,26 @@ class NetworkHelper with LoggingMixin {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
       } else {
+        late String networkException;
+        if (kDebugMode) {
+          networkException = response.body;
+        } else {
+          networkException = "Network error, please try again";
+        }
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+            response: jsonDecode(networkException), responseMessage: 'Error!!');
+
       }
     } catch (e) {
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+      late String networkException;
+      if (kDebugMode) {
+        networkException = e.toString();
+      } else {
+        networkException = "Network error, please try again";
+      }
+
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: networkException);
     }
     return networkResponse;
   }
@@ -63,12 +78,26 @@ class NetworkHelper with LoggingMixin {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
       } else {
+        late String networkException;
+        if (kDebugMode) {
+          networkException = response.body;
+        } else {
+          networkException = "Network error, please try again";
+        }
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+            response: jsonDecode(networkException), responseMessage: 'Error!!');
+
       }
     } catch (e) {
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+      late String networkException;
+      if (kDebugMode) {
+        networkException = e.toString();
+      } else {
+        networkException = "Network error, please try again";
+      }
+
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: networkException);
     }
     return networkResponse;
   }
@@ -86,13 +115,26 @@ class NetworkHelper with LoggingMixin {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
       } else {
+        late String networkException;
+        if (kDebugMode) {
+          networkException = response.body;
+        } else {
+          networkException = "Network error, please try again";
+        }
+
         networkResponse = NetworkResponse.error(
-            response: jsonDecode(response.body), responseMessage: 'Error!!');
+            response: jsonDecode(networkException), responseMessage: 'Error!!');
       }
     } catch (e) {
-      AppHelper.printMessage(">>> ${e.toString()}");
-      networkResponse =
-          NetworkResponse.error(response: null, responseMessage: e.toString());
+      late String networkException;
+      if (kDebugMode) {
+        networkException = e.toString();
+      } else {
+        networkException = "Network error, please try again";
+      }
+
+      networkResponse = NetworkResponse.error(
+          response: null, responseMessage: networkException);
     }
     return networkResponse;
   }

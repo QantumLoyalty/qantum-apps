@@ -30,9 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
       await Future.delayed(const Duration(seconds: 2));
       flavor = FlavorConfig.instance.flavor!;
 
-      _deepLinkService.init((link) {
-        if (_isOpenedFromDeepLink) return;
-        _isOpenedFromDeepLink = true;
+     /* await _deepLinkService.init((link) {
+       // if (!mounted) return;
+
+      //  if (_isOpenedFromDeepLink) return;
+//        _isOpenedFromDeepLink = true;
 
         if (flavor == Flavor.starReward) {
           final encodedLink = link.queryParameters['link'];
@@ -46,14 +48,14 @@ class _SplashScreenState extends State<SplashScreen> {
               .setDeepLinkParams(link.toString());
         }
 
-        /*final decodedLink = Uri.decodeComponent(encodedLink);
+        *//*final decodedLink = Uri.decodeComponent(encodedLink);
         final innerUri = Uri.parse(decodedLink);
 
         final encodedData = innerUri.queryParameters['data'];
         if (encodedData == null) return;
 
-        AppHelper.decodeBase64Payload(encodedData);*/
-      });
+        AppHelper.decodeBase64Payload(encodedData);*//*
+      });*/
 
       _checkLoginStatus();
     });
@@ -93,7 +95,8 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             /// FOR OTHER APPS
             /// CHECKING IF PURCHASED THE MEMBERSHIP
-            if (membershipStatus == MembershipStatus.notMember || membershipStatus == MembershipStatus.pendingPayment) {
+            if (membershipStatus == MembershipStatus.notMember ||
+                membershipStatus == MembershipStatus.pendingPayment) {
               ///  DID NOT PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(
                   context, AppNavigator.pendingPaymentScreen);

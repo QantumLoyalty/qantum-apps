@@ -85,15 +85,15 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-               <!-- <data
-                    android:scheme="https"
-                    android:host="${deeplinkHost}"
-                    android:pathPrefix="/"
-                    />-->
                 <data
                     android:scheme="https"
+                    android:host="${deeplinkHost}"
+                    android:pathPrefix="${deeplinkPath}"
+                    />
+              <!--  <data
+                    android:scheme="https"
                     android:host="app.clevaq.com"
-                    android:pathPattern="/qr-code/workspace/a41f24bb-75eb-bde3-16c7-50c45b78608b/.*" />
+                    android:pathPattern="/qr-code/workspace/a41f24bb-75eb-bde3-16c7-50c45b78608b/.*" />-->
             </intent-filter>
 
         </activity>

@@ -80,10 +80,10 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   ];
 
   String getTranslatedOptionsName(
-      AppLocalizations loc,
-      String key, {
-        Flavor? flavor,
-      }) {
+    AppLocalizations loc,
+    String key, {
+    Flavor? flavor,
+  }) {
     switch (key) {
       case "txtPointsBalance":
         return loc.txtPointsBalance;
@@ -106,7 +106,6 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         return key;
     }
   }
-
 
   List<HomeNavigatorModel> get homeNavigationList => _homeNavigationList;
   final List<HomeNavigatorModel> _seeAllOptionsList = [
@@ -264,9 +263,11 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   }
 
   resetDeepLinkNavigation() {
-    _deeplinkPayloads = null;
-    _startChewzieScreen = null;
-    notifyListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _deeplinkPayloads = null;
+      _startChewzieScreen = null;
+      notifyListeners();
+    });
   }
 
   bool clubPackageCheckStatus = false;
@@ -279,18 +280,18 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     if (membershipID == null) return;
 
     clubPackageCheckStatus = true;
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
 
-    try{
+    try {
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .getMembershipPlansById(membershipID: membershipID!);
       print("GET PACKAGE INFO:  $networkResponse");
 
       if (!networkResponse.isError && networkResponse.response != null) {
         Map<String, dynamic> response =
-        networkResponse.response as Map<String, dynamic>;
+            networkResponse.response as Map<String, dynamic>;
         if (response["success"] as bool && response.containsKey("data")) {
           _selectedMembership = MembershipModel.fromJson(
               (response["data"] as Map<String, dynamic>));
@@ -298,29 +299,26 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
           logEvent('SELECTED PACKAGE:: ${_selectedMembership.toString()}');
         }
       }
-    }
-    catch(e)
-    {
+    } catch (e) {
       logEvent("getClubPackageInfo: ${e.toString()}");
-    }
-    finally{
-     // clubPackageCheckStatus = false;
-     WidgetsBinding.instance.addPostFrameCallback((_){
-       notifyListeners();
-     });
+    } finally {
+      // clubPackageCheckStatus = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        notifyListeners();
+      });
     }
   }
 
   resetClubPackageCheckStatus() {
     clubPackageCheckStatus = true;
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
   }
 
   resetCheckEarlyBirdCondition() {
     checkEarlyBirdCondition = true;
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
   }

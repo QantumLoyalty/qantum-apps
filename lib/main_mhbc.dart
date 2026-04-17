@@ -6,6 +6,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
+import 'package:qantum_apps/views/AppBootstrap.dart';
 import '../core/navigation/route_observer.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
@@ -86,44 +87,46 @@ class _MyAppState extends State<MyApp> {
             create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
-      child: Portal(
-        child: MaterialApp(
-          onGenerateRoute: AppNavigator.generateRoute,
-          debugShowCheckedModeBanner: false,
-          navigatorObservers: [routeObserver],
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('hi'),
-            Locale('zh', 'CN')
-          ],
-          title: FlavorConfig.instance.flavorValues.appName!,
-          theme: AppThemes.mhbcTheme,
-          initialRoute: AppNavigator.splash,
-          home: const SplashScreen(),
-          builder: (context, child) {
-            final mediaQuery = MediaQuery.of(context);
-
-            final scale = mediaQuery.textScaler.scale(1.0).clamp(1.0, 1.2);
-
-            return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: TextScaler.linear(1.0)),
-                child: AnnotatedRegion<SystemUiOverlayStyle>(
-                    value: const SystemUiOverlayStyle(
-                        statusBarBrightness: Brightness.dark,
-                        statusBarColor: Colors.transparent,
-                        statusBarIconBrightness: Brightness.light),
-                    child: child ?? const SizedBox())
-
-
-            );
-          },
+      child: AppBootstrap(
+        child: Portal(
+          child: MaterialApp(
+            onGenerateRoute: AppNavigator.generateRoute,
+            debugShowCheckedModeBanner: false,
+            navigatorObservers: [routeObserver],
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('hi'),
+              Locale('zh', 'CN')
+            ],
+            title: FlavorConfig.instance.flavorValues.appName!,
+            theme: AppThemes.mhbcTheme,
+            initialRoute: AppNavigator.splash,
+            home: const SplashScreen(),
+            builder: (context, child) {
+              final mediaQuery = MediaQuery.of(context);
+        
+              final scale = mediaQuery.textScaler.scale(1.0).clamp(1.0, 1.2);
+        
+              return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: TextScaler.linear(1.0)),
+                  child: AnnotatedRegion<SystemUiOverlayStyle>(
+                      value: const SystemUiOverlayStyle(
+                          statusBarBrightness: Brightness.dark,
+                          statusBarColor: Colors.transparent,
+                          statusBarIconBrightness: Brightness.light),
+                      child: child ?? const SizedBox())
+        
+        
+              );
+            },
+          ),
         ),
       ),
     );

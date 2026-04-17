@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/extensions/spacer_extension.dart';
 import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
@@ -94,16 +96,21 @@ class _HomeScreenState extends State<HomeScreen>
     HomeProvider provider,
     UserInfoProvider userInfoProvider,
   ) {
-    if (_deepLinkHandled) return;
+    print(
+        "_deepLinkHandled >> $_deepLinkHandled, provider.deeplinkPayloads >> ${provider.deeplinkPayloads} userInfoProvider.getUserInfo >> ${userInfoProvider.getUserInfo}");
 
-    if (provider.deeplinkPayloads == null) return;
-    if (userInfoProvider.getUserInfo == null) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_deepLinkHandled || !mounted) return;
 
-    if (flavor == Flavor.starReward) {
-      _handleChewzie(provider, userInfoProvider);
-    } else if (flavor == Flavor.mhbc) {
-      _handleClevaQ(provider, userInfoProvider);
-    }
+      if (provider.deeplinkPayloads == null) return;
+      if (userInfoProvider.getUserInfo == null) return;
+
+      if (flavor == Flavor.starReward) {
+        _handleChewzie(provider, userInfoProvider);
+      } else if (flavor == Flavor.mhbc) {
+        _handleClevaQ(provider, userInfoProvider);
+      }
+    });
   }
 
   void _handleChewzie(
@@ -193,7 +200,9 @@ class _HomeScreenState extends State<HomeScreen>
                 }
               });
             }
-            _tryOpenDeepLink(provider, userInfoProvider);
+            // _tryOpenDeepLink(provider, userInfoProvider);
+
+            _scheduleDeepLinkHandling();
 
             if (userInfoProvider.getUserInfo != null) {
               if ((userInfoProvider.membershipStatus ==
@@ -233,9 +242,10 @@ class _HomeScreenState extends State<HomeScreen>
                 if (!AppDateFormatter.ifUserPurchasedMembership(
                     usersMembershipExpiry:
                         userInfoProvider.getUserInfo!.membershipExpiryDate!,
-                    membershipExpiry:
-                        provider.selectedMembership!.expiryEarlyBirdRenewalDate!)) {
-                  logEvent("ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+                    membershipExpiry: provider
+                        .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
+                  logEvent(
+                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
 
                   /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
 
@@ -686,22 +696,194 @@ class _HomeScreenState extends State<HomeScreen>
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
   }
 
-  Future<void> launchDeepLinkURL(Uri uri) async {
-    await launchUrl(uri,
-        customTabsOptions: CustomTabsOptions(
-          showTitle: false,
-          urlBarHidingEnabled: true,
-          shareState: CustomTabsShareState.off,
-          colorSchemes: CustomTabsColorSchemes.defaults(
-            toolbarColor: Theme.of(context).primaryColor,
-          ),
-        ),
-        safariVCOptions: SafariViewControllerOptions(
-          barCollapsingEnabled: true,
-          preferredBarTintColor: Theme.of(context).primaryColor,
-          dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
-        ));
+  bool _deepLinkCheckScheduled = false;
+  Uri? _pendingDeepLinkUri;
+  bool _isLaunchingDeepLink = false;
+  AppLifecycleState _appLifecycleState = AppLifecycleState.resumed;
+  DateTime? _lastLaunchTime;
+  String? _lastLaunchPayload;
+
+  void _scheduleDeepLinkHandling() {
+    if (_deepLinkCheckScheduled || !mounted) return;
+    _deepLinkCheckScheduled = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _deepLinkCheckScheduled = false;
+      if (!mounted) return;
+
+      final provider = context.read<HomeProvider>();
+      final userInfoProvider = context.read<UserInfoProvider>();
+
+      if (provider.deeplinkPayloads == null) return;
+      if (userInfoProvider.getUserInfo == null) return;
+
+      if (flavor == Flavor.starReward) {
+        _prepareChewzie(provider, userInfoProvider);
+      } else if (flavor == Flavor.mhbc) {
+        _prepareClevaQ(provider, userInfoProvider);
+      }
+    });
   }
+
+  void _prepareChewzie(
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      ) {
+    final payload = provider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+    if (provider.startChewzieScreen != true) return;
+
+    final now = DateTime.now();
+    if (_lastLaunchPayload == payload &&
+        _lastLaunchTime != null &&
+        now.difference(_lastLaunchTime!) < const Duration(seconds: 2)) {
+      provider.resetDeepLinkNavigation();
+      return;
+    }
+
+    final decodedLink = Uri.decodeComponent(payload);
+    final uri = Uri.parse(decodedLink);
+
+    final jsonPayload = {
+      "memberId": userInfoProvider.getUserInfo!.cardNumber,
+    };
+
+    final base64Payload = base64UrlEncode(
+      utf8.encode(jsonEncode(jsonPayload)),
+    );
+
+    final updatedUri = uri.replace(
+      queryParameters: {
+        ...uri.queryParameters,
+        'memberData': base64Payload,
+      },
+    );
+
+    _lastLaunchPayload = payload;
+    _lastLaunchTime = now;
+
+    provider.resetDeepLinkNavigation();
+    _handlePreparedDeepLink(updatedUri);
+  }
+
+
+  void _prepareClevaQ(
+      HomeProvider provider,
+      UserInfoProvider userInfoProvider,
+      ) {
+    final payload = provider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+
+    final now = DateTime.now();
+    if (_lastLaunchPayload == payload &&
+        _lastLaunchTime != null &&
+        now.difference(_lastLaunchTime!) < const Duration(seconds: 2)) {
+      provider.resetDeepLinkNavigation();
+      return;
+    }
+
+    final uri = Uri.parse(payload);
+
+    final updatedUri = uri.replace(
+      pathSegments: [
+        ...uri.pathSegments,
+        'qantumMember',
+        userInfoProvider.getUserInfo?.cardNumber ?? "",
+        AppDateFormatter.dobForClevaQ(
+          userInfoProvider.getUserInfo?.dateOfBirth,
+        ) ??
+            "",
+      ],
+    );
+
+    _lastLaunchPayload = payload;
+    _lastLaunchTime = now;
+
+    provider.resetDeepLinkNavigation();
+    _handlePreparedDeepLink(updatedUri);
+  }
+
+
+  void _handlePreparedDeepLink(Uri uri) {
+    if (Platform.isIOS) {
+      _pendingDeepLinkUri = uri;
+      _tryLaunchPendingDeepLink();
+    } else {
+      _launchNow(uri);
+    }
+  }
+  Future<void> _launchNow(Uri uri) async {
+    if (_isLaunchingDeepLink) return;
+
+    _isLaunchingDeepLink = true;
+    try {
+      await launchDeepLinkURL(uri);
+    } catch (e, st) {
+      debugPrint("Direct launch failed: $e");
+      debugPrintStack(stackTrace: st);
+    } finally {
+      _isLaunchingDeepLink = false;
+    }
+  }
+
+
+  Future<void> _tryLaunchPendingDeepLink() async {
+    final uri = _pendingDeepLinkUri;
+    if (uri == null) return;
+    if (_isLaunchingDeepLink) return;
+    if (!mounted) return;
+
+    final routeIsCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+    final appIsResumed = _appLifecycleState == AppLifecycleState.resumed;
+
+    if (!routeIsCurrent || !appIsResumed) return;
+
+    _isLaunchingDeepLink = true;
+
+    try {
+      await Future.delayed(const Duration(milliseconds: 400));
+      await launchDeepLinkURL(uri);
+      _pendingDeepLinkUri = null;
+    } finally {
+      _isLaunchingDeepLink = false;
+    }
+  }
+
+  Future<void> launchDeepLinkURL(Uri uri) async {
+    try {
+      debugPrint("Launching deep link URL: $uri");
+
+      if (Platform.isIOS) {
+        try {
+          await closeCustomTabs();
+          await Future.delayed(const Duration(milliseconds: 250));
+        } catch (_) {
+          // ignore; there may be nothing open
+        }
+      }
+
+      await launchUrl(uri,
+          customTabsOptions: CustomTabsOptions(
+            showTitle: false,
+            urlBarHidingEnabled: true,
+            shareState: CustomTabsShareState.off,
+            colorSchemes: CustomTabsColorSchemes.defaults(
+              toolbarColor: Theme.of(context).primaryColor,
+            ),
+          ),
+          safariVCOptions: SafariViewControllerOptions(
+            barCollapsingEnabled: true,
+            preferredBarTintColor: Theme.of(context).primaryColor,
+            dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+          ));
+    } catch (e) {
+      e.toString().logMessage("LAUNCH URL EXCEPTION");
+    }
+  }
+
+
+
+
 
   _showEarlyBirdDialogIfNeeded() async {
     final prefs = await SharedPreferenceHelper.getInstance();

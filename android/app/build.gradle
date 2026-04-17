@@ -39,7 +39,8 @@ android {
             dimension "app"
             applicationId "com.au.starhotels.app"
             manifestPlaceholders = [
-                    deeplinkHost: "stargroup-applink.chewzie.net"
+                    deeplinkHost: "stargroup-applink.chewzie.net",
+                    deeplinkPath: "/.*"
             ]
         }
         senseOfTaste {
@@ -81,7 +82,8 @@ android {
             dimension "app"
             applicationId "com.au.mhbc.app"
             manifestPlaceholders = [
-                    deeplinkHost: "app.clevaq.com"
+                    deeplinkHost: "app.clevaq.com",
+                    deeplinkPath: "/qr-code/workspace/a41f24bb-75eb-bde3-16c7-50c45b78608b/"
             ]
         }
         clh {

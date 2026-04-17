@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '/l10n/app_localizations.dart';
 import '/core/utils/AppHelper.dart';
 import '/data/local/SharedPreferenceHelper.dart';
@@ -44,8 +45,7 @@ class UserLoginProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final networkResponse =
-      await UserService.getInstance().login(phoneNo);
+      final networkResponse = await UserService.getInstance().login(phoneNo);
 
       _networkError = networkResponse.isError;
 
@@ -74,6 +74,8 @@ class UserLoginProvider extends ChangeNotifier {
       } else {
         _networkMessage = networkResponse.responseMessage;
       }
+
+      _networkMessage!.logMessage('NETWORK LOG');
     } catch (e) {
       AppHelper.printMessage(">>> error ${e.toString()}");
 
@@ -88,11 +90,11 @@ class UserLoginProvider extends ChangeNotifier {
           error.contains('network is unreachable') ||
           error.contains('connection failed') ||
           error.contains('timed out')) {
-        _networkMessage =
-            AppLocalizations.of(context)!.msgUnableConnect;
+        _networkMessage = AppLocalizations.of(context)!.msgUnableConnect;
       } else {
         _networkMessage = "Something went wrong. Please try again.";
       }
+      _networkMessage!.logMessage('NETWORK LOG');
     } finally {
       _showLoader = false;
       notifyListeners();
@@ -165,7 +167,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   resetNetworkResponseStatus() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      otpSent=null;
+      otpSent = null;
       _networkError = null;
       _networkMessage = null;
       notifyListeners();
@@ -184,11 +186,12 @@ class UserLoginProvider extends ChangeNotifier {
   verifyOTP(
       {required String userId,
       required String otp,
-      required String countryCode,required AppLocalizations loc}) async {
+      required String countryCode,
+      required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        loaderMessage=loc.msgVerifyingOTP;
+        loaderMessage = loc.msgVerifyingOTP;
         notifyListeners();
       });
       Map<String, dynamic> params = {};
@@ -237,21 +240,15 @@ class UserLoginProvider extends ChangeNotifier {
     }
   }
 
-
-
   bool? otpSent;
 
-
-
-  resendOTP({required String phoneNo,required AppLocalizations loc}) async {
+  resendOTP({required String phoneNo, required AppLocalizations loc}) async {
     try {
-
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
-        loaderMessage=loc.msgResendOTP;
+        loaderMessage = loc.msgResendOTP;
         notifyListeners();
       });
-
 
       NetworkResponse networkResponse =
           await UserService.getInstance().resendOTP(phoneNumber: phoneNo);
@@ -261,7 +258,7 @@ class UserLoginProvider extends ChangeNotifier {
       if (networkResponse.response != null) {
         if (networkResponse.response is Map<String, dynamic>) {
           Map<String, dynamic> response =
-          networkResponse.response as Map<String, dynamic>;
+              networkResponse.response as Map<String, dynamic>;
           if (response.containsKey('message')) {
             _networkMessage = response['message'];
           } else {
@@ -273,9 +270,6 @@ class UserLoginProvider extends ChangeNotifier {
       } else {
         _networkMessage = networkResponse.responseMessage;
       }
-
-
-
     } catch (e) {
       _networkError = true;
       _networkMessage = e.toString();
