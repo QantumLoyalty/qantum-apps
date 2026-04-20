@@ -47,35 +47,40 @@ android {
             dimension "app"
             applicationId "com.au.senseoftaste.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         maxx {
             dimension "app"
             applicationId "com.au.max.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         maxClub {
             dimension "app"
             applicationId "com.au.maxclub.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         qantum {
             dimension "app"
             applicationId "com.au.quantum.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         qantumClub {
             dimension "app"
             applicationId "com.au.quantumclub.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         mhbc {
@@ -90,42 +95,48 @@ android {
             dimension "app"
             applicationId "com.au.clh.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         montaukTavern {
             dimension "app"
             applicationId "com.au.montauk.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         hogansReward {
             dimension "app"
             applicationId "com.au.hogansreward.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         northShoreTavern {
             dimension "app"
             applicationId "com.au.northshoretavern.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         aceRewards {
             dimension "app"
             applicationId "com.au.acerewards.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         queens {
             dimension "app"
             applicationId "com.au.queenshotel.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
 
@@ -133,63 +144,72 @@ android {
             dimension "app"
             applicationId "com.au.brisbanebrewing.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         woollahra {
             dimension "app"
             applicationId "com.au.woollahra.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         flinders {
             dimension "app"
             applicationId "com.au.flinders.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         kingscliff {
             dimension "app"
             applicationId "com.au.kingscliff.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         drinkRewards {
             dimension "app"
             applicationId "com.au.drinkRewards.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         wonthaggi {
             dimension "app"
             applicationId "com.au.wonthaggi.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         edp {
             dimension "app"
             applicationId "com.au.edp.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         bobsBulkBooze {
             dimension "app"
             applicationId "com.au.bobsBulkBooze.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
     }

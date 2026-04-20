@@ -118,9 +118,8 @@ class AppThemeCustom {
         return Theme.of(context).primaryColorDark;
       case Flavor.bluewater:
         return Theme.of(context).canvasColor;
-      case Flavor.senseOfTaste||Flavor.bobsBulkBooze:
+      case Flavor.senseOfTaste || Flavor.bobsBulkBooze:
         return Theme.of(context).cardColor;
-
 
       default:
         return Theme.of(context).scaffoldBackgroundColor;
@@ -288,7 +287,9 @@ class AppThemeCustom {
             Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
-            Flavor.senseOfTaste||Flavor.bobsBulkBooze||Flavor.woollahra:
+            Flavor.senseOfTaste ||
+            Flavor.bobsBulkBooze ||
+            Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -344,7 +345,7 @@ class AppThemeCustom {
         return AppColors.dr_box_shadow;
       case Flavor.edp:
         return AppColors.edp_textformField_background_color;
-      case Flavor.bobsBulkBooze||Flavor.senseOfTaste:
+      case Flavor.bobsBulkBooze || Flavor.senseOfTaste:
         return AppColors.white.withOpacity(0.39);
       default:
         return Theme.of(context).cardColor;
@@ -366,9 +367,7 @@ class AppThemeCustom {
   static Color? getHomeScreenProfileIconColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.drinkRewards
-      || Flavor.senseOfTaste
-          ||Flavor.bobsBulkBooze:
+      case Flavor.drinkRewards || Flavor.senseOfTaste || Flavor.bobsBulkBooze:
         return AppColors.white;
       default:
         return Theme.of(context).iconTheme.color;
@@ -635,7 +634,7 @@ class AppThemeCustom {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx || Flavor.maxClub||Flavor.bobsBulkBooze:
+      case Flavor.maxx || Flavor.maxClub || Flavor.bobsBulkBooze:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -741,6 +740,37 @@ class AppThemeCustom {
     }
   }
 
+  static Color getSelectedColorHomeButtonsIcon(
+      HomeProvider provider, String itemName) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.senseOfTaste:
+        {
+          return AppColors.white;
+        }
+      case Flavor.edp:
+        {
+          return AppColors.white;
+        }
+      case Flavor.bobsBulkBooze:
+        {
+          return AppColors.white;
+        }
+      default:
+        return AppColors.white;
+    }
+
+    /*(flavor == Flavor.bobsBulkBooze
+        ? (provider.homeNavigationList[0].name ==
+        provider.homeNavigationList[index].name ||
+        provider.homeNavigationList[2].name ==
+            provider.homeNavigationList[index].name)
+        : provider.homeNavigationList[2].name ==
+        provider.homeNavigationList[index].name)
+        ? AppColors.transparent
+        : AppColors.white*/
+  }
+
   static Color? getCustomHomeButtonsIconStyle(
       BuildContext context,
       HomeProvider provider,
@@ -812,15 +842,13 @@ class AppThemeCustom {
                   : AppColors.edp_button_color;
 
         case Flavor.senseOfTaste:
-          return (provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.sot_button_color
-                  : AppColors.sot_button_color;
+          return (userInfoProvider.getUserInfo != null &&
+                  userInfoProvider.getUserInfo!.isUserStatusCancelled())
+              ? AppColors.sot_hint_text_color
+              : AppColors.sot_button_color;
         case Flavor.bobsBulkBooze:
           return (provider.homeNavigationList[0].name == itemName ||
-              provider.homeNavigationList[2].name == itemName)
+                  provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : (userInfoProvider.getUserInfo != null &&
                       userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -855,7 +883,7 @@ class AppThemeCustom {
             return Theme.of(context).cardColor.withValues(alpha: 0.10);
           }
         }
-      case Flavor.bobsBulkBooze||Flavor.senseOfTaste||Flavor.woollahra:
+      case Flavor.bobsBulkBooze || Flavor.senseOfTaste || Flavor.woollahra:
         return AppColors.white_opacity;
       default:
         return Theme.of(context).cardColor.withValues(alpha: 0.10);
@@ -989,6 +1017,55 @@ class AppThemeCustom {
     }
   }
 
+
+
+  static Border getSelectedHomeButtonsBorderStyle(HomeProvider provider,String itemName)
+  {
+
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.senseOfTaste:
+        {
+          return Border.all(color: AppColors.white);
+        }
+      case Flavor.edp:
+        {
+          return Border.all(color: AppColors.white);
+        }
+      case Flavor.bobsBulkBooze:
+        {
+          return Border.all(color: AppColors.white);
+        }
+      default:
+        return Border.all(color: AppColors.white);
+    }
+
+    /*((flavor == Flavor.bobsBulkBooze
+        ? (provider.homeNavigationList[0]
+        .name ==
+        provider
+            .homeNavigationList[
+        index]
+            .name ||
+        provider.homeNavigationList[2]
+            .name ==
+            provider
+                .homeNavigationList[
+            index]
+                .name)
+        : provider.homeNavigationList[2]
+        .name ==
+        provider
+            .homeNavigationList[index]
+            .name)
+        ? null
+        : Border.all(color: AppColors.white))*/
+
+
+  }
+
+
+
   static BoxBorder? getCustomHomeButtonsBorderStyle(
       BuildContext context,
       HomeProvider provider,
@@ -1031,9 +1108,7 @@ class AppThemeCustom {
             Flavor.kingscliff ||
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
-            Flavor.edp ||
-            Flavor.senseOfTaste
-         :
+            Flavor.edp:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
@@ -1045,15 +1120,15 @@ class AppThemeCustom {
                     width: 1.5);
       case Flavor.bobsBulkBooze:
         return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+                provider.homeNavigationList[2].name == itemName)
             ? null
             : (userInfoProvider.getUserInfo != null &&
-            userInfoProvider.getUserInfo!.isUserStatusCancelled())
-            ? Border.all(color: AppColors.disable_color, width: 1.5)
-            : Border.all(
-            color:
-            Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-            width: 1.5);
+                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5);
       default:
         return (userInfoProvider.getUserInfo != null &&
                 userInfoProvider.getUserInfo!.isUserStatusCancelled())
@@ -1062,6 +1137,32 @@ class AppThemeCustom {
                 color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
                 width: 1.5);
     }
+  }
+
+
+  static Color getSelectedColorHomeButtonsText(HomeProvider provider,String itemName)
+  {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+
+    switch (selectedFlavor) {
+      case Flavor.senseOfTaste:
+        {
+          return AppColors.white;
+        }
+      case Flavor.edp:
+        {
+          return AppColors.white;
+        }
+      case Flavor.bobsBulkBooze:
+        {
+          return AppColors.white;
+        }
+      default:
+        return AppColors.white;
+    }
+
+
+
   }
 
   static Color? getCustomHomeButtonsTextStyle(
@@ -1108,20 +1209,18 @@ class AppThemeCustom {
                 ? AppColors.disable_color
                 : Theme.of(context).textSelectionTheme.selectionColor;
       case Flavor.senseOfTaste:
-        return (provider.homeNavigationList[2].name == itemName)
+        return (userInfoProvider.getUserInfo != null &&
+                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            ? AppColors.disable_color
+            : AppColors.sot_button_color;
+      case Flavor.bobsBulkBooze:
+        return (provider.homeNavigationList[0].name == itemName ||
+                provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (userInfoProvider.getUserInfo != null &&
                     userInfoProvider.getUserInfo!.isUserStatusCancelled())
                 ? AppColors.disable_color
-                : AppColors.sot_button_color;
-      case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
-            ? Colors.transparent
-            : (userInfoProvider.getUserInfo != null &&
-            userInfoProvider.getUserInfo!.isUserStatusCancelled())
-            ? AppColors.disable_color
-            : AppColors.bob_button_color;
+                : AppColors.bob_button_color;
 
       default:
         return (userInfoProvider.getUserInfo != null &&
@@ -1234,6 +1333,7 @@ class AppThemeCustom {
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
   }
+
   static Color getEarlyBirdDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {

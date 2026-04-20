@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '../core/utils/AppHelper.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
@@ -104,6 +105,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_HOME_BUTTONS;
+      "URL: $URL >> BEARER TOKEN:${sharedPreferenceHelper.getAuthToken()}"
+          .logMessage("LOG");
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',

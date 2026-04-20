@@ -35,7 +35,14 @@ class DigitalCardDialog with LoggingMixin {
 
     String userTierType = FlavorConstants.getUserTierType(userData);
     final media = MediaQuery.of(context);
-    final dialogHeight = media.size.height * 0.7;
+
+    double heightFactor = 0.7;
+
+    if (flavor == Flavor.bobsBulkBooze || flavor == Flavor.senseOfTaste) {
+      heightFactor = 0.6;
+    }
+
+    final dialogHeight = media.size.height * heightFactor;
     const textShadows = [
       Shadow(
         offset: Offset(1.0, 1.0),
@@ -106,12 +113,16 @@ class DigitalCardDialog with LoggingMixin {
                                         ),*/
                                         flavor == Flavor.bobsBulkBooze ||
                                                 flavor == Flavor.senseOfTaste
-                                            ? Image.asset(
-                                                AppIcons.app_logo,
-                                                height: 100,
-                                                width: 180,
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 20),
+                                                child: Image.asset(
+                                                  AppIcons.app_logo,
+                                                  height: 100,
+                                                  width: 180,
+                                                ),
                                               )
-                                            : SizedBox(),
+                                            : const SizedBox.shrink(),
                                         ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),

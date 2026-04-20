@@ -32,7 +32,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
 
   late HomeProvider homeProvider;
   String? cardBackground;
-  late Flavor flavor;
+  Flavor? flavor;
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: flavor == Flavor.bobsBulkBooze
+                    color: (flavor != null && flavor == Flavor.bobsBulkBooze)
                         ? AppColors.bob_button_color
                         : Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(10)),
@@ -73,7 +73,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                 height: dialogHeight - 80,
                 child: Container(
                   decoration: BoxDecoration(
-                    image: flavor == Flavor.bobsBulkBooze
+                    image: (flavor != null && flavor == Flavor.bobsBulkBooze)
                         ? null
                         : DecorationImage(
                             fit: BoxFit.fill,
@@ -94,13 +94,13 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          flavor == Flavor.senseOfTaste
+                          (flavor != null && flavor == Flavor.senseOfTaste)
                               ? Image.asset(
                                   "assets/senseOfTaste/app_log_black.png",
                                   height: 100,
                                   width: 140,
                                 )
-                              : flavor == Flavor.bobsBulkBooze
+                              : (flavor != null && flavor == Flavor.bobsBulkBooze)
                                   ? Image.asset(
                                       AppIcons.app_logo,
                                       height: 100,
@@ -124,7 +124,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                           fontWeight: FontWeight.bold),
                                     ),
                           Text(
-                            flavor == Flavor.bobsBulkBooze
+                            (flavor != null && flavor == Flavor.bobsBulkBooze)
                                 ? AppLocalizations.of(context)!
                                     .txtWeeklyDeals
                                     .toUpperCase()
