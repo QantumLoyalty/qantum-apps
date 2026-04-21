@@ -771,95 +771,91 @@ class AppThemeCustom {
         : AppColors.white*/
   }
 
-  static Color? getCustomHomeButtonsIconStyle(
+  static Color? getHomeButtonsIconColor(
       BuildContext context,
       HomeProvider provider,
       UserInfoProvider userInfoProvider,
-      String itemName) {
-    if ((itemName == AppStrings.txtSeeAll &&
+      String itemName,
+      bool isSelected,
+      ) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    final bool isCancelled =
+        userInfoProvider.getUserInfo != null &&
+            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+
+    // Special case: See All hidden
+    if (itemName == AppStrings.txtSeeAll &&
         (provider.moreButtonsMap == null ||
-            provider.moreButtonsMap!.isEmpty))) {
-      return ((provider.moreButtonsMap == null ||
-              provider.moreButtonsMap!.isEmpty))
-          ? Colors.transparent
-          : null;
-    } else {
-      Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+            provider.moreButtonsMap!.isEmpty)) {
+      return Colors.transparent;
+    }
 
+    // 👉 SELECTED STATE
+    if (isSelected) {
       switch (selectedFlavor) {
-        case Flavor.montaukTavern:
-          return (provider.homeNavigationList[0].name == itemName ||
-                  provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.disable_color
-                  : null;
-        case Flavor.clh:
-          return (provider.homeNavigationList[0].name == itemName ||
-                  provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.disable_color
-                  : null;
-        case Flavor.brisbane:
-          return (provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.disable_color
-                  : Theme.of(context).buttonTheme.colorScheme!.primary;
-        case Flavor.woollahra:
-          return (provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.disable_color
-                  : null;
-        case Flavor.northShoreTavern ||
-              Flavor.queens ||
-              Flavor.mhbc ||
-              Flavor.hogansReward ||
-              Flavor.bluewater ||
-              Flavor.flinders ||
-              Flavor.aceRewards ||
-              Flavor.kingscliff ||
-              Flavor.drinkRewards ||
-              Flavor.wonthaggi:
-          return (provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.disable_color
-                  : null;
-        case Flavor.edp:
-          return (provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.edp_button_color
-                  : AppColors.edp_button_color;
-
         case Flavor.senseOfTaste:
-          return (userInfoProvider.getUserInfo != null &&
-                  userInfoProvider.getUserInfo!.isUserStatusCancelled())
-              ? AppColors.sot_hint_text_color
-              : AppColors.sot_button_color;
+        case Flavor.edp:
         case Flavor.bobsBulkBooze:
-          return (provider.homeNavigationList[0].name == itemName ||
-                  provider.homeNavigationList[2].name == itemName)
-              ? Colors.transparent
-              : (userInfoProvider.getUserInfo != null &&
-                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                  ? AppColors.bob_button_color
-                  : AppColors.bob_button_color;
+          return AppColors.white;
+
         default:
-          return (userInfoProvider.getUserInfo != null &&
-                  userInfoProvider.getUserInfo!.isUserStatusCancelled())
-              ? AppColors.disable_color
-              : null;
+          return AppColors.white;
       }
+    }
+
+    // 👉 DEFAULT STATE
+    switch (selectedFlavor) {
+      case Flavor.montaukTavern:
+      case Flavor.clh:
+        return (provider.homeNavigationList[0].name == itemName ||
+            provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : (isCancelled ? AppColors.disable_color : null);
+
+      case Flavor.brisbane:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : (isCancelled
+            ? AppColors.disable_color
+            : Theme.of(context).buttonTheme.colorScheme!.primary);
+
+      case Flavor.woollahra:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : (isCancelled ? AppColors.disable_color : null);
+
+      case Flavor.northShoreTavern:
+      case Flavor.queens:
+      case Flavor.mhbc:
+      case Flavor.hogansReward:
+      case Flavor.bluewater:
+      case Flavor.flinders:
+      case Flavor.aceRewards:
+      case Flavor.kingscliff:
+      case Flavor.drinkRewards:
+      case Flavor.wonthaggi:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : (isCancelled ? AppColors.disable_color : null);
+
+      case Flavor.edp:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : AppColors.edp_button_color;
+
+      case Flavor.senseOfTaste:
+        return isCancelled
+            ? AppColors.sot_hint_text_color
+            : AppColors.sot_button_color;
+
+      case Flavor.bobsBulkBooze:
+        return (provider.homeNavigationList[0].name == itemName ||
+            provider.homeNavigationList[2].name == itemName)
+            ? Colors.transparent
+            : AppColors.bob_button_color;
+
+      default:
+        return isCancelled ? AppColors.disable_color : null;
     }
   }
 
@@ -1019,123 +1015,86 @@ class AppThemeCustom {
 
 
 
-  static Border getSelectedHomeButtonsBorderStyle(HomeProvider provider,String itemName)
-  {
-
-    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-    switch (selectedFlavor) {
-      case Flavor.senseOfTaste:
-        {
-          return Border.all(color: AppColors.white);
-        }
-      case Flavor.edp:
-        {
-          return Border.all(color: AppColors.white);
-        }
-      case Flavor.bobsBulkBooze:
-        {
-          return Border.all(color: AppColors.white);
-        }
-      default:
-        return Border.all(color: AppColors.white);
-    }
-
-    /*((flavor == Flavor.bobsBulkBooze
-        ? (provider.homeNavigationList[0]
-        .name ==
-        provider
-            .homeNavigationList[
-        index]
-            .name ||
-        provider.homeNavigationList[2]
-            .name ==
-            provider
-                .homeNavigationList[
-            index]
-                .name)
-        : provider.homeNavigationList[2]
-        .name ==
-        provider
-            .homeNavigationList[index]
-            .name)
-        ? null
-        : Border.all(color: AppColors.white))*/
-
-
-  }
-
-
-
-  static BoxBorder? getCustomHomeButtonsBorderStyle(
+  static BoxBorder? getHomeButtonsBorder(
       BuildContext context,
       HomeProvider provider,
       UserInfoProvider userInfoProvider,
-      String itemName) {
-    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+      String itemName,
+      bool isSelected,
+      ) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    final bool isCancelled =
+        userInfoProvider.getUserInfo != null &&
+            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+
+    // 👉 SELECTED STATE
+    if (isSelected &&
+        (selectedFlavor == Flavor.senseOfTaste ||
+            selectedFlavor == Flavor.edp ||
+            selectedFlavor == Flavor.bobsBulkBooze)) {
+      return Border.all(color: AppColors.white);
+    }
+
+    // 👉 DEFAULT STATE
     switch (selectedFlavor) {
       case Flavor.montaukTavern:
-        return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
-            ? null
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? Border.all(color: AppColors.disable_color, width: 1.5)
-                : Border.all(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                    width: 1.5);
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
+            provider.homeNavigationList[2].name == itemName)
             ? null
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? Border.all(color: AppColors.disable_color, width: 1.5)
-                : Border.all(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                    width: 1.5);
-
-      case Flavor.northShoreTavern ||
-            Flavor.queens ||
-            Flavor.brisbane ||
-            Flavor.hogansReward ||
-            Flavor.woollahra ||
-            Flavor.bluewater ||
-            Flavor.flinders ||
-            Flavor.aceRewards ||
-            Flavor.mhbc ||
-            Flavor.kingscliff ||
-            Flavor.drinkRewards ||
-            Flavor.wonthaggi ||
-            Flavor.edp:
-        return (provider.homeNavigationList[2].name == itemName)
-            ? null
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? Border.all(color: AppColors.disable_color, width: 1.5)
-                : Border.all(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                    width: 1.5);
-      case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
-            ? null
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? Border.all(color: AppColors.disable_color, width: 1.5)
-                : Border.all(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                    width: 1.5);
-      default:
-        return (userInfoProvider.getUserInfo != null &&
-                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+            : (isCancelled
             ? Border.all(color: AppColors.disable_color, width: 1.5)
             : Border.all(
-                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                width: 1.5);
+            color: Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .onSecondary,
+            width: 1.5));
+
+      case Flavor.northShoreTavern:
+      case Flavor.queens:
+      case Flavor.brisbane:
+      case Flavor.hogansReward:
+      case Flavor.woollahra:
+      case Flavor.bluewater:
+      case Flavor.flinders:
+      case Flavor.aceRewards:
+      case Flavor.mhbc:
+      case Flavor.kingscliff:
+      case Flavor.drinkRewards:
+      case Flavor.wonthaggi:
+      case Flavor.edp:
+        return (provider.homeNavigationList[2].name == itemName)
+            ? null
+            : (isCancelled
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
+            : Border.all(
+            color: Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .onSecondary,
+            width: 1.5));
+
+      case Flavor.bobsBulkBooze:
+        return (provider.homeNavigationList[0].name == itemName ||
+            provider.homeNavigationList[2].name == itemName)
+            ? null
+            : (isCancelled
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
+            : Border.all(
+            color: Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .onSecondary,
+            width: 1.5));
+
+      default:
+        return isCancelled
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
+            : Border.all(
+            color:
+            Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+            width: 1.5);
     }
   }
 
@@ -1160,71 +1119,106 @@ class AppThemeCustom {
       default:
         return AppColors.white;
     }
-
-
-
   }
 
-  static Color? getCustomHomeButtonsTextStyle(
+  static Color? getHomeButtonsBackgroundColor(
+      BuildContext context,
+      HomeProvider provider,
+      int index,
+      bool isSelected,
+      ) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+
+    if (!isSelected) {
+      return Colors.transparent;
+    }
+
+    // 👉 senseOfTaste → ALWAYS shadow (no index condition)
+    if (selectedFlavor == Flavor.senseOfTaste) {
+      return AppColors.button_shadow;
+    }
+
+    // 👉 Other special flavors (keep index 2 exception)
+    if (selectedFlavor == Flavor.bobsBulkBooze ||
+        selectedFlavor == Flavor.edp) {
+      return provider.homeNavigationList[2].name ==
+          provider.homeNavigationList[index].name
+          ? null
+          : AppColors.button_shadow;
+    }
+
+    // 👉 Default flavors
+    return Theme.of(context)
+        .iconTheme
+        .color!
+        .withValues(alpha: 0.5);
+  }
+
+  static Color? getHomeButtonsTextColor(
       BuildContext context,
       HomeProvider provider,
       UserInfoProvider userInfoProvider,
-      String itemName) {
-    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+      String itemName,
+      bool isSelected,
+      ) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    final bool isCancelled =
+        userInfoProvider.getUserInfo != null &&
+            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+
+    // 👉 SELECTED STATE
+    if (isSelected &&
+        (selectedFlavor == Flavor.senseOfTaste ||
+            selectedFlavor == Flavor.bobsBulkBooze ||
+            selectedFlavor == Flavor.edp)) {
+      return AppColors.white;
+    }
+
+    // 👉 DEFAULT STATE
     switch (selectedFlavor) {
       case Flavor.montaukTavern:
-        return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
-            ? Colors.transparent
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? AppColors.disable_color
-                : Theme.of(context).textSelectionTheme.selectionColor;
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
+            provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? AppColors.disable_color
-                : Theme.of(context).textSelectionTheme.selectionColor;
+            : (isCancelled
+            ? AppColors.disable_color
+            : Theme.of(context).textSelectionTheme.selectionColor);
 
-      case Flavor.northShoreTavern ||
-            Flavor.queens ||
-            Flavor.hogansReward ||
-            Flavor.mhbc ||
-            Flavor.brisbane ||
-            Flavor.woollahra ||
-            Flavor.bluewater ||
-            Flavor.flinders ||
-            Flavor.aceRewards ||
-            Flavor.kingscliff ||
-            Flavor.drinkRewards ||
-            Flavor.wonthaggi ||
-            Flavor.edp:
+      case Flavor.northShoreTavern:
+      case Flavor.queens:
+      case Flavor.hogansReward:
+      case Flavor.mhbc:
+      case Flavor.brisbane:
+      case Flavor.woollahra:
+      case Flavor.bluewater:
+      case Flavor.flinders:
+      case Flavor.aceRewards:
+      case Flavor.kingscliff:
+      case Flavor.drinkRewards:
+      case Flavor.wonthaggi:
+      case Flavor.edp:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? AppColors.disable_color
-                : Theme.of(context).textSelectionTheme.selectionColor;
+            : (isCancelled
+            ? AppColors.disable_color
+            : Theme.of(context).textSelectionTheme.selectionColor);
+
       case Flavor.senseOfTaste:
-        return (userInfoProvider.getUserInfo != null &&
-                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+        return isCancelled
             ? AppColors.disable_color
             : AppColors.sot_button_color;
+
       case Flavor.bobsBulkBooze:
         return (provider.homeNavigationList[0].name == itemName ||
-                provider.homeNavigationList[2].name == itemName)
+            provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
-            : (userInfoProvider.getUserInfo != null &&
-                    userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                ? AppColors.disable_color
-                : AppColors.bob_button_color;
+            : (isCancelled
+            ? AppColors.disable_color
+            : AppColors.bob_button_color);
 
       default:
-        return (userInfoProvider.getUserInfo != null &&
-                userInfoProvider.getUserInfo!.isUserStatusCancelled())
+        return isCancelled
             ? AppColors.disable_color
             : Theme.of(context).textSelectionTheme.selectionColor;
     }
