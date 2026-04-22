@@ -3,6 +3,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 
+import '../../core/navigation/AppNavigator.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
@@ -184,6 +185,15 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                                           data: provider
                                                                   .benefitItems![
                                                               index],
+                                                              onLinkTap: (String? url,
+                                                                  Map<String, String> attributes, _) {
+
+                                                          //  debugPrint("Tapped URL: $url");
+
+                                                                AppNavigator.navigateTo(
+                                                                    context, AppNavigator.appWebView,
+                                                                    arguments: url);
+                                                              },
                                                         ))
                                                       ],
                                                     );

@@ -251,7 +251,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             benefits = benefits.replaceAll("<li>", "");
             _benefitItems = benefits.split("</li>");
 
-            logEvent(_benefitItems);
+
+            logEvent("_benefitItems:: $_benefitItems");
             _benefitItems!.removeWhere((test) => test == " ");
           }
         }

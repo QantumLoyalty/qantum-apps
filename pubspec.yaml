@@ -83,13 +83,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+3
 ################################.###
 #SOT
-#version: 1.0.0+2
+version: 1.0.0+7
 ###################################
 #Bobs
-#version: 1.0.0+7
+#version: 1.21.0+7
 ###################################
 #Mosaic Hotel
 #version: 1.0.0+1
+
+
+
 
 environment:
   sdk: ^3.5.3
