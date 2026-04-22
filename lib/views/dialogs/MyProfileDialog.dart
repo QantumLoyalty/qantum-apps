@@ -28,6 +28,7 @@ class MyProfileDialog with LoggingMixin {
   static const double dialogHeightFactor = 0.90;
   static const double dialogHeightBottomMargin = 80;
   late Flavor flavor;
+  late HomeProvider homeProvider;
 
   showMyProfileDialog(BuildContext context) async {
     flavor = FlavorConfig.instance.flavor!;
@@ -43,7 +44,7 @@ class MyProfileDialog with LoggingMixin {
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
           logEvent(FlavorConfig.instance.flavorValues.appVersion);
-
+          homeProvider = Provider.of<HomeProvider>(context, listen: false);
           return Dialog(
             backgroundColor: Colors.transparent,
             insetPadding: EdgeInsets.zero,
@@ -431,6 +432,8 @@ class MyProfileDialog with LoggingMixin {
                                               if (confirmedLogout != true) {
                                                 return;
                                               } else {
+                                                homeProvider.updateSelectedOption(
+                                                    homeProvider.prevSelectedOption);
                                                 provider.logoutUser();
                                               }
 
