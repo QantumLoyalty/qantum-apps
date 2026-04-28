@@ -212,6 +212,14 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
+        mosaic {
+            dimension "app"
+            applicationId "com.au.mosaichotel.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
     }
 
 

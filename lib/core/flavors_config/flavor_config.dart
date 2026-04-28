@@ -20,7 +20,8 @@ enum Flavor {
   drinkRewards,
   wonthaggi,
   edp,
-  bobsBulkBooze
+  bobsBulkBooze,
+  mosaic
 }
 
 class FlavorValues {

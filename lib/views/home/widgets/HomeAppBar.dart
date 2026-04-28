@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppHelper.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -137,10 +138,15 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                   ),
                 ),
                 Expanded(
-                  child: Image.asset(
-                    AppIcons.getHeaderIcon(),
-                    width: 80,
-                    height: 80,
+                  child: Center(
+                    child: SizedBox(
+                        width: AppHelper.getAppIconSize(context).width,
+                        height: AppHelper.getAppIconSize(context).height,
+                      child: Image.asset(
+                        AppIcons.getHeaderIcon(),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(

@@ -570,6 +570,37 @@ class AppColors {
   static Color get bob_profile_cross_background_color => const Color(0xFFFFFFFF);
 
 
+  /// Mosaic Hotel
+
+  static Color get mh_sf_color => const Color(0xFF08385B);
+
+  static Color get mh_back_color => const Color(0xFFfff7e6);
+
+  static Color get mh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get mh_back_color_2 => const Color(0xFFfff7e6);
+
+  static Color get mh_back_color_3 => const Color(0xFFfff7e6);
+
+  static Color get mh_text_color => const Color(0xFF08385B);
+
+  static Color get mh_text_field_text_color => const Color(0xFF08385B);
+
+  static Color get mh_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get mh_button_color => const Color(0xFF08385B);
+
+  static Color get mh_button_border_color => const Color(0xFF08385B);
+
+  static Color get mh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mh_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get mh_disabled_color => const Color(0xFFFFFFFF);
+
+  static Color get mh_canvas_color => const Color(0xFF08385B);
+
+
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);

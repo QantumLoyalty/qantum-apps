@@ -159,7 +159,7 @@ class AppThemeCustom {
       case Flavor.queens ||
             Flavor.brisbane ||
             Flavor.woollahra ||
-            Flavor.wonthaggi:
+            Flavor.wonthaggi||Flavor.mosaic:
         return Theme.of(context).primaryColor;
       case Flavor.senseOfTaste:
         return AppColors.sot_card_color;
@@ -255,7 +255,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.mhbc || Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi:
+      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
         return AppColors.white;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -269,7 +269,7 @@ class AppThemeCustom {
         return Theme.of(context).primaryColor;
       case Flavor.hogansReward:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi:
+      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -289,7 +289,7 @@ class AppThemeCustom {
             Flavor.wonthaggi ||
             Flavor.senseOfTaste ||
             Flavor.bobsBulkBooze ||
-            Flavor.woollahra:
+            Flavor.woollahra||Flavor.mosaic:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -306,7 +306,7 @@ class AppThemeCustom {
   static Color? getPointsBalanceTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi:
+      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -321,7 +321,7 @@ class AppThemeCustom {
             Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.aceRewards ||
-            Flavor.bluewater:
+            Flavor.bluewater||Flavor.mosaic:
         return AppColors.white;
 
       case Flavor.edp:
@@ -406,7 +406,7 @@ class AppThemeCustom {
             Flavor.queens ||
             Flavor.drinkRewards ||
             Flavor.edp ||
-            Flavor.senseOfTaste:
+            Flavor.senseOfTaste||Flavor.mosaic:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return isShadow != null ? AppColors.white : AppColors.black;
@@ -425,8 +425,7 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste ||
-            Flavor.bobsBulkBooze:
+            Flavor.senseOfTaste ||Flavor.mosaic:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -560,7 +559,7 @@ class AppThemeCustom {
       case Flavor.wonthaggi:
         return Theme.of(context).buttonTheme.colorScheme!.secondary;
 
-      case Flavor.hogansReward || Flavor.brisbane:
+      case Flavor.hogansReward || Flavor.brisbane||Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -597,9 +596,8 @@ class AppThemeCustom {
   static Color getAlertDialogTextButtonColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.flinders:
+      case Flavor.flinders||Flavor.mosaic:
         return Theme.of(context).scaffoldBackgroundColor;
-
       default:
         return Theme.of(context).primaryColor;
     }
@@ -626,7 +624,7 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste:
+            Flavor.senseOfTaste||Flavor.mosaic:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -881,6 +879,14 @@ class AppThemeCustom {
         }
       case Flavor.bobsBulkBooze || Flavor.senseOfTaste || Flavor.woollahra:
         return AppColors.white_opacity;
+      case Flavor.mosaic:
+        {
+          if (isEditable) {
+            return Theme.of(context).cardColor;
+          } else {
+            return AppColors.white.withOpacity(0.27);
+          }
+        }
       default:
         return Theme.of(context).cardColor.withValues(alpha: 0.10);
     }
@@ -914,7 +920,10 @@ class AppThemeCustom {
         return (isCommunication != null && isHeadingCommunication != null)
             ? AppColors.wt_back_color
             : Theme.of(context).primaryColorDark;
-        ;
+      case Flavor.mosaic:
+        return isCommunication != null
+            ? AppColors.white
+            : Theme.of(context).primaryColorDark;
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
@@ -924,7 +933,7 @@ class AppThemeCustom {
   static Color? getAppButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.wonthaggi:
+      case Flavor.brisbane || Flavor.wonthaggi||Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -938,7 +947,7 @@ class AppThemeCustom {
       case Flavor.northShoreTavern ||
             Flavor.queens ||
             Flavor.brisbane ||
-            Flavor.wonthaggi:
+            Flavor.wonthaggi|| Flavor.mosaic:
         return Theme.of(context).primaryColor;
       case Flavor.flinders:
         return AppColors.white;
@@ -1147,6 +1156,9 @@ class AppThemeCustom {
           : AppColors.button_shadow;
     }
 
+    if (selectedFlavor == Flavor.mosaic) {
+      return AppColors.mh_button_color;
+    }
     // 👉 Default flavors
     return Theme.of(context)
         .iconTheme
@@ -1170,7 +1182,7 @@ class AppThemeCustom {
     if (isSelected &&
         (selectedFlavor == Flavor.senseOfTaste ||
             selectedFlavor == Flavor.bobsBulkBooze ||
-            selectedFlavor == Flavor.edp)) {
+            selectedFlavor == Flavor.edp||selectedFlavor==Flavor.mosaic)) {
       return AppColors.white;
     }
 
@@ -1227,7 +1239,7 @@ class AppThemeCustom {
   static Color getEditDetailsColor(BuildContext context, {bool? isText}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi:
+      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
         return AppColors.white;
       case Flavor.woollahra:
         return Theme.of(context).primaryColor;

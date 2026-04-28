@@ -209,6 +209,8 @@ class AppHelper with LoggingMixin {
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
       case Flavor.brisbane || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
+      case Flavor.mosaic:
+        return AppColors.white;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
@@ -324,7 +326,15 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-
+      case Flavor.mosaic:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).primaryColorDark),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).primaryColorDark));
       default:
         return ButtonStyle();
     }
@@ -338,7 +348,7 @@ class AppHelper with LoggingMixin {
             Flavor.wonthaggi ||
             Flavor.edp ||
             Flavor.senseOfTaste ||
-            Flavor.bobsBulkBooze:
+            Flavor.bobsBulkBooze||Flavor.mosaic:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -483,11 +493,11 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.mosaic:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                side: BorderSide(color: AppColors.dr_button_color),
+                side: BorderSide(color:Theme.of(context).primaryColorDark),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.starReward || Flavor.kingscliff:
@@ -585,11 +595,10 @@ class AppHelper with LoggingMixin {
             Flavor.bluewater ||
             Flavor.kingscliff ||
             Flavor.drinkRewards ||
-            Flavor.bobsBulkBooze ||
-            Flavor.edp:
+            Flavor.bobsBulkBooze:
         return const Size(142, 58);
 
-      case Flavor.woollahra || Flavor.edp:
+      case Flavor.woollahra:
         return const Size(252, 114);
       case Flavor.mhbc:
         return const Size(142, 30);
@@ -597,6 +606,8 @@ class AppHelper with LoggingMixin {
         return const Size(56, 56);
       case Flavor.senseOfTaste:
         return const Size(280, 80);
+      case Flavor.edp:
+        return const Size(280, 100);
       default:
         return const Size(68, 68);
     }
