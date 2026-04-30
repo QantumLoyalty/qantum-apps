@@ -249,7 +249,7 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                     ],
                                   ),
                                 )
-                            : SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                       ),
                     ],
                   ),

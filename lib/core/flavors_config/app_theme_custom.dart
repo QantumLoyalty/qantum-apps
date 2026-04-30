@@ -253,9 +253,10 @@ class AppThemeCustom {
   static Color getProfileDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.woollahra:
+      case Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
+      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi || Flavor.mhbc ||Flavor.mosaic:
+
         return AppColors.white;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -425,7 +426,8 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste ||Flavor.mosaic:
+            Flavor.senseOfTaste ||Flavor.mosaic ||
+      Flavor.bobsBulkBooze:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),

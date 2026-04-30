@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/services/DeeplinkService.dart';
+import '/data/local/SharedPreferenceHelper.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -38,11 +40,50 @@ void main() async {
     OneSignal.initialize("4272e19f-d3ec-461f-9b87-0df648b4e7bf");
     // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
-    OneSignal.Notifications.requestPermission(true);
+
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
       print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
+
+    //OneSignal.Notifications.requestPermission(true);
   });
+  await _requestNotificationPermissionWeekly();
+}
+
+Future<void> _requestNotificationPermissionWeekly() async {
+  print("SAVE REQUEST");
+  final prefs = await SharedPreferenceHelper.getInstance();
+
+  final lastRequestMillis = prefs.getLastNotificationTime();
+
+  final now = DateTime.now();
+  print(" LAST REQUEST: $lastRequestMillis ");
+  if (lastRequestMillis != null) {
+    final lastRequest = DateTime.fromMillisecondsSinceEpoch(lastRequestMillis);
+
+    final difference = now.difference(lastRequest);
+    print(" DIFFERENCE: $difference ");
+    if (difference.inDays < 7) {
+      print("DIFFERENCE CONDITION");
+      return;
+    }
+  }
+  if (Platform.isAndroid) {
+    final canRequest = await OneSignal.Notifications.canRequest();
+    print(" REQUEST PERMISSION $canRequest ");
+    if (canRequest) {
+      final granted = await OneSignal.Notifications.requestPermission(true);
+
+      print("Notification permission granted: $granted");
+    } else {
+      print("Cannot show permission popup. Show custom UI to open settings.");
+    }
+  } else {
+    OneSignal.Notifications.requestPermission(true);
+  }
+
+  print(" PERMISSION TIME ${now.millisecondsSinceEpoch} ");
+  await prefs.saveLastNotificationTime(now.millisecondsSinceEpoch);
 }
 
 class MyApp extends StatefulWidget {

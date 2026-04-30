@@ -6,9 +6,12 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/network/APIList.dart';
+import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
+import '../../data/local/SharedPreferenceHelper.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/MyAccountProvider.dart';
+import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppScaffold.dart';
 import '../common_widgets/BluewaterBackground.dart';
 import 'widgets/AccountsAppBar.dart';
@@ -23,15 +26,22 @@ class MyAccountScreen extends StatefulWidget {
 class _MyAccountScreenState extends State<MyAccountScreen> {
   MyAccountProvider myAccountProvider = MyAccountProvider();
   late Flavor flavor;
+  late SharedPreferenceHelper sharedPreferenceHelper;
+  late AppLocalizations loc;
 
   @override
   void initState() {
     super.initState();
     flavor = FlavorConfig.instance.flavor!;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      sharedPreferenceHelper = await SharedPreferenceHelper.getInstance();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
+
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
       floatingActionButtonLocation:
@@ -110,6 +120,108 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                         },
                         itemCount: myAccountProvider.accountOptions.length,
                       ),
+                      Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: Consumer<UserInfoProvider>(
+                              builder: (context, provider, child) {
+                            if (provider.cancelledAccount != null &&
+                                provider.cancelledAccount!) {
+                              /// ACCOUNT IS CANCELLED, DO LOGOUT & REDIRECT TO LOGIN SCREEN
+                              /// CLEARING ALL PREFERENCES
+
+                              sharedPreferenceHelper.clearAll();
+
+
+                              /// NAVIGATING TO LOGIN SCREEN
+                              Future.delayed(Duration.zero, () {
+                                provider.resetCancelledAccount();
+                                AppNavigator.navigateAndClearStack(
+                                    context, AppNavigator.login);
+                              });
+                            }
+
+                            return InkWell(
+                              onTap: () async {
+                                bool hasInternet =
+                                    await AppHelper.checkInternetConnection();
+
+                                if (hasInternet) {
+                                  var response = await showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text(loc.txtAlert),
+                                          content: Text(loc.msgCancelAccount),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(
+                                                      context, false);
+                                                },
+                                                child: Text(
+                                                  loc.txtNo,
+                                                  style: const TextStyle(
+                                                      color: Colors.grey),
+                                                )),
+                                            TextButton(
+                                                onPressed: () async {
+                                                  Navigator.pop(
+                                                      context, true);
+                                                },
+                                                child: Text(
+                                                  loc.txtYes,
+                                                  style: TextStyle(
+                                                      color: AppThemeCustom
+                                                          .getAlertDialogTextButtonColor(
+                                                              context)),
+                                                )),
+                                          ],
+                                        );
+                                      });
+
+                                  if (response) {
+                                    /// CANCEL ACCOUNT ///
+                                    provider.cancelAccount();
+                                  }
+                                } else {
+                                  Navigator.pop(context);
+                                  AppHelper.showErrorMessage(
+                                      context, loc.msgNoInternet);
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      loc.txtDeleteMyAccount.toUpperCase(),
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w300,
+                                          color: AppThemeCustom
+                                              .getProfileDialogTextColor(
+                                                  context)),
+                                    ),
+                                    AppDimens.shape_10,
+                                    (provider.showCancelAccountLoader !=
+                                                null &&
+                                            provider.showCancelAccountLoader!)
+                                        ? const SizedBox(
+                                            width: 15,
+                                            height: 15,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                            ),
+                                          )
+                                        : Container()
+                                  ],
+                                ),
+                              ),
+                            );
+                          }))
                     ],
                   ),
                 ),

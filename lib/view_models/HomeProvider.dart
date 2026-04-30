@@ -270,6 +270,20 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
+  String? consumeChewzieLink() {
+    final link = _deeplinkPayloads;
+
+    _deeplinkPayloads = null;
+    _startChewzieScreen = false;
+    notifyListeners();
+
+    return link;
+  }
+
+
+
+
+
   bool clubPackageCheckStatus = false;
   MembershipModel? _selectedMembership;
 

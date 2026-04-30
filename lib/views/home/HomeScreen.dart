@@ -6,15 +6,14 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/enums/FetchProfileState.dart';
-import 'package:qantum_apps/core/enums/MembershipStatus.dart';
-import 'package:qantum_apps/core/extensions/log_extension.dart';
-import 'package:qantum_apps/core/extensions/spacer_extension.dart';
-import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
-import 'package:qantum_apps/views/dialogs/EarlyRenewalMembershipDialog.dart';
-
+import '/core/enums/FetchProfileState.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/core/extensions/spacer_extension.dart';
+import '/core/utils/AppDateFormatter.dart';
+import '/core/utils/AppHelper.dart';
+import '/data/local/SharedPreferenceHelper.dart';
+import '/views/dialogs/EarlyRenewalMembershipDialog.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
@@ -90,8 +89,9 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   bool _deepLinkHandled = false;
-
-  void _tryOpenDeepLink(
+  String? _lastHandledChewziePayload;
+  DateTime? _lastHandledChewzieTime;
+ /* void _tryOpenDeepLink(
     HomeProvider provider,
     UserInfoProvider userInfoProvider,
   ) {
@@ -102,17 +102,20 @@ class _HomeScreenState extends State<HomeScreen>
       if (_deepLinkHandled || !mounted) return;
 
       if (provider.deeplinkPayloads == null) return;
-      if (userInfoProvider.getUserInfo == null) return;
 
       if (flavor == Flavor.starReward) {
         _handleChewzie(provider, userInfoProvider);
-      } else if (flavor == Flavor.mhbc) {
+      }
+
+      if (userInfoProvider.getUserInfo == null) return;
+
+      if (flavor == Flavor.mhbc) {
         _handleClevaQ(provider, userInfoProvider);
       }
     });
-  }
+  }*/
 
-  void _handleChewzie(
+  /*void _handleChewzie(
       HomeProvider provider, UserInfoProvider userInfoProvider) {
     if (provider.startChewzieScreen != true) return;
 
@@ -153,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen>
     print("DEEPLINK URL: ${updatedUri.toString()}");
     launchDeepLinkURL(updatedUri);
     provider.resetDeepLinkNavigation();
-  }
+  }*/
 
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
@@ -297,13 +300,13 @@ class _HomeScreenState extends State<HomeScreen>
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor:AppThemeCustom.getHomeButtonsIconColor(
-                                context,
-                                provider,
-                                userInfoProvider,
-                                provider.homeNavigationList[index].name,
-                                provider.selectedOption == index,
-                              ),
+                            iconColor: AppThemeCustom.getHomeButtonsIconColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.homeNavigationList[index].name,
+                              provider.selectedOption == index,
+                            ),
                             text: provider
                                 .getTranslatedOptionsName(
                                   loc,
@@ -312,17 +315,18 @@ class _HomeScreenState extends State<HomeScreen>
                                 )
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                                textColor: AppThemeCustom.getHomeButtonsTextColor(
-                                  context,
-                                  provider,
-                                  userInfoProvider,
-                                  provider.homeNavigationList[index].name,
-                                  provider.selectedOption == index,
-                                ),
+                            textColor: AppThemeCustom.getHomeButtonsTextColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.homeNavigationList[index].name,
+                              provider.selectedOption == index,
+                            ),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
                             decoration: BoxDecoration(
-                                color: AppThemeCustom.getHomeButtonsBackgroundColor(
+                                color: AppThemeCustom
+                                    .getHomeButtonsBackgroundColor(
                                   context,
                                   provider,
                                   index,
@@ -469,11 +473,11 @@ class _HomeScreenState extends State<HomeScreen>
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
                             iconColor: AppThemeCustom.getHomeButtonsIconColor(
-                                    context,
-                                    provider,
-                                    userInfoProvider,
-                                    provider
-                                        .homeNavigationList[index + 3].name, provider.selectedOption == index+3),
+                                context,
+                                provider,
+                                userInfoProvider,
+                                provider.homeNavigationList[index + 3].name,
+                                provider.selectedOption == index + 3),
                             text: provider
                                 .getTranslatedOptionsName(
                                   loc,
@@ -484,26 +488,27 @@ class _HomeScreenState extends State<HomeScreen>
                                 .toUpperCase(),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
-                                textColor: AppThemeCustom.getHomeButtonsTextColor(
-                                  context,
-                                  provider,
-                                  userInfoProvider,
-                                  provider.homeNavigationList[index + 3].name,
-                                  provider.selectedOption == index + 3,
-                                ),
+                            textColor: AppThemeCustom.getHomeButtonsTextColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.homeNavigationList[index + 3].name,
+                              provider.selectedOption == index + 3,
+                            ),
                             decoration: BoxDecoration(
-                                color: AppThemeCustom.getHomeButtonsBackgroundColor(
+                                color: AppThemeCustom
+                                    .getHomeButtonsBackgroundColor(
                                   context,
                                   provider,
                                   index,
-                                  provider.selectedOption == index+3,
+                                  provider.selectedOption == index + 3,
                                 ),
                                 border: AppThemeCustom.getHomeButtonsBorder(
                                   context,
                                   provider,
                                   userInfoProvider,
-                                  provider.homeNavigationList[index+3].name,
-                                  provider.selectedOption == index+3,
+                                  provider.homeNavigationList[index + 3].name,
+                                  provider.selectedOption == index + 3,
                                 ),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
@@ -644,11 +649,17 @@ class _HomeScreenState extends State<HomeScreen>
       final userInfoProvider = context.read<UserInfoProvider>();
 
       if (provider.deeplinkPayloads == null) return;
-      if (userInfoProvider.getUserInfo == null) return;
+
 
       if (flavor == Flavor.starReward) {
+
         _prepareChewzie(provider, userInfoProvider);
-      } else if (flavor == Flavor.mhbc) {
+        return;
+      }
+
+      if (userInfoProvider.getUserInfo == null) return;
+
+      if (flavor == Flavor.mhbc) {
         _prepareClevaQ(provider, userInfoProvider);
       }
     });
@@ -657,22 +668,61 @@ class _HomeScreenState extends State<HomeScreen>
   void _prepareChewzie(
     HomeProvider provider,
     UserInfoProvider userInfoProvider,
-  ) {
+  ) async {
     final payload = provider.deeplinkPayloads;
     if (payload == null || payload.isEmpty) return;
     if (provider.startChewzieScreen != true) return;
 
-    final now = DateTime.now();
-    if (_lastLaunchPayload == payload &&
-        _lastLaunchTime != null &&
-        now.difference(_lastLaunchTime!) < const Duration(seconds: 2)) {
+    if (_isDuplicateChewzieLaunch(payload)) {
       provider.resetDeepLinkNavigation();
       return;
     }
 
+    _lastHandledChewziePayload = payload;
+    _lastHandledChewzieTime = DateTime.now();
+
+    provider.resetDeepLinkNavigation();
+
+
+
     final decodedLink = Uri.decodeComponent(payload);
     final uri = Uri.parse(decodedLink);
 
+    try {
+      final userInfo = userInfoProvider.getUserInfo ??
+          await _waitForUserInfo(userInfoProvider)
+          .timeout(const Duration(seconds: 10));
+   //  final userInfo = userInfoProvider.getUserInfo;
+      final cardNumber = userInfo!.cardNumber;
+
+      if (cardNumber == null || cardNumber.isEmpty) {
+        _handlePreparedDeepLink(uri);
+        return;
+      }
+
+      final jsonPayload = {
+        "memberId": cardNumber,
+      };
+
+      final base64Payload = base64UrlEncode(
+        utf8.encode(jsonEncode(jsonPayload)),
+      );
+
+      final updatedUri = uri.replace(
+        queryParameters: {
+          ...uri.queryParameters,
+          'memberData': base64Payload,
+        },
+      );
+
+      _handlePreparedDeepLink(updatedUri);
+    } catch (e) {
+      debugPrint("Chewzie userInfo timeout/failure, opening without card: $e");
+      _handlePreparedDeepLink(uri);
+    }
+
+
+/*
     final jsonPayload = {
       "memberId": userInfoProvider.getUserInfo!.cardNumber,
     };
@@ -693,6 +743,32 @@ class _HomeScreenState extends State<HomeScreen>
 
     provider.resetDeepLinkNavigation();
     _handlePreparedDeepLink(updatedUri);
+
+*/
+
+
+
+
+  }
+
+  bool _isDuplicateChewzieLaunch(String payload) {
+    final now = DateTime.now();
+
+    return _lastHandledChewziePayload == payload &&
+        _lastHandledChewzieTime != null &&
+        now.difference(_lastHandledChewzieTime!) < const Duration(seconds: 3);
+  }
+
+  Future<dynamic> _waitForUserInfo(UserInfoProvider provider) async {
+    while (mounted) {
+      if (provider.getUserInfo != null) {
+        return provider.getUserInfo;
+      }
+
+      await Future.delayed(const Duration(milliseconds: 200));
+    }
+
+    throw Exception("HomeScreen unmounted before user info loaded");
   }
 
   void _prepareClevaQ(

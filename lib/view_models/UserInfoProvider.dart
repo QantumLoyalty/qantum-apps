@@ -7,6 +7,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/core/enums/FetchProfileState.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/BenefitsModel.dart';
@@ -107,8 +108,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
 
-    print(
-        "Event:: Retrieved user info from shared preference :: ${_userModel.toString()}");
+    ("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}").logMessage();
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
     }

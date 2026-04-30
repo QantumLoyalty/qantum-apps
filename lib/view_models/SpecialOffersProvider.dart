@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/enums/OffersFilterType.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import '../../data/models/OfferModel.dart';
 import '../core/utils/AppHelper.dart';
 import '../core/utils/FlavorConstants.dart';
@@ -171,7 +172,23 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
         final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
 
-        final String userStatusTier =  FlavorConstants.getUserTierType(userData);
+        final String userStatusTier = FlavorConstants.getUserTierType(userData);
+
+        String? membershipCategory;
+        String? expiryDate;
+
+        if (flavor == Flavor.mhbc) {
+          membershipCategory = userData.membershipCategory;
+
+          try {
+            DateTime dt = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
+                .parse(userData.membershipExpiryDate ?? "");
+
+            expiryDate = DateFormat("yyyy-MM-dd").format(dt);
+          } catch (e) {
+            logEvent("Exception in parsing birthdate $e");
+          }
+        }
 
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchSpecialOffers(
@@ -179,7 +196,9 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
                 birthdayMonth: dob != null ? "${dob.month}" : "1",
                 userId: userData.bluizeUniqueUserId!,
                 joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
-                timezone: currentTimeZone);
+                timezone: currentTimeZone,
+                membershipCategory: membershipCategory,
+                expiryDate: expiryDate);
         logEvent("Special Offers Response: ${networkResponse.response}");
         if (!networkResponse.isError) {
           _isError = networkResponse.isError;

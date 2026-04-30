@@ -55,14 +55,25 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       required String birthdayMonth,
       required String userId,
       required String joinDate,
-      required String timezone}) async {
+      required String timezone,
+      String? membershipCategory,
+      String? expiryDate}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_VOUCHERS +
-          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone";
+          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone&joineddate=$joinDate";
+
+      if (membershipCategory != null) {
+        URL = "$URL&membershipCategory=$membershipCategory";
+      }
+      if (expiryDate != null) {
+        URL = "$URL&expirydate=$expiryDate";
+      }
+
       logEvent(URL);
+      logEvent(Uri.parse(URL));
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',

@@ -1,15 +1,15 @@
 {
   "project_info": {
-    "project_number": "894720990633",
-    "project_id": "qantum-apps",
-    "storage_bucket": "qantum-apps.firebasestorage.app"
+    "project_number": "1056025182878",
+    "project_id": "qantum-42fb6",
+    "storage_bucket": "qantum-42fb6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056025182878:android:007c8a0ecd0535bcc9318f",
+        "mobilesdk_app_id": "1:1056025182878:android:ee304987adecbf8ec9318f",
         "android_client_info": {
-          "package_name": "com.au.bobsBulkBooze.app"
+          "package_name": "au.com.bobsbulkbooze.app"
         }
       },
       "oauth_client": [],

@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/core/utils/DeepLinkLauncher.dart';
 
+import '../../view_models/HomeProvider.dart';
 import '/core/flavors_config/flavor_config.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -31,16 +36,93 @@ class _LoginScreenState extends State<LoginScreen> {
   String countryCode = "+61";
   late AppLocalizations loc;
   late Flavor flavor;
+  bool _chewzieGuestHandled = false;
+  late HomeProvider _homeProvider;
+  //late Color toolbarColor;
 
   @override
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
     flavor = FlavorConfig.instance.flavor!;
+    //toolbarColor = Theme.of(context).primaryColor;
+    _homeProvider = context.read<HomeProvider>();
+    _homeProvider.addListener(_handleGuestChewzieFromProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _handleGuestChewzieFromProvider();
+    });
+  }
+
+/*  void _handleGuestChewzieFromProvider() {
+    if (!mounted) return;
+    if (_chewzieGuestHandled) return;
+    if (flavor != Flavor.starReward) return;
+
+    final homeProvider = context.read<HomeProvider>();
+
+    if (homeProvider.startChewzieScreen != true) return;
+    if (homeProvider.deeplinkPayloads == null ||
+        homeProvider.deeplinkPayloads!.isEmpty) {
+      return;
+    }
+
+    _chewzieGuestHandled = true;
+
+    final payload = homeProvider.consumeChewzieLink();
+    if (payload == null || payload.isEmpty) return;
+
+    final decodedLink = Uri.decodeComponent(payload);
+    final uri = Uri.parse(decodedLink);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 700), () {
+        if (!mounted) return;
+
+        final routeIsCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+        if (!routeIsCurrent) return;
+
+        debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
+        DeepLinkLauncher.launchChewzieUrl(context, uri);
+      });
+    });
+  }*/
+  void _handleGuestChewzieFromProvider() {
+    if (!mounted) return;
+    if (_chewzieGuestHandled) return;
+    if (flavor != Flavor.starReward) return;
+
+    if (_homeProvider.startChewzieScreen != true) return;
+
+    final payload = _homeProvider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+
+    _chewzieGuestHandled = true;
+
+    final consumedPayload = _homeProvider.consumeChewzieLink();
+    if (consumedPayload == null || consumedPayload.isEmpty) return;
+
+    final decodedLink = Uri.decodeComponent(consumedPayload);
+    final uri = Uri.parse(decodedLink);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(
+        Duration(milliseconds: Platform.isIOS ? 700 : 300),
+        () {
+          if (!mounted) return;
+
+          debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
+          DeepLinkLauncher.launchChewzieUrl(context, uri, AppColors.sr_back_color);
+        },
+      );
+    });
   }
 
   @override
   void dispose() {
+    context
+        .read<HomeProvider>()
+        .removeListener(_handleGuestChewzieFromProvider);
     _phoneController.dispose();
     super.dispose();
   }
@@ -50,7 +132,41 @@ class _LoginScreenState extends State<LoginScreen> {
     loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: SafeArea(
-        child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
+        child: Consumer2<UserLoginProvider, HomeProvider>(
+            builder: (context, provider, homeProvider, child) {
+
+
+          /// HANDLING GUEST USERS FOR CHEWZEE CASE
+/*
+          if (!_chewzieGuestHandled &&
+              flavor == Flavor.starReward &&
+              homeProvider.deeplinkPayloads != null &&
+              homeProvider.deeplinkPayloads!.isNotEmpty) {
+            _chewzieGuestHandled = true;
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (!mounted) return;
+
+              final decodedLink =
+                  Uri.decodeComponent(homeProvider.deeplinkPayloads!);
+              final uri = Uri.parse(decodedLink);
+
+              homeProvider.resetDeepLinkNavigation();
+
+              Future.delayed(const Duration(milliseconds: 700), () {
+                if (!mounted) return;
+
+                final routeIsCurrent =
+                    ModalRoute.of(context)?.isCurrent ?? false;
+                if (!routeIsCurrent) return;
+
+                "DEEP LINK URI: $uri".logMessage();
+                DeepLinkLauncher.launchChewzieUrl(context, uri);
+              });
+            });
+          }
+*/
+
           /// CHECKING USER STATUS & NAVIGATING AS PER THE STATUS
           if (provider.isExistingUser != null) {
             Future.delayed(Duration.zero, () {
@@ -283,6 +399,32 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+/*  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final homeProvider = context.watch<HomeProvider>();
+
+    if (_chewzieGuestHandled) return;
+    if (flavor != Flavor.starReward) return;
+    if (homeProvider.startChewzieScreen != true) return;
+    if (homeProvider.deeplinkPayloads == null) return;
+
+    _chewzieGuestHandled = true;
+
+    final payload = homeProvider.consumeChewzieLink();
+    if (payload == null || payload.isEmpty) return;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      final decodedLink = Uri.decodeComponent(payload);
+      final uri = Uri.parse(decodedLink);
+
+      DeepLinkLauncher.launchChewzieUrl(context, uri);
+    });
+  }*/
 
   List<TextSpan> _buildLocalizedChangeMyMobile(BuildContext context) {
     // Use a temporary marker where the bold word should go

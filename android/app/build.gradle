@@ -40,7 +40,7 @@ android {
             applicationId "com.au.starhotels.app"
             manifestPlaceholders = [
                     deeplinkHost: "stargroup-applink.chewzie.net",
-                    deeplinkPath: "/.*"
+                    deeplinkPath: "/"
             ]
         }
         senseOfTaste {
@@ -206,7 +206,7 @@ android {
         }
         bobsBulkBooze {
             dimension "app"
-            applicationId "com.au.bobsBulkBooze.app"
+            applicationId "au.com.bobsbulkbooze.app"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid",
                     deeplinkPath: "/.*"
