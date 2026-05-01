@@ -1539,7 +1539,7 @@ class AppThemes {
             return AppColors.white;
           }
           if (states.contains(WidgetState.selected)) {
-            return AppColors.edp_text_color;
+            return AppColors.edp_button_color;
           }
           return AppColors.white;
         }),

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/ChooseFavouriteVenueDialog.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -108,7 +109,12 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                 AppNavigator.navigateTo(
                                     context, AppNavigator.appWebView,
                                     arguments: APIList.TERMS_AND_CONDITIONS);
-                              } else {
+                              }  if (myAccountProvider.accountOptions.keys
+                                  .elementAt(index) ==
+                                  "txtChangeFavouriteVenue") {
+                                ChooseFavouriteVenuedialog.getInstance()
+                                    .showChooseFavouriteVenueDialog(context);
+                              }else {
                                 AppNavigator.navigateTo(
                                     context,
                                     myAccountProvider.accountOptions[

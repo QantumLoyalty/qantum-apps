@@ -29,6 +29,11 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
   };
+  final Map<String, String> _accountOptionsEDP = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+    //"txtChangeFavouriteVenue": "",
+  };
 
   Map<String, String> get accountOptions {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
@@ -39,6 +44,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return _accountOptionsMHBC;
       case Flavor.starReward:
         return _accountOptionsSR;
+      case Flavor.edp:
+        return _accountOptionsEDP;
 
       default:
         return _accountOptionsOthers;
@@ -76,6 +83,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtClubSponsorship;
         case "txtTermsAndConditions":
         return loc.txtTermsAndConditions;
+      case "txtChangeFavouriteVenue":
+        return loc.txtChangeFavouriteVenue;
 
       default:
         return key; // fallback

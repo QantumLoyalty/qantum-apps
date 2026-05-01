@@ -1405,6 +1405,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Membership expires'**
   String get yourMembershipExpires;
+
+  /// No description provided for @txtChangeFavouriteVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Favourite Venues'**
+  String get txtChangeFavouriteVenue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

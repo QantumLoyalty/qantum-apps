@@ -663,4 +663,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get yourMembershipExpires => 'आपकी सदस्यता समाप्त हो रही है';
+
+  @override
+  String get txtChangeFavouriteVenue => 'पसंदीदा स्थान बदलें';
 }

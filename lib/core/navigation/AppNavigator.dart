@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
+import 'package:qantum_apps/views/login/ChooseFavouriteVenueScreen.dart';
 import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
@@ -70,6 +71,7 @@ class AppNavigator {
   static const String selfieUploadScreen = "/selfieUploadScreen";
   static const String renewMembershipScreen = "/renewMembershipScreen";
   static const String unitedFuelMainScreen = "/unitedFuelMainScreen";
+  static const String chooseFavouriteVenue = "/chooseFavouriteVenueScreen";
   static const String unitedFuelsBarcodeLandscape =
       "/unitedFuelsBarcodeLandscape";
 
@@ -125,6 +127,10 @@ class AppNavigator {
             builder: (_) => SignupScreen(
                   argument: args as Map<String, String>,
                 ));
+      case chooseFavouriteVenue:
+        return MaterialPageRoute(
+            builder: (_) =>const Choosefavouritevenuescreen(
+            ));
       case drivingLicenseScreen:
         return MaterialPageRoute(
             builder: (_) => DrivingLicenseScanScreen(

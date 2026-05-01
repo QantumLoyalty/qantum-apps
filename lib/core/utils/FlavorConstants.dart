@@ -19,6 +19,7 @@ class FlavorConstants {
       Flavor.kingscliff: "KBH",
       Flavor.drinkRewards: "DHQ",
       Flavor.wonthaggi: "WCC",
+      Flavor.edp: "EDP",
     };
 
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";

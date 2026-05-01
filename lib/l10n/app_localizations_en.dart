@@ -663,4 +663,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourMembershipExpires => 'Your Membership expires';
+
+  @override
+  String get txtChangeFavouriteVenue => 'Change Favourite Venues';
 }

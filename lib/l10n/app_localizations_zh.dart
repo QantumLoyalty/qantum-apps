@@ -663,6 +663,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get yourMembershipExpires => '您的會員資格即將到期';
+
+  @override
+  String get txtChangeFavouriteVenue => '更改喜爱的场所';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1324,4 +1327,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get yourMembershipExpires => '您的会员即将到期';
+
+  @override
+  String get txtChangeFavouriteVenue => '更改喜爱的场所';
 }

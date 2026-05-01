@@ -153,8 +153,9 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           if (membershipStatus == MembershipStatus.active) {
                             /// ALREADY PURCHASED THE MEMBERSHIP
                             /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
-
-                            AppNavigator.navigateAndClearStack(
+                            //AppNavigator.navigateAndClearStack(
+                              //  context, AppNavigator.chooseFavouriteVenue);
+                           AppNavigator.navigateAndClearStack(
                                 context, AppNavigator.home);
                           } else if (membershipStatus ==
                               MembershipStatus.inactive) {

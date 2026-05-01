@@ -221,5 +221,7 @@
   "msgUnableConnect":"कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।",
   "renewalOpen":"नवीनीकरण\nअब खुला है",
    "txtWeeklyDeals": "साप्ताहिक ऑफ़र",
-  "yourMembershipExpires":"आपकी सदस्यता समाप्त हो रही है"
+  "yourMembershipExpires":"आपकी सदस्यता समाप्त हो रही है",
+  "txtChangeFavouriteVenue":"पसंदीदा स्थान बदलें"
+
 }
