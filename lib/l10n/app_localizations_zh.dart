@@ -666,6 +666,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get txtChangeFavouriteVenue => '更改喜爱的场所';
+
+  @override
+  String get txtSaveMyVenue => '保存我的場地';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1330,4 +1333,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtChangeFavouriteVenue => '更改喜爱的场所';
+
+  @override
+  String get txtSaveMyVenue => '保存我的场地';
 }

@@ -32,7 +32,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   final Map<String, String> _accountOptionsEDP = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
-    //"txtChangeFavouriteVenue": "",
+    "txtChangeFavouriteVenue": "",
   };
 
   Map<String, String> get accountOptions {

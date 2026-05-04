@@ -1411,6 +1411,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change Favourite Venues'**
   String get txtChangeFavouriteVenue;
+
+  /// No description provided for @txtSaveMyVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save My Venue'**
+  String get txtSaveMyVenue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

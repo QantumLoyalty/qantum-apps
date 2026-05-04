@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/navigation/AppNavigator.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 import 'package:qantum_apps/views/common_widgets/AppLogo.dart';
 import 'package:qantum_apps/views/common_widgets/AppScaffold.dart';
@@ -15,6 +16,7 @@ class Choosefavouritevenuescreen extends StatefulWidget {
 
 class _ChoosefavouritevenuescreenState
     extends State<Choosefavouritevenuescreen> {
+  late AppLocalizations loc;
 
   int selectedIndex = -1;
 
@@ -30,6 +32,7 @@ class _ChoosefavouritevenuescreenState
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     return AppScaffold(
         body: SafeArea(
       child: Column(
@@ -75,9 +78,9 @@ class _ChoosefavouritevenuescreenState
           ),
           Padding(
             padding:
-            const EdgeInsets.only(left: 25.0, right: 25.0, top: 20),
+            const EdgeInsets.only(left: 25.0, right: 25.0, top: 20,bottom: 20),
             child: AppCustomButton(
-              text: "Save My Venue",
+              text:loc.txtSaveMyVenue.toString(),
               textColor: AppHelper.getAccountsButtonTextColor(context),
               onClick: () async {
                  AppNavigator.navigateAndClearStack(

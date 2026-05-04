@@ -153,10 +153,9 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           if (membershipStatus == MembershipStatus.active) {
                             /// ALREADY PURCHASED THE MEMBERSHIP
                             /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
-                            //AppNavigator.navigateAndClearStack(
-                              //  context, AppNavigator.chooseFavouriteVenue);
-                           AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.home);
+                              AppNavigator.navigateAndClearStack(
+                                  context, AppNavigator.home);
+
                           } else if (membershipStatus ==
                               MembershipStatus.inactive) {
                             await context
@@ -177,8 +176,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           }
                         } else {
                           /// IF USER IS OLD
-                          AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.home);
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.home);
                         }
                       }
                     } else {
@@ -198,8 +197,13 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         /// ALREADY PURCHASED THE MEMBERSHIP
                         /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
 
-                        AppNavigator.navigateAndClearStack(
-                            context, AppNavigator.home);
+                        if(flavor == Flavor.edp){
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.chooseFavouriteVenue);
+                        } else {
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.home);
+                        }
                       } else if (membershipStatus ==
                           MembershipStatus.inactive) {
                         await context
@@ -215,8 +219,13 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                       }
                     }
                   } else {
-                    AppNavigator.navigateAndClearStack(
-                        context, AppNavigator.home);
+                    if (flavor == Flavor.edp) {
+                      AppNavigator.navigateAndClearStack(
+                          context, AppNavigator.chooseFavouriteVenue);
+                    } else {
+                      AppNavigator.navigateAndClearStack(
+                          context, AppNavigator.home);
+                    }
                   }
                 });
               }

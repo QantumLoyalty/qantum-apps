@@ -666,4 +666,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get txtChangeFavouriteVenue => 'पसंदीदा स्थान बदलें';
+
+  @override
+  String get txtSaveMyVenue => 'मेरी जगह सहेजें';
 }

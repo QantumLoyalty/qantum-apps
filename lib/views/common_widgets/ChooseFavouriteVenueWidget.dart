@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 
 import '../../core/utils/AppColors.dart' show AppColors;
@@ -18,6 +19,7 @@ class ChooseFavouriteVenueWidget extends StatefulWidget {
 class _ChooseFavouriteVenueWidgetState
     extends State<ChooseFavouriteVenueWidget> {
   int selectedIndex = -1;
+  late AppLocalizations loc;
 
   final List<String> venues = [
     "Bridgeport Hotel",
@@ -31,6 +33,7 @@ class _ChooseFavouriteVenueWidgetState
 
   @override
   Widget build(BuildContext context) {
+    loc = AppLocalizations.of(context)!;
     final media = MediaQuery.of(context);
     final dialogHeight = media.size.height * 0.7;
     return Consumer<UserInfoProvider>(
@@ -127,7 +130,7 @@ class _ChooseFavouriteVenueWidgetState
                 padding:
                     const EdgeInsets.only(left: 25.0, right: 25.0, top: 20),
                 child: AppCustomButton(
-                  text: "Save My Venue",
+                  text: loc.txtSaveMyVenue.toString(),
                   textColor: AppHelper.getAccountsButtonTextColor(context),
                   onClick: () async {},
                   style: AppHelper.getAccountsButtonStyle(context),
