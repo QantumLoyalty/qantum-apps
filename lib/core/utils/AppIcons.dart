@@ -270,11 +270,11 @@ class AppIcons {
       else if (selectedFlavor == Flavor.edp) {
         switch (membershipType.toLowerCase().trim()) {
           case "diamond":
-            return "assets/edp/card_diamond.png";
+            return "assets/loyaltyEatDrinkPlay/card_diamond.png";
           case "gold":
             return card_gold;
           case "staff":
-            return "assets/edp/card_staff.png";
+            return "assets/loyaltyEatDrinkPlay/card_staff.png";
           case "silver":
             return card_silver;
           default:

@@ -26,7 +26,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   FlavorConfig(
       flavor: Flavor.edp,
-      flavorValues: FlavorValues(appName: "Edp", appVersion: "0.0.1"));
+      flavorValues: FlavorValues(appName: "Loyalty Eat Drink Play", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations(
