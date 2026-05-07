@@ -326,7 +326,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-      case Flavor.mosaic:
+      case Flavor.mosaic||Flavor.mannumClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -348,7 +348,7 @@ class AppHelper with LoggingMixin {
             Flavor.wonthaggi ||
             Flavor.edp ||
             Flavor.senseOfTaste ||
-            Flavor.bobsBulkBooze||Flavor.mosaic:
+            Flavor.bobsBulkBooze||Flavor.mosaic||Flavor.mannumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -497,7 +497,7 @@ class AppHelper with LoggingMixin {
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                side: BorderSide(color:Theme.of(context).primaryColorDark),
+                side: BorderSide(color:Colors.transparent),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.starReward || Flavor.kingscliff:
@@ -608,6 +608,10 @@ class AppHelper with LoggingMixin {
         return const Size(280, 80);
       case Flavor.edp:
         return const Size(280, 100);
+      case Flavor.mosaic:
+        return const Size(100, 90);
+      case Flavor.mannumClub:
+        return const Size(250, 90);
       default:
         return const Size(68, 68);
     }
@@ -660,7 +664,8 @@ class AppHelper with LoggingMixin {
       Flavor.aceRewards,
       Flavor.mhbc,
       Flavor.qantumClub,
-      Flavor.maxClub
+      Flavor.maxClub,
+      Flavor.mannumClub,
     };
     return clubFlavors.contains(flavor);
   }

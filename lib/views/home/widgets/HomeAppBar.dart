@@ -195,7 +195,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                       .toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 9,
-                                      fontWeight: FontWeight.normal,
+                                      fontWeight: FontWeight.bold,
                                       color: (userInfoProvider.getUserInfo !=
                                                   null &&
                                               userInfoProvider.getUserInfo!

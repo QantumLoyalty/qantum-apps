@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1057203232257",
+    "project_id": "queens-hotel-c1759",
+    "storage_bucket": "queens-hotel-c1759.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056025182878:android:42a27a8b3cebce6bc9318f",
+        "android_client_info": {
+          "package_name": "com.au.mannumClub.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNDsrRqxj_t98IsVjrH8orZzFZOQ6V1zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

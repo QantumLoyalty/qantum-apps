@@ -600,6 +600,36 @@ class AppColors {
 
   static Color get mh_canvas_color => const Color(0xFF08385B);
 
+  /// Mannum Club
+
+  static Color get mc_sf_color => const Color(0xFF00B0F0);
+
+  static Color get mc_back_color => const Color(0xFF2d3748);
+
+  static Color get mc_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_back_color_2 => const Color(0xFF2d3748);
+
+  static Color get mc_back_color_3 => const Color(0xFF2d3748);
+
+  static Color get mc_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_hint_text_color => const Color(0x73FFFFFF);
+
+  static Color get mc_button_color => const Color(0xFF00B0F0);
+
+  static Color get mc_button_border_color => const Color(0xFF00B0F0);
+
+  static Color get mc_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_divider_color => const Color(0xFFe2f7fb);
+
+  static Color get mc_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_canvas_color => const Color(0xFF00B0F0);
+
 
 
   /// COMMON COLORS ///

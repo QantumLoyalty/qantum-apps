@@ -220,6 +220,14 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
+        mannumClub {
+            dimension "app"
+            applicationId "com.au.mannumClub.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
     }
 
 

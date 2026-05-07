@@ -450,7 +450,7 @@ class _LoginScreenState extends State<LoginScreen> {
         style: TextStyle(
             color: (flavor == Flavor.bobsBulkBooze ||
                     flavor == Flavor.senseOfTaste ||
-                    flavor == Flavor.drinkRewards)
+                    flavor == Flavor.drinkRewards||flavor == Flavor.mannumClub)
                 ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
                 : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
             fontWeight: FontWeight.w900,
@@ -462,7 +462,7 @@ class _LoginScreenState extends State<LoginScreen> {
             style: TextStyle(
                 color: (flavor == Flavor.bobsBulkBooze ||
                         flavor == Flavor.senseOfTaste ||
-                        flavor == Flavor.drinkRewards)
+                        flavor == Flavor.drinkRewards ||flavor == Flavor.mannumClub)
                     ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
                     : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
                 fontWeight: FontWeight.w400,
