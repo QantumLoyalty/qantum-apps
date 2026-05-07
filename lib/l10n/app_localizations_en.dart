@@ -672,4 +672,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txtSaveMyVenue => 'Save My Venue';
+
+  @override
+  String get selectEDPVenues => 'Please choose your\nfavourite EDP Venue';
+
+  @override
+  String get selectVenuesSuccessMsg => 'Venue updated successfully!';
+
+  @override
+  String get selectVenuesErrorMsg => 'Error while updating the venue!';
 }

@@ -672,4 +672,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get txtSaveMyVenue => 'मेरी जगह सहेजें';
+
+  @override
+  String get selectEDPVenues => 'कृपया अपने पसंदीदा\nEDP स्थान चुनें';
+
+  @override
+  String get selectVenuesSuccessMsg => 'स्थान सफलतापूर्वक अपडेट किया गया!';
+
+  @override
+  String get selectVenuesErrorMsg => 'स्थान अपडेट करते समय त्रुटि हुई!';
 }

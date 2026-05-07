@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -50,7 +51,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   false, "my card");
                             }
 
-                            double screenBrightness = 0.4;
+                            /*double screenBrightness = 0.4;
 
                             try {
                               screenBrightness =
@@ -80,7 +81,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   .setSystemScreenBrightness(screenBrightness);
                             } catch (e) {
                               logEvent(e.toString());
-                            }
+                            }*/
+
+                            AppUpdateDialog.getInstance().showAppUpdateDialog(context);
 
                             //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
                             //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);

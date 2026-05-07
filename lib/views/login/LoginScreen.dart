@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
   late Flavor flavor;
   bool _chewzieGuestHandled = false;
   late HomeProvider _homeProvider;
+
   //late Color toolbarColor;
 
   @override
@@ -112,7 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
           if (!mounted) return;
 
           debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
-          DeepLinkLauncher.launchChewzieUrl(context, uri, AppColors.sr_back_color);
+          DeepLinkLauncher.launchChewzieUrl(
+              context, uri, AppColors.sr_back_color);
         },
       );
     });
@@ -120,9 +122,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    context
-        .read<HomeProvider>()
-        .removeListener(_handleGuestChewzieFromProvider);
+    if (flavor == Flavor.starReward) {
+      context
+          .read<HomeProvider>()
+          .removeListener(_handleGuestChewzieFromProvider);
+    }
+
     _phoneController.dispose();
     super.dispose();
   }
@@ -134,8 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Consumer2<UserLoginProvider, HomeProvider>(
             builder: (context, provider, homeProvider, child) {
-
-
           /// HANDLING GUEST USERS FOR CHEWZEE CASE
 /*
           if (!_chewzieGuestHandled &&

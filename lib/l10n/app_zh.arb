@@ -225,5 +225,8 @@
   "txtCurrentDeals": "每週優惠",
   "txtOurGuarantee":"我們的保證",
   "txtChangeFavouriteVenue": "更改喜爱的场所",
-  "txtSaveMyVenue": "保存我的場地"
+  "txtSaveMyVenue": "保存我的場地",
+  "selectEDPVenues":"請選擇您喜愛的\nEDP 場地",
+  "selectVenuesSuccessMsg":"场馆更新成功！",
+  "selectVenuesErrorMsg":"更新场馆时出错"
 }

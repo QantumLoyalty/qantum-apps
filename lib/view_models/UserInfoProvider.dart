@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:qantum_apps/core/enums/FetchProfileState.dart';
-import 'package:qantum_apps/core/enums/MembershipStatus.dart';
-import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/data/models/VenueModel.dart';
+import '/core/enums/FetchProfileState.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/services/AppDataService.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/BenefitsModel.dart';
@@ -108,7 +110,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
 
-    ("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}").logMessage();
+    ("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}")
+        .logMessage();
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
     }
@@ -147,7 +150,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               _userModel!.serverTime = response["serverTime"];
             }
 
-            logEvent("Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
+            logEvent(
+                "Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
 
             if (AppHelper.checkIfMembershipActive(_userModel!)) {
               membershipStatus = MembershipStatus.active;
@@ -250,7 +254,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             benefits = benefits.replaceAll("</ul>", "");
             benefits = benefits.replaceAll("<li>", "");
             _benefitItems = benefits.split("</li>");
-
 
             logEvent("_benefitItems:: $_benefitItems");
             _benefitItems!.removeWhere((test) => test == " ");
@@ -1024,5 +1027,102 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
+  }
+
+  bool? _showVenuesListLoader;
+
+  bool? get showVenuesListLoader => _showVenuesListLoader;
+  bool? _errorOnVenuesList;
+
+  bool? get errorOnVenuesList => _errorOnVenuesList;
+  String? _errorMsgOnVenuesList;
+
+  String? get errorMsgOnVenuesList => _errorMsgOnVenuesList;
+
+  resetErrorOnVenuesList() {
+    _errorOnVenuesList = null;
+    _errorMsgOnVenuesList = null;
+    notifyListeners();
+  }
+
+  List<VenueModel>? _venuesList;
+
+  List<VenueModel>? get venuesList => _venuesList;
+  String? _selectedVenue;
+
+  String? get selectedVenue => _selectedVenue;
+
+  selectVenue(String venue) {
+    _selectedVenue = venue;
+    notifyListeners();
+  }
+
+  fetchVenueList() async {
+    try {
+      _showVenuesListLoader = true;
+      notifyListeners();
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().getVenuesList();
+      _errorOnVenuesList = networkResponse.isError;
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        _venuesList = [];
+        response["data"].forEach((item) {
+          _venuesList!.add(VenueModel.fromJson(item));
+        });
+
+        if (_userModel != null && _userModel!.venueName != null) {
+          _selectedVenue = _userModel!.venueName;
+        }
+      }
+    } catch (e) {
+      _errorOnVenuesList = true;
+      _errorMsgOnVenuesList = e.toString();
+    } finally {
+      _showVenuesListLoader = false;
+      notifyListeners();
+    }
+  }
+
+  bool? _errorOnSelectVenue;
+
+  bool? get errorOnSelectVenue => _errorOnSelectVenue;
+
+  resetErrorOnSelectVenue() {
+    _errorOnSelectVenue = null;
+    notifyListeners();
+  }
+
+  updateSelectedVenue() async {
+    try {
+      _showVenuesListLoader = true;
+      notifyListeners();
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .setSelectedVenue(venueName: _selectedVenue!);
+
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        _errorOnSelectVenue = false;
+        _userModel!.venueName = _selectedVenue!;
+/*
+        if (response.containsKey("user")) {
+          _errorOnSelectVenue = false;
+        } else {
+          _errorOnSelectVenue = true;
+        }*/
+      } else {
+        _errorOnSelectVenue = true;
+      }
+    } catch (e) {
+      _errorOnSelectVenue = true;
+      // _errorMsgOnVenuesList = e.toString();
+    } finally {
+      _showVenuesListLoader = false;
+      notifyListeners();
+    }
   }
 }

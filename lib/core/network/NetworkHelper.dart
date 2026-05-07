@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:qantum_apps/core/utils/AppHelper.dart';
 
+import 'package:http/http.dart' as http;
+import '/core/utils/AppHelper.dart';
 import '../../data/models/NetworkResponse.dart';
+import '../extensions/log_extension.dart';
 import '../mixins/logging_mixin.dart';
 
 class NetworkHelper with LoggingMixin {
@@ -48,7 +46,6 @@ class NetworkHelper with LoggingMixin {
         }
         networkResponse = NetworkResponse.error(
             response: jsonDecode(networkException), responseMessage: 'Error!!');
-
       }
     } catch (e) {
       late String networkException;
@@ -86,7 +83,6 @@ class NetworkHelper with LoggingMixin {
         }
         networkResponse = NetworkResponse.error(
             response: jsonDecode(networkException), responseMessage: 'Error!!');
-
       }
     } catch (e) {
       late String networkException;

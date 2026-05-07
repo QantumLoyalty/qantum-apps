@@ -29,18 +29,21 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   }
 
   @override
-  Future<NetworkResponse> fetchPromotions(String membershipType) async {
+  Future<NetworkResponse> fetchPromotions(String membershipType,
+      {String? selectedVenue}) async {
     NetworkResponse networkResponse;
     try {
-      // var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      if (selectedVenue != null && selectedVenue.isNotEmpty) {
+        URL = "$URL&veneuName=$selectedVenue";
+      }
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var response = await NetworkHelper.instance.getCall(
-          url: Uri.parse(APIList.FETCH_PROMOTIONS + membershipType),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-          });
+      var response =
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+      });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -341,6 +344,49 @@ class AppDataService extends AppDataRepository with LoggingMixin {
         },
       );
     } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> getVenuesList() async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(
+          APIList.FETCH_VENUES_LIST + 'appType=${AppHelper.getAppType()}');
+      url.toString().logMessage();
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> setSelectedVenue({required String venueName}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.SAVE_VENUE);
+      url.toString().logMessage();
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      networkResponse = await NetworkHelper.instance.putCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: {'venueName': venueName},
+      );
+    } catch (e) {
+      e.toString().logMessage();
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }
     return networkResponse;

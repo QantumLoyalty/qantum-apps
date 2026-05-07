@@ -1,11 +1,11 @@
 class APIList {
   // SANDBOX
 
- //static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
 //   static get BASE_URL => "http://3.24.55.180:8081/";
-  static get BASE_URL => "https://api.s2w.com.au/";
+//  static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
 
@@ -71,6 +71,9 @@ class APIList {
   static get RESEND_OTP => BASE_URL + "user/otp-resent/";
 
   static get CLUB_PACKAGE_CHECK => BASE_URL + "club-package/user?packageId=";
+
+  static get FETCH_VENUES_LIST => BASE_URL + "venue/all?";
+  static get SAVE_VENUE => BASE_URL + "user/venue-update";
 
   /// UNITED FUELS APIS ///
   static get VALIDATE_USER => BASE_URL + "fuel/validate/";

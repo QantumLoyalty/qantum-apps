@@ -672,6 +672,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get txtSaveMyVenue => '保存我的場地';
+
+  @override
+  String get selectEDPVenues => '請選擇您喜愛的\nEDP 場地';
+
+  @override
+  String get selectVenuesSuccessMsg => '场馆更新成功！';
+
+  @override
+  String get selectVenuesErrorMsg => '更新场馆时出错';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1342,4 +1351,13 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtSaveMyVenue => '保存我的场地';
+
+  @override
+  String get selectEDPVenues => '请选择您喜欢的\nEDP 场地';
+
+  @override
+  String get selectVenuesSuccessMsg => '场馆更新成功！';
+
+  @override
+  String get selectVenuesErrorMsg => '更新场馆时出错!';
 }

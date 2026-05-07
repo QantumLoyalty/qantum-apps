@@ -1,9 +1,10 @@
-/*
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import '/core/extensions/log_extension.dart';
+import '/core/flavors_config/app_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/core/flavors_config/flavor_config.dart';
@@ -90,7 +91,6 @@ class AppUpdateDialog with LoggingMixin {
                       Expanded(
                           child: TextButton(
                               onPressed: () async {
-
                                 final info = await PackageInfo.fromPlatform();
                                 final id = info.packageName;
 
@@ -103,7 +103,7 @@ class AppUpdateDialog with LoggingMixin {
                                 );
 
                                 final Uri iosUrl = Uri.parse(
-                                  "https://apps.apple.com/app/id6746117250",
+                                  AppConfig.iosAppStoreUrl,
                                 );
 
                                 try {
@@ -116,7 +116,7 @@ class AppUpdateDialog with LoggingMixin {
                                           mode: LaunchMode.externalApplication);
                                     }
                                   } else if (Platform.isIOS) {
-                                    print("iosUrl:; ${iosUrl}");
+                                    "iosUrl:; ${iosUrl}".logMessage();
 
                                     await launchUrl(iosUrl,
                                         mode: LaunchMode.externalApplication);
@@ -127,7 +127,8 @@ class AppUpdateDialog with LoggingMixin {
                                 }
                               },
                               child: Text(loc.updateNow,
-                                  style: TextStyle(fontWeight: FontWeight.w700)))),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w700)))),
                     ],
                   )
                 ],
@@ -137,4 +138,3 @@ class AppUpdateDialog with LoggingMixin {
         });
   }
 }
-*/

@@ -1423,6 +1423,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save My Venue'**
   String get txtSaveMyVenue;
+
+  /// No description provided for @selectEDPVenues.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose your\nfavourite EDP Venue'**
+  String get selectEDPVenues;
+
+  /// No description provided for @selectVenuesSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue updated successfully!'**
+  String get selectVenuesSuccessMsg;
+
+  /// No description provided for @selectVenuesErrorMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Error while updating the venue!'**
+  String get selectVenuesErrorMsg;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

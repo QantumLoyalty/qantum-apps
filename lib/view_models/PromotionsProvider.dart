@@ -36,8 +36,9 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
       if (userData != null && !userData.isUserStatusCancelled()) {
         String userTier =  FlavorConstants.getUserTierType(userData);
+        String? venue=userData!.venueName;
         NetworkResponse networkResponse =
-            await AppDataService.getInstance().fetchPromotions(userTier);
+            await AppDataService.getInstance().fetchPromotions(userTier,selectedVenue: venue);
         _isError = networkResponse.isError;
         Map<String, dynamic> resultData =
             networkResponse.response as Map<String, dynamic>;

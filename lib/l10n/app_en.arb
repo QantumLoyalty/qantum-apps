@@ -224,6 +224,8 @@
   "txtOurGuarantee":"Our Guarantee",
   "yourMembershipExpires":"Your Membership expires",
   "txtChangeFavouriteVenue":"Change Favourite Venues",
-  "txtSaveMyVenue":"Save My Venue"
-
+  "txtSaveMyVenue":"Save My Venue",
+  "selectEDPVenues":"Please choose your\nfavourite EDP Venue",
+  "selectVenuesSuccessMsg":"Venue updated successfully!",
+  "selectVenuesErrorMsg":"Error while updating the venue!"
 }

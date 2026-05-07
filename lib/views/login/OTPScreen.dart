@@ -219,13 +219,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                       }
                     }
                   } else {
-                    if (flavor == Flavor.edp) {
-                      AppNavigator.navigateAndClearStack(
-                          context, AppNavigator.chooseFavouriteVenue);
-                    } else {
-                      AppNavigator.navigateAndClearStack(
-                          context, AppNavigator.home);
-                    }
+                    AppNavigator.navigateAndClearStack(
+                        context, AppNavigator.home);
                   }
                 });
               }

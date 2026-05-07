@@ -41,6 +41,7 @@ class UserModel {
   String? comingPackageId;
   String? comingPackageName;
   String? comingPaymentType;
+  String? venueName;
 
   UserModel(
       {this.id,
@@ -82,7 +83,8 @@ class UserModel {
       this.packageId,
       this.comingPackageId,
       this.comingPackageName,
-      this.comingPaymentType});
+      this.comingPaymentType,
+      this.venueName});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['_id'] ?? "";
@@ -114,7 +116,7 @@ class UserModel {
     comingPaymentType = json.containsKey("comingPaymentType")
         ? json["comingPaymentType"]
         : null;
-
+    venueName = json.containsKey("venueName") ? json["venueName"] : null;
     /*pointsValue = 4003.55;
     pointsBalance = 40.0355;*/
 /*
@@ -123,7 +125,8 @@ class UserModel {
 */
 
     pointsValue = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
-    pointsBalance = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
+    pointsBalance =
+        json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
 
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
@@ -192,10 +195,9 @@ class UserModel {
     data['State'] = state ?? "";
     data['DateJoined'] = dateJoined ?? "";
     //data['PointsBalance'] = pointsValue ?? 0.0;
-   // data['PointsValue'] = pointsBalance ?? 0.0;
+    // data['PointsValue'] = pointsBalance ?? 0.0;
     data['PointsBalance'] = pointsBalance ?? 0.0;
     data['PointsValue'] = pointsValue ?? 0.0;
-
 
     data['StatusPoints'] = statusPoints ?? 0.0;
     data['StatusTier'] = statusTier ?? "";
@@ -222,6 +224,7 @@ class UserModel {
     data['comingPackageId'] = comingPackageId ?? "";
     data['comingPackageName'] = comingPackageName ?? "";
     data['comingPaymentType'] = comingPaymentType ?? "";
+    data['venueName'] = venueName;
 
     return data;
   }
@@ -290,7 +293,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: $id, packageId :$packageId, comingPackageId: $comingPackageId comingPaymentType:$comingPaymentType comingPackageName:$comingPackageName , unitedFuelCardHash: $unitedFuelCardHash,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
+    return 'UserModel{id: $id, venueName: $venueName, comingPackageId: $comingPackageId comingPaymentType:$comingPaymentType comingPackageName:$comingPackageName , unitedFuelCardHash: $unitedFuelCardHash,Id: $bluizeUniqueUserId,paymentType $paymentType ,paymentStatus: $paymentStatus ,firstName: $firstName, lastName: $lastName, email: $email, dateOfBirth: $dateOfBirth, gender: $gender, mobile: $mobile, postCode: $postCode, bluizeId: $bluizeId, cardNumber: $cardNumber, address: $address, suburb: $suburb, state: $state, dateJoined: $dateJoined, pointsBalance: $pointsBalance, pointsValue: $pointsValue, statusPoints: $statusPoints, statusTier: $statusTier, requiredStatusPointsForNextTier: $requiredStatusPointsForNextTier, nextStatusTier: $nextStatusTier, membershipType: $membershipType, membershipCategory: $membershipCategory, accountAvailableBalance: $accountAvailableBalance, accountType: $accountType, acceptsEmail: $acceptsEmail, acceptsSMS: $acceptsSMS, type: $type, frontImage: $licenceFront, backImage: $licenceBack, membershipExpiryDate: $membershipExpiryDate, serverTime: $serverTime}';
   }
 
   bool isUserStatusCancelled() {

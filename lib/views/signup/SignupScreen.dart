@@ -237,34 +237,39 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           return null;
                         },
                         style: TextStyle(
-                            color:
-                                AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
                         decoration: InputDecoration(
-                          fillColor:
-                              AppThemeCustom.getTextFieldBackground(context,isShadow: true),
+                          fillColor: AppThemeCustom.getTextFieldBackground(
+                              context,
+                              isShadow: true),
                           filled: true,
-                          errorStyle: TextStyle(color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,),
+                          errorStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                          ),
                           hintText: loc.txtFirstName,
                           hintStyle: TextStyle(
-                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                              color: AppThemeCustom.getHintTextFieldColor(
+                                  context,
+                                  isShadow: true),
                               fontWeight: FontWeight.w400),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -293,34 +298,39 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               RegExp(r"[A-Za-z\s'\-]")),
                         ],
                         style: TextStyle(
-                            color:
-                                AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
                         decoration: InputDecoration(
-                          fillColor:
-                              AppThemeCustom.getTextFieldBackground(context,isShadow: true),
+                          fillColor: AppThemeCustom.getTextFieldBackground(
+                              context,
+                              isShadow: true),
                           filled: true,
                           hintText: loc.txtLastName,
                           hintStyle: TextStyle(
-                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                              color: AppThemeCustom.getHintTextFieldColor(
+                                  context,
+                                  isShadow: true),
                               fontWeight: FontWeight.w400),
-                          errorStyle: TextStyle(color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,),
+                          errorStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                          ),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -330,51 +340,54 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController,
                         style: TextStyle(
-                            color:
-                                AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return loc.msgEmptyEmail;
-                          } else if (!AppHelper.verifyEmailAddress(
-                              value)) {
+                          } else if (!AppHelper.verifyEmailAddress(value)) {
                             return loc.msgIncorrectEmail;
                           }
 
                           return null;
                         },
                         decoration: InputDecoration(
-                          fillColor:
-                              AppThemeCustom.getTextFieldBackground(context,isShadow: true),
+                          fillColor: AppThemeCustom.getTextFieldBackground(
+                              context,
+                              isShadow: true),
                           filled: true,
                           hintText: loc.hintEmail,
                           hintStyle: TextStyle(
-                              color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                              color: AppThemeCustom.getHintTextFieldColor(
+                                  context,
+                                  isShadow: true),
                               fontWeight: FontWeight.w400),
-                          errorStyle: TextStyle(color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,),
+                          errorStyle: TextStyle(
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                          ),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                           errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
                       AppHelper.isClubApp()
                           ? Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 AppDimens.shape_10,
@@ -400,21 +413,27 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   style: TextStyle(
                                       color:
                                           AppThemeCustom.getTextFieldTextColor(
-                                              context,isShadow: true)),
+                                              context,
+                                              isShadow: true)),
                                   decoration: InputDecoration(
                                       counterText: "",
                                       hintText: "${loc.txtAddress} 1",
                                       fillColor:
                                           AppThemeCustom.getTextFieldBackground(
-                                              context,isShadow: true),
+                                              context,
+                                              isShadow: true),
                                       filled: true,
                                       hintStyle: TextStyle(
-                                        color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                        color: AppThemeCustom
+                                            .getHintTextFieldColor(context,
+                                                isShadow: true),
                                         fontWeight: FontWeight.w400,
                                       ),
-                                      errorStyle: TextStyle(color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,),
+                                      errorStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor,
+                                      ),
                                       enabledBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.transparent),
@@ -443,16 +462,20 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                   style: TextStyle(
                                       color:
                                           AppThemeCustom.getTextFieldTextColor(
-                                              context,isShadow: true)),
+                                              context,
+                                              isShadow: true)),
                                   decoration: InputDecoration(
                                       counterText: "",
                                       hintText: "${loc.txtAddress} 2",
                                       fillColor:
                                           AppThemeCustom.getTextFieldBackground(
-                                              context,isShadow: true),
+                                              context,
+                                              isShadow: true),
                                       filled: true,
                                       hintStyle: TextStyle(
-                                        color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                        color: AppThemeCustom
+                                            .getHintTextFieldColor(context,
+                                                isShadow: true),
                                         fontWeight: FontWeight.w400,
                                       ),
                                       enabledBorder: OutlineInputBorder(
@@ -488,8 +511,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                             Expanded(
                               flex: 3,
                               child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
@@ -506,45 +528,46 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     maxLength: 4,
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter
-                                          .digitsOnly
+                                      FilteringTextInputFormatter.digitsOnly
                                     ],
                                     controller: _postcodeController,
                                     style: TextStyle(
                                         color: AppThemeCustom
-                                            .getTextFieldTextColor(context,isShadow: true)),
+                                            .getTextFieldTextColor(context,
+                                                isShadow: true)),
                                     decoration: InputDecoration(
                                         counterText: "",
                                         hintText: "5555",
                                         fillColor: AppThemeCustom
-                                            .getTextFieldBackground(context,isShadow: true),
+                                            .getTextFieldBackground(context,
+                                                isShadow: true),
                                         filled: true,
                                         hintStyle: TextStyle(
-                                          color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                          color: AppThemeCustom
+                                              .getHintTextFieldColor(context,
+                                                  isShadow: true),
                                           fontWeight: FontWeight.w400,
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color:
-                                                    Colors.transparent),
-                                            borderRadius: BorderRadius.circular(
-                                                10)),
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         border: OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color:
-                                                    Colors.transparent),
-                                            borderRadius: BorderRadius.circular(
-                                                10)),
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color:
-                                                    Colors.transparent),
+                                                color: Colors.transparent),
                                             borderRadius:
-                                                BorderRadius.circular(
-                                                    10)),
+                                                BorderRadius.circular(10)),
                                         errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(color: Colors.transparent),
-                                            borderRadius: BorderRadius.circular(10))),
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
                                   ))
                                 ],
                               ),
@@ -553,8 +576,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                             Expanded(
                                 flex: 7,
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
@@ -567,15 +589,14 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     ),
                                     Expanded(
                                       child: Container(
-                                          margin: const EdgeInsets.only(
-                                              top: 3),
+                                          margin: const EdgeInsets.only(top: 3),
                                           decoration: BoxDecoration(
                                               color: AppThemeCustom
                                                   .getTextFieldBackground(
-                                                      context,isShadow: true),
+                                                      context,
+                                                      isShadow: true),
                                               borderRadius:
-                                                  BorderRadius.circular(
-                                                      10)),
+                                                  BorderRadius.circular(10)),
                                           child: Row(
                                             children: [
                                               Expanded(
@@ -585,8 +606,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                     maxLength: 2,
                                                     textAlign: TextAlign.center,
                                                     keyboardType:
-                                                        TextInputType
-                                                            .number,
+                                                        TextInputType.number,
                                                     inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
@@ -598,30 +618,29 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                     style: TextStyle(
                                                         color: AppThemeCustom
                                                             .getTextFieldTextColor(
-                                                                context,isShadow: true)),
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
                                                     onChanged: (value) {
-                                                      if (value.length ==
-                                                          2) {
+                                                      if (value.length == 2) {
                                                         int? day =
-                                                            int.tryParse(
-                                                                value);
+                                                            int.tryParse(value);
                                                         if (day != null &&
                                                             day > 31) {
                                                           _birthdayDDController
-                                                                  .text =
-                                                              '31';
+                                                              .text = '31';
                                                           _birthdayDDController
                                                                   .selection =
                                                               TextSelection
                                                                   .fromPosition(
                                                             TextPosition(
-                                                                offset: _birthdayDDController
-                                                                    .text
-                                                                    .length),
+                                                                offset:
+                                                                    _birthdayDDController
+                                                                        .text
+                                                                        .length),
                                                           );
                                                         } else {
-                                                          FocusScope.of(
-                                                                  context)
+                                                          FocusScope.of(context)
                                                               .requestFocus(
                                                                   _birthdayMMFocusNode);
                                                         }
@@ -631,30 +650,29 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                         counterText: "",
                                                         hintText: "DD",
                                                         hintStyle: TextStyle(
-                                                            color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400),
                                                         border:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         focusedBorder:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         errorBorder:
-                                                            InputBorder
-                                                                .none),
+                                                            InputBorder.none),
                                                   )),
                                               Expanded(
                                                   flex: 2,
                                                   child: TextFormField(
                                                     maxLines: 1,
                                                     maxLength: 2,
-                                                    textAlign:
-                                                        TextAlign.center,
+                                                    textAlign: TextAlign.center,
                                                     keyboardType:
-                                                        TextInputType
-                                                            .number,
+                                                        TextInputType.number,
                                                     inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
@@ -664,32 +682,31 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                     style: TextStyle(
                                                         color: AppThemeCustom
                                                             .getTextFieldTextColor(
-                                                                context,isShadow: true)),
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
                                                     focusNode:
                                                         _birthdayMMFocusNode,
                                                     onChanged: (value) {
-                                                      if (value.length ==
-                                                          2) {
+                                                      if (value.length == 2) {
                                                         int? day =
-                                                            int.tryParse(
-                                                                value);
+                                                            int.tryParse(value);
                                                         if (day != null &&
                                                             day > 12) {
                                                           _birthdayMMController
-                                                                  .text =
-                                                              '12';
+                                                              .text = '12';
                                                           _birthdayMMController
                                                                   .selection =
                                                               TextSelection
                                                                   .fromPosition(
                                                             TextPosition(
-                                                                offset: _birthdayMMController
-                                                                    .text
-                                                                    .length),
+                                                                offset:
+                                                                    _birthdayMMController
+                                                                        .text
+                                                                        .length),
                                                           );
                                                         } else {
-                                                          FocusScope.of(
-                                                                  context)
+                                                          FocusScope.of(context)
                                                               .requestFocus(
                                                                   _birthdayYYFocusNode);
                                                         }
@@ -699,19 +716,20 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                         counterText: "",
                                                         hintText: "MM",
                                                         hintStyle: TextStyle(
-                                                            color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400),
                                                         border:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         focusedBorder:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         errorBorder:
-                                                            InputBorder
-                                                                .none),
+                                                            InputBorder.none),
                                                   )),
                                               Expanded(
                                                   flex: 6,
@@ -719,8 +737,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                     maxLines: 1,
                                                     maxLength: 4,
                                                     keyboardType:
-                                                        TextInputType
-                                                            .number,
+                                                        TextInputType.number,
                                                     inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
@@ -732,29 +749,30 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                                     style: TextStyle(
                                                         color: AppThemeCustom
                                                             .getTextFieldTextColor(
-                                                                context,isShadow: true)),
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         hintText: "YYYY",
                                                         hintStyle: TextStyle(
-                                                            color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400),
                                                         border:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         focusedBorder:
-                                                            InputBorder
-                                                                .none,
+                                                            InputBorder.none,
                                                         errorBorder:
-                                                            InputBorder
-                                                                .none),
+                                                            InputBorder.none),
                                                     onChanged: (value) {
-                                                      if (value.length ==
-                                                          4) {
-                                                        FocusScope.of(
-                                                                context)
+                                                      if (value.length == 4) {
+                                                        FocusScope.of(context)
                                                             .requestFocus(
                                                                 FocusNode());
                                                       }
@@ -863,8 +881,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           ],
                         ),
                         onTap: () {
-                          provider.updateTCCheckStatus(
-                              !provider.tcCheckStatus);
+                          provider.updateTCCheckStatus(!provider.tcCheckStatus);
                         },
                       ),
                       AppDimens.shape_20,
@@ -873,8 +890,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               onTap: () {
                                 AppNavigator.navigateTo(
                                     context, AppNavigator.appWebView,
-                                    arguments:
-                                        APIList.TERMS_AND_CONDITIONS);
+                                    arguments: APIList.TERMS_AND_CONDITIONS);
                               },
                               child: RichText(
                                 text: TextSpan(children: [
@@ -883,16 +899,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                       style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 13,
-                                        color: AppThemeCustom
-                                            .getTNCTextColor(context),
+                                        color: AppThemeCustom.getTNCTextColor(
+                                            context),
                                       )),
                                   TextSpan(
-                                      text:
-                                          " ${loc.txtTermsAndConditions}",
+                                      text: " ${loc.txtTermsAndConditions}",
                                       style: TextStyle(
                                           fontSize: 13,
-                                          color: AppThemeCustom
-                                              .getTNCTextColor(context),
+                                          color: AppThemeCustom.getTNCTextColor(
+                                              context),
                                           fontWeight: FontWeight.bold))
                                 ]),
                               ))
@@ -906,22 +921,28 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 if (validateData(provider)) {
                                   if (provider.tcCheckStatus) {
                                     Map<String, dynamic> params = {};
-                                    params['GivenNames'] =
-                                        _firstNameController.text.toString().trim();
-                                    params['Surname'] = _lastNameController.text.toString().trim();
+                                    params['GivenNames'] = _firstNameController
+                                        .text
+                                        .toString()
+                                        .trim();
+                                    params['Surname'] = _lastNameController.text
+                                        .toString()
+                                        .trim();
                                     params['DateOfBirth'] =
-                                    '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
+                                        '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
                                     if (_postcodeController.text.isNotEmpty) {
-                                      params['PostCode'] = _postcodeController.text;
+                                      params['PostCode'] =
+                                          _postcodeController.text;
                                     }
 
                                     params['Email'] = _emailController.text;
 
-                                    if (provider.selectedGender![0].toUpperCase() ==
+                                    if (provider.selectedGender![0]
+                                            .toUpperCase() ==
                                         "M") {
                                       params['Gender'] = "M";
                                     } else if (provider.selectedGender![0]
-                                        .toUpperCase() ==
+                                            .toUpperCase() ==
                                         "F") {
                                       params['Gender'] = "F";
                                     } else {
@@ -937,21 +958,23 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     if (widget.argument
                                         .containsKey('license_front')) {
                                       params['licence_front'] =
-                                      widget.argument['license_front'];
+                                          widget.argument['license_front'];
                                     }
                                     if (widget.argument
                                         .containsKey('license_back')) {
                                       params['licence_back'] =
-                                      widget.argument['license_back'];
+                                          widget.argument['license_back'];
                                     }
 
-                                    if (widget.argument.containsKey('expiryDate')) {
+                                    if (widget.argument
+                                        .containsKey('expiryDate')) {
                                       params['expiryDate'] =
-                                      widget.argument['expiryDate'];
+                                          widget.argument['expiryDate'];
                                     }
 
                                     if (_address1Controller.text.isNotEmpty) {
-                                      params['Suburb'] = _address1Controller.text;
+                                      params['Suburb'] =
+                                          _address1Controller.text;
                                     }
 
                                     /////////////////////////////////////////
@@ -967,15 +990,18 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     AppHelper.printMessage(
                                         "PARAMS:: $params -> $phoneNo");
 
-                                    if (widget.argument.containsKey('isTestUser')) {
+                                    if (widget.argument
+                                        .containsKey('isTestUser')) {
                                       navigationSpecialCase();
+                                    } else if (flavor == Flavor.edp) {
+                                      navigationEDP(params);
                                     } else {
                                       userLoginProvider.signup(phoneNo, params,
                                           loc: loc);
                                     }
                                   } else {
-                                    AppHelper.showErrorMessage(
-                                        context, loc.msgCheckTermsAndConditions);
+                                    AppHelper.showErrorMessage(context,
+                                        loc.msgCheckTermsAndConditions);
                                   }
                                 }
                               } else {
@@ -1015,6 +1041,13 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
     AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
         arguments: args);
+  }
+
+  navigationEDP(Map<String, dynamic> params) {
+    params['phoneNo'] = widget.argument['phoneNo']!;
+    params['countryCode'] = widget.argument['countryCode']!;
+    AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
+        arguments: params);
   }
 
   bool validateData(SignupProvider provider) {

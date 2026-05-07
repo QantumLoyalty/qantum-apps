@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
-import 'package:qantum_apps/views/login/ChooseFavouriteVenueScreen.dart';
+import 'package:qantum_apps/views/my_venues/ChooseFavouriteVenueScreen.dart';
 import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
@@ -128,9 +128,14 @@ class AppNavigator {
                   argument: args as Map<String, String>,
                 ));
       case chooseFavouriteVenue:
-        return MaterialPageRoute(
-            builder: (_) =>const Choosefavouritevenuescreen(
-            ));
+        {
+          late Map<String, dynamic> argumentss;
+          argumentss = args as Map<String, dynamic>;
+          return MaterialPageRoute(
+              builder: (_) => ChooseFavouriteVenueScreen(
+                    argument: argumentss,
+                  ));
+        }
       case drivingLicenseScreen:
         return MaterialPageRoute(
             builder: (_) => DrivingLicenseScanScreen(
@@ -239,8 +244,8 @@ class AppNavigator {
       case appWebView:
         return MaterialPageRoute(
             builder: (_) => AppWebView(
-              url: args as String,
-            ));
+                  url: args as String,
+                ));
       case recoverAccountNewPhone:
         return MaterialPageRoute(
             builder: (_) => RecoverAccountNewPhone(
@@ -252,7 +257,6 @@ class AppNavigator {
             builder: (_) => RecoverAccountVerificationScreen(
                   params: args as Map<String, dynamic>,
                 ));
-
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
