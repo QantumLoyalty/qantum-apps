@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +77,7 @@ class AppUpdateDialog with LoggingMixin {
                                 Navigator.pop(context);
                               },
                               child: Text(loc.ignore,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.normal)))),
                       Expanded(
                           child: TextButton(
@@ -86,7 +85,7 @@ class AppUpdateDialog with LoggingMixin {
                                 Navigator.pop(context);
                               },
                               child: Text(loc.later,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.normal)))),
                       Expanded(
                           child: TextButton(

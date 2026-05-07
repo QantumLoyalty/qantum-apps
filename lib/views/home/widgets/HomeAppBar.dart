@@ -51,7 +51,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   false, "my card");
                             }
 
-                            /*double screenBrightness = 0.4;
+                            double screenBrightness = 0.4;
 
                             try {
                               screenBrightness =
@@ -81,9 +81,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   .setSystemScreenBrightness(screenBrightness);
                             } catch (e) {
                               logEvent(e.toString());
-                            }*/
+                            }
 
-                            AppUpdateDialog.getInstance().showAppUpdateDialog(context);
+                       //     AppUpdateDialog.getInstance().showAppUpdateDialog(context);
 
                             //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
                             //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
