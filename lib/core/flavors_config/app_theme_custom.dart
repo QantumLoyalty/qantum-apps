@@ -626,7 +626,8 @@ class AppThemeCustom {
         return AppColors.white;
       case Flavor.edp:
         return AppColors.edp_button_color;
-
+      case Flavor.mannumClub:
+        return AppColors.mc_button_color;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
@@ -1384,6 +1385,36 @@ class AppThemeCustom {
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
+    }
+  }
+  static Color getNoLicenseTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mannumClub:
+        return AppColors.mc_button_color;
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+    }
+  }
+  static Color getChangeMobileTextColor(BuildContext context) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+
+    switch (selectedFlavor) {
+      case Flavor.mannumClub:
+      case Flavor.bobsBulkBooze:
+      case Flavor.senseOfTaste:
+      case Flavor.drinkRewards:
+        return Theme.of(context)
+            .buttonTheme
+            .colorScheme!
+            .onSecondary;
+
+      default:
+        return Theme.of(context)
+            .buttonTheme
+            .colorScheme!
+            .onPrimary;
     }
   }
 }

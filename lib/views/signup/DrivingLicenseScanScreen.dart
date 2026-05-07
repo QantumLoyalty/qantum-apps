@@ -7,6 +7,7 @@ import 'package:flutter_flip_card/modal/flip_side.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '/core/utils/AppIcons.dart';
 import '/core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -185,8 +186,8 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                   child: Text(
                     loc!.noLicense,
                     style: TextStyle(
-                      color:
-                          Theme.of(context).textSelectionTheme.selectionColor,
+                      color: AppThemeCustom.getNoLicenseTextColor(
+                          context),
                     ),
                   ),
                 ),

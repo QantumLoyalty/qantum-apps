@@ -438,21 +438,15 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[0],
             style: TextStyle(
-                color: (flavor == Flavor.bobsBulkBooze ||
-                        flavor == Flavor.senseOfTaste ||
-                        flavor == Flavor.drinkRewards)
-                    ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
-                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color: AppThemeCustom.getChangeMobileTextColor(
+                    context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text before
       TextSpan(
         text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
         style: TextStyle(
-            color: (flavor == Flavor.bobsBulkBooze ||
-                    flavor == Flavor.senseOfTaste ||
-                    flavor == Flavor.drinkRewards||flavor == Flavor.mannumClub)
-                ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
-                : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+            color: AppThemeCustom.getChangeMobileTextColor(
+                context),
             fontWeight: FontWeight.w900,
             fontSize: 14),
       ),
@@ -460,11 +454,8 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[1],
             style: TextStyle(
-                color: (flavor == Flavor.bobsBulkBooze ||
-                        flavor == Flavor.senseOfTaste ||
-                        flavor == Flavor.drinkRewards ||flavor == Flavor.mannumClub)
-                    ? Theme.of(context).buttonTheme.colorScheme!.onSecondary
-                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color:  AppThemeCustom.getChangeMobileTextColor(
+                    context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text after
     ];
