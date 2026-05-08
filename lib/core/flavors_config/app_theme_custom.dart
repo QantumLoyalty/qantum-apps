@@ -160,7 +160,8 @@ class AppThemeCustom {
       case Flavor.queens ||
             Flavor.brisbane ||
             Flavor.woollahra ||
-            Flavor.wonthaggi||Flavor.mosaic:
+            Flavor.wonthaggi ||
+            Flavor.mosaic:
         return Theme.of(context).primaryColor;
       case Flavor.senseOfTaste:
         return AppColors.sot_card_color;
@@ -262,8 +263,11 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi || Flavor.mhbc ||Flavor.mosaic:
-
+      case Flavor.brisbane ||
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mhbc ||
+            Flavor.mosaic:
         return AppColors.white;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -277,7 +281,10 @@ class AppThemeCustom {
         return Theme.of(context).primaryColor;
       case Flavor.hogansReward:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
+      case Flavor.brisbane ||
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -297,7 +304,9 @@ class AppThemeCustom {
             Flavor.wonthaggi ||
             Flavor.senseOfTaste ||
             Flavor.bobsBulkBooze ||
-            Flavor.woollahra||Flavor.mosaic||Flavor.mannumClub:
+            Flavor.woollahra ||
+            Flavor.mosaic ||
+            Flavor.mannumClub:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -314,7 +323,10 @@ class AppThemeCustom {
   static Color? getPointsBalanceTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
+      case Flavor.brisbane ||
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -329,7 +341,8 @@ class AppThemeCustom {
             Flavor.northShoreTavern ||
             Flavor.aceRewards ||
             Flavor.aceRewards ||
-            Flavor.bluewater||Flavor.mosaic:
+            Flavor.bluewater ||
+            Flavor.mosaic:
         return AppColors.white;
 
       case Flavor.edp:
@@ -418,7 +431,9 @@ class AppThemeCustom {
             Flavor.queens ||
             Flavor.drinkRewards ||
             Flavor.edp ||
-            Flavor.senseOfTaste||Flavor.mosaic||Flavor.mannumClub:
+            Flavor.senseOfTaste ||
+            Flavor.mosaic ||
+            Flavor.mannumClub:
         return Theme.of(context).textSelectionTheme.selectionColor!;
       case Flavor.kingscliff:
         return isShadow != null ? AppColors.white : AppColors.black;
@@ -437,8 +452,10 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste ||Flavor.mosaic||Flavor.mannumClub ||
-      Flavor.bobsBulkBooze:
+            Flavor.senseOfTaste ||
+            Flavor.mosaic ||
+            Flavor.mannumClub ||
+            Flavor.bobsBulkBooze:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -572,7 +589,7 @@ class AppThemeCustom {
       case Flavor.wonthaggi:
         return Theme.of(context).buttonTheme.colorScheme!.secondary;
 
-      case Flavor.hogansReward || Flavor.brisbane||Flavor.mosaic:
+      case Flavor.hogansReward || Flavor.brisbane || Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -612,7 +629,7 @@ class AppThemeCustom {
   static Color getAlertDialogTextButtonColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.flinders||Flavor.mosaic:
+      case Flavor.flinders || Flavor.mosaic:
         return Theme.of(context).scaffoldBackgroundColor;
       default:
         return Theme.of(context).primaryColor;
@@ -641,7 +658,9 @@ class AppThemeCustom {
             Flavor.drinkRewards ||
             Flavor.wonthaggi ||
             Flavor.edp ||
-            Flavor.senseOfTaste||Flavor.mosaic||Flavor.mannumClub:
+            Flavor.senseOfTaste ||
+            Flavor.mosaic ||
+            Flavor.mannumClub:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -755,23 +774,20 @@ class AppThemeCustom {
     }
   }
 
-
   static Color? getHomeButtonsIconColor(
-      BuildContext context,
-      HomeProvider provider,
-      UserInfoProvider userInfoProvider,
-      String itemName,
-      bool isSelected,
-      ) {
+    BuildContext context,
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+    String itemName,
+    bool isSelected,
+  ) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-    final bool isCancelled =
-        userInfoProvider.getUserInfo != null &&
-            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+    final bool isCancelled = userInfoProvider.getUserInfo != null &&
+        userInfoProvider.getUserInfo!.isUserStatusCancelled();
 
     // Special case: See All hidden
     if (itemName == AppStrings.txtSeeAll &&
-        (provider.moreButtonsMap == null ||
-            provider.moreButtonsMap!.isEmpty)) {
+        (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
       return Colors.transparent;
     }
 
@@ -783,7 +799,7 @@ class AppThemeCustom {
         case Flavor.bobsBulkBooze:
           return AppColors.white;
 
-        case Flavor.mosaic||Flavor.mannumClub:
+        case Flavor.mosaic || Flavor.mannumClub:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
@@ -798,7 +814,7 @@ class AppThemeCustom {
       case Flavor.montaukTavern:
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+                provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled ? AppColors.disable_color : null);
 
@@ -806,8 +822,8 @@ class AppThemeCustom {
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled
-            ? AppColors.disable_color
-            : Theme.of(context).buttonTheme.colorScheme!.primary);
+                ? AppColors.disable_color
+                : Theme.of(context).buttonTheme.colorScheme!.primary);
 
       case Flavor.woollahra:
         return (provider.homeNavigationList[2].name == itemName)
@@ -840,8 +856,7 @@ class AppThemeCustom {
             : AppColors.sot_button_color;
 
       case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+        return provider.homeNavigationList[0].name == itemName
             ? Colors.transparent
             : AppColors.bob_button_color;
       case Flavor.mannumClub:
@@ -929,7 +944,7 @@ class AppThemeCustom {
   static Color? getAppButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.wonthaggi||Flavor.mosaic:
+      case Flavor.brisbane || Flavor.wonthaggi || Flavor.mosaic:
         return AppColors.white;
 
       default:
@@ -943,7 +958,8 @@ class AppThemeCustom {
       case Flavor.northShoreTavern ||
             Flavor.queens ||
             Flavor.brisbane ||
-            Flavor.wonthaggi|| Flavor.mosaic:
+            Flavor.wonthaggi ||
+            Flavor.mosaic:
         return Theme.of(context).primaryColor;
       case Flavor.flinders:
         return AppColors.white;
@@ -972,7 +988,9 @@ class AppThemeCustom {
         flavor != Flavor.qantumClub &&
         flavor != Flavor.qantum &&
         flavor != Flavor.senseOfTaste &&
-        flavor != Flavor.bobsBulkBooze&& flavor != Flavor.mannumClub&&flavor!= Flavor.mosaic) {
+        flavor != Flavor.bobsBulkBooze &&
+        flavor != Flavor.mannumClub &&
+        flavor != Flavor.mosaic) {
       return selectionColor;
     }
 
@@ -1014,27 +1032,26 @@ class AppThemeCustom {
             ? AppColors.bob_button_color
             : selectionColor;
       case Flavor.mannumClub:
-        return (isHeading==true&& isFromEdit)?AppColors.mc_button_color:selectionColor;
+        return (isHeading == true && isFromEdit)
+            ? AppColors.mc_button_color
+            : selectionColor;
       case Flavor.mosaic:
-        return isFromEdit ? AppColors.mh_button_color:AppColors.white;
+        return isFromEdit ? AppColors.mh_button_color : AppColors.white;
       default:
         return selectionColor;
     }
   }
 
-
-
   static BoxBorder? getHomeButtonsBorder(
-      BuildContext context,
-      HomeProvider provider,
-      UserInfoProvider userInfoProvider,
-      String itemName,
-      bool isSelected,
-      ) {
+    BuildContext context,
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+    String itemName,
+    bool isSelected,
+  ) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-    final bool isCancelled =
-        userInfoProvider.getUserInfo != null &&
-            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+    final bool isCancelled = userInfoProvider.getUserInfo != null &&
+        userInfoProvider.getUserInfo!.isUserStatusCancelled();
 
     // 👉 SELECTED STATE
     if (isSelected &&
@@ -1042,7 +1059,6 @@ class AppThemeCustom {
             selectedFlavor == Flavor.edp ||
             selectedFlavor == Flavor.bobsBulkBooze ||
             selectedFlavor == Flavor.mannumClub)) {
-
       // Special case for mannumClub
       if (selectedFlavor == Flavor.mannumClub &&
           provider.homeNavigationList[2].name == itemName) {
@@ -1057,16 +1073,14 @@ class AppThemeCustom {
       case Flavor.montaukTavern:
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+                provider.homeNavigationList[2].name == itemName)
             ? null
             : (isCancelled
-            ? Border.all(color: AppColors.disable_color, width: 1.5)
-            : Border.all(
-            color: Theme.of(context)
-                .buttonTheme
-                .colorScheme!
-                .onSecondary,
-            width: 1.5));
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5));
 
       case Flavor.northShoreTavern:
       case Flavor.queens:
@@ -1086,40 +1100,33 @@ class AppThemeCustom {
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (isCancelled
-            ? Border.all(color: AppColors.disable_color, width: 1.5)
-            : Border.all(
-            color: Theme.of(context)
-                .buttonTheme
-                .colorScheme!
-                .onSecondary,
-            width: 1.5));
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5));
 
       case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+        return provider.homeNavigationList[0].name == itemName
             ? null
             : (isCancelled
-            ? Border.all(color: AppColors.disable_color, width: 1.5)
-            : Border.all(
-            color: Theme.of(context)
-                .buttonTheme
-                .colorScheme!
-                .onSecondary,
-            width: 1.5));
+                ? Border.all(color: AppColors.disable_color, width: 1.5)
+                : Border.all(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                    width: 1.5));
 
       default:
         return isCancelled
             ? Border.all(color: AppColors.disable_color, width: 1.5)
             : Border.all(
-            color:
-            Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-            width: 1.5);
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5);
     }
   }
 
-
-  static Color getSelectedColorHomeButtonsText(HomeProvider provider,String itemName)
-  {
+  static Color getSelectedColorHomeButtonsText(
+      HomeProvider provider, String itemName) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
 
     switch (selectedFlavor) {
@@ -1141,11 +1148,11 @@ class AppThemeCustom {
   }
 
   static Color? getHomeButtonsBackgroundColor(
-      BuildContext context,
-      HomeProvider provider,
-      int index,
-      bool isSelected,
-      ) {
+    BuildContext context,
+    HomeProvider provider,
+    int index,
+    bool isSelected,
+  ) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
 
     if (!isSelected) {
@@ -1153,57 +1160,53 @@ class AppThemeCustom {
     }
 
     // 👉 senseOfTaste → ALWAYS shadow (no index condition)
-    if (selectedFlavor == Flavor.senseOfTaste) {
+    if (selectedFlavor == Flavor.senseOfTaste ||
+        selectedFlavor == Flavor.bobsBulkBooze) {
       return AppColors.button_shadow;
     }
 
     // 👉 Other special flavors (keep index 2 exception)
-    if (selectedFlavor == Flavor.bobsBulkBooze ||
-        selectedFlavor == Flavor.edp) {
+    if (selectedFlavor == Flavor.edp) {
       return provider.homeNavigationList[2].name ==
-          provider.homeNavigationList[index].name
+              provider.homeNavigationList[index].name
           ? null
           : AppColors.button_shadow;
     }
 
     if (selectedFlavor == Flavor.mosaic) {
       return provider.homeNavigationList[2].name ==
-          provider.homeNavigationList[index].name
+              provider.homeNavigationList[index].name
           ? null
           : AppColors.mh_button_color;
     }
     if (selectedFlavor == Flavor.mannumClub) {
       return provider.homeNavigationList[2].name ==
-          provider.homeNavigationList[index].name
+              provider.homeNavigationList[index].name
           ? null
           : AppColors.button_shadow;
     }
     // 👉 Default flavors
-    return Theme.of(context)
-        .iconTheme
-        .color!
-        .withValues(alpha: 0.5);
+    return Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
   }
 
   static Color? getHomeButtonsTextColor(
-      BuildContext context,
-      HomeProvider provider,
-      UserInfoProvider userInfoProvider,
-      String itemName,
-      bool isSelected,
-      ) {
+    BuildContext context,
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+    String itemName,
+    bool isSelected,
+  ) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-    final bool isCancelled =
-        userInfoProvider.getUserInfo != null &&
-            userInfoProvider.getUserInfo!.isUserStatusCancelled();
+    final bool isCancelled = userInfoProvider.getUserInfo != null &&
+        userInfoProvider.getUserInfo!.isUserStatusCancelled();
 
     // 👉 SELECTED STATE
     if (isSelected &&
         (selectedFlavor == Flavor.senseOfTaste ||
             selectedFlavor == Flavor.bobsBulkBooze ||
             selectedFlavor == Flavor.edp ||
-            selectedFlavor == Flavor.mosaic||selectedFlavor == Flavor.mannumClub)) {
-
+            selectedFlavor == Flavor.mosaic ||
+            selectedFlavor == Flavor.mannumClub)) {
       // Special case for mosaic
       if (selectedFlavor == Flavor.mosaic &&
           provider.homeNavigationList[2].name == itemName) {
@@ -1222,11 +1225,11 @@ class AppThemeCustom {
       case Flavor.montaukTavern:
       case Flavor.clh:
         return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+                provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled
-            ? AppColors.disable_color
-            : Theme.of(context).textSelectionTheme.selectionColor);
+                ? AppColors.disable_color
+                : Theme.of(context).textSelectionTheme.selectionColor);
 
       case Flavor.northShoreTavern:
       case Flavor.queens:
@@ -1245,8 +1248,8 @@ class AppThemeCustom {
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled
-            ? AppColors.disable_color
-            : Theme.of(context).textSelectionTheme.selectionColor);
+                ? AppColors.disable_color
+                : Theme.of(context).textSelectionTheme.selectionColor);
 
       case Flavor.senseOfTaste:
         return isCancelled
@@ -1254,18 +1257,17 @@ class AppThemeCustom {
             : AppColors.sot_button_color;
 
       case Flavor.bobsBulkBooze:
-        return (provider.homeNavigationList[0].name == itemName ||
-            provider.homeNavigationList[2].name == itemName)
+        return provider.homeNavigationList[0].name == itemName
             ? Colors.transparent
             : (isCancelled
-            ? AppColors.disable_color
-            : AppColors.bob_button_color);
+                ? AppColors.disable_color
+                : AppColors.bob_button_color);
       case Flavor.mannumClub:
         return provider.homeNavigationList[2].name == itemName
             ? Colors.transparent
             : (isCancelled
-            ? AppColors.disable_color
-            : AppColors.mc_button_color);
+                ? AppColors.disable_color
+                : AppColors.mc_button_color);
       default:
         return isCancelled
             ? AppColors.disable_color
@@ -1276,9 +1278,12 @@ class AppThemeCustom {
   static Color getEditDetailsColor(BuildContext context, {bool? isText}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.brisbane || Flavor.flinders || Flavor.wonthaggi||Flavor.mosaic:
+      case Flavor.brisbane ||
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mosaic:
         return AppColors.white;
-      case Flavor.woollahra||Flavor.mannumClub:
+      case Flavor.woollahra || Flavor.mannumClub:
         return Theme.of(context).primaryColor;
       case Flavor.drinkRewards:
         return isText != null
@@ -1387,6 +1392,7 @@ class AppThemeCustom {
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
   }
+
   static Color getNoLicenseTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -1397,6 +1403,7 @@ class AppThemeCustom {
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
   }
+
   static Color getChangeMobileTextColor(BuildContext context) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
 
@@ -1405,16 +1412,10 @@ class AppThemeCustom {
       case Flavor.bobsBulkBooze:
       case Flavor.senseOfTaste:
       case Flavor.drinkRewards:
-        return Theme.of(context)
-            .buttonTheme
-            .colorScheme!
-            .onSecondary;
+        return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
 
       default:
-        return Theme.of(context)
-            .buttonTheme
-            .colorScheme!
-            .onPrimary;
+        return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
   }
 }

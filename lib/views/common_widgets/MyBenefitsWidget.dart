@@ -127,7 +127,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                           Text(
                             (flavor != null && flavor == Flavor.bobsBulkBooze)
                                 ? AppLocalizations.of(context)!
-                                    .txtWeeklyDeals
+                                    .txtCurrentDeals
                                     .toUpperCase()
                                 : AppLocalizations.of(context)!
                                     .txtMembershipBenefits

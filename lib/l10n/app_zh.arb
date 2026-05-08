@@ -222,7 +222,8 @@
   "msgUnableConnect":"无法连接。请检查您的网络连接并重试。",
   "renewalOpen":"續訂現已開放",
   "yourMembershipExpires":"您的會員資格即將到期",
-  "txtWeeklyDeals": "每周优惠",
+  "txtCurrentDeals": "每週優惠",
+  "txtOurGuarantee":"我們的保證",
   "txtChangeFavouriteVenue": "更改喜爱的场所",
   "txtSaveMyVenue": "保存我的場地"
 }

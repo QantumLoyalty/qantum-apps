@@ -66,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen>
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
     Flavor.montaukTavern,
-    Flavor.bobsBulkBooze,
   };
 
   bool _hasRedirectedToMembershipBuy = false;

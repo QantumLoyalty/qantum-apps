@@ -220,7 +220,8 @@
   "updateNow": "UPDATE NOW",
   "msgUnableConnect":"Unable to connect. Please check your internet connection and try again.",
   "renewalOpen":"Renewals\nNow Open",
-  "txtWeeklyDeals":"Weekly Deals",
+  "txtCurrentDeals":"Current Deals",
+  "txtOurGuarantee":"Our Guarantee",
   "yourMembershipExpires":"Your Membership expires",
   "txtChangeFavouriteVenue":"Change Favourite Venues",
   "txtSaveMyVenue":"Save My Venue"

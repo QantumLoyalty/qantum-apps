@@ -53,7 +53,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     HomeNavigatorModel(
         name: "txtPartnerOffers",
         screen: PartnerOffersScreen(),
-        icon: Icons.handshake,
+        icon: FlavorConfig.instance.flavor == Flavor.bobsBulkBooze
+            ? Icons.check
+            :Icons.handshake,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
         name: "txtMyVenue",
@@ -90,12 +92,15 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
       case "txtSpecialOffers":
         return loc.txtSpecialOffers;
       case "txtPartnerOffers":
+        if (flavor == Flavor.bobsBulkBooze) {
+          return loc.txtOurGuarantee;
+        }
         return loc.txtPartnerOffers;
       case "txtMyVenue":
         return loc.txtMyVenue;
       case "txtMyBenefits":
         if (flavor == Flavor.bobsBulkBooze) {
-          return loc.txtWeeklyDeals;
+          return loc.txtCurrentDeals;
         }
         return loc.txtMyBenefits;
       case "txtMyAccount":

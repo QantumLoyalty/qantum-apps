@@ -1394,11 +1394,17 @@ abstract class AppLocalizations {
   /// **'Renewals\nNow Open'**
   String get renewalOpen;
 
-  /// No description provided for @txtWeeklyDeals.
+  /// No description provided for @txtCurrentDeals.
   ///
   /// In en, this message translates to:
-  /// **'Weekly Deals'**
-  String get txtWeeklyDeals;
+  /// **'Current Deals'**
+  String get txtCurrentDeals;
+
+  /// No description provided for @txtOurGuarantee.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Guarantee'**
+  String get txtOurGuarantee;
 
   /// No description provided for @yourMembershipExpires.
   ///
