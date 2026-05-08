@@ -5,6 +5,7 @@ import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
 import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+import '../../dialogs/ScratchCardDialog.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
@@ -83,9 +84,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               logEvent(e.toString());
                             }
 
-                       //     AppUpdateDialog.getInstance().showAppUpdateDialog(context);
+                            //    AppUpdateDialog.getInstance().showAppUpdateDialog(context);
 
-                            //    ScratchCardDialog.getInstance().showScratchCardDialog(context);
+                            //     ScratchCardDialog.getInstance().showScratchCardDialog(context);
                             //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(
@@ -143,8 +144,8 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                 Expanded(
                   child: Center(
                     child: SizedBox(
-                        width: AppHelper.getAppIconSize(context).width,
-                        height: AppHelper.getAppIconSize(context).height,
+                      width: AppHelper.getAppIconSize(context).width,
+                      height: AppHelper.getAppIconSize(context).height,
                       child: Image.asset(
                         AppIcons.getHeaderIcon(),
                         fit: BoxFit.fitWidth,
