@@ -26,7 +26,7 @@ void main() async {
       flavor: Flavor.maxClub,
       flavorValues: FlavorValues(appName: "Max Club", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '..env.maxc');
+  await dotenv.load(fileName: '.env.maxc');
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {

@@ -6,6 +6,8 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/common_widgets/OurGuaranteeWidget.dart';
+import 'package:qantum_apps/views/dialogs/OurGuaranteeDialog.dart';
 import '/core/enums/FetchProfileState.dart';
 import '/core/enums/MembershipStatus.dart';
 import '/core/extensions/log_extension.dart';
@@ -283,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen>
                             .homeNavigationList[provider.prevSelectedOption]
                             .screen),
                     (provider.showPointsBalance)
-                        ? const PointsBalanceWidget()
+                        ?  flavor==Flavor.bobsBulkBooze?SizedBox.shrink():PointsBalanceWidget()
                         : const SizedBox.shrink(),
                     checkForSeeAllMenu(provider)
                   ],
@@ -392,8 +394,17 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[0].name) {
                                     /// SHOW POINTS BALANCE DIALOG
-                                    provider
-                                        .updatePointsBalanceVisibility(true);
+                                    if (flavor == Flavor.bobsBulkBooze) {
+
+                                      /// SHOW OUR GUARANTEE DIALOG
+                                      OurGuaranteeDialog.getInstance()
+                                          .showGuaranteeDialog(context);
+
+                                    } else {
+
+                                      /// SHOW POINTS BALANCE DIALOG
+                                      provider.updatePointsBalanceVisibility(true);
+                                    }
                                   } else {
                                     /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
                                     checkAndHidePointsBalance(

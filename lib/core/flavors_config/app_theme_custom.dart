@@ -856,9 +856,7 @@ class AppThemeCustom {
             : AppColors.sot_button_color;
 
       case Flavor.bobsBulkBooze:
-        return provider.homeNavigationList[0].name == itemName
-            ? Colors.transparent
-            : AppColors.bob_button_color;
+        return AppColors.bob_button_color;
       case Flavor.mannumClub:
         return provider.homeNavigationList[2].name == itemName
             ? Colors.transparent
@@ -1107,9 +1105,7 @@ class AppThemeCustom {
                     width: 1.5));
 
       case Flavor.bobsBulkBooze:
-        return provider.homeNavigationList[0].name == itemName
-            ? null
-            : (isCancelled
+        return (isCancelled
                 ? Border.all(color: AppColors.disable_color, width: 1.5)
                 : Border.all(
                     color:
@@ -1257,11 +1253,9 @@ class AppThemeCustom {
             : AppColors.sot_button_color;
 
       case Flavor.bobsBulkBooze:
-        return provider.homeNavigationList[0].name == itemName
-            ? Colors.transparent
-            : (isCancelled
+        return isCancelled
                 ? AppColors.disable_color
-                : AppColors.bob_button_color);
+                : AppColors.bob_button_color;
       case Flavor.mannumClub:
         return provider.homeNavigationList[2].name == itemName
             ? Colors.transparent
