@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import 'package:qantum_apps/views/common_widgets/NoInternetLayout.dart';
 
+import '../dialogs/ScratchCardDialog.dart';
 import '/view_models/HomeProvider.dart';
 import '../../core/enums/AdvertisementEnums.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -526,7 +527,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
           ),*/
         (FlavorConfig.instance.flavor == Flavor.maxx) ||
                 (FlavorConfig.instance.flavor == Flavor.maxClub)
-            ? GestureDetector(
+            ? /*GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),
                 onTapCancel: scaleSpinToPlay(1.0),
@@ -560,7 +561,20 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                 child: ScaleTransition(
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/spin_to_play.png'),
-                ))
+                ))*/
+        GestureDetector(
+            onTapUp: scaleSpinToPlay(1.0),
+            onTapDown: scaleSpinToPlay(0.8),
+            onTapCancel: scaleSpinToPlay(1.0),
+            onTap: () {
+              _controller.forward();
+
+              ScratchCardDialog.getInstance().showScratchCardDialog(context);
+            },
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: Image.asset('assets/common/scratch_and_win.png'),
+            ))
             : Container()
       ],
     );

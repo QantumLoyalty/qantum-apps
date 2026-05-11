@@ -80,7 +80,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+3
 ###################################
 #EDP
-version: 1.0.1+6
+#version: 1.0.1+6
 ################################.###
 #SOT
 #version: 1.0.0+8

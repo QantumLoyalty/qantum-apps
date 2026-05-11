@@ -86,7 +86,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
 
                             //    AppUpdateDialog.getInstance().showAppUpdateDialog(context);
 
-                            //     ScratchCardDialog.getInstance().showScratchCardDialog(context);
+                               //  ScratchCardDialog.getInstance().showScratchCardDialog(context);
                             //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(

@@ -22,10 +22,11 @@ import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
       flavor: Flavor.maxClub,
       flavorValues: FlavorValues(appName: "Max Club", appVersion: "0.0.1"));
-  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: '.env.maxc');
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -37,6 +38,9 @@ void main() async {
     // Use this method to prompt for push notifications.
     // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
+    OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
+      // print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+    });
     Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
     Stripe.stripeAccountId = dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? '';
     Stripe.instance.applySettings();

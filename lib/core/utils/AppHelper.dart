@@ -623,8 +623,7 @@ class AppHelper with LoggingMixin {
 
     ;
     printMessage("Push Subscription ${pushSubscription.optedIn}");
-    printMessage(
-        "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
+    printMessage("Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 
     return oneSignalUser.pushSubscription.id;
   }
