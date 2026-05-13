@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.4+88
+#version:  1.0.4+88
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -86,7 +86,7 @@ version:  1.0.4+88
 #version: 1.0.0+8
 ###################################
 #Bobs
-#version: 1.21.0+9
+version: 1.21.0+10
 ###################################
 #Mosaic Hotel
 #version: 1.0.0+2

@@ -24,8 +24,8 @@ class UnitedFuelsProvider extends ChangeNotifier {
       resetDefaultValues();
       notifyListeners();
       //   cardHash = "wkM9yjP8Em9";
-     // cardHash = "Jvj8JKZ3kQP";
-       cardHash = userData?.unitedFuelCardHash;
+      // cardHash = "Jvj8JKZ3kQP";
+      cardHash = userData?.unitedFuelCardHash;
 
       if (cardHash == null || cardHash!.isEmpty) {
         /// CHECKING USER VALIDATION
@@ -80,32 +80,37 @@ class UnitedFuelsProvider extends ChangeNotifier {
         /// ERROR OCCURRED DURING USER VALIDATION
         /// CHECKING IF USER ISN'T REGISTERED WITH UNITED FUELS, IF NOT THEN REGISTERING THE USER AND FETCHING CARD HASH
 
-        Map<String, dynamic> responseData =
-            validateUserResponse.response as Map<String, dynamic>;
-        print("User Validation Error Response:$responseData");
-        if (responseData.containsKey("registered") &&
-            (responseData["registered"] as bool) == false) {
-          /// USER ISN'T REGISTERED WITH UNITED FUELS
-          Map<String, String> registrationParams = {
-            "first_name": userData.firstName ?? "",
-            "last_name": userData.lastName ?? "",
-            //  "mobile_number": "0420611631",
-            "mobile_number": userData.mobile ?? "",
-            "email_address": userData.email ?? "",
-            "postcode": userData.postCode ?? ""
-          };
-          print("Registration Params:$registrationParams");
-          await registerUserWithUnitedFuels(
-              registrationParams, currentTimeZone);
+        if (validateUserResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> responseData =
+              validateUserResponse.response as Map<String, dynamic>;
+          print("User Validation Error Response:$responseData");
+          if (responseData.containsKey("registered") &&
+              (responseData["registered"] as bool) == false) {
+            /// USER ISN'T REGISTERED WITH UNITED FUELS
+            Map<String, String> registrationParams = {
+              "first_name": userData.firstName ?? "",
+              "last_name": userData.lastName ?? "",
+              //  "mobile_number": "0420611631",
+              "mobile_number": userData.mobile ?? "",
+              "email_address": userData.email ?? "",
+              "postcode": userData.postCode ?? ""
+            };
+            print("Registration Params:$registrationParams");
+            await registerUserWithUnitedFuels(
+                registrationParams, currentTimeZone);
+          } else {
+            isError = true;
+            if (responseData.containsKey("message")) {
+              errorMessage = (responseData["message"]);
+              errorMessage =
+                  "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+            } else {
+              errorMessage = validateUserResponse.responseMessage;
+            }
+          }
         } else {
           isError = true;
-          if (responseData.containsKey("message")) {
-            errorMessage = (responseData["message"]);
-            errorMessage =
-                "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
-          } else {
-            errorMessage = validateUserResponse.responseMessage;
-          }
+          errorMessage = validateUserResponse.responseMessage;
         }
       }
     } catch (e) {

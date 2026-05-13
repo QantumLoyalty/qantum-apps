@@ -68,8 +68,8 @@ class FlavorConstants {
           Flavor.drinkRewards: "Explorer",
           Flavor.wonthaggi: "Valued",
           Flavor.edp: "Silver",
-          Flavor.bobsBulkBooze: "Member",
-          Flavor.senseOfTaste: "Member",
+          Flavor.bobsBulkBooze: "Valued",
+          Flavor.senseOfTaste: "Valued",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";
