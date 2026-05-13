@@ -20,6 +20,8 @@ class FlavorConstants {
       Flavor.drinkRewards: "DHQ",
       Flavor.wonthaggi: "WCC",
       Flavor.edp: "EDP",
+      Flavor.bobsBulkBooze: "BBB",
+      Flavor.senseOfTaste: "SOT",
     };
 
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
@@ -66,6 +68,8 @@ class FlavorConstants {
           Flavor.drinkRewards: "Explorer",
           Flavor.wonthaggi: "Valued",
           Flavor.edp: "Silver",
+          Flavor.bobsBulkBooze: "Member",
+          Flavor.senseOfTaste: "Member",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";

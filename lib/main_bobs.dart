@@ -10,6 +10,7 @@ import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import 'package:qantum_apps/view_models/PromotionsProvider.dart';
 import 'package:qantum_apps/view_models/SignupProvider.dart';
+import 'package:qantum_apps/view_models/UnitedFuelsProvider.dart';
 import 'package:qantum_apps/views/splash/SplashScreen.dart';
 
 import 'core/flavors_config/app_themes.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
       child: Portal(
         child: MaterialApp(
