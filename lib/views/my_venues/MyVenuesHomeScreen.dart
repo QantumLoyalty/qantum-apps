@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
-import 'package:qantum_apps/views/common_widgets/NoInternetLayout.dart';
+import '/view_models/InternetStatusProvider.dart';
+import '/views/common_widgets/NoInternetLayout.dart';
 
 import '../dialogs/ScratchCardDialog.dart';
 import '/view_models/HomeProvider.dart';
@@ -17,6 +17,7 @@ import '../../views/common_widgets/AppLoader.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../dialogs/PromotionDetailDialog.dart';
 import '../dialogs/SpinnerDialog.dart';
+import 'widgets/MegaEntryWidget.dart';
 
 class MyVenuesHomeScreen extends StatefulWidget {
   const MyVenuesHomeScreen({super.key});
@@ -562,20 +563,22 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/spin_to_play.png'),
                 ))*/
-        GestureDetector(
-            onTapUp: scaleSpinToPlay(1.0),
-            onTapDown: scaleSpinToPlay(0.8),
-            onTapCancel: scaleSpinToPlay(1.0),
-            onTap: () {
-              _controller.forward();
+            GestureDetector(
+                onTapUp: scaleSpinToPlay(1.0),
+                onTapDown: scaleSpinToPlay(0.8),
+                onTapCancel: scaleSpinToPlay(1.0),
+                onTap: () {
+                  _controller.forward();
 
-              ScratchCardDialog.getInstance().showScratchCardDialog(context);
-            },
-            child: ScaleTransition(
-              scale: _scaleAnimation,
-              child: Image.asset('assets/common/scratch_and_win.png'),
-            ))
-            : Container()
+                  ScratchCardDialog.getInstance()
+                      .showScratchCardDialog(context);
+                },
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Image.asset('assets/common/scratch_and_win.png'),
+                ))
+            : Container(),
+        MegaEntryWidget()
       ],
     );
   }

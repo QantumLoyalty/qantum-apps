@@ -786,9 +786,11 @@ class AppThemeCustom {
         userInfoProvider.getUserInfo!.isUserStatusCancelled();
     print(itemName);
 
+    print("Item Name :$itemName && moreButtonsMap: ${provider.moreButtonsMap}");
     // Special case: See All hidden
     if (itemName == AppStrings.txtSeeAll &&
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
+      print("Entered in condition");
       return Colors.transparent;
     }
 
@@ -1112,11 +1114,10 @@ class AppThemeCustom {
 
       case Flavor.bobsBulkBooze:
         return (isCancelled
-                ? Border.all(color: AppColors.disable_color, width: 1.5)
-                : Border.all(
-                    color:
-                        Theme.of(context).buttonTheme.colorScheme!.onSecondary,
-                    width: 1.5));
+            ? Border.all(color: AppColors.disable_color, width: 1.5)
+            : Border.all(
+                color: Theme.of(context).buttonTheme.colorScheme!.onSecondary,
+                width: 1.5));
 
       default:
         return isCancelled
@@ -1269,8 +1270,8 @@ class AppThemeCustom {
 
       case Flavor.bobsBulkBooze:
         return isCancelled
-                ? AppColors.disable_color
-                : AppColors.bob_button_color;
+            ? AppColors.disable_color
+            : AppColors.bob_button_color;
       case Flavor.mannumClub:
         return provider.homeNavigationList[2].name == itemName
             ? Colors.transparent

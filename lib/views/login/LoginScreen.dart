@@ -4,8 +4,8 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/extensions/log_extension.dart';
-import 'package:qantum_apps/core/utils/DeepLinkLauncher.dart';
+
+import '/core/utils/DeepLinkLauncher.dart';
 
 import '../../view_models/HomeProvider.dart';
 import '/core/flavors_config/flavor_config.dart';
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
         () {
           if (!mounted) return;
 
-          debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
+          debugPrint("LOGIN GUEST CHEWZI  E URI: $uri");
           DeepLinkLauncher.launchChewzieUrl(
               context, uri, AppColors.sr_back_color);
         },

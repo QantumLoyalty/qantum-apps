@@ -17,6 +17,7 @@ import 'core/flavors_config/app_themes.dart';
 import 'core/navigation/AppNavigator.dart';
 
 import 'view_models/SpecialOffersProvider.dart';
+import 'view_models/UnitedFuelsProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';

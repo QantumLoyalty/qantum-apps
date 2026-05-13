@@ -54,22 +54,30 @@ class UserLoginProvider extends ChangeNotifier {
 
         _networkMessage = response['message'];
 
-        final isRegistered = response['registered'];
+        print(
+            "LOGIN RESPONSE: ${response.toString()} && _networkMessage: $_networkMessage");
 
-        if (isRegistered != null) {
-          if (isRegistered == true) {
-            _isTestUser = response['test'] == true;
-            _isExistingUser = !_isTestUser!;
-          } else {
-            _isExistingUser = false;
-          }
-
-          final user = response['user'];
-          if (user is Map<String, dynamic> && user['Id'] != null) {
-            _userId = user['Id'];
-          }
+        if (response.containsKey("isCancel") &&
+            (response["isCancel"] as bool)) {
+          _networkError = true;
         } else {
-          _isExistingUser = null;
+          final isRegistered = response['registered'];
+
+          if (isRegistered != null) {
+            if (isRegistered == true) {
+              _isTestUser = response['test'] == true;
+              _isExistingUser = !_isTestUser!;
+            } else {
+              _isExistingUser = false;
+            }
+
+            final user = response['user'];
+            if (user is Map<String, dynamic> && user['Id'] != null) {
+              _userId = user['Id'];
+            }
+          } else {
+            _isExistingUser = null;
+          }
         }
       } else {
         _networkMessage = networkResponse.responseMessage;
