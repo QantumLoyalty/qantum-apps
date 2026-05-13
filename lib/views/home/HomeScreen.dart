@@ -6,8 +6,8 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/common_widgets/OurGuaranteeWidget.dart';
 import 'package:qantum_apps/views/dialogs/OurGuaranteeDialog.dart';
+
 import '/core/enums/FetchProfileState.dart';
 import '/core/enums/MembershipStatus.dart';
 import '/core/extensions/log_extension.dart';
@@ -20,7 +20,6 @@ import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
-import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../data/models/HomeNavigatorModel.dart';
 import '../../l10n/app_localizations.dart';
@@ -92,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen>
   bool _deepLinkHandled = false;
   String? _lastHandledChewziePayload;
   DateTime? _lastHandledChewzieTime;
- /* void _tryOpenDeepLink(
+
+  /* void _tryOpenDeepLink(
     HomeProvider provider,
     UserInfoProvider userInfoProvider,
   ) {
@@ -285,7 +285,9 @@ class _HomeScreenState extends State<HomeScreen>
                             .homeNavigationList[provider.prevSelectedOption]
                             .screen),
                     (provider.showPointsBalance)
-                        ?  flavor==Flavor.bobsBulkBooze?SizedBox.shrink():PointsBalanceWidget()
+                        ? flavor == Flavor.bobsBulkBooze
+                            ? SizedBox.shrink()
+                            : PointsBalanceWidget()
                         : const SizedBox.shrink(),
                     checkForSeeAllMenu(provider)
                   ],
@@ -331,6 +333,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   context,
                                   provider,
                                   index,
+                                  provider.homeNavigationList[index].name,
                                   provider.selectedOption == index,
                                 ),
                                 border: AppThemeCustom.getHomeButtonsBorder(
@@ -395,15 +398,13 @@ class _HomeScreenState extends State<HomeScreen>
                                       provider.homeNavigationList[0].name) {
                                     /// SHOW POINTS BALANCE DIALOG
                                     if (flavor == Flavor.bobsBulkBooze) {
-
                                       /// SHOW OUR GUARANTEE DIALOG
                                       OurGuaranteeDialog.getInstance()
                                           .showGuaranteeDialog(context);
-
                                     } else {
-
                                       /// SHOW POINTS BALANCE DIALOG
-                                      provider.updatePointsBalanceVisibility(true);
+                                      provider
+                                          .updatePointsBalanceVisibility(true);
                                     }
                                   } else {
                                     /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
@@ -486,7 +487,13 @@ class _HomeScreenState extends State<HomeScreen>
                                 context,
                                 provider,
                                 userInfoProvider,
-                                provider.homeNavigationList[index + 3].name,
+                                provider
+                                    .getTranslatedOptionsName(
+                                      loc,
+                                      provider
+                                          .homeNavigationList[index + 3].name,
+                                      flavor: flavor,
+                                    ),
                                 provider.selectedOption == index + 3),
                             text: provider
                                 .getTranslatedOptionsName(
@@ -502,7 +509,13 @@ class _HomeScreenState extends State<HomeScreen>
                               context,
                               provider,
                               userInfoProvider,
-                              provider.homeNavigationList[index + 3].name,
+                              provider
+                                  .getTranslatedOptionsName(
+                                loc,
+                                provider
+                                    .homeNavigationList[index + 3].name,
+                                flavor: flavor,
+                              ),
                               provider.selectedOption == index + 3,
                             ),
                             decoration: BoxDecoration(
@@ -511,13 +524,26 @@ class _HomeScreenState extends State<HomeScreen>
                                   context,
                                   provider,
                                   index,
+                                  provider
+                                      .getTranslatedOptionsName(
+                                    loc,
+                                    provider
+                                        .homeNavigationList[index + 3].name,
+                                    flavor: flavor,
+                                  ),
                                   provider.selectedOption == index + 3,
                                 ),
                                 border: AppThemeCustom.getHomeButtonsBorder(
                                   context,
                                   provider,
                                   userInfoProvider,
-                                  provider.homeNavigationList[index + 3].name,
+                                  provider
+                                      .getTranslatedOptionsName(
+                                    loc,
+                                    provider
+                                        .homeNavigationList[index + 3].name,
+                                    flavor: flavor,
+                                  ),
                                   provider.selectedOption == index + 3,
                                 ),
                                 borderRadius: BorderRadius.circular(10)),
@@ -660,9 +686,7 @@ class _HomeScreenState extends State<HomeScreen>
 
       if (provider.deeplinkPayloads == null) return;
 
-
       if (flavor == Flavor.starReward) {
-
         _prepareChewzie(provider, userInfoProvider);
         return;
       }
@@ -693,16 +717,14 @@ class _HomeScreenState extends State<HomeScreen>
 
     provider.resetDeepLinkNavigation();
 
-
-
     final decodedLink = Uri.decodeComponent(payload);
     final uri = Uri.parse(decodedLink);
 
     try {
       final userInfo = userInfoProvider.getUserInfo ??
           await _waitForUserInfo(userInfoProvider)
-          .timeout(const Duration(seconds: 10));
-   //  final userInfo = userInfoProvider.getUserInfo;
+              .timeout(const Duration(seconds: 10));
+      //  final userInfo = userInfoProvider.getUserInfo;
       final cardNumber = userInfo!.cardNumber;
 
       if (cardNumber == null || cardNumber.isEmpty) {
@@ -731,7 +753,6 @@ class _HomeScreenState extends State<HomeScreen>
       _handlePreparedDeepLink(uri);
     }
 
-
 /*
     final jsonPayload = {
       "memberId": userInfoProvider.getUserInfo!.cardNumber,
@@ -755,10 +776,6 @@ class _HomeScreenState extends State<HomeScreen>
     _handlePreparedDeepLink(updatedUri);
 
 */
-
-
-
-
   }
 
   bool _isDuplicateChewzieLaunch(String payload) {

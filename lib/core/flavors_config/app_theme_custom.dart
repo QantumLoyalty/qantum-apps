@@ -784,6 +784,7 @@ class AppThemeCustom {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     final bool isCancelled = userInfoProvider.getUserInfo != null &&
         userInfoProvider.getUserInfo!.isUserStatusCancelled();
+    print(itemName);
 
     // Special case: See All hidden
     if (itemName == AppStrings.txtSeeAll &&
@@ -1051,6 +1052,11 @@ class AppThemeCustom {
     final bool isCancelled = userInfoProvider.getUserInfo != null &&
         userInfoProvider.getUserInfo!.isUserStatusCancelled();
 
+    if (itemName == AppStrings.txtSeeAll &&
+        (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
+      return Border.all(color: Colors.transparent);
+    }
+
     // 👉 SELECTED STATE
     if (isSelected &&
         (selectedFlavor == Flavor.senseOfTaste ||
@@ -1147,10 +1153,14 @@ class AppThemeCustom {
     BuildContext context,
     HomeProvider provider,
     int index,
+    String itemName,
     bool isSelected,
   ) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
-
+    if (itemName == AppStrings.txtSeeAll &&
+        (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
+      return Colors.transparent;
+    }
     if (!isSelected) {
       return Colors.transparent;
     }
@@ -1195,6 +1205,11 @@ class AppThemeCustom {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     final bool isCancelled = userInfoProvider.getUserInfo != null &&
         userInfoProvider.getUserInfo!.isUserStatusCancelled();
+
+    if (itemName == AppStrings.txtSeeAll &&
+        (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
+      return Colors.transparent;
+    }
 
     // 👉 SELECTED STATE
     if (isSelected &&
