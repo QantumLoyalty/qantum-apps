@@ -67,6 +67,7 @@ class UnitedFuelsService with LoggingMixin implements UnitedFuelsRepository
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
       await SharedPreferenceHelper.getInstance();
+      print(sharedPreferenceHelper.getAuthToken());
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse("${APIList.VALIDATE_USER}$phoneNo"),
           headers: {
@@ -77,6 +78,7 @@ class UnitedFuelsService with LoggingMixin implements UnitedFuelsRepository
       );
       networkResponse = response;
     } catch (e) {
+
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }
 

@@ -32,7 +32,6 @@ class AppIcons {
   static String unitedFuelsRounded4c = "assets/common/rounded-4c.png";
   static String renew = "assets/common/renew.png";
 
-
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     if (selectedFlavor == Flavor.northShoreTavern) {
@@ -253,7 +252,7 @@ class AppIcons {
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
-      }else if (selectedFlavor == Flavor.drinkRewards) {
+      } else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
             return "assets/drinkRewards/card_club.png";
@@ -266,8 +265,10 @@ class AppIcons {
           default:
             return "assets/drinkRewards/card_explorer.png";
         }
-      }
-      else if (selectedFlavor == Flavor.edp) {
+      } else if (selectedFlavor == Flavor.bobsBulkBooze ||
+          selectedFlavor == Flavor.senseOfTaste) {
+        return card_value;
+      } else if (selectedFlavor == Flavor.edp) {
         switch (membershipType.toLowerCase().trim()) {
           case "diamond":
             return "assets/edp/card_diamond.png";
@@ -280,7 +281,7 @@ class AppIcons {
           default:
             return card_silver;
         }
-      }else {
+      } else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
             return card_value;

@@ -51,6 +51,7 @@ class DigitalCardDialog with LoggingMixin {
       )
     ];
 
+
     final cardBackground = AppIcons.getCardBackground(userTierType);
     final membershipExpiry =
         AppDateFormatter.userMembershipExpiry(userData.membershipExpiryDate);

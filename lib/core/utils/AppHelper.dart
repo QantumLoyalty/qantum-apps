@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 
 import '../../core/mixins/logging_mixin.dart';
@@ -18,9 +19,10 @@ class AppHelper with LoggingMixin {
   static int defaultRequestTime = 10;
 
   static printMessage(dynamic printableItem) {
-    if (kDebugMode) {
+    /*if (kDebugMode) {
       print(printableItem);
-    }
+    }*/
+    print(printableItem);
   }
 
   static bool verifyPhoneNumber(String phoneNo) {
@@ -797,4 +799,12 @@ class AppHelper with LoggingMixin {
 
     return false;
   }
+
+  static Future<String> getAppVersion() async {
+    final appInfo = await PackageInfo.fromPlatform();
+    debugPrint('${appInfo.version} ${appInfo.appName}');
+    String version = "${appInfo.version} (${appInfo.buildNumber})";
+    return version;
+  }
+
 }

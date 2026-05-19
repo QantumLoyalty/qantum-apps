@@ -203,10 +203,12 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       params['device_token'] = deviceToken ?? "";
       // params['appType'] = "qantum";
       //params['appType'] = FlavorConfig.instance.flavorValues.appName;
-      params['app_version'] = FlavorConfig.instance.flavorValues.appVersion;
+      String appVersion = await AppHelper.getAppVersion();
+      params['app_version'] = appVersion;
       params['device_type'] =
           Platform.isAndroid ? "ANDROID" : (Platform.isIOS ? "IOS" : "");
 
+      print("uploadDeviceDetail params: ${params}");
       NetworkResponse networkResponse =
           await UserService.getInstance().updateDeviceDetail(params);
       logEvent("uploadDeviceDetail response: $networkResponse");
@@ -930,9 +932,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   /// Fetches the app version and name from the package info and logs it.
   getAppInfo() async {
-    final appInfo = await PackageInfo.fromPlatform();
-    logEvent('${appInfo.version} ${appInfo.appName}');
-    version = "${appInfo.version} (${appInfo.buildNumber})";
+    version = await AppHelper.getAppVersion();
     notifyListeners();
   }
 

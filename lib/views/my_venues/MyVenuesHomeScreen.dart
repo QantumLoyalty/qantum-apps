@@ -528,7 +528,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
           ),*/
         (FlavorConfig.instance.flavor == Flavor.maxx) ||
                 (FlavorConfig.instance.flavor == Flavor.maxClub)
-            ? /*GestureDetector(
+            ? GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),
                 onTapCancel: scaleSpinToPlay(1.0),
@@ -562,8 +562,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                 child: ScaleTransition(
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/spin_to_play.png'),
-                ))*/
-            GestureDetector(
+                ))
+            /*GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),
                 onTapCancel: scaleSpinToPlay(1.0),
@@ -576,7 +576,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                 child: ScaleTransition(
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/scratch_and_win.png'),
-                ))
+                ))*/
             : Container(),
         MegaEntryWidget()
       ],

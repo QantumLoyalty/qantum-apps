@@ -107,16 +107,17 @@ class NetworkHelper with LoggingMixin {
       AppHelper.printMessage(">>> ${url.toString()}");
       var response = await client.get(url, headers: headers);
       AppHelper.printMessage(">>> ${response.body.toString()}");
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 403) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
       } else {
         late String networkException;
-        if (kDebugMode) {
+        /*if (kDebugMode) {
           networkException = response.body;
         } else {
           networkException = "Network error, please try again";
-        }
+        }*/
+        networkException = response.body;
 
         networkResponse = NetworkResponse.error(
             response: jsonDecode(networkException), responseMessage: 'Error!!');

@@ -45,7 +45,7 @@ android {
         }
         senseOfTaste {
             dimension "app"
-            applicationId "com.au.senseoftaste.app"
+            applicationId "au.com.senseoftaste.app"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid",
                     deeplinkPath: "/.*"

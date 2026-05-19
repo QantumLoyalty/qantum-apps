@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/data/models/NetworkResponse.dart';
 import 'package:qantum_apps/data/models/UserModel.dart';
 import 'package:qantum_apps/services/UnitedFuelsService.dart';
@@ -26,9 +27,12 @@ class UnitedFuelsProvider extends ChangeNotifier {
       //   cardHash = "wkM9yjP8Em9";
       // cardHash = "Jvj8JKZ3kQP";
       cardHash = userData?.unitedFuelCardHash;
+      cardHash=null;
+      print("cardHash: $cardHash");
 
       if (cardHash == null || cardHash!.isEmpty) {
         /// CHECKING USER VALIDATION
+        ("fetchUnitedCardHash called").logMessage;
         await fetchUnitedCardHash(userData!, currentTimeZone);
       } else {
         /// FETCH BARCODE USING EXISTING CARD HASH
@@ -57,14 +61,17 @@ class UnitedFuelsProvider extends ChangeNotifier {
       NetworkResponse validateUserResponse =
           await UnitedFuelsService.getInstance()
               .validateUser(userData.mobile ?? "");
-
-      /*  NetworkResponse validateUserResponse =
-          await UnitedFuelsService.getInstance().validateUser("0420611631");
-*/
+       /*  NetworkResponse validateUserResponse =
+          await UnitedFuelsService.getInstance().validateUser("0455875773");*/
       print("Validate User Response:$validateUserResponse");
+         print("Validate User Response:${validateUserResponse.isError}");
       if (!validateUserResponse.isError) {
+
         Map<String, dynamic> responseData =
             validateUserResponse.response as Map<String, dynamic>;
+
+        print("Validate User: ${responseData}");
+
         if (responseData.containsKey("success") &&
             responseData["success"] == true &&
             responseData.containsKey("data")) {
@@ -75,15 +82,9 @@ class UnitedFuelsProvider extends ChangeNotifier {
 
           /// USER VALIDATED, NOW FETCHING BARCODE
           await fetchBarcode(currentTimeZone);
-        } else {}
-      } else {
-        /// ERROR OCCURRED DURING USER VALIDATION
-        /// CHECKING IF USER ISN'T REGISTERED WITH UNITED FUELS, IF NOT THEN REGISTERING THE USER AND FETCHING CARD HASH
-
-        if (validateUserResponse.response is Map<String, dynamic>) {
-          Map<String, dynamic> responseData =
-              validateUserResponse.response as Map<String, dynamic>;
-          print("User Validation Error Response:$responseData");
+        } else {
+          /// CHECKING IF USER ISN'T REGISTERED WITH UNITED FUELS, IF NOT THEN REGISTERING THE USER AND FETCHING CARD HASH
+          ///
           if (responseData.containsKey("registered") &&
               (responseData["registered"] as bool) == false) {
             /// USER ISN'T REGISTERED WITH UNITED FUELS
@@ -96,22 +97,33 @@ class UnitedFuelsProvider extends ChangeNotifier {
               "postcode": userData.postCode ?? ""
             };
             print("Registration Params:$registrationParams");
-            await registerUserWithUnitedFuels(
+             await registerUserWithUnitedFuels(
                 registrationParams, currentTimeZone);
           } else {
             isError = true;
             if (responseData.containsKey("message")) {
               errorMessage = (responseData["message"]);
               errorMessage =
-                  "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+              "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
             } else {
               errorMessage = validateUserResponse.responseMessage;
             }
           }
+
+        }
+      } else {
+        isError = true;
+        Map<String, dynamic> responseData =
+        validateUserResponse.response as Map<String, dynamic>;
+
+        if (responseData.containsKey("message")) {
+          errorMessage = (responseData["message"]);
+          errorMessage =
+          "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
         } else {
-          isError = true;
           errorMessage = validateUserResponse.responseMessage;
         }
+
       }
     } catch (e) {
       isError = true;
