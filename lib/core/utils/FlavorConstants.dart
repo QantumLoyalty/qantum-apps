@@ -22,6 +22,8 @@ class FlavorConstants {
       Flavor.edp: "EDP",
       Flavor.bobsBulkBooze: "BBB",
       Flavor.senseOfTaste: "SOT",
+      Flavor.mosaic: "MHW",
+      Flavor.mannumClub: "MCC",
     };
 
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";

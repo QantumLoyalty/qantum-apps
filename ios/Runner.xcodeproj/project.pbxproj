@@ -9714,7 +9714,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "The Mannum Club";
+				APP_DISPLAY_NAME = "Mannum Club";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-mannumClub";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -9862,7 +9862,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "The Mannum Club";
+				APP_DISPLAY_NAME = "Mannum Club";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-mannumClub";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -10006,7 +10006,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "The Mannum Club";
+				APP_DISPLAY_NAME = "Mannum Club";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-mannumClub";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;

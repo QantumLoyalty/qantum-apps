@@ -654,6 +654,7 @@ class AppHelper with LoggingMixin {
       Flavor.woollahra: "Woollahra",
       Flavor.senseOfTaste: "Sense",
       Flavor.bobsBulkBooze: "Bob",
+      Flavor.mannumClub: "Mannum",
     };
     return appTypeMap[flavor] ?? "Qantum";
   }

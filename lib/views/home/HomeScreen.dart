@@ -62,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.kingscliff,
     Flavor.drinkRewards,
     Flavor.wonthaggi,
-    Flavor.edp
+    Flavor.edp,
+    Flavor.mosaic,
+    Flavor.mannumClub,
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,

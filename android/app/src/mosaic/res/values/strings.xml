@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Queens Hotel</string>
-    <string name="default_notification_channel_id">com.au.queenshotel.app.urgent</string>
+    <string name="app_name">Mosaic Hotel</string>
+    <string name="default_notification_channel_id">com.au.mosaichotel.app.urgent</string>
 </resources>

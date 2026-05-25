@@ -281,7 +281,37 @@ class AppIcons {
           default:
             return card_silver;
         }
-      } else {
+      }else if (selectedFlavor == Flavor.mannumClub) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "cancelled":
+            return "assets/theMannumClub/card_cancelled.png";
+          case "member"||"members":
+            return "assets/theMannumClub/card_members.png";
+          case "perpetuity":
+            return "assets/theMannumClub/card_perpetuity.png";
+          case "staff":
+            return "assets/theMannumClub/card_staff.png";
+          case "testing":
+            return "assets/theMannumClub/card_testing.png";
+          default:
+            return "assets/theMannumClub/card_value.png";
+        }
+      } else if (selectedFlavor == Flavor.mosaic) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "bronze":
+            return "assets/mosaicHotel/card_bronze.png";
+          case "cancelled":
+            return "assets/mosaicHotel/card_cancelled.png";
+          case "testing":
+            return "assets/mosaicHotel/card_testing.png";
+          case "gold":
+            return card_gold;
+          case "silver":
+            return card_silver;
+          default:
+            return "assets/mosaicHotel/card_value.png";
+        }
+      }else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
             return card_value;
