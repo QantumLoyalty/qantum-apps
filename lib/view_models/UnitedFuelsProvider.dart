@@ -24,12 +24,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
       isLoading = true;
       resetDefaultValues();
       notifyListeners();
-      //   cardHash = "wkM9yjP8Em9";
-      // cardHash = "Jvj8JKZ3kQP";
       cardHash = userData?.unitedFuelCardHash;
-      cardHash=null;
-      print("cardHash: $cardHash");
-
       if (cardHash == null || cardHash!.isEmpty) {
         /// CHECKING USER VALIDATION
         ("fetchUnitedCardHash called").logMessage;
@@ -61,16 +56,16 @@ class UnitedFuelsProvider extends ChangeNotifier {
       NetworkResponse validateUserResponse =
           await UnitedFuelsService.getInstance()
               .validateUser(userData.mobile ?? "");
-       /*  NetworkResponse validateUserResponse =
+      /*NetworkResponse validateUserResponse =
           await UnitedFuelsService.getInstance().validateUser("0455875773");*/
-      print("Validate User Response:$validateUserResponse");
-         print("Validate User Response:${validateUserResponse.isError}");
-      if (!validateUserResponse.isError) {
+      ("Validate User Response:$validateUserResponse").logMessage();
+      ("Validate User Response:${validateUserResponse.isError}").logMessage();
 
+      if (!validateUserResponse.isError) {
         Map<String, dynamic> responseData =
             validateUserResponse.response as Map<String, dynamic>;
 
-        print("Validate User: ${responseData}");
+        ("Validate User: ${responseData}").logMessage();;
 
         if (responseData.containsKey("success") &&
             responseData["success"] == true &&
@@ -78,52 +73,60 @@ class UnitedFuelsProvider extends ChangeNotifier {
           Map<String, dynamic> userData =
               responseData["data"] as Map<String, dynamic>;
           cardHash = userData["card_hash"];
-          print("Fetched Card Hash:$cardHash");
+          ("Fetched Card Hash:$cardHash").logMessage();
 
           /// USER VALIDATED, NOW FETCHING BARCODE
           await fetchBarcode(currentTimeZone);
         } else {
-          /// CHECKING IF USER ISN'T REGISTERED WITH UNITED FUELS, IF NOT THEN REGISTERING THE USER AND FETCHING CARD HASH
-          ///
-          if (responseData.containsKey("registered") &&
-              (responseData["registered"] as bool) == false) {
-            /// USER ISN'T REGISTERED WITH UNITED FUELS
-            Map<String, String> registrationParams = {
-              "first_name": userData.firstName ?? "",
-              "last_name": userData.lastName ?? "",
-              //  "mobile_number": "0420611631",
-              "mobile_number": userData.mobile ?? "",
-              "email_address": userData.email ?? "",
-              "postcode": userData.postCode ?? ""
-            };
-            print("Registration Params:$registrationParams");
-             await registerUserWithUnitedFuels(
-                registrationParams, currentTimeZone);
-          } else {
+          /// IF FOUND ANY CONFLICT
+          if (responseData.containsKey("conflict") &&
+              (responseData["conflict"] as bool) == true) {
             isError = true;
             if (responseData.containsKey("message")) {
               errorMessage = (responseData["message"]);
-              errorMessage =
-              "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
             } else {
               errorMessage = validateUserResponse.responseMessage;
             }
-          }
+          } else {
+            /// CHECKING IF USER ISN'T REGISTERED WITH UNITED FUELS, IF NOT THEN REGISTERING THE USER AND FETCHING CARD HASH
 
+            if (responseData.containsKey("registered") &&
+                (responseData["registered"] as bool) == false) {
+              /// USER ISN'T REGISTERED WITH UNITED FUELS
+              Map<String, String> registrationParams = {
+                "first_name": userData.firstName ?? "",
+                "last_name": userData.lastName ?? "",
+                "mobile_number": userData.mobile ?? "",
+                "email_address": userData.email ?? "",
+                "postcode": userData.postCode ?? ""
+              };
+              ("Registration Params:$registrationParams").logMessage();
+               await registerUserWithUnitedFuels(
+                registrationParams, currentTimeZone);
+            } else {
+              isError = true;
+              if (responseData.containsKey("message")) {
+                errorMessage = (responseData["message"]);
+                errorMessage =
+                    "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+              } else {
+                errorMessage = validateUserResponse.responseMessage;
+              }
+            }
+          }
         }
       } else {
         isError = true;
         Map<String, dynamic> responseData =
-        validateUserResponse.response as Map<String, dynamic>;
+            validateUserResponse.response as Map<String, dynamic>;
 
         if (responseData.containsKey("message")) {
           errorMessage = (responseData["message"]);
           errorMessage =
-          "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+              "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
         } else {
           errorMessage = validateUserResponse.responseMessage;
         }
-
       }
     } catch (e) {
       isError = true;
@@ -137,7 +140,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
       NetworkResponse fetchBarcodeResponse =
           await UnitedFuelsService.getInstance().fetchBarcode(
               cardHash: cardHash!, currentTimeZone: currentTimeZone);
-      print("fetchBarcodeResponse>>>$fetchBarcodeResponse");
+      ("fetchBarcodeResponse>>>$fetchBarcodeResponse").logMessage();
       if (!fetchBarcodeResponse.isError) {
         Map<String, dynamic> responseData =
             fetchBarcodeResponse.response as Map<String, dynamic>;
@@ -148,7 +151,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
           barcode = barcodeData["barcode"];
           barcode = barcode!.replaceAll(RegExp(r'\s+'), '');
           termsAndConditions = barcodeData["terms"];
-          print("Fetched Barcode:$barcode");
+          ("Fetched Barcode:$barcode").logMessage();
         } else {
           isError = true;
           errorMessage = "An error occurred while fetching the barcode.";
@@ -181,7 +184,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
           await UnitedFuelsService.getInstance()
               .registerUser(registrationParams);
 
-      print("Register User Response:$registerUserResponse");
+      ("Register User Response:$registerUserResponse").logMessage();
       Map<String, dynamic> responseData =
           registerUserResponse.response as Map<String, dynamic>;
 

@@ -681,4 +681,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectVenuesErrorMsg => 'Error while updating the venue!';
+
+  @override
+  String get pleaseAvoidSpecialChar => 'Please avoid special characters';
 }

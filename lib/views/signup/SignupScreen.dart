@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/network/APIList.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -97,14 +98,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         logEvent("DOB Parse Error: $e");
       }
       _birthdayDDController = TextEditingController(
-          text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
+          text: ConditionBuilder.on(
+                  () => dateTime != null && dateTime.day >= 10,
                   () => dateTime!.day.toString())
               .on(() => dateTime != null && dateTime.day < 10,
                   () => "0${dateTime!.day.toString()}")
               .build(orElse: () => ""));
       _birthdayMMController = TextEditingController(
           text: ConditionBuilder.on(
-                  () => dateTime != null && dateTime.month > 10,
+                  () => dateTime != null && dateTime.month >= 10,
                   () => dateTime!.month.toString())
               .on(() => dateTime != null && dateTime.month < 10,
                   () => "0${dateTime!.month.toString()}")
@@ -231,7 +233,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           }
                           final validName = RegExp(r"^[A-Za-z\s'\-]+$");
                           if (!validName.hasMatch(value)) {
-                            return "Please avoid special characters";
+                            return loc.pleaseAvoidSpecialChar;
                           }
 
                           return null;
@@ -288,7 +290,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           }
                           final validName = RegExp(r"^[A-Za-z\s'\-]+$");
                           if (!validName.hasMatch(value)) {
-                            return "Please avoid special characters";
+                            return loc.pleaseAvoidSpecialChar;
                           }
                           return null;
                         },
@@ -1086,7 +1088,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
           age--;
         }
 
-        print("AGE RESULT :: $age");
+        "AGE RESULT :: $age".logMessage();
 
         return age >= 18;
       } else {

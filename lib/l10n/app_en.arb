@@ -227,5 +227,6 @@
   "txtSaveMyVenue":"Save My Venue",
   "selectEDPVenues":"Please choose your\nfavourite EDP Venue",
   "selectVenuesSuccessMsg":"Venue updated successfully!",
-  "selectVenuesErrorMsg":"Error while updating the venue!"
+  "selectVenuesErrorMsg":"Error while updating the venue!",
+  "pleaseAvoidSpecialChar":"Please avoid special characters"
 }

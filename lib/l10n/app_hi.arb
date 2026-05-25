@@ -227,6 +227,7 @@
   "txtSaveMyVenue":"मेरी जगह सहेजें",
   "selectEDPVenues":"कृपया अपने पसंदीदा\nEDP स्थान चुनें",
   "selectVenuesSuccessMsg":"स्थान सफलतापूर्वक अपडेट किया गया!",
-  "selectVenuesErrorMsg":"स्थान अपडेट करते समय त्रुटि हुई!"
+  "selectVenuesErrorMsg":"स्थान अपडेट करते समय त्रुटि हुई!",
+  "pleaseAvoidSpecialChar":"कृपया विशेष वर्णों से बचें"
 
 }

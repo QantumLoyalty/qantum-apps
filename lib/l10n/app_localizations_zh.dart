@@ -681,6 +681,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get selectVenuesErrorMsg => '更新场馆时出错';
+
+  @override
+  String get pleaseAvoidSpecialChar => '請避免使用特殊字元';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1360,4 +1363,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get selectVenuesErrorMsg => '更新场馆时出错!';
+
+  @override
+  String get pleaseAvoidSpecialChar => '请避免使用特殊字符';
 }

@@ -681,4 +681,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get selectVenuesErrorMsg => 'स्थान अपडेट करते समय त्रुटि हुई!';
+
+  @override
+  String get pleaseAvoidSpecialChar => 'कृपया विशेष वर्णों से बचें';
 }

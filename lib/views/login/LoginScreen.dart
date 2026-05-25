@@ -4,6 +4,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 
 import '/core/utils/DeepLinkLauncher.dart';
 
@@ -299,8 +300,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onChanged: (code) {
                                       setState(() {
                                         countryCode = code.dialCode!;
-                                        AppHelper.printMessage(
-                                            "Selected country::${code.dialCode}");
+                                        ("Selected country::${code.dialCode}").logMessage();
                                       });
                                     },
                                     initialSelection: "AU",
@@ -364,6 +364,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   AppHelper.showErrorMessage(
                                       context, loc.msgIncorrectPhoneNumber);
                                 }
+
+
                               },
                             ),
                           ],

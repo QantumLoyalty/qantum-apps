@@ -1441,6 +1441,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error while updating the venue!'**
   String get selectVenuesErrorMsg;
+
+  /// No description provided for @pleaseAvoidSpecialChar.
+  ///
+  /// In en, this message translates to:
+  /// **'Please avoid special characters'**
+  String get pleaseAvoidSpecialChar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

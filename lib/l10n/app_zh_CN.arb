@@ -227,5 +227,6 @@
   "txtSaveMyVenue": "保存我的场地",
   "selectEDPVenues":"请选择您喜欢的\nEDP 场地",
   "selectVenuesSuccessMsg":"场馆更新成功！",
-  "selectVenuesErrorMsg":"更新场馆时出错!"
+  "selectVenuesErrorMsg":"更新场馆时出错!",
+  "pleaseAvoidSpecialChar":"请避免使用特殊字符"
 }
