@@ -1,3 +1,5 @@
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+
 import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
@@ -29,12 +31,16 @@ class FlavorConstants {
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
   }
 
-
   static String getUserTierType(UserModel userData) {
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
     if (flavorConfig.flavor == Flavor.starReward ||
-        flavorConfig.flavor == Flavor.drinkRewards) {
+        flavorConfig.flavor == Flavor.drinkRewards ||
+        flavorConfig.flavor == Flavor.bobsBulkBooze ||
+        flavorConfig.flavor == Flavor.senseOfTaste) {
+
+      "MEMBERSHIP CATEGORY: ${userData.membershipCategory}".logMessage();
+
       if (userData.membershipCategory != null &&
           userData.membershipCategory!.isNotEmpty) {
         if (userData.membershipCategory!.toLowerCase() == "") {
@@ -75,10 +81,7 @@ class FlavorConstants {
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";
-
       }
     }
   }
-
-
 }

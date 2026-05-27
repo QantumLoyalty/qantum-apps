@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/enums/MembershipStatus.dart';
-import 'package:qantum_apps/view_models/UserInfoProvider.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/view_models/UserInfoProvider.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -66,7 +67,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
 
   getAppSignature() async {
     String appSignature = await SmsAutoFill().getAppSignature;
-    print("APP SIGNATURE: $appSignature");
+    ("APP SIGNATURE: $appSignature").logMessage();
   }
 
   @override

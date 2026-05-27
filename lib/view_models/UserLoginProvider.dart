@@ -261,7 +261,7 @@ class UserLoginProvider extends ChangeNotifier {
       NetworkResponse networkResponse =
           await UserService.getInstance().resendOTP(phoneNumber: phoneNo);
 
-      otpSent = networkResponse.isError;
+      otpSent = !networkResponse.isError;
 
       if (networkResponse.response != null) {
         if (networkResponse.response is Map<String, dynamic>) {
