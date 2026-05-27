@@ -268,13 +268,13 @@ class AppIcons {
           case "member"||"members":
             return "assets/theMannumClub/card_members.png";
           case "perpetuity":
-            return "assets/theMannumClub/card_perpetuity.png";
+            return card_gold;
           case "staff":
             return "assets/theMannumClub/card_staff.png";
           case "testing":
             return "assets/theMannumClub/card_testing.png";
           default:
-            return "assets/theMannumClub/card_value.png";
+            return "assets/theMannumClub/card_members.png";
         }
       } else if (selectedFlavor == Flavor.mosaic) {
         switch (membershipType.toLowerCase().trim()) {
