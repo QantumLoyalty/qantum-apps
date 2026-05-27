@@ -11,7 +11,6 @@ enum Flavor {
   hogansReward,
   northShoreTavern,
   aceRewards,
-  queens,
   brisbane,
   woollahra,
   bluewater,

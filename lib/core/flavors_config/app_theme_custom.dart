@@ -157,8 +157,7 @@ class AppThemeCustom {
         return AppColors.nst_back_color;
       case Flavor.aceRewards:
         return AppColors.ar_back_color_2;
-      case Flavor.queens ||
-            Flavor.brisbane ||
+      case Flavor.brisbane ||
             Flavor.woollahra ||
             Flavor.wonthaggi ||
             Flavor.mosaic:
@@ -185,7 +184,7 @@ class AppThemeCustom {
         return AppColors.hr_back_color;
       case Flavor.northShoreTavern:
         return AppColors.nst_back_color;
-      case Flavor.queens || Flavor.brisbane:
+      case Flavor.brisbane:
         return Theme.of(context).primaryColor;
       case Flavor.mannumClub:
         return AppColors.mc_button_color;
@@ -298,7 +297,6 @@ class AppThemeCustom {
       case Flavor.mhbc ||
             Flavor.clh ||
             Flavor.northShoreTavern ||
-            Flavor.queens ||
             Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
@@ -358,7 +356,7 @@ class AppThemeCustom {
   static Color getTextFieldBackground(BuildContext context, {bool? isShadow}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.queens:
+      case Flavor.qantum || Flavor.qantumClub:
         return Theme.of(context).cardColor.withValues(alpha: 0.20);
       case Flavor.kingscliff:
         return isShadow != null
@@ -428,7 +426,6 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.qantum ||
             Flavor.qantumClub ||
-            Flavor.queens ||
             Flavor.drinkRewards ||
             Flavor.edp ||
             Flavor.senseOfTaste ||
@@ -536,7 +533,6 @@ class AppThemeCustom {
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
       case Flavor.aceRewards ||
-            Flavor.queens ||
             Flavor.bluewater ||
             Flavor.woollahra:
         return ButtonStyle(
@@ -735,7 +731,6 @@ class AppThemeCustom {
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
       case Flavor.aceRewards ||
-            Flavor.queens ||
             Flavor.bluewater ||
             Flavor.woollahra:
         return ButtonStyle(
@@ -834,7 +829,6 @@ class AppThemeCustom {
             : (isCancelled ? AppColors.disable_color : null);
 
       case Flavor.northShoreTavern:
-      case Flavor.queens:
       case Flavor.mhbc:
       case Flavor.hogansReward:
       case Flavor.bluewater:
@@ -910,7 +904,7 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.northShoreTavern || Flavor.brisbane || Flavor.woollahra:
         return Theme.of(context).primaryColor;
-      case Flavor.aceRewards || Flavor.queens:
+      case Flavor.aceRewards:
         return isCommunication != null
             ? AppColors.white
             : Theme.of(context).primaryColorDark;
@@ -957,7 +951,6 @@ class AppThemeCustom {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.northShoreTavern ||
-            Flavor.queens ||
             Flavor.brisbane ||
             Flavor.wonthaggi ||
             Flavor.mosaic:
@@ -1004,9 +997,6 @@ class AppThemeCustom {
 
       case Flavor.aceRewards:
         return isFromEdit ? selectionColor : theme.primaryColorDark;
-
-      case Flavor.queens:
-        return isFromEdit ? selectionColor : AppColors.black;
 
       case Flavor.flinders:
         return AppColors.white;
@@ -1089,7 +1079,6 @@ class AppThemeCustom {
                     width: 1.5));
 
       case Flavor.northShoreTavern:
-      case Flavor.queens:
       case Flavor.brisbane:
       case Flavor.hogansReward:
       case Flavor.woollahra:
@@ -1244,7 +1233,6 @@ class AppThemeCustom {
                 : Theme.of(context).textSelectionTheme.selectionColor);
 
       case Flavor.northShoreTavern:
-      case Flavor.queens:
       case Flavor.hogansReward:
       case Flavor.mhbc:
       case Flavor.brisbane:
@@ -1338,8 +1326,6 @@ class AppThemeCustom {
         return Theme.of(context).primaryColorDark;
       case Flavor.flinders:
         return Theme.of(context).scaffoldBackgroundColor;
-      case Flavor.queens:
-        return AppColors.black;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }

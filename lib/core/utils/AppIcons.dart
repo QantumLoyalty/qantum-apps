@@ -172,27 +172,7 @@ class AppIcons {
           default:
             return card_value;
         }
-      } else if (selectedFlavor == Flavor.queens) {
-        switch (membershipType.toLowerCase().trim()) {
-          case "queens":
-            return "assets/queensHotel/card_queens.png";
-          case "ruby":
-            return "assets/queensHotel/card_ruby.png";
-          case "emerald":
-            return "assets/queensHotel/card_emerald.png";
-          case "sapphire":
-            return "assets/queensHotel/card_sapphire.png";
-          case "diamond":
-            return "assets/queensHotel/card_diamond.png";
-          case "diamondplus":
-            return "assets/queensHotel/card_diamond_plus.png";
-          case "curtiscoast":
-            return "assets/queensHotel/card_curtis_coast.png";
-
-          default:
-            return "assets/queensHotel/card_queens.png";
-        }
-      } else if (selectedFlavor == Flavor.brisbane) {
+      }  else if (selectedFlavor == Flavor.brisbane) {
         switch (membershipType.toLowerCase().trim()) {
           case "brewcrew":
             return "assets/brisbaneBrewing/card_brew_crew.png";
@@ -255,7 +235,7 @@ class AppIcons {
       } else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
-            return "assets/drinkRewards/card_club.png";
+            return card_gold;
           case "reserve":
             return "assets/drinkRewards/card_reserve.png";
           case "masters":
@@ -263,7 +243,7 @@ class AppIcons {
           case "staff":
             return "assets/drinkRewards/card_staff.png";
           default:
-            return "assets/drinkRewards/card_explorer.png";
+            return card_gold;
         }
       } else if (selectedFlavor == Flavor.bobsBulkBooze ||
           selectedFlavor == Flavor.senseOfTaste) {
@@ -309,7 +289,7 @@ class AppIcons {
           case "silver":
             return card_silver;
           default:
-            return "assets/mosaicHotel/card_value.png";
+            return card_silver;
         }
       }else {
         switch (membershipType.toLowerCase()) {

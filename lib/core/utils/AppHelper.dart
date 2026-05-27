@@ -191,7 +191,6 @@ class AppHelper with LoggingMixin {
 
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
-            Flavor.queens ||
             Flavor.brisbane ||
             Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
@@ -312,7 +311,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.queens || Flavor.wonthaggi:
+      case Flavor.wonthaggi:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -437,8 +436,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards ||
-            Flavor.queens ||
+      case Flavor.aceRewards||
             Flavor.bluewater ||
             Flavor.woollahra:
         return ButtonStyle(
@@ -546,7 +544,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.northShoreTavern || Flavor.queens || Flavor.wonthaggi:
+      case Flavor.northShoreTavern ||  Flavor.wonthaggi:
         return ButtonStyle(
             shadowColor: WidgetStatePropertyAll(
                 Theme.of(context).primaryColor.withValues(alpha: 0.1)),
@@ -587,8 +585,7 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.montaukTavern ||
             Flavor.hogansReward ||
-            Flavor.clh ||
-            Flavor.queens:
+            Flavor.clh:
         return const Size(142, 42);
 
       case Flavor.northShoreTavern ||
@@ -644,7 +641,6 @@ class AppHelper with LoggingMixin {
       Flavor.hogansReward: "Hogan",
       Flavor.northShoreTavern: "North",
       Flavor.aceRewards: "Ace",
-      Flavor.queens: "Queens",
       Flavor.brisbane: "Brisbane",
       Flavor.bluewater: "Bluewater",
       Flavor.flinders: "Flinders",

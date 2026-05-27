@@ -131,15 +131,6 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
-        queens {
-            dimension "app"
-            applicationId "com.au.queenshotel.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid",
-                    deeplinkPath: "/.*"
-            ]
-        }
-
         brisbane {
             dimension "app"
             applicationId "com.au.brisbanebrewing.app"

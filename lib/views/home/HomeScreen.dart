@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen>
   final partnerOffersMissingApps = {
     Flavor.bluewater,
     Flavor.mhbc,
-    Flavor.queens,
     Flavor.brisbane,
     Flavor.hogansReward,
     Flavor.woollahra,
