@@ -243,7 +243,7 @@ class AppIcons {
           case "staff":
             return "assets/drinkRewards/card_staff.png";
           default:
-            return card_gold;
+            return "assets/drinkRewards/card_explorer.png";
         }
       } else if (selectedFlavor == Flavor.bobsBulkBooze ||
           selectedFlavor == Flavor.senseOfTaste) {
