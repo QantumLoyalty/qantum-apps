@@ -1,3 +1,5 @@
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+
 import '../flavors_config/flavor_config.dart';
 import 'AppStrings.dart';
 
@@ -172,7 +174,7 @@ class AppIcons {
           default:
             return card_value;
         }
-      }  else if (selectedFlavor == Flavor.brisbane) {
+      } else if (selectedFlavor == Flavor.brisbane) {
         switch (membershipType.toLowerCase().trim()) {
           case "brewcrew":
             return "assets/brisbaneBrewing/card_brew_crew.png";
@@ -261,11 +263,11 @@ class AppIcons {
           default:
             return card_silver;
         }
-      }else if (selectedFlavor == Flavor.mannumClub) {
+      } else if (selectedFlavor == Flavor.mannumClub) {
         switch (membershipType.toLowerCase().trim()) {
           case "cancelled":
             return "assets/theMannumClub/card_cancelled.png";
-          case "member"||"members":
+          case "member" || "members":
             return "assets/theMannumClub/card_members.png";
           case "perpetuity":
             return card_gold;
@@ -289,9 +291,10 @@ class AppIcons {
           case "silver":
             return card_silver;
           default:
-            return card_silver;
+            return "assets/mosaicHotel/card_bronze.png";
+
         }
-      }else {
+      } else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
             return card_value;

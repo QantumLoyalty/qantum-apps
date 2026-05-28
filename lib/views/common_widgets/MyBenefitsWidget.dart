@@ -52,7 +52,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
-    final dialogHeight = media.size.height * 0.7;
+    final dialogHeight = media.size.height * 0.6;
 
     return Consumer<UserInfoProvider>(
         builder: (context, userInfoProvider, child) {
@@ -67,8 +67,9 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                 decoration: BoxDecoration(
                     color: (flavor != null && flavor == Flavor.bobsBulkBooze)
                         ? AppColors.bob_button_color
-                        : Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(10)),
+                        : null,
+                        //: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(0)),
                 margin: const EdgeInsets.only(left: 25, right: 25),
                 width: media.size.width,
                 height: dialogHeight - 80,

@@ -167,7 +167,6 @@ dependencies:
   sms_autofill: ^2.4.1
   syncfusion_flutter_barcodes:
   url_launcher:
-  liquid_glass_easy: ^1.1.1
   flutter_scratch_card: ^1.0.1
 
 
