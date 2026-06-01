@@ -234,7 +234,20 @@ class AppIcons {
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
-      } else if (selectedFlavor == Flavor.drinkRewards) {
+      } else if (selectedFlavor == Flavor.kingscliff) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "staff":
+            return "assets/kingscliff/card_staff.png";
+          case "silver":
+            return card_silver;
+          case "gold":
+            return card_gold;
+          case "platinum":
+            return card_platinum;
+          default:
+            return "assets/kingscliff/card_value.png";
+        }
+      }else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
             return card_gold;
