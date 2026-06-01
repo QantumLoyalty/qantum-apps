@@ -27,7 +27,7 @@ void main() async {
       flavorValues:
           FlavorValues(appName: "The Mannum Club", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env.qantum');
+  await dotenv.load(fileName: '.env.mc');
 
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -42,8 +42,8 @@ void main() async {
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
       print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
     });
-    OneSignal.Notifications.requestPermission(true);
     Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '';
+    Stripe.stripeAccountId = dotenv.env['STRIPE_CONNECTED_ACCOUNT_ID'] ?? '';
     Stripe.instance.applySettings();
   });
 }

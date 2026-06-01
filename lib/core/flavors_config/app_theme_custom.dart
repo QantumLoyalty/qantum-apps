@@ -1372,6 +1372,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.maxClub:
         return Theme.of(context).primaryColorDark;
+        case Flavor.mannumClub:
+      return const Color(0xff233250);
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -1383,6 +1385,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.maxClub:
         return AppColors.white;
+      case Flavor.mannumClub:
+        return const Color(0xff233250);
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;

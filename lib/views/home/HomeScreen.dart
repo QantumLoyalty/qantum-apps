@@ -242,12 +242,18 @@ class _HomeScreenState extends State<HomeScreen>
                   provider.selectedMembership!.earlyBirdRenewalDate != null &&
                   provider
                       .selectedMembership!.earlyBirdRenewalDate!.isNotEmpty) {
-                /// CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP
-                if (!AppDateFormatter.ifUserPurchasedMembership(
-                    usersMembershipExpiry:
-                        userInfoProvider.getUserInfo!.membershipExpiryDate!,
-                    membershipExpiry: provider
-                        .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
+                "CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP"
+                    .logMessage();
+                "userInfoProvider.getUserInfo!.membershipExpiryDate! >> ${userInfoProvider.getUserInfo!.membershipExpiryDate} provider.selectedMembership!.expiryEarlyBirdRenewalDate! ${provider.selectedMembership!.expiryEarlyBirdRenewalDate}"
+                    .logMessage();
+
+                if (provider.selectedMembership!.expiryEarlyBirdRenewalDate !=
+                        null &&
+                    !AppDateFormatter.ifUserPurchasedMembership(
+                        usersMembershipExpiry:
+                            userInfoProvider.getUserInfo!.membershipExpiryDate!,
+                        membershipExpiry: provider
+                            .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
                   logEvent(
                       "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
 
@@ -488,13 +494,11 @@ class _HomeScreenState extends State<HomeScreen>
                                 context,
                                 provider,
                                 userInfoProvider,
-                                provider
-                                    .getTranslatedOptionsName(
-                                      loc,
-                                      provider
-                                          .homeNavigationList[index + 3].name,
-                                      flavor: flavor,
-                                    ),
+                                provider.getTranslatedOptionsName(
+                                  loc,
+                                  provider.homeNavigationList[index + 3].name,
+                                  flavor: flavor,
+                                ),
                                 provider.selectedOption == index + 3),
                             text: provider
                                 .getTranslatedOptionsName(
@@ -510,11 +514,9 @@ class _HomeScreenState extends State<HomeScreen>
                               context,
                               provider,
                               userInfoProvider,
-                              provider
-                                  .getTranslatedOptionsName(
+                              provider.getTranslatedOptionsName(
                                 loc,
-                                provider
-                                    .homeNavigationList[index + 3].name,
+                                provider.homeNavigationList[index + 3].name,
                                 flavor: flavor,
                               ),
                               provider.selectedOption == index + 3,
@@ -525,11 +527,9 @@ class _HomeScreenState extends State<HomeScreen>
                                   context,
                                   provider,
                                   index,
-                                  provider
-                                      .getTranslatedOptionsName(
+                                  provider.getTranslatedOptionsName(
                                     loc,
-                                    provider
-                                        .homeNavigationList[index + 3].name,
+                                    provider.homeNavigationList[index + 3].name,
                                     flavor: flavor,
                                   ),
                                   provider.selectedOption == index + 3,
@@ -538,11 +538,9 @@ class _HomeScreenState extends State<HomeScreen>
                                   context,
                                   provider,
                                   userInfoProvider,
-                                  provider
-                                      .getTranslatedOptionsName(
+                                  provider.getTranslatedOptionsName(
                                     loc,
-                                    provider
-                                        .homeNavigationList[index + 3].name,
+                                    provider.homeNavigationList[index + 3].name,
                                     flavor: flavor,
                                   ),
                                   provider.selectedOption == index + 3,
@@ -917,7 +915,8 @@ class _HomeScreenState extends State<HomeScreen>
     final lastShownDate = prefs.getLastEarlyBirdDialogDate();
     final today = AppDateFormatter.formatDateForEarlyBird(DateTime.now());
     logEvent("lastShownDate >> $lastShownDate");
-    if (lastShownDate != today) {
+    if (lastShownDate != today)
+    {
       await EarlyRenewalMembershipDialog.getInstance()
           .showRenewalMembershipDialog(
               context: context,

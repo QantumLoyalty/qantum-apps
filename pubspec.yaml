@@ -83,15 +83,15 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.1+6
 ################################.###
 #SOT
-version: 1.21.0+1205
+#version: 1.21.0+1205
 ###################################
 #Bobs
 #version: 1.22.0+1205
 ###################################
 #Mosaic Hotel
-#version: 1.0.0+2
+#version: 1.0.0+3
 #Mannum club
-#version: 1.0.0+2
+version: 1.0.0+2
 
 
 
@@ -225,6 +225,7 @@ flutter:
     - .env.qantum
     - .env.kc
     - .env.dr
+    - .env.mc
 
 
   #   - images/a_dot_ham.jpeg

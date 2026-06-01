@@ -15,4 +15,9 @@ class EarlyBirdPeriod {
     data['endDate'] = endDate;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'EarlyBirdPeriod{startDate: $startDate, endDate: $endDate}';
+  }
 }
