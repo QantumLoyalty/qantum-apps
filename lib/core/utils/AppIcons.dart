@@ -85,7 +85,7 @@ class AppIcons {
           case "ace":
             return "assets/aceRewards/card_ace.png";
           case "aceplus":
-            return "assets/aceRewards/card_ace_plus.png";
+            return "assets/aceRewards/card_ace.png";
           default:
             return "assets/aceRewards/card_staff.png";
         }
@@ -254,7 +254,7 @@ class AppIcons {
           case "reserve":
             return "assets/drinkRewards/card_reserve.png";
           case "masters":
-            return "assets/drinkRewards/card_masters.png";
+            return card_platinum_black;
           case "staff":
             return "assets/drinkRewards/card_staff.png";
           default:

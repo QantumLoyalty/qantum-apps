@@ -65,7 +65,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.1+5
 ###################################
 # Kingscliff
-version: 1.0.0+6
+#version: 1.0.0+6
 ###################################
 # drinkRewards
 #version: 1.0.0+7
@@ -196,36 +196,109 @@ flutter:
   generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/bluewaterCaptainsClub/
-    - assets/woollahraHotel/
-    - assets/brisbaneBrewing/
+    # common assets for all flavors
     - assets/common/
-    - assets/senseOfTaste/
-    - assets/qantum/
-    - assets/qantumClub/
-    - assets/max/
-    - assets/maxClub/
-    - assets/starReward/
-    - assets/manlyHarbourBoatClub/
-    - assets/centralLaneHotel/
-    - assets/montaukTavern/
-    - assets/hogansReward/
-    - assets/northShoreTavern/
-    - assets/aceRewards/
-    - assets/flindersStreetWharves/
-    - assets/drinkRewards/
-    - assets/kingscliff/
-    - assets/wonthaggi/
-    - assets/bobsBulkBooze/
-    - assets/edp/
-    - assets/mosaicHotel/
-    - assets/theMannumClub/
+
+    # env files, if loaded at runtime by flutter_dotenv
     - .env.mhbc
     - .env.maxc
     - .env.qantum
     - .env.kc
     - .env.dr
     - .env.mc
+
+    # flavor-wise assets
+    - path: assets/starReward/
+      flavors:
+        - starrewards
+
+    - path: assets/senseOfTaste/
+      flavors:
+        - senseOfTaste
+
+    - path: assets/qantum/
+      flavors:
+        - qantum
+
+    - path: assets/qantumClub/
+      flavors:
+        - qantumClub
+
+    - path: assets/max/
+      flavors:
+        - maxx
+
+    - path: assets/maxClub/
+      flavors:
+        - maxClub
+
+    - path: assets/manlyHarbourBoatClub/
+      flavors:
+        - mhbc
+
+    - path: assets/centralLaneHotel/
+      flavors:
+        - clh
+
+    - path: assets/montaukTavern/
+      flavors:
+        - montaukTavern
+
+    - path: assets/hogansReward/
+      flavors:
+        - hogansReward
+
+    - path: assets/northShoreTavern/
+      flavors:
+        - northShoreTavern
+
+    - path: assets/aceRewards/
+      flavors:
+        - aceRewards
+
+    - path: assets/brisbaneBrewing/
+      flavors:
+        - brisbane
+
+    - path: assets/woollahraHotel/
+      flavors:
+        - woollahra
+
+    - path: assets/bluewaterCaptainsClub/
+      flavors:
+        - bluewater
+
+    - path: assets/flindersStreetWharves/
+      flavors:
+        - flinders
+
+    - path: assets/kingscliff/
+      flavors:
+        - kingscliff
+
+    - path: assets/drinkRewards/
+      flavors:
+        - drinkRewards
+
+    - path: assets/wonthaggi/
+      flavors:
+        - wonthaggi
+
+    - path: assets/edp/
+      flavors:
+        - edp
+
+    - path: assets/bobsBulkBooze/
+      flavors:
+        - bobsBulkBooze
+
+    - path: assets/mosaicHotel/
+      flavors:
+        - mosaic
+
+    - path: assets/theMannumClub/
+      flavors:
+        - mannumClub
 
 
   #   - images/a_dot_ham.jpeg
