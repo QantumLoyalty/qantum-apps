@@ -160,6 +160,8 @@ class UserLoginProvider extends ChangeNotifier {
         }
       } else {
         _isRegistered = false;
+        _networkMessage= networkResponse.responseMessage;
+
       }
     } catch (e) {
       _networkError = true;

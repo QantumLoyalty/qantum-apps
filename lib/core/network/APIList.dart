@@ -76,6 +76,10 @@ class APIList {
   static get FETCH_VENUES_LIST => BASE_URL + "venue/all?";
   static get SAVE_VENUE => BASE_URL + "user/venue-update";
 
+  /// SMART INCENTIVES APIS ///
+  static get GET_SMART_INCENTIVES => BASE_URL + "smart-incentive/check-user";
+
+
   /// UNITED FUELS APIS ///
   static get VALIDATE_USER => BASE_URL + "fuel/validate/";
 

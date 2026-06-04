@@ -146,7 +146,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       // DISPLAYING NETWORK RESPONSE
       if (userLoginProvider.networkError != null &&
           userLoginProvider.networkError!) {
-        Future.delayed(Duration.zero, () {
+        /*Future.delayed(Duration.zero, () {
           if (userLoginProvider.networkError!) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppHelper.showErrorMessage(
@@ -155,6 +155,16 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
           }
 
           userLoginProvider.resetNetworkResponseStatus();
+        });*/
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          // Check mounted state to make sure the user hasn't popped the screen yet
+          if (context.mounted) {
+            AppHelper.showErrorMessage(
+                context, userLoginProvider.networkMessage ?? loc.msgCommonError);
+
+            // Clear error flag after showing the message to prevent duplication loops
+            userLoginProvider.resetNetworkResponseStatus();
+          }
         });
       }
 
@@ -175,7 +185,12 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
               AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
                   arguments: args);
             });
-          } else {}
+          }/* else {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppHelper.showErrorMessage(
+                  context, userLoginProvider.networkMessage ?? "");
+            });vv
+          }*/
 
           userLoginProvider.resetUserRegisterStatus();
         });

@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 
+import '../core/extensions/log_extension.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
 import '../core/utils/FlavorConstants.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
 import '../data/models/PromotionModel.dart';
+import '../data/models/SmartIncentivesParam.dart';
 import '../data/models/UserModel.dart';
 import '../services/AppDataService.dart';
 
@@ -35,10 +39,10 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       UserModel? userData = await sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
-        String userTier =  FlavorConstants.getUserTierType(userData);
-        String? venue=userData!.venueName;
-        NetworkResponse networkResponse =
-            await AppDataService.getInstance().fetchPromotions(userTier,selectedVenue: venue);
+        String userTier = FlavorConstants.getUserTierType(userData);
+        String? venue = userData!.venueName;
+        NetworkResponse networkResponse = await AppDataService.getInstance()
+            .fetchPromotions(userTier, selectedVenue: venue);
         _isError = networkResponse.isError;
         Map<String, dynamic> resultData =
             networkResponse.response as Map<String, dynamic>;
@@ -61,9 +65,6 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
   bool get isFetching => _isFetching;
 
-
-
-
   fetchPromotionsTimer() async {
     await getPromotions();
     Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
@@ -74,5 +75,24 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
         _isFetching = false;
       }
     });
+  }
+
+  fetchSpecialIncentives(BuildContext context) async {
+    try {
+      final userInfoProvider = context.read<UserInfoProvider>();
+      final user = userInfoProvider.getUserInfo;
+
+      if (user != null) {
+        SmartIncentivesParam param = SmartIncentivesParam(
+            id: user.bluizeUniqueUserId!,
+            audience: [FlavorConstants.getUserTierType(user)]);
+
+        NetworkResponse networkResponse = await AppDataService.getInstance()
+            .fetchSmartIncentives(param: param);
+        networkResponse.toString().logMessage();
+      }
+    } catch (e) {
+      "Exception in fetchSpecialIncentives: ${e.toString()}".logMessage();
+    }
   }
 }

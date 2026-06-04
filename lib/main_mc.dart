@@ -22,11 +22,14 @@ import 'views/splash/SplashScreen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
   FlavorConfig(
       flavor: Flavor.mannumClub,
       flavorValues:
           FlavorValues(appName: "The Mannum Club", appVersion: "0.0.1"));
-  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: '.env.mc');
 
   SystemChrome.setPreferredOrientations(
@@ -94,12 +97,9 @@ class _MyAppState extends State<MyApp> {
           title: FlavorConfig.instance.flavorValues.appName!,
           theme: AppThemes.mannumClubTheme,
           initialRoute: AppNavigator.splash,
-          //home: const HomeScreen(),
-          home: const SplashScreen(),
           builder: (context, child) {
             return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: TextScaler.linear(1.0)),
+                data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
                 child: AnnotatedRegion<SystemUiOverlayStyle>(
                     value: const SystemUiOverlayStyle(
                         statusBarBrightness: Brightness.dark,

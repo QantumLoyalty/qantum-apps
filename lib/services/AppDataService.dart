@@ -9,6 +9,7 @@ import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
+import '../data/models/SmartIncentivesParam.dart';
 import '../data/repositories/AppDataRepository.dart';
 import 'package:http/http.dart' as http;
 
@@ -384,6 +385,30 @@ class AppDataService extends AppDataRepository with LoggingMixin {
           'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
         },
         body: {'venueName': venueName},
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchSmartIncentives(
+      {required SmartIncentivesParam param}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.GET_SMART_INCENTIVES);
+      url.toString().logMessage();
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      networkResponse = await NetworkHelper.instance.putCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: param.toJson(),
       );
     } catch (e) {
       e.toString().logMessage();

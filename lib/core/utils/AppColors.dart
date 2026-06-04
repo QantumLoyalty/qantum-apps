@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -160,7 +159,7 @@ class AppColors {
 
   static Color get mt_hint_text_color => const Color(0xFFD9D9D9);
 
-  static Color get mt_button_color => const Color(0x00FFFFFF);
+  static Color get mt_button_color =>  Colors.transparent;
 
   static Color get mt_button_border_color => const Color(0xFFFFFFFF);
 

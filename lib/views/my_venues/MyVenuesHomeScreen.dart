@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gif_view/gif_view.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/common_widgets/BouncyButton.dart';
 import '/view_models/InternetStatusProvider.dart';
 import '/views/common_widgets/NoInternetLayout.dart';
 
@@ -39,6 +41,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     super.initState();
     Provider.of<PromotionsProvider>(context, listen: false)
         .fetchPromotionsTimer();
+
+    Provider.of<PromotionsProvider>(context, listen: false)
+        .fetchSpecialIncentives(context);
+
     flavor = FlavorConfig.instance.flavor!;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 100),
@@ -416,7 +422,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                             ),
                           )
                         : Container()
-                    : NoInternetLayout(),
+                    : const NoInternetLayout(),
                 provider.showLoader != null && provider.showLoader!
                     ? AppLoader()
                     : Container()
@@ -526,7 +532,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
               )
             ],
           ),*/
-        (FlavorConfig.instance.flavor == Flavor.maxx) ||
+        (FlavorConfig.instance.flavor == Flavor.mhbc) ||
                 (FlavorConfig.instance.flavor == Flavor.maxClub)
             ? /*GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
@@ -563,20 +569,25 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/spin_to_play.png'),
                 ))*/
-            GestureDetector(
+
+            /*GestureDetector(
                 onTapUp: scaleSpinToPlay(1.0),
                 onTapDown: scaleSpinToPlay(0.8),
                 onTapCancel: scaleSpinToPlay(1.0),
                 onTap: () {
-                  _controller.forward();
-
                   ScratchCardDialog.getInstance()
                       .showScratchCardDialog(context);
                 },
-                child: ScaleTransition(
-                  scale: _scaleAnimation,
-                  child: Image.asset('assets/common/scratch_and_win.gif'),
-                ))
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: GifView.asset('assets/common/scratch_and_win.gif')),
+              )*/
+            BouncyButton(
+                child: GifView.asset('assets/common/scratch_and_win.gif'),
+                onTap: () {
+                  ScratchCardDialog.getInstance()
+                      .showScratchCardDialog(context);
+                })
             : Container(),
         MegaEntryWidget()
       ],
