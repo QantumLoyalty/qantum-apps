@@ -532,9 +532,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards ||
-            Flavor.bluewater ||
-            Flavor.woollahra:
+      case Flavor.aceRewards || Flavor.bluewater || Flavor.woollahra:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -730,9 +728,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).primaryColor));
-      case Flavor.aceRewards ||
-            Flavor.bluewater ||
-            Flavor.woollahra:
+      case Flavor.aceRewards || Flavor.bluewater || Flavor.woollahra:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1)),
@@ -792,7 +788,8 @@ class AppThemeCustom {
         case Flavor.edp:
         case Flavor.bobsBulkBooze:
           return AppColors.white;
-
+        case Flavor.maxClub || Flavor.maxx:
+          return AppColors.max_back_color_3;
         case Flavor.mosaic || Flavor.mannumClub:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
@@ -1051,7 +1048,9 @@ class AppThemeCustom {
         (selectedFlavor == Flavor.senseOfTaste ||
             selectedFlavor == Flavor.edp ||
             selectedFlavor == Flavor.bobsBulkBooze ||
-            selectedFlavor == Flavor.mannumClub)) {
+            selectedFlavor == Flavor.mannumClub ||
+            selectedFlavor == Flavor.maxx ||
+            selectedFlavor == Flavor.maxClub)) {
       // Special case for mannumClub
       if (selectedFlavor == Flavor.mannumClub &&
           provider.homeNavigationList[2].name == itemName) {
@@ -1158,6 +1157,10 @@ class AppThemeCustom {
       return AppColors.button_shadow;
     }
 
+    if (selectedFlavor == Flavor.maxx || selectedFlavor == Flavor.maxClub) {
+      return AppColors.white;
+    }
+
     // 👉 Other special flavors (keep index 2 exception)
     if (selectedFlavor == Flavor.edp) {
       return provider.homeNavigationList[2].name ==
@@ -1181,10 +1184,11 @@ class AppThemeCustom {
 
     if (selectedFlavor == Flavor.wonthaggi) {
       return provider.homeNavigationList[2].name ==
-          provider.homeNavigationList[index].name
+              provider.homeNavigationList[index].name
           ? null
           : AppColors.wt_menu_background;
     }
+
     // 👉 Default flavors
     return Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
   }
@@ -1211,7 +1215,12 @@ class AppThemeCustom {
             selectedFlavor == Flavor.bobsBulkBooze ||
             selectedFlavor == Flavor.edp ||
             selectedFlavor == Flavor.mosaic ||
-            selectedFlavor == Flavor.mannumClub)) {
+            selectedFlavor == Flavor.mannumClub ||
+            selectedFlavor == Flavor.maxx ||
+            selectedFlavor == Flavor.maxClub)) {
+      if (selectedFlavor == Flavor.maxx || selectedFlavor == Flavor.maxClub) {
+        return AppColors.max_back_color_3;
+      }
       // Special case for mosaic
       if (selectedFlavor == Flavor.mosaic &&
           provider.homeNavigationList[2].name == itemName) {
@@ -1376,8 +1385,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.maxClub:
         return Theme.of(context).primaryColorDark;
-        case Flavor.mannumClub:
-      return const Color(0xff233250);
+      case Flavor.mannumClub:
+        return const Color(0xff233250);
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
