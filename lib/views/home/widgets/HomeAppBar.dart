@@ -148,7 +148,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                       height: AppHelper.getAppIconSize(context).height,
                       child: Image.asset(
                         AppIcons.getHeaderIcon(),
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),

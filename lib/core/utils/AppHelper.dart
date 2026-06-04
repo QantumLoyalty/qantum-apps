@@ -611,6 +611,8 @@ class AppHelper with LoggingMixin {
         return const Size(100, 90);
       case Flavor.mannumClub:
         return const Size(250, 90);
+      case Flavor.wonthaggi:
+        return const Size(150, 100);
       default:
         return const Size(68, 68);
     }

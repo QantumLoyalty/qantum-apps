@@ -779,13 +779,9 @@ class AppThemeCustom {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     final bool isCancelled = userInfoProvider.getUserInfo != null &&
         userInfoProvider.getUserInfo!.isUserStatusCancelled();
-    print(itemName);
-
-    print("Item Name :$itemName && moreButtonsMap: ${provider.moreButtonsMap}");
     // Special case: See All hidden
     if (itemName == AppStrings.txtSeeAll &&
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty)) {
-      print("Entered in condition");
       return Colors.transparent;
     }
 
@@ -801,7 +797,8 @@ class AppThemeCustom {
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
-
+        case Flavor.wonthaggi:
+          return AppColors.wt_text_color;
         default:
           return AppColors.white;
       }
@@ -1180,6 +1177,13 @@ class AppThemeCustom {
               provider.homeNavigationList[index].name
           ? null
           : AppColors.button_shadow;
+    }
+
+    if (selectedFlavor == Flavor.wonthaggi) {
+      return provider.homeNavigationList[2].name ==
+          provider.homeNavigationList[index].name
+          ? null
+          : AppColors.wt_menu_background;
     }
     // 👉 Default flavors
     return Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);

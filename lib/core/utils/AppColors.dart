@@ -481,6 +481,8 @@ class AppColors {
 
   static Color get wt_canvas_color => const Color(0xFF222E5A);
 
+  static Color get wt_menu_background => const Color(0xFFD7D4CE);
+
 
   /// EDP COLOR
 
