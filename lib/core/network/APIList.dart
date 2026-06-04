@@ -100,7 +100,6 @@ class APIList {
       BASE_URL + "payment/verify-payment-early";
 
   static get UPDATE_PAYMENT_TYPE => BASE_URL + "user/payment-update";
-
   static get UPDATE_PAYMENT_TYPE_EARLY_BIRD =>
       BASE_URL + "user/early-payment-update";
 
