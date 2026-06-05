@@ -9,7 +9,7 @@ import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
-import '../data/models/SmartIncentivesParam.dart';
+import '../data/models/incentives/SmartIncentivesParam.dart';
 import '../data/repositories/AppDataRepository.dart';
 import 'package:http/http.dart' as http;
 
@@ -400,15 +400,44 @@ class AppDataService extends AppDataRepository with LoggingMixin {
     try {
       var url = Uri.parse(APIList.GET_SMART_INCENTIVES);
       url.toString().logMessage();
+      param.toString().logMessage();
+
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      networkResponse = await NetworkHelper.instance.putCall(
+      "SMART INCENTIVES URL: ${url.toString()} >> TOKEN: ${sharedPreferenceHelper.getAuthToken()!} >> PARAMS: ${param.toJson()}"
+          .logMessage();
+      networkResponse = await NetworkHelper.instance.postCall(
         url: url,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
         },
         body: param.toJson(),
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> consumeSmartIncentive(
+      {required Map<String, dynamic> params}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.ISSUE_SMART_INCENTIVES);
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      "CONSUME SMART INCENTIVES URL: ${url.toString()} >> TOKEN: ${sharedPreferenceHelper.getAuthToken()!} >> Params: $params"
+          .logMessage();
+      networkResponse = await NetworkHelper.instance.postCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: params,
       );
     } catch (e) {
       e.toString().logMessage();

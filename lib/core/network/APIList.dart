@@ -78,6 +78,7 @@ class APIList {
 
   /// SMART INCENTIVES APIS ///
   static get GET_SMART_INCENTIVES => BASE_URL + "smart-incentive/check-user";
+  static get ISSUE_SMART_INCENTIVES => BASE_URL + "smart-incentive/issue-user";
 
 
   /// UNITED FUELS APIS ///

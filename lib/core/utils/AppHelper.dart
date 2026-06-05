@@ -600,7 +600,7 @@ class AppHelper with LoggingMixin {
       case Flavor.woollahra:
         return const Size(252, 114);
       case Flavor.mhbc:
-        return const Size(142, 30);
+        return const Size(142, 48);
       case Flavor.flinders:
         return const Size(56, 56);
       case Flavor.senseOfTaste:
@@ -621,8 +621,6 @@ class AppHelper with LoggingMixin {
   static Future<String?> getDeviceToken() async {
     final oneSignalUser = OneSignal.User;
     final pushSubscription = OneSignal.User.pushSubscription;
-
-    ;
     printMessage("Push Subscription ${pushSubscription.optedIn}");
     printMessage("Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 

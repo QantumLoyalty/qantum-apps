@@ -1,15 +1,20 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scratch_card/flutter_scratch_card.dart';
-
+import 'package:provider/provider.dart';
+import '/core/utils/AppColors.dart';
+import '/view_models/PromotionsProvider.dart';
 import '../../core/extensions/log_extension.dart';
 import '../../core/extensions/spacer_extension.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../data/models/incentives/SmartIncentivesResponse.dart';
 import '../../l10n/app_localizations.dart';
 import 'MetallicGradientText.dart';
 
 class ScratchAndWinWidget extends StatefulWidget {
-  const ScratchAndWinWidget({super.key});
+  MatchedIncentive incentive;
+
+  ScratchAndWinWidget({super.key, required this.incentive});
 
   @override
   State<ScratchAndWinWidget> createState() => _ScratchAndWinWidgetState();
@@ -17,6 +22,7 @@ class ScratchAndWinWidget extends StatefulWidget {
 
 class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
   bool isScratched = false;
+  bool _hasTriggeredConsume = false;
   bool _hasPlayedSound = false;
   late AppLocalizations loc;
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -52,6 +58,7 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
     final dialogHeight = media.size.height;
     final width = media.size.width;
     final loc = AppLocalizations.of(context)!;
+
     return Stack(
       children: [
         Positioned.fill(
@@ -111,10 +118,15 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                                   onProgress: (value) {
                                     "Reveal Progress: $value".logMessage();
 
-                                    if (value == 1.0) {
+                                    if (value == 1.0 && !_hasTriggeredConsume) {
                                       setState(() {
                                         isScratched = true;
+                                        _hasTriggeredConsume = true;
                                       });
+                                      context
+                                          .read<PromotionsProvider>()
+                                          .consumeSmartIncentive(
+                                              widget.incentive.incentiveId);
                                     }
                                   },
                                   progressTriggers: const [0.5],
@@ -136,7 +148,7 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                                               "assets/common/you_won.png",
                                               height: 120),
                                           Text(
-                                            "\$100",
+                                            "\$${widget.incentive.incentiveValue}",
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .primaryColor,
@@ -207,6 +219,41 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
             ),
           ),
         ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child:
+              Consumer<PromotionsProvider>(builder: (context, provider, child) {
+            if (provider.consumeIncentiveMessage == null) {
+              return const SizedBox.shrink();
+            }
+
+            return Container(
+              decoration: BoxDecoration(
+                  color: AppColors.error_red,
+                  borderRadius: BorderRadius.circular(15)),
+              margin: const EdgeInsets.only(left: 18, right: 18, bottom: 25),
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                    "Ooppss.. something went wrong, please try again later",
+                    style: TextStyle(color: AppColors.white),
+                  )),
+                  15.w,
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.cancel, color: AppColors.white))
+                ],
+              ),
+            );
+          }),
+        )
       ],
     );
   }

@@ -13,7 +13,6 @@ class SmartIncentivesParam {
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
-      // Keeps your uppercase 'Id' exact matching the API specification
       'audience': audience,
     };
   }

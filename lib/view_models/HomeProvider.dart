@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
@@ -45,7 +46,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         screen: Container(),
         icon: FlavorConfig.instance.flavor == Flavor.bobsBulkBooze
             ? Icons.check
-            :Icons.attach_money,
+            : Icons.attach_money,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
         name: "txtSpecialOffers",
@@ -285,10 +286,6 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     return link;
   }
 
-
-
-
-
   bool clubPackageCheckStatus = false;
   MembershipModel? _selectedMembership;
 
@@ -306,7 +303,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     try {
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .getMembershipPlansById(membershipID: membershipID!);
-      print("GET PACKAGE INFO:  $networkResponse");
+      ("GET PACKAGE INFO:  $networkResponse").logMessage();
 
       if (!networkResponse.isError && networkResponse.response != null) {
         Map<String, dynamic> response =

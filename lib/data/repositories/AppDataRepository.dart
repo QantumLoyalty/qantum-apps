@@ -1,5 +1,5 @@
 import '../models/NetworkResponse.dart';
-import '../models/SmartIncentivesParam.dart';
+import '../models/incentives/SmartIncentivesParam.dart';
 
 abstract class AppDataRepository {
   Future<NetworkResponse> fetchPromotions(String membershipType);
@@ -46,6 +46,9 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> setSelectedVenue({required String venueName});
 
-  Future<NetworkResponse> fetchSmartIncentives({required SmartIncentivesParam param});
+  Future<NetworkResponse> fetchSmartIncentives(
+      {required SmartIncentivesParam param});
 
+  Future<NetworkResponse> consumeSmartIncentive(
+      {required Map<String, dynamic> params});
 }

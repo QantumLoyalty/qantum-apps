@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_scratch_card/flutter_scratch_card.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/data/models/incentives/SmartIncentivesResponse.dart';
 
 import '../../core/extensions/spacer_extension.dart';
 import '../../l10n/app_localizations.dart';
@@ -20,7 +21,8 @@ class ScratchCardDialog {
     return _instance;
   }
 
-  showScratchCardDialog(BuildContext context) {
+  showScratchCardDialog(BuildContext context,
+      {required MatchedIncentive incentive}) {
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 250),
@@ -28,7 +30,9 @@ class ScratchCardDialog {
           return Dialog(
             backgroundColor: Theme.of(context).primaryColor,
             insetPadding: EdgeInsets.zero,
-            child: const ScratchAndWinWidget(),
+            child: ScratchAndWinWidget(
+              incentive: incentive,
+            ),
           );
         },
         transitionBuilder: (context, anim1, anim2, child) {
