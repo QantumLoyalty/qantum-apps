@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056025182878:android:d203cf455029712ac9318f",
+        "mobilesdk_app_id": "1:1056025182878:android:3a941b12672cf719c9318f",
         "android_client_info": {
-          "package_name": "com.au.mosaichotel.app"
+          "package_name": "com.au.mhotel.app"
         }
       },
       "oauth_client": [],
