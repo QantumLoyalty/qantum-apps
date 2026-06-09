@@ -81,7 +81,24 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
-  fetchSpecialIncentives(BuildContext context) async {
+  bool _isFetchingSpecialIncentives = false;
+
+  bool get isFetchingSpecialIncentives => _isFetchingSpecialIncentives;
+
+  fetchSpecialIncentivesTimer() async {
+    await fetchSpecialIncentives();
+    Timer.periodic(
+        Duration(seconds: AppHelper.defaultRequestTimeSpecialIncentives),
+        (value) async {
+      if (!_isFetchingSpecialIncentives) {
+        _isFetchingSpecialIncentives = true;
+        await fetchSpecialIncentives();
+        _isFetchingSpecialIncentives = false;
+      }
+    });
+  }
+
+  fetchSpecialIncentives() async {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
@@ -149,8 +166,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
             _setErrorAndTimerSmartIncentive(
                 "Ooppss..! Something went wrong while consuming the incentive. Please try again.");
           }
-        }
-        else {
+        } else {
           _setErrorAndTimerSmartIncentive(
               "Ooppss..! Something went wrong while consuming the incentive. Please try again.");
         }

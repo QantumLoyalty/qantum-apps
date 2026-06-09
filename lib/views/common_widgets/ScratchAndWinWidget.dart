@@ -123,7 +123,7 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                                         isScratched = true;
                                         _hasTriggeredConsume = true;
                                       });
-                                      context
+                                       context
                                           .read<PromotionsProvider>()
                                           .consumeSmartIncentive(
                                               widget.incentive.incentiveId);
@@ -148,12 +148,20 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                                               "assets/common/you_won.png",
                                               height: 120),
                                           Text(
-                                            "\$${widget.incentive.incentiveValue}",
+                                            "${widget.incentive.incentiveValue}",
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .primaryColor,
                                                 fontSize: 48,
                                                 fontWeight: FontWeight.w900),
+                                          ),
+                                          Text(
+                                            "Points",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         ],
                                       ),
@@ -172,46 +180,52 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                   child: AnimatedOpacity(
                     opacity: isScratched ? 1.0 : 0.0,
                     duration: const Duration(milliseconds: 1000),
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Image.asset(
-                              "assets/common/congrats_ok_button.png"),
-                        ),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  MetallicGradientText(
-                                    text: loc.txtCongratulations.toUpperCase(),
-                                    fontSize: 32,
-                                  ),
-                                  const Text("Prize is paid in points."),
-                                  5.h,
-                                  const Text(
-                                    "It is in your\nPoints account now!",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  20.h,
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        loc.txtOk.toUpperCase(),
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ))
-                                ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (isScratched) Navigator.pop(context);
+                      },
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Image.asset(
+                                "assets/common/congrats_ok_button.png"),
                           ),
-                        ),
-                      ],
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    MetallicGradientText(
+                                      text:
+                                          loc.txtCongratulations.toUpperCase(),
+                                      fontSize: 32,
+                                    ),
+                                    const Text("Prize is paid in points."),
+                                    5.h,
+                                    const Text(
+                                      "It is in your\nPoints account now!",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    20.h,
+                                    InkWell(
+                                        onTap: () {
+                                          if (isScratched) Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          loc.txtOk.toUpperCase(),
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ))
+                                  ]),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )

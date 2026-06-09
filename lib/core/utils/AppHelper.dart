@@ -18,6 +18,8 @@ class AppHelper with LoggingMixin {
   /// MAKE IT DEFAULT 10
   static int defaultRequestTime = 10;
 
+  static int defaultRequestTimeSpecialIncentives = 60;
+
   static printMessage(dynamic printableItem) {
     /*if (kDebugMode) {
       print(printableItem);

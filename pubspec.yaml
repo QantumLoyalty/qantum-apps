@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version: 1.0.4+11
 ###################################
 # MHBC
-#version:  1.0.12+2
+version:  1.0.12+3
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -89,7 +89,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.22.0+1205
 ###################################
 #Mosaic Hotel
-version: 1.0.1+3
+#version: 1.0.1+3
 #Mannum club
 #version: 1.0.0+2
 

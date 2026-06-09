@@ -63,7 +63,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
 
   fetchSpecialIncentives(BuildContext context) {
     Provider.of<PromotionsProvider>(context, listen: false)
-        .fetchSpecialIncentives(context);
+        .fetchSpecialIncentivesTimer();
   }
 
   @override

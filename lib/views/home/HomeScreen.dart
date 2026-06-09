@@ -814,9 +814,15 @@ class _HomeScreenState extends State<HomeScreen>
 
     final uri = Uri.parse(payload);
 
+
+    final modifiedExistingSegments = uri.pathSegments.map((segment) {
+      return segment == 'qr-code' ? 'qantum' : segment;
+    });
+
+
     final updatedUri = uri.replace(
       pathSegments: [
-        ...uri.pathSegments,
+        ...modifiedExistingSegments,
         'qantumMember',
         userInfoProvider.getUserInfo?.cardNumber ?? "",
         AppDateFormatter.dobForClevaQ(
