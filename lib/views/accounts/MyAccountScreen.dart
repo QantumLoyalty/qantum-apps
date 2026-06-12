@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/views/dialogs/ChooseFavouriteVenueDialog.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -102,19 +103,22 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                         context)),
                             onTap: () {
                               AppHelper.printMessage(
-                                  "CLICKED ONE: ${myAccountProvider.accountOptions[myAccountProvider.accountOptions.keys.elementAt(index)]!}");
+                                  "CLICKED ONE: ${myAccountProvider.accountOptions[myAccountProvider.accountOptions.keys.elementAt(index)]!} >>> ${myAccountProvider.accountOptions.keys
+                                      .elementAt(index)}");
                               if (myAccountProvider.accountOptions.keys
                                       .elementAt(index) ==
                                   "txtTermsAndConditions") {
+                                "Navigate to web view".logMessage();
                                 AppNavigator.navigateTo(
                                     context, AppNavigator.appWebView,
                                     arguments: APIList.TERMS_AND_CONDITIONS);
-                              }  if (myAccountProvider.accountOptions.keys
+                              } else if (myAccountProvider.accountOptions.keys
                                   .elementAt(index) ==
                                   "txtChangeFavouriteVenue") {
                                 ChooseFavouriteVenuedialog.getInstance()
                                     .showChooseFavouriteVenueDialog(context);
                               }else {
+                                "Navigate to splash".logMessage();
                                 AppNavigator.navigateTo(
                                     context,
                                     myAccountProvider.accountOptions[
