@@ -16,7 +16,7 @@ class AppIcons {
   static String card_platinum_black = "assets/common/card_platinum_black.png";
   static String my_account = "assets/common/my_account.png";
   static String card_lieutenant =
-      "assets/manlyHarbourBoatClub/card_lieutenant.png";
+      "assets/common/card_lieutenant.png";
   static String card_nonfinancial =
       "assets/manlyHarbourBoatClub/card_nonfinancial.png";
   static String birthday = "assets/common/birthday.png";

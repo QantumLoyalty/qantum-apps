@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/network/APIList.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import 'package:qantum_apps/views/signup/widgets/GenderSelector.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
@@ -159,8 +160,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           // Check mounted state to make sure the user hasn't popped the screen yet
           if (context.mounted) {
-            AppHelper.showErrorMessage(
-                context, userLoginProvider.networkMessage ?? loc.msgCommonError);
+            AppHelper.showErrorMessage(context,
+                userLoginProvider.networkMessage ?? loc.msgCommonError);
 
             // Clear error flag after showing the message to prevent duplication loops
             userLoginProvider.resetNetworkResponseStatus();
@@ -185,7 +186,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
               AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
                   arguments: args);
             });
-          }/* else {
+          }
+          /* else {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppHelper.showErrorMessage(
                   context, userLoginProvider.networkMessage ?? "");
@@ -238,11 +240,6 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               RegExp(r"[A-Za-z\s'\-]")),
                         ],
                         validator: (value) {
-                          /*if (value!.isEmpty) {
-                            return loc.msgEmptyFirstName;
-                          }
-                          return null;*/
-
                           if (value == null || value.isEmpty) {
                             return loc.msgEmptyFirstName;
                           }
@@ -256,39 +253,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         style: TextStyle(
                             color: AppThemeCustom.getTextFieldTextColor(context,
                                 isShadow: true)),
-                        decoration: InputDecoration(
-                          fillColor: AppThemeCustom.getTextFieldBackground(
-                              context,
-                              isShadow: true),
-                          filled: true,
-                          errorStyle: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor,
-                          ),
-                          hintText: loc.txtFirstName,
-                          hintStyle: TextStyle(
-                              color: AppThemeCustom.getHintTextFieldColor(
-                                  context,
-                                  isShadow: true),
-                              fontWeight: FontWeight.w400),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                        decoration:
+                            _buildCommonInputDecoration(hint: loc.txtFirstName),
                       ),
                       AppDimens.shape_10,
                       TextFormField(
@@ -296,10 +262,6 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         keyboardType: TextInputType.text,
                         controller: _lastNameController,
                         validator: (value) {
-                          /*if (value!.isEmpty) {
-                            return loc.msgEmptyLastName;
-                          }
-                          return null;*/
                           if (value == null || value.isEmpty) {
                             return loc.msgEmptyLastName;
                           }
@@ -317,39 +279,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         style: TextStyle(
                             color: AppThemeCustom.getTextFieldTextColor(context,
                                 isShadow: true)),
-                        decoration: InputDecoration(
-                          fillColor: AppThemeCustom.getTextFieldBackground(
-                              context,
-                              isShadow: true),
-                          filled: true,
-                          hintText: loc.txtLastName,
-                          hintStyle: TextStyle(
-                              color: AppThemeCustom.getHintTextFieldColor(
-                                  context,
-                                  isShadow: true),
-                              fontWeight: FontWeight.w400),
-                          errorStyle: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                        decoration:
+                            _buildCommonInputDecoration(hint: loc.txtLastName),
                       ),
                       AppDimens.shape_10,
                       TextFormField(
@@ -368,39 +299,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
                           return null;
                         },
-                        decoration: InputDecoration(
-                          fillColor: AppThemeCustom.getTextFieldBackground(
-                              context,
-                              isShadow: true),
-                          filled: true,
-                          hintText: loc.hintEmail,
-                          hintStyle: TextStyle(
-                              color: AppThemeCustom.getHintTextFieldColor(
-                                  context,
-                                  isShadow: true),
-                              fontWeight: FontWeight.w400),
-                          errorStyle: TextStyle(
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                        decoration:
+                            _buildCommonInputDecoration(hint: loc.hintEmail),
                       ),
                       AppHelper.isClubApp()
                           ? Column(
@@ -432,45 +332,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
                                               isShadow: true)),
-                                  decoration: InputDecoration(
-                                      counterText: "",
-                                      hintText: "${loc.txtAddress} 1",
-                                      fillColor:
-                                          AppThemeCustom.getTextFieldBackground(
-                                              context,
-                                              isShadow: true),
-                                      filled: true,
-                                      hintStyle: TextStyle(
-                                        color: AppThemeCustom
-                                            .getHintTextFieldColor(context,
-                                                isShadow: true),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      errorStyle: TextStyle(
-                                        color: Theme.of(context)
-                                            .textSelectionTheme
-                                            .selectionColor,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      border: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
+                                  decoration: _buildCommonInputDecoration(hint: "${loc.txtAddress} 1"),
                                 ),
                                 AppDimens.shape_10,
                                 TextFormField(
@@ -481,40 +343,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
                                               isShadow: true)),
-                                  decoration: InputDecoration(
-                                      counterText: "",
-                                      hintText: "${loc.txtAddress} 2",
-                                      fillColor:
-                                          AppThemeCustom.getTextFieldBackground(
-                                              context,
-                                              isShadow: true),
-                                      filled: true,
-                                      hintStyle: TextStyle(
-                                        color: AppThemeCustom
-                                            .getHintTextFieldColor(context,
-                                                isShadow: true),
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      border: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent),
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
+                                  decoration: _buildCommonInputDecoration(hint: "${loc.txtAddress} 2"),
                                 ),
                               ],
                             )
@@ -804,72 +633,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         ),
                       ),
                       AppDimens.shape_5,
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Radio<String>(
-                                    value: SignupProvider.male,
-                                    groupValue: provider.selectedGender,
-                                    onChanged: (value) {
-                                      provider.updateGender(value!);
-                                    }),
-                                Text(
-                                  loc.txtMale,
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textSelectionTheme
-                                          .selectionColor,
-                                      fontSize: 12),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                              child: Row(
-                            children: [
-                              Radio<String>(
-                                  value: SignupProvider.female,
-                                  groupValue: provider.selectedGender,
-                                  onChanged: (value) {
-                                    provider.updateGender(value!);
-                                  }),
-                              Text(
-                                loc.txtFemale,
-                                style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
-                                    fontSize: 12),
-                              )
-                            ],
-                          )),
-                          Expanded(
-                              child: Row(
-                            children: [
-                              Radio<String>(
-                                  value: SignupProvider.nonbinary,
-                                  groupValue: provider.selectedGender,
-                                  onChanged: (value) {
-                                    provider.updateGender(value!);
-                                  }),
-                              Expanded(
-                                child: Text(
-                                  loc.txtNonBinary,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )),
-                        ],
-                      ),
+                      GenderSelector(),
                       AppDimens.shape_5,
                       InkWell(
                         child: Row(
@@ -1027,7 +791,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                               }
                             }
 
-                            // AppNavigator.navigateTo(context, AppNavigator.otp);
+
                           }),
                     ],
                   ),
@@ -1043,6 +807,30 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         ),
       );
     }));
+  }
+
+  InputDecoration _buildCommonInputDecoration({required String hint}) {
+    final transparentBorder = OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent),
+      borderRadius: BorderRadius.circular(10),
+    );
+
+    return InputDecoration(
+      fillColor: AppThemeCustom.getTextFieldBackground(context, isShadow: true),
+      filled: true,
+      counterText: "",
+      hintText: hint,
+      hintStyle: TextStyle(
+          color: AppThemeCustom.getHintTextFieldColor(context, isShadow: true),
+          fontWeight: FontWeight.w400),
+      errorStyle: TextStyle(
+        color: Theme.of(context).textSelectionTheme.selectionColor,
+      ),
+      enabledBorder: transparentBorder,
+      border: transparentBorder,
+      focusedBorder: transparentBorder,
+      errorBorder: transparentBorder,
+    );
   }
 
   navigationSpecialCase() {

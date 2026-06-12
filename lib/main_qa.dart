@@ -15,6 +15,7 @@ import 'view_models/HomeProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
+import 'view_models/UnitedFuelsProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'views/splash/SplashScreen.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
       child: Portal(
           child: MaterialApp(
