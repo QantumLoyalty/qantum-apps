@@ -219,6 +219,14 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
+        southportSharks {
+            dimension "app"
+            applicationId "com.au.southportSharks.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
     }
 
 

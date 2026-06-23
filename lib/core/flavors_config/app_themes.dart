@@ -1749,4 +1749,87 @@ class AppThemes {
               state.contains(MaterialState.selected)
                   ? AppColors.white
                   : AppColors.mc_button_color)));
+
+  static ThemeData get southportSharksTheme => ThemeData(
+      drawerTheme: DrawerThemeData(backgroundColor: AppColors.ss_primary_color),
+      textSelectionTheme: TextSelectionThemeData(
+        selectionHandleColor: AppColors.ss_text_color,
+        selectionColor: AppColors.ss_text_color,
+        cursorColor: AppColors.ss_text_color,
+      ),
+      textTheme: TextTheme(
+          bodyLarge: TextStyle(color: AppColors.ss_text_color)),
+      buttonTheme: ButtonThemeData(
+          textTheme: ButtonTextTheme.accent,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              onPrimary: AppColors.max_text_color,
+              onSecondary: AppColors.ss_button_border_color,
+              secondary: AppColors.ss_button_color,
+              primary: AppColors.transparent),
+          buttonColor: AppColors.ss_button_color),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.white,
+          secondary: AppColors.white,
+          surface: AppColors.white),
+      primaryColorDark: AppColors.ss_primary_color,
+      primaryColor: AppColors.ss_primary_color_dark,
+      cardColor: AppColors.ss_card_color,
+      canvasColor: AppColors.ss_canvas_color,
+      scaffoldBackgroundColor: AppColors.ss_scaffold_bg_color,
+      dividerColor: AppColors.ss_divider_color,
+      hintColor: AppColors.ss_hint_text_color,
+      iconTheme: IconThemeData(color: AppColors.white),
+      radioTheme: RadioThemeData(
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.white;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.ss_text_color;
+          }
+          return AppColors.white;
+        }),
+      ),
+      disabledColor: AppColors.kc_disabled_color,
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.kc_primary_color),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.white,
+          unselectedItemColor: AppColors.kc_text_color),
+      checkboxTheme: CheckboxThemeData(
+        checkColor:
+        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return AppColors.kc_text_color;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.kc_hint_text_color;
+          }
+          return AppColors.kc_text_color;
+        }),
+        fillColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return Colors.transparent;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.white;
+          }
+          return Colors.transparent;
+        }),
+      ),
+      progressIndicatorTheme:
+      ProgressIndicatorThemeData(color: AppColors.kc_primary_color),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.kc_floating_button_icon_color),
+      switchTheme: SwitchThemeData(
+          trackColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.ss_button_color
+              : AppColors.white),
+          thumbColor: MaterialStateProperty.resolveWith((state) =>
+          state.contains(MaterialState.selected)
+              ? AppColors.white
+              : AppColors.ss_button_color)));
 }

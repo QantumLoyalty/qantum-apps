@@ -212,7 +212,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                           fontSize: 10,
                                           fontWeight: FontWeight.w300,
                                           color: AppThemeCustom
-                                              .getProfileDialogTextColor(
+                                              .getDeleteMyAccountTextColor(
                                                   context)),
                                     ),
                                     AppDimens.shape_10,

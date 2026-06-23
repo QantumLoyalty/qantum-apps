@@ -255,7 +255,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -388,7 +388,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -510,7 +510,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -596,7 +596,7 @@ class AppHelper with LoggingMixin {
             Flavor.bluewater ||
             Flavor.kingscliff ||
             Flavor.drinkRewards ||
-            Flavor.bobsBulkBooze:
+            Flavor.bobsBulkBooze||Flavor.southportSharks:
         return const Size(142, 58);
 
       case Flavor.woollahra:
@@ -667,6 +667,7 @@ class AppHelper with LoggingMixin {
       Flavor.qantumClub,
       Flavor.maxClub,
       Flavor.mannumClub,
+      Flavor.southportSharks,
     };
     return clubFlavors.contains(flavor);
   }

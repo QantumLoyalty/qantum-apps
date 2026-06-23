@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.5+93
+#version:  1.0.5+93
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -92,6 +92,8 @@ version:  1.0.5+93
 #version: 1.0.3+7
 #Mannum club
 #version: 1.0.0+2
+#Southport Sharks
+version: 1.0.0+1
 
 
 
@@ -207,6 +209,7 @@ flutter:
     - .env.kc
     - .env.dr
     - .env.mc
+    - .env.ss
       # flavor-wise assets
    # - path: assets/starReward/
   #    flavors:
@@ -300,7 +303,9 @@ flutter:
       flavors:
               - mannumClub
 
-
+    - path: assets/southportSharks/
+      flavors:
+        - southportSharks
 
 
   #   - images/a_dot_ham.jpeg

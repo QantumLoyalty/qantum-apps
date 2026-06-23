@@ -168,6 +168,8 @@ class AppThemeCustom {
         return AppColors.bob_back_color;
       case Flavor.mannumClub:
         return AppColors.mc_back_color;
+      case Flavor.southportSharks:
+        return AppColors.ss_primary_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
@@ -226,7 +228,11 @@ class AppThemeCustom {
   static Color getProfileDialogCardTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.clh || Flavor.brisbane || Flavor.woollahra:
+      case Flavor.mhbc ||
+            Flavor.clh ||
+            Flavor.brisbane ||
+            Flavor.woollahra ||
+            Flavor.southportSharks:
         return Theme.of(context).primaryColor;
       case Flavor.starReward:
         return Theme.of(context).textSelectionTheme.selectionColor!;
@@ -260,7 +266,7 @@ class AppThemeCustom {
   static Color getProfileDialogTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.woollahra:
+      case Flavor.woollahra || Flavor.southportSharks:
         return Theme.of(context).primaryColor;
       case Flavor.brisbane ||
             Flavor.flinders ||
@@ -273,10 +279,28 @@ class AppThemeCustom {
     }
   }
 
+  static Color getDeleteMyAccountTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.woollahra:
+        return Theme.of(context).primaryColor;
+      case Flavor.brisbane ||
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mhbc ||
+            Flavor.mosaic:
+        return AppColors.white;
+      case Flavor.southportSharks:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+    }
+  }
+
   static Color getProfileDialogImage(BuildContext context) {
     final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc || Flavor.woollahra:
+      case Flavor.mhbc || Flavor.woollahra || Flavor.southportSharks:
         return Theme.of(context).primaryColor;
       case Flavor.hogansReward:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -304,7 +328,8 @@ class AppThemeCustom {
             Flavor.bobsBulkBooze ||
             Flavor.woollahra ||
             Flavor.mosaic ||
-            Flavor.mannumClub:
+            Flavor.mannumClub ||
+            Flavor.southportSharks:
         return Theme.of(context).primaryColor;
       case Flavor.montaukTavern:
         return null;
@@ -340,7 +365,8 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.aceRewards ||
             Flavor.bluewater ||
-            Flavor.mosaic:
+            Flavor.mosaic ||
+            Flavor.southportSharks:
         return AppColors.white;
 
       case Flavor.edp:
@@ -370,6 +396,8 @@ class AppThemeCustom {
         return AppColors.white_shadow;
       case Flavor.bobsBulkBooze || Flavor.senseOfTaste:
         return AppColors.white.withOpacity(0.39);
+      case Flavor.southportSharks:
+        return isShadow != null ? AppColors.white_shadow : AppColors.white;
       default:
         return Theme.of(context).cardColor;
     }
@@ -380,7 +408,10 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.drinkRewards:
         return AppColors.transparent;
-      case Flavor.kingscliff || Flavor.maxClub || Flavor.maxx:
+      case Flavor.kingscliff ||
+            Flavor.maxClub ||
+            Flavor.maxx ||
+            Flavor.southportSharks:
         return AppColors.white.withOpacity(0.1);
       default:
         return Theme.of(context).dividerColor;
@@ -436,6 +467,10 @@ class AppThemeCustom {
         return isShadow != null ? AppColors.white : AppColors.black;
       case Flavor.bobsBulkBooze:
         return AppColors.white;
+      case Flavor.southportSharks:
+        return isShadow != null
+            ? Theme.of(context).textSelectionTheme.selectionColor!
+            : AppColors.black;
       default:
         return AppColors.black;
     }
@@ -481,7 +516,7 @@ class AppThemeCustom {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -677,7 +712,7 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -790,7 +825,7 @@ class AppThemeCustom {
           return AppColors.white;
         case Flavor.maxClub || Flavor.maxx:
           return AppColors.max_back_color_3;
-        case Flavor.mosaic || Flavor.mannumClub:
+        case Flavor.mosaic || Flavor.mannumClub || Flavor.southportSharks:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
@@ -832,6 +867,7 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
+      case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled ? AppColors.disable_color : null);
@@ -1088,6 +1124,7 @@ class AppThemeCustom {
       case Flavor.edp:
       case Flavor.mosaic:
       case Flavor.mannumClub:
+      case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (isCancelled
@@ -1189,6 +1226,13 @@ class AppThemeCustom {
           : AppColors.wt_menu_background;
     }
 
+    if (selectedFlavor == Flavor.southportSharks) {
+      return provider.homeNavigationList[2].name ==
+              provider.homeNavigationList[index].name
+          ? null
+          : Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
+    }
+
     // 👉 Default flavors
     return Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
   }
@@ -1258,6 +1302,7 @@ class AppThemeCustom {
       case Flavor.wonthaggi:
       case Flavor.edp:
       case Flavor.mosaic:
+      case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled

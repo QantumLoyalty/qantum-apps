@@ -307,7 +307,9 @@ class AppIcons {
             return "assets/mosaicHotel/card_bronze.png";
 
         }
-      } else {
+      }else if (selectedFlavor == Flavor.southportSharks) {
+        return "assets/southportSharks/card_opal.png";
+      }  else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
             return card_value;

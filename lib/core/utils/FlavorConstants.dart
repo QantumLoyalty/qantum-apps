@@ -76,6 +76,7 @@ class FlavorConstants {
           Flavor.edp: "Silver",
           Flavor.bobsBulkBooze: "Valued",
           Flavor.senseOfTaste: "Valued",
+          Flavor.southportSharks: "Opal",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";

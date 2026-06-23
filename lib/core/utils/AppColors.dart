@@ -603,6 +603,36 @@ class AppColors {
   static Color get mc_canvas_color => const Color(0xFF00B0F0);
 
 
+  /// Southport Sharks Color
+
+
+  static Color get ss_primary_color => const Color(0xFF043D5C);
+
+  static Color get ss_primary_color_dark => const Color(0xFF000000);
+
+  static Color get ss_button_color => const Color(0xFF9F8754);
+
+  static Color get ss_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_hint_text_color => const Color(0x63ffffff);
+
+  static Color get ss_card_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_canvas_color => const Color(0xFF000000);
+
+  static Color get ss_scaffold_bg_color => const Color(0xFF9F8754);
+
+  static Color get ss_disabled_color => const Color(0xFF33A4DE);
+
+  static Color get ss_text_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get ss_profile_cross_background_color => const Color(0xFF375F94);
+
+
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
