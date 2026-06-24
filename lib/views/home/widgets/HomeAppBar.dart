@@ -52,22 +52,12 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   false, "my card");
                             }
 
-                            double screenBrightness = 0.4;
-
-                            try {
-                              screenBrightness =
-                                  await ScreenBrightness.instance.system;
-                            } catch (e) {
-                              logEvent(e);
-                              throw 'Failed to get system brightness';
-                            }
 
                             try {
                               await ScreenBrightness.instance
-                                  .setSystemScreenBrightness(1);
+                                  .setApplicationScreenBrightness(1);
                             } catch (e) {
                               debugPrint(e.toString());
-                              //throw 'Failed to set application brightness';
                             }
                             if (provider.getUserInfo!.isUserStatusCancelled()) {
                               await MembershipCancelledDialog.getInstance()
@@ -79,15 +69,11 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
 
                             try {
                               await ScreenBrightness.instance
-                                  .setSystemScreenBrightness(screenBrightness);
+                                  .resetApplicationScreenBrightness();
                             } catch (e) {
                               logEvent(e.toString());
                             }
 
-                            //    AppUpdateDialog.getInstance().showAppUpdateDialog(context);
-
-                               //  ScratchCardDialog.getInstance().showScratchCardDialog(context);
-                            //  EarlyRenewalMembershipDialog.getInstance().showRenewalMembershipDialog(context);
                           },
                           child: SizedBox(
                             width: 80,
