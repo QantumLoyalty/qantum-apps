@@ -135,7 +135,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                               width: 0.5,
                               color: AppThemeCustom.getContainerBorderColor(
                                   context)),
-                          color: AppThemeCustom.getTextFieldBackground(context),
+                          color: AppThemeCustom.getTextFieldBackground(context,isShadow: true),
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,7 +149,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                             ),
                             textStyle: TextStyle(
                                 color: AppThemeCustom.getTextFieldTextColor(
-                                    context)),
+                                    context,isShadow: true)),
                             onChanged: (code) {
                               setState(() {
                                 countryCode = code.dialCode!;

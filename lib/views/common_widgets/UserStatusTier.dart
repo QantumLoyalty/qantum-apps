@@ -59,7 +59,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 : 0,
                             duration: const Duration(seconds: 1),
                             style: TextStyle(
-                                color: AppThemeCustom.getProfileDialogTextColor(
+                                color: AppThemeCustom.getProfileDialogUserStatusTierTextColor(
                                     context),
                                 fontWeight: FontWeight.w900,
                                 fontSize: 24)),
@@ -73,7 +73,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                     'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
                                 style: TextStyle(
                                     color: AppThemeCustom
-                                        .getProfileDialogTextColor(context),
+                                        .getProfileDialogUserStatusTierTextColor(context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 20)),
                             TextSpan(
@@ -82,7 +82,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                         .toUpperCase(),
                                 style: TextStyle(
                                     color: AppThemeCustom
-                                        .getProfileDialogTextColor(context),
+                                        .getProfileDialogUserStatusTierTextColor(context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 8)),
                           ]),
@@ -162,7 +162,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color:
-                            AppThemeCustom.getProfileDialogTextColor(context),
+                            AppThemeCustom.getProfileDialogUserStatusTierTextColor(context),
                         fontSize: 13),
                   ),
             AppDimens.shape_15,

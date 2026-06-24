@@ -279,6 +279,21 @@ class AppThemeCustom {
     }
   }
 
+  static Color getProfileDialogUserStatusTierTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.woollahra:
+        return Theme.of(context).primaryColor;
+      case Flavor.brisbane ||
+      Flavor.flinders ||
+      Flavor.wonthaggi ||
+      Flavor.mhbc ||
+      Flavor.mosaic||Flavor.southportSharks:
+        return AppColors.white;
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+    }
+  }
   static Color getDeleteMyAccountTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -1384,6 +1399,8 @@ class AppThemeCustom {
         return Theme.of(context).primaryColorDark;
       case Flavor.flinders:
         return Theme.of(context).scaffoldBackgroundColor;
+      case Flavor.southportSharks:
+        return AppColors.ss_button_color;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
     }
