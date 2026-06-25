@@ -308,7 +308,22 @@ class AppIcons {
 
         }
       }else if (selectedFlavor == Flavor.southportSharks) {
-        return "assets/southportSharks/card_opal.png";
+        switch (membershipType.toLowerCase().trim()) {
+          case "staff":
+            return card_platinum_black;
+          case "pearl":
+            return "assets/southportSharks/card_pearl.png";
+          case "opal":
+            return "assets/southportSharks/card_opal.png";
+          case "test":
+            return "assets/southportSharks/card_test.png";
+          case "amber":
+            return "assets/southportSharks/card_amber.png";
+          case "blackopal":
+            return "assets/southportSharks/card_black_opal.png";
+          default:
+            return "assets/southportSharks/card_jade.png";
+        }
       }  else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
