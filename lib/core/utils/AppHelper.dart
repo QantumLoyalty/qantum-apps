@@ -603,6 +603,8 @@ class AppHelper with LoggingMixin {
         return const Size(252, 114);
       case Flavor.mhbc:
         return const Size(142, 48);
+        case Flavor.maxClub:
+        return const Size(142, 48);
       case Flavor.flinders:
         return const Size(56, 56);
       case Flavor.senseOfTaste:

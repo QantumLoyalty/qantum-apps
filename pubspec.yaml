@@ -44,7 +44,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+10
 ###################################
 #QANTUM
-#version: 1.0.0+66
+version: 1.0.0+66
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -74,7 +74,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 #MAX Club
-#version: 1.0.0+10
+#version: 1.0.0+11
 ###################################
 #WONTHAGGI
 #version: 1.0.0+4
@@ -93,7 +93,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #Mannum club
 #version: 1.0.0+2
 #Southport Sharks
-version: 1.0.0+2
+#version: 1.0.0+2
 
 
 
