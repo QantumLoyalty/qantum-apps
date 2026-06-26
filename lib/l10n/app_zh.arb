@@ -229,5 +229,9 @@
   "selectEDPVenues":"請選擇您喜愛的\nEDP 場地",
   "selectVenuesSuccessMsg":"场馆更新成功！",
   "selectVenuesErrorMsg":"更新场馆时出错",
-  "pleaseAvoidSpecialChar":"請避免使用特殊字元"
+  "pleaseAvoidSpecialChar":"請避免使用特殊字元",
+  "warning": "警告！",
+  "yesDelete": "是的，删除",
+  "deleteAccountWarning": "您即将删除您的账户。",
+  "deleteAccountPermanentMessage": "一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。"
 }

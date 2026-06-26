@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.edp,
     Flavor.mosaic,
     Flavor.mannumClub,
-    Flavor.southportSharks,
+
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
@@ -205,7 +205,6 @@ class _HomeScreenState extends State<HomeScreen>
                 }
               });
             }
-            // _tryOpenDeepLink(provider, userInfoProvider);
 
             _scheduleDeepLinkHandling();
 
@@ -230,7 +229,6 @@ class _HomeScreenState extends State<HomeScreen>
               provider.getClubPackageInfo(
                   membershipID: userInfoProvider.getUserInfo!.packageId);
 
-              // provider.resetClubPackageCheckStatus();
             }
 
             /// CHECKING FOR THE EARLY BIRD DIALOG
@@ -276,7 +274,6 @@ class _HomeScreenState extends State<HomeScreen>
             return Column(
               children: [
                 const HomeAppBar(),
-                // AppDimens.shape_20,
 
                 20.h,
                 Expanded(
@@ -294,8 +291,8 @@ class _HomeScreenState extends State<HomeScreen>
                             .screen),
                     (provider.showPointsBalance)
                         ? flavor == Flavor.bobsBulkBooze
-                            ? SizedBox.shrink()
-                            : PointsBalanceWidget()
+                            ? const SizedBox.shrink()
+                            : const PointsBalanceWidget()
                         : const SizedBox.shrink(),
                     checkForSeeAllMenu(provider)
                   ],

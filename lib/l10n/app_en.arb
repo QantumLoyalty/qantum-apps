@@ -85,7 +85,7 @@
   "txtView": "View",
   "txtTermsAndConditions": "Terms & Conditions",
   "msgTermsAndConditionSignup": "By pressing the JOIN NOW button I agree to the terms and conditions of the Venue's Loyalty Program and I am at least 18 years of age.",
-  "txtDeleteMyAccount": "Delete my account",
+  "txtDeleteMyAccount": "Delete\nmy account",
   "txtViewTermsConditions": "View T&C's",
   "txtMyProfile": "My Profile",
   "txtLogout": "Logout",
@@ -228,5 +228,10 @@
   "selectEDPVenues":"Please choose your\nfavourite EDP Venue",
   "selectVenuesSuccessMsg":"Venue updated successfully!",
   "selectVenuesErrorMsg":"Error while updating the venue!",
-  "pleaseAvoidSpecialChar":"Please avoid special characters"
+  "pleaseAvoidSpecialChar":"Please avoid special characters",
+  "warning": "Warning!",
+  "yesDelete": "Yes, Delete",
+  "deleteAccountWarning": "You are about to delete your account.",
+  "deleteAccountPermanentMessage": "Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours."
+
 }

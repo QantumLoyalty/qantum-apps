@@ -1,9 +1,11 @@
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/views/dialogs/ChooseFavouriteVenueDialog.dart';
+import '../../core/extensions/spacer_extension.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
@@ -103,8 +105,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                         context)),
                             onTap: () {
                               AppHelper.printMessage(
-                                  "CLICKED ONE: ${myAccountProvider.accountOptions[myAccountProvider.accountOptions.keys.elementAt(index)]!} >>> ${myAccountProvider.accountOptions.keys
-                                      .elementAt(index)}");
+                                  "CLICKED ONE: ${myAccountProvider.accountOptions[myAccountProvider.accountOptions.keys.elementAt(index)]!} >>> ${myAccountProvider.accountOptions.keys.elementAt(index)}");
                               if (myAccountProvider.accountOptions.keys
                                       .elementAt(index) ==
                                   "txtTermsAndConditions") {
@@ -113,11 +114,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                     context, AppNavigator.appWebView,
                                     arguments: APIList.TERMS_AND_CONDITIONS);
                               } else if (myAccountProvider.accountOptions.keys
-                                  .elementAt(index) ==
+                                      .elementAt(index) ==
                                   "txtChangeFavouriteVenue") {
                                 ChooseFavouriteVenuedialog.getInstance()
                                     .showChooseFavouriteVenueDialog(context);
-                              }else {
+                              } else {
                                 "Navigate to splash".logMessage();
                                 AppNavigator.navigateTo(
                                     context,
@@ -142,7 +143,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
                               sharedPreferenceHelper.clearAll();
 
-
                               /// NAVIGATING TO LOGIN SCREEN
                               Future.delayed(Duration.zero, () {
                                 provider.resetCancelledAccount();
@@ -160,7 +160,134 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                   var response = await showDialog(
                                       context: context,
                                       builder: (context) {
-                                        return AlertDialog(
+                                        return Dialog(
+                                          backgroundColor: Colors.white,
+                                          insetPadding:
+                                              const EdgeInsets.all(12),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(18.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Material(
+                                                    color: Colors.red
+                                                        .withAlpha(20),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            200),
+                                                    child: const Padding(
+                                                        padding:
+                                                            EdgeInsets.all(12),
+                                                        child: Icon(
+                                                          CupertinoIcons
+                                                              .exclamationmark_triangle,
+                                                          color: Colors.red,
+                                                          size: 40,
+                                                        ))),
+                                                12.h,
+                                                Text(
+                                                  loc.warning.toUpperCase(),
+                                                  style: const TextStyle(
+                                                      fontSize: 22,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                4.h,
+                                                Text(
+                                                  loc.deleteAccountWarning,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                10.h,
+                                                Divider(
+                                                  height: 20,
+                                                  thickness: 1,
+                                                  color: Colors.grey[300],
+                                                ),
+                                                10.h,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Material(
+                                                        color: Colors.red
+                                                            .withAlpha(20),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(200),
+                                                        child: const Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    15),
+                                                            child: Icon(
+                                                              CupertinoIcons
+                                                                  .delete,
+                                                              color: Colors.red,
+                                                              size: 28,
+                                                            ))),
+                                                    20.w,
+                                                    Expanded(
+                                                        child: Text(
+                                                          loc.deleteAccountPermanentMessage,
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                      ),
+                                                    ))
+                                                  ],
+                                                ),
+                                                10.h,
+                                                Divider(
+                                                  height: 20,
+                                                  thickness: 1,
+                                                  color: Colors.grey[300],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context, true);
+                                                        },
+                                                        child: Text(
+                                                          loc.yesDelete.toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.red,
+                                                          ),
+                                                        )),
+                                                    OutlinedButton(
+                                                        style: OutlinedButton.styleFrom(
+                                                            side: const BorderSide(
+                                                                color: Colors
+                                                                    .black,
+                                                                width: 1),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadiusGeometry
+                                                                        .circular(
+                                                                            5))),
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context, false);
+                                                        },
+                                                        child: Text(
+                                                          loc.txtCancel.toUpperCase(),
+                                                          style: const TextStyle(
+                                                            color: Colors.black,
+                                                          ),
+                                                        )),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                        /* return AlertDialog(
                                           title: Text(loc.txtAlert),
                                           content: Text(loc.msgCancelAccount),
                                           actions: [
@@ -187,7 +314,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                                               context)),
                                                 )),
                                           ],
-                                        );
+                                        );*/
                                       });
 
                                   if (response) {
@@ -208,16 +335,16 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                   children: [
                                     Text(
                                       loc.txtDeleteMyAccount.toUpperCase(),
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: 10,
-                                          fontWeight: FontWeight.w300,
+                                          fontWeight: FontWeight.w900,
                                           color: AppThemeCustom
                                               .getDeleteMyAccountTextColor(
                                                   context)),
                                     ),
                                     AppDimens.shape_10,
-                                    (provider.showCancelAccountLoader !=
-                                                null &&
+                                    (provider.showCancelAccountLoader != null &&
                                             provider.showCancelAccountLoader!)
                                         ? const SizedBox(
                                             width: 15,

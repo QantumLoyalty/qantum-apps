@@ -25,6 +25,7 @@ class FlavorConstants {
       Flavor.senseOfTaste: "SOT",
       Flavor.mosaic: "",
       Flavor.mannumClub: "MCC",
+      Flavor.southportSharks: "SPS",
     };
 
     return scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
@@ -76,7 +77,7 @@ class FlavorConstants {
           Flavor.edp: "Silver",
           Flavor.bobsBulkBooze: "Valued",
           Flavor.senseOfTaste: "Valued",
-          Flavor.southportSharks: "Opal",
+          Flavor.southportSharks: "Jade",
         };
 
         return defaultTiers[flavorConfig.flavor] ?? "Valued";

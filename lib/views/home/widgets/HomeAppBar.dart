@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppHelper.dart';
-import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
-import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
+import '/core/utils/AppHelper.dart';
+import '/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
-
-import '../../dialogs/ScratchCardDialog.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
@@ -97,7 +94,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                                           .getUserInfo!)),
                                               fit: BoxFit.cover,
                                             )))
-                                    : Container(),
+                                    : const SizedBox.shrink(),
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(

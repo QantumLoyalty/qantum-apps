@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
+import 'package:qantum_apps/view_models/UnitedFuelsProvider.dart';
 import 'view_models/HomeProvider.dart';
 import 'core/flavors_config/app_themes.dart';
 import 'core/flavors_config/flavor_config.dart';
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
       child: Portal(
         child: MaterialApp(

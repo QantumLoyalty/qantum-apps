@@ -1,5 +1,3 @@
-import 'package:qantum_apps/core/extensions/log_extension.dart';
-
 import '../flavors_config/flavor_config.dart';
 import 'AppStrings.dart';
 

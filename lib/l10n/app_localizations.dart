@@ -587,7 +587,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtDeleteMyAccount.
   ///
   /// In en, this message translates to:
-  /// **'Delete my account'**
+  /// **'Delete\nmy account'**
   String get txtDeleteMyAccount;
 
   /// No description provided for @txtViewTermsConditions.
@@ -1447,6 +1447,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please avoid special characters'**
   String get pleaseAvoidSpecialChar;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning!'**
+  String get warning;
+
+  /// No description provided for @yesDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Delete'**
+  String get yesDelete;
+
+  /// No description provided for @deleteAccountWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'You are about to delete your account.'**
+  String get deleteAccountWarning;
+
+  /// No description provided for @deleteAccountPermanentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
+  String get deleteAccountPermanentMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

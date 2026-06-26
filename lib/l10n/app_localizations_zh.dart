@@ -684,6 +684,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pleaseAvoidSpecialChar => '請避免使用特殊字元';
+
+  @override
+  String get warning => '警告！';
+
+  @override
+  String get yesDelete => '是的，删除';
+
+  @override
+  String get deleteAccountWarning => '您即将删除您的账户。';
+
+  @override
+  String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1366,4 +1378,16 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get pleaseAvoidSpecialChar => '请避免使用特殊字符';
+
+  @override
+  String get warning => '警告！';
+
+  @override
+  String get yesDelete => '是的，删除';
+
+  @override
+  String get deleteAccountWarning => '您即将删除您的账户。';
+
+  @override
+  String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 }

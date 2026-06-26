@@ -285,15 +285,17 @@ class AppThemeCustom {
       case Flavor.woollahra:
         return Theme.of(context).primaryColor;
       case Flavor.brisbane ||
-      Flavor.flinders ||
-      Flavor.wonthaggi ||
-      Flavor.mhbc ||
-      Flavor.mosaic||Flavor.southportSharks:
+            Flavor.flinders ||
+            Flavor.wonthaggi ||
+            Flavor.mhbc ||
+            Flavor.mosaic ||
+            Flavor.southportSharks:
         return AppColors.white;
       default:
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
   }
+
   static Color getDeleteMyAccountTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
@@ -840,7 +842,7 @@ class AppThemeCustom {
           return AppColors.white;
         case Flavor.maxClub || Flavor.maxx:
           return AppColors.max_back_color_3;
-        case Flavor.mosaic || Flavor.mannumClub || Flavor.southportSharks:
+        case Flavor.mosaic || Flavor.mannumClub:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
@@ -882,7 +884,7 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
-      case Flavor.southportSharks:
+        // case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled ? AppColors.disable_color : null);
@@ -1139,7 +1141,7 @@ class AppThemeCustom {
       case Flavor.edp:
       case Flavor.mosaic:
       case Flavor.mannumClub:
-      case Flavor.southportSharks:
+        //  case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
             : (isCancelled
@@ -1241,12 +1243,12 @@ class AppThemeCustom {
           : AppColors.wt_menu_background;
     }
 
-    if (selectedFlavor == Flavor.southportSharks) {
+    /*if (selectedFlavor == Flavor.southportSharks) {
       return provider.homeNavigationList[2].name ==
               provider.homeNavigationList[index].name
           ? null
           : Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
-    }
+    }*/
 
     // 👉 Default flavors
     return Theme.of(context).iconTheme.color!.withValues(alpha: 0.5);
@@ -1317,7 +1319,7 @@ class AppThemeCustom {
       case Flavor.wonthaggi:
       case Flavor.edp:
       case Flavor.mosaic:
-      case Flavor.southportSharks:
+        // case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
             : (isCancelled
@@ -1449,6 +1451,8 @@ class AppThemeCustom {
         return Theme.of(context).primaryColorDark;
       case Flavor.mannumClub:
         return const Color(0xff233250);
+      case Flavor.southportSharks:
+        return AppColors.black;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -1462,6 +1466,8 @@ class AppThemeCustom {
         return AppColors.white;
       case Flavor.mannumClub:
         return const Color(0xff233250);
+      case Flavor.southportSharks:
+        return AppColors.black;
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.primary;
@@ -1491,6 +1497,16 @@ class AppThemeCustom {
 
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
+    }
+  }
+
+  static Color? getUnitedFuelsDoneButtonColor(BuildContext context) {
+    final Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.southportSharks:
+        return Theme.of(context).primaryColor;
+      default:
+        return null;
     }
   }
 }

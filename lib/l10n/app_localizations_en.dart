@@ -254,7 +254,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgTermsAndConditionSignup => 'By pressing the JOIN NOW button I agree to the terms and conditions of the Venue\'s Loyalty Program and I am at least 18 years of age.';
 
   @override
-  String get txtDeleteMyAccount => 'Delete my account';
+  String get txtDeleteMyAccount => 'Delete\nmy account';
 
   @override
   String get txtViewTermsConditions => 'View T&C\'s';
@@ -684,4 +684,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pleaseAvoidSpecialChar => 'Please avoid special characters';
+
+  @override
+  String get warning => 'Warning!';
+
+  @override
+  String get yesDelete => 'Yes, Delete';
+
+  @override
+  String get deleteAccountWarning => 'You are about to delete your account.';
+
+  @override
+  String get deleteAccountPermanentMessage => 'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
 }

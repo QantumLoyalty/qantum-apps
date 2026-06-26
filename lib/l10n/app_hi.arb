@@ -228,6 +228,10 @@
   "selectEDPVenues":"कृपया अपने पसंदीदा\nEDP स्थान चुनें",
   "selectVenuesSuccessMsg":"स्थान सफलतापूर्वक अपडेट किया गया!",
   "selectVenuesErrorMsg":"स्थान अपडेट करते समय त्रुटि हुई!",
-  "pleaseAvoidSpecialChar":"कृपया विशेष वर्णों से बचें"
+  "pleaseAvoidSpecialChar":"कृपया विशेष वर्णों से बचें",
+  "warning": "चेतावनी!",
+  "yesDelete": "हाँ, डिलीट करें",
+  "deleteAccountWarning": "आप अपना खाता डिलीट करने वाले हैं।",
+  "deleteAccountPermanentMessage": "पुष्टि करने के बाद, यह खाता अब उपयोग नहीं किया जा सकेगा और आपका डेटा व व्यक्तिगत जानकारी 48 घंटों के भीतर हमारे सिस्टम से स्थायी रूप से हटा दी जाएगी।"
 
 }

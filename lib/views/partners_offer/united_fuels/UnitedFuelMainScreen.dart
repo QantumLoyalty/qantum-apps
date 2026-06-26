@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../../view_models/UnitedFuelsProvider.dart';
 import '/core/utils/AppColors.dart';
@@ -41,39 +42,34 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                         child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Save on fuels",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                AppNavigator.navigateTo(context,
-                                    AppNavigator.appWebView,
-                                    arguments:
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Save on fuels",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            AppNavigator.navigateTo(
+                                context, AppNavigator.appWebView,
+                                arguments:
                                     "https://servicestations.unitedpetroleum.com.au/?fuelCards=acceptsUPDiscountFuelCards");
-                              },
-                              child: Text(
-                                "Find your nearest participating\nUnited service station",
-                                style: TextStyle(
-                                    color: AppColors.blue,
-                                    decorationColor:
-                                    AppColors.blue,
-                                    decoration:
-                                    TextDecoration.underline),
-                              ),
-                            )
-                          ],
-                        )),
+                          },
+                          child: Text(
+                            "Find your nearest participating\nUnited service station",
+                            style: TextStyle(
+                                color: AppColors.blue,
+                                decorationColor: AppColors.blue,
+                                decoration: TextDecoration.underline),
+                          ),
+                        )
+                      ],
+                    )),
                     Image.asset(
                       AppIcons.unitedFuelsRounded4c,
                       width: 80,
@@ -84,9 +80,8 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
               ),
               Expanded(child: Consumer<UnitedFuelsProvider>(
                   builder: (context, provider, child) {
-
-                    print("isError: ${provider.isError} >> errorMessage: $provider.errorMessage");
-
+                print(
+                    "isError: ${provider.isError} >> errorMessage: $provider.errorMessage");
 
                 return Stack(
                   children: [
@@ -96,7 +91,7 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
                                 children: [
-                               /*   Row(
+                                  /*   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -165,6 +160,8 @@ class _UnitedFuelMainScreenState extends State<UnitedFuelMainScreen> {
               SizedBox(
                 width: 120,
                 child: AppButton(
+                    backgroundColor:
+                        AppThemeCustom.getUnitedFuelsDoneButtonColor(context),
                     text: "DONE",
                     onClick: () {
                       Navigator.pop(context);
