@@ -308,6 +308,12 @@ abstract class AppLocalizations {
   /// **'More Info'**
   String get txtMoreInfo;
 
+  /// No description provided for @txtMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More\n '**
+  String get txtMore;
+
   /// No description provided for @txtCongratulations.
   ///
   /// In en, this message translates to:
@@ -875,8 +881,14 @@ abstract class AppLocalizations {
   /// No description provided for @txtStatusCreditsReactNextLevel.
   ///
   /// In en, this message translates to:
-  /// **'Status Credits to reach next level'**
+  /// **'Status Credits###to reach next level'**
   String get txtStatusCreditsReactNextLevel;
+
+  /// No description provided for @txtStatusCreditsRequiredReactNextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status credits required to\nreach next level'**
+  String get txtStatusCreditsRequiredReactNextLevel;
 
   /// No description provided for @txtEditMyDetails.
   ///

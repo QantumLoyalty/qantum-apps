@@ -13,8 +13,7 @@ class AppIcons {
   static String card_platinum = "assets/common/card_platinum.png";
   static String card_platinum_black = "assets/common/card_platinum_black.png";
   static String my_account = "assets/common/my_account.png";
-  static String card_lieutenant =
-      "assets/common/card_lieutenant.png";
+  static String card_lieutenant = "assets/common/card_lieutenant.png";
   static String card_nonfinancial =
       "assets/manlyHarbourBoatClub/card_nonfinancial.png";
   static String birthday = "assets/common/birthday.png";
@@ -219,6 +218,7 @@ class AppIcons {
             return "assets/bluewaterCaptainsClub/card_deckhand.png";
         }
       } else if (selectedFlavor == Flavor.flinders) {
+
         switch (membershipType.toLowerCase().trim()) {
           case "staff":
             return "assets/flindersStreetWharves/card_staff.png";
@@ -228,7 +228,18 @@ class AppIcons {
             return "assets/flindersStreetWharves/card_corporate.png";
           case "vip":
             return "assets/flindersStreetWharves/card_vip.png";
-
+          case "test":
+            return "assets/flindersStreetWharves/card_test.png";
+          case "locals":
+            return "assets/flindersStreetWharves/card_locals.png";
+          case "bronze":
+            return "assets/flindersStreetWharves/card_bronze.png";
+          case "silver":
+            return card_silver;
+          case "gold":
+            return card_gold;
+          case "platinum":
+            return card_platinum;
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
@@ -245,7 +256,7 @@ class AppIcons {
           default:
             return "assets/kingscliff/card_value.png";
         }
-      }else if (selectedFlavor == Flavor.drinkRewards) {
+      } else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
             return card_gold;
@@ -303,9 +314,8 @@ class AppIcons {
             return card_silver;
           default:
             return "assets/mosaicHotel/card_bronze.png";
-
         }
-      }else if (selectedFlavor == Flavor.southportSharks) {
+      } else if (selectedFlavor == Flavor.southportSharks) {
         switch (membershipType.toLowerCase().trim()) {
           case "staff":
             return card_platinum_black;
@@ -322,7 +332,7 @@ class AppIcons {
           default:
             return "assets/southportSharks/card_jade.png";
         }
-      }  else {
+      } else {
         switch (membershipType.toLowerCase()) {
           case "valued" || "staff" || "pre 3 months staff":
             return card_value;

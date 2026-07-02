@@ -116,6 +116,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtMoreInfo => 'अधिक जानकारी';
 
   @override
+  String get txtMore => 'और देखें';
+
+  @override
   String get txtCongratulations => 'बधाई हो!';
 
   @override
@@ -398,7 +401,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtValidTo => 'मान्य तिथि';
 
   @override
-  String get txtStatusCreditsReactNextLevel => 'अगले स्तर तक पहुँचने के लिए स्टेटस क्रेडिट्स';
+  String get txtStatusCreditsReactNextLevel => 'स्टेटस क्रेडिट्स###अगले स्तर तक पहुँचने के लिए';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => 'स्टेटस क्रेडिट्स की आवश्यकता है\nअगले स्तर तक पहुँचने के लिए';
 
   @override
   String get txtEditMyDetails => 'मेरी जानकारी संपादित करें';

@@ -1242,6 +1242,12 @@ class AppThemeCustom {
           ? null
           : AppColors.wt_menu_background;
     }
+    if (selectedFlavor == Flavor.flinders) {
+      return provider.homeNavigationList[2].name ==
+              provider.homeNavigationList[index].name
+          ? null
+          : Theme.of(context).iconTheme.color!;
+    }
 
     /*if (selectedFlavor == Flavor.southportSharks) {
       return provider.homeNavigationList[2].name ==
@@ -1273,6 +1279,7 @@ class AppThemeCustom {
     // 👉 SELECTED STATE
     if (isSelected &&
         (selectedFlavor == Flavor.senseOfTaste ||
+            selectedFlavor == Flavor.flinders ||
             selectedFlavor == Flavor.bobsBulkBooze ||
             selectedFlavor == Flavor.edp ||
             selectedFlavor == Flavor.mosaic ||

@@ -116,6 +116,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtMoreInfo => 'More Info';
 
   @override
+  String get txtMore => 'More\n ';
+
+  @override
   String get txtCongratulations => 'Congratulations!';
 
   @override
@@ -398,7 +401,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtValidTo => 'Valid to';
 
   @override
-  String get txtStatusCreditsReactNextLevel => 'Status Credits to reach next level';
+  String get txtStatusCreditsReactNextLevel => 'Status Credits###to reach next level';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => 'Status credits required to\nreach next level';
 
   @override
   String get txtEditMyDetails => 'Edit my details';

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/services/DeeplinkService.dart';
 import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
@@ -24,22 +25,23 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
       flavor: Flavor.edp,
       flavorValues: FlavorValues(appName: "Edp", appVersion: "0.0.1"));
-  WidgetsFlutterBinding.ensureInitialized();
 
+  await dotenv.load(fileName: '.env.edp');
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     // Initialize with your OneSignal App ID
-    OneSignal.initialize("22ec9bfd-f547-4ceb-9b86-2039ae84009b");
-    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
+    dotenv.env['ONESIGNAL_API_KEY'].toString().logMessage();
+    OneSignal.initialize(dotenv.env['ONESIGNAL_API_KEY']??"");
     OneSignal.Notifications.requestPermission(true);
     OneSignal.Notifications.addClickListener((onNotificationClickEvent) {
-      print("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}");
+      ("NOTIFICATION PAYLOAD:: ${onNotificationClickEvent.result}").logMessage();
     });
   });
 }

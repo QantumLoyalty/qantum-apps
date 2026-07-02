@@ -74,178 +74,184 @@ class DigitalCardDialog with LoggingMixin {
                     builder: (context, onInit, onDispose) {
                       return Stack(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: flavor == Flavor.bobsBulkBooze
-                                    ? AppColors.transparent
-                                    : Theme.of(context).primaryColor,
-                                borderRadius: BorderRadius.circular(10)),
-                            margin: const EdgeInsets.only(left: 25, right: 25),
-                            width: media.size.width,
-                            height: dialogHeight - 80,
-                            child: Container(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
                                 decoration: BoxDecoration(
-                                  image: flavor == Flavor.senseOfTaste
-                                      ? null
-                                      : DecorationImage(
-                                          image: AssetImage(cardBackground),
-                                          fit: BoxFit.fill,
-                                        ),
-                                ),
-                                child: Consumer<UserInfoProvider>(
-                                    builder: (context, provider, child) {
-                                  return Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        AppDimens.shape_20,
-                                        /*  ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: QrImageView(
-                                            data:
-                                                '$cardPrefix${provider.getUserInfo!.cardNumber}',
-                                            backgroundColor: AppColors.white,
-                                            size: 180,
-                                          ),
-                                        ),*/
-                                        flavor == Flavor.bobsBulkBooze ||
-                                                flavor == Flavor.senseOfTaste
-                                            ? Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 20),
-                                                child: Image.asset(
-                                                  AppIcons.app_logo,
-                                                  height: 100,
-                                                  width: 180,
-                                                ),
-                                              )
-                                            : const SizedBox.shrink(),
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Container(
-                                            color: AppColors.white,
-                                            padding: const EdgeInsets.all(10),
-                                            child: SizedBox(
-                                              height: 180,
-                                              width: 180,
-                                              child: SfBarcodeGenerator(
-                                                value:
+                                    color: flavor == Flavor.bobsBulkBooze
+                                        ? AppColors.transparent
+                                        : Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                               // margin: const EdgeInsets.only(left: 25, right: 25),
+                                width: media.size.width,
+                                height: dialogHeight - 80,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      image: flavor == Flavor.senseOfTaste
+                                          ? null
+                                          : DecorationImage(
+                                              image: AssetImage(cardBackground),
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                    child: Consumer<UserInfoProvider>(
+                                        builder: (context, provider, child) {
+                                      return Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            AppDimens.shape_20,
+                                            /*  ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: QrImageView(
+                                                data:
                                                     '$cardPrefix${provider.getUserInfo!.cardNumber}',
-                                                symbology: QRCode(),
-                                                showValue: false,
+                                                backgroundColor: AppColors.white,
+                                                size: 180,
+                                              ),
+                                            ),*/
+                                            flavor == Flavor.bobsBulkBooze ||
+                                                    flavor == Flavor.senseOfTaste
+                                                ? Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        bottom: 20),
+                                                    child: Image.asset(
+                                                      AppIcons.app_logo,
+                                                      height: 100,
+                                                      width: 180,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Container(
+                                                color: AppColors.white,
+                                                padding: const EdgeInsets.all(10),
+                                                child: SizedBox(
+                                                  height: 180,
+                                                  width: 180,
+                                                  child: SfBarcodeGenerator(
+                                                    value:
+                                                        '$cardPrefix${provider.getUserInfo!.cardNumber}',
+                                                    symbology: QRCode(),
+                                                    showValue: false,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        AppDimens.shape_20,
-                                        flavor == Flavor.bobsBulkBooze ||
-                                                flavor == Flavor.senseOfTaste
-                                            ? SizedBox()
-                                            : Expanded(
-                                                child: SingleChildScrollView(
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      userTierType
-                                                          .toUpperCase(),
-                                                      style: TextStyle(
-                                                          shadows: textShadows,
-                                                          color: AppThemeCustom
-                                                              .getCardDialogsTextColor(
-                                                                  context),
-                                                          fontSize: 32,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    Text(
-                                                      AppLocalizations.of(
-                                                              context)!
-                                                          .txtMembership,
-                                                      style: TextStyle(
-                                                          shadows: textShadows,
-                                                          color: AppThemeCustom
-                                                              .getCardDialogsTextColor(
-                                                                  context),
-                                                          fontSize: 18),
-                                                    ),
-                                                    AppDimens.shape_5,
-                                                    (showMembershipCategory(userData
-                                                            .membershipCategory))
-                                                        ? Column(
-                                                            children: [
-                                                              Text(
-                                                                "${userData.membershipCategory}",
-                                                                style: TextStyle(
-                                                                    shadows:
-                                                                        textShadows,
-                                                                    color: AppThemeCustom
-                                                                        .getCardDialogsTextColor(
-                                                                            context),
-                                                                    fontSize:
-                                                                        16),
-                                                              ),
-                                                              AppDimens.shape_5,
-                                                              Text(
-                                                                  '#${userData.bluizeId}',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
+                                            AppDimens.shape_20,
+                                            flavor == Flavor.bobsBulkBooze ||
+                                                    flavor == Flavor.senseOfTaste
+                                                ? SizedBox()
+                                                : Expanded(
+                                                    child: SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          userTierType
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 32,
+                                                              fontWeight:
+                                                                  FontWeight.bold),
+                                                        ),
+                                                        Text(
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .txtMembership,
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 18),
+                                                        ),
+                                                        AppDimens.shape_5,
+                                                        (showMembershipCategory(userData
+                                                                .membershipCategory))
+                                                            ? Column(
+                                                                children: [
+                                                                  Text(
+                                                                    "${userData.membershipCategory}",
+                                                                    style: TextStyle(
+                                                                        shadows:
+                                                                            textShadows,
+                                                                        color: AppThemeCustom
+                                                                            .getCardDialogsTextColor(
+                                                                                context),
+                                                                        fontSize:
+                                                                            16),
+                                                                  ),
+                                                                  AppDimens.shape_5,
+                                                                  Text(
+                                                                      '#${userData.bluizeId}',
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      style: TextStyle(
+                                                                          color: AppThemeCustom
+                                                                              .getCardDialogsTextColor(
+                                                                                  context),
+                                                                          fontSize:
+                                                                              14))
+                                                                ],
+                                                              )
+                                                            : const SizedBox
+                                                                .shrink(),
+                                                        AppDimens.shape_20,
+                                                        Text(
+                                                          "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 14),
+                                                        ),
+                                                        (membershipExpiry != null &&
+                                                                membershipExpiry
+                                                                    .isNotEmpty)
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        top: 12),
+                                                                child: Text(
+                                                                  "Membership Expiry: $membershipExpiry",
                                                                   style: TextStyle(
+                                                                      shadows:
+                                                                          textShadows,
                                                                       color: AppThemeCustom
                                                                           .getCardDialogsTextColor(
                                                                               context),
-                                                                      fontSize:
-                                                                          14))
-                                                            ],
-                                                          )
-                                                        : const SizedBox
-                                                            .shrink(),
-                                                    AppDimens.shape_20,
-                                                    Text(
-                                                      "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          shadows: textShadows,
-                                                          color: AppThemeCustom
-                                                              .getCardDialogsTextColor(
-                                                                  context),
-                                                          fontSize: 14),
+                                                                      fontSize: 14),
+                                                                ),
+                                                              )
+                                                            : const SizedBox
+                                                                .shrink(),
+                                                        AppDimens.shape_30
+                                                      ],
                                                     ),
-                                                    (membershipExpiry != null &&
-                                                            membershipExpiry
-                                                                .isNotEmpty)
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 12),
-                                                            child: Text(
-                                                              "Membership Expiry: $membershipExpiry",
-                                                              style: TextStyle(
-                                                                  shadows:
-                                                                      textShadows,
-                                                                  color: AppThemeCustom
-                                                                      .getCardDialogsTextColor(
-                                                                          context),
-                                                                  fontSize: 14),
-                                                            ),
-                                                          )
-                                                        : const SizedBox
-                                                            .shrink(),
-                                                    AppDimens.shape_30
-                                                  ],
-                                                ),
-                                              ))
-                                      ],
-                                    ),
-                                  );
-                                })),
+                                                  ))
+                                          ],
+                                        ),
+                                      );
+                                    })),
+                              ),
+                            ),
                           ),
                           Positioned(
                               left: 0,

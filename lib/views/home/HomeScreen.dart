@@ -89,77 +89,8 @@ class _HomeScreenState extends State<HomeScreen>
       logEvent("SELECTED FLAVOR $flavor");
     }
   }
-
-  bool _deepLinkHandled = false;
   String? _lastHandledChewziePayload;
   DateTime? _lastHandledChewzieTime;
-
-  /* void _tryOpenDeepLink(
-    HomeProvider provider,
-    UserInfoProvider userInfoProvider,
-  ) {
-    print(
-        "_deepLinkHandled >> $_deepLinkHandled, provider.deeplinkPayloads >> ${provider.deeplinkPayloads} userInfoProvider.getUserInfo >> ${userInfoProvider.getUserInfo}");
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_deepLinkHandled || !mounted) return;
-
-      if (provider.deeplinkPayloads == null) return;
-
-      if (flavor == Flavor.starReward) {
-        _handleChewzie(provider, userInfoProvider);
-      }
-
-      if (userInfoProvider.getUserInfo == null) return;
-
-      if (flavor == Flavor.mhbc) {
-        _handleClevaQ(provider, userInfoProvider);
-      }
-    });
-  }*/
-
-  /*void _handleChewzie(
-      HomeProvider provider, UserInfoProvider userInfoProvider) {
-    if (provider.startChewzieScreen != true) return;
-
-    _deepLinkHandled = true;
-
-    final decodedLink = Uri.decodeComponent(provider.deeplinkPayloads!);
-    final uri = Uri.parse(decodedLink);
-
-    final jsonPayload = {
-      "memberId": userInfoProvider.getUserInfo!.cardNumber,
-    };
-
-    final base64Payload = base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
-
-    final updatedUri = uri.replace(
-      queryParameters: {
-        ...uri.queryParameters,
-        'memberData': base64Payload,
-      },
-    );
-
-    launchDeepLinkURL(updatedUri);
-    provider.resetDeepLinkNavigation();
-  }
-
-  void _handleClevaQ(HomeProvider provider, UserInfoProvider userInfoProvider) {
-    _deepLinkHandled = true;
-
-    final uri = Uri.parse(provider.deeplinkPayloads!);
-    final updatedUri = uri.replace(pathSegments: [
-      ...uri.pathSegments,
-      'qantumMember',
-      userInfoProvider.getUserInfo!.cardNumber ?? "",
-      AppDateFormatter.dobForClevaQ(
-              userInfoProvider.getUserInfo!.dateOfBirth) ??
-          ""
-    ]);
-    print("DEEPLINK URL: ${updatedUri.toString()}");
-    launchDeepLinkURL(updatedUri);
-    provider.resetDeepLinkNavigation();
-  }*/
 
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
@@ -274,7 +205,6 @@ class _HomeScreenState extends State<HomeScreen>
             return Column(
               children: [
                 const HomeAppBar(),
-
                 20.h,
                 Expanded(
                     child: Stack(
@@ -417,62 +347,6 @@ class _HomeScreenState extends State<HomeScreen>
                                         provider, "FROM TOP ROW");
                                   }
                                 }
-
-                                /*if (flavor == Flavor.bluewater &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name) {
-                                /// DO NOTHING ///
-                              } else if (flavor == Flavor.mhbc &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.clh &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[0].name) ||
-                                  (flavor == Flavor.clh &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.montaukTavern &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[0].name) ||
-                                  (flavor == Flavor.montaukTavern &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.starReward &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.queens &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.brisbane &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.hogansReward &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else {
-                                provider.updateSelectedOption(index);
-
-                                if (provider.homeNavigationList[index].name ==
-                                    provider.homeNavigationList[0].name) {
-                                  /// SHOW POINTS BALANCE DIALOG
-                                  provider.updatePointsBalanceVisibility(true);
-                                } else {
-                                  /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
-                                  checkAndHidePointsBalance(
-                                      provider, "FROM TOP ROW");
-                                }
-                              }*/
                               } else {
                                 print("issue in user status");
                               }
@@ -481,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen>
                         }),
                       ),
 
-                      /// SECOND ROW --> MY VENUE***MY BENEFITS***MY ACCOUNT***SEE ALL <-- ///
+                      /// SECOND ROW --> MY VENUE***MY BENEFITS***MY ACCOUNT***MORE <-- ///
                       Row(
                         children: List.generate(4, (index) {
                           return Expanded(
@@ -750,29 +624,6 @@ class _HomeScreenState extends State<HomeScreen>
       _handlePreparedDeepLink(uri);
     }
 
-/*
-    final jsonPayload = {
-      "memberId": userInfoProvider.getUserInfo!.cardNumber,
-    };
-
-    final base64Payload = base64UrlEncode(
-      utf8.encode(jsonEncode(jsonPayload)),
-    );
-
-    final updatedUri = uri.replace(
-      queryParameters: {
-        ...uri.queryParameters,
-        'memberData': base64Payload,
-      },
-    );
-
-    _lastLaunchPayload = payload;
-    _lastLaunchTime = now;
-
-    provider.resetDeepLinkNavigation();
-    _handlePreparedDeepLink(updatedUri);
-
-*/
   }
 
   bool _isDuplicateChewzieLaunch(String payload) {

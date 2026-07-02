@@ -34,6 +34,7 @@ abstract class UserRepository {
   Future<NetworkResponse> resendOTPEmail({required String phoneNo});
 
   Future<NetworkResponse> resendOTPNewPhone({required String phoneNo});
+  Future<NetworkResponse> fetchStatusTierValue({required String statusTier});
 
   Future<NetworkResponse> verifyOTPEmail(
       String phoneNo, Map<String, dynamic> params);

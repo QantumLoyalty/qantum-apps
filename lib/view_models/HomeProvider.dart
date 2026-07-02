@@ -76,7 +76,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         icon: Icons.account_circle_outlined,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: "txtSeeAll",
+        name: "txtMore",
         screen: Container(),
         icon: Icons.more_horiz,
         type: HomeNavigatorModel.typeDialog),
@@ -106,8 +106,8 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtMyBenefits;
       case "txtMyAccount":
         return loc.txtMyAccount;
-      case "txtSeeAll":
-        return loc.txtSeeAll;
+      case "txtMore":
+        return loc.txtMore;
       default:
         return key;
     }

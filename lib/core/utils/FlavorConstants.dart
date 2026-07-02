@@ -34,7 +34,7 @@ class FlavorConstants {
   static String getUserTierType(UserModel userData) {
     FlavorConfig flavorConfig = FlavorConfig.instance;
 
-    if (flavorConfig.flavor == Flavor.starReward ||
+    if (
         flavorConfig.flavor == Flavor.drinkRewards ||
         flavorConfig.flavor == Flavor.bobsBulkBooze ||
         flavorConfig.flavor == Flavor.senseOfTaste) {
@@ -74,6 +74,7 @@ class FlavorConstants {
           Flavor.kingscliff: "Valued",
           Flavor.drinkRewards: "Explorer",
           Flavor.wonthaggi: "Valued",
+          Flavor.starReward: "Valued",
           Flavor.edp: "Silver",
           Flavor.bobsBulkBooze: "Valued",
           Flavor.senseOfTaste: "Valued",

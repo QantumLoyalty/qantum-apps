@@ -35,13 +35,17 @@ class MyProfileDialog with LoggingMixin {
 
     AppLocalizations loc = AppLocalizations.of(context)!;
     Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
-
+    final userInfoProvider = context.read<UserInfoProvider>();
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
           logEvent(FlavorConfig.instance.flavorValues.appVersion);
           homeProvider = Provider.of<HomeProvider>(context, listen: false);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            userInfoProvider.fetchUserProfile("true");
+            userInfoProvider.fetchStatusTierValue();
+          });
           return Dialog(
             backgroundColor: Colors.transparent,
             insetPadding: EdgeInsets.zero,
@@ -227,8 +231,8 @@ class MyProfileDialog with LoggingMixin {
                                                       Flavor.drinkRewards ||
                                                   flavor ==
                                                       Flavor.bobsBulkBooze ||
-                                                  flavor == Flavor.senseOfTaste || flavor==Flavor.starReward)
-                                              ? Container()
+                                                  flavor == Flavor.senseOfTaste)
+                                              ? const SizedBox.shrink()
                                               : UserStatusTier()
                                         ],
                                       ),

@@ -2,6 +2,7 @@ import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../core/extensions/spacer_extension.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/l10n/app_localizations.dart';
@@ -22,6 +23,10 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
     flavor = FlavorConfig.instance.flavor!;
+
+    List<String> statusCreditMsg =
+        loc.txtStatusCreditsReactNextLevel.split("###");
+
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
       statusPoints = (provider.getUserInfo != null &&
               provider.getUserInfo!.statusPoints != null)
@@ -33,15 +38,27 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppDimens.shape_15,
-            Text(
-              loc.txtStatusCreditsReactNextLevel.toUpperCase(),
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: AppThemeCustom.getProfileDialogTextColor(context),
-                  fontSize: 13),
+            AppDimens.shape_5,
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(children: [
+                TextSpan(
+                    text: "${statusCreditMsg[0].toUpperCase()}\n",
+                    style: TextStyle(
+                        color: AppThemeCustom
+                            .getProfileDialogUserStatusTierTextColor(context),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
+                TextSpan(
+                    text: statusCreditMsg[1].toUpperCase(),
+                    style: TextStyle(
+                        color: AppThemeCustom
+                            .getProfileDialogUserStatusTierTextColor(context),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14)),
+              ]),
             ),
-            AppDimens.shape_15,
+            20.h,
             SizedBox(
               height: 180,
               child: Stack(
@@ -50,7 +67,6 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        //   statusPoints != 0 ?
                         Countup(
                             begin: 0,
                             end: (provider.getUserInfo != null &&
@@ -59,30 +75,31 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 : 0,
                             duration: const Duration(seconds: 1),
                             style: TextStyle(
-                                color: AppThemeCustom.getProfileDialogUserStatusTierTextColor(
-                                    context),
+                                color: AppThemeCustom
+                                    .getProfileDialogUserStatusTierTextColor(
+                                        context),
                                 fontWeight: FontWeight.w900,
                                 fontSize: 24)),
-                        //: Container(),
                         RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(children: [
-                            //    if(statusPoints != 0)
                             TextSpan(
                                 text:
-                                    'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
+                                    'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
                                 style: TextStyle(
                                     color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(context),
+                                        .getProfileDialogUserStatusTierTextColor(
+                                            context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 20)),
                             TextSpan(
                                 text:
-                                    '\n\nStatus credits required\nto advance to ${provider.getUserInfo != null ? provider.getUserInfo!.nextStatusTier ?? "" : ""}'
+                                    '\n\n${loc.txtStatusCreditsRequiredReactNextLevel}'
                                         .toUpperCase(),
                                 style: TextStyle(
                                     color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(context),
+                                        .getProfileDialogUserStatusTierTextColor(
+                                            context),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 8)),
                           ]),
@@ -157,14 +174,63 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
             AppDimens.shape_15,
             (flavor == Flavor.mhbc)
                 ? const SizedBox.shrink()
-                : Text(
-                    loc.txtHowToEarnStatusCredits,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color:
-                            AppThemeCustom.getProfileDialogUserStatusTierTextColor(context),
-                        fontSize: 13),
-                  ),
+                : (flavor == Flavor.starReward
+                    ? /*RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: "311 ",
+                              style: TextStyle(
+                                  color: AppThemeCustom
+                                      .getProfileDialogUserStatusTierTextColor(
+                                          context),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                          TextSpan(
+                              text: "Status credits required\nto maintain current level",
+                              style: TextStyle(
+                                  color: AppThemeCustom
+                                      .getProfileDialogUserStatusTierTextColor(
+                                          context),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14)),
+                        ]),
+                      )*/
+                    (provider.statusTierValue.isNotEmpty
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "${provider.statusTierValue} ",
+                                style: TextStyle(
+                                    color: AppThemeCustom
+                                        .getProfileDialogUserStatusTierTextColor(
+                                            context),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30),
+                              ),
+                              Text(
+                                "Status Credits required\nto maintain current level",
+                                style: TextStyle(
+                                    height: 1.1,
+                                    color: AppThemeCustom
+                                        .getProfileDialogUserStatusTierTextColor(
+                                            context),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14),
+                              ),
+                            ],
+                          )
+                        : SizedBox.shrink())
+                    : Text(
+                        loc.txtHowToEarnStatusCredits,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: AppThemeCustom
+                                .getProfileDialogUserStatusTierTextColor(
+                                    context),
+                            fontSize: 13),
+                      )),
             AppDimens.shape_15,
           ],
         ),

@@ -116,6 +116,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtMoreInfo => '更多信息';
 
   @override
+  String get txtMore => '更多选项';
+
+  @override
   String get txtCongratulations => '恭喜！';
 
   @override
@@ -398,7 +401,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtValidTo => '有效期至';
 
   @override
-  String get txtStatusCreditsReactNextLevel => '升级所需的状态积分';
+  String get txtStatusCreditsReactNextLevel => '等级积分###以达到下一等级';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => '需要状态积分\n才能达到下一等级';
 
   @override
   String get txtEditMyDetails => '编辑我的资料';
@@ -810,6 +816,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get txtMoreInfo => '更多信息';
 
   @override
+  String get txtMore => '更多选项';
+
+  @override
   String get txtCongratulations => '恭喜！';
 
   @override
@@ -1092,7 +1101,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get txtValidTo => '有效期至';
 
   @override
-  String get txtStatusCreditsReactNextLevel => '升级所需的状态积分';
+  String get txtStatusCreditsReactNextLevel => '等级积分###以达到下一等级';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => '需要状态积分\n才能达到下一等级';
 
   @override
   String get txtEditMyDetails => '编辑我的资料';

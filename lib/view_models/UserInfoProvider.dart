@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/data/models/VenueModel.dart';
+import '../core/utils/FlavorConstants.dart';
 import '/core/enums/FetchProfileState.dart';
 import '/core/enums/MembershipStatus.dart';
 import '/core/extensions/log_extension.dart';
@@ -318,6 +319,36 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       }
     } catch (e) {
       logEvent(e.toString());
+    }
+  }
+
+  String statusTierValue = "";
+
+  fetchStatusTierValue() async {
+    try {
+      if (_userModel != null) {
+        String userTierType = FlavorConstants.getUserTierType(_userModel!);
+
+
+        NetworkResponse networkResponse = await UserService.getInstance()
+            .fetchStatusTierValue(statusTier: userTierType);
+
+        logEvent("FETCH STATUS TIER VALUE RESPONSE $networkResponse");
+
+        if (!networkResponse.isError) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+          if (response.containsKey('success') &&
+              response['success'] == true &&
+              response.containsKey('value')) {
+            statusTierValue = response["value"].toString();
+          }
+        }
+      }
+    } catch (e) {
+      logEvent(e.toString());
+    } finally {
+      notifyListeners();
     }
   }
 

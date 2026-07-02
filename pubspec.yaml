@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-#version:  1.0.6+94
+version:  1.0.7+95
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -62,7 +62,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+7
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.1+5
+#version: 1.0.2+6
 ###################################
 # Kingscliff
 #version: 1.0.0+6
@@ -93,7 +93,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #Mannum club
 #version: 1.0.0+2
 #Southport Sharks
-version: 1.0.0+3
+#version: 1.0.0+3
 
 
 
@@ -212,10 +212,12 @@ flutter:
     - .env.dr
     - .env.mc
     - .env.ss
+    - .env.edp
+
       # flavor-wise assets
-   # - path: assets/starReward/
+  #  - path: assets/starReward/
   #    flavors:
- #         - starRewards
+  #        - starRewards
 
     - path: assets/senseOfTaste/
       flavors:
