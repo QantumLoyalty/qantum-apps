@@ -323,12 +323,13 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   }
 
   String statusTierValue = "";
+  bool showNextLevel = false;
+  bool showStatusCredit = false;
 
   fetchStatusTierValue() async {
     try {
       if (_userModel != null) {
         String userTierType = FlavorConstants.getUserTierType(_userModel!);
-
 
         NetworkResponse networkResponse = await UserService.getInstance()
             .fetchStatusTierValue(statusTier: userTierType);
@@ -342,6 +343,19 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               response['success'] == true &&
               response.containsKey('value')) {
             statusTierValue = response["value"].toString();
+
+            if(response.containsKey('nextLevel') && response['nextLevel'] is bool)
+            {
+              showNextLevel=response['nextLevel'] as bool;
+
+            }
+            if(response.containsKey('statusCredit') && response['statusCredit'] is bool)
+            {
+              showStatusCredit=response['statusCredit'] as bool;
+
+            }
+
+
           }
         }
       }

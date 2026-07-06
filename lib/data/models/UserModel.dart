@@ -136,6 +136,8 @@ class UserModel {
     statusPoints =
         json.containsKey("StatusPoints") ? json["StatusPoints"] : 0.0;
 
+
+
     if (json.containsKey("StatusTier") && json["StatusTier"] != null) {
       statusTier = json["StatusTier"];
     } else {

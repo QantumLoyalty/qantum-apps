@@ -24,9 +24,6 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
     loc = AppLocalizations.of(context)!;
     flavor = FlavorConfig.instance.flavor!;
 
-    List<String> statusCreditMsg =
-        loc.txtStatusCreditsReactNextLevel.split("###");
-
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
       statusPoints = (provider.getUserInfo != null &&
               provider.getUserInfo!.statusPoints != null)
@@ -39,189 +36,18 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
           mainAxisSize: MainAxisSize.min,
           children: [
             AppDimens.shape_5,
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "${statusCreditMsg[0].toUpperCase()}\n",
-                    style: TextStyle(
-                        color: AppThemeCustom
-                            .getProfileDialogUserStatusTierTextColor(context),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-                TextSpan(
-                    text: statusCreditMsg[1].toUpperCase(),
-                    style: TextStyle(
-                        color: AppThemeCustom
-                            .getProfileDialogUserStatusTierTextColor(context),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14)),
-              ]),
-            ),
-            20.h,
-            SizedBox(
-              height: 180,
-              child: Stack(
-                children: [
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Countup(
-                            begin: 0,
-                            end: (provider.getUserInfo != null &&
-                                    provider.getUserInfo!.statusPoints != null)
-                                ? provider.getUserInfo!.statusPoints!.toDouble()
-                                : 0,
-                            duration: const Duration(seconds: 1),
-                            style: TextStyle(
-                                color: AppThemeCustom
-                                    .getProfileDialogUserStatusTierTextColor(
-                                        context),
-                                fontWeight: FontWeight.w900,
-                                fontSize: 24)),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text:
-                                    'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
-                                style: TextStyle(
-                                    color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(
-                                            context),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20)),
-                            TextSpan(
-                                text:
-                                    '\n\n${loc.txtStatusCreditsRequiredReactNextLevel}'
-                                        .toUpperCase(),
-                                style: TextStyle(
-                                    color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(
-                                            context),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 8)),
-                          ]),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SfRadialGauge(
-                    axes: <RadialAxis>[
-                      RadialAxis(
-                        minimum: 0,
-                        maximum: 100,
-                        showLabels: false,
-                        showTicks: false,
-                        startAngle: 270,
-                        endAngle: 270,
-                        axisLineStyle: AxisLineStyle(
-                            thickness: 0.05,
-                            color: AppColors.white,
-                            thicknessUnit: GaugeSizeUnit.factor,
-                            dashArray: const <double>[3, 3]),
-                        pointers: <GaugePointer>[
-                          MarkerPointer(
-                            enableAnimation: false,
-                            value: 0,
-                            markerWidth: 20,
-                            markerHeight: 20,
-                            markerType: MarkerType.circle,
-                            color: AppColors.white,
-                          ),
-                          RangePointer(
-                            value: getCircularGraphValue(
-                                provider.getUserInfo != null
-                                    ? provider.getUserInfo!.statusPoints
-                                    : 0,
-                                provider.getUserInfo != null
-                                    ? provider.getUserInfo!
-                                        .requiredStatusPointsForNextTier
-                                    : 0),
-                            width: 0.05,
-                            sizeUnit: GaugeSizeUnit.factor,
-                            cornerStyle: CornerStyle.startCurve,
-                            enableAnimation: true,
-                            color: AppColors.white,
-                          ),
-                          MarkerPointer(
-                            enableAnimation: true,
-                            value: getCircularGraphValue(
-                                provider.getUserInfo != null
-                                    ? provider.getUserInfo!.statusPoints
-                                    : 0,
-                                provider.getUserInfo != null
-                                    ? provider.getUserInfo!
-                                        .requiredStatusPointsForNextTier
-                                    : 0),
-                            markerWidth: 25,
-                            markerHeight: 25,
-                            markerType: MarkerType.image,
-                            color: (provider.getUserInfo != null &&
-                                    provider.getUserInfo!.statusPoints != null)
-                                ? AppColors.white
-                                : Colors.transparent,
-                            imageUrl: 'assets/common/play.png',
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            flavor == Flavor.starReward
+                ? (provider.showNextLevel
+                    ? dialerWidget(context, provider)
+                    : const SizedBox(
+                        height: 200,
+                      ))
+                : dialerWidget(context, provider),
             AppDimens.shape_15,
             (flavor == Flavor.mhbc)
                 ? const SizedBox.shrink()
                 : (flavor == Flavor.starReward
-                    ? /*RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "311 ",
-                              style: TextStyle(
-                                  color: AppThemeCustom
-                                      .getProfileDialogUserStatusTierTextColor(
-                                          context),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                          TextSpan(
-                              text: "Status credits required\nto maintain current level",
-                              style: TextStyle(
-                                  color: AppThemeCustom
-                                      .getProfileDialogUserStatusTierTextColor(
-                                          context),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14)),
-                        ]),
-                      )*/
-                    (provider.statusTierValue.isNotEmpty
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "${provider.statusTierValue} ",
-                                style: TextStyle(
-                                    color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(
-                                            context),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30),
-                              ),
-                              Text(
-                                "Status Credits required\nto maintain current level",
-                                style: TextStyle(
-                                    height: 1.1,
-                                    color: AppThemeCustom
-                                        .getProfileDialogUserStatusTierTextColor(
-                                            context),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14),
-                              ),
-                            ],
-                          )
-                        : SizedBox.shrink())
+                    ? statusTierWidget(context, provider)
                     : Text(
                         loc.txtHowToEarnStatusCredits,
                         style: TextStyle(
@@ -236,6 +62,214 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
         ),
       );
     });
+  }
+
+  Widget dialerWidget(BuildContext context, UserInfoProvider provider) {
+    List<String> statusCreditMsg =
+        loc.txtStatusCreditsReactNextLevel.split("###");
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(children: [
+            TextSpan(
+                text: "${statusCreditMsg[0].toUpperCase()}\n",
+                style: TextStyle(
+                    color:
+                        AppThemeCustom.getProfileDialogUserStatusTierTextColor(
+                            context),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20)),
+            TextSpan(
+                text: statusCreditMsg[1].toUpperCase(),
+                style: TextStyle(
+                    color:
+                        AppThemeCustom.getProfileDialogUserStatusTierTextColor(
+                            context),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14)),
+          ]),
+        ),
+        20.h,
+        SizedBox(
+          height: 180,
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Countup(
+                        begin: 0,
+                        end: (provider.getUserInfo != null &&
+                                provider.getUserInfo!.statusPoints != null)
+                            ? provider.getUserInfo!.statusPoints!.toDouble()
+                            : 0,
+                        duration: const Duration(seconds: 1),
+                        style: TextStyle(
+                            color: AppThemeCustom
+                                .getProfileDialogUserStatusTierTextColor(
+                                    context),
+                            fontWeight: FontWeight.w900,
+                            fontSize: 24)),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text:
+                                'of ${provider.getUserInfo != null ? ((provider.getUserInfo!.statusPoints ?? 0) + (provider.getUserInfo!.requiredStatusPointsForNextTier ?? 0)) : "-"}',
+                            style: TextStyle(
+                                color: AppThemeCustom
+                                    .getProfileDialogUserStatusTierTextColor(
+                                        context),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20)),
+                        TextSpan(
+                            text:
+                                '\n\n${loc.txtStatusCreditsRequiredReactNextLevel}'
+                                    .toUpperCase(),
+                            style: TextStyle(
+                                color: AppThemeCustom
+                                    .getProfileDialogUserStatusTierTextColor(
+                                        context),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 8)),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              SfRadialGauge(
+                axes: <RadialAxis>[
+                  RadialAxis(
+                    minimum: 0,
+                    maximum: 100,
+                    showLabels: false,
+                    showTicks: false,
+                    startAngle: 270,
+                    endAngle: 270,
+                    axisLineStyle: AxisLineStyle(
+                        thickness: 0.05,
+                        color: AppColors.white,
+                        thicknessUnit: GaugeSizeUnit.factor,
+                        dashArray: const <double>[3, 3]),
+                    pointers: <GaugePointer>[
+                      MarkerPointer(
+                        enableAnimation: false,
+                        value: 0,
+                        markerWidth: 20,
+                        markerHeight: 20,
+                        markerType: MarkerType.circle,
+                        color: AppColors.white,
+                      ),
+                      RangePointer(
+                        value: getCircularGraphValue(
+                            provider.getUserInfo != null
+                                ? provider.getUserInfo!.statusPoints
+                                : 0,
+                            provider.getUserInfo != null
+                                ? provider.getUserInfo!
+                                    .requiredStatusPointsForNextTier
+                                : 0),
+                        width: 0.05,
+                        sizeUnit: GaugeSizeUnit.factor,
+                        cornerStyle: CornerStyle.startCurve,
+                        enableAnimation: true,
+                        color: AppColors.white,
+                      ),
+                      if (provider.getUserInfo != null &&
+                          provider.getUserInfo!.statusPoints != null &&
+                          provider.getUserInfo!.statusPoints! > 5)
+                        MarkerPointer(
+                          enableAnimation: true,
+                          value: getCircularGraphValue(
+                              provider.getUserInfo != null
+                                  ? provider.getUserInfo!.statusPoints
+                                  : 0,
+                              provider.getUserInfo != null
+                                  ? provider.getUserInfo!
+                                      .requiredStatusPointsForNextTier
+                                  : 0),
+                          markerWidth: 25,
+                          markerHeight: 25,
+                          markerType: MarkerType.image,
+                          color: (provider.getUserInfo != null &&
+                                  provider.getUserInfo!.statusPoints != null)
+                              ? AppColors.white
+                              : Colors.transparent,
+                          imageUrl: 'assets/common/play.png',
+                        )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget statusTierWidget(BuildContext context, UserInfoProvider provider) {
+    return (provider.statusTierValue.isNotEmpty && provider.showStatusCredit
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "${provider.statusTierValue} ",
+                    style: TextStyle(
+                        color: AppThemeCustom
+                            .getProfileDialogUserStatusTierTextColor(context),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                  ),
+                  Text(
+                    "Status Credits required\nto maintain current level",
+                    style: TextStyle(
+                        height: 1.1,
+                        color: AppThemeCustom
+                            .getProfileDialogUserStatusTierTextColor(context),
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14),
+                  ),
+                ],
+              ),
+              5.h,
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "You have ",
+                      style: TextStyle(
+                          color: AppThemeCustom
+                              .getProfileDialogUserStatusTierTextColor(context),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14)),
+                  TextSpan(
+                      text:
+                          "${provider.getUserInfo != null ? provider.getUserInfo!.statusPoints ?? 0 : 0}",
+                      style: TextStyle(
+                          color: AppThemeCustom
+                              .getProfileDialogUserStatusTierTextColor(context),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18)),
+                  TextSpan(
+                      text: " Status Credits",
+                      style: TextStyle(
+                          color: AppThemeCustom
+                              .getProfileDialogUserStatusTierTextColor(context),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14)),
+                ]),
+              ),
+            ],
+          )
+        : const SizedBox.shrink());
   }
 
   double getCircularGraphValue(num? currentPoint, num? requiredPoints) {
