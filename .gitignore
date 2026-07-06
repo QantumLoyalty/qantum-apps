@@ -38,6 +38,9 @@ migrate_working_dir/
 .pub-preload-cache/
 .pub-cache/
 .pub/
+/.bundle/
+/vendor/bundle/
+fastlane/report.xml
 build/
 flutter_*.png
 linked_*.ds
@@ -137,4 +140,3 @@ analysis_benchmark.json
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 .env*
-

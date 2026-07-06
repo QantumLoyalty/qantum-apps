@@ -20,6 +20,9 @@
 ### MAX GAMING APP
 ### COMMAND TO RUN THE APP : flutter run apk --flavor maxx -t lib/main_max.dart
 ### COMMAND TO BUILD THE APP : flutter build apk --release --flavor maxx -t lib/main_max.dart
+### FASTLANE BUILD COMMAND : bundle exec fastlane android build_max
+### FASTLANE UPLOAD COMMAND : bundle exec fastlane android upload_max
+### FASTLANE DOC : docs/fastlane-max-gaming.md
 
 ### COMMAND FOR TEST THE DEEP LINK
 adb shell am start \                                    
@@ -29,5 +32,4 @@ adb shell am start \
 ### Kingscliff app build ios
 ### flutter build ipa --release --flavor kingscliff -t lib/main_kc.dart
 ### flutter build ipa --release --flavor wonthaggi -t lib/main_wt.dart
-
 
