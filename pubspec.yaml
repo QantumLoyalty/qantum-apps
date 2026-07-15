@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.7+98
+#version:  1.0.7+98
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -59,10 +59,10 @@ version:  1.0.7+98
 #version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
-#version: 1.0.4+7
+#version: 1.0.5+9
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.2+6
+#version: 1.0.2+7
 ###################################
 # Kingscliff
 #version: 1.0.0+6
@@ -80,7 +80,7 @@ version:  1.0.7+98
 #version: 1.0.0+4
 ###################################
 #EDP
-#version: 1.0.1+6
+version: 1.0.2+10
 ################################.###
 #SOT
 #version: 1.21.0+1205

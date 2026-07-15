@@ -123,6 +123,12 @@
 		236ED4092DDB375700B1E8B8 /* RunnerDebug-mhbc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-mhbc.entitlements"; sourceTree = "<group>"; };
 		236ED40A2DDB377F00B1E8B8 /* RunnerProfile-mhbc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-mhbc.entitlements"; sourceTree = "<group>"; };
 		237FCD452E65538700DDAA37 /* RunnerDebug-hogansreward.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-hogansreward.entitlements"; sourceTree = "<group>"; };
+		23A50AC22FFBD364005FC01B /* RunnerProfile-bluewater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-bluewater.entitlements"; sourceTree = "<group>"; };
+		23A50AC32FFBD39D005FC01B /* RunnerRelease-bluewater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-bluewater.entitlements"; sourceTree = "<group>"; };
+		23A50AC42FFBD3D4005FC01B /* RunnerDebug-bluewater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-bluewater.entitlements"; sourceTree = "<group>"; };
+		23A568BB2FFD161C00910FEA /* RunnerDebug-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-flinders.entitlements"; sourceTree = "<group>"; };
+		23A568BC2FFD163A00910FEA /* RunnerProfile-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-flinders.entitlements"; sourceTree = "<group>"; };
+		23A568BD2FFD166100910FEA /* RunnerRelease-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-flinders.entitlements"; sourceTree = "<group>"; };
 		253C942F06B14E47147A8560 /* Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig"; sourceTree = "<group>"; };
 		2546C835E53B49906591C6D3 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27187479064BC6B12EA97B0B /* Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig"; sourceTree = "<group>"; };
@@ -726,6 +732,12 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				23A568BD2FFD166100910FEA /* RunnerRelease-flinders.entitlements */,
+				23A568BC2FFD163A00910FEA /* RunnerProfile-flinders.entitlements */,
+				23A568BB2FFD161C00910FEA /* RunnerDebug-flinders.entitlements */,
+				23A50AC42FFBD3D4005FC01B /* RunnerDebug-bluewater.entitlements */,
+				23A50AC32FFBD39D005FC01B /* RunnerRelease-bluewater.entitlements */,
+				23A50AC22FFBD364005FC01B /* RunnerProfile-bluewater.entitlements */,
 				237FCD452E65538700DDAA37 /* RunnerDebug-hogansreward.entitlements */,
 				236ED40A2DDB377F00B1E8B8 /* RunnerProfile-mhbc.entitlements */,
 				236ED4092DDB375700B1E8B8 /* RunnerDebug-mhbc.entitlements */,
@@ -4478,7 +4490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-hogansreward.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-bluewater.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -4628,7 +4640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-max.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-bluewater.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -4770,7 +4782,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-bluewater";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-starrewards.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-bluewater.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;

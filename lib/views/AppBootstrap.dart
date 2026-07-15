@@ -26,7 +26,7 @@ class _AppBootstrapState extends State<AppBootstrap> {
     _deepLinkService.init((link) {
       if (!mounted) return;
 
-      if (flavor == Flavor.starReward) {
+      if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
         final encodedLink = link.queryParameters['link'];
         if (encodedLink == null || encodedLink.isEmpty) return;
 

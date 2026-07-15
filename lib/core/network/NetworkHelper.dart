@@ -32,8 +32,13 @@ class NetworkHelper with LoggingMixin {
 
     late NetworkResponse networkResponse;
     try {
+      print(">>>${url.toString()} ->> ${jsonEncode(body)}");
+
       var response =
           await client.post(url, headers: headers, body: jsonEncode(body));
+      
+      (">>>${response.statusCode} ${response.body.toString()}").logMessage();
+      
       if (response.statusCode == 200) {
         networkResponse = NetworkResponse.success(
             responseMessage: 'Success!!', response: jsonDecode(response.body));
@@ -42,7 +47,8 @@ class NetworkHelper with LoggingMixin {
         if (kDebugMode) {
           networkException = response.body;
         } else {
-          networkException = "Network error, please try again";
+          networkException = response.body;
+          //networkException = "Network error, please try again";
         }
         networkResponse = NetworkResponse.error(
             response: jsonDecode(networkException), responseMessage: 'Error!!');

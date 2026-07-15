@@ -2,6 +2,7 @@ import '../models/NetworkResponse.dart';
 
 abstract class UserRepository {
   Future<NetworkResponse> login(String phoneNo);
+  Future<NetworkResponse> checkEmail({required String email});
 
   Future<NetworkResponse> signup(
       String phoneNo, Map<String, dynamic> signupParams);

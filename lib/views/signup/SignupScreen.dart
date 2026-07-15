@@ -5,8 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/network/APIList.dart';
+import 'package:qantum_apps/data/models/NetworkResponse.dart';
 import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
 import 'package:qantum_apps/views/signup/widgets/GenderSelector.dart';
+import 'package:qantum_apps/views/signup/widgets/SignupErrorDialog.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
@@ -332,7 +334,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
                                               isShadow: true)),
-                                  decoration: _buildCommonInputDecoration(hint: "${loc.txtAddress} 1"),
+                                  decoration: _buildCommonInputDecoration(
+                                      hint: "${loc.txtAddress} 1"),
                                 ),
                                 AppDimens.shape_10,
                                 TextFormField(
@@ -343,11 +346,12 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
                                               isShadow: true)),
-                                  decoration: _buildCommonInputDecoration(hint: "${loc.txtAddress} 2"),
+                                  decoration: _buildCommonInputDecoration(
+                                      hint: "${loc.txtAddress} 2"),
                                 ),
                               ],
                             )
-                          : Container(),
+                          : const SizedBox.shrink(),
                       Container(
                         margin: const EdgeInsets.only(top: 10),
                         width: MediaQuery.of(context).size.width,
@@ -790,8 +794,6 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     context, loc.msgEmptyPostcode);
                               }
                             }
-
-
                           }),
                     ],
                   ),
@@ -801,7 +803,14 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                   ? AppLoader(
                       loaderMessage: loc.msgPleaseWait,
                     )
-                  : Container()
+                  : const SizedBox.shrink(),
+
+              userLoginProvider.showEmailCheckLoader
+                  ? AppLoader(
+                loaderMessage: loc.msgPleaseWait,
+              )
+                  : const SizedBox.shrink()
+
             ],
           ),
         ),
@@ -848,11 +857,36 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         arguments: args);
   }
 
-  navigationEDP(Map<String, dynamic> params) {
+  navigationEDP(Map<String, dynamic> params) async {
     params['phoneNo'] = widget.argument['phoneNo']!;
     params['countryCode'] = widget.argument['countryCode']!;
-    AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
-        arguments: params);
+
+    NetworkResponse checkEmailResponse = await context
+        .read<UserLoginProvider>()
+        .checkEmail(email: params['Email']);
+
+    if (checkEmailResponse.isError) {
+    } else {
+      if (checkEmailResponse.response != null &&
+          checkEmailResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> verifyEmailResponse =
+            checkEmailResponse.response as Map<String, dynamic>;
+        if (verifyEmailResponse.containsKey("emailExists")) {
+          if (verifyEmailResponse["emailExists"] as bool) {
+            SignupErrorDialog.getInstance().showSignupErrorDialog(context);
+          } else {
+            AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
+                arguments: params);
+          }
+        } else {
+          AppHelper.showErrorMessage(context,
+              "Getting error while verifying the email, please try again");
+        }
+      } else {
+        AppHelper.showErrorMessage(context,
+            "Getting error while verifying the email, please try again");
+      }
+    }
   }
 
   bool validateData(SignupProvider provider) {

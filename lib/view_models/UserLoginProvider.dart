@@ -53,7 +53,8 @@ class UserLoginProvider extends ChangeNotifier {
         final response = networkResponse.response as Map<String, dynamic>;
 
         _networkMessage = response['message'];
-        ("LOGIN RESPONSE: ${response.toString()} && _networkMessage: $_networkMessage").logMessage();
+        ("LOGIN RESPONSE: ${response.toString()} && _networkMessage: $_networkMessage")
+            .logMessage();
 
         if (response.containsKey("isCancel") &&
             (response["isCancel"] as bool)) {
@@ -140,17 +141,24 @@ class UserLoginProvider extends ChangeNotifier {
             _networkMessage = response['message'];
           }
 
-          print(">>> $_networkMessage");
-          if (response.containsKey('userId') && response['userId'] != null) {
-            _isRegistered = true;
-
-            if (response.containsKey('thirdPartyData') &&
-                response['thirdPartyData'] is Map<String, dynamic>) {
-              _userId =
-                  (response['thirdPartyData'] as Map<String, dynamic>)['Id'];
-            }
-          } else {
+          if (_networkMessage != null &&
+              _networkMessage!.toString().trim().toLowerCase() ==
+                  ("bad request")) {
+            _networkMessage =
+                "We couldn’t complete your request at this time. Please see venue staff for assistance.";
             _isRegistered = false;
+          } else {
+            if (response.containsKey('userId') && response['userId'] != null) {
+              _isRegistered = true;
+
+              if (response.containsKey('thirdPartyData') &&
+                  response['thirdPartyData'] is Map<String, dynamic>) {
+                _userId =
+                    (response['thirdPartyData'] as Map<String, dynamic>)['Id'];
+              }
+            } else {
+              _isRegistered = false;
+            }
           }
         } else {
           _networkMessage = loc.msgCommonError;
@@ -158,8 +166,7 @@ class UserLoginProvider extends ChangeNotifier {
         }
       } else {
         _isRegistered = false;
-        _networkMessage= networkResponse.responseMessage;
-
+        _networkMessage = networkResponse.responseMessage;
       }
     } catch (e) {
       _networkError = true;
@@ -288,5 +295,22 @@ class UserLoginProvider extends ChangeNotifier {
         notifyListeners();
       });
     }
+  }
+
+  bool showEmailCheckLoader = false;
+  bool? isEmailExists;
+  bool? isErrorOnEmailCheck;
+
+  Future<NetworkResponse> checkEmail({required String email}) async {
+    showEmailCheckLoader = true;
+    notifyListeners();
+
+    NetworkResponse networkResponse =
+        await UserService.getInstance().checkEmail(email: email);
+
+    showEmailCheckLoader = false;
+    notifyListeners();
+
+    return networkResponse;
   }
 }

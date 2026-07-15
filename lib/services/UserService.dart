@@ -103,17 +103,15 @@ class UserService with LoggingMixin implements UserRepository {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-     // print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
+      // print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
 
-      String URL=APIList.GET_PROFILE + "?fetchFromBluize=$fetchFromBluize";
+      String URL = APIList.GET_PROFILE + "?fetchFromBluize=$fetchFromBluize";
       print("URL: $URL");
-      var response = await NetworkHelper.instance.postCall(
-          url: Uri.parse(URL),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
-          },
-          body: {});
+      var response =
+          await NetworkHelper.instance.postCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
+      }, body: {});
       networkResponse = response;
 
       debugPrint("USER FULL : ${networkResponse.response}", wrapWidth: 1024);
@@ -492,15 +490,15 @@ class UserService with LoggingMixin implements UserRepository {
   }
 
   @override
-  Future<NetworkResponse> fetchStatusTierValue({required String statusTier}) async {
+  Future<NetworkResponse> fetchStatusTierValue(
+      {required String statusTier}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
-      await SharedPreferenceHelper.getInstance();
+          await SharedPreferenceHelper.getInstance();
 
       var response = await NetworkHelper.instance.getCall(
-          url: Uri.parse(APIList.GET_STATUS_TIER_VALUE +
-              statusTier),
+          url: Uri.parse(APIList.GET_STATUS_TIER_VALUE + statusTier),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
@@ -510,6 +508,20 @@ class UserService with LoggingMixin implements UserRepository {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }
     return networkResponse;
+  }
 
+  @override
+  Future<NetworkResponse> checkEmail({required String email}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(
+              "${APIList.CHECK_EMAIL}$email?appType=${AppHelper.getAppType()}"));
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
   }
 }

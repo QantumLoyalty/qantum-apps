@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -24,7 +25,7 @@ class _AppWebViewState extends State<AppWebView> with LoggingMixin {
   void initState() {
     super.initState();
 
-    logEvent("WEB VIEW URL: ${widget.url}");
+    "WEB VIEW URL: ${widget.url}".toString().logMessage();
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -72,7 +73,7 @@ class _AppWebViewState extends State<AppWebView> with LoggingMixin {
                       loaderMessage: AppLocalizations.of(context)!.txtLoading,
                     ),
                   )
-                : Container()
+                : const SizedBox.shrink()
           ],
         ));
   }

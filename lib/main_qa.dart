@@ -79,12 +79,11 @@ class MyApp extends StatelessWidget {
         title: FlavorConfig.instance.flavorValues.appName!,
         theme: AppThemes.qantumTheme,
         initialRoute: AppNavigator.splash,
-        //home: const HomeScreen(),
         home: const SplashScreen(),
         builder: (context, child) {
           return MediaQuery(
               data: MediaQuery.of(context)
-                  .copyWith(textScaler: TextScaler.linear(1.0)),
+                  .copyWith(textScaler: const TextScaler.linear(1.0)),
               child: AnnotatedRegion<SystemUiOverlayStyle>(
                   value: const SystemUiOverlayStyle(
                       statusBarBrightness: Brightness.dark,

@@ -47,7 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     _phoneController = TextEditingController();
     flavor = FlavorConfig.instance.flavor!;
-    //toolbarColor = Theme.of(context).primaryColor;
     _homeProvider = context.read<HomeProvider>();
     _homeProvider.addListener(_handleGuestChewzieFromProvider);
 
@@ -56,43 +55,15 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-/*  void _handleGuestChewzieFromProvider() {
-    if (!mounted) return;
-    if (_chewzieGuestHandled) return;
-    if (flavor != Flavor.starReward) return;
 
-    final homeProvider = context.read<HomeProvider>();
-
-    if (homeProvider.startChewzieScreen != true) return;
-    if (homeProvider.deeplinkPayloads == null ||
-        homeProvider.deeplinkPayloads!.isEmpty) {
-      return;
-    }
-
-    _chewzieGuestHandled = true;
-
-    final payload = homeProvider.consumeChewzieLink();
-    if (payload == null || payload.isEmpty) return;
-
-    final decodedLink = Uri.decodeComponent(payload);
-    final uri = Uri.parse(decodedLink);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 700), () {
-        if (!mounted) return;
-
-        final routeIsCurrent = ModalRoute.of(context)?.isCurrent ?? false;
-        if (!routeIsCurrent) return;
-
-        debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
-        DeepLinkLauncher.launchChewzieUrl(context, uri);
-      });
-    });
-  }*/
   void _handleGuestChewzieFromProvider() {
     if (!mounted) return;
     if (_chewzieGuestHandled) return;
-    if (flavor != Flavor.starReward) return;
+    final isChewzieFlavor =
+        flavor == Flavor.starReward || flavor == Flavor.bluewater;
+    if (!isChewzieFlavor) return;
+
+    if (!isChewzieFlavor) return;
 
     if (_homeProvider.startChewzieScreen != true) return;
 
@@ -113,9 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
         () {
           if (!mounted) return;
 
+          Color toolbarColor= flavor == Flavor.starReward
+              ? AppColors.sr_back_color
+              : AppColors.bcc_back_color;
+
           debugPrint("LOGIN GUEST CHEWZI  E URI: $uri");
           DeepLinkLauncher.launchChewzieUrl(
-              context, uri, AppColors.sr_back_color);
+              context, uri, toolbarColor);
         },
       );
     });
@@ -123,10 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    if (flavor == Flavor.starReward) {
-      context
-          .read<HomeProvider>()
-          .removeListener(_handleGuestChewzieFromProvider);
+    if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
+      _homeProvider.removeListener(_handleGuestChewzieFromProvider);
     }
 
     _phoneController.dispose();
@@ -140,37 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Consumer2<UserLoginProvider, HomeProvider>(
             builder: (context, provider, homeProvider, child) {
-          /// HANDLING GUEST USERS FOR CHEWZEE CASE
-/*
-          if (!_chewzieGuestHandled &&
-              flavor == Flavor.starReward &&
-              homeProvider.deeplinkPayloads != null &&
-              homeProvider.deeplinkPayloads!.isNotEmpty) {
-            _chewzieGuestHandled = true;
-
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (!mounted) return;
-
-              final decodedLink =
-                  Uri.decodeComponent(homeProvider.deeplinkPayloads!);
-              final uri = Uri.parse(decodedLink);
-
-              homeProvider.resetDeepLinkNavigation();
-
-              Future.delayed(const Duration(milliseconds: 700), () {
-                if (!mounted) return;
-
-                final routeIsCurrent =
-                    ModalRoute.of(context)?.isCurrent ?? false;
-                if (!routeIsCurrent) return;
-
-                "DEEP LINK URI: $uri".logMessage();
-                DeepLinkLauncher.launchChewzieUrl(context, uri);
-              });
-            });
-          }
-*/
-
           /// CHECKING USER STATUS & NAVIGATING AS PER THE STATUS
           if (provider.isExistingUser != null) {
             Future.delayed(Duration.zero, () {
@@ -405,31 +347,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-/*  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
 
-    final homeProvider = context.watch<HomeProvider>();
-
-    if (_chewzieGuestHandled) return;
-    if (flavor != Flavor.starReward) return;
-    if (homeProvider.startChewzieScreen != true) return;
-    if (homeProvider.deeplinkPayloads == null) return;
-
-    _chewzieGuestHandled = true;
-
-    final payload = homeProvider.consumeChewzieLink();
-    if (payload == null || payload.isEmpty) return;
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-
-      final decodedLink = Uri.decodeComponent(payload);
-      final uri = Uri.parse(decodedLink);
-
-      DeepLinkLauncher.launchChewzieUrl(context, uri);
-    });
-  }*/
 
   List<TextSpan> _buildLocalizedChangeMyMobile(BuildContext context) {
     // Use a temporary marker where the bold word should go

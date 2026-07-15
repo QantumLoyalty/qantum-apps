@@ -1,13 +1,14 @@
 class APIList {
   // SANDBOX
 
-
- //static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
-  static get BASE_URL => "https://api.s2w.com.au/";
+ // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
+
+  static get CHECK_EMAIL => BASE_URL + "user/check-email/";
 
   static get REGISTRATION => BASE_URL + "user/register/";
 
@@ -73,14 +74,15 @@ class APIList {
   static get CLUB_PACKAGE_CHECK => BASE_URL + "club-package/user?packageId=";
 
   static get FETCH_VENUES_LIST => BASE_URL + "venue/all?";
-  static get SAVE_VENUE => BASE_URL + "user/venue-update";
-  static get GET_STATUS_TIER_VALUE => BASE_URL + "status-tier/getByRating?key=";
 
+  static get SAVE_VENUE => BASE_URL + "user/venue-update";
+
+  static get GET_STATUS_TIER_VALUE => BASE_URL + "status-tier/getByRating?key=";
 
   /// SMART INCENTIVES APIS ///
   static get GET_SMART_INCENTIVES => BASE_URL + "smart-incentive/check-user";
-  static get ISSUE_SMART_INCENTIVES => BASE_URL + "smart-incentive/issue-user";
 
+  static get ISSUE_SMART_INCENTIVES => BASE_URL + "smart-incentive/issue-user";
 
   /// UNITED FUELS APIS ///
   static get VALIDATE_USER => BASE_URL + "fuel/validate/";
@@ -102,6 +104,7 @@ class APIList {
       BASE_URL + "payment/verify-payment-early";
 
   static get UPDATE_PAYMENT_TYPE => BASE_URL + "user/payment-update";
+
   static get UPDATE_PAYMENT_TYPE_EARLY_BIRD =>
       BASE_URL + "user/early-payment-update";
 

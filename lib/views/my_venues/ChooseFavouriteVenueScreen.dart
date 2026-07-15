@@ -10,6 +10,7 @@ import 'package:qantum_apps/views/common_widgets/AppLogo.dart';
 import 'package:qantum_apps/views/common_widgets/AppScaffold.dart';
 
 import '../../core/extensions/spacer_extension.dart';
+import '../../core/flavors_config/app_theme_custom.dart';
 import '../../view_models/UserInfoProvider.dart';
 import '../common_widgets/AppLoader.dart';
 
@@ -64,92 +65,114 @@ class _ChooseFavouriteVenueScreenState
           });
         }
 
-        return Column(
+        return Stack(
           children: [
-            Applogo(
-              hideTopLine: true,
-            ),
-            Expanded(
-                child: Stack(
-              children: [
-                (userInfoProvider.venuesList != null &&
-                        userInfoProvider.venuesList!.isNotEmpty)
-                    ? Column(
-                        children: [
-                          Text(
-                            loc.selectEDPVenues,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor,
-                              fontSize: 18,
-                            ),
-                          ),
-                          20.h,
-
-                          /// ✅ FIX: Wrap with Expanded
-                          Expanded(
-                              child: SingleChildScrollView(
-                            child: RadioGroup<String>(
-                              groupValue: userInfoProvider.selectedVenue,
-                              onChanged: (value) {
-                                userInfoProvider.selectVenue(value!);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                child: Column(
-                                  children:
-                                      userInfoProvider.venuesList!.map((item) {
-                                    return RadioListTile<String>(
-                                        value: item.name!,
-                                        title: Text(item.name ?? "",
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .textSelectionTheme
-                                                  .selectionColor,
-                                            )));
-                                  }).toList(),
+            Positioned.fill(
+              child: Column(
+                children: [
+                  Applogo(
+                    hideTopLine: true,
+                  ),
+                  Expanded(
+                      child: Stack(
+                    children: [
+                      (userInfoProvider.venuesList != null &&
+                              userInfoProvider.venuesList!.isNotEmpty)
+                          ? Column(
+                              children: [
+                                Text(
+                                  loc.selectEDPVenues,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                            ),
-                          )),
-                        ],
-                      )
-                    : const SizedBox.shrink(),
-                userInfoProvider.showVenuesListLoader != null &&
-                        userInfoProvider.showVenuesListLoader!
-                    ? AppLoader()
-                    : const SizedBox.shrink(),
-                loginProvider.showLoader
-                    ? AppLoader(
-                        loaderMessage: loc.msgPleaseWait,
-                      )
-                    : Container()
-              ],
-            )),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 25.0, right: 25.0, top: 20, bottom: 20),
-              child: AppCustomButton(
-                text: loc.txtSaveMyVenue.toString(),
-                textColor: AppHelper.getAccountsButtonTextColor(context),
-                onClick: () {
-                  if (userInfoProvider.selectedVenue != null &&
-                      userInfoProvider.selectedVenue!.isNotEmpty) {
-                    String phoneNo =
-                        "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
-                    widget.argument["venueName"] =
-                        userInfoProvider.selectedVenue!;
-                    loginProvider.signup(phoneNo, widget.argument, loc: loc);
-                  } else {
-                    AppHelper.showErrorMessage(context, loc.selectEDPVenues);
-                  }
-                },
-                style: AppHelper.getAccountsButtonStyle(context),
+                                20.h,
+              
+                                /// ✅ FIX: Wrap with Expanded
+                                Expanded(
+                                    child: SingleChildScrollView(
+                                  child: RadioGroup<String>(
+                                    groupValue: userInfoProvider.selectedVenue,
+                                    onChanged: (value) {
+                                      userInfoProvider.selectVenue(value!);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 10),
+                                      child: Column(
+                                        children:
+                                            userInfoProvider.venuesList!.map((item) {
+                                          return RadioListTile<String>(
+                                              value: item.name!,
+                                              title: Text(item.name ?? "",
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textSelectionTheme
+                                                        .selectionColor,
+                                                  )));
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                              ],
+                            )
+                          : const SizedBox.shrink(),
+                      userInfoProvider.showVenuesListLoader != null &&
+                              userInfoProvider.showVenuesListLoader!
+                          ? AppLoader()
+                          : const SizedBox.shrink(),
+                      loginProvider.showLoader
+                          ? AppLoader(
+                              loaderMessage: loc.msgPleaseWait,
+                            )
+                          : Container()
+                    ],
+                  )),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 25.0, right: 25.0, top: 20, bottom: 20),
+                    child: AppCustomButton(
+                      text: loc.txtSaveMyVenue.toString(),
+                      textColor: AppHelper.getAccountsButtonTextColor(context),
+                      onClick: () {
+                        if (userInfoProvider.selectedVenue != null &&
+                            userInfoProvider.selectedVenue!.isNotEmpty) {
+                          String phoneNo =
+                              "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
+                          widget.argument["venueName"] =
+                              userInfoProvider.selectedVenue!;
+                          loginProvider.signup(phoneNo, widget.argument, loc: loc);
+                        } else {
+                          AppHelper.showErrorMessage(context, loc.selectEDPVenues);
+                        }
+                      },
+                      style: AppHelper.getAccountsButtonStyle(context),
+                    ),
+                  )
+                ],
               ),
-            )
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.chevron_left,
+                      size: 28,
+                      color:
+                      AppThemeCustom.getAccountHeaderColor(context),
+                    ),
+                  )),
+            ),
           ],
         );
       }),

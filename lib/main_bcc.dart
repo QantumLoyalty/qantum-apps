@@ -20,6 +20,8 @@ import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'views/AppBootstrap.dart';
+
 void main() async {
   FlavorConfig(
       flavor: Flavor.bluewater,
@@ -74,37 +76,39 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
-      child: Portal(
-        child: MaterialApp(
-          onGenerateRoute: AppNavigator.generateRoute,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('hi'),
-            Locale('zh', 'CN')
-          ],
-          title: FlavorConfig.instance.flavorValues.appName!,
-          theme: AppThemes.bluewaterTheme,
-          initialRoute: AppNavigator.splash,
-          builder: (context, child) {
-            return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: TextScaler.linear(1.0)),
-                child: AnnotatedRegion<SystemUiOverlayStyle>(
-                    value: const SystemUiOverlayStyle(
-                        statusBarBrightness: Brightness.dark,
-                        statusBarColor: Colors.transparent,
-                        statusBarIconBrightness: Brightness.light),
-                    child: child ?? const SizedBox())
-            );
-          },
-          home: const SplashScreen(),
+      child: AppBootstrap(
+        child: Portal(
+          child: MaterialApp(
+            onGenerateRoute: AppNavigator.generateRoute,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('hi'),
+              Locale('zh', 'CN')
+            ],
+            title: FlavorConfig.instance.flavorValues.appName!,
+            theme: AppThemes.bluewaterTheme,
+            initialRoute: AppNavigator.splash,
+            builder: (context, child) {
+              return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: TextScaler.linear(1.0)),
+                  child: AnnotatedRegion<SystemUiOverlayStyle>(
+                      value: const SystemUiOverlayStyle(
+                          statusBarBrightness: Brightness.dark,
+                          statusBarColor: Colors.transparent,
+                          statusBarIconBrightness: Brightness.light),
+                      child: child ?? const SizedBox())
+              );
+            },
+            home: const SplashScreen(),
+          ),
         ),
       ),
     );

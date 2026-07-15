@@ -43,6 +43,14 @@ android {
                     deeplinkPath: "/"
             ]
         }
+        bluewater {
+            dimension "app"
+            applicationId "com.au.bluewater.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "thebluewater-applink.chewzie.net",
+                    deeplinkPath: "/"
+            ]
+        }
         senseOfTaste {
             dimension "app"
             applicationId "au.com.senseoftaste.app"
@@ -142,14 +150,6 @@ android {
         woollahra {
             dimension "app"
             applicationId "com.au.woollahra.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid",
-                    deeplinkPath: "/.*"
-            ]
-        }
-        bluewater {
-            dimension "app"
-            applicationId "com.au.bluewater.app"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid",
                     deeplinkPath: "/.*"

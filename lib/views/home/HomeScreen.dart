@@ -184,8 +184,7 @@ class _HomeScreenState extends State<HomeScreen>
                             userInfoProvider.getUserInfo!.membershipExpiryDate!,
                         membershipExpiry: provider
                             .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
-                  logEvent(
-                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+                  logEvent("ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
 
                   /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
 
@@ -557,7 +556,7 @@ class _HomeScreenState extends State<HomeScreen>
 
       if (provider.deeplinkPayloads == null) return;
 
-      if (flavor == Flavor.starReward) {
+      if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
         _prepareChewzie(provider, userInfoProvider);
         return;
       }

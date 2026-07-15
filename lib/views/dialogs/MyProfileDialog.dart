@@ -226,7 +226,6 @@ class MyProfileDialog with LoggingMixin {
                                           (flavor == Flavor.clh ||
                                                   flavor ==
                                                       Flavor.montaukTavern ||
-                                                  flavor == Flavor.flinders ||
                                                   flavor ==
                                                       Flavor.drinkRewards ||
                                                   flavor ==

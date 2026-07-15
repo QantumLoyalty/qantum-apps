@@ -4,6 +4,7 @@ import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '/view_models/DocumentScanProvider.dart';
 import '/view_models/MembershipManagerProvider.dart';
 import '../core/flavors_config/app_themes.dart';
@@ -39,11 +40,11 @@ void main() async {
 
     runApp(const MyApp());
 
-    print("Permission: ${await OneSignal.Notifications.permission}");
+    ("Permission: ${await OneSignal.Notifications.permission}").logMessage();
     var state = OneSignal.User.pushSubscription;
-    print("Subscribed: ${state.optedIn}");
-    print("Token: ${state.token}");
-    print("Status: ${state.toString()}");
+    ("Subscribed: ${state.optedIn}").logMessage();
+    ("Token: ${state.token}").logMessage();
+    ("Status: ${state.toString()}").logMessage();
   });
 }
 
