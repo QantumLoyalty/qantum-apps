@@ -100,7 +100,9 @@
             </intent-filter>
 
         </activity>
-
+        <meta-data
+            android:name="com.onesignal.NotificationServiceExtension"
+            android:value="com.au.NotificationServiceExtension" />
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

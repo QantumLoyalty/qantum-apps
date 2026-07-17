@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
+import 'package:qantum_apps/views/home/notification_screen.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -137,25 +140,45 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                   ),
                 ),
                 Expanded(
-                  child: Column(
+                  child: Stack(
+                    alignment: Alignment.centerRight,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Consumer2<HomeProvider, UserInfoProvider>(
-                            builder:
-                                (context, provider, userInfoProvider, child) {
+                      if (flavor == Flavor.southportSharks)
+                        Positioned(
+                          right: 56, // profile column ki width + spacing ke hisaab se adjust karo
+                          top: 0,
+                          bottom: 0,
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () async {
+                                final sph = await SharedPreferenceHelper.getInstance();
+                                final currentUserId = sph.getUserData()?.id ?? 'guest';
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          NotificationsScreen(userId: currentUserId),
+                                    ));
+                              },
+                              icon: Icon(
+                                Icons.notifications_outlined,
+                                color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      Consumer2<HomeProvider, UserInfoProvider>(
+                        builder: (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
                               if (userInfoProvider.getUserInfo != null &&
-                                  !userInfoProvider.getUserInfo!
-                                      .isUserStatusCancelled()) {
-                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
+                                  !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
                                 if (provider.showSeeAllMenu) {
-                                  provider.updateShowAllMenuVisibility(
-                                      false, "my profile");
+                                  provider.updateShowAllMenuVisibility(false, "my profile");
                                 }
-                                MyProfileDialog.getInstance()
-                                    .showMyProfileDialog(context);
+                                MyProfileDialog.getInstance().showMyProfileDialog(context);
                               }
                             },
                             child: Column(
@@ -167,39 +190,29 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   AppIcons.my_profile,
                                   width: 34,
                                   height: 34,
-                                  color:
-                                      (userInfoProvider.getUserInfo != null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
-                                          ? AppColors.disable_color
-                                          : AppThemeCustom
-                                              .getHomeScreenProfileIconColor(
-                                                  context),
+                                  color: (userInfoProvider.getUserInfo != null &&
+                                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                      ? AppColors.disable_color
+                                      : AppThemeCustom.getHomeScreenProfileIconColor(context),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!
-                                      .txtMyProfile
-                                      .toUpperCase(),
+                                  AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.bold,
-                                      color: (userInfoProvider.getUserInfo !=
-                                                  null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
+                                      color: (userInfoProvider.getUserInfo != null &&
+                                          userInfoProvider.getUserInfo!.isUserStatusCancelled())
                                           ? AppColors.disable_color
-                                          : Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor),
+                                          : Theme.of(context).textSelectionTheme.selectionColor),
                                 )
                               ],
                             ),
                           );
-                        }),
+                        },
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

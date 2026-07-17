@@ -337,7 +337,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
             }
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
+              AppNavigator.navigateTo(context, AppNavigator.otp,
                   arguments: args);
             });
           }

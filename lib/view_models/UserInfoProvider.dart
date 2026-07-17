@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/data/models/VenueModel.dart';
+import 'package:qantum_apps/main_ss.dart';
 import '../core/utils/FlavorConstants.dart';
 import '/core/enums/FetchProfileState.dart';
 import '/core/enums/MembershipStatus.dart';
@@ -115,6 +116,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         .logMessage();
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
+      await syncCurrentUserIdToNative(_userModel!.id ?? 'guest');  // 👈 NAYI LINE
     }
 
     notifyListeners();
@@ -145,7 +147,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);
           _userModel = userModel;
-
+          await syncCurrentUserIdToNative(userModel.id ?? 'guest');   // 👈 NAYI LINE
           if (AppHelper.isClubApp()) {
             if (response.containsKey("serverTime")) {
               _userModel!.serverTime = response["serverTime"];
@@ -1043,6 +1045,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         // 🧹 CLEAR USER STATE
         _userModel = null;
         _tempUser = null;
+        SharedPreferenceHelper sph = await SharedPreferenceHelper.getInstance();
+        await sph.clearAll();
+        await syncCurrentUserIdToNative('guest');
       } else {
         _logoutSuccess = false;
       }

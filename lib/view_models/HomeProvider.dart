@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
+import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
+import 'package:qantum_apps/services/notification_services.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/MoreButtonModel.dart';
@@ -30,6 +32,36 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   Map<int, dynamic>? _moreButtonsMap;
 
   Map<int, dynamic>? get moreButtonsMap => _moreButtonsMap;
+
+  List<NotificationModel> _notifications = [];
+  List<NotificationModel> get notifications => _notifications;
+
+  String? _notificationUserId;
+
+  void loadNotifications(String userId) {
+    _notificationUserId = userId;
+    _notifications = NotificationHiveService.getForUser(userId);
+    notifyListeners();
+  }
+
+  Future<void> refreshNotifications() async {
+    if (_notificationUserId == null) return;
+    _notifications = NotificationHiveService.getForUser(_notificationUserId!);
+    notifyListeners();
+  }
+
+  Future<void> onTapNotification(NotificationModel n) async {
+    if (n.isRead) return;
+    await NotificationHiveService.markAsRead(
+      id: n.id,
+      userId: n.userId,
+      title: n.title,
+      body: n.body,
+      imageUrl: n.imageUrl,
+      payload: n.payload,
+    );
+    await refreshNotifications();
+  }
 
   updateSelectedOption(int value) {
     if (_homeNavigationList[_selectedOption].type ==

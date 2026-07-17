@@ -1478,6 +1478,12 @@ abstract class AppLocalizations {
   /// **'You are about to delete your account.'**
   String get deleteAccountWarning;
 
+  /// No description provided for @txtNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get txtNotification;
+
   /// No description provided for @deleteAccountPermanentMessage.
   ///
   /// In en, this message translates to:

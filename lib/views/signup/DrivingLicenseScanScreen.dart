@@ -50,10 +50,10 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
     _flipController = FlipCardController();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<DocumentScanProvider>(context, listen: false).resetNavigated();
       _initCamera();
     });
 
-    Provider.of<DocumentScanProvider>(context, listen: false).resetNavigated();
   }
 
   /// Handle app pause/resume to prevent freeze on iOS
@@ -98,7 +98,7 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    _controller!.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
