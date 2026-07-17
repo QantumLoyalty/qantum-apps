@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
       _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
+      _loadNotificationsForCurrentUser();
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
     }
@@ -102,6 +103,12 @@ class _HomeScreenState extends State<HomeScreen>
     if (_pointsDialogTimer != null && _pointsDialogTimer!.isActive) {
       _pointsDialogTimer!.cancel();
     }
+  }
+  Future<void> _loadNotificationsForCurrentUser() async {
+    final sph = await SharedPreferenceHelper.getInstance();
+    final currentUserId = sph.getUserData()?.id ?? 'guest';
+    if (!mounted) return; // async gap ke baad check zaroori
+    _homeProvider.loadNotifications(currentUserId);
   }
 
   @override

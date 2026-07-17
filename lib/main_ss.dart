@@ -10,6 +10,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/services/notification_services.dart';
@@ -92,7 +93,7 @@ Future<void> migratePendingNativeNotifications() async {
       }
     }
 
-    print('[Migration] migration complete');
+    ('[Migration] migration complete').logMessage();
   } on MissingPluginException {
     print('[Migration] native channel available nahi hai - skip');
   } catch (e) {

@@ -669,7 +669,7 @@ class AppHelper with LoggingMixin {
       Flavor.qantumClub,
       Flavor.maxClub,
       Flavor.mannumClub,
-      Flavor.southportSharks,
+     // Flavor.southportSharks,
     };
     return clubFlavors.contains(flavor);
   }

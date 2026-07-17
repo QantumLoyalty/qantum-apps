@@ -38,6 +38,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
 
   String? _notificationUserId;
 
+  int get unreadCount => _notifications.where((n) => !n.isRead).length;
+
+
   void loadNotifications(String userId) {
     _notificationUserId = userId;
     _notifications = NotificationHiveService.getForUser(userId);

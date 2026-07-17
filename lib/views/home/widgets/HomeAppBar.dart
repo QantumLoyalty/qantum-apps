@@ -143,9 +143,9 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                   child: Stack(
                     alignment: Alignment.centerRight,
                     children: [
-                      if (flavor == Flavor.southportSharks)
+                      /*if (flavor == Flavor.southportSharks)
                         Positioned(
-                          right: 56, // profile column ki width + spacing ke hisaab se adjust karo
+                          right: 60, // profile column ki width + spacing ke hisaab se adjust karo
                           top: 0,
                           bottom: 0,
                           child: Center(
@@ -164,10 +164,78 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               icon: Icon(
                                 Icons.notifications_outlined,
                                 color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                size: 34,
                               ),
                             ),
                           ),
                         ),
+                      */
+                      if (flavor == Flavor.southportSharks)
+                        Positioned(
+                          right: 60,
+                          top: 0,
+                          bottom: 0,
+                          child: Center(
+                            child: Consumer<HomeProvider>(
+                              builder: (context, homeProvider, child) {
+                                final unreadCount = homeProvider.unreadCount;
+                                return Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () async {
+                                        final sph = await SharedPreferenceHelper.getInstance();
+                                        final currentUserId = sph.getUserData()?.id ?? 'guest';
+
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  NotificationsScreen(userId: currentUserId),
+                                            ));
+                                      },
+                                      icon: Icon(
+                                        Icons.notifications_none_rounded,
+                                        color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                        size: 36,
+                                      ),
+                                    ),
+                                    if (unreadCount > 0)
+                                      Positioned(
+                                        right: 8,
+                                        top: 10,
+                                        child: Container(
+                                          width: 18,
+                                          height:18,
+                                          constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(2000),
+                                            border: Border.all(color: Colors.white, width: 1),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              unreadCount > 99 ? '99+' : unreadCount.toString(),
+
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.bold,
+                                               // height: 1.2,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+
+
 
                       Consumer2<HomeProvider, UserInfoProvider>(
                         builder: (context, provider, userInfoProvider, child) {
