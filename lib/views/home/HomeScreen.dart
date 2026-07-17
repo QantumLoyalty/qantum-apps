@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.edp,
     Flavor.mosaic,
     Flavor.mannumClub,
-
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
@@ -89,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen>
       logEvent("SELECTED FLAVOR $flavor");
     }
   }
+
   String? _lastHandledChewziePayload;
   DateTime? _lastHandledChewzieTime;
 
@@ -159,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen>
                 !provider.clubPackageCheckStatus) {
               provider.getClubPackageInfo(
                   membershipID: userInfoProvider.getUserInfo!.packageId);
-
             }
 
             /// CHECKING FOR THE EARLY BIRD DIALOG
@@ -184,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen>
                             userInfoProvider.getUserInfo!.membershipExpiryDate!,
                         membershipExpiry: provider
                             .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
-                  logEvent("ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+                  logEvent(
+                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
 
                   /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
 
@@ -556,7 +556,9 @@ class _HomeScreenState extends State<HomeScreen>
 
       if (provider.deeplinkPayloads == null) return;
 
-      if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
+      if (flavor == Flavor.starReward ||
+          flavor == Flavor.bluewater ||
+          flavor == Flavor.flinders) {
         _prepareChewzie(provider, userInfoProvider);
         return;
       }
@@ -622,7 +624,6 @@ class _HomeScreenState extends State<HomeScreen>
       debugPrint("Chewzie userInfo timeout/failure, opening without card: $e");
       _handlePreparedDeepLink(uri);
     }
-
   }
 
   bool _isDuplicateChewzieLaunch(String payload) {
@@ -662,11 +663,9 @@ class _HomeScreenState extends State<HomeScreen>
 
     final uri = Uri.parse(payload);
 
-
     final modifiedExistingSegments = uri.pathSegments.map((segment) {
       return segment == 'qr-code' ? 'qantum' : segment;
     });
-
 
     final updatedUri = uri.replace(
       pathSegments: [
@@ -769,8 +768,7 @@ class _HomeScreenState extends State<HomeScreen>
     final lastShownDate = prefs.getLastEarlyBirdDialogDate();
     final today = AppDateFormatter.formatDateForEarlyBird(DateTime.now());
     logEvent("lastShownDate >> $lastShownDate");
-    if (lastShownDate != today)
-    {
+    if (lastShownDate != today) {
       await EarlyRenewalMembershipDialog.getInstance()
           .showRenewalMembershipDialog(
               context: context,

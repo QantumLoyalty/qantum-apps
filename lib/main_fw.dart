@@ -21,6 +21,8 @@ import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'views/AppBootstrap.dart';
+
 void main() async {
   FlavorConfig(
       flavor: Flavor.flinders,
@@ -77,31 +79,33 @@ class _MyAppState extends State<MyApp> {
             create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
       ],
-      child: Portal(
-        child: MaterialApp(
-          onGenerateRoute: AppNavigator.generateRoute,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('hi'),
-            Locale('zh', 'CN')
-          ],
-          title: FlavorConfig.instance.flavorValues.appName!,
-          theme: AppThemes.flindersTheme,
-          initialRoute: AppNavigator.splash,
-          builder: (context, child) {
-            return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: child!);
-          },
-          home: const SplashScreen(),
+      child: AppBootstrap(
+        child: Portal(
+          child: MaterialApp(
+            onGenerateRoute: AppNavigator.generateRoute,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('hi'),
+              Locale('zh', 'CN')
+            ],
+            title: FlavorConfig.instance.flavorValues.appName!,
+            theme: AppThemes.flindersTheme,
+            initialRoute: AppNavigator.splash,
+            builder: (context, child) {
+              return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: child!);
+            },
+            home: const SplashScreen(),
+          ),
         ),
       ),
     );

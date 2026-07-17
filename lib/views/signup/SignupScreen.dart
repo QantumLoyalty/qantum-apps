@@ -1,18 +1,16 @@
+import 'dart:async';
+
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/extensions/log_extension.dart';
-import 'package:qantum_apps/core/network/APIList.dart';
-import 'package:qantum_apps/data/models/NetworkResponse.dart';
-import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
-import 'package:qantum_apps/views/signup/widgets/GenderSelector.dart';
-import 'package:qantum_apps/views/signup/widgets/SignupErrorDialog.dart';
+import '/core/extensions/log_extension.dart';
+import '/core/network/APIList.dart';
+import '/data/models/NetworkResponse.dart';
+import '/views/signup/widgets/GenderSelector.dart';
 import '../../core/flavors_config/flavor_config.dart';
-import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
-
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
@@ -39,12 +37,21 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _emailController;
+
+  Timer? _emailDebounce;
+  bool _isCheckingEmail = false;
+  bool _showDuplicateEmailMsg = false;
+
+  String? _lastCheckedEmail;
+
+
   late TextEditingController _postcodeController;
   late TextEditingController _birthdayDDController;
   late TextEditingController _birthdayMMController;
   late TextEditingController _birthdayYYController;
   late TextEditingController _addressController;
   late TextEditingController _address1Controller;
+
   late FocusNode _birthdayDDFocusNode;
   late FocusNode _birthdayMMFocusNode;
   late FocusNode _birthdayYYFocusNode;
@@ -71,6 +78,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
     _lastNameController = TextEditingController(text: lastName);
     _emailController = TextEditingController();
+
+    _emailController.addListener(_handleEmailControllerChange);
 
     _birthdayDDFocusNode = FocusNode();
     _birthdayMMFocusNode = FocusNode();
@@ -127,6 +136,9 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
+
+    _emailDebounce?.cancel();
+    _emailController.removeListener(_handleEmailControllerChange);
     _emailController.dispose();
     _postcodeController.dispose();
     _birthdayDDController.dispose();
@@ -138,6 +150,146 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     _addressController.dispose();
     _address1Controller.dispose();
     super.dispose();
+  }
+
+  bool? _isDuplicateEmail = null;
+
+  void _handleEmailControllerChange() async {
+    if (flavor != Flavor.edp) {
+      return;
+    }
+    _emailDebounce?.cancel();
+
+    final email = _emailController.text.trim().toLowerCase();
+    if (email.isEmpty || !AppHelper.verifyEmailAddress(email)) {
+      _clearEmailCheckResult();
+      return;
+    }
+
+    if (_lastCheckedEmail == email && _isDuplicateEmail != null) {
+      return;
+    }
+
+    _emailDebounce = Timer(
+      const Duration(milliseconds: 700),
+      () => _checkEnteredEmail(email),
+    );
+
+/*
+    setState(() {
+      _isCheckingEmail = true;
+      _emailExists = null;
+    });
+
+    NetworkResponse checkEmailResponse =
+        await context.read<UserLoginProvider>().checkEmail(email: email);
+    if (!mounted) return;
+
+    if (checkEmailResponse.isError) {
+    } else {
+      if (checkEmailResponse.response != null &&
+          checkEmailResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> verifyEmailResponse =
+            checkEmailResponse.response as Map<String, dynamic>;
+        if (verifyEmailResponse.containsKey("emailExists")) {
+          if (verifyEmailResponse["emailExists"] as bool) {
+            _isDuplicateEmail = true;
+            _showDuplicateEmailMsg = true;
+          } else {
+            _isDuplicateEmail = false;
+            _showDuplicateEmailMsg = false;
+          }
+        } else {
+          AppHelper.showErrorMessage(context,
+              "Getting error while verifying the email, please try again");
+        }
+      } else {
+        AppHelper.showErrorMessage(context,
+            "Getting error while verifying the email, please try again");
+      }
+    }
+
+    setState(() {
+      _isCheckingEmail = false;
+    });
+
+    Future.delayed(Duration(seconds: 2), () {
+      _showDuplicateEmailMsg = false;
+    });
+*/
+  }
+
+  Future<void> _checkEnteredEmail(String email) async {
+    setState(() {
+      _isCheckingEmail = true;
+      _isDuplicateEmail = null;
+      _showDuplicateEmailMsg = false;
+    });
+
+    final NetworkResponse checkEmailResponse =
+        await context.read<UserLoginProvider>().checkEmail(
+              email: email,
+            );
+
+    if (!mounted) return;
+
+    final currentEmail = _emailController.text.trim().toLowerCase();
+
+    // Ignore the response if the user changed the email.
+    if (currentEmail != email) {
+      setState(() {
+        _isCheckingEmail = false;
+      });
+      return;
+    }
+
+    if (checkEmailResponse.isError) {
+      setState(() {
+        _isCheckingEmail = false;
+        _isDuplicateEmail = null;
+        _showDuplicateEmailMsg = false;
+      });
+
+      AppHelper.showErrorMessage(
+        context,
+        'Unable to verify the email. Please try again.',
+      );
+      return;
+    }
+
+    final response = checkEmailResponse.response;
+
+    if (response is! Map<String, dynamic> || response['emailExists'] is! bool) {
+      setState(() {
+        _isCheckingEmail = false;
+      });
+
+      AppHelper.showErrorMessage(
+        context,
+        'Getting error while verifying the email, please try again',
+      );
+      return;
+    }
+
+    final bool emailExists = response['emailExists'] as bool;
+
+    setState(() {
+      _isCheckingEmail = false;
+      _isDuplicateEmail = emailExists;
+      _showDuplicateEmailMsg = emailExists;
+      _lastCheckedEmail = email;
+    });
+  }
+
+  void _clearEmailCheckResult() {
+    if (!mounted) return;
+
+    setState(() {
+      _isCheckingEmail = false;
+      _isDuplicateEmail = null;
+      _showDuplicateEmailMsg = false;
+      _lastCheckedEmail = null;
+    });
   }
 
   @override
@@ -301,9 +453,27 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
                           return null;
                         },
-                        decoration:
-                            _buildCommonInputDecoration(hint: loc.hintEmail),
+                        decoration: _buildCommonInputDecoration(
+                            hint: loc.hintEmail, isEmail: true),
                       ),
+                      (_showDuplicateEmailMsg && flavor == Flavor.edp)
+                          ? Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(left: 6,right: 6),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10))),
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 8, bottom: 8),
+                              child: const Text(
+                                "This Email ID is already registered, please use another one.",
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 12),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                       AppHelper.isClubApp()
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -702,6 +872,16 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           text: loc.txtJoinNow.toUpperCase(),
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
+                              // Stop EDP registration when the email is already registered.
+                              if (flavor == Flavor.edp &&
+                                  _isDuplicateEmail == true) {
+                                AppHelper.showErrorMessage(
+                                  context,
+                                  "This Email ID is already registered. Please use another email ID.",
+                                );
+                                return;
+                              }
+
                               if (_postcodeController.text.isNotEmpty) {
                                 if (validateData(provider)) {
                                   if (provider.tcCheckStatus) {
@@ -804,13 +984,11 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                       loaderMessage: loc.msgPleaseWait,
                     )
                   : const SizedBox.shrink(),
-
-              userLoginProvider.showEmailCheckLoader
+              /*userLoginProvider.showEmailCheckLoader
                   ? AppLoader(
-                loaderMessage: loc.msgPleaseWait,
-              )
-                  : const SizedBox.shrink()
-
+                      loaderMessage: loc.msgPleaseWait,
+                    )
+                  : const SizedBox.shrink()*/
             ],
           ),
         ),
@@ -818,7 +996,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     }));
   }
 
-  InputDecoration _buildCommonInputDecoration({required String hint}) {
+  InputDecoration _buildCommonInputDecoration(
+      {required String hint, bool? isEmail}) {
     final transparentBorder = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(10),
@@ -829,6 +1008,11 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       filled: true,
       counterText: "",
       hintText: hint,
+      suffixIcon: (isEmail != null && isEmail)
+          ? Center(
+              widthFactor: 1, heightFactor: 1, child: emailCheckStatusWidget())
+          : null,
+      suffixIconConstraints: const BoxConstraints(minHeight: 40, minWidth: 40),
       hintStyle: TextStyle(
           color: AppThemeCustom.getHintTextFieldColor(context, isShadow: true),
           fontWeight: FontWeight.w400),
@@ -840,6 +1024,70 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       focusedBorder: transparentBorder,
       errorBorder: transparentBorder,
     );
+  }
+
+  Widget emailCheckStatusWidget() {
+    if (_isCheckingEmail) {
+      return ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: 24,
+          minHeight: 24,
+          maxWidth: 24, // Set your desired maximum width
+          maxHeight: 24, // Set your desired maximum height
+        ),
+        child: Material(
+            borderRadius: BorderRadius.circular(200),
+            color: Colors.white,
+            child: const Padding(
+              padding: EdgeInsets.all(5.0),
+              child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  )),
+            )),
+      );
+    }
+    if (_isDuplicateEmail != null) {
+      if (_isDuplicateEmail!) {
+        return ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 24,
+            minHeight: 24,
+            maxWidth: 24, // Set your desired maximum width
+            maxHeight: 24, // Set your desired maximum height
+          ),
+          child: Material(
+              borderRadius: BorderRadius.circular(200),
+              color: Colors.red,
+              child: const Icon(
+                Icons.clear,
+                size: 18,
+                color: Colors.white,
+              )),
+        );
+      } else {
+        return ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 24,
+            minHeight: 24,
+            maxWidth: 24, // Set your desired maximum width
+            maxHeight: 24, // Set your desired maximum height
+          ),
+          child: Material(
+              borderRadius: BorderRadius.circular(200),
+              color: Colors.green[400],
+              child: const Icon(
+                Icons.check,
+                size: 18,
+                color: Colors.white,
+              )),
+        );
+      }
+    }
+
+    return const SizedBox.shrink();
   }
 
   navigationSpecialCase() {
@@ -860,8 +1108,9 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   navigationEDP(Map<String, dynamic> params) async {
     params['phoneNo'] = widget.argument['phoneNo']!;
     params['countryCode'] = widget.argument['countryCode']!;
-
-    NetworkResponse checkEmailResponse = await context
+    AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
+        arguments: params);
+    /*NetworkResponse checkEmailResponse = await context
         .read<UserLoginProvider>()
         .checkEmail(email: params['Email']);
 
@@ -886,7 +1135,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         AppHelper.showErrorMessage(context,
             "Getting error while verifying the email, please try again");
       }
-    }
+    }*/
   }
 
   bool validateData(SignupProvider provider) {

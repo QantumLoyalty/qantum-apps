@@ -59,10 +59,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
-#version: 1.0.5+9
+#version: 1.0.5+10
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.2+7
+#version: 1.0.3+8
 ###################################
 # Kingscliff
 #version: 1.0.0+6
@@ -80,13 +80,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+4
 ###################################
 #EDP
-version: 1.0.2+10
+version: 1.0.2+11
 ################################.###
 #SOT
 #version: 1.21.0+1205
 ###################################
 #Bobs
-#version: 1.22.0+1205
+#version: 1.22.1+1
 ###################################
 #Mosaic Hotel
 #version: 1.0.3+7

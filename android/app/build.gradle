@@ -51,6 +51,14 @@ android {
                     deeplinkPath: "/"
             ]
         }
+        flinders {
+            dimension "app"
+            applicationId "com.au.flinders.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "flindersstreetwharves-applink.chewzie.net",
+                    deeplinkPath: "/"
+            ]
+        }
         senseOfTaste {
             dimension "app"
             applicationId "au.com.senseoftaste.app"
@@ -155,14 +163,7 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
-        flinders {
-            dimension "app"
-            applicationId "com.au.flinders.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid",
-                    deeplinkPath: "/.*"
-            ]
-        }
+
         kingscliff {
             dimension "app"
             applicationId "com.au.kingscliff.app"

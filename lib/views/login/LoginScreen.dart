@@ -55,14 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-
   void _handleGuestChewzieFromProvider() {
     if (!mounted) return;
     if (_chewzieGuestHandled) return;
-    final isChewzieFlavor =
-        flavor == Flavor.starReward || flavor == Flavor.bluewater;
-    if (!isChewzieFlavor) return;
-
+    final isChewzieFlavor = flavor == Flavor.starReward ||
+        flavor == Flavor.bluewater ||
+        flavor == Flavor.flinders;
     if (!isChewzieFlavor) return;
 
     if (_homeProvider.startChewzieScreen != true) return;
@@ -84,13 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
         () {
           if (!mounted) return;
 
-          Color toolbarColor= flavor == Flavor.starReward
-              ? AppColors.sr_back_color
-              : AppColors.bcc_back_color;
+          final Color toolbarColor = switch (flavor) {
+            Flavor.starReward => AppColors.sr_back_color,
+            Flavor.bluewater => AppColors.bcc_back_color,
+            Flavor.flinders => AppColors.fw_back_color,
+            _ => AppColors.sr_back_color,
+          };
 
-          debugPrint("LOGIN GUEST CHEWZI  E URI: $uri");
-          DeepLinkLauncher.launchChewzieUrl(
-              context, uri, toolbarColor);
+          debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
+          DeepLinkLauncher.launchChewzieUrl(context, uri, toolbarColor);
         },
       );
     });
@@ -98,10 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
+    /*if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
       _homeProvider.removeListener(_handleGuestChewzieFromProvider);
-    }
-
+    }*/
+    _homeProvider.removeListener(_handleGuestChewzieFromProvider);
     _phoneController.dispose();
     super.dispose();
   }
@@ -240,9 +240,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 .textSelectionTheme
                                                 .selectionHandleColor),
                                     onChanged: (code) {
+                                      ("Selected country::${code.dialCode}")
+                                          .logMessage();
                                       setState(() {
                                         countryCode = code.dialCode!;
-                                        ("Selected country::${code.dialCode}").logMessage();
                                       });
                                     },
                                     initialSelection: "AU",
@@ -306,8 +307,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   AppHelper.showErrorMessage(
                                       context, loc.msgIncorrectPhoneNumber);
                                 }
-
-
                               },
                             ),
                           ],
@@ -317,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     AppDimens.shape_10,
                     (widget.hideChangeMobileOption != null &&
                             widget.hideChangeMobileOption!)
-                        ? Container()
+                        ?const SizedBox.shrink()
                         : InkWell(
                             onTap: () {
                               AppNavigator.navigateTo(
@@ -338,7 +337,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ? AppLoader(
                         loaderMessage: loc.msgVerifyAccountAndProceed,
                       )
-                    : Container()
+                    : const SizedBox.shrink()
               ],
             ),
           );
@@ -346,8 +345,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
 
   List<TextSpan> _buildLocalizedChangeMyMobile(BuildContext context) {
     // Use a temporary marker where the bold word should go
@@ -361,15 +358,13 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[0],
             style: TextStyle(
-                color: AppThemeCustom.getChangeMobileTextColor(
-                    context),
+                color: AppThemeCustom.getChangeMobileTextColor(context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text before
       TextSpan(
         text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
         style: TextStyle(
-            color: AppThemeCustom.getChangeMobileTextColor(
-                context),
+            color: AppThemeCustom.getChangeMobileTextColor(context),
             fontWeight: FontWeight.w900,
             fontSize: 14),
       ),
@@ -377,8 +372,7 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[1],
             style: TextStyle(
-                color:  AppThemeCustom.getChangeMobileTextColor(
-                    context),
+                color: AppThemeCustom.getChangeMobileTextColor(context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text after
     ];

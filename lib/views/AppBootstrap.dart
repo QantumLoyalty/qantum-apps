@@ -7,6 +7,7 @@ import '../view_models/HomeProvider.dart';
 
 class AppBootstrap extends StatefulWidget {
   final Widget child;
+
   const AppBootstrap({super.key, required this.child});
 
   @override
@@ -26,7 +27,9 @@ class _AppBootstrapState extends State<AppBootstrap> {
     _deepLinkService.init((link) {
       if (!mounted) return;
 
-      if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
+      if (flavor == Flavor.starReward ||
+          flavor == Flavor.bluewater ||
+          flavor == Flavor.flinders) {
         final encodedLink = link.queryParameters['link'];
         if (encodedLink == null || encodedLink.isEmpty) return;
 
