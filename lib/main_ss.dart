@@ -128,44 +128,16 @@ void main() async {
       return user?.id ?? 'guest';
     }
 
-    // FOREGROUND — notification aayi aur app foreground me hai
     OneSignal.Notifications.addForegroundWillDisplayListener((event) async {
       final n = event.notification;
       print(
           '[OneSignal] FOREGROUND notification received: id=${n.notificationId}, title=${n.title}');
 
-      if (Platform.isIOS) {
-        await migratePendingNativeNotifications();
-      } else {
-        // Android: NSE hai hi nahi, isliye purana direct-save logic yahi rahega
-        final userId = await _getCurrentUserId();
-
-        String? imageUrl;
-        if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {
-          imageUrl = n.bigPicture;
-        } else if (n.attachments != null && n.attachments!.isNotEmpty) {
-          imageUrl = n.attachments!.values.first as String?;
-        }
-
-        final model = NotificationModel(
-          id: n.notificationId ??
-              DateTime.now().millisecondsSinceEpoch.toString(),
-          userId: userId,
-          title: n.title ?? '',
-          body: n.body ?? '',
-          imageUrl: imageUrl,
-          payload: n.additionalData?.toString(),
-          isRead: false,
-          receivedAt: DateTime.now(),
-        );
-
-        await NotificationHiveService.save(model);
-      }
+      await migratePendingNativeNotifications();
 
       event.notification.display();
     });
 
-    // TAP — foreground/background/terminated teeno me kaam karega
     OneSignal.Notifications.addClickListener((event) async {
       final n = event.notification;
       print(

@@ -1,8 +1,14 @@
 import UserNotifications
 import OneSignalExtension
 
+
 let APP_GROUP_ID = "group.com.qantumapps.notifications"
-let PENDING_NOTIFICATIONS_KEY = "pending_notifications"
+private let hostAppBundleId: String = {
+    let extensionBundleId = Bundle.main.bundleIdentifier ?? "unknown"
+    return extensionBundleId.replacingOccurrences(of: ".OneSignalNotificationServiceExtension", with: "")
+}()
+
+let PENDING_NOTIFICATIONS_KEY = "pending_notifications_\(hostAppBundleId)"
 
 class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
@@ -45,7 +51,7 @@ class NotificationService: UNNotificationServiceExtension {
 
         let userInfo = processedContent.userInfo
         let notificationId = request.identifier
-        let currentUserId = sharedDefaults.string(forKey: "current_user_id") ?? "guest"
+        let currentUserId = sharedDefaults.string(forKey: "current_user_id_\(hostAppBundleId)") ?? "guest"
 
         print("[NSE] userInfo: \(userInfo)")
 
