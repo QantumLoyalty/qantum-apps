@@ -76,6 +76,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
   Widget build(BuildContext context) {
     return Consumer3<PromotionsProvider, HomeProvider, InternetStatusProvider>(
       builder: (context, provider, homeProvider, internetProvider, child) {
+        final bool hasSmartIncentives = switch (flavor) {
+          Flavor.mhbc || Flavor.qantum || Flavor.maxx => true,
+          _ => false,
+        };
         final bool isMhbc = flavor == Flavor.mhbc;
         final bool isMaxClub = flavor == Flavor.maxClub;
         final double largeAdvHeight = isMhbc ? 180.0 : 210.0;
@@ -427,7 +431,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                   child: Image.asset('assets/common/spin_to_play.png'),
                 ),
               ),
-            if (isMhbc && provider.incentives.isNotEmpty)
+            if (hasSmartIncentives && provider.incentives.isNotEmpty)
               BouncyButton(
                 child: GifView.asset('assets/common/scratch_and_win.gif'),
                 onTap: () async {
