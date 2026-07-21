@@ -216,7 +216,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                           child: Center(
                                             child: Text(
                                               unreadCount > 99 ? '99+' : unreadCount.toString(),
-
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 color: Colors.white,

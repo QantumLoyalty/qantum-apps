@@ -6,7 +6,7 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/dialogs/OurGuaranteeDialog.dart';
+import '/views/dialogs/OurGuaranteeDialog.dart';
 
 import '/core/enums/FetchProfileState.dart';
 import '/core/enums/MembershipStatus.dart';

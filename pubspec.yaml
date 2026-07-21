@@ -80,7 +80,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+4
 ###################################
 #EDP
-version: 1.0.2+11
+version: 1.0.3+9
 ################################.###
 #SOT
 #version: 1.21.0+1205
@@ -93,7 +93,7 @@ version: 1.0.2+11
 #Mannum club
 #version: 1.0.0+2
 #Southport Sharks
-#version: 1.0.0+3
+#version: 1.0.0+4
 
 
 
