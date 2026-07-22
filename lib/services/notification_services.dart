@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:qantum_apps/data/models/notification_model.dart';
 
@@ -99,4 +100,9 @@ class NotificationHiveService {
     await _safeBox.deleteAll(keys);
     print('[NotificationHive] cleared ${keys.length} records for $userId');
   }
+
+  static ValueListenable<Box<NotificationModel>> get listenable {
+    return _safeBox.listenable();
+  }
+
 }

@@ -170,7 +170,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           ),
                         ),
                       */
-                      if (flavor == Flavor.southportSharks||flavor==Flavor.qantum)
+                      if (flavor == Flavor.southportSharks||flavor==Flavor.qantum||flavor==Flavor.maxx||flavor==Flavor.starReward                             )
                         Positioned(
                           right: 60,
                           top: 0,

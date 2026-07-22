@@ -37,6 +37,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   List<NotificationModel> get notifications => _notifications;
 
   String? _notificationUserId;
+  bool _hiveListenerAttached = false;
 
   int get unreadCount => _notifications.where((n) => !n.isRead).length;
 
@@ -44,8 +45,24 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   void loadNotifications(String userId) {
     _notificationUserId = userId;
     _notifications = NotificationHiveService.getForUser(userId);
+    _attachHiveListener();   // 👈 NAYI LINE
     notifyListeners();
   }
+
+  void _attachHiveListener() {
+    if (_hiveListenerAttached) return;
+    _hiveListenerAttached = true;
+    print('[HomeProvider] attaching Hive listener');   // 👈 ADD KARO
+    NotificationHiveService.listenable.addListener(_onHiveBoxChanged);
+  }
+
+  void _onHiveBoxChanged() {
+    print('[HomeProvider] Hive box changed - refreshing notifications');   // 👈 ADD KARO
+    if (_notificationUserId == null) return;
+    _notifications = NotificationHiveService.getForUser(_notificationUserId!);
+    notifyListeners();
+  }
+
 
   Future<void> refreshNotifications() async {
     if (_notificationUserId == null) return;

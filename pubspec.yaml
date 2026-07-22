@@ -206,6 +206,7 @@ flutter:
     - assets/audio/
     - assets/common/
     - assets/starReward/
+    - assets/max/
 
     - .env.mhbc
     - .env.maxc
@@ -232,10 +233,6 @@ flutter:
     - path: assets/qantumClub/
       flavors:
               - qantumClub
-
-    - path: assets/max/
-      flavors:
-              - maxx
 
     - path: assets/maxClub/
       flavors:

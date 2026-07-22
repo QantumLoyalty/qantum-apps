@@ -1,10 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
+import 'package:qantum_apps/data/models/notification_model.dart';
+import 'package:qantum_apps/services/notification_services.dart';
 import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
+import 'core/extensions/log_extension.dart';
 import 'view_models/InternetStatusProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
 import 'core/flavors_config/app_themes.dart';
@@ -19,27 +27,167 @@ import 'views/splash/SplashScreen.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+
+Future<void> syncCurrentUserIdToNative(String userId) async {
+  try {
+    await _nativeNotificationsChannel
+        .invokeMethod('setCurrentUserId', {'userId': userId});
+    ('[NativeSync] userId synced to App Group: $userId').logMessage;
+  } on MissingPluginException {
+    // Android - normal, skip
+  } catch (e) {
+    ('[NativeSync] error: $e').logMessage;
+  }
+}
+
+const MethodChannel _nativeNotificationsChannel =
+MethodChannel('com.qantum/native_notifications');
+
+Future<void> migratePendingNativeNotifications() async {
+  try {
+    final List<dynamic>? pendingList = await _nativeNotificationsChannel
+        .invokeMethod('getPendingNotifications');
+
+    if (pendingList == null || pendingList.isEmpty) {
+      ('[Migration] koi pending native notification nahi mila').logMessage;
+      return;
+    }
+
+    ('[Migration] ${pendingList.length} pending notifications mile, Hive me migrate kar rahe hain').logMessage;
+
+    for (final item in pendingList) {
+      try {
+        final Map<String, dynamic> data = jsonDecode(item as String);
+
+        final String id =
+            data['id'] ?? DateTime.now().millisecondsSinceEpoch.toString();
+        final String title = data['title'] ?? '';
+        final String body = data['body'] ?? '';
+        final String? imageUrl = (data['imageUrl'] as String?)?.isEmpty == true
+            ? null
+            : data['imageUrl'] as String?;
+        final String? payload = data['payload'] as String?;
+        final DateTime receivedAt = data['receivedAt'] != null
+            ? DateTime.tryParse(data['receivedAt']) ?? DateTime.now()
+            : DateTime.now();
+        final String notifUserId = data['userId'] ?? 'guest';
+
+        final model = NotificationModel(
+          id: id,
+          userId: notifUserId,
+          title: title,
+          body: body,
+          imageUrl: imageUrl,
+          payload: payload,
+          isRead: false,
+          receivedAt: receivedAt,
+        );
+
+        await NotificationHiveService.save(model);
+      } catch (e) {('[Migration] ek notification parse karne me error: $e, raw: $item').logMessage;
+      }
+    }
+
+    ('[Migration] migration complete').logMessage;
+  } on MissingPluginException {
+    ('[Migration] native channel available nahi hai - skip').logMessage;
+  } catch (e) {
+    ('[Migration] error: $e').logMessage;
+  }
+}
+
 void main() async {
   FlavorConfig(
       flavor: Flavor.maxx,
       flavorValues: FlavorValues(appName: "Max", appVersion: "0.0.1"));
   WidgetsFlutterBinding.ensureInitialized();
-
+  await setupNotificationStorage();
+  await migratePendingNativeNotifications();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
     runApp(const MyApp());
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-    // Initialize with your OneSignal App ID
     OneSignal.initialize("bc03a2c3-74a6-466f-b4c0-350b70a4d007");
-    // Use this method to prompt for push notifications.
-    // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
     OneSignal.Notifications.requestPermission(true);
+
+    Future<String> _getCurrentUserId() async {
+      final sph = await SharedPreferenceHelper.getInstance();
+      final user = sph.getUserData();
+      return user?.id ?? 'guest';
+    }
+
+    OneSignal.Notifications.addForegroundWillDisplayListener((event) async {
+      final n = event.notification;
+      print(
+          '[OneSignal] FOREGROUND notification received: id=${n.notificationId}, title=${n.title}');
+
+      await migratePendingNativeNotifications();
+
+      event.notification.display();
+    });
+
+    OneSignal.Notifications.addClickListener((event) async {
+      final n = event.notification;
+      print(
+          '[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}');
+
+      final userId = await _getCurrentUserId();
+
+      String? imageUrl;
+      if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {
+        imageUrl = n.bigPicture;
+      } else if (n.attachments != null && n.attachments!.isNotEmpty) {
+        imageUrl = n.attachments!.values.first as String?; // ✅ Map.values.first
+      }
+
+      await NotificationHiveService.markAsRead(
+        id: n.notificationId ??
+            DateTime.now().millisecondsSinceEpoch.toString(),
+        userId: userId,
+        title: n.title ?? '',
+        body: n.body ?? '',
+        imageUrl: imageUrl,
+        payload: n.additionalData?.toString(),
+      );
+    });
   });
 }
 
-class MyApp extends StatelessWidget {
+Future<void> setupNotificationStorage() async {
+  await Hive.initFlutter();
+  await NotificationHiveService.init();
+  print('[Main] NotificationHiveService ready');
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this); // 👈 register
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this); // 👈 cleanup
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      print('[Lifecycle] app resumed - checking pending native notifications');
+      migratePendingNativeNotifications(); // 👈 har resume pe dobara check karo
+    }
+  }
 
   // This widget is the root of your application.
   @override
