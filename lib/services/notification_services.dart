@@ -30,14 +30,15 @@ class NotificationHiveService {
   /// Save a new notification (called from foreground willDisplay listener,
   /// or from click listener if it wasn't already saved).
   static Future<void> save(NotificationModel model) async {
-    final existing = _safeBox.get(model.id);
-    if (existing != null) {
-      print('[NotificationHive] duplicate id=${model.id}, skipping save');
-      return;
-    }
+    if (_safeBox.get(model.id) != null) return; // existing ID check
+
+    final recentDuplicate = _safeBox.values.any((n) =>
+    n.title == model.title &&
+        n.body == model.body &&
+        n.receivedAt.difference(model.receivedAt).abs().inSeconds < 5);
+    if (recentDuplicate) return;
+
     await _safeBox.put(model.id, model);
-    print(
-        '[NotificationHive] SAVED id=${model.id} userId=${model.userId} title="${model.title}" isRead=${model.isRead}');
   }
 
   /// Mark a notification as read by its id. If it doesn't exist yet

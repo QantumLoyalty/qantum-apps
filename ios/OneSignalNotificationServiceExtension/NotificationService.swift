@@ -50,7 +50,11 @@ class NotificationService: UNNotificationServiceExtension {
         }
 
         let userInfo = processedContent.userInfo
-        let notificationId = request.identifier
+        var notificationId = request.identifier
+        if let customData = userInfo["custom"] as? [String: Any],
+           let oneSignalId = customData["i"] as? String {
+            notificationId = oneSignalId
+        }
         let currentUserId = sharedDefaults.string(forKey: "current_user_id_\(hostAppBundleId)") ?? "guest"
 
         print("[NSE] userInfo: \(userInfo)")
