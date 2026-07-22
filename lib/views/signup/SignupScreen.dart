@@ -63,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   void initState() {
     super.initState();
 
-    logEvent("PARAMS ON SIGNUP: ${widget.argument}");
+    debugPrint("PARAMS ON SIGNUP: ${widget.argument}");
     flavor = FlavorConfig.instance.flavor!;
     String firstName = "", lastName = "";
     if (widget.argument.containsKey('name')) {
@@ -155,9 +155,9 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   bool? _isDuplicateEmail = null;
 
   void _handleEmailControllerChange() async {
-    if (flavor != Flavor.edp) {
+    /*if (flavor != Flavor.edp) {
       return;
-    }
+    }*/
     _emailDebounce?.cancel();
 
     final email = _emailController.text.trim().toLowerCase();
@@ -456,7 +456,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         decoration: _buildCommonInputDecoration(
                             hint: loc.hintEmail, isEmail: true),
                       ),
-                      (_showDuplicateEmailMsg && flavor == Flavor.edp)
+                      (_showDuplicateEmailMsg)
                           ? Container(
                               width: double.infinity,
                               margin: const EdgeInsets.only(left: 6,right: 6),
@@ -873,7 +873,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
                               // Stop EDP registration when the email is already registered.
-                              if (flavor == Flavor.edp &&
+                              if (
                                   _isDuplicateEmail == true) {
                                 AppHelper.showErrorMessage(
                                   context,
@@ -1101,7 +1101,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       args['fromRegistrationAndClubApp'] = 'true';
     }
 
-    AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
+    AppNavigator.navigateTo(context, AppNavigator.otp,
         arguments: args);
   }
 

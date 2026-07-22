@@ -114,6 +114,7 @@ class UserLoginProvider extends ChangeNotifier {
       _networkError = null;
       _networkMessage = null;
       _isTestUser = null;
+      _userId=null;
       notifyListeners();
     });
   }
