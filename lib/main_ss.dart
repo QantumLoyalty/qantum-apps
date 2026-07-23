@@ -51,12 +51,12 @@ Future<void> migratePendingNativeNotifications() async {
         .invokeMethod('getPendingNotifications');
 
     if (pendingList == null || pendingList.isEmpty) {
-      print('[Migration] koi pending native notification nahi mila');
+      ('[Migration] koi pending native notification nahi mila').logMessage();
       return;
     }
 
-    print(
-        '[Migration] ${pendingList.length} pending notifications mile, Hive me migrate kar rahe hain');
+    ('[Migration] ${pendingList.length} pending notifications mile, Hive me migrate kar rahe hain')
+        .logMessage();
 
     for (final item in pendingList) {
       try {
@@ -88,16 +88,16 @@ Future<void> migratePendingNativeNotifications() async {
 
         await NotificationHiveService.save(model);
       } catch (e) {
-        print(
-            '[Migration] ek notification parse karne me error: $e, raw: $item');
+        ('[Migration] ek notification parse karne me error: $e, raw: $item')
+            .logMessage();
       }
     }
 
     ('[Migration] migration complete').logMessage();
   } on MissingPluginException {
-    print('[Migration] native channel available nahi hai - skip');
+    ('[Migration] native channel available nahi hai - skip').logMessage();
   } catch (e) {
-    print('[Migration] error: $e');
+    ('[Migration] error: $e').logMessage();
   }
 }
 
@@ -131,8 +131,8 @@ void main() async {
 
     OneSignal.Notifications.addForegroundWillDisplayListener((event) async {
       final n = event.notification;
-      print(
-          '[OneSignal] FOREGROUND notification received: id=${n.notificationId}, title=${n.title}');
+      ('[OneSignal] FOREGROUND notification received: id=${n.notificationId}, title=${n.title}')
+          .logMessage();
 
       await migratePendingNativeNotifications();
 
@@ -141,8 +141,8 @@ void main() async {
 
     OneSignal.Notifications.addClickListener((event) async {
       final n = event.notification;
-      print(
-          '[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}');
+      ('[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}')
+          .logMessage();
 
       final userId = await _getCurrentUserId();
 
@@ -173,7 +173,7 @@ void main() async {
 Future<void> setupNotificationStorage() async {
   await Hive.initFlutter();
   await NotificationHiveService.init();
-  print('[Main] NotificationHiveService ready');
+  ('[Main] NotificationHiveService ready').logMessage();
 }
 
 class MyApp extends StatefulWidget {
@@ -200,8 +200,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.resumed) {
-      print('[Lifecycle] app resumed - checking pending native notifications');
-      migratePendingNativeNotifications(); // 👈 har resume pe dobara check karo
+      ('[Lifecycle] app resumed - checking pending native notifications').logMessage();
+      migratePendingNativeNotifications();
     }
   }
 

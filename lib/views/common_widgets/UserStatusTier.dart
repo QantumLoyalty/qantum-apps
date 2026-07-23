@@ -2,6 +2,7 @@ import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '../../core/extensions/spacer_extension.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '/core/mixins/logging_mixin.dart';
@@ -13,17 +14,18 @@ import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 
 class UserStatusTier extends StatelessWidget with LoggingMixin {
-  UserStatusTier({super.key});
-
   late AppLocalizations loc;
   num statusPoints = 0;
   late Flavor flavor;
+  bool? isSmallScreen;
+
+  UserStatusTier({super.key, this.isSmallScreen});
 
   @override
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
     flavor = FlavorConfig.instance.flavor!;
-
+    "isSmallScreen:$isSmallScreen".logMessage();
     return Consumer<UserInfoProvider>(builder: (context, provider, child) {
       statusPoints = (provider.getUserInfo != null &&
               provider.getUserInfo!.statusPoints != null)
@@ -81,7 +83,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                         AppThemeCustom.getProfileDialogUserStatusTierTextColor(
                             context),
                     fontWeight: FontWeight.bold,
-                    fontSize: 20)),
+                    fontSize:
+                        isSmallScreen != null && isSmallScreen! ? 16 : 20)),
             TextSpan(
                 text: statusCreditMsg[1].toUpperCase(),
                 style: TextStyle(
@@ -89,12 +92,13 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                         AppThemeCustom.getProfileDialogUserStatusTierTextColor(
                             context),
                     fontWeight: FontWeight.w400,
-                    fontSize: 14)),
+                    fontSize:
+                        isSmallScreen != null && isSmallScreen! ? 12 : 14)),
           ]),
         ),
         20.h,
         SizedBox(
-          height: 180,
+          height: isSmallScreen != null && isSmallScreen! ? 150 : 180,
           child: Stack(
             children: [
               Center(
@@ -113,7 +117,9 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                 .getProfileDialogUserStatusTierTextColor(
                                     context),
                             fontWeight: FontWeight.w900,
-                            fontSize: 24)),
+                            fontSize: isSmallScreen != null && isSmallScreen!
+                                ? 18
+                                : 24)),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(children: [
@@ -125,7 +131,10 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                                     .getProfileDialogUserStatusTierTextColor(
                                         context),
                                 fontWeight: FontWeight.w400,
-                                fontSize: 20)),
+                                fontSize:
+                                    isSmallScreen != null && isSmallScreen!
+                                        ? 14
+                                        : 20)),
                         TextSpan(
                             text:
                                 '\n\n${loc.txtStatusCreditsRequiredReactNextLevel}'
@@ -226,7 +235,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                         color: AppThemeCustom
                             .getProfileDialogUserStatusTierTextColor(context),
                         fontWeight: FontWeight.bold,
-                        fontSize: 30),
+                        fontSize:
+                            isSmallScreen != null && isSmallScreen! ? 24 : 30),
                   ),
                   Text(
                     "Status Credits required\nto maintain current level",
@@ -235,7 +245,8 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                         color: AppThemeCustom
                             .getProfileDialogUserStatusTierTextColor(context),
                         fontWeight: FontWeight.normal,
-                        fontSize: 14),
+                        fontSize:
+                            isSmallScreen != null && isSmallScreen! ? 12 : 14),
                   ),
                 ],
               ),

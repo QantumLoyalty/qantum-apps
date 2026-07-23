@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/views/home/notification_screen.dart';
+import '../../../core/extensions/spacer_extension.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -51,6 +52,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                               homeProvider.updateShowAllMenuVisibility(
                                   false, "my card");
                             }
+
 
                             try {
                               await ScreenBrightness.instance
@@ -178,87 +180,82 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           flavor == Flavor.hogansReward)
                         Positioned(
                           right: 60,
-                          top: 0,
+                          top: 2,
                           bottom: 0,
-                          child: Center(
-                            child: Consumer<HomeProvider>(
-                              builder: (context, homeProvider, child) {
-                                final unreadCount = homeProvider.unreadCount;
-                                return Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () async {
-                                        final sph = await SharedPreferenceHelper.getInstance();
-                                        final currentUserId = sph.getUserData()?.id ?? 'guest';
+                          child: Consumer<HomeProvider>(
+                            builder: (context, homeProvider, child) {
+                              final unreadCount = homeProvider.unreadCount;
+                              return Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(200),
+                                    onTap: () async {
+                                      final sph = await SharedPreferenceHelper.getInstance();
+                                      final currentUserId = sph.getUserData()?.id ?? 'guest';
 
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (_) =>
-                                                  NotificationsScreen(
-                                                      userId: currentUserId),
-                                            ));
-                                      },
-                                      icon: Icon(
-                                        Icons.notifications_none_rounded,
-                                        color: AppThemeCustom
-                                            .getHomeScreenProfileIconColor(
-                                                context),
-                                        size: 36,
-                                      ),
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                NotificationsScreen(userId: currentUserId),
+                                          ));
+                                    },
+                                    child: Image.asset(
+                                      AppIcons.notification,
+                                      color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                      width: 30,
+                                      height: 30,
                                     ),
-                                    if (unreadCount > 0)
-                                      Positioned(
-                                        right: 8,
-                                        top: 10,
+                                  ),
+                                  if (unreadCount > 0)
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: IgnorePointer(
+                                        ignoring: true,
                                         child: Container(
                                           width: 18,
-                                          height: 18,
-                                          constraints: const BoxConstraints(
-                                              minWidth: 16, minHeight: 16),
+                                          height:18,
+                                          constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                                           decoration: BoxDecoration(
                                             color: Colors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(2000),
-                                            border: Border.all(
-                                                color: Colors.white, width: 1),
+                                            borderRadius: BorderRadius.circular(2000),
+                                            border: Border.all(color: Colors.white, width: 1),
                                           ),
                                           child: Center(
                                             child: Text(
-                                              unreadCount > 99
-                                                  ? '99+'
-                                                  : unreadCount.toString(),
+                                              unreadCount > 99 ? '99+' : unreadCount.toString(),
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.bold,
-                                                // height: 1.2,
+                                               // height: 1.2,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                  ],
-                                );
-                              },
-                            ),
+                                    ),
+                                ],
+                              );
+                            },
                           ),
                         ),
+
+
+
                       Consumer2<HomeProvider, UserInfoProvider>(
                         builder: (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
                               if (userInfoProvider.getUserInfo != null &&
-                                  !userInfoProvider.getUserInfo!
-                                      .isUserStatusCancelled()) {
+                                  !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
                                 if (provider.showSeeAllMenu) {
-                                  provider.updateShowAllMenuVisibility(
-                                      false, "my profile");
+                                  provider.updateShowAllMenuVisibility(false, "my profile");
                                 }
-                                MyProfileDialog.getInstance()
-                                    .showMyProfileDialog(context);
+                                MyProfileDialog.getInstance().showMyProfileDialog(context);
                               }
                             },
                             child: Column(
@@ -270,36 +267,29 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   AppIcons.my_profile,
                                   width: 34,
                                   height: 34,
-                                  color:
-                                      (userInfoProvider.getUserInfo != null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
-                                          ? AppColors.disable_color
-                                          : AppThemeCustom
-                                              .getHomeScreenProfileIconColor(
-                                                  context),
+                                  color: (userInfoProvider.getUserInfo != null &&
+                                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                      ? AppColors.disable_color
+                                      : AppThemeCustom.getHomeScreenProfileIconColor(context),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!
-                                      .txtMyProfile
-                                      .toUpperCase(),
+                                 // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+
+                                  "Profile",
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.bold,
-                                      color: (userInfoProvider.getUserInfo !=
-                                                  null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
+                                      color: (userInfoProvider.getUserInfo != null &&
+                                          userInfoProvider.getUserInfo!.isUserStatusCancelled())
                                           ? AppColors.disable_color
-                                          : Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor),
+                                          : Theme.of(context).textSelectionTheme.selectionColor),
                                 )
                               ],
                             ),
                           );
                         },
                       ),
+
                     ],
                   ),
                 ),

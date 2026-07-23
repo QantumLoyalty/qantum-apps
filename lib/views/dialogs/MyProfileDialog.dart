@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
 import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppColors.dart';
@@ -29,10 +30,11 @@ class MyProfileDialog with LoggingMixin {
   static const double dialogHeightBottomMargin = 80;
   late Flavor flavor;
   late HomeProvider homeProvider;
-
+  bool? isSmallScreen;
   showMyProfileDialog(BuildContext context) async {
     flavor = FlavorConfig.instance.flavor!;
-
+    isSmallScreen = MediaQuery.sizeOf(context).height < 900;
+    ("isSmallScreen: $isSmallScreen && Height: ${MediaQuery.sizeOf(context).height}").logMessage();
     AppLocalizations loc = AppLocalizations.of(context)!;
     Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
     final userInfoProvider = context.read<UserInfoProvider>();
@@ -114,7 +116,7 @@ class MyProfileDialog with LoggingMixin {
                                             textScaler:
                                                 const TextScaler.linear(1.0),
                                             style: TextStyle(
-                                              fontSize: 28,
+                                              fontSize: (isSmallScreen!=null && isSmallScreen!)?20:28,
                                               fontWeight: FontWeight.bold,
                                               color: AppThemeCustom
                                                   .getProfileDialogTextColor(
@@ -232,7 +234,7 @@ class MyProfileDialog with LoggingMixin {
                                                       Flavor.bobsBulkBooze ||
                                                   flavor == Flavor.senseOfTaste)
                                               ? const SizedBox.shrink()
-                                              : UserStatusTier()
+                                              : UserStatusTier(isSmallScreen: isSmallScreen,)
                                         ],
                                       ),
                                     ),
