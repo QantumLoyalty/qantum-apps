@@ -207,6 +207,7 @@ flutter:
     - assets/common/
     - assets/starReward/
     - assets/max/
+    - assets/hogansReward/
 
     - .env.mhbc
     - .env.maxc
@@ -249,10 +250,6 @@ flutter:
     - path: assets/montaukTavern/
       flavors:
               - montaukTavern
-
-    - path: assets/hogansReward/
-      flavors:
-              - hogansreward
 
     - path: assets/northShoreTavern/
       flavors:
