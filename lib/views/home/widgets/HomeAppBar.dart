@@ -52,7 +52,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   false, "my card");
                             }
 
-
                             try {
                               await ScreenBrightness.instance
                                   .setApplicationScreenBrightness(1);
@@ -170,7 +169,11 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           ),
                         ),
                       */
-                      if (flavor == Flavor.southportSharks||flavor==Flavor.qantum||flavor==Flavor.maxx||flavor==Flavor.starReward                             )
+                      if (flavor == Flavor.southportSharks ||
+                          flavor == Flavor.qantum ||
+                          flavor == Flavor.maxx ||
+                          flavor == Flavor.starReward ||
+                          flavor == Flavor.flinders)
                         Positioned(
                           right: 60,
                           top: 0,
@@ -191,12 +194,15 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                             context,
                                             MaterialPageRoute(
                                               builder: (_) =>
-                                                  NotificationsScreen(userId: currentUserId),
+                                                  NotificationsScreen(
+                                                      userId: currentUserId),
                                             ));
                                       },
                                       icon: Icon(
                                         Icons.notifications_none_rounded,
-                                        color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                        color: AppThemeCustom
+                                            .getHomeScreenProfileIconColor(
+                                                context),
                                         size: 36,
                                       ),
                                     ),
@@ -206,22 +212,27 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                         top: 10,
                                         child: Container(
                                           width: 18,
-                                          height:18,
-                                          constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                          height: 18,
+                                          constraints: const BoxConstraints(
+                                              minWidth: 16, minHeight: 16),
                                           decoration: BoxDecoration(
                                             color: Colors.red,
-                                            borderRadius: BorderRadius.circular(2000),
-                                            border: Border.all(color: Colors.white, width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(2000),
+                                            border: Border.all(
+                                                color: Colors.white, width: 1),
                                           ),
                                           child: Center(
                                             child: Text(
-                                              unreadCount > 99 ? '99+' : unreadCount.toString(),
+                                              unreadCount > 99
+                                                  ? '99+'
+                                                  : unreadCount.toString(),
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.bold,
-                                               // height: 1.2,
+                                                // height: 1.2,
                                               ),
                                             ),
                                           ),
@@ -233,19 +244,19 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             ),
                           ),
                         ),
-
-
-
                       Consumer2<HomeProvider, UserInfoProvider>(
                         builder: (context, provider, userInfoProvider, child) {
                           return InkWell(
                             onTap: () {
                               if (userInfoProvider.getUserInfo != null &&
-                                  !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
+                                  !userInfoProvider.getUserInfo!
+                                      .isUserStatusCancelled()) {
                                 if (provider.showSeeAllMenu) {
-                                  provider.updateShowAllMenuVisibility(false, "my profile");
+                                  provider.updateShowAllMenuVisibility(
+                                      false, "my profile");
                                 }
-                                MyProfileDialog.getInstance().showMyProfileDialog(context);
+                                MyProfileDialog.getInstance()
+                                    .showMyProfileDialog(context);
                               }
                             },
                             child: Column(
@@ -257,20 +268,30 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   AppIcons.my_profile,
                                   width: 34,
                                   height: 34,
-                                  color: (userInfoProvider.getUserInfo != null &&
-                                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                                      ? AppColors.disable_color
-                                      : AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                  color:
+                                      (userInfoProvider.getUserInfo != null &&
+                                              userInfoProvider.getUserInfo!
+                                                  .isUserStatusCancelled())
+                                          ? AppColors.disable_color
+                                          : AppThemeCustom
+                                              .getHomeScreenProfileIconColor(
+                                                  context),
                                 ),
                                 Text(
-                                  AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+                                  AppLocalizations.of(context)!
+                                      .txtMyProfile
+                                      .toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontWeight: FontWeight.bold,
-                                      color: (userInfoProvider.getUserInfo != null &&
-                                          userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                      color: (userInfoProvider.getUserInfo !=
+                                                  null &&
+                                              userInfoProvider.getUserInfo!
+                                                  .isUserStatusCancelled())
                                           ? AppColors.disable_color
-                                          : Theme.of(context).textSelectionTheme.selectionColor),
+                                          : Theme.of(context)
+                                              .textSelectionTheme
+                                              .selectionColor),
                                 )
                               ],
                             ),
