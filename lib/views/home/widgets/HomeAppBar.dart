@@ -179,7 +179,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           flavor == Flavor.mhbc||
                           flavor == Flavor.hogansReward)
                         Positioned(
-                          right: 60,
+                          right: 65,
                           top: 2,
                           bottom: 0,
                           child: Consumer<HomeProvider>(
@@ -248,43 +248,46 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
 
                       Consumer2<HomeProvider, UserInfoProvider>(
                         builder: (context, provider, userInfoProvider, child) {
-                          return InkWell(
-                            onTap: () {
-                              if (userInfoProvider.getUserInfo != null &&
-                                  !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
-                                if (provider.showSeeAllMenu) {
-                                  provider.updateShowAllMenuVisibility(false, "my profile");
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: InkWell(
+                              onTap: () {
+                                if (userInfoProvider.getUserInfo != null &&
+                                    !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
+                                  if (provider.showSeeAllMenu) {
+                                    provider.updateShowAllMenuVisibility(false, "my profile");
+                                  }
+                                  MyProfileDialog.getInstance().showMyProfileDialog(context);
                                 }
-                                MyProfileDialog.getInstance().showMyProfileDialog(context);
-                              }
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  AppIcons.my_profile,
-                                  width: 34,
-                                  height: 34,
-                                  color: (userInfoProvider.getUserInfo != null &&
-                                      userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                                      ? AppColors.disable_color
-                                      : AppThemeCustom.getHomeScreenProfileIconColor(context),
-                                ),
-                                Text(
-                                 // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    AppIcons.my_profile,
+                                    width: 34,
+                                    height: 34,
+                                    color: (userInfoProvider.getUserInfo != null &&
+                                        userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                        ? AppColors.disable_color
+                                        : AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                  ),
+                                  Text(
+                                   // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
 
-                                  "Profile",
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.bold,
-                                      color: (userInfoProvider.getUserInfo != null &&
-                                          userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                                          ? AppColors.disable_color
-                                          : Theme.of(context).textSelectionTheme.selectionColor),
-                                )
-                              ],
+                                    "Profile",
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold,
+                                        color: (userInfoProvider.getUserInfo != null &&
+                                            userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                            ? AppColors.disable_color
+                                            : Theme.of(context).textSelectionTheme.selectionColor),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },

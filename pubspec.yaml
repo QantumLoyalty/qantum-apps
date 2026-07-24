@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.9+100
+#version:  1.0.9+100
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -62,7 +62,7 @@ version:  1.0.9+100
 #version: 1.0.5+10
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.3+8
+version: 1.0.3+10
 ###################################
 # Kingscliff
 #version: 1.0.0+6
