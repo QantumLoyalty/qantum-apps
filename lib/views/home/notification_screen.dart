@@ -9,6 +9,8 @@ import 'package:qantum_apps/view_models/HomeProvider.dart';
 import 'package:qantum_apps/views/accounts/widgets/AccountsAppBar.dart';
 import 'package:qantum_apps/views/common_widgets/AppScaffold.dart';
 
+import 'widgets/NotificationListTile.dart';
+
 
 class NotificationsScreen extends StatefulWidget {
   final String userId;
@@ -31,7 +33,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations loc = AppLocalizations.of(context)!;
-    final notifications = context.watch<HomeProvider>().notifications;
+    final notifications = context
+        .watch<HomeProvider>()
+        .notifications;
 
     return AppScaffold(
       scaffoldBackground: AppThemeCustom.getAccountBackground(context),
@@ -41,27 +45,38 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             AccountsAppBar(showBackButton: true, title: loc.txtNotification),
             Expanded(
               child: Container(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
-                  color: Theme.of(context).canvasColor,
+                  color: Theme
+                      .of(context)
+                      .canvasColor,
                 ),
                 child: notifications.isEmpty
                     ? Center(
                     child: Text(
                       'No notifications yet',
                       style: TextStyle(
-                          color: Theme.of(context)
+                          color: Theme
+                              .of(context)
                               .textSelectionTheme
                               .selectionColor),
                     ))
                     : RefreshIndicator(
-                  backgroundColor: Theme.of(context).primaryColorDark,
+                  backgroundColor: Theme
+                      .of(context)
+                      .primaryColorDark,
                   color:
-                  Theme.of(context).textSelectionTheme.selectionColor,
+                  Theme
+                      .of(context)
+                      .textSelectionTheme
+                      .selectionColor,
                   onRefresh: () =>
                       context.read<HomeProvider>().refreshNotifications(),
                   child: ListView.separated(
@@ -170,6 +185,79 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               radius: 5,
                               backgroundColor: Colors.blue,
                             ),
+                      /*return NotificationListTile(key: ValueKey(n.id),
+                        notification: n,
+                        onTap: () {
+                          context
+                              .read<HomeProvider>()
+                              .onTapNotification(n);
+                        },);*/
+                      /*return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white.withValues(alpha: 0.25),
+                        ),
+                        child: ListTile(
+                          onTap: () => context
+                              .read<HomeProvider>()
+                              .onTapNotification(n),
+                          leading: n.imageUrl != null && n.imageUrl!.isNotEmpty
+                              ? ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              n.imageUrl!,
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.fill,
+                              loadingBuilder: (context, child, progress) {
+                                if (progress == null) return child;
+                                return const SizedBox(
+                                  width: 48,
+                                  height: 48,
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(strokeWidth: 2),
+                                    ),
+                                  ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  width: 48,
+                                  height: 48,
+                                  color: Colors.white.withValues(alpha: 0.15),
+                                  child: const Icon(Icons.image_not_supported_outlined, size: 20),
+                                );
+                              },
+                            ),
+                          )
+                              : null,
+                          title: Text(
+                            n.title,
+                            style: TextStyle(
+                                fontWeight: n.isRead
+                                    ? FontWeight.normal
+                                    : FontWeight.bold,
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor),
+                          ),
+                          subtitle: Text(
+                            n.body,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor),
+                          ),
+                          trailing: n.isRead
+                              ? null
+                              : const CircleAvatar(
+                            radius: 5,
+                            backgroundColor: Colors.blue,
                           ),
                         ),
                       );
