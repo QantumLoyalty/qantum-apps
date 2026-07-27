@@ -70,6 +70,12 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     notifyListeners();
   }
 
+  Future<void> deleteNotification(NotificationModel n) async {
+    _notifications.removeWhere((item) => item.id == n.id);
+    notifyListeners();
+    await NotificationHiveService.delete(n.id);
+  }
+
   Future<void> onTapNotification(NotificationModel n) async {
     if (n.isRead) return;
     await NotificationHiveService.markAsRead(

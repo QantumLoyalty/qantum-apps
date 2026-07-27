@@ -106,4 +106,9 @@ class NotificationHiveService {
     return _safeBox.listenable();
   }
 
+  static Future<void> delete(String id) async {
+    await _safeBox.delete(id);
+    print('[NotificationHive] DELETED id=$id');
+  }
+
 }

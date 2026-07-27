@@ -26,7 +26,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version:  1.0.0+56
 ###################################
 # MAX
-#version:  1.0.0+60
+version:  1.0.0+61
 ###################################
 # HOGAN'S REWARD
 # version: 1.0.4+11
@@ -41,10 +41,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
-#version: 1.0.4+10
+#version: 1.0.4+10\\\\\\
 ###################################
 #QANTUM
-#version: 1.0.0+67
+#version: 1.0.0+68
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -62,7 +62,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.5+10
 ###################################
 # FLINDERS STREET WHARVES
-version: 1.0.3+10
+#version: 1.0.3+10
 ###################################
 # Kingscliff
 #version: 1.0.0+6
@@ -89,7 +89,7 @@ version: 1.0.3+10
 #version: 1.22.1+1
 ###################################
 #Mosaic Hotel
-#version: 1.0.3+7
+#version: 1.0.4+1
 #Mannum club
 #version: 1.0.0+2
 #Southport Sharks
@@ -173,6 +173,7 @@ dependencies:
   audioplayers: ^6.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  flutter_slidable: ^4.0.3
 
 
 
