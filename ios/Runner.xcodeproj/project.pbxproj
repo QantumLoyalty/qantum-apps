@@ -129,6 +129,9 @@
 		23A568BB2FFD161C00910FEA /* RunnerDebug-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-flinders.entitlements"; sourceTree = "<group>"; };
 		23A568BC2FFD163A00910FEA /* RunnerProfile-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-flinders.entitlements"; sourceTree = "<group>"; };
 		23A568BD2FFD166100910FEA /* RunnerRelease-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-flinders.entitlements"; sourceTree = "<group>"; };
+		23F604643018AD1800BA809A /* RunnerDebug-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
+		23F604653018AD3800BA809A /* RunnerProfile-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
+		23F604663018AD7600BA809A /* RunnerRelease-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
 		253C942F06B14E47147A8560 /* Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-edp.xcconfig"; sourceTree = "<group>"; };
 		2546C835E53B49906591C6D3 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27187479064BC6B12EA97B0B /* Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-woollahra.xcconfig"; sourceTree = "<group>"; };
@@ -733,6 +736,9 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				23F604663018AD7600BA809A /* RunnerRelease-bobsbulkbooze.entitlements */,
+				23F604653018AD3800BA809A /* RunnerProfile-bobsbulkbooze.entitlements */,
+				23F604643018AD1800BA809A /* RunnerDebug-bobsbulkbooze.entitlements */,
 				3D4AAC833008BB4500BFC8A5 /* Runner.entitlements */,
 				23A568BD2FFD166100910FEA /* RunnerRelease-flinders.entitlements */,
 				23A568BC2FFD163A00910FEA /* RunnerProfile-flinders.entitlements */,
@@ -7230,6 +7236,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3732F4FM9;
@@ -7251,6 +7258,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.bobsbulkbooze.app.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -7378,6 +7386,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3732F4FM9;
@@ -7398,6 +7407,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.bobsbulkbooze.app.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
