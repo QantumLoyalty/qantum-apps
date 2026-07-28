@@ -24,6 +24,7 @@ class _NotificationListTileState extends State<NotificationListTile> {
         color: Colors.white.withValues(alpha: 0.25),
       ),
       child: ListTile(
+        titleAlignment: ListTileTitleAlignment.top,
         onTap: () => context
             .read<HomeProvider>()
             .onTapNotification(widget.notification),

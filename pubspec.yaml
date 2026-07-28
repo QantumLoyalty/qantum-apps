@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.9+101
+#version:  1.0.9+102
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -32,7 +32,7 @@ version:  1.0.9+101
 #version: 1.0.4+13
 ###################################
 # MHBC
-#version:  1.0.13+1
+version:  1.0.13+99
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -44,7 +44,7 @@ version:  1.0.9+101
 #version: 1.0.4+10\\\\\\
 ###################################
 #QANTUM
-#version: 1.0.0+68
+#version: 1.0.0+69
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
