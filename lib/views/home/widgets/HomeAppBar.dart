@@ -179,6 +179,7 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           flavor == Flavor.mhbc||
                           flavor == Flavor.edp||
                           flavor == Flavor.mosaic||
+                          flavor == Flavor.drinkRewards||
                           flavor == Flavor.hogansReward)
                         Positioned(
                           right: 65,
