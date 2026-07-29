@@ -124,6 +124,12 @@
 		23A568BB2FFD161C00910FEA /* RunnerDebug-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-flinders.entitlements"; sourceTree = "<group>"; };
 		23A568BC2FFD163A00910FEA /* RunnerProfile-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-flinders.entitlements"; sourceTree = "<group>"; };
 		23A568BD2FFD166100910FEA /* RunnerRelease-flinders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-flinders.entitlements"; sourceTree = "<group>"; };
+		23E192393019EAED00C13D00 /* RunnerRelease-edp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-edp.entitlements"; sourceTree = "<group>"; };
+		23E1923A3019EB0400C13D00 /* RunnerDebug-edp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-edp.entitlements"; sourceTree = "<group>"; };
+		23E1923B3019EB1D00C13D00 /* RunnerProfile-edp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-edp.entitlements"; sourceTree = "<group>"; };
+		23E1923C3019EB4C00C13D00 /* RunnerProfile-northShoreTavern.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-northShoreTavern.entitlements"; sourceTree = "<group>"; };
+		23E1923D3019EB9E00C13D00 /* RunnerDebug-northShoreTavern.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-northShoreTavern.entitlements"; sourceTree = "<group>"; };
+		23E1923E3019EBF700C13D00 /* RunnerRelease-northShoreTavern.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-northShoreTavern.entitlements"; sourceTree = "<group>"; };
 		23F604643018AD1800BA809A /* RunnerDebug-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerDebug-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
 		23F604653018AD3800BA809A /* RunnerProfile-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerProfile-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
 		23F604663018AD7600BA809A /* RunnerRelease-bobsbulkbooze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RunnerRelease-bobsbulkbooze.entitlements"; sourceTree = "<group>"; };
@@ -718,6 +724,12 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				23E1923D3019EB9E00C13D00 /* RunnerDebug-northShoreTavern.entitlements */,
+				23E1923C3019EB4C00C13D00 /* RunnerProfile-northShoreTavern.entitlements */,
+				23E1923E3019EBF700C13D00 /* RunnerRelease-northShoreTavern.entitlements */,
+				23E1923B3019EB1D00C13D00 /* RunnerProfile-edp.entitlements */,
+				23E1923A3019EB0400C13D00 /* RunnerDebug-edp.entitlements */,
+				23E192393019EAED00C13D00 /* RunnerRelease-edp.entitlements */,
 				23F604663018AD7600BA809A /* RunnerRelease-bobsbulkbooze.entitlements */,
 				23F604653018AD3800BA809A /* RunnerProfile-bobsbulkbooze.entitlements */,
 				23F604643018AD1800BA809A /* RunnerDebug-bobsbulkbooze.entitlements */,
@@ -6664,7 +6676,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-northShoreTavern";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-northShoreTavern.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -6817,7 +6829,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-northShoreTavern";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-northShoreTavern.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -6962,7 +6974,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-northShoreTavern";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-northShoreTavern.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
