@@ -41,7 +41,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
-version: 1.0.4+11
+version: 1.0.4+12
 ###################################
 #QANTUM
 #version: 1.0.0+69
