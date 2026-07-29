@@ -89,6 +89,7 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		151DD0468896E2B629D945C8 /* Pods-OneSignalNotificationServiceExtension.release-max.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-max.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-max.xcconfig"; sourceTree = "<group>"; };
+		15D6B48D8FB665397ADF7DB0 /* Pods-Runner.debug-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-brisbane.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-brisbane.xcconfig"; sourceTree = "<group>"; };
 		161B0A803C8253DE3389DE70 /* Pods-Runner.release-edp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-edp.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-edp.xcconfig"; sourceTree = "<group>"; };
 		1627A93FD7973A44B71726C0 /* Pods-RunnerTests.profile-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		16EF069A75D1722BF245B1F1 /* Pods-Runner.release-bobsbulkbooze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-bobsbulkbooze.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-bobsbulkbooze.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 		6170C9EFAE8D9F7414798CE3 /* Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-northshoretavern.xcconfig"; sourceTree = "<group>"; };
 		61B7089F957B8783DEB2C4E9 /* Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-senseoftaste.xcconfig"; sourceTree = "<group>"; };
 		6210A1C3E480CC4E318B9430 /* Pods-RunnerTests.release-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-maxclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-maxclub.xcconfig"; sourceTree = "<group>"; };
+		633BF5950601CA2E1F258FB4 /* Pods-RunnerTests.debug-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-brisbane.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-brisbane.xcconfig"; sourceTree = "<group>"; };
 		64F8D333B193A6790302F72C /* Pods-RunnerTests.profile-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile-maxclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile-maxclub.xcconfig"; sourceTree = "<group>"; };
 		66AEB420E4D98CBA1BE82F31 /* Pods-RunnerTests.debug-montauktavern.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-montauktavern.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-montauktavern.xcconfig"; sourceTree = "<group>"; };
 		6B00470CFDC1DBE859707FAA /* Pods-RunnerTests.release-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-flinders.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-flinders.xcconfig"; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		A0A181E28C6CA43CB3388FCF /* Pods-Runner.debug-southportsharks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-southportsharks.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-southportsharks.xcconfig"; sourceTree = "<group>"; };
 		A1F52B6073D1F08940370E68 /* Pods-Runner.profile-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-brisbane.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-brisbane.xcconfig"; sourceTree = "<group>"; };
 		A2FC4CF1F3668AF41EB64D4A /* Pods-Runner.profile-southportsharks.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-southportsharks.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-southportsharks.xcconfig"; sourceTree = "<group>"; };
+		A3EB65094D0ECE193076C472 /* Pods-OneSignalNotificationServiceExtension.debug-brisbane.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-brisbane.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-brisbane.xcconfig"; sourceTree = "<group>"; };
 		A51E8D05A908A11384106D21 /* Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-queens.xcconfig"; sourceTree = "<group>"; };
 		A5B7C28179ADF211DFBE60BF /* Pods-OneSignalNotificationServiceExtension.profile-wonthaggi.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile-wonthaggi.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile-wonthaggi.xcconfig"; sourceTree = "<group>"; };
 		A847C8338847509A1210D07B /* Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug-starrewards.xcconfig"; sourceTree = "<group>"; };
@@ -684,6 +687,9 @@
 				BA001A12CF0243FCC9875CFD /* Pods-RunnerTests.debug-southportsharks.xcconfig */,
 				594F219D4502E7F433023F3E /* Pods-RunnerTests.release-southportsharks.xcconfig */,
 				5A5EC17D98AF3C25FC6BC1ED /* Pods-RunnerTests.profile-southportsharks.xcconfig */,
+				A3EB65094D0ECE193076C472 /* Pods-OneSignalNotificationServiceExtension.debug-brisbane.xcconfig */,
+				15D6B48D8FB665397ADF7DB0 /* Pods-Runner.debug-brisbane.xcconfig */,
+				633BF5950601CA2E1F258FB4 /* Pods-RunnerTests.debug-brisbane.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -5342,7 +5348,7 @@
 			};
 			name = "Profile-acerewards";
 		};
-		23E0D0582EC1E0E3002504CC /* Debug-brisbanse */ = {
+		23E0D0582EC1E0E3002504CC /* Debug-brisbane */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -5399,9 +5405,9 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = "Debug-brisbanse";
+			name = "Debug-brisbane";
 		};
-		23E0D0592EC1E0E3002504CC /* Debug-brisbanse */ = {
+		23E0D0592EC1E0E3002504CC /* Debug-brisbane */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
@@ -5431,11 +5437,11 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = "Debug-brisbanse";
+			name = "Debug-brisbane";
 		};
-		23E0D05A2EC1E0E3002504CC /* Debug-brisbanse */ = {
+		23E0D05A2EC1E0E3002504CC /* Debug-brisbane */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EF7285FBD9268AD870E3040 /* Pods-RunnerTests.debug-brisbanse.xcconfig */;
+			baseConfigurationReference = 633BF5950601CA2E1F258FB4 /* Pods-RunnerTests.debug-brisbane.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -5449,11 +5455,11 @@
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
 			};
-			name = "Debug-brisbanse";
+			name = "Debug-brisbane";
 		};
-		23E0D05B2EC1E0E3002504CC /* Debug-brisbanse */ = {
+		23E0D05B2EC1E0E3002504CC /* Debug-brisbane */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B324D356851059D438C6113 /* Pods-OneSignalNotificationServiceExtension.debug-brisbanse.xcconfig */;
+			baseConfigurationReference = A3EB65094D0ECE193076C472 /* Pods-OneSignalNotificationServiceExtension.debug-brisbane.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -5494,7 +5500,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = "Debug-brisbanse";
+			name = "Debug-brisbane";
 		};
 		23E0D05C2EC1E11E002504CC /* Release-brisbane */ = {
 			isa = XCBuildConfiguration;
@@ -12632,7 +12638,7 @@
 				235B5CEF2DC9D72D004A8F1C /* Debug-qantum */,
 				3D78CC9C2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F72DDAE45D00B1E8B8 /* Debug-mhbc */,
-				23E0D05B2EC1E0E3002504CC /* Debug-brisbanse */,
+				23E0D05B2EC1E0E3002504CC /* Debug-brisbane */,
 				23FAB62B2E8F9386002B9565 /* Debug-northShoreTavern */,
 				235B5CF02DC9D72D004A8F1C /* Release */,
 				235B5CF12DC9D72D004A8F1C /* Release-max */,
@@ -12717,7 +12723,7 @@
 				235EB8502D268E7A00621146 /* Debug-qantum */,
 				3D78CC9B2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F62DDAE45D00B1E8B8 /* Debug-mhbc */,
-				23E0D05A2EC1E0E3002504CC /* Debug-brisbanse */,
+				23E0D05A2EC1E0E3002504CC /* Debug-brisbane */,
 				23FAB62A2E8F9386002B9565 /* Debug-northShoreTavern */,
 				331C8089294A63A400263BE5 /* Release */,
 				23ED95DC2D6C886A005C5478 /* Release-max */,
@@ -12802,7 +12808,7 @@
 				235EB84E2D268E7A00621146 /* Debug-qantum */,
 				3D78CC992F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F42DDAE45D00B1E8B8 /* Debug-mhbc */,
-				23E0D0582EC1E0E3002504CC /* Debug-brisbanse */,
+				23E0D0582EC1E0E3002504CC /* Debug-brisbane */,
 				23FAB6282E8F9386002B9565 /* Debug-northShoreTavern */,
 				97C147041CF9000F007C117D /* Release */,
 				23ED95DA2D6C886A005C5478 /* Release-max */,
@@ -12887,7 +12893,7 @@
 				235EB84F2D268E7A00621146 /* Debug-qantum */,
 				3D78CC9A2F3C99F30009F7A2 /* Debug-qantumClub */,
 				236ED3F52DDAE45D00B1E8B8 /* Debug-mhbc */,
-				23E0D0592EC1E0E3002504CC /* Debug-brisbanse */,
+				23E0D0592EC1E0E3002504CC /* Debug-brisbane */,
 				23FAB6292E8F9386002B9565 /* Debug-northShoreTavern */,
 				97C147071CF9000F007C117D /* Release */,
 				23ED95DB2D6C886A005C5478 /* Release-max */,
