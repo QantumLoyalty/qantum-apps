@@ -55,15 +55,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           child: Text(
                           'No notifications yet',
                           style: TextStyle(
-                              color: Theme.of(context)
-                                  .textSelectionTheme
-                                  .selectionColor),
+                            color: AppThemeCustom.getNotificationItemStyle(
+                                context),
+                          ),
                         ))
                       : RefreshIndicator(
                           backgroundColor: Theme.of(context).primaryColorDark,
-                          color: Theme.of(context)
-                              .textSelectionTheme
-                              .selectionColor,
+                          color: Theme.of(context).textSelectionTheme.selectionColor,
                           onRefresh: () => context
                               .read<HomeProvider>()
                               .refreshNotifications(),
@@ -87,13 +85,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                                 .read<HomeProvider>()
                                                 .deleteNotification(n);
                                           },
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           backgroundColor: Colors.transparent,
                                           child: Container(
                                             width: double.infinity,
-                                            decoration: BoxDecoration(color: const Color(0xFFB11921),borderRadius:
-                                            BorderRadius.circular(5),),
-                                            margin: const EdgeInsets.only(left: 12),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFB11921),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            margin:
+                                                const EdgeInsets.only(left: 12),
                                             child: Center(
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
@@ -108,9 +111,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                                     "DELETE",
                                                     style: TextStyle(
                                                         fontSize: 12,
-                                                        fontWeight: FontWeight.bold,
-                                                        color:
-                                                        Colors.white),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white),
                                                   )
                                                 ],
                                               ),
@@ -139,90 +142,3 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         ])));
   }
 }
-/*return NotificationListTile(key: ValueKey(n.id),
-                        notification: n,
-                        onTap: () {
-                          context
-                              .read<HomeProvider>()
-                              .onTapNotification(n);
-                        },);*/
-/*return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white.withValues(alpha: 0.25),
-                        ),
-                        child: ListTile(
-                          onTap: () => context
-                              .read<HomeProvider>()
-                              .onTapNotification(n),
-                          leading: n.imageUrl != null && n.imageUrl!.isNotEmpty
-                              ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              n.imageUrl!,
-                              width: 50,
-                              height: 50,
-                              fit: BoxFit.fill,
-                              loadingBuilder: (context, child, progress) {
-                                if (progress == null) return child;
-                                return const SizedBox(
-                                  width: 48,
-                                  height: 48,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(strokeWidth: 2),
-                                    ),
-                                  ),
-                                );
-                              },
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  width: 48,
-                                  height: 48,
-                                  color: Colors.white.withValues(alpha: 0.15),
-                                  child: const Icon(Icons.image_not_supported_outlined, size: 20),
-                                );
-                              },
-                            ),
-                          )
-                              : null,
-                          title: Text(
-                            n.title,
-                            style: TextStyle(
-                                fontWeight: n.isRead
-                                    ? FontWeight.normal
-                                    : FontWeight.bold,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor),
-                          ),
-                          subtitle: Text(
-                            n.body,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor),
-                          ),
-                          trailing: n.isRead
-                              ? null
-                              : const CircleAvatar(
-                            radius: 5,
-                            backgroundColor: Colors.blue,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}*/

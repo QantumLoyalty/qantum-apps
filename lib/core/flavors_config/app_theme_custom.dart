@@ -69,6 +69,17 @@ class AppThemeCustom {
     }
   }
 
+  static Color? getNotificationItemStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.northShoreTavern||Flavor.brisbane:
+        return Theme.of(context).primaryColor;
+
+      default:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+    }
+  }
+
   static ButtonStyle getRedeemButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
