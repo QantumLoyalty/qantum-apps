@@ -2,7 +2,7 @@ import UserNotifications
 import OneSignalExtension
 
 
-let APP_GROUP_ID = "group.com.qantumapps.notifications"
+let APP_GROUP_ID = Bundle.main.object(forInfoDictionaryKey: "AppGroupID") as? String ?? "group.com.qantumapps.notifications"
 private let hostAppBundleId: String = {
     let extensionBundleId = Bundle.main.bundleIdentifier ?? "unknown"
     return extensionBundleId.replacingOccurrences(of: ".OneSignalNotificationServiceExtension", with: "")
@@ -24,6 +24,17 @@ class NotificationService: UNNotificationServiceExtension {
             contentHandler(request.content)
             return
         }
+
+        print("========== NSE ==========")
+        print("Bundle ID: \(Bundle.main.bundleIdentifier ?? "nil")")
+        print("APP_GROUP_ID: \(APP_GROUP_ID)")
+
+        if let _ = UserDefaults(suiteName: APP_GROUP_ID) {
+            print("App Group Access: SUCCESS")
+        } else {
+            print("App Group Access: FAILED")
+        }
+        print("=========================")
 
         OneSignalExtension.didReceiveNotificationExtensionRequest(
             self.receivedRequest,

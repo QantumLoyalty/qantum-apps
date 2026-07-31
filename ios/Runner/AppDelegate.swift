@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 
-let APP_GROUP_ID = "group.com.qantumapps.notifications"
+let APP_GROUP_ID = Bundle.main.object(forInfoDictionaryKey: "AppGroupID") as? String ?? "group.com.qantumapps.notifications"
 
 private let hostAppBundleId: String = Bundle.main.bundleIdentifier ?? "unknown"
 let PENDING_NOTIFICATIONS_KEY = "pending_notifications_\(hostAppBundleId)"
@@ -19,6 +19,16 @@ let CURRENT_USER_ID_KEY = "current_user_id_\(hostAppBundleId)"
           }
 
     GeneratedPluginRegistrant.register(with: self)
+    print("========== RUNNER ==========")
+    print("Bundle ID: \(Bundle.main.bundleIdentifier ?? "nil")")
+    print("APP_GROUP_ID: \(APP_GROUP_ID)")
+
+    if let defaults = UserDefaults(suiteName: APP_GROUP_ID) {
+        print("App Group Access: SUCCESS")
+    } else {
+        print("App Group Access: FAILED")
+    }
+    print("============================")
 
     let controller = window?.rootViewController as! FlutterViewController
     let channel = FlutterMethodChannel(
