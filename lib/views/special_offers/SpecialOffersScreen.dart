@@ -254,7 +254,7 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                     ],
                   ),
                 )
-              : NoInternetLayout(),
+              : const NoInternetLayout(),
           provider.showLoader != null && provider.showLoader!
               ? AppLoader()
               : Container()

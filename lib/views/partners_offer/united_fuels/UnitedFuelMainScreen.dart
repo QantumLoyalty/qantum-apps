@@ -5,7 +5,6 @@ import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../../view_models/UnitedFuelsProvider.dart';
 import '/core/utils/AppColors.dart';
 import '/core/utils/AppDimens.dart';
-import '/l10n/app_localizations.dart';
 import '/views/common_widgets/AppButton.dart';
 import '/views/partners_offer/widget/BarcodeView.dart';
 import '/views/partners_offer/widget/UnitedTermsList.dart';

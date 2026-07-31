@@ -149,7 +149,7 @@ class DigitalCardDialog with LoggingMixin {
                                             AppDimens.shape_20,
                                             flavor == Flavor.bobsBulkBooze ||
                                                     flavor == Flavor.senseOfTaste
-                                                ? SizedBox()
+                                                ? const SizedBox()
                                                 : Expanded(
                                                     child: SingleChildScrollView(
                                                     child: Column(

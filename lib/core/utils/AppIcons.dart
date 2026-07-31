@@ -46,10 +46,10 @@ class AppIcons {
     if (membershipType!.toLowerCase() ==
         AppStrings.textMemberCancelled.toLowerCase()) {
       return cardMembershipCancelled;
-    } else if (membershipType!.toLowerCase() == "test") {
+    } else if (membershipType.toLowerCase() == "test") {
       return cardTest;
     } else {
-      membershipType = membershipType!.toLowerCase().replaceAll(" ", "");
+      membershipType = membershipType.toLowerCase().replaceAll(" ", "");
       Flavor selectedFlavor = FlavorConfig.instance.flavor!;
       if (selectedFlavor == Flavor.mhbc) {
         switch (membershipType.toLowerCase()) {

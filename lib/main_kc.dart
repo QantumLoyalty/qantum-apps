@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/services/DeeplinkService.dart';
 import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
@@ -100,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, child) {
             return MediaQuery(
                 data: MediaQuery.of(context)
-                    .copyWith(textScaler: TextScaler.linear(1.0)),
+                    .copyWith(textScaler: const TextScaler.linear(1.0)),
                 child: AnnotatedRegion<SystemUiOverlayStyle>(
                     value: const SystemUiOverlayStyle(
                         statusBarBrightness: Brightness.dark,

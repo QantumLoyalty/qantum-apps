@@ -65,7 +65,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
         Map<String, dynamic> responseData =
             validateUserResponse.response as Map<String, dynamic>;
 
-        ("Validate User: ${responseData}").logMessage();;
+        ("Validate User: $responseData").logMessage();
 
         if (responseData.containsKey("success") &&
             responseData["success"] == true &&
@@ -108,7 +108,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
               if (responseData.containsKey("message")) {
                 errorMessage = (responseData["message"]);
                 errorMessage =
-                    "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+                    "$errorMessage\nPossible reason: User's number is not an australian number or there is a network issue.";
               } else {
                 errorMessage = validateUserResponse.responseMessage;
               }
@@ -123,7 +123,7 @@ class UnitedFuelsProvider extends ChangeNotifier {
         if (responseData.containsKey("message")) {
           errorMessage = (responseData["message"]);
           errorMessage =
-              "${errorMessage}\nPossible reason: User's number is not an australian number or there is a network issue.";
+              "$errorMessage\nPossible reason: User's number is not an australian number or there is a network issue.";
         } else {
           errorMessage = validateUserResponse.responseMessage;
         }

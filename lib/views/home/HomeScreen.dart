@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen>
   Timer? _pointsDialogTimer;
   late HomeProvider _homeProvider;
   late UserInfoProvider _userInfoProvider;
+  @override
   late Flavor flavor;
   late AppLocalizations loc;
   bool isMembershipCancelledDialogShown = false;
@@ -546,7 +547,7 @@ class _HomeScreenState extends State<HomeScreen>
   bool _deepLinkCheckScheduled = false;
   Uri? _pendingDeepLinkUri;
   bool _isLaunchingDeepLink = false;
-  AppLifecycleState _appLifecycleState = AppLifecycleState.resumed;
+  final AppLifecycleState _appLifecycleState = AppLifecycleState.resumed;
   DateTime? _lastLaunchTime;
   String? _lastLaunchPayload;
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/services/DeeplinkService.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
@@ -21,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   late Flavor flavor;
   final DeeplinkService _deepLinkService = DeeplinkService();
   Uri? deepLink;
-  bool _isOpenedFromDeepLink = false;
+  final bool _isOpenedFromDeepLink = false;
 
   @override
   void initState() {

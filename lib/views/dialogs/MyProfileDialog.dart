@@ -28,6 +28,7 @@ class MyProfileDialog with LoggingMixin {
 
   static const double dialogHeightFactor = 0.90;
   static const double dialogHeightBottomMargin = 80;
+  @override
   late Flavor flavor;
   late HomeProvider homeProvider;
   bool? isSmallScreen;

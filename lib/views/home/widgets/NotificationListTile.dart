@@ -9,7 +9,7 @@ class NotificationListTile extends StatefulWidget {
   final NotificationModel notification;
   final VoidCallback onTap;
 
-  NotificationListTile(
+  const NotificationListTile(
       {super.key, required this.notification, required this.onTap});
 
   @override

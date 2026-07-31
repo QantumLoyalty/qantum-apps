@@ -113,7 +113,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
         name: "txtPartnerOffers",
-        screen: PartnerOffersScreen(),
+        screen: const PartnerOffersScreen(),
         icon: Icons.handshake,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
@@ -360,7 +360,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
 
     try {
       NetworkResponse networkResponse = await AppDataService.getInstance()
-          .getMembershipPlansById(membershipID: membershipID!);
+          .getMembershipPlansById(membershipID: membershipID);
       ("GET PACKAGE INFO:  $networkResponse").logMessage();
 
       if (!networkResponse.isError && networkResponse.response != null) {

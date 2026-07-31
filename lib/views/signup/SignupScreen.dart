@@ -57,6 +57,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
   late AppLocalizations loc;
+  @override
   late Flavor flavor;
 
   @override
@@ -152,7 +153,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     super.dispose();
   }
 
-  bool? _isDuplicateEmail = null;
+  bool? _isDuplicateEmail;
 
   void _handleEmailControllerChange() async {
     /*if (flavor != Flavor.edp) {
@@ -807,7 +808,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         ),
                       ),
                       AppDimens.shape_5,
-                      GenderSelector(),
+                      const GenderSelector(),
                       AppDimens.shape_5,
                       InkWell(
                         child: Row(

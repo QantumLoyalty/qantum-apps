@@ -629,7 +629,7 @@ class AppThemeCustom {
                 Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
   }
 

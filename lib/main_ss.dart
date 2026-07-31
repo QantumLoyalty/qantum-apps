@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -123,7 +122,7 @@ void main() async {
     OneSignal.initialize("668011af-5fa3-4785-8486-d63a7bf5d644");
     OneSignal.Notifications.requestPermission(true);
 
-    Future<String> _getCurrentUserId() async {
+    Future<String> getCurrentUserId() async {
       final sph = await SharedPreferenceHelper.getInstance();
       final user = sph.getUserData();
       return user?.id ?? 'guest';
@@ -144,7 +143,7 @@ void main() async {
       ('[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}')
           .logMessage();
 
-      final userId = await _getCurrentUserId();
+      final userId = await getCurrentUserId();
 
       String? imageUrl;
       if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {

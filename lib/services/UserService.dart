@@ -398,7 +398,7 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      UserModel? user = await sharedPreferenceHelper.getUserData();
+      UserModel? user = sharedPreferenceHelper.getUserData();
 
       final String userStatusTier = FlavorConstants.getUserTierType(user!);
 
@@ -422,7 +422,7 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      UserModel? user = await sharedPreferenceHelper.getUserData();
+      UserModel? user = sharedPreferenceHelper.getUserData();
       final request = http.MultipartRequest(
           'POST',
           Uri.parse(

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 class SmartIncentivesParam {
   final String id;

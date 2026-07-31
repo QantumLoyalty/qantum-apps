@@ -14,11 +14,11 @@ class CustomGraph extends StatelessWidget {
 
 class MapGraph extends CustomPainter {
   List<Offset> points = [
-    Offset(50, 50),
-    Offset(100, 100),
-    Offset(150, 50),
-    Offset(200, 200),
-    Offset(250, 150),
+    const Offset(50, 50),
+    const Offset(100, 100),
+    const Offset(150, 50),
+    const Offset(200, 200),
+    const Offset(250, 150),
   ];
 
   @override

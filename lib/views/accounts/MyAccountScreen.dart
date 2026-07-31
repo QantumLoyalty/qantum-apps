@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ import '../common_widgets/BluewaterBackground.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class MyAccountScreen extends StatefulWidget {
-  MyAccountScreen({super.key});
+  const MyAccountScreen({super.key});
 
   @override
   State<MyAccountScreen> createState() => _MyAccountScreenState();

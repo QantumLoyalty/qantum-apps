@@ -72,10 +72,10 @@ class _MembershipPaymentScreenState extends State<MembershipPaymentScreen> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("Email"),
+                              const Text("Email"),
                               TextFormField(),
                               AppDimens.shape_10,
-                              Text("Card Information"),
+                              const Text("Card Information"),
                               AppDimens.shape_5,
                               TextFormField(),
                               AppDimens.shape_5,
@@ -86,12 +86,12 @@ class _MembershipPaymentScreenState extends State<MembershipPaymentScreen> {
                                 ],
                               ),
                               AppDimens.shape_10,
-                              Text("Name on card"),
+                              const Text("Name on card"),
                               AppDimens.shape_5,
                               TextFormField(),
                               AppDimens.shape_15,
                               TextButton(
-                                  onPressed: () {}, child: Text("Pay \$100.00"))
+                                  onPressed: () {}, child: const Text("Pay \$100.00"))
                             ],
                           ),
                         ),

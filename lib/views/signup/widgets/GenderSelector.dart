@@ -5,6 +5,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../../view_models/SignupProvider.dart';
 
 class GenderSelector extends StatelessWidget {
+  const GenderSelector({super.key});
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;

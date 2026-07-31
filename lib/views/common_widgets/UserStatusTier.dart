@@ -1,6 +1,5 @@
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '../../core/extensions/spacer_extension.dart';
@@ -16,6 +15,7 @@ import '../../core/utils/AppDimens.dart';
 class UserStatusTier extends StatelessWidget with LoggingMixin {
   late AppLocalizations loc;
   num statusPoints = 0;
+  @override
   late Flavor flavor;
   bool? isSmallScreen;
 

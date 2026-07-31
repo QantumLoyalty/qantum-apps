@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -339,7 +338,7 @@ class AppHelper with LoggingMixin {
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).primaryColorDark));
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
   }
 
@@ -470,7 +469,7 @@ class AppHelper with LoggingMixin {
                 Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
   }
 
@@ -499,7 +498,7 @@ class AppHelper with LoggingMixin {
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                side: BorderSide(color:Colors.transparent),
+                side: const BorderSide(color:Colors.transparent),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.starReward || Flavor.kingscliff:
@@ -732,7 +731,7 @@ class AppHelper with LoggingMixin {
   static Future<bool> checkIfUserIsNew() async {
     SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    UserModel? userData = sharedPreferencesHelper.getUserData();
     if (userData != null) {
       print("userData.type >> ${userData.type}");
 

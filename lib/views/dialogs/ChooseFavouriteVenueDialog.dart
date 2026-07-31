@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/common_widgets/ChooseFavouriteVenueWidget.dart';
-import '../common_widgets/MyBenefitsWidget.dart';
 
 class ChooseFavouriteVenuedialog {
   static final ChooseFavouriteVenuedialog _chooseFavouriteVenuedialog =

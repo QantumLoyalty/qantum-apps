@@ -18,7 +18,6 @@ import 'view_models/SignupProvider.dart';
 import 'view_models/SpecialOffersProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
-import 'views/splash/SplashScreen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {

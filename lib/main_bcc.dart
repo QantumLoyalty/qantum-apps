@@ -113,7 +113,7 @@ void main() async {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize("505a94f6-2b08-4065-a6b1-16a7317c1ba9");
     await OneSignal.Notifications.requestPermission(true);
-    Future<String> _getCurrentUserId() async {
+    Future<String> getCurrentUserId() async {
       final sph = await SharedPreferenceHelper.getInstance();
       final user = sph.getUserData();
       return user?.id ?? 'guest';
@@ -134,7 +134,7 @@ void main() async {
       ('[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}')
           .logMessage;
 
-      final userId = await _getCurrentUserId();
+      final userId = await getCurrentUserId();
 
       String? imageUrl;
       if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {
@@ -155,7 +155,7 @@ void main() async {
     });
     runApp(const MyApp());
 
-    print("Permission: ${await OneSignal.Notifications.permission}");
+    print("Permission: ${OneSignal.Notifications.permission}");
     var state = OneSignal.User.pushSubscription;
     print("Subscribed: ${state.optedIn}");
     print("Token: ${state.token}");
@@ -234,7 +234,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             builder: (context, child) {
               return MediaQuery(
                   data: MediaQuery.of(context)
-                      .copyWith(textScaler: TextScaler.linear(1.0)),
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
                   child: AnnotatedRegion<SystemUiOverlayStyle>(
                       value: const SystemUiOverlayStyle(
                           statusBarBrightness: Brightness.dark,

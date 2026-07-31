@@ -152,7 +152,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = await sharedPreferenceHelper.getUserData();
+      UserModel? userData = sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
         DateTime? dob;
@@ -262,7 +262,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       });
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = await sharedPreferenceHelper.getUserData();
+      UserModel? userData = sharedPreferenceHelper.getUserData();
 
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .fetchOfferByID(

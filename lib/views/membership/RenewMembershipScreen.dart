@@ -76,7 +76,7 @@ class _RenewMembershipScreenState extends State<RenewMembershipScreen> {
                       AppButton(
                         text: loc!.renewNow.toUpperCase(),
                         onClick: () {
-                          Map<String, String> params = Map();
+                          Map<String, String> params = {};
                           params['fromRenewMembership'] = "true";
 
                           AppNavigator.navigateAndClearStack(

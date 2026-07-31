@@ -4,7 +4,7 @@ import '/views/partners_offer/widget/PartnerOfferItem.dart';
 import '../../core/utils/AppDimens.dart';
 
 class PartnerOffersScreen extends StatefulWidget {
-  PartnerOffersScreen({super.key});
+  const PartnerOffersScreen({super.key});
 
   @override
   State<PartnerOffersScreen> createState() => _PartnerOffersScreenState();

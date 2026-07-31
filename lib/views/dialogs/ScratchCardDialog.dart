@@ -1,16 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_scratch_card/flutter_scratch_card.dart';
-import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/data/models/incentives/SmartIncentivesResponse.dart';
 
-import '../../core/extensions/spacer_extension.dart';
-import '../../l10n/app_localizations.dart';
-import '../common_widgets/MetallicGradientText.dart';
 import '../common_widgets/ScratchAndWinWidget.dart';
-import '/core/utils/AppColors.dart';
-import '/core/utils/AppDimens.dart';
 
 class ScratchCardDialog {
   static final ScratchCardDialog _instance = ScratchCardDialog._internal();

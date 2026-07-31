@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 
 import '/data/models/incentives/SmartIncentivesResponse.dart';
 import '../core/extensions/log_extension.dart';
@@ -40,11 +39,11 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = await sharedPreferenceHelper.getUserData();
+      UserModel? userData = sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
         String userTier = FlavorConstants.getUserTierType(userData);
-        String? venue = userData!.venueName;
+        String? venue = userData.venueName;
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchPromotions(userTier, selectedVenue: venue);
         _isError = networkResponse.isError;
@@ -102,8 +101,8 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? user = await sharedPreferenceHelper.getUserData();
-      "SMART INCENTIVES FOR USER: ${user}".logMessage();
+      UserModel? user = sharedPreferenceHelper.getUserData();
+      "SMART INCENTIVES FOR USER: $user".logMessage();
 
       if (user != null) {
         SmartIncentivesParam param = SmartIncentivesParam(
@@ -143,8 +142,8 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? user = await sharedPreferenceHelper.getUserData();
-      "SMART INCENTIVES FOR USER: ${user}".logMessage();
+      UserModel? user = sharedPreferenceHelper.getUserData();
+      "SMART INCENTIVES FOR USER: $user".logMessage();
 
       if (user != null) {
         NetworkResponse networkResponse = await AppDataService.getInstance()
@@ -183,7 +182,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
   // Helper method to set the error and handle the safe 3-second auto-dismissal
   void _setErrorAndTimerSmartIncentive(String message) {
     _consumeIncentiveMessage = message;
-    "Error message set for consuming incentive: ${message}".logMessage();
+    "Error message set for consuming incentive: $message".logMessage();
     notifyListeners();
     Future.delayed(const Duration(seconds: 5), () {
       resetConsumeIncentiveMessage();

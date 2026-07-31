@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/views/home/notification_screen.dart';
-import '../../../core/extensions/spacer_extension.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/dialogs/MembershipCancelledDialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';

@@ -77,12 +77,12 @@ class AppThemes {
           backgroundColor: AppColors.qa_button_color,
           foregroundColor: AppColors.qa_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.qa_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.qa_primary_color_dark)));
 
@@ -160,12 +160,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.max_back_color_3),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.max_back_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.max_back_color)));
 
@@ -243,12 +243,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.sr_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.sr_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.sr_back_color_2)));
 
@@ -326,12 +326,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.mhbc_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.mhbc_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.mhbc_back_color_2)));
 
@@ -409,12 +409,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.clh_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.clh_sf_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.clh_sf_color)));
 
@@ -492,12 +492,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.mt_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.mt_sf_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.mt_sf_color)));
 
@@ -575,12 +575,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.ar_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.ar_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.ar_back_color_2)));
 
@@ -658,12 +658,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.bcc_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.bcc_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.bcc_floating_button_icon_color)));
 
@@ -741,12 +741,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.hr_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.hr_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.hr_back_color_2)));
 
@@ -824,12 +824,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.nst_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.nst_back_color_2
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.nst_back_color_2)));
 
@@ -907,12 +907,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.bb_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.bb_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.bb_button_color)));
 
@@ -990,12 +990,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.wh_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.wh_back_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.wh_back_color)));
 
@@ -1073,12 +1073,12 @@ class AppThemes {
             backgroundColor: AppColors.white,
             foregroundColor: AppColors.fw_floating_button_icon_color),
         switchTheme: SwitchThemeData(
-            trackColor: MaterialStateProperty.resolveWith((state) =>
-                state.contains(MaterialState.selected)
+            trackColor: WidgetStateProperty.resolveWith((state) =>
+                state.contains(WidgetState.selected)
                     ? AppColors.fw_button_border_color
                     : AppColors.white),
-            thumbColor: MaterialStateProperty.resolveWith((state) =>
-                state.contains(MaterialState.selected)
+            thumbColor: WidgetStateProperty.resolveWith((state) =>
+                state.contains(WidgetState.selected)
                     ? AppColors.white
                     : AppColors.fw_button_border_color)),
       );
@@ -1157,12 +1157,12 @@ class AppThemes {
             backgroundColor: AppColors.white,
             foregroundColor: AppColors.wt_floating_button_icon_color),
         switchTheme: SwitchThemeData(
-            trackColor: MaterialStateProperty.resolveWith((state) =>
-                state.contains(MaterialState.selected)
+            trackColor: WidgetStateProperty.resolveWith((state) =>
+                state.contains(WidgetState.selected)
                     ? AppColors.wt_back_color
                     : AppColors.white),
-            thumbColor: MaterialStateProperty.resolveWith((state) =>
-                state.contains(MaterialState.selected)
+            thumbColor: WidgetStateProperty.resolveWith((state) =>
+                state.contains(WidgetState.selected)
                     ? AppColors.white
                     : AppColors.wt_button_border_color)),
       );
@@ -1241,12 +1241,12 @@ class AppThemes {
           backgroundColor: AppColors.transparent,
           foregroundColor: AppColors.sot_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.sot_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.sot_button_color)));
 
@@ -1324,12 +1324,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.kc_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.kc_divider_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.kc_divider_color)));
 
@@ -1408,12 +1408,12 @@ class AppThemes {
           backgroundColor: AppColors.dr_button_color,
           foregroundColor: AppColors.qa_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.dr_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.dr_button_color)));
 
@@ -1491,12 +1491,12 @@ class AppThemes {
           backgroundColor: AppColors.edp_button_color,
           foregroundColor: AppColors.edp_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.edp_button_border_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.edp_canvas_color)));
 
@@ -1574,12 +1574,12 @@ class AppThemes {
           backgroundColor: AppColors.bob_button_color,
           foregroundColor: AppColors.white),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.bob_button_color),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.bob_scaffold_bg_color
                   : AppColors.transparent)));
 
@@ -1658,12 +1658,12 @@ class AppThemes {
           backgroundColor: AppColors.mh_button_color,
           foregroundColor: AppColors.white),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.mh_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.mh_button_color)));
 
@@ -1741,12 +1741,12 @@ class AppThemes {
           backgroundColor: AppColors.transparent,
           foregroundColor: AppColors.mc_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.mc_button_color
                   : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-              state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+              state.contains(WidgetState.selected)
                   ? AppColors.white
                   : AppColors.mc_button_color)));
 
@@ -1824,12 +1824,12 @@ class AppThemes {
           backgroundColor: AppColors.white,
           foregroundColor: AppColors.kc_floating_button_icon_color),
       switchTheme: SwitchThemeData(
-          trackColor: MaterialStateProperty.resolveWith((state) =>
-          state.contains(MaterialState.selected)
+          trackColor: WidgetStateProperty.resolveWith((state) =>
+          state.contains(WidgetState.selected)
               ? AppColors.ss_button_color
               : AppColors.white),
-          thumbColor: MaterialStateProperty.resolveWith((state) =>
-          state.contains(MaterialState.selected)
+          thumbColor: WidgetStateProperty.resolveWith((state) =>
+          state.contains(WidgetState.selected)
               ? AppColors.white
               : AppColors.ss_button_color)));
 }

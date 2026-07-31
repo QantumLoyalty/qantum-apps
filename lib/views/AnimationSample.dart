@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AnimationSample extends StatefulWidget {
   const AnimationSample({super.key});
@@ -74,7 +73,7 @@ class _AnimationsampleState extends State<AnimationSample>
                     });
                   });
             },
-            child: Text("AnimatedContainer")),
+            child: const Text("AnimatedContainer")),
         ElevatedButton(
             onPressed: () {
               showDialog(
@@ -99,7 +98,7 @@ class _AnimationsampleState extends State<AnimationSample>
                     });
                   });
             },
-            child: Text("AnimatedOpacity")),
+            child: const Text("AnimatedOpacity")),
         ElevatedButton(
             onPressed: () {
               showDialog(
@@ -123,9 +122,9 @@ class _AnimationsampleState extends State<AnimationSample>
                                       ? Alignment.center
                                       : Alignment.topRight,
                                   child: const SizedBox(
-                                    child: Text("Tap Me!"),
                                     width: 80,
                                     height: 80,
+                                    child: Text("Tap Me!"),
                                   ),
                                 ),
                               ],
@@ -134,8 +133,8 @@ class _AnimationsampleState extends State<AnimationSample>
                     });
                   });
             },
-            child: Text("AnimatedAlign")),
-        ElevatedButton(onPressed: () {}, child: Text("AnimatedPositioned")),
+            child: const Text("AnimatedAlign")),
+        ElevatedButton(onPressed: () {}, child: const Text("AnimatedPositioned")),
         ElevatedButton(
             onPressed: () {
               showDialog(
@@ -156,10 +155,10 @@ class _AnimationsampleState extends State<AnimationSample>
                                 AnimatedPadding(
                                   duration: const Duration(seconds: 1),
                                   padding: EdgeInsets.all(value ? 50 : 10),
-                                  child: Container(
-                                    child: Text("Tap Me!"),
+                                  child: const SizedBox(
                                     width: 100,
                                     height: 100,
+                                    child: Text("Tap Me!"),
                                   ),
                                 ),
                               ],
@@ -168,9 +167,9 @@ class _AnimationsampleState extends State<AnimationSample>
                     });
                   });
             },
-            child: Text("AnimatedPadding")),
-        ElevatedButton(onPressed: () {}, child: Text("AnimatedCrossFade")),
-        ElevatedButton(onPressed: () {}, child: Text("TweenAnimationBuilder")),
+            child: const Text("AnimatedPadding")),
+        ElevatedButton(onPressed: () {}, child: const Text("AnimatedCrossFade")),
+        ElevatedButton(onPressed: () {}, child: const Text("TweenAnimationBuilder")),
       ],
     );
   }

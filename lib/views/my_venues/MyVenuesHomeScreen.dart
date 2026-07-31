@@ -5,7 +5,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gif_view/gif_view.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/utils/AppColors.dart';
 import 'package:qantum_apps/views/common_widgets/BouncyButton.dart';
 import '../../core/extensions/spacer_extension.dart';
 import '/view_models/InternetStatusProvider.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
-import 'package:qantum_apps/core/enums/RenewMembershipSource.dart';
 import 'package:qantum_apps/views/my_venues/ChooseFavouriteVenueScreen.dart';
 import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
@@ -200,18 +199,18 @@ class AppNavigator {
         return MaterialPageRoute(builder: (_) => ReceptionPaymentScreen());
 
       case unitedFuelMainScreen:
-        return MaterialPageRoute(builder: (_) => UnitedFuelMainScreen());
+        return MaterialPageRoute(builder: (_) => const UnitedFuelMainScreen());
       case unitedFuelsBarcodeLandscape:
-        return MaterialPageRoute(builder: (_) => UnitedFuelsBarcodeLandscape());
+        return MaterialPageRoute(builder: (_) => const UnitedFuelsBarcodeLandscape());
 
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case myAccountScreen:
-        return MaterialPageRoute(builder: (_) => MyAccountScreen());
+        return MaterialPageRoute(builder: (_) => const MyAccountScreen());
       case userDetailScreen:
         return MaterialPageRoute(builder: (_) => const UserDetailScreen());
       case clubAndMembership:
-        return MaterialPageRoute(builder: (_) => ClubAndMembership());
+        return MaterialPageRoute(builder: (_) => const ClubAndMembership());
       case selfieUploadScreen:
         {
           Map<String, String>? argumentss;
@@ -231,7 +230,7 @@ class AppNavigator {
       case pasStatement:
         return MaterialPageRoute(builder: (_) => PASStatement());
       case verifyOTPAccount:
-        return MaterialPageRoute(builder: (_) => VerifyOTPAccount());
+        return MaterialPageRoute(builder: (_) => const VerifyOTPAccount());
       case editUserDetailsScreen:
         return MaterialPageRoute(builder: (_) => const EditUserDetailsScreen());
       case recoverAccountScreen:

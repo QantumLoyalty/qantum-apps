@@ -12,7 +12,7 @@ import '../common_widgets/AppScaffold.dart';
 import 'widgets/AccountsAppBar.dart';
 
 class ClubAndMembership extends StatefulWidget {
-  ClubAndMembership({super.key});
+  const ClubAndMembership({super.key});
 
   @override
   State<ClubAndMembership> createState() => _ClubAndMembershipState();

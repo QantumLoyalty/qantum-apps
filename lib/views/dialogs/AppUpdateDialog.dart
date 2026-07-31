@@ -65,9 +65,9 @@ class AppUpdateDialog with LoggingMixin {
                   AppDimens.shape_10,
                   Text(
                     loc.releaseNotes,
-                    style: TextStyle(fontWeight: FontWeight.w700),
+                    style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  Text("Minor updates & improvements"),
+                  const Text("Minor updates & improvements"),
                   AppDimens.shape_10,
                   Row(
                     children: [
@@ -115,7 +115,7 @@ class AppUpdateDialog with LoggingMixin {
                                           mode: LaunchMode.externalApplication);
                                     }
                                   } else if (Platform.isIOS) {
-                                    "iosUrl:; ${iosUrl}".logMessage();
+                                    "iosUrl:; $iosUrl".logMessage();
 
                                     await launchUrl(iosUrl,
                                         mode: LaunchMode.externalApplication);
@@ -127,7 +127,7 @@ class AppUpdateDialog with LoggingMixin {
                               },
                               child: Text(loc.updateNow,
                                   style:
-                                      TextStyle(fontWeight: FontWeight.w700)))),
+                                      const TextStyle(fontWeight: FontWeight.w700)))),
                     ],
                   )
                 ],

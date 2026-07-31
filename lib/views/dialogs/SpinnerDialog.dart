@@ -44,7 +44,7 @@ class ArcTextWithBgPainter extends CustomPainter {
       final bgPaint = Paint()..color = backgroundColor;
       final rect = Rect.fromCenter(center: offset, width: 24, height: 28);
       canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, Radius.circular(6)),
+        RRect.fromRectAndRadius(rect, const Radius.circular(6)),
         bgPaint,
       );
 

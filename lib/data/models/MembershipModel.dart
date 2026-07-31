@@ -43,7 +43,7 @@ class MembershipModel {
         ? EarlyBirdPeriod.fromJson(json['earlyBirdPeriod'])
         : null;
     earlyBirdRenewalDate = json['earlyBirdRenewalDate'];
-    expiryEarlyBirdRenewalDate = json['expiryEarlyBirdRenewalDate'] ?? null;
+    expiryEarlyBirdRenewalDate = json['expiryEarlyBirdRenewalDate'];
   }
 
   Map<String, dynamic> toJson() {

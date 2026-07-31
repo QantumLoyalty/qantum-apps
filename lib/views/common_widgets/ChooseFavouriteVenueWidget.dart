@@ -151,7 +151,7 @@ class _ChooseFavouriteVenueWidgetState
                               ),
                             ),
                           ))
-                      : SizedBox.shrink(),
+                      : const SizedBox.shrink(),
 
                   /// CLOSE BUTTON
                   Positioned(

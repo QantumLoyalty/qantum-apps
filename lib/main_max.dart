@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +110,7 @@ void main() async {
     OneSignal.initialize("bc03a2c3-74a6-466f-b4c0-350b70a4d007");
     OneSignal.Notifications.requestPermission(true);
 
-    Future<String> _getCurrentUserId() async {
+    Future<String> getCurrentUserId() async {
       final sph = await SharedPreferenceHelper.getInstance();
       final user = sph.getUserData();
       return user?.id ?? 'guest';
@@ -132,7 +131,7 @@ void main() async {
       print(
           '[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}');
 
-      final userId = await _getCurrentUserId();
+      final userId = await getCurrentUserId();
 
       String? imageUrl;
       if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {
@@ -226,7 +225,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         builder: (context, child) {
           return MediaQuery(
               data: MediaQuery.of(context)
-                  .copyWith(textScaler: TextScaler.linear(1.0)),
+                  .copyWith(textScaler: const TextScaler.linear(1.0)),
               child: AnnotatedRegion<SystemUiOverlayStyle>(
                   value: const SystemUiOverlayStyle(
                       statusBarBrightness: Brightness.dark,

@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -114,7 +113,7 @@ void main() async {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize("46320246-4a36-4fa6-8dc1-a9035c44403d");
     OneSignal.Notifications.requestPermission(true);
-    Future<String> _getCurrentUserId() async {
+    Future<String> getCurrentUserId() async {
       final sph = await SharedPreferenceHelper.getInstance();
       final user = sph.getUserData();
       return user?.id ?? 'guest';
@@ -135,7 +134,7 @@ void main() async {
       print(
           '[OneSignal] CLICKED notification: id=${n.notificationId}, title=${n.title}');
 
-      final userId = await _getCurrentUserId();
+      final userId = await getCurrentUserId();
 
       String? imageUrl;
       if (n.bigPicture != null && n.bigPicture!.isNotEmpty) {

@@ -1,10 +1,8 @@
 import 'package:intl/intl.dart';
-import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import 'package:qantum_apps/core/utils/AppHelper.dart';
 import 'package:qantum_apps/data/models/EarlyBirdPeriod.dart';
 
 import '../flavors_config/flavor_config.dart';
-import '../mixins/logging_mixin.dart';
 
 class AppDateFormatter {
   static String? userMembershipExpiry(String? membershipExpiry) {

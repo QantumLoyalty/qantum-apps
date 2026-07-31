@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/data/models/VenueModel.dart';
 import 'package:qantum_apps/main_ss.dart';
 import '../core/utils/FlavorConstants.dart';
@@ -223,7 +220,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   runFetchProfileTimer({required String fetchFromBluize}) async {
     await fetchUserProfile(fetchFromBluize);
-    profileTimer = Timer.periodic(Duration(seconds: 30), (value) async {
+    profileTimer = Timer.periodic(const Duration(seconds: 30), (value) async {
       if (!_isFetching) {
         _isFetching = true;
         await fetchUserProfile(fetchFromBluize);
@@ -253,7 +250,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       params['device_type'] =
           Platform.isAndroid ? "ANDROID" : (Platform.isIOS ? "IOS" : "");
 
-      print("uploadDeviceDetail params: ${params}");
+      print("uploadDeviceDetail params: $params");
       NetworkResponse networkResponse =
           await UserService.getInstance().updateDeviceDetail(params);
       logEvent("uploadDeviceDetail response: $networkResponse");

@@ -1,19 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/core/utils/FlavorConstants.dart';
 import '../../l10n/app_localizations.dart';
-import '/core/flavors_config/flavor_config.dart';
-import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
 import 'package:secure_content/secure_content.dart';
 import '../../core/utils/AppColors.dart';
-import '../../data/local/SharedPreferenceHelper.dart';
-import '../../data/models/UserModel.dart';
 import '../../view_models/UserInfoProvider.dart';
 
 class MembershipCancelledDialog {
