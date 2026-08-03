@@ -38,17 +38,15 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
           mainAxisSize: MainAxisSize.min,
           children: [
             AppDimens.shape_5,
-            flavor == Flavor.starReward || flavor == Flavor.flinders
-                ? (provider.showNextLevel
+            /*flavor == Flavor.starReward || flavor == Flavor.flinders
+                ?*/ (provider.showNextLevel
                     ? dialerWidget(context, provider)
                     : const SizedBox(
                         height: 200,
-                      ))
-                : dialerWidget(context, provider),
+                      )),
+                /*: dialerWidget(context, provider),*/
             AppDimens.shape_15,
-            (flavor == Flavor.mhbc)
-                ? const SizedBox.shrink()
-                : (flavor == Flavor.starReward || flavor == Flavor.flinders
+             (flavor == Flavor.mhbc || flavor == Flavor.starReward || flavor == Flavor.flinders
                     ? statusTierWidget(context, provider)
                     : Text(
                         loc.txtHowToEarnStatusCredits,

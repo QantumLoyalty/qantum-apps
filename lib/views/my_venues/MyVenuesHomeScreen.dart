@@ -76,7 +76,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Consumer3<PromotionsProvider, HomeProvider, InternetStatusProvider>(
       builder: (context, provider, homeProvider, internetProvider, child) {
         final bool hasSmartIncentives = switch (flavor) {
-          Flavor.mhbc || Flavor.qantum || Flavor.maxx => true,
+          Flavor.hogansReward || Flavor.mhbc || Flavor.qantum || Flavor.maxx => true,
           _ => false,
         };
         final bool isMhbc = flavor == Flavor.mhbc;

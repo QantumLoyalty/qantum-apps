@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
 import 'package:qantum_apps/views/home/notification_screen.dart';
 import '/core/utils/AppHelper.dart';
 import '/views/dialogs/MembershipCancelledDialog.dart';
@@ -73,7 +74,8 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             } catch (e) {
                               logEvent(e.toString());
                             }
-
+                           /* await AppUpdateDialog.getInstance()
+                                .showAppUpdateDialog(context);*/
                           },
                           child: SizedBox(
                             width: 80,
@@ -175,14 +177,14 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           flavor == Flavor.maxx ||
                           flavor == Flavor.starReward ||
                           flavor == Flavor.flinders ||
-                          flavor == Flavor.mhbc||
-                          flavor == Flavor.edp||
-                          flavor == Flavor.mosaic||
-                          flavor == Flavor.drinkRewards||
-                          flavor == Flavor.bobsBulkBooze||
-                          flavor == Flavor.bluewater||
-                          flavor == Flavor.northShoreTavern||
-                          flavor == Flavor.brisbane||
+                          flavor == Flavor.mhbc ||
+                          flavor == Flavor.edp ||
+                          flavor == Flavor.mosaic ||
+                          flavor == Flavor.drinkRewards ||
+                          flavor == Flavor.bobsBulkBooze ||
+                          flavor == Flavor.bluewater ||
+                          flavor == Flavor.northShoreTavern ||
+                          flavor == Flavor.brisbane ||
                           flavor == Flavor.hogansReward)
                         Positioned(
                           right: 65,
@@ -197,19 +199,23 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   InkWell(
                                     borderRadius: BorderRadius.circular(200),
                                     onTap: () async {
-                                      final sph = await SharedPreferenceHelper.getInstance();
-                                      final currentUserId = sph.getUserData()?.id ?? 'guest';
+                                      final sph = await SharedPreferenceHelper
+                                          .getInstance();
+                                      final currentUserId =
+                                          sph.getUserData()?.id ?? 'guest';
 
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (_) =>
-                                                NotificationsScreen(userId: currentUserId),
+                                            builder: (_) => NotificationsScreen(
+                                                userId: currentUserId),
                                           ));
                                     },
                                     child: Image.asset(
                                       AppIcons.notification,
-                                      color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                      color: AppThemeCustom
+                                          .getHomeScreenProfileIconColor(
+                                              context),
                                       width: 30,
                                       height: 30,
                                     ),
@@ -222,22 +228,27 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                         ignoring: true,
                                         child: Container(
                                           width: 18,
-                                          height:18,
-                                          constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                          height: 18,
+                                          constraints: const BoxConstraints(
+                                              minWidth: 16, minHeight: 16),
                                           decoration: BoxDecoration(
                                             color: Colors.red,
-                                            borderRadius: BorderRadius.circular(2000),
-                                            border: Border.all(color: Colors.white, width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(2000),
+                                            border: Border.all(
+                                                color: Colors.white, width: 1),
                                           ),
                                           child: Center(
                                             child: Text(
-                                              unreadCount > 99 ? '99+' : unreadCount.toString(),
+                                              unreadCount > 99
+                                                  ? '99+'
+                                                  : unreadCount.toString(),
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.bold,
-                                               // height: 1.2,
+                                                // height: 1.2,
                                               ),
                                             ),
                                           ),
@@ -249,9 +260,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             },
                           ),
                         ),
-
-
-
                       Consumer2<HomeProvider, UserInfoProvider>(
                         builder: (context, provider, userInfoProvider, child) {
                           return Padding(
@@ -259,11 +267,14 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                             child: InkWell(
                               onTap: () {
                                 if (userInfoProvider.getUserInfo != null &&
-                                    !userInfoProvider.getUserInfo!.isUserStatusCancelled()) {
+                                    !userInfoProvider.getUserInfo!
+                                        .isUserStatusCancelled()) {
                                   if (provider.showSeeAllMenu) {
-                                    provider.updateShowAllMenuVisibility(false, "my profile");
+                                    provider.updateShowAllMenuVisibility(
+                                        false, "my profile");
                                   }
-                                  MyProfileDialog.getInstance().showMyProfileDialog(context);
+                                  MyProfileDialog.getInstance()
+                                      .showMyProfileDialog(context);
                                 }
                               },
                               child: Column(
@@ -275,22 +286,30 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                     AppIcons.my_profile,
                                     width: 34,
                                     height: 34,
-                                    color: (userInfoProvider.getUserInfo != null &&
-                                        userInfoProvider.getUserInfo!.isUserStatusCancelled())
-                                        ? AppColors.disable_color
-                                        : AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                    color:
+                                        (userInfoProvider.getUserInfo != null &&
+                                                userInfoProvider.getUserInfo!
+                                                    .isUserStatusCancelled())
+                                            ? AppColors.disable_color
+                                            : AppThemeCustom
+                                                .getHomeScreenProfileIconColor(
+                                                    context),
                                   ),
                                   Text(
-                                   // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+                                    // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
 
                                     "Profile",
                                     style: TextStyle(
                                         fontSize: 9,
                                         fontWeight: FontWeight.bold,
-                                        color: (userInfoProvider.getUserInfo != null &&
-                                            userInfoProvider.getUserInfo!.isUserStatusCancelled())
+                                        color: (userInfoProvider.getUserInfo !=
+                                                    null &&
+                                                userInfoProvider.getUserInfo!
+                                                    .isUserStatusCancelled())
                                             ? AppColors.disable_color
-                                            : Theme.of(context).textSelectionTheme.selectionColor),
+                                            : Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionColor),
                                   )
                                 ],
                               ),
@@ -298,7 +317,6 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                           );
                         },
                       ),
-
                     ],
                   ),
                 ),

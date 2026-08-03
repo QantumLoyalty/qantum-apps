@@ -42,7 +42,10 @@ class AppUpdateDialog with LoggingMixin {
                 children: [
                   Text(
                     loc.appUpdate,
-                    style: TextStyle(fontSize: 18, color: AppColors.black),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.bold),
                   ),
                   AppDimens.shape_10,
                   Text(loc.msgNewVersionAvailable.replaceAll(
@@ -78,6 +81,7 @@ class AppUpdateDialog with LoggingMixin {
                               },
                               child: Text(loc.ignore,
                                   style: const TextStyle(
+                                      color: Colors.black,
                                       fontWeight: FontWeight.normal)))),
                       Expanded(
                           child: TextButton(
@@ -86,6 +90,7 @@ class AppUpdateDialog with LoggingMixin {
                               },
                               child: Text(loc.later,
                                   style: const TextStyle(
+                                      color: Colors.black,
                                       fontWeight: FontWeight.normal)))),
                       Expanded(
                           child: TextButton(
@@ -126,8 +131,9 @@ class AppUpdateDialog with LoggingMixin {
                                 }
                               },
                               child: Text(loc.updateNow,
-                                  style:
-                                      const TextStyle(fontWeight: FontWeight.w700)))),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700)))),
                     ],
                   )
                 ],
