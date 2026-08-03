@@ -51,6 +51,48 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   MembershipStatus membershipStatus = MembershipStatus.loading;
 
+
+  bool _isPushEnabled = true;
+
+  bool get isPushEnabled => _isPushEnabled;
+
+
+  Future<void> pausePushNotifications() async {
+    try {
+      await OneSignal.User.pushSubscription.optOut();
+      _isPushEnabled = false;
+      logEvent("Push notifications paused");
+    } catch (e) {
+      logEvent("pausePushNotifications error:: ${e.toString()}");
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> resumePushNotifications() async {
+    try {
+      await OneSignal.User.pushSubscription.optIn();
+      _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+
+      if (!_isPushEnabled) {
+        await OneSignal.Notifications.requestPermission(true);
+        await OneSignal.User.pushSubscription.optIn();
+        _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+      }
+
+      logEvent("Push notifications resumed: $_isPushEnabled");
+    } catch (e) {
+      logEvent("resumePushNotifications error:: ${e.toString()}");
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  checkPushNotificationStatus() {
+    _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+    notifyListeners();
+  }
+
   markNavigated() {
     _isNavigated = true;
   }

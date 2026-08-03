@@ -1484,6 +1484,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get txtNotification;
 
+  /// No description provided for @txtPushNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Push Notifications'**
+  String get txtPushNotification;
+
   /// No description provided for @deleteAccountPermanentMessage.
   ///
   /// In en, this message translates to:

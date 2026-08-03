@@ -704,5 +704,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtNotification => 'Notifications';
 
   @override
+  String get txtPushNotification => 'Push Notifications';
+
+  @override
   String get deleteAccountPermanentMessage => 'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
 }

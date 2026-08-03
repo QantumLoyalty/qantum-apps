@@ -704,6 +704,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtNotification => '通知';
 
   @override
+  String get txtPushNotification => '推播通知';
+
+  @override
   String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 }
 
@@ -1405,6 +1408,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtNotification => '通知';
+
+  @override
+  String get txtPushNotification => '推送通知';
 
   @override
   String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';

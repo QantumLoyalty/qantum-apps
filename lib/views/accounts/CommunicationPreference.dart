@@ -30,6 +30,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
     super.initState();
     _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
     // _userInfoProvider.fetchUserProfile();
+     _userInfoProvider.checkPushNotificationStatus();
     flavor = FlavorConfig.instance.flavor!;
   }
 
@@ -168,6 +169,28 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                         color: AppThemeCustom
                                             .getAccountSectionItemStyle(context,
                                                 isCommunication: true),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
+                                  ),
+                                ),
+                                SwitchListTile(
+                                  materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                                  contentPadding: EdgeInsets.zero,
+                                  value: provider.isPushEnabled,
+                                  onChanged: (value) {
+                                    if (value) {
+                                      provider.resumePushNotifications();
+                                    } else {
+                                      provider.pausePushNotifications();
+                                    }
+                                  },
+                                  title: Text(
+                                    loc.txtPushNotification,
+                                    style: TextStyle(
+                                        color: AppThemeCustom
+                                            .getAccountSectionItemStyle(context,
+                                            isCommunication: true),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
