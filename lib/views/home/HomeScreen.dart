@@ -84,8 +84,28 @@ class _HomeScreenState extends State<HomeScreen>
       _loadNotificationsForCurrentUser();
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
+      checkForAppUpdate();
     }
   }
+
+
+  bool _updateDialogDisplayed = false;
+  checkForAppUpdate() async
+  {
+    if (!mounted || _updateDialogDisplayed) return;
+
+    final result = await _homeProvider.checkForAppUpdate();
+
+    if (!mounted ||
+        result ||
+        _updateDialogDisplayed) {
+      return;
+    }
+
+    _updateDialogDisplayed = true;
+
+  }
+
 
   String? _lastHandledChewziePayload;
   DateTime? _lastHandledChewzieTime;
@@ -101,10 +121,11 @@ class _HomeScreenState extends State<HomeScreen>
       _pointsDialogTimer!.cancel();
     }
   }
+
   Future<void> _loadNotificationsForCurrentUser() async {
     final sph = await SharedPreferenceHelper.getInstance();
     final currentUserId = sph.getUserData()?.id ?? 'guest';
-    if (!mounted) return; // async gap ke baad check zaroori
+    if (!mounted) return;
     _homeProvider.loadNotifications(currentUserId);
   }
 

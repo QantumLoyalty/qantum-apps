@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+14
 ###################################
 # MHBC
-version:  1.0.14+100
+#version:  1.0.14+100
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -74,7 +74,7 @@ version:  1.0.14+100
 #version: 1.0.0+2
 ###################################
 #MAX Club
-#version: 1.0.0+11
+version: 1.0.0+10
 ###################################
 #WONTHAGGI
 #version: 1.0.0+4

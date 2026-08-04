@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/common_widgets/AppButton.dart';
+import '../../core/extensions/spacer_extension.dart';
 import '/core/extensions/log_extension.dart';
 import '/core/flavors_config/app_config.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,120 +27,156 @@ class AppUpdateDialog with LoggingMixin {
   showAppUpdateDialog(BuildContext context) {
     context.read<UserInfoProvider>().getAppInfo();
     AppLocalizations loc = AppLocalizations.of(context)!;
-    showDialog(
+    showGeneralDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) {
-          return Dialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            insetPadding: const EdgeInsets.all(20),
-            backgroundColor: AppColors.white,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    loc.appUpdate,
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: AppColors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  AppDimens.shape_10,
-                  Text(loc.msgNewVersionAvailable.replaceAll(
-                      "###", FlavorConfig.instance.flavorValues.appName!)),
-                  AppDimens.shape_10,
-                  Text(loc.msgNewAppVersionAvailable
-                      .replaceAll("###", "1.0.11")),
-                  AppDimens.shape_10,
-                  Selector<UserInfoProvider, String?>(
-                      builder: (_, version, __) => Text(
-                            loc.msgYouHaveVersion
-                                .replaceAll("###", version ?? ""),
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
+        transitionDuration: const Duration(milliseconds: 250),
+        pageBuilder: (context, anim1, anim2) {
+          return PopScope(
+            canPop: false,
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              insetPadding: const EdgeInsets.all(20),
+              backgroundColor: Theme.of(context).primaryColor,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    10.h,
+                    Material(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(200),
+                            side: BorderSide(
+                              width: 1,
+                              color: Theme.of(context)
+                                  .textSelectionTheme
+                                  .selectionColor!,
+                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.download,
+                            size: 48,
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
                           ),
-                      selector: (_, v) => v.version),
-                  AppDimens.shape_10,
-                  Text(loc.msgLikeToUpdate),
-                  AppDimens.shape_10,
-                  Text(
-                    loc.releaseNotes,
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  const Text("Minor updates & improvements"),
-                  AppDimens.shape_10,
-                  Row(
-                    children: [
-                      Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(loc.ignore,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal)))),
-                      Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(loc.later,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal)))),
-                      Expanded(
-                          child: TextButton(
-                              onPressed: () async {
-                                final info = await PackageInfo.fromPlatform();
-                                final id = info.packageName;
+                        )),
+                    20.h,
+                    Text(
+                      "App Update Available".toUpperCase(),
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    AppDimens.shape_10,
+                    Text("Great news! A new update is available,\nclick the",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                            fontWeight: FontWeight.normal)),
+                    AppDimens.shape_10,
+                    /*Text(loc.msgNewAppVersionAvailable
+                        .replaceAll("###", "1.0.11")),
+                    AppDimens.shape_10,
+                    Selector<UserInfoProvider, String?>(
+                        builder: (_, version, __) => Text(
+                              loc.msgYouHaveVersion
+                                  .replaceAll("###", version ?? ""),
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                        selector: (_, v) => v.version),
+                    AppDimens.shape_10,
+                    Text(loc.msgLikeToUpdate),
+                    AppDimens.shape_10,
+                    Text(
+                      loc.releaseNotes,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    const Text("Minor updates & improvements"),*/
+                    AppDimens.shape_10,
+                    Row(
+                      children: [
+                        Expanded(
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(loc.later,
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor,
+                                        fontWeight: FontWeight.normal)))),
+                        Expanded(
+                            child: AppButton(
+                          onClick: () async {
+                            final info = await PackageInfo.fromPlatform();
+                            final id = info.packageName;
 
-                                final Uri androidUrl = Uri.parse(
-                                  "market://details?id=$id",
-                                );
+                            final Uri androidUrl = Uri.parse(
+                              "market://details?id=$id",
+                            );
 
-                                final Uri androidFallback = Uri.parse(
-                                  "https://play.google.com/store/apps/details?id=$id",
-                                );
+                            final Uri androidFallback = Uri.parse(
+                              "https://play.google.com/store/apps/details?id=$id",
+                            );
 
-                                final Uri iosUrl = Uri.parse(
-                                  AppConfig.iosAppStoreUrl,
-                                );
+                            final Uri iosUrl = Uri.parse(
+                              AppConfig.iosAppStoreUrl,
+                            );
 
-                                try {
-                                  if (Platform.isAndroid) {
-                                    if (await canLaunchUrl(androidUrl)) {
-                                      await launchUrl(androidUrl);
-                                    } else {
-                                      /// IF PLAYSTORE APP ISN'T INSTALLED OR FAILED TO FIND THE PLAYSTORE APP THIS WILL WORK IN WEB VIEW
-                                      await launchUrl(androidFallback,
-                                          mode: LaunchMode.externalApplication);
-                                    }
-                                  } else if (Platform.isIOS) {
-                                    "iosUrl:; $iosUrl".logMessage();
-
-                                    await launchUrl(iosUrl,
-                                        mode: LaunchMode.externalApplication);
-                                  }
-                                } catch (e) {
-                                  logEvent(
-                                      "Error while opening the store: ${e.toString()}");
+                            try {
+                              if (Platform.isAndroid) {
+                                if (await canLaunchUrl(androidUrl)) {
+                                  await launchUrl(androidUrl);
+                                } else {
+                                  /// IF PLAYSTORE APP ISN'T INSTALLED OR FAILED TO FIND THE PLAYSTORE APP THIS WILL WORK IN WEB VIEW
+                                  await launchUrl(androidFallback,
+                                      mode: LaunchMode.externalApplication);
                                 }
-                              },
-                              child: Text(loc.updateNow,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700)))),
-                    ],
-                  )
-                ],
+                              } else if (Platform.isIOS) {
+                                "iosUrl:; $iosUrl".logMessage();
+
+                                await launchUrl(iosUrl,
+                                    mode: LaunchMode.externalApplication);
+                              }
+                            } catch (e) {
+                              logEvent(
+                                  "Error while opening the store: ${e.toString()}");
+                            }
+                          },
+                          text: loc.updateNow.toUpperCase(),
+                        )),
+                      ],
+                    )
+                  ],
+                ),
               ),
+            ),
+          );
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(
+                sigmaX: 4 * anim1.value, sigmaY: 4 * anim1.value),
+            child: SlideTransition(
+              position:
+                  Tween(begin: const Offset(0, -1), end: const Offset(0, 0))
+                      .animate(anim1),
+              child: child,
             ),
           );
         });

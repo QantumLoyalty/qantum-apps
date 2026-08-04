@@ -34,6 +34,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   Map<int, dynamic>? get moreButtonsMap => _moreButtonsMap;
 
   List<NotificationModel> _notifications = [];
+
   List<NotificationModel> get notifications => _notifications;
 
   String? _notificationUserId;
@@ -41,28 +42,27 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
 
   int get unreadCount => _notifications.where((n) => !n.isRead).length;
 
-
   void loadNotifications(String userId) {
     _notificationUserId = userId;
     _notifications = NotificationHiveService.getForUser(userId);
-    _attachHiveListener();   // 👈 NAYI LINE
+    _attachHiveListener(); // 👈 NAYI LINE
     notifyListeners();
   }
 
   void _attachHiveListener() {
     if (_hiveListenerAttached) return;
     _hiveListenerAttached = true;
-    print('[HomeProvider] attaching Hive listener');   // 👈 ADD KARO
+    print('[HomeProvider] attaching Hive listener'); // 👈 ADD KARO
     NotificationHiveService.listenable.addListener(_onHiveBoxChanged);
   }
 
   void _onHiveBoxChanged() {
-    print('[HomeProvider] Hive box changed - refreshing notifications');   // 👈 ADD KARO
+    print(
+        '[HomeProvider] Hive box changed - refreshing notifications'); // 👈 ADD KARO
     if (_notificationUserId == null) return;
     _notifications = NotificationHiveService.getForUser(_notificationUserId!);
     notifyListeners();
   }
-
 
   Future<void> refreshNotifications() async {
     if (_notificationUserId == null) return;
@@ -395,5 +395,28 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
+  }
+
+  Future<bool> checkForAppUpdate() async {
+    bool result=false;
+    try {
+
+      NetworkResponse networkResponse=await AppDataService.getInstance().checkAppUpdate();
+      print("CHECK APP UPDATE: $networkResponse");
+
+
+
+
+
+    }
+    catch (e) {
+      e.toString().logMessage();
+     return result;
+    }
+    finally {
+
+      return result;
+
+    }
   }
 }

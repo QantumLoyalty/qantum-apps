@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '/core/utils/AppHelper.dart';
@@ -83,9 +85,31 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
           if (response.keys.contains("data")) {
             _membershipList = [];
 
+            List<MembershipModel> tempList = [];
+
             response["data"].forEach((item) {
-              _membershipList.add(MembershipModel.fromJson(item));
+              tempList.add(MembershipModel.fromJson(item));
             });
+
+            /// THIS CONDITION IS A TEMPORARY CONDITION WE NEED TO REMOVE IT AFTER AUSTRALIAN EXPO ///
+            if (flavor == Flavor.mhbc) {
+              MembershipModel? specialMembership;
+
+              tempList.forEach((item) {
+                if (item.membershipName!.toString().trim().toLowerCase() ==
+                    'Social Sailing 1 Yr'.toLowerCase()) {
+                  specialMembership = item;
+                }
+              });
+
+              _membershipList = tempList.take(2).toList();
+
+              if (specialMembership != null) {
+                _membershipList.add(specialMembership!);
+              }
+            } else {
+              _membershipList = tempList.take(2).toList();
+            }
 
             logEvent("MEMBERSHIP LIST SIZE ${_membershipList.length}");
             if (_membershipList.isNotEmpty) {
@@ -176,9 +200,9 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         /// IF USER IS BUYING THE MEMBERSHIP FROM EARLY BIRD FLOW
         paymentParams["amount"] =
             (_selectedMembership!.originalPrice! * 100).toInt();
-
       }
-      print("${_selectedMembership!.calculatedPrice!} >>> ${_selectedMembership!.originalPrice!}");
+      print(
+          "${_selectedMembership!.calculatedPrice!} >>> ${_selectedMembership!.originalPrice!}");
 
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .createPaymentIntent(
@@ -218,8 +242,6 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
       notifyListeners();
     }
   }
-
-
 
   updateMembershipPaymentMethod(
       {required AppLocalizations loc,

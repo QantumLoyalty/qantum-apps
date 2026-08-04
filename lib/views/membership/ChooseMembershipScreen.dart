@@ -89,89 +89,9 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                       ),
                       AppDimens.shape_20,
-                      provider.membershipList.isNotEmpty
-                          ? (flavor == Flavor.mhbc)
-                              ? /*DropdownButtonFormField<MembershipModel>(
-                                  key: const ValueKey('membership_dropdown'),
-                                  value: provider.selectedMembership,
-                                  menuMaxHeight: 260,
-                                  //dropdownColor: const Color(0xFF9FA8B8),
-                                  alignment: Alignment.bottomCenter,
-                          selectedItemBuilder: (BuildContext context) {
-                            return provider.membershipList.map((membership) {
-                              return Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  " ${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              );
-                            }).toList();
-                          },
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: const Color(0xFF9FA8B8),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 16,
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: const BorderSide(
-                                          color: Colors.white,
-                                          width: 1.5,
-                                        ),
-                                      )),
-                                  isExpanded: true,
-                                  hint: const Text(
-                                    'Select membership',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  icon: const Icon(
-                                    Icons.keyboard_arrow_down_rounded,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  items: provider.membershipList
-                                      .map((membership) =>
-                                          DropdownMenuItem<MembershipModel>(
-                                              value: membership,
-                                              child: Container(
-                                                width: double.infinity,
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 12, vertical: 8),
-                                                margin: EdgeInsets.only(bottom: 4),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                  border: Border.all(color: Colors.white,
-                                                    width: 1,),
-                                                ),
-                                                child: Text(
-                                                  "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              )))
-                                      .toList(),
-                                  onChanged: (item) {})*/
+                      provider.membershipList.isNotEmpty?
+                          /*? (flavor == Flavor.mhbc)
+                              ?
                       LayoutBuilder(
                         builder: (context, constraints) {
                           return DropdownMenu<MembershipModel>(
@@ -312,7 +232,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                           );
                         },
                       )
-                              : Column(
+                              :*/ Column(
                                   children: [
                                     ListView.builder(
                                       shrinkWrap: true,
@@ -355,10 +275,7 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                                           ),
                                         );
                                       },
-                                      itemCount:
-                                          provider.membershipList.length >= 3
-                                              ? 3
-                                              : provider.membershipList.length,
+                                      itemCount: provider.membershipList.length,
                                     ),
                                     AppDimens.shape_30,
                                     Text(

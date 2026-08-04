@@ -445,4 +445,22 @@ class AppDataService extends AppDataRepository with LoggingMixin {
     }
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> checkAppUpdate() async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.CHECK_APP_VERSION+"${AppHelper.getAppType()}/latest");
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

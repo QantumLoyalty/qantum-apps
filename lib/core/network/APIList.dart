@@ -1,7 +1,7 @@
 class APIList {
   // SANDBOX
 
-  //static get BASE_URL => "https://betaapi.s2w.com.au/";
+ // static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
   static get BASE_URL => "https://api.s2w.com.au/";
@@ -76,6 +76,8 @@ class APIList {
   static get FETCH_VENUES_LIST => BASE_URL + "venue/all?";
 
   static get SAVE_VENUE => BASE_URL + "user/venue-update";
+
+    static get CHECK_APP_VERSION  => BASE_URL + "app-versions/";
 
   static get GET_STATUS_TIER_VALUE => BASE_URL + "status-tier/getByRating?key=";
 

@@ -51,4 +51,6 @@ abstract class AppDataRepository {
 
   Future<NetworkResponse> consumeSmartIncentive(
       {required Map<String, dynamic> params});
+
+  Future<NetworkResponse> checkAppUpdate();
 }
