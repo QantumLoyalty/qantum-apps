@@ -1,25 +1,22 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:gif_view/gif_view.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/views/common_widgets/BouncyButton.dart';
-import '../../core/extensions/spacer_extension.dart';
+
+import '/view_models/HomeProvider.dart';
 import '/view_models/InternetStatusProvider.dart';
 import '/views/common_widgets/NoInternetLayout.dart';
-
-import '../dialogs/ScratchCardDialog.dart';
-import '/view_models/HomeProvider.dart';
 import '../../core/enums/AdvertisementEnums.dart';
+import '../../core/extensions/spacer_extension.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../view_models/PromotionsProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
 import '../../views/my_venues/widgets/PromotionsPlaceHolder.dart';
 import '../dialogs/PromotionDetailDialog.dart';
-import '../dialogs/SpinnerDialog.dart';
+import '../dialogs/ScratchCardDialog.dart';
 import 'widgets/MegaEntryWidget.dart';
 
 class MyVenuesHomeScreen extends StatefulWidget {
@@ -76,7 +73,15 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Consumer3<PromotionsProvider, HomeProvider, InternetStatusProvider>(
       builder: (context, provider, homeProvider, internetProvider, child) {
         final bool hasSmartIncentives = switch (flavor) {
-          Flavor.hogansReward || Flavor.mhbc || Flavor.qantum || Flavor.maxx || Flavor.maxClub => true,
+          Flavor.hogansReward ||
+          Flavor.mhbc ||
+          Flavor.flinders ||
+          Flavor.edp ||
+          Flavor.qantum ||
+          Flavor.bluewater ||
+          Flavor.maxx ||
+          Flavor.maxClub =>
+            true,
           _ => false,
         };
         final bool isMhbc = flavor == Flavor.mhbc;

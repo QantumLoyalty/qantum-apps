@@ -11,6 +11,7 @@ import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/services/notification_services.dart';
+import 'package:qantum_apps/view_models/UnitedFuelsProvider.dart';
 
 import '/view_models/DocumentScanProvider.dart';
 import '/view_models/MembershipManagerProvider.dart';
@@ -211,6 +212,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ChangeNotifierProvider(
             create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
+
       ],
       child: AppBootstrap(
         child: Portal(

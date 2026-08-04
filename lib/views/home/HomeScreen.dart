@@ -51,18 +51,14 @@ class _HomeScreenState extends State<HomeScreen>
   bool isMembershipCancelledDialogShown = false;
 
   final partnerOffersMissingApps = {
-    Flavor.bluewater,
     Flavor.mhbc,
     Flavor.brisbane,
-    Flavor.hogansReward,
     Flavor.woollahra,
-    Flavor.flinders,
     Flavor.aceRewards,
     Flavor.northShoreTavern,
     Flavor.kingscliff,
     Flavor.drinkRewards,
     Flavor.wonthaggi,
-    Flavor.edp,
     Flavor.mosaic,
     Flavor.mannumClub,
   };

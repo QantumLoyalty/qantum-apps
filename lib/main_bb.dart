@@ -11,6 +11,7 @@ import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
 import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/services/notification_services.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
+import 'package:qantum_apps/view_models/UnitedFuelsProvider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -194,6 +195,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
+        ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
       child: Portal(
         child: MaterialApp(

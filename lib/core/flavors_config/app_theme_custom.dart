@@ -887,9 +887,6 @@ class AppThemeCustom {
 
       case Flavor.northShoreTavern:
       case Flavor.mhbc:
-      case Flavor.hogansReward:
-      case Flavor.bluewater:
-      case Flavor.flinders:
       case Flavor.aceRewards:
       case Flavor.kingscliff:
       case Flavor.drinkRewards:
@@ -901,9 +898,7 @@ class AppThemeCustom {
             : (isCancelled ? AppColors.disable_color : null);
 
       case Flavor.edp:
-        return (provider.homeNavigationList[2].name == itemName)
-            ? Colors.transparent
-            : AppColors.edp_button_color;
+        return AppColors.edp_button_color;
 
       case Flavor.senseOfTaste:
         return isCancelled
@@ -1114,8 +1109,8 @@ class AppThemeCustom {
             selectedFlavor == Flavor.bobsBulkBooze ||
             selectedFlavor == Flavor.mannumClub ||
             selectedFlavor == Flavor.maxx ||
+            selectedFlavor == Flavor.hogansReward ||
             selectedFlavor == Flavor.maxClub)) {
-      // Special case for mannumClub
       if (selectedFlavor == Flavor.mannumClub &&
           provider.homeNavigationList[2].name == itemName) {
         return Border.all(color: Colors.transparent);
@@ -1140,16 +1135,12 @@ class AppThemeCustom {
 
       case Flavor.northShoreTavern:
       case Flavor.brisbane:
-      case Flavor.hogansReward:
       case Flavor.woollahra:
-      case Flavor.bluewater:
-      case Flavor.flinders:
       case Flavor.aceRewards:
       case Flavor.mhbc:
       case Flavor.kingscliff:
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
-      case Flavor.edp:
       case Flavor.mosaic:
       case Flavor.mannumClub:
         //  case Flavor.southportSharks:
@@ -1228,10 +1219,7 @@ class AppThemeCustom {
 
     // 👉 Other special flavors (keep index 2 exception)
     if (selectedFlavor == Flavor.edp) {
-      return provider.homeNavigationList[2].name ==
-              provider.homeNavigationList[index].name
-          ? null
-          : AppColors.button_shadow;
+      return AppColors.button_shadow;
     }
 
     if (selectedFlavor == Flavor.mosaic) {
@@ -1254,10 +1242,7 @@ class AppThemeCustom {
           : AppColors.wt_menu_background;
     }
     if (selectedFlavor == Flavor.flinders) {
-      return provider.homeNavigationList[2].name ==
-              provider.homeNavigationList[index].name
-          ? null
-          : Theme.of(context).iconTheme.color!;
+      return Theme.of(context).iconTheme.color!;
     }
 
     /*if (selectedFlavor == Flavor.southportSharks) {
@@ -1325,17 +1310,13 @@ class AppThemeCustom {
                 : Theme.of(context).textSelectionTheme.selectionColor);
 
       case Flavor.northShoreTavern:
-      case Flavor.hogansReward:
       case Flavor.mhbc:
       case Flavor.brisbane:
       case Flavor.woollahra:
-      case Flavor.bluewater:
-      case Flavor.flinders:
       case Flavor.aceRewards:
       case Flavor.kingscliff:
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
-      case Flavor.edp:
       case Flavor.mosaic:
         // case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
