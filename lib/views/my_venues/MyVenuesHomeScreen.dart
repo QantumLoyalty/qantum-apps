@@ -76,7 +76,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Consumer3<PromotionsProvider, HomeProvider, InternetStatusProvider>(
       builder: (context, provider, homeProvider, internetProvider, child) {
         final bool hasSmartIncentives = switch (flavor) {
-          Flavor.hogansReward || Flavor.mhbc || Flavor.qantum || Flavor.maxx => true,
+          Flavor.hogansReward || Flavor.mhbc || Flavor.qantum || Flavor.maxx || Flavor.maxClub => true,
           _ => false,
         };
         final bool isMhbc = flavor == Flavor.mhbc;
@@ -390,7 +390,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                 ],
               ),
             ),
-            if (isMaxClub)
+            /*if (isMaxClub)
               GestureDetector(
                 onTapUp: (_) => scaleSpinToPlay(1.0),
                 onTapDown: (_) => scaleSpinToPlay(0.8),
@@ -429,7 +429,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                   scale: _scaleAnimation,
                   child: Image.asset('assets/common/spin_to_play.png'),
                 ),
-              ),
+              ),*/
             if (hasSmartIncentives && provider.incentives.isNotEmpty)
               BouncyButton(
                 child: GifView.asset('assets/common/scratch_and_win.gif'),
