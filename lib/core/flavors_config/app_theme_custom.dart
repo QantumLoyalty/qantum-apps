@@ -853,10 +853,12 @@ class AppThemeCustom {
           return AppColors.white;
         case Flavor.maxClub || Flavor.maxx:
           return AppColors.max_back_color_3;
-        case Flavor.mosaic || Flavor.mannumClub:
+        case Flavor.mosaic:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
+        case Flavor.mannumClub:
+          return AppColors.white;
         case Flavor.wonthaggi:
           return AppColors.wt_text_color;
         default:
@@ -908,9 +910,7 @@ class AppThemeCustom {
       case Flavor.bobsBulkBooze:
         return AppColors.bob_button_color;
       case Flavor.mannumClub:
-        return provider.homeNavigationList[2].name == itemName
-            ? Colors.transparent
-            : AppColors.mc_button_color;
+        return AppColors.mc_button_color;
       default:
         return isCancelled ? AppColors.disable_color : null;
     }
@@ -1111,10 +1111,6 @@ class AppThemeCustom {
             selectedFlavor == Flavor.maxx ||
             selectedFlavor == Flavor.hogansReward ||
             selectedFlavor == Flavor.maxClub)) {
-      if (selectedFlavor == Flavor.mannumClub &&
-          provider.homeNavigationList[2].name == itemName) {
-        return Border.all(color: Colors.transparent);
-      }
 
       return Border.all(color: AppColors.white);
     }
@@ -1142,7 +1138,6 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
-      case Flavor.mannumClub:
         //  case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
@@ -1229,10 +1224,7 @@ class AppThemeCustom {
           : AppColors.mh_button_color;
     }
     if (selectedFlavor == Flavor.mannumClub) {
-      return provider.homeNavigationList[2].name ==
-              provider.homeNavigationList[index].name
-          ? null
-          : AppColors.button_shadow;
+      return AppColors.button_shadow;
     }
 
     if (selectedFlavor == Flavor.wonthaggi) {
@@ -1290,10 +1282,6 @@ class AppThemeCustom {
           provider.homeNavigationList[2].name == itemName) {
         return Colors.transparent;
       }
-      if (selectedFlavor == Flavor.mannumClub &&
-          provider.homeNavigationList[2].name == itemName) {
-        return Colors.transparent;
-      }
 
       return AppColors.white;
     }
@@ -1335,9 +1323,7 @@ class AppThemeCustom {
             ? AppColors.disable_color
             : AppColors.bob_button_color;
       case Flavor.mannumClub:
-        return provider.homeNavigationList[2].name == itemName
-            ? Colors.transparent
-            : (isCancelled
+        return (isCancelled
                 ? AppColors.disable_color
                 : AppColors.mc_button_color);
       default:

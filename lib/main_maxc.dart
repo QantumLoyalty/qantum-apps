@@ -22,7 +22,7 @@ import 'core/navigation/AppNavigator.dart';
 import 'view_models/HomeProvider.dart';
 import 'view_models/PromotionsProvider.dart';
 import 'view_models/SignupProvider.dart';
-import 'view_models/UnitedFuelsProvider.dart' show UnitedFuelsProvider;
+import 'view_models/UnitedFuelsProvider.dart';
 import 'view_models/UserInfoProvider.dart';
 import 'view_models/UserLoginProvider.dart';
 import 'views/splash/SplashScreen.dart';

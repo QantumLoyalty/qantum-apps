@@ -61,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen>
     Flavor.drinkRewards,
     Flavor.wonthaggi,
     Flavor.mosaic,
-    Flavor.mannumClub,
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
