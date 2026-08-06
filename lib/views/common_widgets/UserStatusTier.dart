@@ -46,7 +46,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                       )),
                 /*: dialerWidget(context, provider),*/
             AppDimens.shape_15,
-             (flavor == Flavor.mhbc || flavor == Flavor.starReward || flavor == Flavor.flinders|| flavor == Flavor.edp || flavor == Flavor.qantum
+             (flavor == Flavor.mhbc || flavor == Flavor.starReward || flavor == Flavor.flinders|| flavor == Flavor.edp || flavor == Flavor.qantum || flavor == Flavor.mannumClub
                     ? statusTierWidget(context, provider)
                     : Text(
                         loc.txtHowToEarnStatusCredits,

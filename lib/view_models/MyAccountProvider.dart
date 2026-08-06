@@ -24,6 +24,9 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     "txtTermsAndConditions": "",
 
   };
+  final Map<String, String> _accountOptionsMannum = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+  };
 
   final Map<String, String> _accountOptionsOthers = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
@@ -46,6 +49,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return _accountOptionsSR;
       case Flavor.edp:
         return _accountOptionsEDP;
+      case Flavor.mannumClub:
+        return _accountOptionsMannum;
 
       default:
         return _accountOptionsOthers;
