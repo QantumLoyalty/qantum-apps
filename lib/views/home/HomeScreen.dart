@@ -6,6 +6,7 @@ import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
 import '/views/dialogs/OurGuaranteeDialog.dart';
 
 import '/core/enums/FetchProfileState.dart';
@@ -78,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen>
       _userInfoProvider.retrieveUserInfo();
       _userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       _userInfoProvider.uploadDeviceDetail();
-      _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
       _loadNotificationsForCurrentUser();
@@ -88,24 +88,24 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
-
   bool _updateDialogDisplayed = false;
-  checkForAppUpdate() async
-  {
+
+  checkForAppUpdate() async {
     if (!mounted || _updateDialogDisplayed) return;
 
     final result = await _homeProvider.checkForAppUpdate();
 
-    if (!mounted ||
-        result ||
-        _updateDialogDisplayed) {
+    print("APp update result: $result");
+
+    if (!mounted || result == null || _updateDialogDisplayed) {
       return;
     }
 
     _updateDialogDisplayed = true;
-
+    if (result!.shouldShowDialog) {
+      await AppUpdateDialog.getInstance().showAppUpdateDialog(context, result: result);
+    }
   }
-
 
   String? _lastHandledChewziePayload;
   DateTime? _lastHandledChewzieTime;
@@ -135,6 +135,14 @@ class _HomeScreenState extends State<HomeScreen>
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      checkForAppUpdate();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

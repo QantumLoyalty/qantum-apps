@@ -3,15 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/common_widgets/AppButton.dart';
+import '/data/models/AppUpdateResult.dart';
+import '/views/common_widgets/AppButton.dart';
 import '../../core/extensions/spacer_extension.dart';
 import '/core/extensions/log_extension.dart';
 import '/core/flavors_config/app_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/core/mixins/logging_mixin.dart';
-import '/core/flavors_config/flavor_config.dart';
+
 import '/core/utils/AppDimens.dart';
-import '../../core/utils/AppColors.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../view_models/UserInfoProvider.dart';
 
@@ -24,7 +25,7 @@ class AppUpdateDialog with LoggingMixin {
 
   AppUpdateDialog._internal();
 
-  showAppUpdateDialog(BuildContext context) {
+  showAppUpdateDialog(BuildContext context,{required AppUpdateResult result}) {
     context.read<UserInfoProvider>().getAppInfo();
     AppLocalizations loc = AppLocalizations.of(context)!;
     showGeneralDialog(
@@ -109,7 +110,7 @@ class AppUpdateDialog with LoggingMixin {
                     AppDimens.shape_10,
                     Row(
                       children: [
-                        Expanded(
+                        (!result.forceUpdate)?Expanded(
                             child: TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -119,7 +120,7 @@ class AppUpdateDialog with LoggingMixin {
                                         color: Theme.of(context)
                                             .textSelectionTheme
                                             .selectionColor,
-                                        fontWeight: FontWeight.normal)))),
+                                        fontWeight: FontWeight.normal)))):const SizedBox.shrink(),
                         Expanded(
                             child: AppButton(
                           onClick: () async {

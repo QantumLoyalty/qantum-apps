@@ -1,14 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/data/models/AppUpdateResponse.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
 import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/services/notification_services.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
+import '../data/models/AppUpdateResult.dart';
 import '../data/models/MoreButtonModel.dart';
 import '../data/models/NetworkResponse.dart';
 import '../services/AppDataService.dart';
@@ -397,26 +401,98 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
-  Future<bool> checkForAppUpdate() async {
-    bool result=false;
+  Future<AppUpdateResult?> checkForAppUpdate() async {
+    AppUpdateResult? result;
     try {
-
-      NetworkResponse networkResponse=await AppDataService.getInstance().checkAppUpdate();
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().checkAppUpdate();
       print("CHECK APP UPDATE: $networkResponse");
 
+      if (!networkResponse.isError &&
+          networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        if (response["success"] as bool && response.containsKey("data")) {
+          AppUpdateResponse appUpdateResponse =
+              AppUpdateResponse.fromJson(response);
+          PlatformUpdateInfo? platformInfo;
+          if (Platform.isAndroid) {
+            platformInfo = appUpdateResponse.data!.android;
+          } else if (Platform.isIOS) {
+            platformInfo = appUpdateResponse.data!.ios;
+          }
+          if (platformInfo != null) {
+            final latestVersion = platformInfo.latestVersion?.trim() ?? '';
+            final latestBuild = platformInfo.latestBuild;
+            final storeUrl = platformInfo.storeUrl?.trim() ?? '';
 
+            final packageInfo = await PackageInfo.fromPlatform();
 
+            final currentVersion = packageInfo.version.trim();
+            final currentBuild =
+                int.tryParse(packageInfo.buildNumber.trim()) ?? 0;
 
+            final hasNewerBuild = latestBuild! > currentBuild;
 
-    }
-    catch (e) {
+            final hasNewerVersion = _compareVersions(
+                  latestVersion,
+                  currentVersion,
+                ) >
+                0;
+
+            print(
+                "Current Version: $currentVersion, Current Build: $currentBuild");
+            print("Latest Version: $latestVersion, Latest Build: $latestBuild");
+            print(
+                "Has New Build: $hasNewerBuild, Has New Version: $hasNewerVersion");
+
+            result = AppUpdateResult(
+                shouldShowDialog: hasNewerBuild || hasNewerVersion,
+                forceUpdate: platformInfo.forceUpdate,
+                message: '',
+                storeUrl: '',
+                latestVersion: latestVersion,
+                latestBuild: latestBuild);
+          }
+        }
+      }
+    } catch (e) {
       e.toString().logMessage();
-     return result;
-    }
-    finally {
-
+    } finally {
       return result;
-
     }
+  }
+
+  int _compareVersions(
+    String first,
+    String second,
+  ) {
+    final firstParts = _versionParts(first);
+    final secondParts = _versionParts(second);
+
+    final maxLength = firstParts.length > secondParts.length
+        ? firstParts.length
+        : secondParts.length;
+
+    for (var index = 0; index < maxLength; index++) {
+      final firstValue = index < firstParts.length ? firstParts[index] : 0;
+
+      final secondValue = index < secondParts.length ? secondParts[index] : 0;
+
+      if (firstValue > secondValue) return 1;
+      if (firstValue < secondValue) return -1;
+    }
+
+    return 0;
+  }
+
+  List<int> _versionParts(String version) {
+    final sanitizedVersion = version.trim().split('+').first.split('-').first;
+
+    return sanitizedVersion
+        .split('.')
+        .map((part) => int.tryParse(part) ?? 0)
+        .toList();
   }
 }

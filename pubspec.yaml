@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+14
 ###################################
 # MHBC
-#version:  1.0.14+100
+#version:  1.0.14+101
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -44,7 +44,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+12
 ###################################
 #QANTUM
-#version: 1.0.0+69
+version: 1.0.0+70
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -74,7 +74,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 #MAX Club
-version: 1.0.0+10
+#version: 1.0.0+10
 ###################################
 #WONTHAGGI
 #version: 1.0.0+4
