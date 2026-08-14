@@ -88,21 +88,31 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   bool _updateDialogDisplayed = false;
+  bool _isCheckingForAppUpdate = false;
 
   checkForAppUpdate() async {
-    if (!mounted || _updateDialogDisplayed) return;
+    if (!mounted || _isCheckingForAppUpdate || _updateDialogDisplayed) return;
 
-    final result = await _homeProvider.checkForAppUpdate();
+    _isCheckingForAppUpdate = true;
 
-    print("APp update result: $result");
+    try {
+      final result = await _homeProvider.checkForAppUpdate();
 
-    if (!mounted || result == null || _updateDialogDisplayed) {
-      return;
-    }
+      ("App update result: $result").logMessage();
 
-    _updateDialogDisplayed = true;
-    if (result!.shouldShowDialog) {
-      await AppUpdateDialog.getInstance().showAppUpdateDialog(context, result: result);
+      if (!mounted || result == null || _updateDialogDisplayed) {
+        return;
+      }
+
+      _updateDialogDisplayed = true;
+      if (result!.shouldShowDialog) {
+        await AppUpdateDialog.getInstance()
+            .showAppUpdateDialog(context, result: result);
+      }
+    } catch (e) {
+      e.logMessage();
+    } finally {
+      _isCheckingForAppUpdate = false;
     }
   }
 
@@ -141,7 +151,6 @@ class _HomeScreenState extends State<HomeScreen>
       checkForAppUpdate();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

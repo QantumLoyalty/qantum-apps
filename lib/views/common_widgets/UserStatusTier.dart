@@ -39,24 +39,33 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
           children: [
             AppDimens.shape_5,
             /*flavor == Flavor.starReward || flavor == Flavor.flinders
-                ?*/ (provider.showNextLevel
-                    ? dialerWidget(context, provider)
-                    : const SizedBox(
-                        height: 200,
-                      )),
-                /*: dialerWidget(context, provider),*/
+                ?*/
+            (provider.showNextLevel
+                ? dialerWidget(context, provider)
+                : const SizedBox(
+                    height: 200,
+                  )),
+            /*: dialerWidget(context, provider),*/
             AppDimens.shape_15,
-             (flavor == Flavor.mhbc || flavor == Flavor.starReward || flavor == Flavor.flinders|| flavor == Flavor.edp || flavor == Flavor.qantum || flavor == Flavor.mannumClub
-                    ? statusTierWidget(context, provider)
-                    : Text(
-                        loc.txtHowToEarnStatusCredits,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: AppThemeCustom
-                                .getProfileDialogUserStatusTierTextColor(
-                                    context),
-                            fontSize: 13),
-                      )),
+            (flavor == Flavor.mhbc ||
+                    flavor == Flavor.starReward ||
+                    flavor == Flavor.flinders ||
+                    flavor == Flavor.edp ||
+                    flavor == Flavor.qantum ||
+                    flavor == Flavor.qantumClub ||
+                    flavor == Flavor.mannumClub ||
+                    flavor == Flavor.maxClub ||
+                    flavor == Flavor.maxx ||
+                    flavor == Flavor.hogansReward
+                ? statusTierWidget(context, provider)
+                : Text(
+                    loc.txtHowToEarnStatusCredits,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: AppThemeCustom
+                            .getProfileDialogUserStatusTierTextColor(context),
+                        fontSize: 13),
+                  )),
             AppDimens.shape_15,
           ],
         ),
