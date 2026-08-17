@@ -752,6 +752,12 @@ abstract class AppLocalizations {
   /// **'Please enter the correct 4-digit OTP to proceed.'**
   String get msgIncorrectOTP;
 
+  /// No description provided for @msgSendingOTPEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending OTP on email...'**
+  String get msgSendingOTPEmail;
+
   /// No description provided for @msgSendingOTP.
   ///
   /// In en, this message translates to:

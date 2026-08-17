@@ -14,8 +14,8 @@
 
 
 ### QANTUM APP
-### COMMAND TO RUN THE APP : flutter run apk --flavor qantum -t lib/main_qa.dart
-### COMMAND TO BUILD THE APP : flutter run apk --release --flavor qantum -t lib/main_qa.dart
+ - COMMAND TO RUN THE APP : flutter run apk --flavor qantum -t lib/main_qa.dart
+ - COMMAND TO BUILD THE APP : flutter run apk --release --flavor qantum -t lib/main_qa.dart
 
 ### MAX GAMING APP
 ### COMMAND TO RUN THE APP : flutter run apk --flavor maxx -t lib/main_max.dart

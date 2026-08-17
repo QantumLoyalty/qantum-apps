@@ -338,6 +338,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get msgIncorrectOTP => '请输入正确的 4 位数 OTP 以继续。';
 
   @override
+  String get msgSendingOTPEmail => '正在向邮箱发送验证码...';
+
+  @override
   String get msgSendingOTP => '正在将 OTP 发送到您的手机...';
 
   @override
@@ -1042,6 +1045,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgIncorrectOTP => '请输入正确的 4 位数 OTP 以继续。';
+
+  @override
+  String get msgSendingOTPEmail => '正在向邮箱发送验证码...';
 
   @override
   String get msgSendingOTP => '正在将 OTP 发送到您的手机...';

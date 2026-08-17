@@ -115,6 +115,7 @@
   "msgEmptyMonth": "月份不能为空",
   "msgEmptyYear": "年份不能为空",
   "msgIncorrectOTP": "请输入正确的 4 位数 OTP 以继续。",
+  "msgSendingOTPEmail": "正在向邮箱发送验证码...",
   "msgSendingOTP": "正在将 OTP 发送到您的手机...",
   "msgResendOTP": "正在再次发送 OTP 到您的手机...",
   "msgVerifyingOTP": "正在验证 OTP...",

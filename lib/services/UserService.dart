@@ -524,4 +524,24 @@ class UserService with LoggingMixin implements UserRepository {
 
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> sendOTPOnEmail({required String email}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.SEND_OTP_EXISTING_EMAIL +
+              "?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            'Email': email
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
 }

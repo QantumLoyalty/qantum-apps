@@ -235,6 +235,21 @@ class AppThemeCustom {
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
   }
+  static Color getAppUpdateLogoBackColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mosaic:
+        return AppColors.white;
+      case Flavor.edp:
+        return AppColors.white.withAlpha(20);
+
+
+      default:
+        return Theme.of(context)
+            .textSelectionTheme
+            .selectionColor!;
+    }
+  }
 
   static Color getProfileDialogCardTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;

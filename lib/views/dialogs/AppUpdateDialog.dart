@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '/data/models/AppUpdateResult.dart';
 import '/views/common_widgets/AppButton.dart';
 import '../../core/extensions/spacer_extension.dart';
@@ -58,13 +59,12 @@ class AppUpdateDialog with LoggingMixin {
                     children: [
                       10.h,
                       Material(
+                        color: AppThemeCustom.getAppUpdateLogoBackColor(context),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(200),
                               side: BorderSide(
                                 width: 1,
-                                color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor!,
+                                color: AppThemeCustom.getAppUpdateLogoBackColor(context),
                               )),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

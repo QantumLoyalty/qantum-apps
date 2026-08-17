@@ -48,6 +48,7 @@ abstract class UserRepository {
 
   Future<NetworkResponse> uploadSelfie(String filePath);
   Future<NetworkResponse> resendOTP({required String phoneNumber});
+  Future<NetworkResponse> sendOTPOnEmail({required String email});
 
   Future<NetworkResponse> logout();
 }

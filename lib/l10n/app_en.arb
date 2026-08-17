@@ -113,6 +113,7 @@
   "msgEmptyMonth": "Month can't be empty",
   "msgEmptyYear": "Year can't be empty",
   "msgIncorrectOTP": "Please enter the correct 4-digit OTP to proceed.",
+  "msgSendingOTPEmail": "Sending OTP on email...",
   "msgSendingOTP": "Sending OTP on your phone...",
   "msgResendOTP": "Sending again OTP on your phone...",
   "msgVerifyingOTP": "Verifying OTP...",

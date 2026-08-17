@@ -338,6 +338,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgIncorrectOTP => 'Please enter the correct 4-digit OTP to proceed.';
 
   @override
+  String get msgSendingOTPEmail => 'Sending OTP on email...';
+
+  @override
   String get msgSendingOTP => 'Sending OTP on your phone...';
 
   @override

@@ -1214,4 +1214,71 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       notifyListeners();
     }
   }
+
+
+  sendOTPOnExistingEmail(
+      {
+        required String email,
+        required AppLocalizations loc}) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        _loaderMessage = loc.msgSendingOTPEmail;
+        notifyListeners();
+      });
+
+      NetworkResponse networkResponse =
+      await UserService.getInstance().sendOTPOnEmail(email: email);
+      logEvent("Send OTP On Existing Email RESPONSE:: $networkResponse");
+
+      _accountVerified = !networkResponse.isError;
+
+      if (networkResponse.response != null) {
+        /*if (networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+          networkResponse.response as Map<String, dynamic>;
+
+          if (response.containsKey("verified") &&
+              response.containsKey("user")) {
+            _accountVerified = response["verified"] as bool;
+            SharedPreferenceHelper sharedPreferencesHelper =
+            await SharedPreferenceHelper.getInstance();
+            await sharedPreferencesHelper
+                .saveUserData(UserModel.fromJson(response["user"]));
+            await sharedPreferencesHelper.saveAuthToken(response['token']);
+            await sharedPreferencesHelper
+                .saveCountryCode(params["countryCode"]);
+
+            logEvent(
+                "SAVED DATA :: ${sharedPreferencesHelper.getUserData()} --> ${sharedPreferencesHelper.getAuthToken()} --> ${sharedPreferencesHelper.getCountryCode()}");
+          } else {
+            _accountVerified = false;
+          }
+
+          if (response.containsKey('message')) {
+            _networkMessage = response['message'];
+          } else if (response.containsKey('error')) {
+            _networkMessage = response['error'];
+          }
+        } else {
+          _networkMessage = networkResponse.responseMessage;
+          _accountVerified = false;
+        }*/
+      } else {
+        _networkMessage = networkResponse.responseMessage;
+        _accountVerified = false;
+      }
+    } catch (e) {
+      logEvent(e.toString());
+      _accountVerified = false;
+      _networkMessage = e.toString();
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+
 }

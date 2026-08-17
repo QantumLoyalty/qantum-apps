@@ -44,7 +44,6 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
   String? _lastCheckedEmail;
 
-
   late TextEditingController _postcodeController;
   late TextEditingController _birthdayDDController;
   late TextEditingController _birthdayMMController;
@@ -457,10 +456,10 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         decoration: _buildCommonInputDecoration(
                             hint: loc.hintEmail, isEmail: true),
                       ),
-                      (_showDuplicateEmailMsg)
+                      (_showDuplicateEmailMsg && flavor != Flavor.edp)
                           ? Container(
                               width: double.infinity,
-                              margin: const EdgeInsets.only(left: 6,right: 6),
+                              margin: const EdgeInsets.only(left: 6, right: 6),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.only(
@@ -874,8 +873,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                           onClick: () {
                             if (_formKey.currentState!.validate()) {
                               // Stop EDP registration when the email is already registered.
-                              if (
-                                  _isDuplicateEmail == true) {
+                              if (_isDuplicateEmail == true &&
+                                  flavor != Flavor.edp) {
                                 AppHelper.showErrorMessage(
                                   context,
                                   "This Email ID is already registered. Please use another email ID.",
@@ -1009,7 +1008,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       filled: true,
       counterText: "",
       hintText: hint,
-      suffixIcon: (isEmail != null && isEmail)
+      suffixIcon: (isEmail != null && isEmail && flavor != Flavor.edp)
           ? Center(
               widthFactor: 1, heightFactor: 1, child: emailCheckStatusWidget())
           : null,
@@ -1102,41 +1101,21 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       args['fromRegistrationAndClubApp'] = 'true';
     }
 
-    AppNavigator.navigateTo(context, AppNavigator.otp,
-        arguments: args);
+    AppNavigator.navigateTo(context, AppNavigator.otp, arguments: args);
   }
 
   navigationEDP(Map<String, dynamic> params) async {
     params['phoneNo'] = widget.argument['phoneNo']!;
     params['countryCode'] = widget.argument['countryCode']!;
-    AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
-        arguments: params);
-    /*NetworkResponse checkEmailResponse = await context
-        .read<UserLoginProvider>()
-        .checkEmail(email: params['Email']);
 
-    if (checkEmailResponse.isError) {
+    if (_isDuplicateEmail != null && _isDuplicateEmail!) {
+      AppNavigator.navigateTo(
+          context, AppNavigator.verifyExistingEmailOTPScreen,
+          arguments: params);
     } else {
-      if (checkEmailResponse.response != null &&
-          checkEmailResponse.response is Map<String, dynamic>) {
-        Map<String, dynamic> verifyEmailResponse =
-            checkEmailResponse.response as Map<String, dynamic>;
-        if (verifyEmailResponse.containsKey("emailExists")) {
-          if (verifyEmailResponse["emailExists"] as bool) {
-            SignupErrorDialog.getInstance().showSignupErrorDialog(context);
-          } else {
-            AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
-                arguments: params);
-          }
-        } else {
-          AppHelper.showErrorMessage(context,
-              "Getting error while verifying the email, please try again");
-        }
-      } else {
-        AppHelper.showErrorMessage(context,
-            "Getting error while verifying the email, please try again");
-      }
-    }*/
+      AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
+          arguments: params);
+    }
   }
 
   bool validateData(SignupProvider provider) {

@@ -338,6 +338,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get msgIncorrectOTP => 'आगे बढ़ने के लिए सही 4-अंकीय ओटीपी दर्ज करें।';
 
   @override
+  String get msgSendingOTPEmail => 'ईमेल पर OTP भेजा जा रहा है...';
+
+  @override
   String get msgSendingOTP => 'आपके फोन पर ओटीपी भेजा जा रहा है...';
 
   @override

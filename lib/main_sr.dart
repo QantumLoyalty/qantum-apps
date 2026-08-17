@@ -103,7 +103,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupNotificationStorage();
   await migratePendingNativeNotifications();
-  SystemChrome.setPreferredOrientations(
+  await SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((context) {
     runApp(const MyApp());

@@ -148,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      print("RESUMED AGAIN!");
       checkForAppUpdate();
     }
   }

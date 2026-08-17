@@ -4,7 +4,7 @@ class APIList {
   static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
- // static get BASE_URL => "https://api.s2w.com.au/";
+//  static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
 
@@ -20,6 +20,8 @@ class APIList {
   static get GET_PROFILE => BASE_URL + "user/get-profile";
 
   static get UPDATE_USER_INFO => BASE_URL + "user/update-profile";
+
+  static get SEND_OTP_EXISTING_EMAIL => BASE_URL + "user/otpOnEmail";
 
   static get SEND_OTP_PROFILE => BASE_URL + "user/otp-generate";
 
@@ -77,7 +79,7 @@ class APIList {
 
   static get SAVE_VENUE => BASE_URL + "user/venue-update";
 
-    static get CHECK_APP_VERSION  => BASE_URL + "app-versions/";
+  static get CHECK_APP_VERSION => BASE_URL + "app-versions/";
 
   static get GET_STATUS_TIER_VALUE => BASE_URL + "status-tier/getByRating?key=";
 

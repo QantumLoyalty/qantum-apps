@@ -4,6 +4,7 @@ import 'package:qantum_apps/views/my_venues/ChooseFavouriteVenueScreen.dart';
 import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
 import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
+import '../../views/signup/VerifyExistingEmailOTPScreen.dart';
 import '../../views/web_view/AppWebView.dart';
 import '/views/membership/RenewMembershipScreen.dart';
 import '../../views/signup/SelfieUploadScreen.dart';
@@ -39,6 +40,8 @@ class AppNavigator {
   static const String otp = "/otp";
   static const String home = "/home";
   static const String signup = "/signup";
+  static const String verifyExistingEmailOTPScreen =
+      "/verifyExistingEmailOTPScreen";
   static const String promotionDetail = "/promotionDetail";
   static const String whatsOnDetailScreen = "/whatsOnDetailScreen";
   static const String specialOfferDetailScreen = "/specialOfferDetailScreen";
@@ -126,6 +129,11 @@ class AppNavigator {
             builder: (_) => SignupScreen(
                   argument: args as Map<String, String>,
                 ));
+      case verifyExistingEmailOTPScreen:
+        return MaterialPageRoute(
+            builder: (_) => VerifyExistingEmailOTPScreen(
+                  params: args as Map<String, dynamic>,
+                ));
       case chooseFavouriteVenue:
         {
           late Map<String, dynamic> argumentss;
@@ -201,7 +209,8 @@ class AppNavigator {
       case unitedFuelMainScreen:
         return MaterialPageRoute(builder: (_) => const UnitedFuelMainScreen());
       case unitedFuelsBarcodeLandscape:
-        return MaterialPageRoute(builder: (_) => const UnitedFuelsBarcodeLandscape());
+        return MaterialPageRoute(
+            builder: (_) => const UnitedFuelsBarcodeLandscape());
 
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
