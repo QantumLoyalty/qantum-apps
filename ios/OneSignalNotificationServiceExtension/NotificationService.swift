@@ -1,32 +1,110 @@
 import UserNotifications
 import OneSignalExtension
 
+
+let APP_GROUP_ID = Bundle.main.object(forInfoDictionaryKey: "AppGroupID") as? String ?? "group.com.qantumapps.notifications"
+private let hostAppBundleId: String = {
+    let extensionBundleId = Bundle.main.bundleIdentifier ?? "unknown"
+    return extensionBundleId.replacingOccurrences(of: ".OneSignalNotificationServiceExtension", with: "")
+}()
+
+let PENDING_NOTIFICATIONS_KEY = "pending_notifications_\(hostAppBundleId)"
+
 class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var receivedRequest: UNNotificationRequest!
     var bestAttemptContent: UNMutableNotificationContent?
 
-    // Note this extension only runs when `mutable_content` is set
-    // Setting an attachment or action buttons automatically sets the property to true
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.receivedRequest = request
         self.contentHandler = contentHandler
         self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-        if let bestAttemptContent = bestAttemptContent {
-            // DEBUGGING: Uncomment the 2 lines below to check this extension is executing
-//            print("Running NotificationServiceExtension")
-//            bestAttemptContent.body = "[Modified] " + bestAttemptContent.body
-
-            OneSignalExtension.didReceiveNotificationExtensionRequest(self.receivedRequest, with: bestAttemptContent, withContentHandler: self.contentHandler)
+        guard let bestAttemptContent = bestAttemptContent else {
+            contentHandler(request.content)
+            return
         }
+
+        print("========== NSE ==========")
+        print("Bundle ID: \(Bundle.main.bundleIdentifier ?? "nil")")
+        print("APP_GROUP_ID: \(APP_GROUP_ID)")
+
+        if let _ = UserDefaults(suiteName: APP_GROUP_ID) {
+            print("App Group Access: SUCCESS")
+        } else {
+            print("App Group Access: FAILED")
+        }
+        print("=========================")
+
+        OneSignalExtension.didReceiveNotificationExtensionRequest(
+            self.receivedRequest,
+            with: bestAttemptContent,
+            withContentHandler: { [weak self] finalContent in
+                self?.saveNotificationToAppGroup(request: request, processedContent: finalContent)
+                contentHandler(finalContent)
+            }
+        )
     }
 
     override func serviceExtensionTimeWillExpire() {
-        // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
+        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             OneSignalExtension.serviceExtensionTimeWillExpireRequest(self.receivedRequest, with: self.bestAttemptContent)
+            saveNotificationToAppGroup(request: self.receivedRequest, processedContent: bestAttemptContent)
             contentHandler(bestAttemptContent)
         }
+    }
+
+    private func saveNotificationToAppGroup(request: UNNotificationRequest, processedContent: UNNotificationContent) {
+        guard let sharedDefaults = UserDefaults(suiteName: APP_GROUP_ID) else {
+            print("[NSE] ERROR: App Group '\(APP_GROUP_ID)' access nahi ho paaya")
+            return
+        }
+
+        let userInfo = processedContent.userInfo
+        var notificationId = request.identifier
+        if let customData = userInfo["custom"] as? [String: Any],
+           let oneSignalId = customData["i"] as? String {
+            notificationId = oneSignalId
+        }
+        let currentUserId = sharedDefaults.string(forKey: "current_user_id_\(hostAppBundleId)") ?? "guest"
+
+        print("[NSE] userInfo: \(userInfo)")
+
+        var imageUrl: String? = nil
+        if let att = userInfo["att"] as? [String: String] {
+            imageUrl = att.values.first
+        }
+
+        var additionalDataJson: String = "{}"
+        if let customData = userInfo["custom"] as? [String: Any],
+           let additionalData = customData["a"] {
+            if let jsonData = try? JSONSerialization.data(withJSONObject: additionalData, options: []),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                additionalDataJson = jsonString
+            }
+        }
+
+        let notificationDict: [String: Any] = [
+            "id": notificationId,
+            "userId": currentUserId,
+            "title": processedContent.title,
+            "body": processedContent.body,
+            "imageUrl": imageUrl ?? "",
+            "payload": additionalDataJson,
+            "receivedAt": ISO8601DateFormatter().string(from: Date())
+        ]
+
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: notificationDict, options: []),
+              let jsonString = String(data: jsonData, encoding: .utf8) else {
+            print("[NSE] ERROR: notification data ko JSON me convert nahi kar paaya")
+            return
+        }
+
+        var pendingList: [String] = sharedDefaults.stringArray(forKey: PENDING_NOTIFICATIONS_KEY) ?? []
+        pendingList.append(jsonString)
+        sharedDefaults.set(pendingList, forKey: PENDING_NOTIFICATIONS_KEY)
+        sharedDefaults.synchronize()
+
+        print("[NSE] SAVED to App Group: id=\(notificationId), title=\(processedContent.title), pending count=\(pendingList.count)")
     }
 }

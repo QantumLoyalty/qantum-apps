@@ -4,19 +4,25 @@ enum Flavor {
   qantum,
   qantumClub,
   maxx,
+  maxClub,
   mhbc,
   clh,
   montaukTavern,
   hogansReward,
   northShoreTavern,
   aceRewards,
-  queens,
   brisbane,
   woollahra,
   bluewater,
   flinders,
   kingscliff,
-  drinkRewards
+  drinkRewards,
+  wonthaggi,
+  edp,
+  bobsBulkBooze,
+  mosaic,
+  mannumClub,
+  southportSharks,
 }
 
 class FlavorValues {

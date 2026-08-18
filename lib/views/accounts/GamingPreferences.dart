@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/utils/AppColors.dart';
@@ -72,7 +73,8 @@ class GamingPreferences extends StatelessWidget {
                             trailing: Icon(Icons.chevron_right,
                                 color:
                                     AppThemeCustom.getAccountSectionItemStyle(
-                                        context,isCommunication: true)),
+                                        context,
+                                        isCommunication: true)),
                             title: Text(
                               translateContent(AppLocalizations.of(context)!,
                                   items.keys.elementAt(item)),
@@ -80,7 +82,9 @@ class GamingPreferences extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context,isCommunication: true)),
+                                          context,
+                                          isCommunication: true,
+                                          isHeadingCommunication: true)),
                             ),
                             subtitle: Text(
                               translateContent(AppLocalizations.of(context)!,
@@ -88,7 +92,8 @@ class GamingPreferences extends StatelessWidget {
                               style: TextStyle(
                                   color:
                                       AppThemeCustom.getAccountSectionItemStyle(
-                                          context,isCommunication: true)),
+                                          context,
+                                          isCommunication: true)),
                             ),
                             onTap: () {},
                           ),

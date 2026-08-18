@@ -116,6 +116,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtMoreInfo => '更多信息';
 
   @override
+  String get txtMore => '更多选项';
+
+  @override
   String get txtCongratulations => '恭喜！';
 
   @override
@@ -335,6 +338,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get msgIncorrectOTP => '请输入正确的 4 位数 OTP 以继续。';
 
   @override
+  String get msgSendingOTPEmail => '正在向邮箱发送验证码...';
+
+  @override
   String get msgSendingOTP => '正在将 OTP 发送到您的手机...';
 
   @override
@@ -398,7 +404,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get txtValidTo => '有效期至';
 
   @override
-  String get txtStatusCreditsReactNextLevel => '升级所需的状态积分';
+  String get txtStatusCreditsReactNextLevel => '等级积分###以达到下一等级';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => '需要状态积分\n才能达到下一等级';
 
   @override
   String get txtEditMyDetails => '编辑我的资料';
@@ -603,6 +612,105 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgNoOffers => '未找到优惠！';
+
+  @override
+  String get cannotEditSeeVenue => '无法编辑\n请查看场地';
+
+  @override
+  String get msgErrorInDLScanning => '掃描時發生錯誤，請拍攝您的原始駕駛執照並重試。';
+
+  @override
+  String get membershipRenewalTime => '會員續期時間！';
+
+  @override
+  String get yourMembershipExpired => '您的會員資格已過期';
+
+  @override
+  String get renewNow => '立即續期';
+
+  @override
+  String get renewMembership => '续会籍 / 续会员';
+
+  @override
+  String get paymentOptions => '付款选项';
+
+  @override
+  String get appUpdate => '應用程式更新';
+
+  @override
+  String get msgNewVersionAvailable => '### 的新版本現已推出！';
+
+  @override
+  String get msgNewAppVersionAvailable => '版本 ### 現已可用！';
+
+  @override
+  String get msgYouHaveVersion => '您目前使用的版本是 ###';
+
+  @override
+  String get releaseNotes => '發行說明：';
+
+  @override
+  String get msgLikeToUpdate => '您現在要更新嗎？';
+
+  @override
+  String get ignore => '忽略';
+
+  @override
+  String get later => '稍後';
+
+  @override
+  String get updateNow => '立即更新';
+
+  @override
+  String get msgUnableConnect => '无法连接。请检查您的网络连接并重试。';
+
+  @override
+  String get renewalOpen => '續訂現已開放';
+
+  @override
+  String get txtCurrentDeals => '每週優惠';
+
+  @override
+  String get txtOurGuarantee => '我們的保證';
+
+  @override
+  String get yourMembershipExpires => '您的會員資格即將到期';
+
+  @override
+  String get txtChangeFavouriteVenue => '更改喜爱的场所';
+
+  @override
+  String get txtSaveMyVenue => '保存我的場地';
+
+  @override
+  String get selectEDPVenues => '請選擇您喜愛的\nEDP 場地';
+
+  @override
+  String get selectVenuesSuccessMsg => '场馆更新成功！';
+
+  @override
+  String get selectVenuesErrorMsg => '更新场馆时出错';
+
+  @override
+  String get pleaseAvoidSpecialChar => '請避免使用特殊字元';
+
+  @override
+  String get warning => '警告！';
+
+  @override
+  String get yesDelete => '是的，删除';
+
+  @override
+  String get deleteAccountWarning => '您即将删除您的账户。';
+
+  @override
+  String get txtNotification => '通知';
+
+  @override
+  String get txtPushNotification => '推播通知';
+
+  @override
+  String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -715,6 +823,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get txtMoreInfo => '更多信息';
+
+  @override
+  String get txtMore => '更多选项';
 
   @override
   String get txtCongratulations => '恭喜！';
@@ -936,6 +1047,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get msgIncorrectOTP => '请输入正确的 4 位数 OTP 以继续。';
 
   @override
+  String get msgSendingOTPEmail => '正在向邮箱发送验证码...';
+
+  @override
   String get msgSendingOTP => '正在将 OTP 发送到您的手机...';
 
   @override
@@ -999,7 +1113,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get txtValidTo => '有效期至';
 
   @override
-  String get txtStatusCreditsReactNextLevel => '升级所需的状态积分';
+  String get txtStatusCreditsReactNextLevel => '等级积分###以达到下一等级';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => '需要状态积分\n才能达到下一等级';
 
   @override
   String get txtEditMyDetails => '编辑我的资料';
@@ -1204,4 +1321,103 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgNoOffers => '未找到优惠！';
+
+  @override
+  String get cannotEditSeeVenue => '无法编辑\n请查看场地';
+
+  @override
+  String get msgErrorInDLScanning => '扫描时发生错误，请拍摄您的原始驾驶执照并重试。';
+
+  @override
+  String get membershipRenewalTime => '会员续费时间！';
+
+  @override
+  String get yourMembershipExpired => '您的会员资格已过期';
+
+  @override
+  String get renewNow => '立即续费';
+
+  @override
+  String get renewMembership => '续费会员 / 续订会员';
+
+  @override
+  String get paymentOptions => '付款选项';
+
+  @override
+  String get appUpdate => '应用更新';
+
+  @override
+  String get msgNewVersionAvailable => '### 的新版本现已推出！';
+
+  @override
+  String get msgNewAppVersionAvailable => '版本 ### 现已可用！';
+
+  @override
+  String get msgYouHaveVersion => '您当前使用的版本是 ###';
+
+  @override
+  String get releaseNotes => '发布说明：';
+
+  @override
+  String get msgLikeToUpdate => '您现在要更新吗？';
+
+  @override
+  String get ignore => '忽略';
+
+  @override
+  String get later => '稍后';
+
+  @override
+  String get updateNow => '立即更新';
+
+  @override
+  String get msgUnableConnect => '無法連線。請檢查您的網路連線並再試一次。';
+
+  @override
+  String get renewalOpen => '续订现已开放';
+
+  @override
+  String get txtCurrentDeals => '每周优惠';
+
+  @override
+  String get txtOurGuarantee => '我们的保证';
+
+  @override
+  String get yourMembershipExpires => '您的会员即将到期';
+
+  @override
+  String get txtChangeFavouriteVenue => '更改喜爱的场所';
+
+  @override
+  String get txtSaveMyVenue => '保存我的场地';
+
+  @override
+  String get selectEDPVenues => '请选择您喜欢的\nEDP 场地';
+
+  @override
+  String get selectVenuesSuccessMsg => '场馆更新成功！';
+
+  @override
+  String get selectVenuesErrorMsg => '更新场馆时出错!';
+
+  @override
+  String get pleaseAvoidSpecialChar => '请避免使用特殊字符';
+
+  @override
+  String get warning => '警告！';
+
+  @override
+  String get yesDelete => '是的，删除';
+
+  @override
+  String get deleteAccountWarning => '您即将删除您的账户。';
+
+  @override
+  String get txtNotification => '通知';
+
+  @override
+  String get txtPushNotification => '推送通知';
+
+  @override
+  String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
 }

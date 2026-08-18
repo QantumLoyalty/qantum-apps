@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../views/common_widgets/AppLoader.dart';
 import '../../views/common_widgets/AppScaffold.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class AppWebView extends StatefulWidget {
   String url;
@@ -13,24 +16,38 @@ class AppWebView extends StatefulWidget {
   State<AppWebView> createState() => _AppWebViewState();
 }
 
-class _AppWebViewState extends State<AppWebView> {
+class _AppWebViewState extends State<AppWebView> with LoggingMixin {
   late WebViewController _controller;
   bool showLoader = true;
+  bool showWebView = false;
 
   @override
   void initState() {
     super.initState();
 
-    print("WEB VIEW URL: ${widget.url}");
+    "WEB VIEW URL: ${widget.url}".toString().logMessage();
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(onPageFinished: (String url) {
-        setState(() {
-          showLoader = false;
-        });
-      }))
-      ..loadRequest(Uri.parse(widget.url));
+        if (mounted) {
+          setState(() {
+            showLoader = false;
+          });
+        }
+      }));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        showWebView = true;
+      });
+
+      _controller.loadRequest(Uri.parse(widget.url));
+    });
   }
 
   @override
@@ -56,7 +73,7 @@ class _AppWebViewState extends State<AppWebView> {
                       loaderMessage: AppLocalizations.of(context)!.txtLoading,
                     ),
                   )
-                : Container()
+                : const SizedBox.shrink()
           ],
         ));
   }

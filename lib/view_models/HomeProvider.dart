@@ -1,9 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/data/models/AppUpdateResponse.dart';
+import 'package:qantum_apps/data/models/MembershipModel.dart';
+import 'package:qantum_apps/data/models/notification_model.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
+import 'package:qantum_apps/services/notification_services.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
+import '../data/models/AppUpdateResult.dart';
 import '../data/models/MoreButtonModel.dart';
 import '../data/models/NetworkResponse.dart';
 import '../services/AppDataService.dart';
@@ -11,7 +20,6 @@ import '../core/utils/AppStrings.dart';
 import '../data/models/HomeNavigatorModel.dart';
 import '../views/my_venues/MyVenuesHomeScreen.dart';
 import '../views/partners_offer/PartnerOffersScreen.dart';
-import '../views/profile/MyProfileScreen.dart';
 import '../views/special_offers/SpecialOffersScreen.dart';
 
 class HomeProvider extends ChangeNotifier with LoggingMixin {
@@ -29,6 +37,62 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
 
   Map<int, dynamic>? get moreButtonsMap => _moreButtonsMap;
 
+  List<NotificationModel> _notifications = [];
+
+  List<NotificationModel> get notifications => _notifications;
+
+  String? _notificationUserId;
+  bool _hiveListenerAttached = false;
+
+  int get unreadCount => _notifications.where((n) => !n.isRead).length;
+
+  void loadNotifications(String userId) {
+    _notificationUserId = userId;
+    _notifications = NotificationHiveService.getForUser(userId);
+    _attachHiveListener(); // 👈 NAYI LINE
+    notifyListeners();
+  }
+
+  void _attachHiveListener() {
+    if (_hiveListenerAttached) return;
+    _hiveListenerAttached = true;
+    print('[HomeProvider] attaching Hive listener'); // 👈 ADD KARO
+    NotificationHiveService.listenable.addListener(_onHiveBoxChanged);
+  }
+
+  void _onHiveBoxChanged() {
+    print(
+        '[HomeProvider] Hive box changed - refreshing notifications'); // 👈 ADD KARO
+    if (_notificationUserId == null) return;
+    _notifications = NotificationHiveService.getForUser(_notificationUserId!);
+    notifyListeners();
+  }
+
+  Future<void> refreshNotifications() async {
+    if (_notificationUserId == null) return;
+    _notifications = NotificationHiveService.getForUser(_notificationUserId!);
+    notifyListeners();
+  }
+
+  Future<void> deleteNotification(NotificationModel n) async {
+    _notifications.removeWhere((item) => item.id == n.id);
+    notifyListeners();
+    await NotificationHiveService.delete(n.id);
+  }
+
+  Future<void> onTapNotification(NotificationModel n) async {
+    if (n.isRead) return;
+    await NotificationHiveService.markAsRead(
+      id: n.id,
+      userId: n.userId,
+      title: n.title,
+      body: n.body,
+      imageUrl: n.imageUrl,
+      payload: n.payload,
+    );
+    await refreshNotifications();
+  }
+
   updateSelectedOption(int value) {
     if (_homeNavigationList[_selectedOption].type ==
         HomeNavigatorModel.typeScreen) {
@@ -42,7 +106,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     HomeNavigatorModel(
         name: "txtPointsBalance",
         screen: Container(),
-        icon: Icons.attach_money,
+        icon: FlavorConfig.instance.flavor == Flavor.bobsBulkBooze
+            ? Icons.check
+            : Icons.attach_money,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
         name: "txtSpecialOffers",
@@ -51,7 +117,7 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
         name: "txtPartnerOffers",
-        screen: PartnerOffersScreen(),
+        screen: const PartnerOffersScreen(),
         icon: Icons.handshake,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
@@ -62,23 +128,32 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
     HomeNavigatorModel(
         name: "txtMyBenefits",
         screen: Container(),
-        icon: Icons.restaurant,
+        icon: FlavorConfig.instance.flavor == Flavor.bobsBulkBooze
+            ? Icons.attach_money
+            : Icons.restaurant,
         type: HomeNavigatorModel.typeDialog),
     HomeNavigatorModel(
         name: "txtMyAccount",
-        screen: const MyProfileScreen(),
+        screen: Container(),
         icon: Icons.account_circle_outlined,
         type: HomeNavigatorModel.typeScreen),
     HomeNavigatorModel(
-        name: "txtSeeAll",
+        name: "txtMore",
         screen: Container(),
         icon: Icons.more_horiz,
         type: HomeNavigatorModel.typeDialog),
   ];
 
-  String getTranslatedOptionsName(AppLocalizations loc, String key) {
+  String getTranslatedOptionsName(
+    AppLocalizations loc,
+    String key, {
+    Flavor? flavor,
+  }) {
     switch (key) {
       case "txtPointsBalance":
+        if (flavor == Flavor.bobsBulkBooze) {
+          return loc.txtOurGuarantee;
+        }
         return loc.txtPointsBalance;
       case "txtSpecialOffers":
         return loc.txtSpecialOffers;
@@ -87,11 +162,14 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
       case "txtMyVenue":
         return loc.txtMyVenue;
       case "txtMyBenefits":
+        if (flavor == Flavor.bobsBulkBooze) {
+          return loc.txtCurrentDeals;
+        }
         return loc.txtMyBenefits;
       case "txtMyAccount":
         return loc.txtMyAccount;
-      case "txtSeeAll":
-        return loc.txtSeeAll;
+      case "txtMore":
+        return loc.txtMore;
       default:
         return key;
     }
@@ -204,11 +282,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
               _moreButtonsMap!.remove(5);
               _moreButtonsMap!.remove(6);
             }
-
           }
         }
       }
-
     } catch (e) {
       logEvent(e.toString());
     } finally {
@@ -255,8 +331,168 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
   }
 
   resetDeepLinkNavigation() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _deeplinkPayloads = null;
+      _startChewzieScreen = null;
+      notifyListeners();
+    });
+  }
+
+  String? consumeChewzieLink() {
+    final link = _deeplinkPayloads;
+
     _deeplinkPayloads = null;
-    _startChewzieScreen = null;
+    _startChewzieScreen = false;
     notifyListeners();
+
+    return link;
+  }
+
+  bool clubPackageCheckStatus = false;
+  MembershipModel? _selectedMembership;
+
+  MembershipModel? get selectedMembership => _selectedMembership;
+  bool checkEarlyBirdCondition = false;
+
+  getClubPackageInfo({String? membershipID}) async {
+    if (membershipID == null) return;
+
+    clubPackageCheckStatus = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
+
+    try {
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .getMembershipPlansById(membershipID: membershipID);
+      ("GET PACKAGE INFO:  $networkResponse").logMessage();
+
+      if (!networkResponse.isError && networkResponse.response != null) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        if (response["success"] as bool && response.containsKey("data")) {
+          _selectedMembership = MembershipModel.fromJson(
+              (response["data"] as Map<String, dynamic>));
+
+          logEvent('SELECTED PACKAGE:: ${_selectedMembership.toString()}');
+        }
+      }
+    } catch (e) {
+      logEvent("getClubPackageInfo: ${e.toString()}");
+    } finally {
+      // clubPackageCheckStatus = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        notifyListeners();
+      });
+    }
+  }
+
+  resetClubPackageCheckStatus() {
+    clubPackageCheckStatus = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
+  }
+
+  resetCheckEarlyBirdCondition() {
+    checkEarlyBirdCondition = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
+  }
+
+  Future<AppUpdateResult?> checkForAppUpdate() async {
+    AppUpdateResult? result;
+    try {
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().checkAppUpdate();
+      print("CHECK APP UPDATE: $networkResponse");
+
+      if (!networkResponse.isError &&
+          networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        if (response["success"] as bool && response.containsKey("data")) {
+          AppUpdateResponse appUpdateResponse =
+              AppUpdateResponse.fromJson(response);
+          PlatformUpdateInfo? platformInfo;
+          if (Platform.isAndroid) {
+            platformInfo = appUpdateResponse.data!.android;
+          } else if (Platform.isIOS) {
+            platformInfo = appUpdateResponse.data!.ios;
+          }
+          if (platformInfo != null) {
+            final latestVersion = platformInfo.latestVersion?.trim() ?? '';
+            final latestBuild = platformInfo.latestBuild;
+            final storeUrl = platformInfo.storeUrl?.trim() ?? '';
+
+            final packageInfo = await PackageInfo.fromPlatform();
+
+            final currentVersion = packageInfo.version.trim();
+            final currentBuild =
+                int.tryParse(packageInfo.buildNumber.trim()) ?? 0;
+
+            final hasNewerBuild = latestBuild! > currentBuild;
+
+            final hasNewerVersion = _compareVersions(
+                  latestVersion,
+                  currentVersion,
+                ) >
+                0;
+
+            print(
+                "Current Version: $currentVersion, Current Build: $currentBuild");
+            print("Latest Version: $latestVersion, Latest Build: $latestBuild");
+            print(
+                "Has New Build: $hasNewerBuild, Has New Version: $hasNewerVersion");
+
+            result = AppUpdateResult(
+                shouldShowDialog: hasNewerBuild || hasNewerVersion,
+                forceUpdate: platformInfo.forceUpdate,
+                message: '',
+                storeUrl: '',
+                latestVersion: latestVersion,
+                latestBuild: latestBuild);
+          }
+        }
+      }
+    } catch (e) {
+      e.toString().logMessage();
+    } finally {
+      return result;
+    }
+  }
+
+  int _compareVersions(
+    String first,
+    String second,
+  ) {
+    final firstParts = _versionParts(first);
+    final secondParts = _versionParts(second);
+
+    final maxLength = firstParts.length > secondParts.length
+        ? firstParts.length
+        : secondParts.length;
+
+    for (var index = 0; index < maxLength; index++) {
+      final firstValue = index < firstParts.length ? firstParts[index] : 0;
+
+      final secondValue = index < secondParts.length ? secondParts[index] : 0;
+
+      if (firstValue > secondValue) return 1;
+      if (firstValue < secondValue) return -1;
+    }
+
+    return 0;
+  }
+
+  List<int> _versionParts(String version) {
+    final sanitizedVersion = version.trim().split('+').first.split('-').first;
+
+    return sanitizedVersion
+        .split('.')
+        .map((part) => int.tryParse(part) ?? 0)
+        .toList();
   }
 }

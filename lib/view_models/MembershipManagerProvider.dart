@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '/core/utils/AppHelper.dart';
@@ -83,9 +85,31 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
           if (response.keys.contains("data")) {
             _membershipList = [];
 
+            List<MembershipModel> tempList = [];
+
             response["data"].forEach((item) {
-              _membershipList.add(MembershipModel.fromJson(item));
+              tempList.add(MembershipModel.fromJson(item));
             });
+
+            /// THIS CONDITION IS A TEMPORARY CONDITION WE NEED TO REMOVE IT AFTER AUSTRALIAN EXPO ///
+            if (flavor == Flavor.mhbc) {
+              MembershipModel? specialMembership;
+
+              tempList.forEach((item) {
+                if (item.membershipName!.toString().trim().toLowerCase() ==
+                    'Social Sailing 1 Yr'.toLowerCase()) {
+                  specialMembership = item;
+                }
+              });
+
+              _membershipList = tempList.take(2).toList();
+
+              if (specialMembership != null) {
+                _membershipList.add(specialMembership!);
+              }
+            } else {
+              _membershipList = tempList.take(2).toList();
+            }
 
             logEvent("MEMBERSHIP LIST SIZE ${_membershipList.length}");
             if (_membershipList.isNotEmpty) {
@@ -148,7 +172,10 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
   }
 
   createPaymentIntent(
-      {required String userId, required AppLocalizations loc}) async {
+      {required String userId,
+      required AppLocalizations loc,
+      required String renewType,
+      String? paymentFlowSource}) async {
     try {
       _showLoader = true;
       _paymentIntentClientSecret = null;
@@ -159,16 +186,31 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "userId": userId,
         "packageId": _selectedMembership!.id!,
         "packageName": _selectedMembership!.membershipName!,
-        "amount": (_selectedMembership!.calculatedPrice! * 100).toInt(),
         "currency": "aud",
         "appType": AppHelper.getAppType(),
-        "paymentType": "card"
+        "paymentType": "card",
       };
+
+      if (paymentFlowSource == null) {
+        /// IF USER IS BUYING THE MEMBERSHIP FROM NEW FLOW OR RENEWING THE MEMBERSHIP
+        paymentParams["renewType"] = renewType;
+        paymentParams["amount"] =
+            (_selectedMembership!.calculatedPrice! * 100).toInt();
+      } else {
+        /// IF USER IS BUYING THE MEMBERSHIP FROM EARLY BIRD FLOW
+        paymentParams["amount"] =
+            (_selectedMembership!.originalPrice! * 100).toInt();
+      }
+      print(
+          "${_selectedMembership!.calculatedPrice!} >>> ${_selectedMembership!.originalPrice!}");
+
       NetworkResponse networkResponse = await AppDataService.getInstance()
-          .createPaymentIntent(paymentParams: paymentParams);
+          .createPaymentIntent(
+              paymentParams: paymentParams,
+              paymentFlowSource: paymentFlowSource);
 
       logEvent(
-          "Payment Intent Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
+          "Payment Intent Params $paymentParams Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
       _errorInResponse = networkResponse.isError;
       if (!_errorInResponse!) {
         _paymentIntentClientSecret =
@@ -201,7 +243,10 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  updateMembershipPaymentMethod({required AppLocalizations loc}) async {
+  updateMembershipPaymentMethod(
+      {required AppLocalizations loc,
+      String? renewType,
+      String? paymentFlowSource}) async {
     try {
       _showLoader = true;
       _loaderMessage = loc.msgCommonLoader;
@@ -210,13 +255,20 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
       Map<String, dynamic> paymentParams = {
         "packageName": _selectedMembership!.membershipName!,
         "paymentType": "reception",
-        "packageId": _selectedMembership!.id!,
+        "packageId": _selectedMembership!.id!
       };
+
+      if (paymentFlowSource == null) {
+        paymentParams["renewType"] = renewType ?? "none";
+      }
+
       NetworkResponse networkResponse = await AppDataService.getInstance()
-          .updatePaymentType(paymentParams: paymentParams);
+          .updatePaymentType(
+              paymentParams: paymentParams,
+              paymentFlowSource: paymentFlowSource);
 
       logEvent(
-          "Payment Intent Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
+          "Update PaymentType Response: ${networkResponse.responseMessage} ==> ${networkResponse.response}");
       _isPaymentMethodUpdated = !networkResponse.isError;
     } catch (e) {
       _errorInResponse = true;
@@ -232,7 +284,10 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
     notifyListeners();
   }
 
-  verifyPayment({required AppLocalizations loc, required String userId}) async {
+  verifyPayment(
+      {required AppLocalizations loc,
+      required String userId,
+      String? paymentFlowSource}) async {
     try {
       _showLoader = true;
       _loaderMessage = loc.verifyingPayment;
@@ -243,12 +298,16 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
         "packageId": _selectedMembership!.id!,
         "appType": AppHelper.getAppType(),
         "paymentIntentId": _paymentIntentId,
+        "paymentType": "card",
+        "packageName": _selectedMembership!.membershipName!
       };
       NetworkResponse networkResponse = await AppDataService.getInstance()
-          .verifyPayment(paymentParams: paymentParams);
+          .verifyPayment(
+              paymentParams: paymentParams,
+              paymentFlowSource: paymentFlowSource);
 
       logEvent(
-          "Verify Payment Response: ${networkResponse.responseMessage} ===> isError: ${networkResponse.isError} ==> ${networkResponse.response}");
+          "Verify Payment Params: $paymentParams Response: ${networkResponse.responseMessage} ===> isError: ${networkResponse.isError} ==> ${networkResponse.response}");
       _isPaymentVerified = !networkResponse.isError;
     } catch (e) {
       _isPaymentVerified = false;

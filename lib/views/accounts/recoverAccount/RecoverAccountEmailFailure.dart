@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/l10n/app_localizations.dart';
 import '/views/common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
@@ -9,9 +10,7 @@ class RecoverAccountEmailFailure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    AppLocalizations loc= AppLocalizations.of(context)!;
-
+    AppLocalizations loc = AppLocalizations.of(context)!;
 
     return AppScaffold(
         body: SafeArea(

@@ -21,26 +21,36 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   };
   final Map<String, String> _accountOptionsSR = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
-    "txtCommunicationPreferences": AppNavigator.communicationPreference,
-    "txtClubSponsorship": AppNavigator.clubAndMembership,
     "txtTermsAndConditions": "",
 
+  };
+  final Map<String, String> _accountOptionsMannum = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
   };
 
   final Map<String, String> _accountOptionsOthers = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
   };
+  final Map<String, String> _accountOptionsEDP = {
+    "txtChangeMyDetails": AppNavigator.userDetailScreen,
+    "txtCommunicationPreferences": AppNavigator.communicationPreference,
+    "txtChangeFavouriteVenue": "",
+  };
 
   Map<String, String> get accountOptions {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.maxx:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.maxx||Flavor.maxClub:
         return _accountOptions;
       case Flavor.mhbc:
         return _accountOptionsMHBC;
       case Flavor.starReward:
         return _accountOptionsSR;
+      case Flavor.edp:
+        return _accountOptionsEDP;
+      case Flavor.mannumClub:
+        return _accountOptionsMannum;
 
       default:
         return _accountOptionsOthers;
@@ -78,6 +88,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtClubSponsorship;
         case "txtTermsAndConditions":
         return loc.txtTermsAndConditions;
+      case "txtChangeFavouriteVenue":
+        return loc.txtChangeFavouriteVenue;
 
       default:
         return key; // fallback

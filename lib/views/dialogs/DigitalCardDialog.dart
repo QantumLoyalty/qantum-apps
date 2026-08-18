@@ -4,19 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
-import '../../l10n/app_localizations.dart';
+import 'package:qantum_apps/core/mixins/logging_mixin.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
+import 'package:secure_content/secure_content.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
+
 import '/core/flavors_config/flavor_config.dart';
-import '../../core/utils/AppHelper.dart';
+import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppIcons.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:secure_content/secure_content.dart';
-import '../../core/utils/AppColors.dart';
-import '../../data/local/SharedPreferenceHelper.dart';
+import '../../core/utils/FlavorConstants.dart';
 import '../../data/models/UserModel.dart';
+import '../../l10n/app_localizations.dart';
 import '../../view_models/UserInfoProvider.dart';
 
-class DigitalCardDialog {
+class DigitalCardDialog with LoggingMixin {
   static final DigitalCardDialog _digitalCardDialog =
       DigitalCardDialog._internal();
 
@@ -27,10 +29,33 @@ class DigitalCardDialog {
   DigitalCardDialog._internal();
 
   showDigitalCardDialog(BuildContext context) async {
-    SharedPreferenceHelper sharedPreferenceHelper =
-        await SharedPreferenceHelper.getInstance();
-    UserModel? userData = await sharedPreferenceHelper.getUserData();
-    String userTierType = await AppHelper.getUserTierType(userData!);
+    UserModel? userData = context.read<UserInfoProvider>().getUserInfo;
+
+    if (userData == null) return;
+
+    String userTierType = FlavorConstants.getUserTierType(userData);
+    final media = MediaQuery.of(context);
+
+    double heightFactor = 0.7;
+
+    if (flavor == Flavor.bobsBulkBooze || flavor == Flavor.senseOfTaste) {
+      heightFactor = 0.6;
+    }
+
+    final dialogHeight = media.size.height * heightFactor;
+    const textShadows = [
+      Shadow(
+        offset: Offset(1.0, 1.0),
+        blurRadius: 3.0,
+        color: Color(0x80000000),
+      )
+    ];
+
+
+    final cardBackground = AppIcons.getCardBackground(userTierType);
+    final membershipExpiry =
+        AppDateFormatter.userMembershipExpiry(userData.membershipExpiryDate);
+    final cardPrefix = FlavorConstants.getScancode();
 
     await showGeneralDialog(
         context: context,
@@ -43,233 +68,222 @@ class DigitalCardDialog {
               alignment: Alignment.center,
               child: SizedBox(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.7,
-                child: Consumer<UserInfoProvider>(
-                    builder: (context, provider, child) {
-                  return SecureWidget(
-                      isSecure: true,
-                      builder: (context, onInit, onDispose) {
-                        return Stack(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              margin:
-                                  const EdgeInsets.only(left: 25, right: 25),
-                              width: MediaQuery.of(context).size.width,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.7 - 80,
-                              child: Consumer<UserInfoProvider>(
-                                  builder: (context, provider, child) {
-                                return Stack(
-                                  children: [
-                                    Positioned.fill(
-                                      child: Image.asset(
-                                        AppIcons.getCardBackground(
-                                            AppHelper.getUserTierType(
-                                                provider.getUserInfo!)),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          AppDimens.shape_20,
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: QrImageView(
-                                              data:
-                                                  '${getScancode()}${provider.getUserInfo!.cardNumber}',
-                                              backgroundColor: AppColors.white,
-                                              size: 180,
+                height: dialogHeight,
+                child: SecureWidget(
+                    isSecure: true,
+                    builder: (context, onInit, onDispose) {
+                      return Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: flavor == Flavor.bobsBulkBooze
+                                        ? AppColors.transparent
+                                        : Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                               // margin: const EdgeInsets.only(left: 25, right: 25),
+                                width: media.size.width,
+                                height: dialogHeight - 80,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      image: flavor == Flavor.senseOfTaste
+                                          ? null
+                                          : DecorationImage(
+                                              image: AssetImage(cardBackground),
+                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                          AppDimens.shape_20,
-                                          SingleChildScrollView(
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  userTierType.toUpperCase(),
-                                                  style: TextStyle(
-                                                      shadows: [
-                                                        Shadow(
-                                                          offset: const Offset(
-                                                              1.0, 1.0),
-                                                          blurRadius: 3.0,
-                                                          color: AppColors.black
-                                                              .withValues(
-                                                                  alpha: 0.5),
-                                                        )
-                                                      ],
-                                                      color: AppThemeCustom
-                                                          .getCardDialogsTextColor(
-                                                              context),
-                                                      fontSize: 32,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  AppLocalizations.of(context)!
-                                                      .txtMembership,
-                                                  style: TextStyle(
-                                                      shadows: [
-                                                        Shadow(
-                                                          offset: const Offset(
-                                                              1.0, 1.0),
-                                                          blurRadius: 3.0,
-                                                          color: AppColors.black
-                                                              .withValues(
-                                                                  alpha: 0.5),
-                                                        )
-                                                      ],
-                                                      color: AppThemeCustom
-                                                          .getCardDialogsTextColor(
-                                                              context),
-                                                      fontSize: 18),
-                                                ),
-                                                AppDimens.shape_5,
-                                                (showMembershipCategory(userData
-                                                        .membershipCategory))
-                                                    ? Text(
-                                                        '#${userData.bluizeId}',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                            color: AppThemeCustom
-                                                                .getCardDialogsTextColor(
-                                                                    context),
-                                                            fontSize: 14))
-                                                    : Container(),
-                                                AppDimens.shape_20,
-                                                Text(
-                                                  "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      shadows: [
-                                                        Shadow(
-                                                          offset: const Offset(
-                                                              1.0, 1.0),
-                                                          blurRadius: 3.0,
-                                                          color: AppColors.black
-                                                              .withValues(
-                                                                  alpha: 0.5),
-                                                        )
-                                                      ],
-                                                      color: AppThemeCustom
-                                                          .getCardDialogsTextColor(
-                                                              context),
-                                                      fontSize: 14),
-                                                ),
-                                                (showMembershipCategory(userData
-                                                        .membershipCategory))
-                                                    ? Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          AppDimens.shape_30,
-                                                          Text(
-                                                            AppLocalizations.of(
-                                                                    context)!
-                                                                .txtMembership,
-                                                            style: TextStyle(
-                                                                shadows: [
-                                                                  Shadow(
-                                                                    offset:
-                                                                        const Offset(
-                                                                            1.0,
-                                                                            1.0),
-                                                                    blurRadius:
-                                                                        3.0,
-                                                                    color: AppColors
-                                                                        .black
-                                                                        .withValues(
-                                                                            alpha:
-                                                                                0.5),
-                                                                  )
-                                                                ],
-                                                                color: AppThemeCustom
-                                                                    .getCardDialogsTextColor(
-                                                                        context),
-                                                                fontSize: 16),
-                                                          ),
-                                                          Text(
-                                                            "${userData.membershipCategory}",
-                                                            style: TextStyle(
-                                                                shadows: [
-                                                                  Shadow(
-                                                                    offset:
-                                                                        const Offset(
-                                                                            1.0,
-                                                                            1.0),
-                                                                    blurRadius:
-                                                                        3.0,
-                                                                    color: AppColors
-                                                                        .black
-                                                                        .withValues(
-                                                                            alpha:
-                                                                                0.5),
-                                                                  )
-                                                                ],
-                                                                color: AppThemeCustom
-                                                                    .getCardDialogsTextColor(
-                                                                        context),
-                                                                fontSize: 22),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Container()
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
                                     ),
-                                  ],
-                                );
-                              }),
+                                    child: Consumer<UserInfoProvider>(
+                                        builder: (context, provider, child) {
+                                      return Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            AppDimens.shape_20,
+                                            /*  ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: QrImageView(
+                                                data:
+                                                    '$cardPrefix${provider.getUserInfo!.cardNumber}',
+                                                backgroundColor: AppColors.white,
+                                                size: 180,
+                                              ),
+                                            ),*/
+                                            flavor == Flavor.bobsBulkBooze ||
+                                                    flavor == Flavor.senseOfTaste
+                                                ? Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        bottom: 20),
+                                                    child: Image.asset(
+                                                      AppIcons.app_logo,
+                                                      height: 100,
+                                                      width: 180,
+                                                    ),
+                                                  )
+                                                : const SizedBox.shrink(),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: Container(
+                                                color: AppColors.white,
+                                                padding: const EdgeInsets.all(10),
+                                                child: SizedBox(
+                                                  height: 180,
+                                                  width: 180,
+                                                  child: SfBarcodeGenerator(
+                                                    value:
+                                                        '$cardPrefix${provider.getUserInfo!.cardNumber}',
+                                                    symbology: QRCode(),
+                                                    showValue: false,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            AppDimens.shape_20,
+                                            flavor == Flavor.bobsBulkBooze ||
+                                                    flavor == Flavor.senseOfTaste
+                                                ? const SizedBox()
+                                                : Expanded(
+                                                    child: SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          userTierType
+                                                              .toUpperCase(),
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 32,
+                                                              fontWeight:
+                                                                  FontWeight.bold),
+                                                        ),
+                                                        Text(
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .txtMembership,
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 18),
+                                                        ),
+                                                        AppDimens.shape_5,
+                                                        (showMembershipCategory(userData
+                                                                .membershipCategory))
+                                                            ? Column(
+                                                                children: [
+                                                                  Text(
+                                                                    "${userData.membershipCategory}",
+                                                                    style: TextStyle(
+                                                                        shadows:
+                                                                            textShadows,
+                                                                        color: AppThemeCustom
+                                                                            .getCardDialogsTextColor(
+                                                                                context),
+                                                                        fontSize:
+                                                                            16),
+                                                                  ),
+                                                                  AppDimens.shape_5,
+                                                                  Text(
+                                                                      '#${userData.bluizeId}',
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      style: TextStyle(
+                                                                          color: AppThemeCustom
+                                                                              .getCardDialogsTextColor(
+                                                                                  context),
+                                                                          fontSize:
+                                                                              14))
+                                                                ],
+                                                              )
+                                                            : const SizedBox
+                                                                .shrink(),
+                                                        AppDimens.shape_20,
+                                                        Text(
+                                                          "${AppLocalizations.of(context)!.txtTime}: ${DateFormat("HH:mm").format(DateTime.now())}\n${AppLocalizations.of(context)!.txtDate}: ${DateFormat("dd MMMM yyyy").format(DateTime.now())}",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              shadows: textShadows,
+                                                              color: AppThemeCustom
+                                                                  .getCardDialogsTextColor(
+                                                                      context),
+                                                              fontSize: 14),
+                                                        ),
+                                                        (membershipExpiry != null &&
+                                                                membershipExpiry
+                                                                    .isNotEmpty)
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        top: 12),
+                                                                child: Text(
+                                                                  "Membership Expiry: $membershipExpiry",
+                                                                  style: TextStyle(
+                                                                      shadows:
+                                                                          textShadows,
+                                                                      color: AppThemeCustom
+                                                                          .getCardDialogsTextColor(
+                                                                              context),
+                                                                      fontSize: 14),
+                                                                ),
+                                                              )
+                                                            : const SizedBox
+                                                                .shrink(),
+                                                        AppDimens.shape_30
+                                                      ],
+                                                    ),
+                                                  ))
+                                          ],
+                                        ),
+                                      );
+                                    })),
+                              ),
                             ),
-                            Positioned(
-                                left: 0,
-                                right: 0,
-                                bottom: 50,
-                                child: CircleAvatar(
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  backgroundImage: ExactAssetImage(
-                                      AppIcons.getCardBackground(
-                                          AppHelper.getUserTierType(
-                                              provider.getUserInfo!))),
-                                  radius: 30,
-                                  child: IconButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.clear,
-                                        size: 30,
-                                        color: Colors.white,
-                                        shadows: <Shadow>[
-                                          Shadow(
-                                              color: AppColors.black
-                                                  .withValues(alpha: 0.5),
-                                              offset: const Offset(1.0, 1.0),
-                                              blurRadius: 3.0)
-                                        ],
-                                      )),
-                                ))
-                          ],
-                        );
-                      });
-                }),
+                          ),
+                          Positioned(
+                              left: 0,
+                              right: 0,
+                              bottom: 50,
+                              child: CircleAvatar(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                backgroundImage: flavor == Flavor.senseOfTaste
+                                    ? null
+                                    : ExactAssetImage(cardBackground),
+                                radius: 30,
+                                child: IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    tooltip: "close",
+                                    icon: Icon(
+                                      Icons.clear,
+                                      size: 30,
+                                      color: Colors.white,
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                            color: AppColors.black
+                                                .withValues(alpha: 0.5),
+                                            offset: const Offset(1.0, 1.0),
+                                            blurRadius: 3.0)
+                                      ],
+                                    )),
+                              ))
+                        ],
+                      );
+                    }),
               ),
             ),
           );
@@ -290,73 +304,24 @@ class DigitalCardDialog {
 
   bool showMembershipCategory(String? membershipCategory) {
     Flavor flavor = FlavorConfig.instance.flavor!;
-    if (flavor == Flavor.mhbc) {
-      if (membershipCategory != null && membershipCategory.isNotEmpty) {
-        switch (membershipCategory.toUpperCase()) {
-          case "NON FINANCIAL":
-            return true;
-          case "INVITE ONLY":
-            return true;
-          case "STAFF":
-            return true;
-          default:
-            return false;
-        }
-      } else {
-        return false;
-      }
-    } else {
+    const hiddenCategories = {
+      "NON FINANCIAL",
+      "INVITE ONLY",
+      "STAFF",
+    };
+    if (flavor != Flavor.mhbc ||
+        membershipCategory == null ||
+        membershipCategory.isEmpty) {
       return false;
     }
-  }
+/*
+    if (flavor != Flavor.mhbc || flavor != Flavor.maxClub ||
+        membershipCategory == null ||
+        membershipCategory.isEmpty) {
+      return false;
+    }
+*/
 
-  String getScancode() {
-    const Map<Flavor, String> _scanCodes = {
-      Flavor.mhbc: "MHBCAAAAA",
-      Flavor.clh: "CLH",
-      Flavor.northShoreTavern: "NST",
-      Flavor.montaukTavern: "MTT",
-      Flavor.hogansReward: "HWP",
-      Flavor.starReward: "SHG",
-      Flavor.aceRewards: "WML",
-      Flavor.queens: "QHG",
-      Flavor.brisbane: "BBCAAAAAA",
-      Flavor.woollahra: "WHT",
-      Flavor.flinders: "FSW",
-      Flavor.bluewater: "BBGAAAAAA",
-      Flavor.kingscliff: "KBH",
-      Flavor.drinkRewards: "DHQ",
-    };
-
-    return _scanCodes[FlavorConfig.instance.flavor] ?? "ABC1234";
-
-    // Flavor flavor = FlavorConfig.instance.flavor!;
-    /* if (flavor == Flavor.mhbc) {
-      return "MHBCAAAAA";
-    } else if (flavor == Flavor.clh) {
-      return "CLH";
-    } else if (flavor == Flavor.northShoreTavern) {
-      return "NST";
-    } else if (flavor == Flavor.montaukTavern) {
-      return "MTT";
-    } else if (flavor == Flavor.hogansReward) {
-      return "HWP";
-    } else if (flavor == Flavor.starReward) {
-      return "SHG";
-    } else if (flavor == Flavor.aceRewards) {
-      return "WML";
-    } else if (flavor == Flavor.queens) {
-      return "QHG";
-    } else if (flavor == Flavor.brisbane) {
-      return "BBCAAAAAA";
-    } else if (flavor == Flavor.woollahra) {
-      return "WHT";
-    } else if (flavor == Flavor.flinders) {
-      return "FSW";
-    } else if (flavor == Flavor.bluewater) {
-      return "BBGAAAAAA";
-    } else {
-      return "ABC1234";
-    }*/
+    return !hiddenCategories.contains(membershipCategory.toUpperCase());
   }
 }

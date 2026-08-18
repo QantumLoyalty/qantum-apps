@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -8,9 +7,9 @@ class AppColors {
 
   /// QANTUM THEME ///
 
-  static Color get qa_back_color => const Color(0xFF002D72);
+  static Color get qa_primary_color => const Color(0xFF002D72);
 
-  static Color get qa_back_color_2 => const Color(0xFF070526);
+  static Color get qa_primary_color_dark => const Color(0xFF070526);
 
   static Color get qa_floating_button_icon_color => const Color(0xFFFFFFFF);
 
@@ -31,6 +30,7 @@ class AppColors {
   static Color get qa_divider_color => const Color(0xFFFFFFFF);
 
   static Color get qa_disable_color => const Color(0xFF28ABE2);
+
 
   /// MAX THEME ///
 
@@ -159,7 +159,7 @@ class AppColors {
 
   static Color get mt_hint_text_color => const Color(0xFFD9D9D9);
 
-  static Color get mt_button_color => const Color(0x00FFFFFF);
+  static Color get mt_button_color =>  Colors.transparent;
 
   static Color get mt_button_border_color => const Color(0xFFFFFFFF);
 
@@ -199,21 +199,29 @@ class AppColors {
 
   /// SENSE OF TASTE THEME ///
 
-  static Color get sot_back_color => const Color(0xFFc69c6e);
+  static Color get sot_back_color => const Color(0xFF24272a);
 
-  static Color get sot_back_color_2 => const Color(0xFFc69c6e);
+  static Color get sot_back_color_2 => const Color(0xFF24272a);
 
-  static Color get sot_text_color => const Color(0xFF4e4e4e);
+  static Color get sot_text_color => const Color(0xFFFFFFFF);
 
-  static Color get sot_text_field_text_color => const Color(0xFFd4b491);
+  static Color get sot_text_field_text_color => const Color(0xFFFFFFFF);
 
-  static Color get sot_hint_text_color => const Color(0xFF6D6D6D);
+  static Color get sot_hint_text_color => const Color(0x61FFFFFF);
 
-  static Color get sot_button_color => const Color(0xFF4e4e4e);
+  static Color get sot_button_color => const Color(0xFFC79C6E);
 
-  static Color get sot_card_color => const Color(0xFF444444);
+  static Color get sot_card_color => const Color(0xFF000000);
 
-  static Color get sot_divider_color => const Color(0xFFd4b491);
+  static Color get sot_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get sot_scaffold_bg_color => const Color(0xFFC79C6E);
+
+  static Color get sot_disabled_color => const Color(0xFFC79C6E);
+
+  static Color get sot_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get sot_profile_cross_background_color => const Color(0xFFC79C6E);
 
   /// NORTH SHORE TAVERN ///
 
@@ -275,35 +283,6 @@ class AppColors {
 
   static Color get ar_canvas_color => const Color(0xFFCED2CE);
 
-  /// QUEENS HOTEL ///
-
-  static Color get qh_sf_color => const Color(0xFFB1BF79);
-
-  static Color get qh_back_color => const Color(0xFFA4862C);
-
-  static Color get qh_floating_button_icon_color => const Color(0xFFB11921);
-
-  static Color get qh_back_color_2 => const Color(0xFFA4862C);
-
-  static Color get qh_back_color_3 => const Color(0xFFA4862C);
-
-  static Color get qh_text_color => const Color(0xFFFFFFFF);
-
-  static Color get qh_text_field_text_color => const Color(0xFFFFFFFF);
-
-  static Color get qh_hint_text_color => const Color(0xFFD9D9D9);
-
-  static Color get qh_button_color => const Color(0x00000000);
-
-  static Color get qh_button_border_color => const Color(0xFFFFFFFF);
-
-  static Color get qh_card_color => const Color(0xFFFFFFFF);
-
-  static Color get qh_divider_color => const Color(0xFFbfab6c);
-
-  static Color get qh_disable_color => const Color(0xFFFFFFFF);
-
-  static Color get qh_canvas_color => const Color(0xFFFDF1E2);
 
   /// BRISBANE BREWING ///
 
@@ -473,6 +452,187 @@ class AppColors {
   static Color get dr_box_shadow => const Color(0x80FFFFFF);
 
 
+  /// WONTHAGGI THEME
+  static Color get wt_sf_color => const Color(0xFF222E5A);
+
+  static Color get wt_back_color => const Color(0xFFF7F1E2);
+
+  static Color get wt_floating_button_icon_color => const Color(0xFF222E5A);
+
+  static Color get wt_back_color_2 => const Color(0xFFF2F0E7);
+
+  static Color get wt_back_color_3 => const Color(0xFFB8C9CE);
+
+  static Color get wt_text_color => const Color(0xFF222E5A);
+
+  static Color get wt_text_field_text_color => const Color(0xFF000000);
+
+  static Color get wt_hint_text_color => const Color(0x66222E5A);
+
+  static Color get wt_button_color => const Color(0xFF222E5A);
+
+  static Color get wt_button_border_color => const Color(0xFF222E5A);
+
+  static Color get wt_card_color => const Color(0xFFFFFFFF);
+
+  static Color get wt_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get wt_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get wt_canvas_color => const Color(0xFF222E5A);
+
+  static Color get wt_menu_background => const Color(0xFFD7D4CE);
+
+
+  /// EDP COLOR
+
+
+  static Color get edp_sf_color => Colors.black;
+
+  static Color get edp_back_color =>  Colors.black;
+
+  static Color get edp_floating_button_icon_color =>  Colors.white;
+
+  static Color get edp_back_color_2 =>  Colors.black;
+
+  static Color get edp_text_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_hint_text_color => const Color(0x39FFFFFF);
+
+  static Color get edp_button_color => const Color(0xFF72B42F);
+
+  static Color get edp_button_border_color => const Color(0xFF72B42F);
+
+  static Color get edp_card_color => const Color(0xFFFFFFFF);
+
+  static Color get edp_divider_color =>  const Color(0x80FFFFFF);
+
+  static Color get edp_disable_color => const Color(0xFFF4F4F4);
+
+  static Color get edp_canvas_color => const Color(0xFF285FA9);
+
+  static Color get edp_textformField_background_color => const Color(0xFF707070);
+
+  /// Bobs bulk booze color
+
+  static Color get bob_back_color => const Color(0xFFff8f00);
+
+  static Color get bob_back_color_2 => const Color(0xFFff8f00);
+
+  static Color get bob_text_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_hint_text_color => const Color(0x61FFFFFF);
+
+  static Color get bob_button_color => const Color(0xFF971B2F);
+
+  static Color get bob_card_color => const Color(0xFF971B2F);
+
+  static Color get bob_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_scaffold_bg_color => const Color(0xFF971B2F);
+
+  static Color get bob_disabled_color => const Color(0xFF49141D);
+
+  static Color get bob_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get bob_profile_cross_background_color => const Color(0xFFFFFFFF);
+
+
+  /// Mosaic Hotel
+
+  static Color get mh_sf_color => const Color(0xFF08385B);
+
+  static Color get mh_back_color => const Color(0xFFfff7e6);
+
+  static Color get mh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get mh_back_color_2 => const Color(0xFFfff7e6);
+
+  static Color get mh_back_color_3 => const Color(0xFFfff7e6);
+
+  static Color get mh_text_color => const Color(0xFF08385B);
+
+  static Color get mh_text_field_text_color => const Color(0xFF08385B);
+
+  static Color get mh_hint_text_color => const Color(0xFFD9D9D9);
+
+  static Color get mh_button_color => const Color(0xFF08385B);
+
+  static Color get mh_button_border_color => const Color(0xFF08385B);
+
+  static Color get mh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mh_divider_color => const Color(0xFFD9D9D9);
+
+  static Color get mh_disabled_color => const Color(0xFFFFFFFF);
+
+  static Color get mh_canvas_color => const Color(0xFF08385B);
+
+  /// Mannum Club
+
+  static Color get mc_sf_color => const Color(0xFF00B0F0);
+
+  static Color get mc_back_color => const Color(0xFF2d3748);
+
+  static Color get mc_floating_button_icon_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_back_color_2 => const Color(0xFF2d3748);
+
+  static Color get mc_back_color_3 => const Color(0xFF2d3748);
+
+  static Color get mc_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_text_field_text_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_hint_text_color => const Color(0x73FFFFFF);
+
+  static Color get mc_button_color => const Color(0xFF00B0F0);
+
+  static Color get mc_button_border_color => const Color(0xFF00B0F0);
+
+  static Color get mc_card_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_divider_color => const Color(0xFFe2f7fb);
+
+  static Color get mc_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get mc_canvas_color => const Color(0xFF00B0F0);
+
+
+  /// Southport Sharks Color
+
+
+  static Color get ss_primary_color => const Color(0xFF043D5C);
+
+  static Color get ss_primary_color_dark => const Color(0xFF000000);
+
+  static Color get ss_button_color => const Color(0xFF9F8754);
+
+  static Color get ss_button_border_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_divider_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_hint_text_color => const Color(0x63ffffff);
+
+  static Color get ss_card_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_canvas_color => const Color(0xFF000000);
+
+  static Color get ss_scaffold_bg_color => const Color(0xFF9F8754);
+
+  static Color get ss_disabled_color => const Color(0xFF33A4DE);
+
+  static Color get ss_text_color => const Color(0xFFFFFFFF);
+
+  static Color get ss_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get ss_profile_cross_background_color => const Color(0xFF375F94);
+
+
 
   /// COMMON COLORS ///
   static Color get white => const Color(0xFFFFFFFF);
@@ -497,6 +657,10 @@ class AppColors {
 
   static Color get white_shadow => const Color(0x80FFFFFF);
 
+  static Color get button_shadow => const Color(0x2EFFFFFF);
+
+  static Color get white_opacity => const Color(0x27FFFFFF);
+
 
 
   static Color get transparent =>  Colors.transparent;
@@ -507,9 +671,9 @@ class AppColors {
       case "valued":
         {
           switch (selectedFlavor) {
-            case Flavor.qantum:
+            case Flavor.qantum||Flavor.qantumClub:
               return const Color(0xFF14ad53);
-            case Flavor.maxx:
+            case Flavor.maxx||Flavor.maxClub:
               return const Color(0xFFdb023d);
             case Flavor.starReward:
               return const Color(0xFFc72224);

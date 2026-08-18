@@ -249,12 +249,12 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                     ],
                                   ),
                                 )
-                            : SizedBox.shrink(),
+                            : const SizedBox.shrink(),
                       ),
                     ],
                   ),
                 )
-              : NoInternetLayout(),
+              : const NoInternetLayout(),
           provider.showLoader != null && provider.showLoader!
               ? AppLoader()
               : Container()

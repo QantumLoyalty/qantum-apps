@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '/l10n/app_localizations.dart';
 import '/core/utils/AppHelper.dart';
 import '/data/local/SharedPreferenceHelper.dart';
@@ -10,6 +11,8 @@ class UserLoginProvider extends ChangeNotifier {
   bool _showLoader = false;
 
   bool get showLoader => _showLoader;
+
+  String loaderMessage = "";
 
   bool? _networkError;
 
@@ -35,55 +38,73 @@ class UserLoginProvider extends ChangeNotifier {
 
   String? get networkMessage => _networkMessage;
 
-  login(String phoneNo) async {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showLoader = true;
-      notifyListeners();
-    });
+  UserModel? loggedInUser;
+
+  Future<void> login(String phoneNo, BuildContext context) async {
+    _showLoader = true;
+    notifyListeners();
+
     try {
-      NetworkResponse networkResponse =
-          await UserService.getInstance().login(phoneNo);
+      final networkResponse = await UserService.getInstance().login(phoneNo);
+
       _networkError = networkResponse.isError;
 
-      if (networkResponse.response != null &&
-          networkResponse.response is Map<String, dynamic>) {
-        Map<String, dynamic> response =
-            networkResponse.response as Map<String, dynamic>;
+      if (networkResponse.response is Map<String, dynamic>) {
+        final response = networkResponse.response as Map<String, dynamic>;
 
         _networkMessage = response['message'];
+        ("LOGIN RESPONSE: ${response.toString()} && _networkMessage: $_networkMessage")
+            .logMessage();
 
-        if (response['registered'] != null) {
-          if (response['registered'] as bool) {
-            if (response.containsKey('test') && response['test'] == true) {
-              _isTestUser = true;
-              _isExistingUser = false;
+        if (response.containsKey("isCancel") &&
+            (response["isCancel"] as bool)) {
+          _networkError = true;
+        } else {
+          final isRegistered = response['registered'];
+
+          if (isRegistered != null) {
+            if (isRegistered == true) {
+              _isTestUser = response['test'] == true;
+              _isExistingUser = isRegistered;
             } else {
-              _isExistingUser = true;
+              _isExistingUser = false;
+            }
+
+            final user = response['user'];
+            if (user is Map<String, dynamic> && user['Id'] != null) {
+              _userId = user['Id'];
             }
           } else {
-            _isExistingUser = false;
+            _isExistingUser = null;
           }
-
-          if (response['user'] != null) {
-            if ((response['user'] as Map<String, dynamic>)['Id'] != null) {
-              _userId = (response['user'] as Map<String, dynamic>)['Id'];
-            }
-          }
-        } else {
-          _isExistingUser = null;
         }
       } else {
         _networkMessage = networkResponse.responseMessage;
       }
+
+      _networkMessage!.logMessage('NETWORK LOG');
     } catch (e) {
-      AppHelper.printMessage(">>> ${e.toString()}");
+      AppHelper.printMessage(">>> error ${e.toString()}");
+
       _networkError = true;
-      _networkMessage = e.toString();
+
+      String error = e.toString().toLowerCase();
+
+      // ✅ Strong error handling
+      if (error.contains('socketexception') ||
+          error.contains('failed host lookup') ||
+          error.contains('clientexception') ||
+          error.contains('network is unreachable') ||
+          error.contains('connection failed') ||
+          error.contains('timed out')) {
+        _networkMessage = AppLocalizations.of(context)!.msgUnableConnect;
+      } else {
+        _networkMessage = "Something went wrong. Please try again.";
+      }
+      _networkMessage!.logMessage('NETWORK LOG');
     } finally {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showLoader = false;
-        notifyListeners();
-      });
+      _showLoader = false;
+      notifyListeners();
     }
   }
 
@@ -93,6 +114,7 @@ class UserLoginProvider extends ChangeNotifier {
       _networkError = null;
       _networkMessage = null;
       _isTestUser = null;
+      _userId=null;
       notifyListeners();
     });
   }
@@ -120,17 +142,24 @@ class UserLoginProvider extends ChangeNotifier {
             _networkMessage = response['message'];
           }
 
-          print(">>> $_networkMessage");
-          if (response.containsKey('userId') && response['userId'] != null) {
-            _isRegistered = true;
-
-            if (response.containsKey('thirdPartyData') &&
-                response['thirdPartyData'] is Map<String, dynamic>) {
-              _userId =
-                  (response['thirdPartyData'] as Map<String, dynamic>)['Id'];
-            }
-          } else {
+          if (_networkMessage != null &&
+              _networkMessage!.toString().trim().toLowerCase() ==
+                  ("bad request")) {
+            _networkMessage =
+                "We couldn’t complete your request at this time. Please see venue staff for assistance.";
             _isRegistered = false;
+          } else {
+            if (response.containsKey('userId') && response['userId'] != null) {
+              _isRegistered = true;
+
+              if (response.containsKey('thirdPartyData') &&
+                  response['thirdPartyData'] is Map<String, dynamic>) {
+                _userId =
+                    (response['thirdPartyData'] as Map<String, dynamic>)['Id'];
+              }
+            } else {
+              _isRegistered = false;
+            }
           }
         } else {
           _networkMessage = loc.msgCommonError;
@@ -138,6 +167,7 @@ class UserLoginProvider extends ChangeNotifier {
         }
       } else {
         _isRegistered = false;
+        _networkMessage = networkResponse.responseMessage;
       }
     } catch (e) {
       _networkError = true;
@@ -153,6 +183,7 @@ class UserLoginProvider extends ChangeNotifier {
 
   resetNetworkResponseStatus() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      otpSent = null;
       _networkError = null;
       _networkMessage = null;
       notifyListeners();
@@ -171,10 +202,12 @@ class UserLoginProvider extends ChangeNotifier {
   verifyOTP(
       {required String userId,
       required String otp,
-      required String countryCode}) async {
+      required String countryCode,
+      required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
+        loaderMessage = loc.msgVerifyingOTP;
         notifyListeners();
       });
       Map<String, dynamic> params = {};
@@ -196,11 +229,17 @@ class UserLoginProvider extends ChangeNotifier {
 
         _networkMessage = response['message'];
         if (!_networkError!) {
-          AppHelper.printMessage("SAVING RESPONSE");
+          debugPrint(response.toString(), wrapWidth: 1024);
           Map<String, dynamic> data = response['user'] as Map<String, dynamic>;
+
+          loggedInUser = UserModel.fromJson(data);
+          if (response.containsKey("serverTime")) {
+            loggedInUser!.serverTime = response["serverTime"];
+          }
           AppHelper.printMessage(
-              "PARSED USER DATA::: ${UserModel.fromJson(data)}");
-          await sharedPreferencesHelper.saveUserData(UserModel.fromJson(data));
+              "PARSED USER DATA::: ${loggedInUser!.toString()}");
+
+          await sharedPreferencesHelper.saveUserData(loggedInUser!);
           await sharedPreferencesHelper.saveAuthToken(response['token']);
           await sharedPreferencesHelper.saveCountryCode(countryCode);
         }
@@ -215,5 +254,64 @@ class UserLoginProvider extends ChangeNotifier {
         notifyListeners();
       });
     }
+  }
+
+  bool? otpSent;
+
+  resendOTP({required String phoneNo, required AppLocalizations loc}) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        loaderMessage = loc.msgResendOTP;
+        notifyListeners();
+      });
+
+      NetworkResponse networkResponse =
+          await UserService.getInstance().resendOTP(phoneNumber: phoneNo);
+
+      otpSent = !networkResponse.isError;
+
+      if (networkResponse.response != null) {
+        if (networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+          if (response.containsKey('message')) {
+            _networkMessage = response['message'];
+          } else {
+            _networkMessage = networkResponse.responseMessage;
+          }
+        } else {
+          _networkMessage = networkResponse.responseMessage;
+        }
+      } else {
+        _networkMessage = networkResponse.responseMessage;
+      }
+    } catch (e) {
+      _networkError = true;
+      _networkMessage = e.toString();
+      AppHelper.printMessage(_networkMessage);
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+  bool showEmailCheckLoader = false;
+  bool? isEmailExists;
+  bool? isErrorOnEmailCheck;
+
+  Future<NetworkResponse> checkEmail({required String email}) async {
+    showEmailCheckLoader = true;
+    notifyListeners();
+
+    NetworkResponse networkResponse =
+        await UserService.getInstance().checkEmail(email: email);
+
+    showEmailCheckLoader = false;
+    notifyListeners();
+
+    return networkResponse;
   }
 }

@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/core/network/APIList.dart';
-import 'package:qantum_apps/views/signup/DrivingLicenseScanScreen.dart';
+import '/core/extensions/log_extension.dart';
+import '/core/network/APIList.dart';
+import '/data/models/NetworkResponse.dart';
+import '/views/signup/widgets/GenderSelector.dart';
 import '../../core/flavors_config/flavor_config.dart';
-import '../../view_models/DocumentScanProvider.dart';
 import '/core/mixins/logging_mixin.dart';
-
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
@@ -35,24 +37,33 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _emailController;
+
+  Timer? _emailDebounce;
+  bool _isCheckingEmail = false;
+  bool _showDuplicateEmailMsg = false;
+
+  String? _lastCheckedEmail;
+
   late TextEditingController _postcodeController;
   late TextEditingController _birthdayDDController;
   late TextEditingController _birthdayMMController;
   late TextEditingController _birthdayYYController;
   late TextEditingController _addressController;
   late TextEditingController _address1Controller;
+
   late FocusNode _birthdayDDFocusNode;
   late FocusNode _birthdayMMFocusNode;
   late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
   late AppLocalizations loc;
+  @override
   late Flavor flavor;
 
   @override
   void initState() {
     super.initState();
 
-    logEvent("PARAMS ON SIGNUP: ${widget.argument}");
+    debugPrint("PARAMS ON SIGNUP: ${widget.argument}");
     flavor = FlavorConfig.instance.flavor!;
     String firstName = "", lastName = "";
     if (widget.argument.containsKey('name')) {
@@ -67,6 +78,8 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
     _lastNameController = TextEditingController(text: lastName);
     _emailController = TextEditingController();
+
+    _emailController.addListener(_handleEmailControllerChange);
 
     _birthdayDDFocusNode = FocusNode();
     _birthdayMMFocusNode = FocusNode();
@@ -97,14 +110,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
         logEvent("DOB Parse Error: $e");
       }
       _birthdayDDController = TextEditingController(
-          text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
+          text: ConditionBuilder.on(
+                  () => dateTime != null && dateTime.day >= 10,
                   () => dateTime!.day.toString())
               .on(() => dateTime != null && dateTime.day < 10,
                   () => "0${dateTime!.day.toString()}")
               .build(orElse: () => ""));
       _birthdayMMController = TextEditingController(
           text: ConditionBuilder.on(
-                  () => dateTime != null && dateTime.month > 10,
+                  () => dateTime != null && dateTime.month >= 10,
                   () => dateTime!.month.toString())
               .on(() => dateTime != null && dateTime.month < 10,
                   () => "0${dateTime!.month.toString()}")
@@ -122,6 +136,9 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
+
+    _emailDebounce?.cancel();
+    _emailController.removeListener(_handleEmailControllerChange);
     _emailController.dispose();
     _postcodeController.dispose();
     _birthdayDDController.dispose();
@@ -135,6 +152,146 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     super.dispose();
   }
 
+  bool? _isDuplicateEmail;
+
+  void _handleEmailControllerChange() async {
+    /*if (flavor != Flavor.edp) {
+      return;
+    }*/
+    _emailDebounce?.cancel();
+
+    final email = _emailController.text.trim().toLowerCase();
+    if (email.isEmpty || !AppHelper.verifyEmailAddress(email)) {
+      _clearEmailCheckResult();
+      return;
+    }
+
+    if (_lastCheckedEmail == email && _isDuplicateEmail != null) {
+      return;
+    }
+
+    _emailDebounce = Timer(
+      const Duration(milliseconds: 700),
+      () => _checkEnteredEmail(email),
+    );
+
+/*
+    setState(() {
+      _isCheckingEmail = true;
+      _emailExists = null;
+    });
+
+    NetworkResponse checkEmailResponse =
+        await context.read<UserLoginProvider>().checkEmail(email: email);
+    if (!mounted) return;
+
+    if (checkEmailResponse.isError) {
+    } else {
+      if (checkEmailResponse.response != null &&
+          checkEmailResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> verifyEmailResponse =
+            checkEmailResponse.response as Map<String, dynamic>;
+        if (verifyEmailResponse.containsKey("emailExists")) {
+          if (verifyEmailResponse["emailExists"] as bool) {
+            _isDuplicateEmail = true;
+            _showDuplicateEmailMsg = true;
+          } else {
+            _isDuplicateEmail = false;
+            _showDuplicateEmailMsg = false;
+          }
+        } else {
+          AppHelper.showErrorMessage(context,
+              "Getting error while verifying the email, please try again");
+        }
+      } else {
+        AppHelper.showErrorMessage(context,
+            "Getting error while verifying the email, please try again");
+      }
+    }
+
+    setState(() {
+      _isCheckingEmail = false;
+    });
+
+    Future.delayed(Duration(seconds: 2), () {
+      _showDuplicateEmailMsg = false;
+    });
+*/
+  }
+
+  Future<void> _checkEnteredEmail(String email) async {
+    setState(() {
+      _isCheckingEmail = true;
+      _isDuplicateEmail = null;
+      _showDuplicateEmailMsg = false;
+    });
+
+    final NetworkResponse checkEmailResponse =
+        await context.read<UserLoginProvider>().checkEmail(
+              email: email,
+            );
+
+    if (!mounted) return;
+
+    final currentEmail = _emailController.text.trim().toLowerCase();
+
+    // Ignore the response if the user changed the email.
+    if (currentEmail != email) {
+      setState(() {
+        _isCheckingEmail = false;
+      });
+      return;
+    }
+
+    if (checkEmailResponse.isError) {
+      setState(() {
+        _isCheckingEmail = false;
+        _isDuplicateEmail = null;
+        _showDuplicateEmailMsg = false;
+      });
+
+      AppHelper.showErrorMessage(
+        context,
+        'Unable to verify the email. Please try again.',
+      );
+      return;
+    }
+
+    final response = checkEmailResponse.response;
+
+    if (response is! Map<String, dynamic> || response['emailExists'] is! bool) {
+      setState(() {
+        _isCheckingEmail = false;
+      });
+
+      AppHelper.showErrorMessage(
+        context,
+        'Getting error while verifying the email, please try again',
+      );
+      return;
+    }
+
+    final bool emailExists = response['emailExists'] as bool;
+
+    setState(() {
+      _isCheckingEmail = false;
+      _isDuplicateEmail = emailExists;
+      _showDuplicateEmailMsg = emailExists;
+      _lastCheckedEmail = email;
+    });
+  }
+
+  void _clearEmailCheckResult() {
+    if (!mounted) return;
+
+    setState(() {
+      _isCheckingEmail = false;
+      _isDuplicateEmail = null;
+      _showDuplicateEmailMsg = false;
+      _lastCheckedEmail = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
@@ -144,7 +301,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       // DISPLAYING NETWORK RESPONSE
       if (userLoginProvider.networkError != null &&
           userLoginProvider.networkError!) {
-        Future.delayed(Duration.zero, () {
+        /*Future.delayed(Duration.zero, () {
           if (userLoginProvider.networkError!) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppHelper.showErrorMessage(
@@ -153,6 +310,16 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
           }
 
           userLoginProvider.resetNetworkResponseStatus();
+        });*/
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          // Check mounted state to make sure the user hasn't popped the screen yet
+          if (context.mounted) {
+            AppHelper.showErrorMessage(context,
+                userLoginProvider.networkMessage ?? loc.msgCommonError);
+
+            // Clear error flag after showing the message to prevent duplication loops
+            userLoginProvider.resetNetworkResponseStatus();
+          }
         });
       }
 
@@ -170,10 +337,16 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
             }
 
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
+              AppNavigator.navigateTo(context, AppNavigator.otp,
                   arguments: args);
             });
-          } else {}
+          }
+          /* else {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppHelper.showErrorMessage(
+                  context, userLoginProvider.networkMessage ?? "");
+            });vv
+          }*/
 
           userLoginProvider.resetUserRegisterStatus();
         });
@@ -184,829 +357,737 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
           padding: const EdgeInsets.all(AppDimens.screenPadding),
           child: Stack(
             children: [
-              Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Applogo(),
-                            Text(
-                              loc.msgPleaseRegister,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
-                            ),
-                            AppDimens.shape_5,
-                            Text(
-                              loc.msgFillDetailsForSignup,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 12,
-                                  color: Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor),
-                            ),
-                            AppDimens.shape_20,
-                            TextFormField(
-                              maxLines: 1,
-                              keyboardType: TextInputType.text,
-                              controller: _firstNameController,
-                              inputFormatters: <TextInputFormatter>[
-                                UpperCaseTextFormatter(),
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r"[A-Za-z\s'\-]")),
-                              ],
-                              validator: (value) {
-                                /*if (value!.isEmpty) {
-                                  return loc.msgEmptyFirstName;
-                                }
-                                return null;*/
+              SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Applogo(),
+                      Text(
+                        loc.msgPleaseRegister,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor),
+                      ),
+                      AppDimens.shape_5,
+                      Text(
+                        loc.msgFillDetailsForSignup,
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor),
+                      ),
+                      AppDimens.shape_20,
+                      TextFormField(
+                        maxLines: 1,
+                        keyboardType: TextInputType.text,
+                        controller: _firstNameController,
+                        inputFormatters: <TextInputFormatter>[
+                          UpperCaseTextFormatter(),
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r"[A-Za-z\s'\-]")),
+                        ],
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return loc.msgEmptyFirstName;
+                          }
+                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                          if (!validName.hasMatch(value)) {
+                            return loc.pleaseAvoidSpecialChar;
+                          }
 
-                                if (value == null || value.isEmpty) {
-                                  return loc.msgEmptyFirstName;
-                                }
-                                final validName = RegExp(r"^[A-Za-z\s'\-]+$");
-                                if (!validName.hasMatch(value)) {
-                                  return "Please avoid special characters";
-                                }
+                          return null;
+                        },
+                        style: TextStyle(
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
+                        decoration:
+                            _buildCommonInputDecoration(hint: loc.txtFirstName),
+                      ),
+                      AppDimens.shape_10,
+                      TextFormField(
+                        maxLines: 1,
+                        keyboardType: TextInputType.text,
+                        controller: _lastNameController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return loc.msgEmptyLastName;
+                          }
+                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                          if (!validName.hasMatch(value)) {
+                            return loc.pleaseAvoidSpecialChar;
+                          }
+                          return null;
+                        },
+                        inputFormatters: <TextInputFormatter>[
+                          UpperCaseTextFormatter(),
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r"[A-Za-z\s'\-]")),
+                        ],
+                        style: TextStyle(
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
+                        decoration:
+                            _buildCommonInputDecoration(hint: loc.txtLastName),
+                      ),
+                      AppDimens.shape_10,
+                      TextFormField(
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        style: TextStyle(
+                            color: AppThemeCustom.getTextFieldTextColor(context,
+                                isShadow: true)),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return loc.msgEmptyEmail;
+                          } else if (!AppHelper.verifyEmailAddress(value)) {
+                            return loc.msgIncorrectEmail;
+                          }
 
-                                return null;
-                              },
-                              style: TextStyle(
-                                  color:
-                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
-                              decoration: InputDecoration(
-                                fillColor:
-                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
-                                filled: true,
-                                errorStyle: TextStyle(color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,),
-                                hintText: loc.txtFirstName,
-                                hintStyle: TextStyle(
-                                    color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                    fontWeight: FontWeight.w400),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
+                          return null;
+                        },
+                        decoration: _buildCommonInputDecoration(
+                            hint: loc.hintEmail, isEmail: true),
+                      ),
+                      (_showDuplicateEmailMsg && flavor != Flavor.edp)
+                          ? Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(left: 6, right: 6),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10))),
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 8, bottom: 8),
+                              child: const Text(
+                                "This Email ID is already registered, please use another one.",
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 12),
                               ),
-                            ),
-                            AppDimens.shape_10,
-                            TextFormField(
-                              maxLines: 1,
-                              keyboardType: TextInputType.text,
-                              controller: _lastNameController,
-                              validator: (value) {
-                                /*if (value!.isEmpty) {
-                                  return loc.msgEmptyLastName;
-                                }
-                                return null;*/
-                                if (value == null || value.isEmpty) {
-                                  return loc.msgEmptyLastName;
-                                }
-                                final validName = RegExp(r"^[A-Za-z\s'\-]+$");
-                                if (!validName.hasMatch(value)) {
-                                  return "Please avoid special characters";
-                                }
-                                return null;
-                              },
-                              inputFormatters: <TextInputFormatter>[
-                                UpperCaseTextFormatter(),
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r"[A-Za-z\s'\-]")),
-                              ],
-                              style: TextStyle(
-                                  color:
-                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
-                              decoration: InputDecoration(
-                                fillColor:
-                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
-                                filled: true,
-                                hintText: loc.txtLastName,
-                                hintStyle: TextStyle(
-                                    color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                    fontWeight: FontWeight.w400),
-                                errorStyle: TextStyle(color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                              ),
-                            ),
-                            AppDimens.shape_10,
-                            TextFormField(
-                              maxLines: 1,
-                              keyboardType: TextInputType.emailAddress,
-                              controller: _emailController,
-                              style: TextStyle(
-                                  color:
-                                      AppThemeCustom.getTextFieldTextColor(context,isShadow: true)),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return loc.msgEmptyEmail;
-                                } else if (!AppHelper.verifyEmailAddress(
-                                    value)) {
-                                  return loc.msgIncorrectEmail;
-                                }
-
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                fillColor:
-                                    AppThemeCustom.getTextFieldBackground(context,isShadow: true),
-                                filled: true,
-                                hintText: loc.hintEmail,
-                                hintStyle: TextStyle(
-                                    color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                    fontWeight: FontWeight.w400),
-                                errorStyle: TextStyle(color: Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                              ),
-                            ),
-                            AppHelper.isClubApp()
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AppDimens.shape_10,
-                                      Text(
-                                        loc.txtAddress,
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor),
-                                      ),
-                                      AppDimens.shape_5,
-                                      TextFormField(
-                                        maxLines: 1,
-                                        controller: _addressController,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return loc.msgEmptyAddress;
-                                          }
-
-                                          return null;
-                                        },
-                                        style: TextStyle(
-                                            color:
-                                                AppThemeCustom.getTextFieldTextColor(
-                                                    context,isShadow: true)),
-                                        decoration: InputDecoration(
-                                            counterText: "",
-                                            hintText: "${loc.txtAddress} 1",
-                                            fillColor:
-                                                AppThemeCustom.getTextFieldBackground(
-                                                    context,isShadow: true),
-                                            filled: true,
-                                            hintStyle: TextStyle(
-                                              color: AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            errorStyle: TextStyle(color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor,),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            border: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            errorBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10))),
-                                      ),
-                                      AppDimens.shape_10,
-                                      TextFormField(
-                                        maxLines: 1,
-                                        controller: _address1Controller,
-                                        style: TextStyle(
-                                            color:
-                                                AppThemeCustom.getTextFieldTextColor(
-                                                    context,isShadow: true)),
-                                        decoration: InputDecoration(
-                                            counterText: "",
-                                            hintText: "${loc.txtAddress} 2",
-                                            fillColor:
-                                                AppThemeCustom.getTextFieldBackground(
-                                                    context,isShadow: true),
-                                            filled: true,
-                                            hintStyle: TextStyle(
-                                              color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            border: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            errorBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.transparent),
-                                                borderRadius:
-                                                    BorderRadius.circular(10))),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              width: MediaQuery.of(context).size.width,
-                              height: 70,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          loc.txtPostcode,
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: Theme.of(context)
-                                                  .textSelectionTheme
-                                                  .selectionColor),
-                                        ),
-                                        Expanded(
-                                            child: TextFormField(
-                                          maxLines: 1,
-                                          maxLength: 4,
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          controller: _postcodeController,
-                                          style: TextStyle(
-                                              color: AppThemeCustom
-                                                  .getTextFieldTextColor(context,isShadow: true)),
-                                          decoration: InputDecoration(
-                                              counterText: "",
-                                              hintText: "5555",
-                                              fillColor: AppThemeCustom
-                                                  .getTextFieldBackground(context,isShadow: true),
-                                              filled: true,
-                                              hintStyle: TextStyle(
-                                                color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius: BorderRadius.circular(
-                                                      10)),
-                                              border: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius: BorderRadius.circular(
-                                                      10)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              errorBorder: OutlineInputBorder(
-                                                  borderSide: const BorderSide(color: Colors.transparent),
-                                                  borderRadius: BorderRadius.circular(10))),
-                                        ))
-                                      ],
-                                    ),
-                                  ),
-                                  AppDimens.shape_20,
-                                  Expanded(
-                                      flex: 7,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            loc.txtBirthday,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .textSelectionTheme
-                                                    .selectionColor,
-                                                fontSize: 10),
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 3),
-                                                decoration: BoxDecoration(
-                                                    color: AppThemeCustom
-                                                        .getTextFieldBackground(
-                                                            context,isShadow: true),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                        flex: 2,
-                                                        child: TextFormField(
-                                                          maxLines: 1,
-                                                          maxLength: 2,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          inputFormatters: <TextInputFormatter>[
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          controller:
-                                                              _birthdayDDController,
-                                                          focusNode:
-                                                              _birthdayDDFocusNode,
-                                                          style: TextStyle(
-                                                              color: AppThemeCustom
-                                                                  .getTextFieldTextColor(
-                                                                      context,isShadow: true)),
-                                                          onChanged: (value) {
-                                                            if (value.length ==
-                                                                2) {
-                                                              int? day =
-                                                                  int.tryParse(
-                                                                      value);
-                                                              if (day != null &&
-                                                                  day > 31) {
-                                                                _birthdayDDController
-                                                                        .text =
-                                                                    '31';
-                                                                _birthdayDDController
-                                                                        .selection =
-                                                                    TextSelection
-                                                                        .fromPosition(
-                                                                  TextPosition(
-                                                                      offset: _birthdayDDController
-                                                                          .text
-                                                                          .length),
-                                                                );
-                                                              } else {
-                                                                FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _birthdayMMFocusNode);
-                                                              }
-                                                            }
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              counterText: "",
-                                                              hintText: "DD",
-                                                              hintStyle: TextStyle(
-                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              focusedBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              errorBorder:
-                                                                  InputBorder
-                                                                      .none),
-                                                        )),
-                                                    Expanded(
-                                                        flex: 2,
-                                                        child: TextFormField(
-                                                          maxLines: 1,
-                                                          maxLength: 2,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          inputFormatters: <TextInputFormatter>[
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          controller:
-                                                              _birthdayMMController,
-                                                          style: TextStyle(
-                                                              color: AppThemeCustom
-                                                                  .getTextFieldTextColor(
-                                                                      context,isShadow: true)),
-                                                          focusNode:
-                                                              _birthdayMMFocusNode,
-                                                          onChanged: (value) {
-                                                            if (value.length ==
-                                                                2) {
-                                                              int? day =
-                                                                  int.tryParse(
-                                                                      value);
-                                                              if (day != null &&
-                                                                  day > 12) {
-                                                                _birthdayMMController
-                                                                        .text =
-                                                                    '12';
-                                                                _birthdayMMController
-                                                                        .selection =
-                                                                    TextSelection
-                                                                        .fromPosition(
-                                                                  TextPosition(
-                                                                      offset: _birthdayMMController
-                                                                          .text
-                                                                          .length),
-                                                                );
-                                                              } else {
-                                                                FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _birthdayYYFocusNode);
-                                                              }
-                                                            }
-                                                          },
-                                                          decoration: InputDecoration(
-                                                              counterText: "",
-                                                              hintText: "MM",
-                                                              hintStyle: TextStyle(
-                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              focusedBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              errorBorder:
-                                                                  InputBorder
-                                                                      .none),
-                                                        )),
-                                                    Expanded(
-                                                        flex: 6,
-                                                        child: TextFormField(
-                                                          maxLines: 1,
-                                                          maxLength: 4,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          inputFormatters: <TextInputFormatter>[
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          controller:
-                                                              _birthdayYYController,
-                                                          focusNode:
-                                                              _birthdayYYFocusNode,
-                                                          style: TextStyle(
-                                                              color: AppThemeCustom
-                                                                  .getTextFieldTextColor(
-                                                                      context,isShadow: true)),
-                                                          decoration: InputDecoration(
-                                                              counterText: "",
-                                                              hintText: "YYYY",
-                                                              hintStyle: TextStyle(
-                                                                  color:  AppThemeCustom.getHintTextFieldColor(context,isShadow: true),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              focusedBorder:
-                                                                  InputBorder
-                                                                      .none,
-                                                              errorBorder:
-                                                                  InputBorder
-                                                                      .none),
-                                                          onChanged: (value) {
-                                                            if (value.length ==
-                                                                4) {
-                                                              FocusScope.of(
-                                                                      context)
-                                                                  .requestFocus(
-                                                                      FocusNode());
-                                                            }
-                                                          },
-                                                        )),
-                                                  ],
-                                                )),
-                                          )
-                                        ],
-                                      )),
-                                ],
-                              ),
-                            ),
-                            AppDimens.shape_5,
-                            Row(
+                            )
+                          : const SizedBox.shrink(),
+                      AppHelper.isClubApp()
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      Radio<String>(
-                                          value: SignupProvider.male,
-                                          groupValue: provider.selectedGender,
-                                          onChanged: (value) {
-                                            provider.updateGender(value!);
-                                          }),
-                                      Text(
-                                        loc.txtMale,
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor,
-                                            fontSize: 12),
-                                      )
-                                    ],
-                                  ),
+                                AppDimens.shape_10,
+                                Text(
+                                  loc.txtAddress,
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Theme.of(context)
+                                          .textSelectionTheme
+                                          .selectionColor),
                                 ),
-                                Expanded(
-                                    child: Row(
-                                  children: [
-                                    Radio<String>(
-                                        value: SignupProvider.female,
-                                        groupValue: provider.selectedGender,
-                                        onChanged: (value) {
-                                          provider.updateGender(value!);
-                                        }),
-                                    Text(
-                                      loc.txtFemale,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor,
-                                          fontSize: 12),
-                                    )
-                                  ],
-                                )),
-                                Expanded(
-                                    child: Row(
-                                  children: [
-                                    Radio<String>(
-                                        value: SignupProvider.nonbinary,
-                                        groupValue: provider.selectedGender,
-                                        onChanged: (value) {
-                                          provider.updateGender(value!);
-                                        }),
-                                    Expanded(
-                                      child: Text(
-                                        loc.txtNonBinary,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )),
+                                AppDimens.shape_5,
+                                TextFormField(
+                                  maxLines: 1,
+                                  controller: _addressController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return loc.msgEmptyAddress;
+                                    }
+
+                                    return null;
+                                  },
+                                  style: TextStyle(
+                                      color:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context,
+                                              isShadow: true)),
+                                  decoration: _buildCommonInputDecoration(
+                                      hint: "${loc.txtAddress} 1"),
+                                ),
+                                AppDimens.shape_10,
+                                TextFormField(
+                                  maxLines: 1,
+                                  controller: _address1Controller,
+                                  style: TextStyle(
+                                      color:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context,
+                                              isShadow: true)),
+                                  decoration: _buildCommonInputDecoration(
+                                      hint: "${loc.txtAddress} 2"),
+                                ),
                               ],
-                            ),
-                            AppDimens.shape_5,
-                            InkWell(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                            )
+                          : const SizedBox.shrink(),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        width: MediaQuery.of(context).size.width,
+                        height: 70,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(
-                                    provider.tcCheckStatus
-                                        ? Icons.task_alt
-                                        : Icons.circle_outlined,
-                                    color: Theme.of(context)
-                                        .textSelectionTheme
-                                        .selectionColor,
+                                  Text(
+                                    loc.txtPostcode,
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Theme.of(context)
+                                            .textSelectionTheme
+                                            .selectionColor),
                                   ),
-                                  AppDimens.getCustomBoxShape(8),
                                   Expanded(
-                                    child: Text(
-                                      loc.msgTermsAndConditionSignup,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor,
-                                          fontSize: 11),
-                                    ),
-                                  )
+                                      child: TextFormField(
+                                    maxLines: 1,
+                                    maxLength: 4,
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    controller: _postcodeController,
+                                    style: TextStyle(
+                                        color: AppThemeCustom
+                                            .getTextFieldTextColor(context,
+                                                isShadow: true)),
+                                    decoration: InputDecoration(
+                                        counterText: "",
+                                        hintText: "5555",
+                                        fillColor: AppThemeCustom
+                                            .getTextFieldBackground(context,
+                                                isShadow: true),
+                                        filled: true,
+                                        hintStyle: TextStyle(
+                                          color: AppThemeCustom
+                                              .getHintTextFieldColor(context,
+                                                  isShadow: true),
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        border: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        errorBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ))
                                 ],
                               ),
-                              onTap: () {
-                                provider.updateTCCheckStatus(
-                                    !provider.tcCheckStatus);
-                              },
                             ),
                             AppDimens.shape_20,
-                            flavor == Flavor.starReward
-                                ? InkWell(
-                                    onTap: () {
-                                      AppNavigator.navigateTo(
-                                          context, AppNavigator.appWebView,
-                                          arguments:
-                                              APIList.TERMS_AND_CONDITIONS);
-                                    },
-                                    child: RichText(
-                                      text: TextSpan(children: [
-                                        TextSpan(
-                                            text: loc.txtView,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 13,
+                            Expanded(
+                                flex: 7,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      loc.txtBirthday,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textSelectionTheme
+                                              .selectionColor,
+                                          fontSize: 10),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          margin: const EdgeInsets.only(top: 3),
+                                          decoration: BoxDecoration(
                                               color: AppThemeCustom
-                                                  .getTNCTextColor(context),
-                                            )),
-                                        TextSpan(
-                                            text:
-                                                " ${loc.txtTermsAndConditions}",
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                color: AppThemeCustom
-                                                    .getTNCTextColor(context),
-                                                fontWeight: FontWeight.bold))
-                                      ]),
-                                    ))
-                                : const SizedBox.shrink()
+                                                  .getTextFieldBackground(
+                                                      context,
+                                                      isShadow: true),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                  flex: 2,
+                                                  child: TextFormField(
+                                                    maxLines: 1,
+                                                    maxLength: 2,
+                                                    textAlign: TextAlign.center,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    controller:
+                                                        _birthdayDDController,
+                                                    focusNode:
+                                                        _birthdayDDFocusNode,
+                                                    style: TextStyle(
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
+                                                    onChanged: (value) {
+                                                      if (value.length == 2) {
+                                                        int? day =
+                                                            int.tryParse(value);
+                                                        if (day != null &&
+                                                            day > 31) {
+                                                          _birthdayDDController
+                                                              .text = '31';
+                                                          _birthdayDDController
+                                                                  .selection =
+                                                              TextSelection
+                                                                  .fromPosition(
+                                                            TextPosition(
+                                                                offset:
+                                                                    _birthdayDDController
+                                                                        .text
+                                                                        .length),
+                                                          );
+                                                        } else {
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  _birthdayMMFocusNode);
+                                                        }
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        hintText: "DD",
+                                                        hintStyle: TextStyle(
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                        errorBorder:
+                                                            InputBorder.none),
+                                                  )),
+                                              Expanded(
+                                                  flex: 2,
+                                                  child: TextFormField(
+                                                    maxLines: 1,
+                                                    maxLength: 2,
+                                                    textAlign: TextAlign.center,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    controller:
+                                                        _birthdayMMController,
+                                                    style: TextStyle(
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
+                                                    focusNode:
+                                                        _birthdayMMFocusNode,
+                                                    onChanged: (value) {
+                                                      if (value.length == 2) {
+                                                        int? day =
+                                                            int.tryParse(value);
+                                                        if (day != null &&
+                                                            day > 12) {
+                                                          _birthdayMMController
+                                                              .text = '12';
+                                                          _birthdayMMController
+                                                                  .selection =
+                                                              TextSelection
+                                                                  .fromPosition(
+                                                            TextPosition(
+                                                                offset:
+                                                                    _birthdayMMController
+                                                                        .text
+                                                                        .length),
+                                                          );
+                                                        } else {
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  _birthdayYYFocusNode);
+                                                        }
+                                                      }
+                                                    },
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        hintText: "MM",
+                                                        hintStyle: TextStyle(
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                        errorBorder:
+                                                            InputBorder.none),
+                                                  )),
+                                              Expanded(
+                                                  flex: 6,
+                                                  child: TextFormField(
+                                                    maxLines: 1,
+                                                    maxLength: 4,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    controller:
+                                                        _birthdayYYController,
+                                                    focusNode:
+                                                        _birthdayYYFocusNode,
+                                                    style: TextStyle(
+                                                        color: AppThemeCustom
+                                                            .getTextFieldTextColor(
+                                                                context,
+                                                                isShadow:
+                                                                    true)),
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        hintText: "YYYY",
+                                                        hintStyle: TextStyle(
+                                                            color: AppThemeCustom
+                                                                .getHintTextFieldColor(
+                                                                    context,
+                                                                    isShadow:
+                                                                        true),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                        errorBorder:
+                                                            InputBorder.none),
+                                                    onChanged: (value) {
+                                                      if (value.length == 4) {
+                                                        FocusScope.of(context)
+                                                            .requestFocus(
+                                                                FocusNode());
+                                                      }
+                                                    },
+                                                  )),
+                                            ],
+                                          )),
+                                    )
+                                  ],
+                                )),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                  AppDimens.shape_10,
-                  AppButton(
-                      text: loc.txtJoinNow.toUpperCase(),
-                      onClick: () {
-                        if (_formKey.currentState!.validate()) {
-                          if (_postcodeController.text.isNotEmpty) {
-                            if (validateData(provider)) {
-                              if (provider.tcCheckStatus) {
-                                Map<String, dynamic> params = {};
-                                params['GivenNames'] =
-                                    _firstNameController.text.toString().trim();
-                                params['Surname'] = _lastNameController.text.toString().trim();
-                                params['DateOfBirth'] =
-                                    '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
-                                if (_postcodeController.text.isNotEmpty) {
-                                  params['PostCode'] = _postcodeController.text;
-                                }
+                      AppDimens.shape_5,
+                      const GenderSelector(),
+                      AppDimens.shape_5,
+                      InkWell(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              provider.tcCheckStatus
+                                  ? Icons.task_alt
+                                  : Icons.circle_outlined,
+                              color: Theme.of(context)
+                                  .textSelectionTheme
+                                  .selectionColor,
+                            ),
+                            AppDimens.getCustomBoxShape(8),
+                            Expanded(
+                              child: Text(
+                                loc.msgTermsAndConditionSignup,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor,
+                                    fontSize: 11),
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          provider.updateTCCheckStatus(!provider.tcCheckStatus);
+                        },
+                      ),
+                      AppDimens.shape_20,
+                      flavor == Flavor.starReward
+                          ? InkWell(
+                              onTap: () {
+                                AppNavigator.navigateTo(
+                                    context, AppNavigator.appWebView,
+                                    arguments: APIList.TERMS_AND_CONDITIONS);
+                              },
+                              child: RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: loc.txtView,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 13,
+                                        color: AppThemeCustom.getTNCTextColor(
+                                            context),
+                                      )),
+                                  TextSpan(
+                                      text: " ${loc.txtTermsAndConditions}",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppThemeCustom.getTNCTextColor(
+                                              context),
+                                          fontWeight: FontWeight.bold))
+                                ]),
+                              ))
+                          : const SizedBox.shrink(),
+                      AppDimens.shape_10,
+                      AppButton(
+                          text: loc.txtJoinNow.toUpperCase(),
+                          onClick: () {
+                            if (_formKey.currentState!.validate()) {
+                              // Stop EDP registration when the email is already registered.
+                              if (_isDuplicateEmail == true &&
+                                  flavor != Flavor.edp) {
+                                AppHelper.showErrorMessage(
+                                  context,
+                                  "This Email ID is already registered. Please use another email ID.",
+                                );
+                                return;
+                              }
 
-                                params['Email'] = _emailController.text;
+                              if (_postcodeController.text.isNotEmpty) {
+                                if (validateData(provider)) {
+                                  if (provider.tcCheckStatus) {
+                                    Map<String, dynamic> params = {};
+                                    params['GivenNames'] = _firstNameController
+                                        .text
+                                        .toString()
+                                        .trim();
+                                    params['Surname'] = _lastNameController.text
+                                        .toString()
+                                        .trim();
+                                    params['DateOfBirth'] =
+                                        '${_birthdayYYController.text}-${_birthdayMMController.text}-${_birthdayDDController.text}';
+                                    if (_postcodeController.text.isNotEmpty) {
+                                      params['PostCode'] =
+                                          _postcodeController.text;
+                                    }
 
-                                if (provider.selectedGender![0].toUpperCase() ==
-                                    "M") {
-                                  params['Gender'] = "M";
-                                } else if (provider.selectedGender![0]
-                                        .toUpperCase() ==
-                                    "F") {
-                                  params['Gender'] = "F";
-                                } else {
-                                  params['Gender'] = "U";
-                                }
+                                    params['Email'] = _emailController.text;
 
-                                /// TEMP CONDITION FOR MHBC APP ONLY ///
-                                if (flavor == Flavor.mhbc) {
-                                  params['type'] = "new";
-                                }
+                                    if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "M") {
+                                      params['Gender'] = "M";
+                                    } else if (provider.selectedGender![0]
+                                            .toUpperCase() ==
+                                        "F") {
+                                      params['Gender'] = "F";
+                                    } else {
+                                      params['Gender'] = "U";
+                                    }
 
-                                /// ADDING PARAMS IF APP IS A CLUB APP ///
-                                if (widget.argument
-                                    .containsKey('license_front')) {
-                                  params['licence_front'] =
-                                      widget.argument['license_front'];
-                                }
-                                if (widget.argument
-                                    .containsKey('license_back')) {
-                                  params['licence_back'] =
-                                      widget.argument['license_back'];
-                                }
+                                    /// TEMP CONDITION FOR MHBC APP ONLY ///
+                                    if (flavor == Flavor.mhbc) {
+                                      params['type'] = "new";
+                                    }
 
-                                if (widget.argument.containsKey('expiryDate')) {
-                                  params['expiryDate'] =
-                                      widget.argument['expiryDate'];
-                                }
+                                    /// ADDING PARAMS IF APP IS A CLUB APP ///
+                                    if (widget.argument
+                                        .containsKey('license_front')) {
+                                      params['licence_front'] =
+                                          widget.argument['license_front'];
+                                    }
+                                    if (widget.argument
+                                        .containsKey('license_back')) {
+                                      params['licence_back'] =
+                                          widget.argument['license_back'];
+                                    }
 
-                                if (_address1Controller.text.isNotEmpty) {
-                                  params['Suburb'] = _address1Controller.text;
-                                }
+                                    if (widget.argument
+                                        .containsKey('expiryDate')) {
+                                      params['expiryDate'] =
+                                          widget.argument['expiryDate'];
+                                    }
 
-                                /////////////////////////////////////////
+                                    if (_address1Controller.text.isNotEmpty) {
+                                      params['Suburb'] =
+                                          _address1Controller.text;
+                                    }
 
-                                String phoneNo =
-                                    "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
+                                    /////////////////////////////////////////
 
-                                params['State'] = "NA";
+                                    String phoneNo =
+                                        "${widget.argument['countryCode']}${widget.argument['phoneNo']}";
 
-                                params['Address'] =
-                                    _addressController.text.toString();
+                                    params['State'] = "NA";
 
-                                AppHelper.printMessage(
-                                    "PARAMS:: $params -> $phoneNo");
+                                    params['Address'] =
+                                        _addressController.text.toString();
 
-                                if (widget.argument.containsKey('isTestUser')) {
-                                  navigationSpecialCase();
-                                } else {
-                                  userLoginProvider.signup(phoneNo, params,
-                                      loc: loc);
+                                    AppHelper.printMessage(
+                                        "PARAMS:: $params -> $phoneNo");
+
+                                    if (widget.argument
+                                        .containsKey('isTestUser')) {
+                                      navigationSpecialCase();
+                                    } else if (flavor == Flavor.edp) {
+                                      navigationEDP(params);
+                                    } else {
+                                      userLoginProvider.signup(phoneNo, params,
+                                          loc: loc);
+                                    }
+                                  } else {
+                                    AppHelper.showErrorMessage(context,
+                                        loc.msgCheckTermsAndConditions);
+                                  }
                                 }
                               } else {
                                 AppHelper.showErrorMessage(
-                                    context, loc.msgCheckTermsAndConditions);
+                                    context, loc.msgEmptyPostcode);
                               }
                             }
-                          } else {
-                            AppHelper.showErrorMessage(
-                                context, loc.msgEmptyPostcode);
-                          }
-                        }
-
-                        // AppNavigator.navigateTo(context, AppNavigator.otp);
-                      }),
-                ],
+                          }),
+                    ],
+                  ),
+                ),
               ),
               userLoginProvider.showLoader
                   ? AppLoader(
                       loaderMessage: loc.msgPleaseWait,
                     )
-                  : Container()
+                  : const SizedBox.shrink(),
+              /*userLoginProvider.showEmailCheckLoader
+                  ? AppLoader(
+                      loaderMessage: loc.msgPleaseWait,
+                    )
+                  : const SizedBox.shrink()*/
             ],
           ),
         ),
       );
     }));
+  }
+
+  InputDecoration _buildCommonInputDecoration(
+      {required String hint, bool? isEmail}) {
+    final transparentBorder = OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent),
+      borderRadius: BorderRadius.circular(10),
+    );
+
+    return InputDecoration(
+      fillColor: AppThemeCustom.getTextFieldBackground(context, isShadow: true),
+      filled: true,
+      counterText: "",
+      hintText: hint,
+      suffixIcon: (isEmail != null && isEmail && flavor != Flavor.edp)
+          ? Center(
+              widthFactor: 1, heightFactor: 1, child: emailCheckStatusWidget())
+          : null,
+      suffixIconConstraints: const BoxConstraints(minHeight: 40, minWidth: 40),
+      hintStyle: TextStyle(
+          color: AppThemeCustom.getHintTextFieldColor(context, isShadow: true),
+          fontWeight: FontWeight.w400),
+      errorStyle: TextStyle(
+        color: Theme.of(context).textSelectionTheme.selectionColor,
+      ),
+      enabledBorder: transparentBorder,
+      border: transparentBorder,
+      focusedBorder: transparentBorder,
+      errorBorder: transparentBorder,
+    );
+  }
+
+  Widget emailCheckStatusWidget() {
+    if (_isCheckingEmail) {
+      return ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: 24,
+          minHeight: 24,
+          maxWidth: 24, // Set your desired maximum width
+          maxHeight: 24, // Set your desired maximum height
+        ),
+        child: Material(
+            borderRadius: BorderRadius.circular(200),
+            color: Colors.white,
+            child: const Padding(
+              padding: EdgeInsets.all(5.0),
+              child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  )),
+            )),
+      );
+    }
+    if (_isDuplicateEmail != null) {
+      if (_isDuplicateEmail!) {
+        return ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 24,
+            minHeight: 24,
+            maxWidth: 24, // Set your desired maximum width
+            maxHeight: 24, // Set your desired maximum height
+          ),
+          child: Material(
+              borderRadius: BorderRadius.circular(200),
+              color: Colors.red,
+              child: const Icon(
+                Icons.clear,
+                size: 18,
+                color: Colors.white,
+              )),
+        );
+      } else {
+        return ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 24,
+            minHeight: 24,
+            maxWidth: 24, // Set your desired maximum width
+            maxHeight: 24, // Set your desired maximum height
+          ),
+          child: Material(
+              borderRadius: BorderRadius.circular(200),
+              color: Colors.green[400],
+              child: const Icon(
+                Icons.check,
+                size: 18,
+                color: Colors.white,
+              )),
+        );
+      }
+    }
+
+    return const SizedBox.shrink();
   }
 
   navigationSpecialCase() {
@@ -1020,8 +1101,21 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       args['fromRegistrationAndClubApp'] = 'true';
     }
 
-    AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
-        arguments: args);
+    AppNavigator.navigateTo(context, AppNavigator.otp, arguments: args);
+  }
+
+  navigationEDP(Map<String, dynamic> params) async {
+    params['phoneNo'] = widget.argument['phoneNo']!;
+    params['countryCode'] = widget.argument['countryCode']!;
+
+    if (_isDuplicateEmail != null && _isDuplicateEmail!) {
+      AppNavigator.navigateTo(
+          context, AppNavigator.verifyExistingEmailOTPScreen,
+          arguments: params);
+    } else {
+      AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
+          arguments: params);
+    }
   }
 
   bool validateData(SignupProvider provider) {
@@ -1060,7 +1154,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
           age--;
         }
 
-        print("AGE RESULT :: $age");
+        "AGE RESULT :: $age".logMessage();
 
         return age >= 18;
       } else {

@@ -1,16 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+
 import 'package:condition_builder/condition_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
+import '/views/dialogs/OurGuaranteeDialog.dart';
+
+import '/core/enums/FetchProfileState.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/core/extensions/spacer_extension.dart';
+import '/core/utils/AppDateFormatter.dart';
+import '/core/utils/AppHelper.dart';
+import '/data/local/SharedPreferenceHelper.dart';
+import '/views/dialogs/EarlyRenewalMembershipDialog.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/navigation/AppNavigator.dart';
-import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
-import '../../core/utils/AppStrings.dart';
 import '../../data/models/HomeNavigatorModel.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/HomeProvider.dart';
@@ -35,29 +46,28 @@ class _HomeScreenState extends State<HomeScreen>
   Timer? _pointsDialogTimer;
   late HomeProvider _homeProvider;
   late UserInfoProvider _userInfoProvider;
+  @override
   late Flavor flavor;
   late AppLocalizations loc;
   bool isMembershipCancelledDialogShown = false;
 
-
   final partnerOffersMissingApps = {
-    Flavor.bluewater,
     Flavor.mhbc,
-    Flavor.starReward,
-    Flavor.queens,
     Flavor.brisbane,
-    Flavor.hogansReward,
     Flavor.woollahra,
-    Flavor.flinders,
     Flavor.aceRewards,
     Flavor.northShoreTavern,
     Flavor.kingscliff,
     Flavor.drinkRewards,
+    Flavor.wonthaggi,
+    Flavor.mosaic,
   };
   final partnerOffersAndPointsBalanceMissingApps = {
     Flavor.clh,
-    Flavor.montaukTavern
+    Flavor.montaukTavern,
   };
+
+  bool _hasRedirectedToMembershipBuy = false;
 
   @override
   void initState() {
@@ -66,57 +76,48 @@ class _HomeScreenState extends State<HomeScreen>
       WidgetsBinding.instance.addObserver(this);
       _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
       _userInfoProvider.retrieveUserInfo();
-      _userInfoProvider.runFetchProfileTimer();
+      _userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       _userInfoProvider.uploadDeviceDetail();
-      _userInfoProvider.checkForAppUpdate();
       _homeProvider = Provider.of<HomeProvider>(context, listen: false);
       _homeProvider.getAllOptionsTimer();
-
+      _loadNotificationsForCurrentUser();
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
-
+      checkForAppUpdate();
     }
   }
 
-  bool _deepLinkHandled = false;
+  bool _updateDialogDisplayed = false;
+  bool _isCheckingForAppUpdate = false;
 
-  void _tryOpenDeepLink(
-      HomeProvider provider,
-      UserInfoProvider userInfoProvider,
-      ) {
-    if (_deepLinkHandled) return;
+  checkForAppUpdate() async {
+    if (!mounted || _isCheckingForAppUpdate || _updateDialogDisplayed) return;
 
-    if (provider.startChewzieScreen != true) return;
-    if (provider.deeplinkPayloads == null) return;
-    if (userInfoProvider.getUserInfo == null) return;
+    _isCheckingForAppUpdate = true;
 
-    _deepLinkHandled = true;
+    try {
+      final result = await _homeProvider.checkForAppUpdate();
 
-    final decodedLink =
-    Uri.decodeComponent(provider.deeplinkPayloads!);
+      ("App update result: $result").logMessage();
 
-    final uri = Uri.parse(decodedLink);
+      if (!mounted || result == null || _updateDialogDisplayed) {
+        return;
+      }
 
-    final jsonPayload = {
-      "memberId": userInfoProvider.getUserInfo!.cardNumber,
-    };
-
-    final base64Payload =
-    base64UrlEncode(utf8.encode(jsonEncode(jsonPayload)));
-
-    final updatedUri = uri.replace(
-      queryParameters: {
-        ...uri.queryParameters,
-        'memberData': base64Payload,
-      },
-    );
-
-    // 🚀 Fire and forget — no await
-    launchDeepLinkURL(updatedUri);
-
-    provider.resetDeepLinkNavigation();
+      _updateDialogDisplayed = true;
+      if (result!.shouldShowDialog) {
+        await AppUpdateDialog.getInstance()
+            .showAppUpdateDialog(context, result: result);
+      }
+    } catch (e) {
+      e.logMessage();
+    } finally {
+      _isCheckingForAppUpdate = false;
+    }
   }
 
+  String? _lastHandledChewziePayload;
+  DateTime? _lastHandledChewzieTime;
 
   startPointsDialogTimer() {
     _pointsDialogTimer = Timer(const Duration(seconds: 5), () {
@@ -130,6 +131,13 @@ class _HomeScreenState extends State<HomeScreen>
     }
   }
 
+  Future<void> _loadNotificationsForCurrentUser() async {
+    final sph = await SharedPreferenceHelper.getInstance();
+    final currentUserId = sph.getUserData()?.id ?? 'guest';
+    if (!mounted) return;
+    _homeProvider.loadNotifications(currentUserId);
+  }
+
   @override
   void dispose() {
     cancelPointsDialogTimer();
@@ -137,6 +145,13 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      print("RESUMED AGAIN!");
+      checkForAppUpdate();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,12 +178,75 @@ class _HomeScreenState extends State<HomeScreen>
                 }
               });
             }
-            _tryOpenDeepLink(provider, userInfoProvider);
+
+            _scheduleDeepLinkHandling();
+
+            if (userInfoProvider.getUserInfo != null) {
+              if ((userInfoProvider.membershipStatus ==
+                      MembershipStatus.inactive) &&
+                  !_hasRedirectedToMembershipBuy &&
+                  userInfoProvider.fetchProfileState ==
+                      FetchProfileState.loaded) {
+                _hasRedirectedToMembershipBuy = true;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  AppNavigator.navigateReplacement(
+                      context, AppNavigator.renewMembershipScreen);
+                });
+              }
+            }
+
+            /// CHECKING & GETTING THE USER MEMBERSHIP PLAN
+            if (userInfoProvider.getUserInfo != null &&
+                AppHelper.isClubApp() &&
+                !provider.clubPackageCheckStatus) {
+              provider.getClubPackageInfo(
+                  membershipID: userInfoProvider.getUserInfo!.packageId);
+            }
+
+            /// CHECKING FOR THE EARLY BIRD DIALOG
+            if (userInfoProvider.getUserInfo != null &&
+                !provider.checkEarlyBirdCondition &&
+                provider.selectedMembership != null) {
+              logEvent(
+                  "ENTERED IN \"CHECKING FOR THE EARLY BIRD DIALOG BLOCK\"");
+              if (provider.selectedMembership!.earlyBirdPeriod != null &&
+                  provider.selectedMembership!.earlyBirdRenewalDate != null &&
+                  provider
+                      .selectedMembership!.earlyBirdRenewalDate!.isNotEmpty) {
+                "CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP"
+                    .logMessage();
+                "userInfoProvider.getUserInfo!.membershipExpiryDate! >> ${userInfoProvider.getUserInfo!.membershipExpiryDate} provider.selectedMembership!.expiryEarlyBirdRenewalDate! ${provider.selectedMembership!.expiryEarlyBirdRenewalDate}"
+                    .logMessage();
+
+                if (provider.selectedMembership!.expiryEarlyBirdRenewalDate !=
+                        null &&
+                    !AppDateFormatter.ifUserPurchasedMembership(
+                        usersMembershipExpiry:
+                            userInfoProvider.getUserInfo!.membershipExpiryDate!,
+                        membershipExpiry: provider
+                            .selectedMembership!.expiryEarlyBirdRenewalDate!)) {
+                  logEvent(
+                      "ENTERED IN \"CHECKING IF USER HAS ALREADY BOUGHT THE MEMBERSHIP\"");
+
+                  /// CHECKING IF CURRENT DAY IS FALLING UNDER EARLY BIRD DATE RANGE
+
+                  if (AppDateFormatter.isCurrentDateUnderEarlyBirdRange(
+                      earlyBirdPeriod:
+                          provider.selectedMembership!.earlyBirdPeriod!)) {
+                    logEvent(
+                        "ENTERED IN \"CHECKING CURRENT DAY FALLING UNDER EARLY BIRD DATE RANGE\"");
+                    _showEarlyBirdDialogIfNeeded();
+                  }
+                }
+              }
+
+              provider.resetCheckEarlyBirdCondition();
+            }
 
             return Column(
               children: [
                 const HomeAppBar(),
-                AppDimens.shape_20,
+                20.h,
                 Expanded(
                     child: Stack(
                   children: [
@@ -183,7 +261,9 @@ class _HomeScreenState extends State<HomeScreen>
                             .homeNavigationList[provider.prevSelectedOption]
                             .screen),
                     (provider.showPointsBalance)
-                        ? const PointsBalanceWidget()
+                        ? flavor == Flavor.bobsBulkBooze
+                            ? const SizedBox.shrink()
+                            : const PointsBalanceWidget()
                         : const SizedBox.shrink(),
                     checkForSeeAllMenu(provider)
                   ],
@@ -199,39 +279,46 @@ class _HomeScreenState extends State<HomeScreen>
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index].icon,
-                            iconColor:
-                                AppThemeCustom.getCustomHomeButtonsIconStyle(
-                                    context,
-                                    provider,
-                                    userInfoProvider,
-                                    provider.homeNavigationList[index].name),
+                            iconColor: AppThemeCustom.getHomeButtonsIconColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.homeNavigationList[index].name,
+                              provider.selectedOption == index,
+                            ),
                             text: provider
-                                .getTranslatedOptionsName(loc,
-                                    provider.homeNavigationList[index].name)
+                                .getTranslatedOptionsName(
+                                  loc,
+                                  provider.homeNavigationList[index].name,
+                                  flavor: flavor,
+                                )
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
-                            textColor:
-                                AppThemeCustom.getCustomHomeButtonsTextStyle(
-                                    context,
-                                    provider,
-                                    userInfoProvider,
-                                    provider.homeNavigationList[index].name),
+                            textColor: AppThemeCustom.getHomeButtonsTextColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.homeNavigationList[index].name,
+                              provider.selectedOption == index,
+                            ),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
                             decoration: BoxDecoration(
-                                color: (provider.selectedOption == index)
-                                    ? Theme.of(context)
-                                        .iconTheme
-                                        .color!
-                                        .withValues(alpha: 0.5)
-                                    : Colors.transparent,
-                                border: AppThemeCustom
-                                    .getCustomHomeButtonsBorderStyle(
-                                        context,
-                                        provider,
-                                        userInfoProvider,
-                                        provider
-                                            .homeNavigationList[index].name),
+                                color: AppThemeCustom
+                                    .getHomeButtonsBackgroundColor(
+                                  context,
+                                  provider,
+                                  index,
+                                  provider.homeNavigationList[index].name,
+                                  provider.selectedOption == index,
+                                ),
+                                border: AppThemeCustom.getHomeButtonsBorder(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.homeNavigationList[index].name,
+                                  provider.selectedOption == index,
+                                ),
                                 borderRadius: BorderRadius.circular(10)),
                             onDragStart: (value) {
                               /// HIDE POINTS BALANCE DIALOG
@@ -251,9 +338,13 @@ class _HomeScreenState extends State<HomeScreen>
                               }
                             },
                             onTapDown: (value) {
+                              print("Tap down called for index $index");
+
                               if (userInfoProvider.getUserInfo != null &&
                                   !userInfoProvider.getUserInfo!
                                       .isUserStatusCancelled()) {
+                                print("Entered in if block for index $index");
+
                                 /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
                                 checkAndHideSeeAllOptionMenu(
                                     provider, "points balance");
@@ -282,124 +373,91 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (provider.homeNavigationList[index].name ==
                                       provider.homeNavigationList[0].name) {
                                     /// SHOW POINTS BALANCE DIALOG
-                                    provider
-                                        .updatePointsBalanceVisibility(true);
+                                    if (flavor == Flavor.bobsBulkBooze) {
+                                      /// SHOW OUR GUARANTEE DIALOG
+                                      OurGuaranteeDialog.getInstance()
+                                          .showGuaranteeDialog(context);
+                                    } else {
+                                      /// SHOW POINTS BALANCE DIALOG
+                                      provider
+                                          .updatePointsBalanceVisibility(true);
+                                    }
                                   } else {
                                     /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
                                     checkAndHidePointsBalance(
                                         provider, "FROM TOP ROW");
                                   }
                                 }
-
-                                /*if (flavor == Flavor.bluewater &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name) {
-                                /// DO NOTHING ///
-                              } else if (flavor == Flavor.mhbc &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.clh &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[0].name) ||
-                                  (flavor == Flavor.clh &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.montaukTavern &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[0].name) ||
-                                  (flavor == Flavor.montaukTavern &&
-                                      provider.homeNavigationList[index].name ==
-                                          provider
-                                              .homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.starReward &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.queens &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.brisbane &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
-                              } else if ((flavor == Flavor.hogansReward &&
-                                  provider.homeNavigationList[index].name ==
-                                      provider.homeNavigationList[2].name)) {
-                                /// DO NOTHING ///
                               } else {
-                                provider.updateSelectedOption(index);
-
-                                if (provider.homeNavigationList[index].name ==
-                                    provider.homeNavigationList[0].name) {
-                                  /// SHOW POINTS BALANCE DIALOG
-                                  provider.updatePointsBalanceVisibility(true);
-                                } else {
-                                  /// HIDE & CHECK IF POINTS BALANCE MENU IS VISIBLE OR NOT
-                                  checkAndHidePointsBalance(
-                                      provider, "FROM TOP ROW");
-                                }
-                              }*/
+                                print("issue in user status");
                               }
                             },
                           ));
                         }),
                       ),
 
-                      /// SECOND ROW --> MY VENUE***MY BENEFITS***MY ACCOUNT***SEE ALL <-- ///
+                      /// SECOND ROW --> MY VENUE***MY BENEFITS***MY ACCOUNT***MORE <-- ///
                       Row(
                         children: List.generate(4, (index) {
                           return Expanded(
                               child: IconTextWidget(
                             orientation: IconTextWidget.VERTICAL,
                             icon: provider.homeNavigationList[index + 3].icon,
-                            iconColor: (userInfoProvider.getUserInfo != null &&
-                                    userInfoProvider.getUserInfo!
-                                        .isUserStatusCancelled())
-                                ? AppColors.disable_color
-                                : null,
+                            iconColor: AppThemeCustom.getHomeButtonsIconColor(
+                                context,
+                                provider,
+                                userInfoProvider,
+                                provider.getTranslatedOptionsName(
+                                  loc,
+                                  provider.homeNavigationList[index + 3].name,
+                                  flavor: flavor,
+                                ),
+                                provider.selectedOption == index + 3),
                             text: provider
-                                .getTranslatedOptionsName(loc,
-                                    provider.homeNavigationList[index + 3].name)
+                                .getTranslatedOptionsName(
+                                  loc,
+                                  provider.homeNavigationList[index + 3].name,
+                                  flavor: flavor,
+                                )
                                 .replaceAll(" ", "\n")
                                 .toUpperCase(),
                             margin: const EdgeInsets.all(5),
                             textSize: 13,
-                            textColor: (userInfoProvider.getUserInfo != null &&
-                                    userInfoProvider.getUserInfo!
-                                        .isUserStatusCancelled())
-                                ? AppColors.disable_color
-                                : Theme.of(context)
-                                    .textSelectionTheme
-                                    .selectionColor,
+                            textColor: AppThemeCustom.getHomeButtonsTextColor(
+                              context,
+                              provider,
+                              userInfoProvider,
+                              provider.getTranslatedOptionsName(
+                                loc,
+                                provider.homeNavigationList[index + 3].name,
+                                flavor: flavor,
+                              ),
+                              provider.selectedOption == index + 3,
+                            ),
                             decoration: BoxDecoration(
-                                color: (userInfoProvider.getUserInfo != null &&
-                                        userInfoProvider.getUserInfo!
-                                            .isUserStatusCancelled())
-                                    ? Colors.transparent
-                                    : ((provider.selectedOption == index + 3)
-                                        ? Theme.of(context)
-                                            .iconTheme
-                                            .color!
-                                            .withValues(alpha: 0.5)
-                                        : Colors.transparent),
-                                border: Border.all(
-                                    color:
-                                        (userInfoProvider.getUserInfo != null &&
-                                                userInfoProvider.getUserInfo!
-                                                    .isUserStatusCancelled())
-                                            ? AppColors.disable_color
-                                            : Theme.of(context)
-                                                .buttonTheme
-                                                .colorScheme!
-                                                .onSecondary,
-                                    width: 1.5),
+                                color: AppThemeCustom
+                                    .getHomeButtonsBackgroundColor(
+                                  context,
+                                  provider,
+                                  index,
+                                  provider.getTranslatedOptionsName(
+                                    loc,
+                                    provider.homeNavigationList[index + 3].name,
+                                    flavor: flavor,
+                                  ),
+                                  provider.selectedOption == index + 3,
+                                ),
+                                border: AppThemeCustom.getHomeButtonsBorder(
+                                  context,
+                                  provider,
+                                  userInfoProvider,
+                                  provider.getTranslatedOptionsName(
+                                    loc,
+                                    provider.homeNavigationList[index + 3].name,
+                                    flavor: flavor,
+                                  ),
+                                  provider.selectedOption == index + 3,
+                                ),
                                 borderRadius: BorderRadius.circular(10)),
                             onClick: () {
                               if (userInfoProvider.getUserInfo != null &&
@@ -503,33 +561,261 @@ class _HomeScreenState extends State<HomeScreen>
   checkForSeeAllMenuVisibility(HomeProvider provider, int index) {
     return provider
                 .getTranslatedOptionsName(
-                    loc, provider.homeNavigationList[index + 3].name)
+                  loc,
+                  provider.homeNavigationList[index + 3].name,
+                  flavor: flavor,
+                )
                 .replaceAll(" ", "\n")
                 .toUpperCase() ==
             provider
                 .getTranslatedOptionsName(
-                    loc, provider.homeNavigationList[6].name)
+                  loc,
+                  provider.homeNavigationList[6].name,
+                  flavor: flavor,
+                )
                 .replaceAll(" ", "\n")
                 .toUpperCase() &&
         (provider.moreButtonsMap == null || provider.moreButtonsMap!.isEmpty);
   }
 
+  bool _deepLinkCheckScheduled = false;
+  Uri? _pendingDeepLinkUri;
+  bool _isLaunchingDeepLink = false;
+  final AppLifecycleState _appLifecycleState = AppLifecycleState.resumed;
+  DateTime? _lastLaunchTime;
+  String? _lastLaunchPayload;
 
+  void _scheduleDeepLinkHandling() {
+    if (_deepLinkCheckScheduled || !mounted) return;
+    _deepLinkCheckScheduled = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _deepLinkCheckScheduled = false;
+      if (!mounted) return;
+
+      final provider = context.read<HomeProvider>();
+      final userInfoProvider = context.read<UserInfoProvider>();
+
+      if (provider.deeplinkPayloads == null) return;
+
+      if (flavor == Flavor.starReward ||
+          flavor == Flavor.bluewater ||
+          flavor == Flavor.flinders) {
+        _prepareChewzie(provider, userInfoProvider);
+        return;
+      }
+
+      if (userInfoProvider.getUserInfo == null) return;
+
+      if (flavor == Flavor.mhbc) {
+        _prepareClevaQ(provider, userInfoProvider);
+      }
+    });
+  }
+
+  void _prepareChewzie(
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+  ) async {
+    final payload = provider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+    if (provider.startChewzieScreen != true) return;
+
+    if (_isDuplicateChewzieLaunch(payload)) {
+      provider.resetDeepLinkNavigation();
+      return;
+    }
+
+    _lastHandledChewziePayload = payload;
+    _lastHandledChewzieTime = DateTime.now();
+
+    provider.resetDeepLinkNavigation();
+
+    final decodedLink = Uri.decodeComponent(payload);
+    final uri = Uri.parse(decodedLink);
+
+    try {
+      final userInfo = userInfoProvider.getUserInfo ??
+          await _waitForUserInfo(userInfoProvider)
+              .timeout(const Duration(seconds: 10));
+      //  final userInfo = userInfoProvider.getUserInfo;
+      final cardNumber = userInfo!.cardNumber;
+
+      if (cardNumber == null || cardNumber.isEmpty) {
+        _handlePreparedDeepLink(uri);
+        return;
+      }
+
+      final jsonPayload = {
+        "memberId": cardNumber,
+      };
+
+      final base64Payload = base64UrlEncode(
+        utf8.encode(jsonEncode(jsonPayload)),
+      );
+
+      final updatedUri = uri.replace(
+        queryParameters: {
+          ...uri.queryParameters,
+          'memberData': base64Payload,
+        },
+      );
+
+      _handlePreparedDeepLink(updatedUri);
+    } catch (e) {
+      debugPrint("Chewzie userInfo timeout/failure, opening without card: $e");
+      _handlePreparedDeepLink(uri);
+    }
+  }
+
+  bool _isDuplicateChewzieLaunch(String payload) {
+    final now = DateTime.now();
+
+    return _lastHandledChewziePayload == payload &&
+        _lastHandledChewzieTime != null &&
+        now.difference(_lastHandledChewzieTime!) < const Duration(seconds: 3);
+  }
+
+  Future<dynamic> _waitForUserInfo(UserInfoProvider provider) async {
+    while (mounted) {
+      if (provider.getUserInfo != null) {
+        return provider.getUserInfo;
+      }
+
+      await Future.delayed(const Duration(milliseconds: 200));
+    }
+
+    throw Exception("HomeScreen unmounted before user info loaded");
+  }
+
+  void _prepareClevaQ(
+    HomeProvider provider,
+    UserInfoProvider userInfoProvider,
+  ) {
+    final payload = provider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+
+    final now = DateTime.now();
+    if (_lastLaunchPayload == payload &&
+        _lastLaunchTime != null &&
+        now.difference(_lastLaunchTime!) < const Duration(seconds: 2)) {
+      provider.resetDeepLinkNavigation();
+      return;
+    }
+
+    final uri = Uri.parse(payload);
+
+    final modifiedExistingSegments = uri.pathSegments.map((segment) {
+      return segment == 'qr-code' ? 'qantum' : segment;
+    });
+
+    final updatedUri = uri.replace(
+      pathSegments: [
+        ...modifiedExistingSegments,
+        'qantumMember',
+        userInfoProvider.getUserInfo?.cardNumber ?? "",
+        AppDateFormatter.dobForClevaQ(
+              userInfoProvider.getUserInfo?.dateOfBirth,
+            ) ??
+            "",
+      ],
+    );
+
+    _lastLaunchPayload = payload;
+    _lastLaunchTime = now;
+
+    provider.resetDeepLinkNavigation();
+    _handlePreparedDeepLink(updatedUri);
+  }
+
+  void _handlePreparedDeepLink(Uri uri) {
+    if (Platform.isIOS) {
+      _pendingDeepLinkUri = uri;
+      _tryLaunchPendingDeepLink();
+    } else {
+      _launchNow(uri);
+    }
+  }
+
+  Future<void> _launchNow(Uri uri) async {
+    if (_isLaunchingDeepLink) return;
+
+    _isLaunchingDeepLink = true;
+    try {
+      await launchDeepLinkURL(uri);
+    } catch (e, st) {
+      debugPrint("Direct launch failed: $e");
+      debugPrintStack(stackTrace: st);
+    } finally {
+      _isLaunchingDeepLink = false;
+    }
+  }
+
+  Future<void> _tryLaunchPendingDeepLink() async {
+    final uri = _pendingDeepLinkUri;
+    if (uri == null) return;
+    if (_isLaunchingDeepLink) return;
+    if (!mounted) return;
+
+    final routeIsCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+    final appIsResumed = _appLifecycleState == AppLifecycleState.resumed;
+
+    if (!routeIsCurrent || !appIsResumed) return;
+
+    _isLaunchingDeepLink = true;
+
+    try {
+      await Future.delayed(const Duration(milliseconds: 400));
+      await launchDeepLinkURL(uri);
+      _pendingDeepLinkUri = null;
+    } finally {
+      _isLaunchingDeepLink = false;
+    }
+  }
 
   Future<void> launchDeepLinkURL(Uri uri) async {
-    await launchUrl(uri,
-        customTabsOptions: CustomTabsOptions(
-          showTitle: false,
-          urlBarHidingEnabled: true,
-          shareState: CustomTabsShareState.off,
-          colorSchemes: CustomTabsColorSchemes.defaults(
-            toolbarColor: Theme.of(context).primaryColor,
+    try {
+      debugPrint("Launching deep link URL: $uri");
+
+      if (Platform.isIOS) {
+        try {
+          await closeCustomTabs();
+          await Future.delayed(const Duration(milliseconds: 250));
+        } catch (_) {
+          // ignore; there may be nothing open
+        }
+      }
+
+      await launchUrl(uri,
+          customTabsOptions: CustomTabsOptions(
+            showTitle: false,
+            urlBarHidingEnabled: true,
+            shareState: CustomTabsShareState.off,
+            colorSchemes: CustomTabsColorSchemes.defaults(
+              toolbarColor: Theme.of(context).primaryColor,
+            ),
           ),
-        ),
-        safariVCOptions: SafariViewControllerOptions(
-          barCollapsingEnabled: true,
-          preferredBarTintColor: Theme.of(context).primaryColor,
-          dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
-        ));
+          safariVCOptions: SafariViewControllerOptions(
+            barCollapsingEnabled: true,
+            preferredBarTintColor: Theme.of(context).primaryColor,
+            dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+          ));
+    } catch (e) {
+      e.toString().logMessage("LAUNCH URL EXCEPTION");
+    }
+  }
+
+  _showEarlyBirdDialogIfNeeded() async {
+    final prefs = await SharedPreferenceHelper.getInstance();
+    final lastShownDate = prefs.getLastEarlyBirdDialogDate();
+    final today = AppDateFormatter.formatDateForEarlyBird(DateTime.now());
+    logEvent("lastShownDate >> $lastShownDate");
+    if (lastShownDate != today) {
+      await EarlyRenewalMembershipDialog.getInstance()
+          .showRenewalMembershipDialog(
+              context: context,
+              currentMembership: _homeProvider.selectedMembership!);
+      await prefs.saveLastEarlyBirdDialogDate(today!);
+    }
   }
 }

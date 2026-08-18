@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
+import 'package:qantum_apps/views/my_venues/ChooseFavouriteVenueScreen.dart';
+import '../../views/membership/EarlyBirdRenewalMembershipScreen.dart';
+import '../../views/partners_offer/united_fuels/UnitedFuelMainScreen.dart';
+import '../../views/partners_offer/united_fuels/UnitedFuelsBarcodeLandscape.dart';
+import '../../views/signup/VerifyExistingEmailOTPScreen.dart';
+import '../../views/web_view/AppWebView.dart';
+import '/views/membership/RenewMembershipScreen.dart';
 import '../../views/signup/SelfieUploadScreen.dart';
 import '/views/signup/DrivingLicenseScanScreen.dart';
 import '../../views/login/WelcomeScreen.dart';
@@ -7,7 +15,6 @@ import '../../views/membership/ChoosePaymentMethod.dart';
 import '../../views/membership/MembershipPaymentScreen.dart';
 import '../../views/membership/PendingPaymentScreen.dart';
 import '../../views/membership/ReceptionPaymentScreen.dart';
-import '../../views/web_view/AppWebView.dart';
 import '../../views/accounts/ClubAndMembership.dart';
 import '../../views/accounts/CommunicationPreference.dart';
 import '../../views/accounts/GamingPreferences.dart';
@@ -24,11 +31,8 @@ import '../../views/accounts/VerifyOTPAccount.dart';
 import '../../views/home/HomeScreen.dart';
 import '../../views/login/LoginScreen.dart';
 import '../../views/login/OTPScreen.dart';
-import '../../views/partners_offer/PartnerOfferDetailScreen.dart';
-import '../../views/promotions/PromotionDetailScreen.dart';
 import '../../views/signup/SignupScreen.dart';
 import '../../views/splash/SplashScreen.dart';
-import '../../views/whats_on/WhatsOnDetailScreen.dart';
 
 class AppNavigator {
   static const String splash = "/splash";
@@ -36,8 +40,9 @@ class AppNavigator {
   static const String otp = "/otp";
   static const String home = "/home";
   static const String signup = "/signup";
+  static const String verifyExistingEmailOTPScreen =
+      "/verifyExistingEmailOTPScreen";
   static const String promotionDetail = "/promotionDetail";
-  static const String partnerOfferDetail = "/partnerOfferDetail";
   static const String whatsOnDetailScreen = "/whatsOnDetailScreen";
   static const String specialOfferDetailScreen = "/specialOfferDetailScreen";
   static const String myAccountScreen = "/myAccountScreen";
@@ -62,8 +67,15 @@ class AppNavigator {
   static const String membershipPaymentScreen = "/membershipPaymentScreen";
   static const String pendingPaymentScreen = "/pendingPaymentScreen";
   static const String choosePaymentMethod = "/choosePaymentMethod";
+  static const String earlyBirdRenewalMembershipScreen =
+      "/earlyBirdRenewalMembershipScreen";
   static const String receptionPaymentScreen = "/receptionPaymentScreen";
   static const String selfieUploadScreen = "/selfieUploadScreen";
+  static const String renewMembershipScreen = "/renewMembershipScreen";
+  static const String unitedFuelMainScreen = "/unitedFuelMainScreen";
+  static const String chooseFavouriteVenue = "/chooseFavouriteVenueScreen";
+  static const String unitedFuelsBarcodeLandscape =
+      "/unitedFuelsBarcodeLandscape";
 
   // Method to navigate to a specific screen
   static Future<void> navigateTo(BuildContext context, String routeName,
@@ -117,6 +129,20 @@ class AppNavigator {
             builder: (_) => SignupScreen(
                   argument: args as Map<String, String>,
                 ));
+      case verifyExistingEmailOTPScreen:
+        return MaterialPageRoute(
+            builder: (_) => VerifyExistingEmailOTPScreen(
+                  params: args as Map<String, dynamic>,
+                ));
+      case chooseFavouriteVenue:
+        {
+          late Map<String, dynamic> argumentss;
+          argumentss = args as Map<String, dynamic>;
+          return MaterialPageRoute(
+              builder: (_) => ChooseFavouriteVenueScreen(
+                    argument: argumentss,
+                  ));
+        }
       case drivingLicenseScreen:
         return MaterialPageRoute(
             builder: (_) => DrivingLicenseScanScreen(
@@ -136,9 +162,36 @@ class AppNavigator {
         }
 
       case membershipPaymentScreen:
-        return MaterialPageRoute(builder: (_) => MembershipPaymentScreen());
+        {
+          MembershipFlowSource? flowSource;
+          if (args != null) {
+            flowSource = args as MembershipFlowSource;
+          }
+
+          return MaterialPageRoute(
+              builder: (_) => MembershipPaymentScreen(
+                    membershipFlowSource: flowSource,
+                  ));
+        }
+      case renewMembershipScreen:
+        {
+          return MaterialPageRoute(builder: (_) => RenewMembershipScreen());
+        }
       case pendingPaymentScreen:
-        return MaterialPageRoute(builder: (_) => PendingPaymentScreen());
+        {
+          String? screenFlowSource;
+
+          if (args != null) {
+            screenFlowSource = args as String;
+          }
+          return MaterialPageRoute(
+              builder: (_) => PendingPaymentScreen(
+                    fromScreenFlow: screenFlowSource,
+                  ));
+        }
+      case earlyBirdRenewalMembershipScreen:
+        return MaterialPageRoute(
+            builder: (_) => EarlyBirdRenewalMembershipScreen());
       case choosePaymentMethod:
         {
           Map<String, String>? argumentss;
@@ -153,21 +206,20 @@ class AppNavigator {
       case receptionPaymentScreen:
         return MaterialPageRoute(builder: (_) => ReceptionPaymentScreen());
 
+      case unitedFuelMainScreen:
+        return MaterialPageRoute(builder: (_) => const UnitedFuelMainScreen());
+      case unitedFuelsBarcodeLandscape:
+        return MaterialPageRoute(
+            builder: (_) => const UnitedFuelsBarcodeLandscape());
+
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
-      case promotionDetail:
-        return MaterialPageRoute(builder: (_) => const PromotionDetailScreen());
-      case partnerOfferDetail:
-        return MaterialPageRoute(
-            builder: (_) => const PartnerOfferDetailScreen());
-      case whatsOnDetailScreen:
-        return MaterialPageRoute(builder: (_) => const WhatsOnDetailScreen());
       case myAccountScreen:
-        return MaterialPageRoute(builder: (_) => MyAccountScreen());
+        return MaterialPageRoute(builder: (_) => const MyAccountScreen());
       case userDetailScreen:
         return MaterialPageRoute(builder: (_) => const UserDetailScreen());
       case clubAndMembership:
-        return MaterialPageRoute(builder: (_) => ClubAndMembership());
+        return MaterialPageRoute(builder: (_) => const ClubAndMembership());
       case selfieUploadScreen:
         {
           Map<String, String>? argumentss;
@@ -187,7 +239,7 @@ class AppNavigator {
       case pasStatement:
         return MaterialPageRoute(builder: (_) => PASStatement());
       case verifyOTPAccount:
-        return MaterialPageRoute(builder: (_) => VerifyOTPAccount());
+        return MaterialPageRoute(builder: (_) => const VerifyOTPAccount());
       case editUserDetailsScreen:
         return MaterialPageRoute(builder: (_) => const EditUserDetailsScreen());
       case recoverAccountScreen:
@@ -197,6 +249,11 @@ class AppNavigator {
       case recoverAccountEmailFailure:
         return MaterialPageRoute(
             builder: (_) => const RecoverAccountEmailFailure());
+      case appWebView:
+        return MaterialPageRoute(
+            builder: (_) => AppWebView(
+                  url: args as String,
+                ));
       case recoverAccountNewPhone:
         return MaterialPageRoute(
             builder: (_) => RecoverAccountNewPhone(
@@ -207,11 +264,6 @@ class AppNavigator {
         return MaterialPageRoute(
             builder: (_) => RecoverAccountVerificationScreen(
                   params: args as Map<String, dynamic>,
-                ));
-      case appWebView:
-        return MaterialPageRoute(
-            builder: (_) => AppWebView(
-                  url: args as String,
                 ));
 
       default:

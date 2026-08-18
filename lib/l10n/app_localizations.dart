@@ -308,6 +308,12 @@ abstract class AppLocalizations {
   /// **'More Info'**
   String get txtMoreInfo;
 
+  /// No description provided for @txtMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More\n '**
+  String get txtMore;
+
   /// No description provided for @txtCongratulations.
   ///
   /// In en, this message translates to:
@@ -587,7 +593,7 @@ abstract class AppLocalizations {
   /// No description provided for @txtDeleteMyAccount.
   ///
   /// In en, this message translates to:
-  /// **'Delete my account'**
+  /// **'Delete\nmy account'**
   String get txtDeleteMyAccount;
 
   /// No description provided for @txtViewTermsConditions.
@@ -746,6 +752,12 @@ abstract class AppLocalizations {
   /// **'Please enter the correct 4-digit OTP to proceed.'**
   String get msgIncorrectOTP;
 
+  /// No description provided for @msgSendingOTPEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending OTP on email...'**
+  String get msgSendingOTPEmail;
+
   /// No description provided for @msgSendingOTP.
   ///
   /// In en, this message translates to:
@@ -875,8 +887,14 @@ abstract class AppLocalizations {
   /// No description provided for @txtStatusCreditsReactNextLevel.
   ///
   /// In en, this message translates to:
-  /// **'Status Credits to reach next level'**
+  /// **'Status Credits###to reach next level'**
   String get txtStatusCreditsReactNextLevel;
+
+  /// No description provided for @txtStatusCreditsRequiredReactNextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status credits required to\nreach next level'**
+  String get txtStatusCreditsRequiredReactNextLevel;
 
   /// No description provided for @txtEditMyDetails.
   ///
@@ -1007,7 +1025,7 @@ abstract class AppLocalizations {
   /// No description provided for @msgVerificationCodeSentToEmail.
   ///
   /// In en, this message translates to:
-  /// **'We sent a verification code to your email address.'**
+  /// **'       We sent a verification code to your email address.'**
   String get msgVerificationCodeSentToEmail;
 
   /// No description provided for @msgVerificationCodeSentToPhone.
@@ -1285,6 +1303,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No offers found!'**
   String get msgNoOffers;
+
+  /// No description provided for @cannotEditSeeVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'CANNOT EDIT\nSEE VENUE'**
+  String get cannotEditSeeVenue;
+
+  /// No description provided for @msgErrorInDLScanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Error in scanning, please click your original driving licence and try again'**
+  String get msgErrorInDLScanning;
+
+  /// No description provided for @membershipRenewalTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership Renewal Time!'**
+  String get membershipRenewalTime;
+
+  /// No description provided for @yourMembershipExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your membership has expired'**
+  String get yourMembershipExpired;
+
+  /// No description provided for @renewNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew Now'**
+  String get renewNow;
+
+  /// No description provided for @renewMembership.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew Membership'**
+  String get renewMembership;
+
+  /// No description provided for @paymentOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Options'**
+  String get paymentOptions;
+
+  /// No description provided for @appUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'App Update'**
+  String get appUpdate;
+
+  /// No description provided for @msgNewVersionAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version of ### is available!'**
+  String get msgNewVersionAvailable;
+
+  /// No description provided for @msgNewAppVersionAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Version ### is now available!'**
+  String get msgNewAppVersionAvailable;
+
+  /// No description provided for @msgYouHaveVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'You have version ###'**
+  String get msgYouHaveVersion;
+
+  /// No description provided for @releaseNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Release Notes:'**
+  String get releaseNotes;
+
+  /// No description provided for @msgLikeToUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to update it now?'**
+  String get msgLikeToUpdate;
+
+  /// No description provided for @ignore.
+  ///
+  /// In en, this message translates to:
+  /// **'IGNORE'**
+  String get ignore;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'LATER'**
+  String get later;
+
+  /// No description provided for @updateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'UPDATE NOW'**
+  String get updateNow;
+
+  /// No description provided for @msgUnableConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect. Please check your internet connection and try again.'**
+  String get msgUnableConnect;
+
+  /// No description provided for @renewalOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Renewals\nNow Open'**
+  String get renewalOpen;
+
+  /// No description provided for @txtCurrentDeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Deals'**
+  String get txtCurrentDeals;
+
+  /// No description provided for @txtOurGuarantee.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Guarantee'**
+  String get txtOurGuarantee;
+
+  /// No description provided for @yourMembershipExpires.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Membership expires'**
+  String get yourMembershipExpires;
+
+  /// No description provided for @txtChangeFavouriteVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Favourite Venues'**
+  String get txtChangeFavouriteVenue;
+
+  /// No description provided for @txtSaveMyVenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save My Venue'**
+  String get txtSaveMyVenue;
+
+  /// No description provided for @selectEDPVenues.
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose your\nfavourite EDP Venue'**
+  String get selectEDPVenues;
+
+  /// No description provided for @selectVenuesSuccessMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue updated successfully!'**
+  String get selectVenuesSuccessMsg;
+
+  /// No description provided for @selectVenuesErrorMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'Error while updating the venue!'**
+  String get selectVenuesErrorMsg;
+
+  /// No description provided for @pleaseAvoidSpecialChar.
+  ///
+  /// In en, this message translates to:
+  /// **'Please avoid special characters'**
+  String get pleaseAvoidSpecialChar;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning!'**
+  String get warning;
+
+  /// No description provided for @yesDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Delete'**
+  String get yesDelete;
+
+  /// No description provided for @deleteAccountWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'You are about to delete your account.'**
+  String get deleteAccountWarning;
+
+  /// No description provided for @txtNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get txtNotification;
+
+  /// No description provided for @txtPushNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Push Notifications'**
+  String get txtPushNotification;
+
+  /// No description provided for @deleteAccountPermanentMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
+  String get deleteAccountPermanentMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

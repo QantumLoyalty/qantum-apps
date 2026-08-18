@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
 import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppColors.dart';
@@ -27,21 +28,27 @@ class MyProfileDialog with LoggingMixin {
 
   static const double dialogHeightFactor = 0.90;
   static const double dialogHeightBottomMargin = 80;
+  @override
   late Flavor flavor;
-
+  late HomeProvider homeProvider;
+  bool? isSmallScreen;
   showMyProfileDialog(BuildContext context) async {
     flavor = FlavorConfig.instance.flavor!;
-    SharedPreferenceHelper sharedPreferenceHelper =
-        await SharedPreferenceHelper.getInstance();
+    isSmallScreen = MediaQuery.sizeOf(context).height < 900;
+    ("isSmallScreen: $isSmallScreen && Height: ${MediaQuery.sizeOf(context).height}").logMessage();
     AppLocalizations loc = AppLocalizations.of(context)!;
     Provider.of<UserInfoProvider>(context, listen: false).getAppInfo();
-
+    final userInfoProvider = context.read<UserInfoProvider>();
     showGeneralDialog(
         context: context,
         transitionDuration: const Duration(milliseconds: 500),
         pageBuilder: (context, anim1, anim2) {
           logEvent(FlavorConfig.instance.flavorValues.appVersion);
-
+          homeProvider = Provider.of<HomeProvider>(context, listen: false);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            userInfoProvider.fetchUserProfile("true");
+            userInfoProvider.fetchStatusTierValue();
+          });
           return Dialog(
             backgroundColor: Colors.transparent,
             insetPadding: EdgeInsets.zero,
@@ -60,8 +67,14 @@ class MyProfileDialog with LoggingMixin {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                flavor == Flavor.kingscliff? AppColors.kc_primary_color:AppThemeCustom.getMyProfileCardBackground(context),
-                                flavor == Flavor.kingscliff? AppColors.kc_primary_color_dark:AppThemeCustom.getMyProfileCardBackground(context),
+                                flavor == Flavor.kingscliff
+                                    ? AppColors.kc_primary_color
+                                    : AppThemeCustom.getMyProfileCardBackground(
+                                        context),
+                                flavor == Flavor.kingscliff
+                                    ? AppColors.kc_primary_color_dark
+                                    : AppThemeCustom.getMyProfileCardBackground(
+                                        context),
                               ],
                             ),
                             borderRadius: BorderRadius.circular(10)),
@@ -101,18 +114,23 @@ class MyProfileDialog with LoggingMixin {
                                           Text(
                                             "${provider.getUserInfo?.firstName ?? ''} ${provider.getUserInfo?.lastName ?? ''}",
                                             textAlign: TextAlign.center,
-                                            textScaler: const TextScaler.linear(1.0),
+                                            textScaler:
+                                                const TextScaler.linear(1.0),
                                             style: TextStyle(
-                                              fontSize: 28,
+                                              fontSize: (isSmallScreen!=null && isSmallScreen!)?20:28,
                                               fontWeight: FontWeight.bold,
-                                              color: AppThemeCustom.getProfileDialogTextColor(context),
+                                              color: AppThemeCustom
+                                                  .getProfileDialogTextColor(
+                                                      context),
                                             ),
                                           ),
                                           Text(
                                             "${loc.txtCard} # ${provider.getUserInfo?.cardNumber ?? ''}",
                                             style: TextStyle(
                                               fontSize: 14,
-                                              color: AppThemeCustom.getProfileDialogCardTextColor(context),
+                                              color: AppThemeCustom
+                                                  .getProfileDialogCardTextColor(
+                                                      context),
                                             ),
                                           ),
                                           AppDimens.shape_20,
@@ -122,7 +140,8 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.cake,
                                             iconSize: 18,
                                             text: AppHelper.formatDate(provider
-                                                .getUserInfo?.dateOfBirth??''),
+                                                    .getUserInfo?.dateOfBirth ??
+                                                ''),
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -136,7 +155,8 @@ class MyProfileDialog with LoggingMixin {
                                             icon: Icons.phone_android_outlined,
                                             iconSize: 18,
                                             text:
-                                                "${provider.getUserInfo?.mobile??""}",
+                                                provider.getUserInfo?.mobile ??
+                                                    "",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -149,8 +169,8 @@ class MyProfileDialog with LoggingMixin {
                                                 IconTextWidget.HORIZONTAL,
                                             icon: Icons.email_outlined,
                                             iconSize: 18,
-                                            text:
-                                                "${provider.getUserInfo?.email??""}",
+                                            text: provider.getUserInfo?.email ??
+                                                "",
                                             iconColor: AppThemeCustom
                                                 .getProfileDialogTextColor(
                                                     context),
@@ -199,7 +219,8 @@ class MyProfileDialog with LoggingMixin {
                                                       style: TextStyle(
                                                           color: AppThemeCustom
                                                               .getEditDetailsColor(
-                                                                  context,isText:true),
+                                                                  context,
+                                                                  isText: true),
                                                           fontSize: 10),
                                                     )
                                                   ],
@@ -208,172 +229,57 @@ class MyProfileDialog with LoggingMixin {
                                           (flavor == Flavor.clh ||
                                                   flavor ==
                                                       Flavor.montaukTavern ||
-                                                  flavor == Flavor.starReward ||
-                                                  flavor == Flavor.flinders)
-                                              ? Container()
-                                              : UserStatusTier()
+                                                  flavor ==
+                                                      Flavor.drinkRewards ||
+                                                  flavor ==
+                                                      Flavor.bobsBulkBooze ||
+                                                  flavor == Flavor.senseOfTaste)
+                                              ? const SizedBox.shrink()
+                                              : UserStatusTier(isSmallScreen: isSmallScreen,)
                                         ],
                                       ),
                                     ),
                                   ),
                                   AppDimens.shape_10,
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Consumer<UserInfoProvider>(
-                                          builder: (context, provider, child) {
-                                        if (provider.cancelledAccount != null &&
-                                            provider.cancelledAccount!) {
-                                          /// ACCOUNT IS CANCELLED, DO LOGOUT & REDIRECT TO LOGIN SCREEN
-                                          /// CLEARING ALL PREFERENCES
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Consumer<UserInfoProvider>(
+                                        builder: (context, provider, child) {
+                                      if (provider.logoutSuccess != null) {
+                                        if (provider.logoutSuccess!) {
+                                          WidgetsBinding.instance
+                                              .addPostFrameCallback((_) async {
+                                            try {
+                                              /// CLEARING ALL PREFERENCE
+                                              SharedPreferenceHelper
+                                                  sharedPreferenceHelper =
+                                                  await SharedPreferenceHelper
+                                                      .getInstance();
+                                              await sharedPreferenceHelper
+                                                  .clearAll();
 
-                                          sharedPreferenceHelper.clearAll();
+                                              /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
 
-                                          /// REMOVING ALL DIALOGS
-                                          Navigator.pop(context);
+                                              await closingAllRepeatedTasksInProviders(
+                                                  context);
 
-                                          /// NAVIGATING TO LOGIN SCREEN
-                                          Future.delayed(Duration.zero, () {
-                                            provider.resetCancelledAccount();
-                                            AppNavigator.navigateAndClearStack(
-                                                context, AppNavigator.login);
+                                              /// REMOVING PROFILE DIALOG
+                                              Navigator.pop(context);
+
+                                              /// NAVIGATING TO LOGIN SCREEN
+                                              AppNavigator.navigateReplacement(
+                                                  context, AppNavigator.login);
+                                              provider.resetLogoutStatus();
+                                            } catch (e) {}
                                           });
                                         }
+                                      }
 
-                                        return InkWell(
-                                          onTap: () async {
-                                            bool hasInternet = await AppHelper
-                                                .checkInternetConnection();
-
-                                            if (hasInternet) {
-                                              var response = await showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text(loc.txtAlert),
-                                                      content: Text(
-                                                          loc.msgCancelAccount),
-                                                      actions: [
-                                                        TextButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context,
-                                                                  false);
-                                                            },
-                                                            child: Text(
-                                                              loc.txtNo,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .grey),
-                                                            )),
-                                                        TextButton(
-                                                            onPressed:
-                                                                () async {
-                                                              Navigator.pop(
-                                                                  context,
-                                                                  true);
-                                                            },
-                                                            child: Text(
-                                                              loc.txtYes,
-                                                              style: TextStyle(
-                                                                  color: AppThemeCustom
-                                                                      .getAlertDialogTextButtonColor(
-                                                                          context)),
-                                                            )),
-                                                      ],
-                                                    );
-                                                  });
-
-                                              if (response) {
-                                                /// CANCEL ACCOUNT ///
-                                                provider.cancelAccount();
-                                              }
-                                            } else {
-                                              Navigator.pop(context);
-                                              AppHelper.showErrorMessage(
-                                                  context, loc.msgNoInternet);
-                                            }
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  loc.txtDeleteMyAccount
-                                                      .toUpperCase(),
-                                                  style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      color: AppThemeCustom
-                                                          .getProfileDialogTextColor(
-                                                              context)),
-                                                ),
-                                                AppDimens.shape_10,
-                                                (provider.showCancelAccountLoader !=
-                                                            null &&
-                                                        provider
-                                                            .showCancelAccountLoader!)
-                                                    ? const SizedBox(
-                                                        width: 15,
-                                                        height: 15,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          strokeWidth: 2,
-                                                        ),
-                                                      )
-                                                    : Container()
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                      Consumer<UserInfoProvider>(
-                                          builder: (context, provider, child) {
-                                        if (provider.logoutSuccess != null) {
-                                          if (provider.logoutSuccess!) {
-                                            WidgetsBinding.instance
-                                                .addPostFrameCallback(
-                                                    (_) async {
-                                              try {
-                                                /// CLEARING ALL PREFERENCE
-                                                SharedPreferenceHelper
-                                                    sharedPreferenceHelper =
-                                                    await SharedPreferenceHelper
-                                                        .getInstance();
-                                                await sharedPreferenceHelper
-                                                    .clearAll();
-
-                                                /// CANCELLING ALL TIMER/REPEATED TASKS IN PROVIDERS
-
-                                                await closingAllRepeatedTasksInProviders(
-                                                    context);
-
-                                                /// REMOVING PROFILE DIALOG
-                                                Navigator.pop(context);
-
-                                                /// NAVIGATING TO LOGIN SCREEN
-                                                AppNavigator
-                                                    .navigateReplacement(
-                                                        context,
-                                                        AppNavigator.login);
-                                                provider.resetLogoutStatus();
-                                              } catch (e) {}
-                                            });
-                                          }
-                                        }
-
-                                        return InkWell(
-                                          onTap: () async {
-
-                                            bool hasInternet=await AppHelper.checkInternetConnection();
-                                            if(hasInternet)
-                                              {
-
+                                      return InkWell(
+                                        onTap: () async {
+                                          bool hasInternet = await AppHelper
+                                              .checkInternetConnection();
+                                          if (hasInternet) {
                                             final confirmedLogout =
                                                 await showDialog<bool>(
                                                     context: context,
@@ -416,6 +322,9 @@ class MyProfileDialog with LoggingMixin {
                                             if (confirmedLogout != true) {
                                               return;
                                             } else {
+                                              homeProvider.updateSelectedOption(
+                                                  homeProvider
+                                                      .prevSelectedOption);
                                               provider.logoutUser();
                                             }
 
@@ -440,31 +349,27 @@ class MyProfileDialog with LoggingMixin {
                                                   AppNavigator.navigateReplacement(
                                                       context, AppNavigator.login);
                                                 } catch (e) {}*/
-
-                                              }
-                                            else {
-                                              Navigator.pop(context);
-                                              AppHelper.showErrorMessage(
-                                                  context, loc.msgNoInternet);
-                                            }
-
-                                              },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: Text(
-                                              loc.txtLogout.toUpperCase(),
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: AppThemeCustom
-                                                      .getProfileDialogTextColor(
-                                                          context)),
-                                            ),
+                                          } else {
+                                            Navigator.pop(context);
+                                            AppHelper.showErrorMessage(
+                                                context, loc.msgNoInternet);
+                                          }
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Text(
+                                            loc.txtLogout.toUpperCase(),
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w300,
+                                                color: AppThemeCustom
+                                                    .getProfileDialogTextColor(
+                                                        context)),
                                           ),
-                                        );
-                                      }),
-                                    ],
-                                  ),
+                                        ),
+                                      );
+                                    }),
+                                  )
                                 ],
                               ),
                               provider.showLogoutLoader != null &&

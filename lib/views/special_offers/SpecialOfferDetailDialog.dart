@@ -2,11 +2,11 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/HomeProvider.dart';
 import '../../view_models/SpecialOffersProvider.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import '../../core/utils/AppColors.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../view_models/UserInfoProvider.dart';
@@ -126,11 +126,25 @@ class SpecialOfferDetailDialog {
                                           ),
                                         ),
                                         AppDimens.shape_5,
-                                        QrImageView(
+                                       /* QrImageView(
                                           data:
                                               '${offerProvider.selectedOffer != null ? offerProvider.selectedOffer!.qrURL : "1"}',
                                           backgroundColor: AppColors.white,
                                           size: 180,
+                                        ),*/
+                                        Container(color: AppColors.white,
+                                         // padding: const EdgeInsets.all(8),
+                                          child: SizedBox(
+                                            height: 210,
+                                            width: 210,
+                                            child: SfBarcodeGenerator(
+                                              value: offerProvider.selectedOffer != null
+                                                  ? offerProvider.selectedOffer!.qrURL
+                                                  : "1",
+                                              symbology: QRCode(),
+                                              showValue: false,
+                                            ),
+                                          ),
                                         ),
                                         AppDimens.shape_20,
                                       ],

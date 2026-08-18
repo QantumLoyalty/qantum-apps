@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
-import 'package:qantum_apps/views/common_widgets/AppCustomButton.dart';
 import '/core/utils/AppDimens.dart';
 
 class AppButton extends StatelessWidget {
@@ -15,6 +14,7 @@ class AppButton extends StatelessWidget {
       required this.text,
       required this.onClick,
       this.icon,
+      this.backgroundColor,
       this.textColor});
 
   @override

@@ -1,9 +1,14 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:qantum_apps/data/models/VenueModel.dart';
+import 'package:qantum_apps/main_ss.dart';
+import '../core/utils/FlavorConstants.dart';
+import '/core/enums/FetchProfileState.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/services/AppDataService.dart';
 import '/l10n/app_localizations.dart';
 import '../core/utils/AppHelper.dart';
 import '../data/models/BenefitsModel.dart';
@@ -41,8 +46,57 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   bool get isNavigated => _isNavigated;
 
+  MembershipStatus membershipStatus = MembershipStatus.loading;
+
+
+  bool _isPushEnabled = true;
+
+  bool get isPushEnabled => _isPushEnabled;
+
+
+  Future<void> pausePushNotifications() async {
+    try {
+      await OneSignal.User.pushSubscription.optOut();
+      _isPushEnabled = false;
+      logEvent("Push notifications paused");
+    } catch (e) {
+      logEvent("pausePushNotifications error:: ${e.toString()}");
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> resumePushNotifications() async {
+    try {
+      await OneSignal.User.pushSubscription.optIn();
+      _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+
+      if (!_isPushEnabled) {
+        await OneSignal.Notifications.requestPermission(true);
+        await OneSignal.User.pushSubscription.optIn();
+        _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+      }
+
+      logEvent("Push notifications resumed: $_isPushEnabled");
+    } catch (e) {
+      logEvent("resumePushNotifications error:: ${e.toString()}");
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  checkPushNotificationStatus() {
+    _isPushEnabled = OneSignal.User.pushSubscription.optedIn!;
+    notifyListeners();
+  }
+
   markNavigated() {
     _isNavigated = true;
+  }
+
+  resetNavigated() {
+    _isNavigated = false;
+    notifyListeners();
   }
 
   bool? _showLoader;
@@ -96,32 +150,67 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     SharedPreferenceHelper sharedPreferenceHelper =
         await SharedPreferenceHelper.getInstance();
     _userModel ??= sharedPreferenceHelper.getUserData();
+
+    ("Event:: Retrieved user info from shared preference :: ${_userModel.toString()}")
+        .logMessage();
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
+      await syncCurrentUserIdToNative(_userModel!.id ?? 'guest');  // 👈 NAYI LINE
     }
 
     notifyListeners();
   }
 
-  fetchUserProfile() async {
+  FetchProfileState _fetchProfileState = FetchProfileState.idle;
+
+  FetchProfileState get fetchProfileState => _fetchProfileState;
+
+  fetchUserProfile(String fetchFromBluize) async {
     try {
-      NetworkResponse networkResponse =
-          await UserService.getInstance().fetchUserProfile();
+      _fetchProfileState = FetchProfileState.loading;
+
+      NetworkResponse networkResponse = await UserService.getInstance()
+          .fetchUserProfile(fetchFromBluize: fetchFromBluize);
+
+      debugPrint("Event:: Updated user1:: ${networkResponse.toString()}",
+          wrapWidth: 1024);
+
       if (!networkResponse.isError) {
         Map<String, dynamic> response =
             networkResponse.response as Map<String, dynamic>;
         if (response.containsKey("user")) {
           UserModel userModel = UserModel.fromJson(response["user"]);
-          debugPrint("Event:: Updated user:: ${userModel.toString()}",wrapWidth: 1024);
+          debugPrint("Event:: Updated user:: ${userModel.toString()}",
+              wrapWidth: 1024);
           SharedPreferenceHelper sharedPreferenceHelper =
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);
           _userModel = userModel;
+          await syncCurrentUserIdToNative(userModel.id ?? 'guest');   // 👈 NAYI LINE
+          if (AppHelper.isClubApp()) {
+            if (response.containsKey("serverTime")) {
+              _userModel!.serverTime = response["serverTime"];
+            }
+
+            logEvent(
+                "Users Membership Status ${AppHelper.checkIfMembershipActive(_userModel!)}");
+
+            if (AppHelper.checkIfMembershipActive(_userModel!)) {
+              membershipStatus = MembershipStatus.active;
+            } else {
+              membershipStatus = MembershipStatus.inactive;
+            }
+          } else {
+            membershipStatus = MembershipStatus.active;
+          }
+
+          _fetchProfileState = FetchProfileState.loaded;
         }
 
         notifyListeners();
       }
     } catch (e) {
+      _fetchProfileState = FetchProfileState.error;
       logEvent("Event:: Fetch profile error ${e.toString()}");
     }
   }
@@ -129,13 +218,12 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   bool _isFetching = false;
   Timer? profileTimer;
 
-  runFetchProfileTimer() async {
-    await fetchUserProfile();
-    profileTimer = Timer.periodic(
-        Duration(seconds: AppHelper.defaultRequestTime), (value) async {
+  runFetchProfileTimer({required String fetchFromBluize}) async {
+    await fetchUserProfile(fetchFromBluize);
+    profileTimer = Timer.periodic(const Duration(seconds: 30), (value) async {
       if (!_isFetching) {
         _isFetching = true;
-        await fetchUserProfile();
+        await fetchUserProfile(fetchFromBluize);
         _isFetching = false;
       }
     });
@@ -157,10 +245,12 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       params['device_token'] = deviceToken ?? "";
       // params['appType'] = "qantum";
       //params['appType'] = FlavorConfig.instance.flavorValues.appName;
-      params['app_version'] = FlavorConfig.instance.flavorValues.appVersion;
+      String appVersion = await AppHelper.getAppVersion();
+      params['app_version'] = appVersion;
       params['device_type'] =
           Platform.isAndroid ? "ANDROID" : (Platform.isIOS ? "IOS" : "");
 
+      print("uploadDeviceDetail params: $params");
       NetworkResponse networkResponse =
           await UserService.getInstance().updateDeviceDetail(params);
       logEvent("uploadDeviceDetail response: $networkResponse");
@@ -209,7 +299,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
             benefits = benefits.replaceAll("<li>", "");
             _benefitItems = benefits.split("</li>");
 
-            logEvent(_benefitItems);
+            logEvent("_benefitItems:: $_benefitItems");
             _benefitItems!.removeWhere((test) => test == " ");
           }
         }
@@ -270,6 +360,50 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       }
     } catch (e) {
       logEvent(e.toString());
+    }
+  }
+
+  String statusTierValue = "";
+  bool showNextLevel = false;
+  bool showStatusCredit = false;
+
+  fetchStatusTierValue() async {
+    try {
+      if (_userModel != null) {
+        String userTierType = FlavorConstants.getUserTierType(_userModel!);
+
+        NetworkResponse networkResponse = await UserService.getInstance()
+            .fetchStatusTierValue(statusTier: userTierType);
+
+        logEvent("FETCH STATUS TIER VALUE RESPONSE $networkResponse");
+
+        if (!networkResponse.isError) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+          if (response.containsKey('success') &&
+              response['success'] == true &&
+              response.containsKey('value')) {
+            statusTierValue = response["value"].toString();
+
+            if(response.containsKey('nextLevel') && response['nextLevel'] is bool)
+            {
+              showNextLevel=response['nextLevel'] as bool;
+
+            }
+            if(response.containsKey('statusCredit') && response['statusCredit'] is bool)
+            {
+              showStatusCredit=response['statusCredit'] as bool;
+
+            }
+
+
+          }
+        }
+      }
+    } catch (e) {
+      logEvent(e.toString());
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -593,7 +727,17 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         params["Surname"] = tempUser!.lastName;
         params["Email"] = tempUser!.email;
         params["Mobile"] = tempUser!.mobile;
-       // params["DateOfBirth"] = tempUser!.dateOfBirth;
+
+/*
+        String datePart = tempUser!.dateOfBirth!;
+        if (datePart.contains('T')) datePart = datePart.split('T')[0];
+        params["DateOfBirth"] = datePart;
+*/
+
+        //params["DateOfBirth"] = tempUser!.dateOfBirth;
+
+        logEvent(params);
+
         NetworkResponse networkResponse =
             await UserService.getInstance().updateUserProfile(params);
         logEvent("UPDATE USER INFO:: ${networkResponse.response}");
@@ -874,9 +1018,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   /// Fetches the app version and name from the package info and logs it.
   getAppInfo() async {
-    final appInfo = await PackageInfo.fromPlatform();
-    logEvent('${appInfo.version} ${appInfo.appName}');
-    version = "${appInfo.version} (${appInfo.buildNumber})";
+    version = await AppHelper.getAppVersion();
     notifyListeners();
   }
 
@@ -929,7 +1071,7 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
 
       NetworkResponse networkResponse =
-      await UserService.getInstance().logout();
+          await UserService.getInstance().logout();
 
       logEvent("logoutUser >> ${networkResponse.response}");
 
@@ -942,6 +1084,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         // 🧹 CLEAR USER STATE
         _userModel = null;
         _tempUser = null;
+        SharedPreferenceHelper sph = await SharedPreferenceHelper.getInstance();
+        await sph.clearAll();
+        await syncCurrentUserIdToNative('guest');
       } else {
         _logoutSuccess = false;
       }
@@ -955,7 +1100,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
     }
   }
-
 
   resetLogoutStatus() {
     _showLogoutLoader = null;
@@ -973,4 +1117,168 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       notifyListeners();
     });
   }
+
+  bool? _showVenuesListLoader;
+
+  bool? get showVenuesListLoader => _showVenuesListLoader;
+  bool? _errorOnVenuesList;
+
+  bool? get errorOnVenuesList => _errorOnVenuesList;
+  String? _errorMsgOnVenuesList;
+
+  String? get errorMsgOnVenuesList => _errorMsgOnVenuesList;
+
+  resetErrorOnVenuesList() {
+    _errorOnVenuesList = null;
+    _errorMsgOnVenuesList = null;
+    notifyListeners();
+  }
+
+  List<VenueModel>? _venuesList;
+
+  List<VenueModel>? get venuesList => _venuesList;
+  String? _selectedVenue;
+
+  String? get selectedVenue => _selectedVenue;
+
+  selectVenue(String venue) {
+    _selectedVenue = venue;
+    notifyListeners();
+  }
+
+  fetchVenueList() async {
+    try {
+      _showVenuesListLoader = true;
+      notifyListeners();
+      NetworkResponse networkResponse =
+          await AppDataService.getInstance().getVenuesList();
+      _errorOnVenuesList = networkResponse.isError;
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        _venuesList = [];
+        response["data"].forEach((item) {
+          _venuesList!.add(VenueModel.fromJson(item));
+        });
+
+        if (_userModel != null && _userModel!.venueName != null) {
+          _selectedVenue = _userModel!.venueName;
+        }
+      }
+    } catch (e) {
+      _errorOnVenuesList = true;
+      _errorMsgOnVenuesList = e.toString();
+    } finally {
+      _showVenuesListLoader = false;
+      notifyListeners();
+    }
+  }
+
+  bool? _errorOnSelectVenue;
+
+  bool? get errorOnSelectVenue => _errorOnSelectVenue;
+
+  resetErrorOnSelectVenue() {
+    _errorOnSelectVenue = null;
+    notifyListeners();
+  }
+
+  updateSelectedVenue() async {
+    try {
+      _showVenuesListLoader = true;
+      notifyListeners();
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .setSelectedVenue(venueName: _selectedVenue!);
+
+      if (networkResponse.response != null &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        _errorOnSelectVenue = false;
+        _userModel!.venueName = _selectedVenue!;
+/*
+        if (response.containsKey("user")) {
+          _errorOnSelectVenue = false;
+        } else {
+          _errorOnSelectVenue = true;
+        }*/
+      } else {
+        _errorOnSelectVenue = true;
+      }
+    } catch (e) {
+      _errorOnSelectVenue = true;
+      // _errorMsgOnVenuesList = e.toString();
+    } finally {
+      _showVenuesListLoader = false;
+      notifyListeners();
+    }
+  }
+
+
+  sendOTPOnExistingEmail(
+      {
+        required String email,
+        required AppLocalizations loc}) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        _loaderMessage = loc.msgSendingOTPEmail;
+        notifyListeners();
+      });
+
+      NetworkResponse networkResponse =
+      await UserService.getInstance().sendOTPOnEmail(email: email);
+      logEvent("Send OTP On Existing Email RESPONSE:: $networkResponse");
+
+      _accountVerified = !networkResponse.isError;
+
+      if (networkResponse.response != null) {
+        /*if (networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+          networkResponse.response as Map<String, dynamic>;
+
+          if (response.containsKey("verified") &&
+              response.containsKey("user")) {
+            _accountVerified = response["verified"] as bool;
+            SharedPreferenceHelper sharedPreferencesHelper =
+            await SharedPreferenceHelper.getInstance();
+            await sharedPreferencesHelper
+                .saveUserData(UserModel.fromJson(response["user"]));
+            await sharedPreferencesHelper.saveAuthToken(response['token']);
+            await sharedPreferencesHelper
+                .saveCountryCode(params["countryCode"]);
+
+            logEvent(
+                "SAVED DATA :: ${sharedPreferencesHelper.getUserData()} --> ${sharedPreferencesHelper.getAuthToken()} --> ${sharedPreferencesHelper.getCountryCode()}");
+          } else {
+            _accountVerified = false;
+          }
+
+          if (response.containsKey('message')) {
+            _networkMessage = response['message'];
+          } else if (response.containsKey('error')) {
+            _networkMessage = response['error'];
+          }
+        } else {
+          _networkMessage = networkResponse.responseMessage;
+          _accountVerified = false;
+        }*/
+      } else {
+        _networkMessage = networkResponse.responseMessage;
+        _accountVerified = false;
+      }
+    } catch (e) {
+      logEvent(e.toString());
+      _accountVerified = false;
+      _networkMessage = e.toString();
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+
 }

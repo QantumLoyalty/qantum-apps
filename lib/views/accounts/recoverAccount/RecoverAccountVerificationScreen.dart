@@ -1,18 +1,20 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
+
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/navigation/AppNavigator.dart';
-import '../../../l10n/app_localizations.dart';
-import '../../common_widgets/AppScaffold.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppButton.dart';
 import '../../common_widgets/AppLoader.dart';
 import '../../common_widgets/AppLogo.dart';
+import '../../common_widgets/AppScaffold.dart';
 
 class RecoverAccountVerificationScreen extends StatefulWidget {
   Map<String, dynamic> params;
@@ -134,10 +136,11 @@ class _RecoverAccountVerificationScreenState
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child:  Icon(
+                          child: Icon(
                             Icons.chevron_left,
                             size: 28,
-                             color: AppThemeCustom.getAccountHeaderColor(context),
+                            color:
+                                AppThemeCustom.getAccountHeaderColor(context),
                           )),
                     ),
                     Applogo(
@@ -224,8 +227,8 @@ class _RecoverAccountVerificationScreenState
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                           style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStatePropertyAll(AppColors.white.withValues(alpha: 0.1))),
+                              backgroundColor: WidgetStatePropertyAll(
+                                  AppColors.white.withValues(alpha: 0.1))),
                           onPressed: () {
                             _resetResendCode();
                           },

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import '/views/partners_offer/widget/PartnerOfferItem.dart';
 
+import '/views/partners_offer/widget/PartnerOfferItem.dart';
 import '../../core/utils/AppDimens.dart';
 
-class PartnerOffersScreen extends StatelessWidget {
-  PartnerOffersScreen({super.key});
+class PartnerOffersScreen extends StatefulWidget {
+  const PartnerOffersScreen({super.key});
 
+  @override
+  State<PartnerOffersScreen> createState() => _PartnerOffersScreenState();
+}
+
+class _PartnerOffersScreenState extends State<PartnerOffersScreen> {
   List<String> offersList = [
     "assets/common/partner_offer_placeholder.png",
-    "assets/common/partner_offer_placeholder_2.png"
   ];
 
   @override

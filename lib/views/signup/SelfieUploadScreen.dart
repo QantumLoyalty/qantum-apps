@@ -166,7 +166,7 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
               AppNavigator.choosePaymentMethod,
             );
           } else {
-            membershipManagerProvider.updateMembershipPaymentMethod(loc: loc!);
+            membershipManagerProvider.updateMembershipPaymentMethod(loc: loc!,renewType: "none");
           }
         });
 
@@ -293,7 +293,7 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
                 Expanded(
                     child: Container(
                   key: _frameKey,
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       border: Border.all(color: AppColors.white, width: 1),
                       borderRadius: BorderRadius.circular(15)),
@@ -474,7 +474,7 @@ class _SelfieUploadScreenState extends State<SelfieUploadScreen>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("CANCEL")),
+                  child: const Text("CANCEL")),
               Expanded(child: Image.file(File(selfieImage))),
             ],
           ));

@@ -134,7 +134,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                           ),
                         ),
                         AppDimens.shape_20,
-                        SizedBox(
+                        /*SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: AppCustomButton(
                             style: AppHelper.getDeleteButtonStyle(context),
@@ -155,7 +155,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                               },
                                               child: Text(
                                                 loc.txtNo,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.grey),
                                               )),
                                           TextButton(
@@ -186,7 +186,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                                     context),
                           ),
                         ),
-                        AppDimens.shape_20,
+                        AppDimens.shape_20,*/
                       ],
                     ),
                     provider.showCancelAccountLoader != null &&

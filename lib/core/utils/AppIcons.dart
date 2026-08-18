@@ -6,6 +6,7 @@ class AppIcons {
       "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/app_logo.png";
 
   static String my_profile = "assets/common/my_profile.png";
+  static String notification = "assets/common/bell.png";
   static String card_value =
       "assets/${FlavorConfig.instance.flavorValues.appName![0].toLowerCase()}${FlavorConfig.instance.flavorValues.appName!.substring(1).replaceAll(" ", "")}/card_value.png";
   static String card_silver = "assets/common/card_silver.png";
@@ -13,8 +14,7 @@ class AppIcons {
   static String card_platinum = "assets/common/card_platinum.png";
   static String card_platinum_black = "assets/common/card_platinum_black.png";
   static String my_account = "assets/common/my_account.png";
-  static String card_lieutenant =
-      "assets/manlyHarbourBoatClub/card_lieutenant.png";
+  static String card_lieutenant = "assets/common/card_lieutenant.png";
   static String card_nonfinancial =
       "assets/manlyHarbourBoatClub/card_nonfinancial.png";
   static String birthday = "assets/common/birthday.png";
@@ -24,6 +24,13 @@ class AppIcons {
   static String cardMembershipCancelled =
       "assets/common/card_membership_cancelled.png";
   static String cardTest = "assets/common/card_test.png";
+
+  static String payByCard = "assets/common/pay_by_card.png";
+  static String payAtReception = "assets/common/pay_at_reception.png";
+  static String unitedFuelsBanner = "assets/common/united-logo-white.png";
+  static String unitedFuelsHero = "assets/common/hero-image.png";
+  static String unitedFuelsRounded4c = "assets/common/rounded-4c.png";
+  static String renew = "assets/common/renew.png";
 
   static String getHeaderIcon() {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
@@ -39,10 +46,10 @@ class AppIcons {
     if (membershipType!.toLowerCase() ==
         AppStrings.textMemberCancelled.toLowerCase()) {
       return cardMembershipCancelled;
-    } else if (membershipType!.toLowerCase() == "test") {
+    } else if (membershipType.toLowerCase() == "test") {
       return cardTest;
     } else {
-      membershipType = membershipType!.toLowerCase().replaceAll(" ", "");
+      membershipType = membershipType.toLowerCase().replaceAll(" ", "");
       Flavor selectedFlavor = FlavorConfig.instance.flavor!;
       if (selectedFlavor == Flavor.mhbc) {
         switch (membershipType.toLowerCase()) {
@@ -76,7 +83,7 @@ class AppIcons {
           case "ace":
             return "assets/aceRewards/card_ace.png";
           case "aceplus":
-            return "assets/aceRewards/card_ace_plus.png";
+            return "assets/aceRewards/card_ace.png";
           default:
             return "assets/aceRewards/card_staff.png";
         }
@@ -165,26 +172,6 @@ class AppIcons {
           default:
             return card_value;
         }
-      } else if (selectedFlavor == Flavor.queens) {
-        switch (membershipType.toLowerCase().trim()) {
-          case "queens":
-            return "assets/queensHotel/card_queens.png";
-          case "ruby":
-            return "assets/queensHotel/card_ruby.png";
-          case "emerald":
-            return "assets/queensHotel/card_emerald.png";
-          case "sapphire":
-            return "assets/queensHotel/card_sapphire.png";
-          case "diamond":
-            return "assets/queensHotel/card_diamond.png";
-          case "diamondplus":
-            return "assets/queensHotel/card_diamond_plus.png";
-          case "curtiscoast":
-            return "assets/queensHotel/card_curtis_coast.png";
-
-          default:
-            return "assets/queensHotel/card_queens.png";
-        }
       } else if (selectedFlavor == Flavor.brisbane) {
         switch (membershipType.toLowerCase().trim()) {
           case "brewcrew":
@@ -232,6 +219,7 @@ class AppIcons {
             return "assets/bluewaterCaptainsClub/card_deckhand.png";
         }
       } else if (selectedFlavor == Flavor.flinders) {
+
         switch (membershipType.toLowerCase().trim()) {
           case "staff":
             return "assets/flindersStreetWharves/card_staff.png";
@@ -241,23 +229,109 @@ class AppIcons {
             return "assets/flindersStreetWharves/card_corporate.png";
           case "vip":
             return "assets/flindersStreetWharves/card_vip.png";
-
+          case "test":
+            return "assets/flindersStreetWharves/card_test.png";
+          case "locals":
+            return "assets/flindersStreetWharves/card_locals.png";
+          case "bronze":
+            return "assets/flindersStreetWharves/card_bronze.png";
+          case "silver":
+            return card_silver;
+          case "gold":
+            return card_gold;
+          case "platinum":
+            return card_platinum;
           default:
             return "assets/flindersStreetWharves/card_staff.png";
         }
-      }else if (selectedFlavor == Flavor.drinkRewards) {
+      } else if (selectedFlavor == Flavor.kingscliff) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "staff":
+            return "assets/kingscliff/card_staff.png";
+          case "silver":
+            return card_silver;
+          case "gold":
+            return card_gold;
+          case "platinum":
+            return card_platinum;
+          default:
+            return "assets/kingscliff/card_value.png";
+        }
+      } else if (selectedFlavor == Flavor.drinkRewards) {
         switch (membershipType.toLowerCase().trim()) {
           case "club":
-            return "assets/drinkRewards/card_club.png";
+            return card_gold;
           case "reserve":
             return "assets/drinkRewards/card_reserve.png";
           case "masters":
-            return "assets/drinkRewards/card_masters.png";
+            return card_platinum_black;
           case "staff":
             return "assets/drinkRewards/card_staff.png";
-
           default:
             return "assets/drinkRewards/card_explorer.png";
+        }
+      } else if (selectedFlavor == Flavor.bobsBulkBooze ||
+          selectedFlavor == Flavor.senseOfTaste) {
+        return card_value;
+      } else if (selectedFlavor == Flavor.edp) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "diamond":
+            return "assets/edp/card_diamond.png";
+          case "gold":
+            return card_gold;
+          case "staff":
+            return "assets/edp/card_staff.png";
+          case "silver":
+            return card_silver;
+          default:
+            return card_silver;
+        }
+      } else if (selectedFlavor == Flavor.mannumClub) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "cancelled":
+            return "assets/theMannumClub/card_cancelled.png";
+          case "member" || "members":
+            return "assets/theMannumClub/card_members.png";
+          case "perpetuity":
+            return card_gold;
+          case "staff":
+            return "assets/theMannumClub/card_staff.png";
+          case "testing":
+            return "assets/theMannumClub/card_testing.png";
+          default:
+            return "assets/theMannumClub/card_members.png";
+        }
+      } else if (selectedFlavor == Flavor.mosaic) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "bronze":
+            return "assets/mosaicHotel/card_bronze.png";
+          case "cancelled":
+            return "assets/mosaicHotel/card_cancelled.png";
+          case "testing":
+            return "assets/mosaicHotel/card_testing.png";
+          case "gold":
+            return card_gold;
+          case "silver":
+            return card_silver;
+          default:
+            return "assets/mosaicHotel/card_bronze.png";
+        }
+      } else if (selectedFlavor == Flavor.southportSharks) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "staff":
+            return card_platinum_black;
+          case "pearl":
+            return "assets/southportSharks/card_pearl.png";
+          case "opal":
+            return "assets/southportSharks/card_opal.png";
+          case "test":
+            return "assets/southportSharks/card_test.png";
+          case "amber":
+            return "assets/southportSharks/card_amber.png";
+          case "blackopal":
+            return "assets/southportSharks/card_black_opal.png";
+          default:
+            return "assets/southportSharks/card_jade.png";
         }
       } else {
         switch (membershipType.toLowerCase()) {

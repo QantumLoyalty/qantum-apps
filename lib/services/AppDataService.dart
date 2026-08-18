@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 import '../core/utils/AppHelper.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../core/network/APIList.dart';
 import '../core/network/NetworkHelper.dart';
 import '../data/local/SharedPreferenceHelper.dart';
 import '../data/models/NetworkResponse.dart';
+import '../data/models/incentives/SmartIncentivesParam.dart';
 import '../data/repositories/AppDataRepository.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,18 +30,21 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   }
 
   @override
-  Future<NetworkResponse> fetchPromotions(String membershipType) async {
+  Future<NetworkResponse> fetchPromotions(String membershipType,
+      {String? selectedVenue}) async {
     NetworkResponse networkResponse;
     try {
-      // var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      var URL = APIList.FETCH_PROMOTIONS + membershipType;
+      if (selectedVenue != null && selectedVenue.isNotEmpty) {
+        URL = "$URL&veneuName=$selectedVenue";
+      }
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var response = await NetworkHelper.instance.getCall(
-          url: Uri.parse(APIList.FETCH_PROMOTIONS + membershipType),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
-          });
+      var response =
+          await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+      });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
@@ -54,14 +59,25 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       required String birthdayMonth,
       required String userId,
       required String joinDate,
-      required String timezone}) async {
+      required String timezone,
+      String? membershipCategory,
+      String? expiryDate}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_VOUCHERS +
-          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone";
+          "$membershipType&birthMonth=$birthdayMonth&userId=$userId&joinDate=$joinDate&timezone=$timezone&joineddate=$joinDate";
+
+      if (membershipCategory != null) {
+        URL = "$URL&membershipCategory=$membershipCategory";
+      }
+      if (expiryDate != null) {
+        URL = "$URL&expirydate=$expiryDate";
+      }
+
       logEvent(URL);
+      logEvent(Uri.parse(URL));
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
@@ -104,6 +120,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       var URL = APIList.FETCH_HOME_BUTTONS;
+      "URL: $URL >> BEARER TOKEN:${sharedPreferenceHelper.getAuthToken()}"
+          .logMessage("LOG");
       var response =
           await NetworkHelper.instance.getCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
@@ -228,10 +246,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> createPaymentIntent(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
-      var url = Uri.parse(APIList.CREATE_PAYMENT_INTENT);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.CREATE_PAYMENT_INTENT_EARLY_BIRD
+          : APIList.CREATE_PAYMENT_INTENT);
+      print(url.toString());
       networkResponse = await NetworkHelper.instance.postCall(
           url: url,
           headers: {'Content-Type': 'application/json'},
@@ -244,12 +266,15 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> updatePaymentType(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var url = Uri.parse(APIList.UPDATE_PAYMENT_TYPE);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.UPDATE_PAYMENT_TYPE_EARLY_BIRD
+          : APIList.UPDATE_PAYMENT_TYPE);
       networkResponse = await NetworkHelper.instance.putCall(
           url: url,
           headers: {
@@ -265,10 +290,14 @@ class AppDataService extends AppDataRepository with LoggingMixin {
 
   @override
   Future<NetworkResponse> verifyPayment(
-      {required Map<String, dynamic> paymentParams}) async {
+      {required Map<String, dynamic> paymentParams,
+      String? paymentFlowSource}) async {
     NetworkResponse networkResponse;
     try {
-      var url = Uri.parse(APIList.VERIFY_PAYMENT);
+      var url = Uri.parse(paymentFlowSource != null
+          ? APIList.VERIFY_PAYMENT_EARLY_BIRD
+          : APIList.VERIFY_PAYMENT);
+      print("VERIFY PAYMENT: ${url.toString()} >> PARAMS: $paymentParams");
       networkResponse = await NetworkHelper.instance.postCall(
           url: url,
           headers: {'Content-Type': 'application/json'},
@@ -294,6 +323,142 @@ class AppDataService extends AppDataRepository with LoggingMixin {
         },
       );
     } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> getMembershipPlansById(
+      {required String membershipID}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var url = Uri.parse(APIList.CLUB_PACKAGE_CHECK +
+          '$membershipID&appType=${AppHelper.getAppType()}');
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+      );
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> getVenuesList() async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(
+          APIList.FETCH_VENUES_LIST + 'appType=${AppHelper.getAppType()}');
+      url.toString().logMessage();
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> setSelectedVenue({required String venueName}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.SAVE_VENUE);
+      url.toString().logMessage();
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      networkResponse = await NetworkHelper.instance.putCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: {'venueName': venueName},
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchSmartIncentives(
+      {required SmartIncentivesParam param}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.GET_SMART_INCENTIVES);
+      url.toString().logMessage();
+      param.toString().logMessage();
+
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      "SMART INCENTIVES URL: ${url.toString()} >> TOKEN: ${sharedPreferenceHelper.getAuthToken()!} >> PARAMS: ${param.toJson()}"
+          .logMessage();
+      networkResponse = await NetworkHelper.instance.postCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: param.toJson(),
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> consumeSmartIncentive(
+      {required Map<String, dynamic> params}) async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.ISSUE_SMART_INCENTIVES);
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      "CONSUME SMART INCENTIVES URL: ${url.toString()} >> TOKEN: ${sharedPreferenceHelper.getAuthToken()!} >> Params: $params"
+          .logMessage();
+      networkResponse = await NetworkHelper.instance.postCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+        },
+        body: params,
+      );
+    } catch (e) {
+      e.toString().logMessage();
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> checkAppUpdate() async {
+    NetworkResponse networkResponse;
+    try {
+      var url = Uri.parse(APIList.CHECK_APP_VERSION+"${AppHelper.getAppType()}/latest");
+      networkResponse = await NetworkHelper.instance.getCall(
+        url: url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+    } catch (e) {
+      e.toString().logMessage();
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }
     return networkResponse;

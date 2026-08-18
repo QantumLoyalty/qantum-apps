@@ -4,8 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/services/DeeplinkService.dart';
+import 'package:qantum_apps/view_models/DocumentScanProvider.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
+import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
 import '../core/flavors_config/app_themes.dart';
 import '../core/flavors_config/flavor_config.dart';
 import '../core/navigation/AppNavigator.dart';
@@ -70,8 +71,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => UserInfoProvider()),
         ChangeNotifierProvider(create: (context) => PromotionsProvider()),
         ChangeNotifierProvider(create: (context) => SpecialOffersProvider()),
+        ChangeNotifierProvider(create: (context) => DocumentScanProvider()),
+        ChangeNotifierProvider(create: (context) => MembershipManagerProvider()),
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
-
       ],
       child: Portal(
         child: MaterialApp(
@@ -98,7 +100,13 @@ class _MyAppState extends State<MyApp> {
             return MediaQuery(
                 data: MediaQuery.of(context)
                     .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: child!);
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: const SystemUiOverlayStyle(
+                        statusBarBrightness: Brightness.dark,
+                        statusBarColor: Colors.transparent,
+                        statusBarIconBrightness: Brightness.light),
+                    child: child ?? const SizedBox())
+            );
           },
         ),
       ),

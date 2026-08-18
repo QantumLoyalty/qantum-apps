@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/view_models/MembershipManagerProvider.dart';
-import '../../core/utils/AppHelper.dart';
-import '../../services/PaymentService.dart';
+
 import '/core/navigation/AppNavigator.dart';
-import '/views/common_widgets/AppButton.dart';
 import '/view_models/UserInfoProvider.dart';
+import '/views/common_widgets/AppButton.dart';
 import '/views/common_widgets/AppScaffold.dart';
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppDimens.dart';
+import '../../core/utils/AppHelper.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/PaymentService.dart';
 import '../common_widgets/AppLogo.dart';
 import 'widgets/BottomInfoWidget.dart';
 
 class PendingPaymentScreen extends StatefulWidget {
-  const PendingPaymentScreen({super.key});
+  String? fromScreenFlow;
+
+  PendingPaymentScreen({super.key, this.fromScreenFlow});
 
   @override
   State<PendingPaymentScreen> createState() => _PendingPaymentScreenState();
@@ -33,9 +37,13 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     membershipManagerProvider =
         Provider.of<MembershipManagerProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      userInfoProvider.runFetchProfileTimer();
+      userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
+      userInfoProvider.resetNavigated();
       membershipManagerProvider.checkSelectedMembershipInLocal();
     });
+
+    print(
+        "PendingPaymentScreen initialized with fromScreenFlow: ${widget.fromScreenFlow}");
   }
 
   @override
@@ -43,9 +51,21 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
     loc = AppLocalizations.of(context)!;
     return AppScaffold(body: SafeArea(child: Consumer<UserInfoProvider>(
       builder: (context, provider, child) {
+        /* logEvent(
+            "VISIBILITY LICENCE CONDITION >>> ${((provider.getUserInfo != null && provider.getUserInfo!.licenceFront != null && provider.getUserInfo!.licenceFront!.isNotEmpty && provider.getUserInfo!.licenceBack != null && provider.getUserInfo!.licenceBack!.isNotEmpty))}");
+        logEvent(
+            "VISIBILITY fromScreenFlow CONDITION >>>  ${widget.fromScreenFlow != null && widget.fromScreenFlow == "renew"}");
+*/
+        logEvent("THIS METHOD IS FOR IF PAYMENT IS UPDATED FROM S2W");
         if (provider.getUserInfo != null && !provider.isNavigated) {
           WidgetsBinding.instance.addPostFrameCallback((_) async {
-            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
+            MembershipStatus membershipStatus =
+                await AppHelper.checkIfUserHasPurchasedTheMembership(
+                    user: provider.getUserInfo);
+
+            logEvent("MEMBERSHIP STATUS:$membershipStatus");
+
+            if (membershipStatus == MembershipStatus.active) {
               /// ALREADY PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(context, AppNavigator.home);
               provider.markNavigated();
@@ -53,6 +73,7 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
           });
         }
 
+        logEvent("THIS METHOD IS AN ONLINE PAYMENT IS MADE FROM APP");
         if (membershipManagerProvider.isPaymentVerified != null) {
           logEvent(
               "isPaymentVerified: ${membershipManagerProvider.isPaymentVerified}");
@@ -166,11 +187,15 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                         ],
                       ),
                       AppDimens.shape_60,
-                      (provider.getUserInfo != null &&
-                              provider.getUserInfo!.licenceFront != null &&
-                              provider.getUserInfo!.licenceFront!.isNotEmpty &&
-                              provider.getUserInfo!.licenceBack != null &&
-                              provider.getUserInfo!.licenceBack!.isNotEmpty)
+                      ((provider.getUserInfo != null &&
+                                  provider.getUserInfo!.licenceFront != null &&
+                                  provider
+                                      .getUserInfo!.licenceFront!.isNotEmpty &&
+                                  provider.getUserInfo!.licenceBack != null &&
+                                  provider
+                                      .getUserInfo!.licenceBack!.isNotEmpty) ||
+                              (widget.fromScreenFlow != null &&
+                                  widget.fromScreenFlow == "renew"))
                           ? Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -196,22 +221,22 @@ class _PendingPaymentScreenState extends State<PendingPaymentScreen>
                                           loc: loc!,
                                           membershipManagerProvider:
                                               membershipManagerProvider,
-                                          userInfoProvider: userInfoProvider);
+                                          userInfoProvider: userInfoProvider,
+                                          renewType: "none");
                                     }),
-
                                 AppDimens.shape_20,
-
-                                  (provider.getUserInfo != null &&
-                                    provider.getUserInfo!.bluizeUniqueUserId=="4a9ec9ef-aa36-49c0-ba3b-e6b36b14d07b")
+                                (provider.getUserInfo != null &&
+                                        provider.getUserInfo!
+                                                .bluizeUniqueUserId ==
+                                            "4a9ec9ef-aa36-49c0-ba3b-e6b36b14d07b")
                                     ? AppButton(
-                                    text: "Continue for Review".toUpperCase(),
-                                    onClick: () {
-                                      AppNavigator.navigateAndClearStack(
-                                          context, AppNavigator.home);
-                                    })
+                                        text:
+                                            "Continue for Review".toUpperCase(),
+                                        onClick: () {
+                                          AppNavigator.navigateAndClearStack(
+                                              context, AppNavigator.home);
+                                        })
                                     : Container(),
-
-
                               ],
                             )
                           : Padding(

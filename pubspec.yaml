@@ -20,55 +20,83 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-# version:  1.0.0+75
+#version:  1.0.9+103
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
 ###################################
 # MAX
-#version:  1.0.0+57
+#version:  1.0.1+63
 ###################################
 # HOGAN'S REWARD
-#version: 1.0.3+10
+#version: 1.0.5+16
 ###################################
 # MHBC
-#version:  1.0.9+81
+#version:  1.0.14+102
 ###################################
 # MONTAUK TAVERN
-#version:  1.0.3+55
+#version:  1.0.4+56
 ###################################
 # CENTRAL LANE HOTEL
-#version:  1.0.4+65
+#version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
-#version: 1.0.3+9
+#version: 1.0.4+12
 ###################################
 #QANTUM
-#version: 1.0.0+62
+#version: 1.0.0+71
 ###################################
 # ACE REWARDS
-#version: 1.0.0+12
+#version: 1.0.0+13
 ###################################
 # QUEENS HOTEL
 #version: 1.0.0+2
 ###################################
 # BRISBANE BREWING
-#version: 1.0.2+7
+#version: 1.0.4+10
 ###################################
 # WOOLLAHRA HOTEL
-#version: 1.0.0+1
+#version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
-#version: 1.0.4+7
+#version: 1.0.6+11
 ###################################
 # FLINDERS STREET WHARVES
-#version: 1.0.0+4
+#version: 1.0.3+12
 ###################################
 # Kingscliff
-version: 1.0.0+4
+#version: 1.0.0+6
 ###################################
 # drinkRewards
+#version: 1.0.0+7
+###################################
+#QANTUMClub
+#version: 1.0.0+3
+###################################
+#MAX Club
+#version: 1.0.0+12
+###################################
+#WONTHAGGI
 #version: 1.0.0+4
+###################################
+#EDP
+#version: 1.0.5+12
+################################.###
+#SOT
+#version: 1.21.0+1205
+###################################
+#Bobs
+#version: 1.23.0+1
+###################################
+#Mosaic Hotel
+version: 1.0.5+8
+#Mannum club
+#version: 1.0.0+3
+#Southport Sharks
+#version: 1.0.0+4
+
+
+
 
 environment:
   sdk: ^3.5.3
@@ -89,7 +117,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
-  qr_flutter: ^4.1.0
   carousel_slider: ^5.0.0
   screen_brightness: ^2.1.1
   secure_content: ^1.0.1
@@ -120,7 +147,6 @@ dependencies:
   lottie:
   webview_flutter: ^4.13.0
   condition_builder:
-  freezed: ^3.1.0
   json_annotation: ^4.9.0
   flutter_secure_storage: ^9.2.4
   flutter_localization: ^0.3.3
@@ -133,13 +159,23 @@ dependencies:
   camera: ^0.10.5+2
   #camera: ^0.11.3
   flutter_flip_card: ^0.0.6
-  flutter_stripe: ^12.0.2
+  flutter_stripe: 12.4.0
 #  easy_geofencing: ^0.2.0
   flutter_dotenv: ^6.0.0
   app_links:
   connectivity_plus: ^7.0.0
-  flutter_custom_tabs: ^2.4.1
+  flutter_custom_tabs: ^2.5.0
   sms_autofill: ^2.4.1
+  syncfusion_flutter_barcodes:
+  url_launcher:
+  gif_view: ^1.0.3
+  flutter_scratch_card: ^1.0.1
+  audioplayers: ^6.7.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_slidable: ^4.0.3
+
+
 
 
 dev_dependencies:
@@ -154,6 +190,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   json_serializable: ^6.9.5
 
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -167,28 +204,110 @@ flutter:
   generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/bluewaterCaptainsClub/
-    - assets/woollahraHotel/
-    - assets/queensHotel/
-    - assets/brisbaneBrewing/
+    - assets/audio/
     - assets/common/
-    - assets/senseOfTaste/
-    - assets/qantum/
-    - assets/max/
     - assets/starReward/
-    - assets/manlyHarbourBoatClub/
-    - assets/centralLaneHotel/
-    - assets/montaukTavern/
+    - assets/max/
     - assets/hogansReward/
-    - assets/northShoreTavern/
-    - assets/aceRewards/
-    - assets/flindersStreetWharves/
-    - assets/drinkRewards/
-    - assets/kingscliff/
+
     - .env.mhbc
+    - .env.maxc
     - .env.qantum
     - .env.kc
     - .env.dr
+    - .env.mc
+    - .env.ss
+    - .env.edp
+
+      # flavor-wise assets
+  #  - path: assets/starReward/
+  #    flavors:
+  #        - starRewards
+
+    - path: assets/senseOfTaste/
+      flavors:
+          - senseOfTaste
+
+    - path: assets/qantum/
+      flavors:
+              - qantum
+
+    - path: assets/qantumClub/
+      flavors:
+              - qantumClub
+
+    - path: assets/maxClub/
+      flavors:
+              - maxClub
+
+    - path: assets/manlyHarbourBoatClub/
+      flavors:
+              - mhbc
+
+    - path: assets/centralLaneHotel/
+      flavors:
+              - clh
+
+    - path: assets/montaukTavern/
+      flavors:
+              - montaukTavern
+
+    - path: assets/northShoreTavern/
+      flavors:
+              - northShoreTavern
+
+    - path: assets/aceRewards/
+      flavors:
+              - aceRewards
+
+    - path: assets/brisbaneBrewing/
+      flavors:
+              - brisbane
+
+    - path: assets/woollahraHotel/
+      flavors:
+              - woollahra
+
+    - path: assets/bluewaterCaptainsClub/
+      flavors:
+              - bluewater
+
+    - path: assets/flindersStreetWharves/
+      flavors:
+              - flinders
+
+    - path: assets/kingscliff/
+      flavors:
+              - kingscliff
+
+    - path: assets/drinkRewards/
+      flavors:
+              - drinkRewards
+
+    - path: assets/wonthaggi/
+      flavors:
+              - wonthaggi
+
+    - path: assets/edp/
+      flavors:
+              - edp
+
+    - path: assets/bobsBulkBooze/
+      flavors:
+              - bobsBulkBooze
+
+    - path: assets/mosaicHotel/
+      flavors:
+              - mosaic
+
+    - path: assets/theMannumClub/
+      flavors:
+              - mannumClub
+
+    - path: assets/southportSharks/
+      flavors:
+        - southportSharks
+
 
   #   - images/a_dot_ham.jpeg
 
@@ -203,10 +322,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: Impact
+       fonts:
+         - asset: assets/fonts/impact.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

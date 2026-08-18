@@ -54,7 +54,7 @@ class _GeofencesampleState extends State<Geofencesample> {
     bg.BackgroundGeolocation.onProviderChange((bg.ProviderChangeEvent event) {
       print("LOCATION >>> $event");
     });
-  *//*
+  */ /*
 
 
   }

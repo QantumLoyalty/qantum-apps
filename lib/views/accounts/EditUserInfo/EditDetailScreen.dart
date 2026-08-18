@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/UpperCaseTextFormatter.dart';
+
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/mixins/dob_mixin.dart';
 import '../../../core/utils/AppDimens.dart';
 import '../../../core/utils/AppHelper.dart';
+import '../../../core/utils/UpperCaseTextFormatter.dart';
 import '../../../view_models/UserInfoProvider.dart';
 import '../../common_widgets/AppCustomButton.dart';
 
@@ -49,13 +50,14 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
     }
 
     _birthdayDDController = TextEditingController(
-        text: ConditionBuilder.on(() => dateTime != null && dateTime.day > 10,
+        text: ConditionBuilder.on(() => dateTime != null && dateTime.day >= 10,
                 () => dateTime!.day.toString())
             .on(() => dateTime != null && dateTime.day < 10,
                 () => "0${dateTime!.day.toString()}")
             .build(orElse: () => ""));
     _birthdayMMController = TextEditingController(
-        text: ConditionBuilder.on(() => dateTime != null && dateTime.month > 10,
+        text: ConditionBuilder.on(
+                () => dateTime != null && dateTime.month >= 10,
                 () => dateTime!.month.toString())
             .on(() => dateTime != null && dateTime.month < 10,
                 () => "0${dateTime!.month.toString()}")
@@ -154,7 +156,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           ],
                           controller: _birthdayDDController,
                           focusNode: _birthdayDDFocusNode,
-                          enabled: false,
+                          enabled: true,
                           style: TextStyle(
                               color: AppThemeCustom.getTextFieldTextColor(
                                   context)),
@@ -196,7 +198,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                       ],
                       controller: _birthdayMMController,
                       focusNode: _birthdayMMFocusNode,
-                      enabled: false,
+                      enabled: true,
                       style: TextStyle(
                           color: AppThemeCustom.getTextFieldTextColor(context)),
                       decoration: InputDecoration(
@@ -236,7 +238,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                             ],
                             controller: _birthdayYYController,
                             focusNode: _birthdayYYFocusNode,
-                            enabled: false,
+                            enabled: true,
                             style: TextStyle(
                                 color: AppThemeCustom.getTextFieldTextColor(
                                     context)),
@@ -332,6 +334,7 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
 
   @override
   void dispose() {
+    _fullNameFieldController.dispose();
     _birthdayDDController.dispose();
     _birthdayMMController.dispose();
     _birthdayYYController.dispose();

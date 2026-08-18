@@ -14,8 +14,8 @@
 
 
 ### QANTUM APP
-### COMMAND TO RUN THE APP : flutter run apk --flavor qantum -t lib/main_qa.dart
-### COMMAND TO BUILD THE APP : flutter run apk --release --flavor qantum -t lib/main_qa.dart
+ - COMMAND TO RUN THE APP : flutter run apk --flavor qantum -t lib/main_qa.dart
+ - COMMAND TO BUILD THE APP : flutter run apk --release --flavor qantum -t lib/main_qa.dart
 
 ### MAX GAMING APP
 ### COMMAND TO RUN THE APP : flutter run apk --flavor maxx -t lib/main_max.dart
@@ -28,3 +28,6 @@ adb shell am start \
 
 ### Kingscliff app build ios
 ### flutter build ipa --release --flavor kingscliff -t lib/main_kc.dart
+### flutter build ipa --release --flavor wonthaggi -t lib/main_wt.dart
+
+

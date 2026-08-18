@@ -16,7 +16,7 @@ class MyBenefitsDialog {
   showBenefitsDialog(BuildContext context) {
     showGeneralDialog(
         context: context,
-        transitionDuration: const Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 250),
         pageBuilder: (context, anim1, anim2) {
           return const Dialog(
             backgroundColor: Colors.transparent,

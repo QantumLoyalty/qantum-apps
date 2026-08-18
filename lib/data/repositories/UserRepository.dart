@@ -2,6 +2,7 @@ import '../models/NetworkResponse.dart';
 
 abstract class UserRepository {
   Future<NetworkResponse> login(String phoneNo);
+  Future<NetworkResponse> checkEmail({required String email});
 
   Future<NetworkResponse> signup(
       String phoneNo, Map<String, dynamic> signupParams);
@@ -17,7 +18,7 @@ abstract class UserRepository {
 
   Future<NetworkResponse> cancelAccount();
 
-  Future<NetworkResponse> fetchUserProfile();
+  Future<NetworkResponse> fetchUserProfile({required String fetchFromBluize});
 
   Future<NetworkResponse> updateUserProfile(Map<String, dynamic> params);
 
@@ -34,6 +35,7 @@ abstract class UserRepository {
   Future<NetworkResponse> resendOTPEmail({required String phoneNo});
 
   Future<NetworkResponse> resendOTPNewPhone({required String phoneNo});
+  Future<NetworkResponse> fetchStatusTierValue({required String statusTier});
 
   Future<NetworkResponse> verifyOTPEmail(
       String phoneNo, Map<String, dynamic> params);
@@ -45,6 +47,8 @@ abstract class UserRepository {
   Future<NetworkResponse> checkForAppUpdate(Map<String, dynamic> params);
 
   Future<NetworkResponse> uploadSelfie(String filePath);
+  Future<NetworkResponse> resendOTP({required String phoneNumber});
+  Future<NetworkResponse> sendOTPOnEmail({required String email});
 
   Future<NetworkResponse> logout();
 }

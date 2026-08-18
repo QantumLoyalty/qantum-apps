@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipFlowSource.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
 import '../../core/utils/AppIcons.dart';
@@ -11,7 +12,9 @@ import '../common_widgets/AppLogo.dart';
 import '../common_widgets/AppScaffold.dart';
 
 class MembershipPaymentScreen extends StatefulWidget {
-  const MembershipPaymentScreen({super.key});
+  MembershipFlowSource? membershipFlowSource;
+
+  MembershipPaymentScreen({super.key, this.membershipFlowSource});
 
   @override
   State<MembershipPaymentScreen> createState() =>
@@ -69,10 +72,10 @@ class _MembershipPaymentScreenState extends State<MembershipPaymentScreen> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("Email"),
+                              const Text("Email"),
                               TextFormField(),
                               AppDimens.shape_10,
-                              Text("Card Information"),
+                              const Text("Card Information"),
                               AppDimens.shape_5,
                               TextFormField(),
                               AppDimens.shape_5,
@@ -83,12 +86,12 @@ class _MembershipPaymentScreenState extends State<MembershipPaymentScreen> {
                                 ],
                               ),
                               AppDimens.shape_10,
-                              Text("Name on card"),
+                              const Text("Name on card"),
                               AppDimens.shape_5,
                               TextFormField(),
                               AppDimens.shape_15,
                               TextButton(
-                                  onPressed: () {}, child: Text("Pay \$100.00"))
+                                  onPressed: () {}, child: const Text("Pay \$100.00"))
                             ],
                           ),
                         ),

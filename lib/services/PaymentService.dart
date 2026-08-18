@@ -16,32 +16,34 @@ class PaymentService {
     return _instance!;
   }
 
-  static Future<void> makePayment({
-    required BuildContext context,
-    required AppLocalizations loc,
-    required MembershipManagerProvider membershipManagerProvider,
-    required UserInfoProvider userInfoProvider,
-  }) async {
+  static Future<void> makePayment(
+      {required BuildContext context,
+      required AppLocalizations loc,
+      required MembershipManagerProvider membershipManagerProvider,
+      required UserInfoProvider userInfoProvider,
+      required String renewType,
+      String? paymentFlowSource}) async {
     try {
       await membershipManagerProvider.createPaymentIntent(
-        loc: loc,
-        userId: userInfoProvider.getUserInfo!.id!,
-      );
+          loc: loc,
+          userId: userInfoProvider.getUserInfo!.id!,
+          renewType: renewType,
+          paymentFlowSource: paymentFlowSource);
 
       final clientSecret = membershipManagerProvider.paymentIntentClientSecret;
       if (clientSecret != null) {
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
-                style: ThemeMode.dark,
-                paymentIntentClientSecret:
-                    membershipManagerProvider.paymentIntentClientSecret!,
-                merchantDisplayName: 'Qantum',
-            ));
+          style: ThemeMode.dark,
+          paymentIntentClientSecret:
+              membershipManagerProvider.paymentIntentClientSecret!,
+          merchantDisplayName: 'Qantum',
+        ));
         await Stripe.instance.presentPaymentSheet();
         await membershipManagerProvider.verifyPayment(
-          loc: loc,
-          userId: userInfoProvider.getUserInfo!.id!,
-        );
+            loc: loc,
+            userId: userInfoProvider.getUserInfo!.id!,
+            paymentFlowSource: paymentFlowSource);
       }
     } on StripeException catch (e) {
       print("makePayment Error: $e");

@@ -1,6 +1,6 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
+    id "org.jetbrains.kotlin.android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
     id 'com.google.gms.google-services'
@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.au"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -39,127 +39,193 @@ android {
             dimension "app"
             applicationId "com.au.starhotels.app"
             manifestPlaceholders = [
-                    deeplinkHost: "stargroup-applink.chewzie.net"
-            ]
-        }
-        senseOfTaste {
-            dimension "app"
-            applicationId "com.au.senseoftaste.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        maxx {
-            dimension "app"
-            applicationId "com.au.max.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        qantum {
-            dimension "app"
-            applicationId "com.au.quantum.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        qantumClub {
-            dimension "app"
-            applicationId "com.au.quantumclub.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        mhbc {
-            dimension "app"
-            applicationId "com.au.mhbc.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        clh {
-            dimension "app"
-            applicationId "com.au.clh.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        montaukTavern {
-            dimension "app"
-            applicationId "com.au.montauk.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        hogansReward {
-            dimension "app"
-            applicationId "com.au.hogansreward.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        northShoreTavern {
-            dimension "app"
-            applicationId "com.au.northshoretavern.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        aceRewards {
-            dimension "app"
-            applicationId "com.au.acerewards.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        queens {
-            dimension "app"
-            applicationId "com.au.queenshotel.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-
-        brisbane {
-            dimension "app"
-            applicationId "com.au.brisbanebrewing.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
-            ]
-        }
-        woollahra {
-            dimension "app"
-            applicationId "com.au.woollahra.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "stargroup-applink.chewzie.net",
+                    deeplinkPath: "/"
             ]
         }
         bluewater {
             dimension "app"
             applicationId "com.au.bluewater.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "thebluewater-applink.chewzie.net",
+                    deeplinkPath: "/"
             ]
         }
         flinders {
             dimension "app"
             applicationId "com.au.flinders.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "flindersstreetwharves-applink.chewzie.net",
+                    deeplinkPath: "/"
             ]
         }
+        senseOfTaste {
+            dimension "app"
+            applicationId "au.com.senseoftaste.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        maxx {
+            dimension "app"
+            applicationId "com.au.max.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        maxClub {
+            dimension "app"
+            applicationId "com.au.maxclub.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        qantum {
+            dimension "app"
+            applicationId "com.au.quantum.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        qantumClub {
+            dimension "app"
+            applicationId "com.au.quantumclub.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        mhbc {
+            dimension "app"
+            applicationId "com.au.mhbc.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "app.clevaq.com",
+                    deeplinkPath: "/qr-code/workspace/a41f24bb-75eb-bde3-16c7-50c45b78608b/"
+            ]
+        }
+        clh {
+            dimension "app"
+            applicationId "com.au.clh.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        montaukTavern {
+            dimension "app"
+            applicationId "com.au.montauk.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        hogansReward {
+            dimension "app"
+            applicationId "com.au.hogansreward.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        northShoreTavern {
+            dimension "app"
+            applicationId "com.au.northshoretavern.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        aceRewards {
+            dimension "app"
+            applicationId "com.au.acerewards.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        brisbane {
+            dimension "app"
+            applicationId "com.au.brisbanebrewing.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        woollahra {
+            dimension "app"
+            applicationId "com.au.woollahra.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+
         kingscliff {
             dimension "app"
             applicationId "com.au.kingscliff.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
         drinkRewards {
             dimension "app"
             applicationId "com.au.drinkRewards.app"
             manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid"
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        wonthaggi {
+            dimension "app"
+            applicationId "com.au.wonthaggi.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        edp {
+            dimension "app"
+            applicationId "com.au.edp.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        bobsBulkBooze {
+            dimension "app"
+            applicationId "au.com.bobsbulkbooze.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        mosaic {
+            dimension "app"
+            applicationId "com.au.mhotel.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        mannumClub {
+            dimension "app"
+            applicationId "com.au.mannumClub.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
+            ]
+        }
+        southportSharks {
+            dimension "app"
+            applicationId "com.au.southportSharks.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "disabled.invalid",
+                    deeplinkPath: "/.*"
             ]
         }
     }
@@ -171,7 +237,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 26
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -205,6 +271,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.material:material:1.13.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    implementation 'com.onesignal:OneSignal:[5.0.0, 5.99.99]'
 }
 
 flutter {

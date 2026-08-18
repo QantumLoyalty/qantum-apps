@@ -8,9 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
@@ -19,6 +16,9 @@
     <uses-permission
         android:name="android.permission.ACCESS_ADSERVICES_AD_ID"
         tools:node="remove" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="${applicationName}"
@@ -28,6 +28,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:label"
         android:theme="@style/LaunchTheme"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         >
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -88,12 +91,18 @@
                 <data
                     android:scheme="https"
                     android:host="${deeplinkHost}"
-                    android:pathPrefix="/"
+                    android:pathPrefix="${deeplinkPath}"
                     />
+              <!--  <data
+                    android:scheme="https"
+                    android:host="app.clevaq.com"
+                    android:pathPattern="/qr-code/workspace/a41f24bb-75eb-bde3-16c7-50c45b78608b/.*" />-->
             </intent-filter>
 
         </activity>
-
+        <meta-data
+            android:name="com.onesignal.NotificationServiceExtension"
+            android:value="com.au.NotificationServiceExtension" />
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

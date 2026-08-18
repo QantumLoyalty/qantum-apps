@@ -44,12 +44,12 @@ class AppDimens {
     height: 80,
   );
 
-  static getCustomBoxShape(double size) => SizedBox(
+  static SizedBox getCustomBoxShape(double size) => SizedBox(
         width: size,
         height: size,
       );
 
-  static getCustomShape(double cWidth, double cHeight) => SizedBox(
+  static SizedBox getCustomShape(double cWidth, double cHeight) => SizedBox(
         width: cWidth,
         height: cHeight,
       );

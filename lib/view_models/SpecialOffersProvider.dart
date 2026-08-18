@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/enums/OffersFilterType.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
 import '../../data/models/OfferModel.dart';
 import '../core/utils/AppHelper.dart';
+import '../core/utils/FlavorConstants.dart';
 import '../data/models/NetworkResponse.dart';
 import '../core/mixins/logging_mixin.dart';
 import '../data/local/SharedPreferenceHelper.dart';
@@ -150,7 +152,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = await sharedPreferenceHelper.getUserData();
+      UserModel? userData = sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
         DateTime? dob;
@@ -170,7 +172,23 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
         final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
 
-        final String userStatusTier = await AppHelper.getUserTierType(userData);
+        final String userStatusTier = FlavorConstants.getUserTierType(userData);
+
+        String? membershipCategory;
+        String? expiryDate;
+
+        if (flavor == Flavor.mhbc) {
+          membershipCategory = userData.membershipCategory;
+
+          try {
+            DateTime dt = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
+                .parse(userData.membershipExpiryDate ?? "");
+
+            expiryDate = DateFormat("yyyy-MM-dd").format(dt);
+          } catch (e) {
+            logEvent("Exception in parsing birthdate $e");
+          }
+        }
 
         NetworkResponse networkResponse = await AppDataService.getInstance()
             .fetchSpecialOffers(
@@ -178,7 +196,9 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
                 birthdayMonth: dob != null ? "${dob.month}" : "1",
                 userId: userData.bluizeUniqueUserId!,
                 joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
-                timezone: currentTimeZone);
+                timezone: currentTimeZone,
+                membershipCategory: membershipCategory,
+                expiryDate: expiryDate);
         logEvent("Special Offers Response: ${networkResponse.response}");
         if (!networkResponse.isError) {
           _isError = networkResponse.isError;
@@ -216,7 +236,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
   fetchSpecialOffersTimer() async {
     //await getSpecialOffers(showLoader: true);
-    await getSpecialOffersFilters();
+    await getSpecialOffersFilters(showLoader: true);
 
     _fetchSpecialOfferTimer = Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTime), (value) async {
@@ -242,7 +262,7 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       });
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      UserModel? userData = await sharedPreferenceHelper.getUserData();
+      UserModel? userData = sharedPreferenceHelper.getUserData();
 
       NetworkResponse networkResponse = await AppDataService.getInstance()
           .fetchOfferByID(

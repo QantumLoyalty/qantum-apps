@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qantum_apps/views/dialogs/MembershipCancelledDialog.dart';
-import '../../../core/utils/AppColors.dart';
+import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/data/local/SharedPreferenceHelper.dart';
+import 'package:qantum_apps/views/dialogs/AppUpdateDialog.dart';
+import 'package:qantum_apps/views/home/notification_screen.dart';
 import '/core/utils/AppHelper.dart';
-import '../../../core/flavors_config/app_theme_custom.dart';
-import '../../../l10n/app_localizations.dart';
+import '/views/dialogs/MembershipCancelledDialog.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppDimens.dart';
 import '/core/utils/AppIcons.dart';
 import '/view_models/HomeProvider.dart';
 import '/view_models/UserInfoProvider.dart';
 import '/views/dialogs/MyProfileDialog.dart';
-import 'package:screen_brightness/screen_brightness.dart';
+import '../../../core/flavors_config/app_theme_custom.dart';
+import '../../../core/utils/AppColors.dart';
+import '../../../core/utils/FlavorConstants.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../dialogs/DigitalCardDialog.dart';
 
 class HomeAppBar extends StatelessWidget with LoggingMixin {
@@ -48,22 +53,12 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                   false, "my card");
                             }
 
-                            double screenBrightness = 0.4;
-
-                            try {
-                              screenBrightness =
-                                  await ScreenBrightness.instance.system;
-                            } catch (e) {
-                              logEvent(e);
-                              throw 'Failed to get system brightness';
-                            }
 
                             try {
                               await ScreenBrightness.instance
-                                  .setSystemScreenBrightness(1);
+                                  .setApplicationScreenBrightness(1);
                             } catch (e) {
                               debugPrint(e.toString());
-                              //throw 'Failed to set application brightness';
                             }
                             if (provider.getUserInfo!.isUserStatusCancelled()) {
                               await MembershipCancelledDialog.getInstance()
@@ -75,11 +70,12 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
 
                             try {
                               await ScreenBrightness.instance
-                                  .setSystemScreenBrightness(screenBrightness);
+                                  .resetApplicationScreenBrightness();
                             } catch (e) {
                               logEvent(e.toString());
-                              // throw 'Failed to reset application brightness';
                             }
+                           /* await AppUpdateDialog.getInstance()
+                                .showAppUpdateDialog(context);*/
                           },
                           child: SizedBox(
                             width: 80,
@@ -98,11 +94,12 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                                                     BorderRadius.circular(8)),
                                             child: Image.asset(
                                               AppIcons.getCardBackground(
-                                                  AppHelper.getUserTierType(
-                                                      provider.getUserInfo!)),
+                                                  FlavorConstants
+                                                      .getUserTierType(provider
+                                                          .getUserInfo!)),
                                               fit: BoxFit.cover,
                                             )))
-                                    : Container(),
+                                    : const SizedBox.shrink(),
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -133,74 +130,199 @@ class HomeAppBar extends StatelessWidget with LoggingMixin {
                   ),
                 ),
                 Expanded(
-                  child: Image.asset(
-                    AppIcons.getHeaderIcon(),
-                    width: 80,
-                    height: 80,
+                  child: Center(
+                    child: SizedBox(
+                      width: AppHelper.getAppIconSize(context).width,
+                      height: AppHelper.getAppIconSize(context).height,
+                      child: Image.asset(
+                        AppIcons.getHeaderIcon(),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: Column(
+                  child: Stack(
+                    alignment: Alignment.centerRight,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Consumer2<HomeProvider, UserInfoProvider>(
-                            builder:
-                                (context, provider, userInfoProvider, child) {
-                          return InkWell(
-                            onTap: () {
-                              if (userInfoProvider.getUserInfo != null &&
-                                  !userInfoProvider.getUserInfo!
-                                      .isUserStatusCancelled()) {
-                                /// HIDE & CHECK IF SEE ALL MENU IS VISIBLE OR NOT
-                                if (provider.showSeeAllMenu) {
-                                  provider.updateShowAllMenuVisibility(
-                                      false, "my profile");
-                                }
-                                MyProfileDialog.getInstance()
-                                    .showMyProfileDialog(context);
-                              }
+                      /*if (flavor == Flavor.southportSharks)
+                        Positioned(
+                          right: 60, // profile column ki width + spacing ke hisaab se adjust karo
+                          top: 0,
+                          bottom: 0,
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () async {
+                                final sph = await SharedPreferenceHelper.getInstance();
+                                final currentUserId = sph.getUserData()?.id ?? 'guest';
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          NotificationsScreen(userId: currentUserId),
+                                    ));
+                              },
+                              icon: Icon(
+                                Icons.notifications_outlined,
+                                color: AppThemeCustom.getHomeScreenProfileIconColor(context),
+                                size: 34,
+                              ),
+                            ),
+                          ),
+                        ),
+                      */
+                      if (flavor == Flavor.southportSharks ||
+                          flavor == Flavor.qantum ||
+                          flavor == Flavor.maxx ||
+                          flavor == Flavor.starReward ||
+                          flavor == Flavor.flinders ||
+                          flavor == Flavor.mhbc ||
+                          flavor == Flavor.edp ||
+                          flavor == Flavor.mosaic ||
+                          flavor == Flavor.drinkRewards ||
+                          flavor == Flavor.bobsBulkBooze ||
+                          flavor == Flavor.bluewater ||
+                          flavor == Flavor.northShoreTavern ||
+                          flavor == Flavor.brisbane ||
+                          flavor == Flavor.maxClub ||
+                          flavor == Flavor.mannumClub ||
+                          flavor == Flavor.qantumClub ||
+                          flavor == Flavor.hogansReward)
+                        Positioned(
+                          right: 65,
+                          top: 2,
+                          bottom: 0,
+                          child: Consumer<HomeProvider>(
+                            builder: (context, homeProvider, child) {
+                              final unreadCount = homeProvider.unreadCount;
+                              return Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(200),
+                                    onTap: () async {
+                                      final sph = await SharedPreferenceHelper
+                                          .getInstance();
+                                      final currentUserId =
+                                          sph.getUserData()?.id ?? 'guest';
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => NotificationsScreen(
+                                                userId: currentUserId),
+                                          ));
+                                    },
+                                    child: Image.asset(
+                                      AppIcons.notification,
+                                      color: AppThemeCustom
+                                          .getHomeScreenProfileIconColor(
+                                              context),
+                                      width: 30,
+                                      height: 30,
+                                    ),
+                                  ),
+                                  if (unreadCount > 0)
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: IgnorePointer(
+                                        ignoring: true,
+                                        child: Container(
+                                          width: 18,
+                                          height: 18,
+                                          constraints: const BoxConstraints(
+                                              minWidth: 16, minHeight: 16),
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius:
+                                                BorderRadius.circular(2000),
+                                            border: Border.all(
+                                                color: Colors.white, width: 1),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              unreadCount > 99
+                                                  ? '99+'
+                                                  : unreadCount.toString(),
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.bold,
+                                                // height: 1.2,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              );
                             },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  AppIcons.my_profile,
-                                  width: 34,
-                                  height: 34,
-                                  color:
-                                      (userInfoProvider.getUserInfo != null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
-                                          ? AppColors.disable_color
-                                          : AppThemeCustom.getHomeScreenProfileIconColor(context),
-                                ),
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .txtMyProfile
-                                      .toUpperCase(),
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.normal,
-                                      color: (userInfoProvider.getUserInfo !=
-                                                  null &&
-                                              userInfoProvider.getUserInfo!
-                                                  .isUserStatusCancelled())
-                                          ? AppColors.disable_color
-                                          : Theme.of(context)
-                                              .textSelectionTheme
-                                              .selectionColor),
-                                )
-                              ],
+                          ),
+                        ),
+                      Consumer2<HomeProvider, UserInfoProvider>(
+                        builder: (context, provider, userInfoProvider, child) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: InkWell(
+                              onTap: () {
+                                if (userInfoProvider.getUserInfo != null &&
+                                    !userInfoProvider.getUserInfo!
+                                        .isUserStatusCancelled()) {
+                                  if (provider.showSeeAllMenu) {
+                                    provider.updateShowAllMenuVisibility(
+                                        false, "my profile");
+                                  }
+                                  MyProfileDialog.getInstance()
+                                      .showMyProfileDialog(context);
+                                }
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    AppIcons.my_profile,
+                                    width: 34,
+                                    height: 34,
+                                    color:
+                                        (userInfoProvider.getUserInfo != null &&
+                                                userInfoProvider.getUserInfo!
+                                                    .isUserStatusCancelled())
+                                            ? AppColors.disable_color
+                                            : AppThemeCustom
+                                                .getHomeScreenProfileIconColor(
+                                                    context),
+                                  ),
+                                  Text(
+                                    // AppLocalizations.of(context)!.txtMyProfile.toUpperCase(),
+
+                                    "Profile",
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold,
+                                        color: (userInfoProvider.getUserInfo !=
+                                                    null &&
+                                                userInfoProvider.getUserInfo!
+                                                    .isUserStatusCancelled())
+                                            ? AppColors.disable_color
+                                            : Theme.of(context)
+                                                .textSelectionTheme
+                                                .selectionColor),
+                                  )
+                                ],
+                              ),
                             ),
                           );
-                        }),
+                        },
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

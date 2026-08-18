@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
 import '../../data/local/SharedPreferenceHelper.dart';
@@ -12,13 +14,16 @@ import '../../data/models/UserModel.dart';
 import '../flavors_config/flavor_config.dart';
 
 class AppHelper with LoggingMixin {
-  /// MAKE IT DEFAULT 5
-  static int defaultRequestTime = 5;
+  /// MAKE IT DEFAULT 10
+  static int defaultRequestTime = 10;
+
+  static int defaultRequestTimeSpecialIncentives = 60;
 
   static printMessage(dynamic printableItem) {
-    if (kDebugMode) {
+    /*if (kDebugMode) {
       print(printableItem);
-    }
+    }*/
+    print(printableItem);
   }
 
   static bool verifyPhoneNumber(String phoneNo) {
@@ -182,13 +187,13 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.starReward:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
-      case Flavor.maxx:
+      case Flavor.maxx || Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
 
       case Flavor.hogansReward ||
             Flavor.northShoreTavern ||
-            Flavor.queens ||
-            Flavor.brisbane:
+            Flavor.brisbane ||
+            Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
 
       case Flavor.flinders:
@@ -202,10 +207,12 @@ class AppHelper with LoggingMixin {
   static Color getEditAccountsButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.maxx:
+      case Flavor.maxx || Flavor.maxClub:
         return Theme.of(context).buttonTheme.colorScheme!.onSecondary;
-      case Flavor.brisbane:
+      case Flavor.brisbane || Flavor.wonthaggi:
         return Theme.of(context).primaryColor;
+      case Flavor.mosaic:
+        return AppColors.white;
       default:
         return Theme.of(context).buttonTheme.colorScheme!.onPrimary;
     }
@@ -214,7 +221,11 @@ class AppHelper with LoggingMixin {
   static ButtonStyle getAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.drinkRewards ||
+            Flavor.edp ||
+            Flavor.bobsBulkBooze:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -225,7 +236,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-      case Flavor.maxx:
+      case Flavor.maxx || Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -243,7 +254,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -301,7 +312,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.queens:
+      case Flavor.wonthaggi:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -317,16 +328,29 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
-
+      case Flavor.mosaic||Flavor.mannumClub:
+        return ButtonStyle(
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).primaryColorDark),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(
+                Theme.of(context).primaryColorDark));
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
   }
 
   static ButtonStyle getEditAccountsButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.wonthaggi ||
+            Flavor.edp ||
+            Flavor.senseOfTaste ||
+            Flavor.bobsBulkBooze||Flavor.mosaic||Flavor.mannumClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -345,7 +369,7 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx || Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.7)),
@@ -363,7 +387,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -413,8 +437,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.aceRewards ||
-            Flavor.queens ||
+      case Flavor.aceRewards||
             Flavor.bluewater ||
             Flavor.woollahra:
         return ButtonStyle(
@@ -446,14 +469,17 @@ class AppHelper with LoggingMixin {
                 Theme.of(context).buttonTheme.colorScheme!.primary));
 
       default:
-        return ButtonStyle();
+        return const ButtonStyle();
     }
   }
 
   static ButtonStyle getDeleteButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.drinkRewards:
+      case Flavor.qantum ||
+            Flavor.qantumClub ||
+            Flavor.drinkRewards ||
+            Flavor.edp:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -461,18 +487,18 @@ class AppHelper with LoggingMixin {
                     color: Theme.of(context).buttonTheme.colorScheme!.primary),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.maxx || Flavor.maxClub || Flavor.bobsBulkBooze:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.maxx:
+      case Flavor.mosaic:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                side: BorderSide(color: AppColors.dr_button_color),
+                side: const BorderSide(color:Colors.transparent),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       case Flavor.starReward || Flavor.kingscliff:
@@ -483,7 +509,7 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.southportSharks:
         return ButtonStyle(
             shadowColor:
                 WidgetStatePropertyAll(Colors.black.withValues(alpha: 0.1)),
@@ -519,7 +545,7 @@ class AppHelper with LoggingMixin {
                 side: BorderSide(color: AppColors.white),
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
-      case Flavor.northShoreTavern || Flavor.queens:
+      case Flavor.northShoreTavern ||  Flavor.wonthaggi:
         return ButtonStyle(
             shadowColor: WidgetStatePropertyAll(
                 Theme.of(context).primaryColor.withValues(alpha: 0.1)),
@@ -560,8 +586,7 @@ class AppHelper with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.montaukTavern ||
             Flavor.hogansReward ||
-            Flavor.clh ||
-            Flavor.queens:
+            Flavor.clh:
         return const Size(142, 42);
 
       case Flavor.northShoreTavern ||
@@ -569,16 +594,28 @@ class AppHelper with LoggingMixin {
             Flavor.brisbane ||
             Flavor.bluewater ||
             Flavor.kingscliff ||
-            Flavor.drinkRewards:
+            Flavor.drinkRewards ||
+            Flavor.bobsBulkBooze||Flavor.southportSharks:
         return const Size(142, 58);
 
       case Flavor.woollahra:
         return const Size(252, 114);
       case Flavor.mhbc:
-        return const Size(142, 30);
+        return const Size(142, 48);
+        case Flavor.maxClub:
+        return const Size(142, 48);
       case Flavor.flinders:
         return const Size(56, 56);
-
+      case Flavor.senseOfTaste:
+        return const Size(280, 80);
+      case Flavor.edp:
+        return const Size(280, 120);
+      case Flavor.mosaic:
+        return const Size(100, 90);
+      case Flavor.mannumClub:
+        return const Size(250, 90);
+      case Flavor.wonthaggi:
+        return const Size(150, 100);
       default:
         return const Size(68, 68);
     }
@@ -587,11 +624,8 @@ class AppHelper with LoggingMixin {
   static Future<String?> getDeviceToken() async {
     final oneSignalUser = OneSignal.User;
     final pushSubscription = OneSignal.User.pushSubscription;
-
-    ;
     printMessage("Push Subscription ${pushSubscription.optedIn}");
-    printMessage(
-        "Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
+    printMessage("Push ${OneSignal.User.pushSubscription.id} Token ${pushSubscription.token}");
 
     return oneSignalUser.pushSubscription.id;
   }
@@ -603,99 +637,93 @@ class AppHelper with LoggingMixin {
       Flavor.qantum: "Qantum",
       Flavor.qantumClub: "Qantum",
       Flavor.maxx: "MaxGaming",
+      Flavor.maxClub: "MaxGaming",
       Flavor.clh: "Central",
       Flavor.mhbc: "Manly",
       Flavor.montaukTavern: "Montauk",
-      Flavor.senseOfTaste: "Sense",
       Flavor.hogansReward: "Hogan",
       Flavor.northShoreTavern: "North",
       Flavor.aceRewards: "Ace",
-      Flavor.queens: "Queens",
       Flavor.brisbane: "Brisbane",
       Flavor.bluewater: "Bluewater",
       Flavor.flinders: "Flinders",
       Flavor.drinkRewards: "Drinks",
+      Flavor.wonthaggi: "Wonthaggi",
+      Flavor.edp: "EDP",
+      Flavor.woollahra: "Woollahra",
+      Flavor.senseOfTaste: "Sense",
+      Flavor.bobsBulkBooze: "Bob",
+      Flavor.mannumClub: "Mannum",
+      Flavor.mosaic: "Mosaic",
     };
     return appTypeMap[flavor] ?? "Qantum";
-  }
-
-  static String getUserTierType(UserModel userData) {
-    FlavorConfig flavorConfig = FlavorConfig.instance;
-
-    if (flavorConfig.flavor == Flavor.starReward||flavorConfig.flavor == Flavor.drinkRewards) {
-      if (userData.membershipCategory != null &&
-          userData.membershipCategory!.isNotEmpty) {
-        if (userData.membershipCategory!.toLowerCase() == "") {
-          return "STAFF PRE 3MTH";
-        } else {
-          return userData.membershipCategory!;
-        }
-      } else {
-        return "Valued";
-      }
-    } else {
-      if (userData.statusTier != null && userData.statusTier!.isNotEmpty) {
-        if (userData.statusTier!.toLowerCase() == "") {
-          return "STAFF PRE 3MTH";
-        } else {
-          return userData.statusTier!;
-        }
-      } else {
-        /// STATUS TIER IS NULL, NEED TO RETURN DEFAULT TIER
-        switch (flavorConfig.flavor) {
-          case Flavor.mhbc:
-            return "Crewmate";
-          case Flavor.montaukTavern:
-            return "Member";
-          case Flavor.clh:
-            return "Member";
-          case Flavor.hogansReward:
-            return "Bronze";
-          case Flavor.queens:
-            return "Queens";
-          case Flavor.aceRewards:
-            return "Tens";
-          case Flavor.brisbane:
-            return "Member";
-          case Flavor.woollahra:
-            return "Regulars";
-          case Flavor.bluewater:
-            return "Deckhand";
-          case Flavor.flinders:
-            return "Member";
-          case Flavor.northShoreTavern:
-            return "Silver";
-          case Flavor.kingscliff:
-            return "Valued";
-          case Flavor.drinkRewards:
-            return "Explorer";
-          default:
-            return "Valued";
-        }
-      }
-    }
   }
 
   static bool isClubApp() {
     final flavor = FlavorConfig.instance.flavor;
     //const clubFlavors = {Flavor.qantumClub, Flavor.aceRewards, Flavor.mhbc};
-    const clubFlavors = {Flavor.aceRewards, Flavor.mhbc};
+    const clubFlavors = {
+      Flavor.aceRewards,
+      Flavor.mhbc,
+      Flavor.qantumClub,
+      Flavor.maxClub,
+      Flavor.mannumClub,
+     // Flavor.southportSharks,
+    };
     return clubFlavors.contains(flavor);
   }
 
-  static Future<bool> checkIfUserHasPurchasedTheMembership() async {
-    SharedPreferenceHelper sharedPreferencesHelper =
+  static Future<MembershipStatus> checkIfUserHasPurchasedTheMembership(
+      {UserModel? user}) async {
+    /*SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    UserModel? userData = sharedPreferencesHelper.getUserData();*/
+
+    UserModel? userData;
+
+    if (user != null) {
+      userData = user;
+    } else {
+      SharedPreferenceHelper sharedPreferencesHelper =
+          await SharedPreferenceHelper.getInstance();
+      userData = sharedPreferencesHelper.getUserData();
+    }
+
     if (userData != null) {
-      if (userData.paymentStatus!.isNotEmpty &&
-          userData.paymentStatus!.toLowerCase() == 'success') {
-        return true;
+      debugPrint(
+          "Event:: checkIfUserHasPurchasedTheMembership:: ${userData.toString()}",
+          wrapWidth: 1024);
+
+      if (userData.paymentType != null && userData.paymentType!.isNotEmpty) {
+        print("PAYMENT TYPE ${userData.paymentType}");
+        if (userData.paymentType!.toLowerCase() == "reception") {
+          return MembershipStatus.pendingPayment;
+        } else {
+          if (userData.paymentType!.toLowerCase() == "card") {
+            if (userData.paymentStatus!.isNotEmpty &&
+                userData.paymentStatus!.toLowerCase() == 'success') {
+              if (AppHelper.checkIfMembershipActive(userData)) {
+                return MembershipStatus.active;
+              } else {
+                return MembershipStatus.inactive;
+              }
+            } else {
+              return MembershipStatus.notMember;
+            }
+          } else {
+            if (AppHelper.checkIfMembershipActive(userData)) {
+              return MembershipStatus.active;
+            } else {
+              return MembershipStatus.inactive;
+            }
+          }
+        }
       } else {
-        return false;
+        return MembershipStatus.notMember;
       }
     } else {
-      return false;
+      print("User data not found in shared preferences");
+      return MembershipStatus.notMember;
     }
   }
 
@@ -703,8 +731,10 @@ class AppHelper with LoggingMixin {
   static Future<bool> checkIfUserIsNew() async {
     SharedPreferenceHelper sharedPreferencesHelper =
         await SharedPreferenceHelper.getInstance();
-    UserModel? userData = await sharedPreferencesHelper.getUserData();
+    UserModel? userData = sharedPreferencesHelper.getUserData();
     if (userData != null) {
+      print("userData.type >> ${userData.type}");
+
       if (userData.type != null && userData.type!.toLowerCase() == "new") {
         return true;
       } else {
@@ -737,4 +767,46 @@ class AppHelper with LoggingMixin {
 
     return !results.contains(ConnectivityResult.none);
   }
+
+  static bool checkIfMembershipActive(UserModel user) {
+    if (user.membershipExpiryDate != null &&
+        user.membershipExpiryDate!.isNotEmpty) {
+      print(
+          "Membership Expiry: ${user.membershipExpiryDate} ServerTime ${user.serverTime}");
+
+      if (user.serverTime != null && user.serverTime!.isNotEmpty) {
+        /*DateTime expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
+        DateTime serverTime = DateTime.parse(user.serverTime!).toUtc();
+*/
+
+        final server = DateTime.parse(user.serverTime!).toUtc();
+        final expiry = DateTime.parse(user.membershipExpiryDate!).toUtc();
+
+        final serverDateOnly =
+            DateTime.utc(server.year, server.month, server.day);
+        final expiryDateOnly =
+            DateTime.utc(expiry.year, expiry.month, expiry.day);
+        print("Membership status: ${serverDateOnly.isBefore(expiryDateOnly)}");
+        return serverDateOnly.isBefore(expiryDateOnly) ||
+            serverDateOnly.isAtSameMomentAs(expiryDateOnly);
+
+        /*    print("Membership status: ${serverTime.isBefore(expiry)}");
+        return serverTime.isBefore(expiry);
+        //return serverTime.isAfter(expiry);*/
+      }
+
+      return false;
+    }
+    print("Membership Expiry Data ${user.membershipExpiryDate}");
+
+    return false;
+  }
+
+  static Future<String> getAppVersion() async {
+    final appInfo = await PackageInfo.fromPlatform();
+    debugPrint('${appInfo.version} ${appInfo.appName}');
+    String version = "${appInfo.version} (${appInfo.buildNumber})";
+    return version;
+  }
+
 }

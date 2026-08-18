@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:qantum_apps/core/utils/FlavorConstants.dart';
 
 import '/core/mixins/logging_mixin.dart';
 import '/core/utils/AppHelper.dart';
@@ -95,17 +97,24 @@ class UserService with LoggingMixin implements UserRepository {
   }
 
   @override
-  Future<NetworkResponse> fetchUserProfile() async {
+  Future<NetworkResponse> fetchUserProfile(
+      {required String fetchFromBluize}) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var response = await NetworkHelper.instance
-          .postCall(url: Uri.parse(APIList.GET_PROFILE), headers: {
+      // print('Bearer ${sharedPreferenceHelper.getAuthToken()}');
+
+      String URL = APIList.GET_PROFILE + "?fetchFromBluize=$fetchFromBluize";
+      print("URL: $URL");
+      var response =
+          await NetworkHelper.instance.postCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()}'
       }, body: {});
       networkResponse = response;
+
+      debugPrint("USER FULL : ${networkResponse.response}", wrapWidth: 1024);
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());
     }
@@ -389,9 +398,9 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      UserModel? user = await sharedPreferenceHelper.getUserData();
+      UserModel? user = sharedPreferenceHelper.getUserData();
 
-      final String userStatusTier = await AppHelper.getUserTierType(user!);
+      final String userStatusTier = FlavorConstants.getUserTierType(user!);
 
       var response = await NetworkHelper.instance.getCall(
           url: Uri.parse(APIList.GET_USERS_BENEFITS + "type=$userStatusTier"),
@@ -413,7 +422,7 @@ class UserService with LoggingMixin implements UserRepository {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
 
-      UserModel? user = await sharedPreferenceHelper.getUserData();
+      UserModel? user = sharedPreferenceHelper.getUserData();
       final request = http.MultipartRequest(
           'POST',
           Uri.parse(
@@ -452,6 +461,83 @@ class UserService with LoggingMixin implements UserRepository {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
       }, body: {});
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> resendOTP({required String phoneNumber}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(APIList.RESEND_OTP +
+              "$phoneNumber?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> fetchStatusTierValue(
+      {required String statusTier}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(APIList.GET_STATUS_TIER_VALUE + statusTier),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> checkEmail({required String email}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(
+              "${APIList.CHECK_EMAIL}$email?appType=${AppHelper.getAppType()}"));
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> sendOTPOnEmail({required String email}) async {
+    NetworkResponse networkResponse;
+    try {
+      var response = await NetworkHelper.instance.postCall(
+          url: Uri.parse(APIList.SEND_OTP_EXISTING_EMAIL +
+              "?appType=${AppHelper.getAppType()}"),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            'Email': email
+          });
       networkResponse = response;
     } catch (e) {
       networkResponse = NetworkResponse.error(responseMessage: e.toString());

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:qantum_apps/data/local/AppSecureStore.dart';
 import 'package:qantum_apps/data/models/UserModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +17,9 @@ class SharedPreferenceHelper {
   static String MEMBERSHIP = "membership";
   static String AUTH_TOKEN = "authToken";
   static String COUNTRY_CODE = "countryCode";
+  static String LAST_EARLY_BIRD_DATE = "lastEarlyBirdDate";
+  static String LAST_NOTIFICATION_PERMISSION_REQUEST =
+      "lastNotificationPermissionRequest";
 
   static Future<SharedPreferenceHelper> getInstance() async {
     _instance ??= SharedPreferenceHelper._internal();
@@ -105,6 +107,34 @@ class SharedPreferenceHelper {
       }
       return null;
     }*/
+  }
+
+  saveLastEarlyBirdDialogDate(String date) {
+    print("LastEarlyBirdDialogDate >>> $date");
+    _sharedPreferences!.setString(LAST_EARLY_BIRD_DATE, date);
+  }
+
+  String? getLastEarlyBirdDialogDate() {
+    if (_sharedPreferences!.containsKey(LAST_EARLY_BIRD_DATE)) {
+      return _sharedPreferences!.getString(LAST_EARLY_BIRD_DATE)!;
+    }
+    return null;
+  }
+
+  saveLastNotificationTime(int date) {
+    try {
+      print("SaveLastNotificationTime >>> $date");
+      _sharedPreferences!.setInt(LAST_NOTIFICATION_PERMISSION_REQUEST, date);
+    } catch (e) {
+      print("Exception: ${e.toString()}");
+    }
+  }
+
+  int? getLastNotificationTime() {
+    if (_sharedPreferences!.containsKey(LAST_NOTIFICATION_PERMISSION_REQUEST)) {
+      return _sharedPreferences!.getInt(LAST_NOTIFICATION_PERMISSION_REQUEST)!;
+    }
+    return null;
   }
 
   clearAll() async {

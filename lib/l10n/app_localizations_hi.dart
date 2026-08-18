@@ -116,6 +116,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtMoreInfo => 'अधिक जानकारी';
 
   @override
+  String get txtMore => 'और देखें';
+
+  @override
   String get txtCongratulations => 'बधाई हो!';
 
   @override
@@ -335,6 +338,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get msgIncorrectOTP => 'आगे बढ़ने के लिए सही 4-अंकीय ओटीपी दर्ज करें।';
 
   @override
+  String get msgSendingOTPEmail => 'ईमेल पर OTP भेजा जा रहा है...';
+
+  @override
   String get msgSendingOTP => 'आपके फोन पर ओटीपी भेजा जा रहा है...';
 
   @override
@@ -398,7 +404,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get txtValidTo => 'मान्य तिथि';
 
   @override
-  String get txtStatusCreditsReactNextLevel => 'अगले स्तर तक पहुँचने के लिए स्टेटस क्रेडिट्स';
+  String get txtStatusCreditsReactNextLevel => 'स्टेटस क्रेडिट्स###अगले स्तर तक पहुँचने के लिए';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => 'स्टेटस क्रेडिट्स की आवश्यकता है\nअगले स्तर तक पहुँचने के लिए';
 
   @override
   String get txtEditMyDetails => 'मेरी जानकारी संपादित करें';
@@ -603,4 +612,103 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgNoOffers => 'ऑफ़र उपलब्ध नहीं हैं';
+
+  @override
+  String get cannotEditSeeVenue => 'संपादन संभव नहीं है\nवेन्यू देखें';
+
+  @override
+  String get msgErrorInDLScanning => 'स्कैनिंग में त्रुटि हुई है, कृपया अपने मूल ड्राइविंग लाइसेंस की फोटो क्लिक करें और फिर से प्रयास करें।';
+
+  @override
+  String get membershipRenewalTime => 'सदस्यता नवीनीकरण का समय!';
+
+  @override
+  String get yourMembershipExpired => 'आपकी सदस्यता समाप्त हो गई है';
+
+  @override
+  String get renewNow => 'नवीनीकरण करें';
+
+  @override
+  String get renewMembership => 'सदस्यता नवीनीकरण करें';
+
+  @override
+  String get paymentOptions => 'भुगतान विकल्प';
+
+  @override
+  String get appUpdate => 'ऐप अपडेट';
+
+  @override
+  String get msgNewVersionAvailable => '### का नया संस्करण उपलब्ध है!';
+
+  @override
+  String get msgNewAppVersionAvailable => 'संस्करण ### अब उपलब्ध है!';
+
+  @override
+  String get msgYouHaveVersion => 'आपके पास संस्करण ### है';
+
+  @override
+  String get releaseNotes => 'रिलीज़ नोट्स:';
+
+  @override
+  String get msgLikeToUpdate => 'क्या आप इसे अभी अपडेट करना चाहेंगे?';
+
+  @override
+  String get ignore => 'अनदेखा करें';
+
+  @override
+  String get later => 'बाद में';
+
+  @override
+  String get updateNow => 'अभी अपडेट करें';
+
+  @override
+  String get msgUnableConnect => 'कनेक्ट नहीं हो सका। कृपया अपने इंटरनेट कनेक्शन की जांच करें और पुनः प्रयास करें।';
+
+  @override
+  String get renewalOpen => 'नवीनीकरण\nअब खुला है';
+
+  @override
+  String get txtCurrentDeals => 'वर्तमान ऑफ़र';
+
+  @override
+  String get txtOurGuarantee => 'हमारी गारंटी';
+
+  @override
+  String get yourMembershipExpires => 'आपकी सदस्यता समाप्त हो रही है';
+
+  @override
+  String get txtChangeFavouriteVenue => 'पसंदीदा स्थान बदलें';
+
+  @override
+  String get txtSaveMyVenue => 'मेरी जगह सहेजें';
+
+  @override
+  String get selectEDPVenues => 'कृपया अपने पसंदीदा\nEDP स्थान चुनें';
+
+  @override
+  String get selectVenuesSuccessMsg => 'स्थान सफलतापूर्वक अपडेट किया गया!';
+
+  @override
+  String get selectVenuesErrorMsg => 'स्थान अपडेट करते समय त्रुटि हुई!';
+
+  @override
+  String get pleaseAvoidSpecialChar => 'कृपया विशेष वर्णों से बचें';
+
+  @override
+  String get warning => 'चेतावनी!';
+
+  @override
+  String get yesDelete => 'हाँ, डिलीट करें';
+
+  @override
+  String get deleteAccountWarning => 'आप अपना खाता डिलीट करने वाले हैं।';
+
+  @override
+  String get txtNotification => 'सूचनाएँ';
+
+  @override
+  String get txtPushNotification => 'पुश सूचनाएँ';
+
+  @override
+  String get deleteAccountPermanentMessage => 'पुष्टि करने के बाद, यह खाता अब उपयोग नहीं किया जा सकेगा और आपका डेटा व व्यक्तिगत जानकारी 48 घंटों के भीतर हमारे सिस्टम से स्थायी रूप से हटा दी जाएगी।';
 }

@@ -116,6 +116,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtMoreInfo => 'More Info';
 
   @override
+  String get txtMore => 'More\n ';
+
+  @override
   String get txtCongratulations => 'Congratulations!';
 
   @override
@@ -254,7 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgTermsAndConditionSignup => 'By pressing the JOIN NOW button I agree to the terms and conditions of the Venue\'s Loyalty Program and I am at least 18 years of age.';
 
   @override
-  String get txtDeleteMyAccount => 'Delete my account';
+  String get txtDeleteMyAccount => 'Delete\nmy account';
 
   @override
   String get txtViewTermsConditions => 'View T&C\'s';
@@ -335,6 +338,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgIncorrectOTP => 'Please enter the correct 4-digit OTP to proceed.';
 
   @override
+  String get msgSendingOTPEmail => 'Sending OTP on email...';
+
+  @override
   String get msgSendingOTP => 'Sending OTP on your phone...';
 
   @override
@@ -398,7 +404,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get txtValidTo => 'Valid to';
 
   @override
-  String get txtStatusCreditsReactNextLevel => 'Status Credits to reach next level';
+  String get txtStatusCreditsReactNextLevel => 'Status Credits###to reach next level';
+
+  @override
+  String get txtStatusCreditsRequiredReactNextLevel => 'Status credits required to\nreach next level';
 
   @override
   String get txtEditMyDetails => 'Edit my details';
@@ -464,7 +473,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgOtpIssue => 'There was a problem sending the OTP. Please try again.';
 
   @override
-  String get msgVerificationCodeSentToEmail => 'We sent a verification code to your email address.';
+  String get msgVerificationCodeSentToEmail => '       We sent a verification code to your email address.';
 
   @override
   String get msgVerificationCodeSentToPhone => 'We sent a verification code to the mobile number ending in';
@@ -603,4 +612,103 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgNoOffers => 'No offers found!';
+
+  @override
+  String get cannotEditSeeVenue => 'CANNOT EDIT\nSEE VENUE';
+
+  @override
+  String get msgErrorInDLScanning => 'Error in scanning, please click your original driving licence and try again';
+
+  @override
+  String get membershipRenewalTime => 'Membership Renewal Time!';
+
+  @override
+  String get yourMembershipExpired => 'Your membership has expired';
+
+  @override
+  String get renewNow => 'Renew Now';
+
+  @override
+  String get renewMembership => 'Renew Membership';
+
+  @override
+  String get paymentOptions => 'Payment Options';
+
+  @override
+  String get appUpdate => 'App Update';
+
+  @override
+  String get msgNewVersionAvailable => 'A new version of ### is available!';
+
+  @override
+  String get msgNewAppVersionAvailable => 'Version ### is now available!';
+
+  @override
+  String get msgYouHaveVersion => 'You have version ###';
+
+  @override
+  String get releaseNotes => 'Release Notes:';
+
+  @override
+  String get msgLikeToUpdate => 'Would you like to update it now?';
+
+  @override
+  String get ignore => 'IGNORE';
+
+  @override
+  String get later => 'LATER';
+
+  @override
+  String get updateNow => 'UPDATE NOW';
+
+  @override
+  String get msgUnableConnect => 'Unable to connect. Please check your internet connection and try again.';
+
+  @override
+  String get renewalOpen => 'Renewals\nNow Open';
+
+  @override
+  String get txtCurrentDeals => 'Current Deals';
+
+  @override
+  String get txtOurGuarantee => 'Our Guarantee';
+
+  @override
+  String get yourMembershipExpires => 'Your Membership expires';
+
+  @override
+  String get txtChangeFavouriteVenue => 'Change Favourite Venues';
+
+  @override
+  String get txtSaveMyVenue => 'Save My Venue';
+
+  @override
+  String get selectEDPVenues => 'Please choose your\nfavourite EDP Venue';
+
+  @override
+  String get selectVenuesSuccessMsg => 'Venue updated successfully!';
+
+  @override
+  String get selectVenuesErrorMsg => 'Error while updating the venue!';
+
+  @override
+  String get pleaseAvoidSpecialChar => 'Please avoid special characters';
+
+  @override
+  String get warning => 'Warning!';
+
+  @override
+  String get yesDelete => 'Yes, Delete';
+
+  @override
+  String get deleteAccountWarning => 'You are about to delete your account.';
+
+  @override
+  String get txtNotification => 'Notifications';
+
+  @override
+  String get txtPushNotification => 'Push Notifications';
+
+  @override
+  String get deleteAccountPermanentMessage => 'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
 }

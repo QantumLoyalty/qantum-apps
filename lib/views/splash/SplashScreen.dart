@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/enums/MembershipStatus.dart';
 import 'package:qantum_apps/services/DeeplinkService.dart';
-import 'package:qantum_apps/view_models/HomeProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppHelper.dart';
@@ -20,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   late Flavor flavor;
   final DeeplinkService _deepLinkService = DeeplinkService();
   Uri? deepLink;
-  bool _isOpenedFromDeepLink = false;
+  final bool _isOpenedFromDeepLink = false;
 
   @override
   void initState() {
@@ -29,23 +28,32 @@ class _SplashScreenState extends State<SplashScreen> {
       await Future.delayed(const Duration(seconds: 2));
       flavor = FlavorConfig.instance.flavor!;
 
-      _deepLinkService.init((link) {
-        _isOpenedFromDeepLink = true;
+     /* await _deepLinkService.init((link) {
+       // if (!mounted) return;
 
-        final encodedLink = link.queryParameters['link'];
-        if (encodedLink == null) return;
+      //  if (_isOpenedFromDeepLink) return;
+//        _isOpenedFromDeepLink = true;
 
-        Provider.of<HomeProvider>(context, listen: false)
-            .setDeepLinkParams(encodedLink);
+        if (flavor == Flavor.starReward) {
+          final encodedLink = link.queryParameters['link'];
+          if (encodedLink == null) return;
 
-        /*final decodedLink = Uri.decodeComponent(encodedLink);
+          Provider.of<HomeProvider>(context, listen: false)
+              .setDeepLinkParams(encodedLink);
+        } else if (flavor == Flavor.mhbc) {
+          print("DEEP LINK BEFORE: ${link.toString()}");
+          Provider.of<HomeProvider>(context, listen: false)
+              .setDeepLinkParams(link.toString());
+        }
+
+        *//*final decodedLink = Uri.decodeComponent(encodedLink);
         final innerUri = Uri.parse(decodedLink);
 
         final encodedData = innerUri.queryParameters['data'];
         if (encodedData == null) return;
 
-        AppHelper.decodeBase64Payload(encodedData);*/
-      });
+        AppHelper.decodeBase64Payload(encodedData);*//*
+      });*/
 
       _checkLoginStatus();
     });
@@ -60,18 +68,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if (hasUserData) {
         if (AppHelper.isClubApp()) {
+          MembershipStatus membershipStatus =
+              await AppHelper.checkIfUserHasPurchasedTheMembership();
+
           /// TEMP CONDITION FOR MHBC APP ONLY
           if (flavor == Flavor.mhbc) {
             if (await AppHelper.checkIfUserIsNew()) {
               /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
               /// CHECKING IF PURCHASED THE MEMBERSHIP
-              if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
-                /// ALREADY PURCHASED THE MEMBERSHIP
-                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-              } else {
+              if (membershipStatus == MembershipStatus.notMember ||
+                  membershipStatus == MembershipStatus.pendingPayment) {
                 ///  DID NOT PURCHASED THE MEMBERSHIP
+
                 AppNavigator.navigateAndClearStack(
                     context, AppNavigator.pendingPaymentScreen);
+              } else {
+                /// ALREADY PURCHASED THE MEMBERSHIP MAY BE ACTIVE OR EXPIRED
+                AppNavigator.navigateAndClearStack(context, AppNavigator.home);
               }
             } else {
               /// IF USER IS OLD
@@ -80,13 +93,14 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             /// FOR OTHER APPS
             /// CHECKING IF PURCHASED THE MEMBERSHIP
-            if (await AppHelper.checkIfUserHasPurchasedTheMembership()) {
-              /// ALREADY PURCHASED THE MEMBERSHIP
-              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
-            } else {
+            if (membershipStatus == MembershipStatus.notMember ||
+                membershipStatus == MembershipStatus.pendingPayment) {
               ///  DID NOT PURCHASED THE MEMBERSHIP
               AppNavigator.navigateAndClearStack(
                   context, AppNavigator.pendingPaymentScreen);
+            } else {
+              /// ALREADY PURCHASED THE MEMBERSHIP
+              AppNavigator.navigateAndClearStack(context, AppNavigator.home);
             }
           }
         } else {

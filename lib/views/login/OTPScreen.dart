@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '/core/enums/MembershipStatus.dart';
+import '/core/extensions/log_extension.dart';
+import '/view_models/UserInfoProvider.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -30,6 +35,9 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
   late Flavor flavor;
   late UserLoginProvider _loginProvider;
   final FocusNode _otpFocusNode = FocusNode();
+  int remainingSec = 30;
+  bool enableResend = false;
+  Timer? timer;
 
   @override
   void initState() {
@@ -41,24 +49,49 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       FocusScope.of(context).requestFocus(_otpFocusNode);
       SystemChannels.textInput.invokeMethod('TextInput.show');
-
+    });
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (remainingSec != 0) {
+        setState(() {
+          remainingSec--;
+        });
+      } else {
+        setState(() {
+          enableResend = true;
+        });
+      }
     });
     getAppSignature();
     listenForCode();
   }
 
-  getAppSignature() async
-  {
-    String appSignature=await SmsAutoFill().getAppSignature;
-    print("APP SIGNATURE: $appSignature");
+  getAppSignature() async {
+    String appSignature = await SmsAutoFill().getAppSignature;
+    ("APP SIGNATURE: $appSignature").logMessage();
   }
-
 
   @override
   void dispose() {
+    if (timer != null && timer!.isActive) {
+      timer!.cancel();
+    }
     _otpFocusNode.dispose();
     _otpController.dispose();
     super.dispose();
+  }
+
+  void _resetResendCode() {
+    if (remainingSec == 0) {
+      _loginProvider.resendOTP(
+          phoneNo:
+              "${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",
+          loc: loc);
+
+      setState(() {
+        remainingSec = 30;
+        enableResend = false;
+      });
+    }
   }
 
   @override
@@ -67,6 +100,24 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
     return AppScaffold(
       body: SafeArea(
         child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
+          /// CHECKING FOR OTP SEND CASE
+          if (provider.otpSent != null) {
+            if (provider.otpSent!) {
+              Future.delayed(Duration.zero, () {
+                AppHelper.showSuccessMessage(
+                    context, provider.networkMessage ?? loc.msgOtpSent);
+                provider.resetNetworkResponseStatus();
+              });
+            } else {
+              Future.delayed(Duration.zero, () {
+                AppHelper.showErrorMessage(
+                    context, provider.networkMessage ?? loc.msgOtpIssue);
+                provider.resetNetworkResponseStatus();
+              });
+            }
+          }
+
+          /// CHECKING FOR OTP VERIFY CASE
           if (provider.networkError != null) {
             if (provider.networkError!) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -84,6 +135,10 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                 /// NAVIGATE TO HOME SCREEN
                 WidgetsBinding.instance.addPostFrameCallback((_) async {
                   if (AppHelper.isClubApp()) {
+                    MembershipStatus membershipStatus =
+                        await AppHelper.checkIfUserHasPurchasedTheMembership();
+                    print("MEMBERSHIP STATUS: ${membershipStatus.toString()}");
+
                     /// TEMP CONDITION FOR MHBC APP ONLY
                     if (flavor == Flavor.mhbc) {
                       if (widget.argument.containsKey('isTestUser')) {
@@ -96,26 +151,40 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         if (await AppHelper.checkIfUserIsNew()) {
                           /// IF USER IS NEW AND NEEDS TO SELECT MEMBERSHIP
                           /// CHECKING IF PURCHASED THE MEMBERSHIP
-                          if (await AppHelper
-                              .checkIfUserHasPurchasedTheMembership()) {
+                          if (membershipStatus == MembershipStatus.active) {
                             /// ALREADY PURCHASED THE MEMBERSHIP
+                            /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
+                              AppNavigator.navigateAndClearStack(
+                                  context, AppNavigator.home);
+
+                          } else if (membershipStatus ==
+                              MembershipStatus.inactive) {
+                            await context
+                                .read<UserInfoProvider>()
+                                .retrieveUserInfo();
                             AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.home);
-                          } else {
+                                context, AppNavigator.renewMembershipScreen);
+                          } else if (membershipStatus ==
+                              MembershipStatus.notMember) {
                             ///  DID NOT PURCHASED THE MEMBERSHIP
                             AppNavigator.navigateAndClearStack(
                                 context, AppNavigator.chooseMembershipScreen);
+                          } else if (membershipStatus ==
+                              MembershipStatus.pendingPayment) {
+                            /// PENDING PAYMENT
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.pendingPaymentScreen);
                           }
                         } else {
                           /// IF USER IS OLD
-                          AppNavigator.navigateAndClearStack(
-                              context, AppNavigator.home);
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.home);
                         }
                       }
                     } else {
                       /// FOR OTHER APPS
                       /// CHECKING IF PURCHASED THE MEMBERSHIP
-                      if (await AppHelper
+                      /*if (await AppHelper
                           .checkIfUserHasPurchasedTheMembership()) {
                         /// ALREADY PURCHASED THE MEMBERSHIP
                         AppNavigator.navigateAndClearStack(
@@ -124,6 +193,30 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         ///  DID NOT PURCHASED THE MEMBERSHIP
                         AppNavigator.navigateAndClearStack(
                             context, AppNavigator.pendingPaymentScreen);
+                      }*/
+                      if (membershipStatus == MembershipStatus.active) {
+                        /// ALREADY PURCHASED THE MEMBERSHIP
+                        /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
+
+                        if(flavor == Flavor.edp){
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.chooseFavouriteVenue);
+                        } else {
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.home);
+                        }
+                      } else if (membershipStatus ==
+                          MembershipStatus.inactive) {
+                        await context
+                            .read<UserInfoProvider>()
+                            .retrieveUserInfo();
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.renewMembershipScreen);
+                      } else if (membershipStatus ==
+                          MembershipStatus.notMember) {
+                        ///  DID NOT PURCHASED THE MEMBERSHIP
+                        AppNavigator.navigateAndClearStack(
+                            context, AppNavigator.chooseMembershipScreen);
                       }
                     }
                   } else {
@@ -179,7 +272,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                             AppDimens.shape_5,
                             Text(
                               "${loc.msgEnterVerificationCode}${widget.argument['countryCode'].toString()}${widget.argument['phoneNo'].toString()}",
-                            //  "${loc.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
+                              //  "${loc.msgEnterVerificationCode}${AppHelper.maskPhoneNumber(widget.argument['phoneNo'].toString())}",
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.normal,
@@ -221,16 +314,20 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                               ],
                               controller: _otpController,
                               style: TextStyle(
-                                  color:  AppThemeCustom
-                                      .getTextFieldTextColor(
-                                      context,isShadow: true)),
+                                  color: AppThemeCustom.getTextFieldTextColor(
+                                      context,
+                                      isShadow: true)),
                               decoration: InputDecoration(
                                 counter: AppDimens.shape_5,
                                 fillColor:
-                                AppThemeCustom.getTextFieldBackground(context,isShadow: true),
+                                    AppThemeCustom.getTextFieldBackground(
+                                        context,
+                                        isShadow: true),
                                 filled: true,
-                                hintStyle:
-                                TextStyle(color:AppThemeCustom.getHintTextFieldColor(context,isShadow: true)),
+                                hintStyle: TextStyle(
+                                    color: AppThemeCustom.getHintTextFieldColor(
+                                        context,
+                                        isShadow: true)),
                                 hintText: 'XXXX',
                                 border: OutlineInputBorder(
                                     borderSide: const BorderSide(
@@ -250,6 +347,27 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                                     borderRadius: BorderRadius.circular(10)),
                               ),
                             ),
+                            AppDimens.shape_5,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: TextButton(
+                                  onPressed: () {
+                                    _resetResendCode();
+                                  },
+                                  child: Text(
+                                    "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
+                                    style: TextStyle(
+                                      color: remainingSec == 0
+                                          ? Theme.of(context)
+                                              .textSelectionTheme
+                                              .selectionColor
+                                          : Theme.of(context)
+                                              .textSelectionTheme
+                                              .selectionColor!
+                                              .withValues(alpha: 0.5),
+                                    ),
+                                  )),
+                            ),
                             AppDimens.shape_20,
                             AppButton(
                                 text: loc.txtSubmit,
@@ -265,7 +383,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
               ),
               provider.showLoader
                   ? AppLoader(
-                      loaderMessage: loc.msgVerifyingOTP,
+                      loaderMessage: provider.loaderMessage,
                     )
                   : Container()
             ],
@@ -281,7 +399,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
       _loginProvider.verifyOTP(
           userId: widget.argument['userId'].toString(),
           countryCode: widget.argument['countryCode'].toString(),
-          otp: _otpController.text);
+          otp: _otpController.text,
+          loc: loc);
     } else {
       AppHelper.showErrorMessage(context, loc.msgIncorrectOTP);
     }

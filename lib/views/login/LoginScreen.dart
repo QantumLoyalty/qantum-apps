@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/extensions/log_extension.dart';
 
+import '/core/utils/DeepLinkLauncher.dart';
+
+import '../../view_models/HomeProvider.dart';
 import '/core/flavors_config/flavor_config.dart';
 import '/l10n/app_localizations.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
@@ -31,16 +37,71 @@ class _LoginScreenState extends State<LoginScreen> {
   String countryCode = "+61";
   late AppLocalizations loc;
   late Flavor flavor;
+  bool _chewzieGuestHandled = false;
+  late HomeProvider _homeProvider;
+
+  //late Color toolbarColor;
 
   @override
   void initState() {
     super.initState();
     _phoneController = TextEditingController();
     flavor = FlavorConfig.instance.flavor!;
+    _homeProvider = context.read<HomeProvider>();
+    _homeProvider.addListener(_handleGuestChewzieFromProvider);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _handleGuestChewzieFromProvider();
+    });
+  }
+
+  void _handleGuestChewzieFromProvider() {
+    if (!mounted) return;
+    if (_chewzieGuestHandled) return;
+    final isChewzieFlavor = flavor == Flavor.starReward ||
+        flavor == Flavor.bluewater ||
+        flavor == Flavor.flinders;
+    if (!isChewzieFlavor) return;
+
+    if (_homeProvider.startChewzieScreen != true) return;
+
+    final payload = _homeProvider.deeplinkPayloads;
+    if (payload == null || payload.isEmpty) return;
+
+    _chewzieGuestHandled = true;
+
+    final consumedPayload = _homeProvider.consumeChewzieLink();
+    if (consumedPayload == null || consumedPayload.isEmpty) return;
+
+    final decodedLink = Uri.decodeComponent(consumedPayload);
+    final uri = Uri.parse(decodedLink);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(
+        Duration(milliseconds: Platform.isIOS ? 700 : 300),
+        () {
+          if (!mounted) return;
+
+          final Color toolbarColor = switch (flavor) {
+            Flavor.starReward => AppColors.sr_back_color,
+            Flavor.bluewater => AppColors.bcc_back_color,
+            Flavor.flinders => AppColors.fw_back_color,
+            _ => AppColors.sr_back_color,
+          };
+
+          debugPrint("LOGIN GUEST CHEWZIE URI: $uri");
+          DeepLinkLauncher.launchChewzieUrl(context, uri, toolbarColor);
+        },
+      );
+    });
   }
 
   @override
   void dispose() {
+    /*if (flavor == Flavor.starReward || flavor == Flavor.bluewater) {
+      _homeProvider.removeListener(_handleGuestChewzieFromProvider);
+    }*/
+    _homeProvider.removeListener(_handleGuestChewzieFromProvider);
     _phoneController.dispose();
     super.dispose();
   }
@@ -50,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
     loc = AppLocalizations.of(context)!;
     return AppScaffold(
       body: SafeArea(
-        child: Consumer<UserLoginProvider>(builder: (context, provider, child) {
+        child: Consumer2<UserLoginProvider, HomeProvider>(
+            builder: (context, provider, homeProvider, child) {
           /// CHECKING USER STATUS & NAVIGATING AS PER THE STATUS
           if (provider.isExistingUser != null) {
             Future.delayed(Duration.zero, () {
@@ -178,23 +240,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 .textSelectionTheme
                                                 .selectionHandleColor),
                                     onChanged: (code) {
+                                      ("Selected country::${code.dialCode}")
+                                          .logMessage();
                                       setState(() {
                                         countryCode = code.dialCode!;
-                                        AppHelper.printMessage(
-                                            "Selected country::${code.dialCode}");
                                       });
                                     },
                                     initialSelection: "AU",
                                   ),
                                   SizedBox(
-                                      height: 60,
-                                      child: VerticalDivider(
+                                    height: 60,
+                                    child: VerticalDivider(
                                         width: 1,
                                         thickness: 1,
-                                        color: flavor == Flavor.kingscliff
-                                            ? AppColors.white
-                                            : Theme.of(context).dividerColor,
-                                      )),
+                                        color: AppThemeCustom
+                                            .getTextFormFieldInnerDividerColor(
+                                          context,
+                                        )),
+                                  ),
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -238,7 +301,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AppHelper.verifyPhoneNumber(
                                         _phoneController.text)) {
                                   provider.login(
-                                      "$countryCode${_phoneController.text}");
+                                      "$countryCode${_phoneController.text}",
+                                      context);
                                 } else {
                                   AppHelper.showErrorMessage(
                                       context, loc.msgIncorrectPhoneNumber);
@@ -252,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     AppDimens.shape_10,
                     (widget.hideChangeMobileOption != null &&
                             widget.hideChangeMobileOption!)
-                        ? Container()
+                        ?const SizedBox.shrink()
                         : InkWell(
                             onTap: () {
                               AppNavigator.navigateTo(
@@ -273,7 +337,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ? AppLoader(
                         loaderMessage: loc.msgVerifyAccountAndProceed,
                       )
-                    : Container()
+                    : const SizedBox.shrink()
               ],
             ),
           );
@@ -294,17 +358,13 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[0],
             style: TextStyle(
-                color: flavor == Flavor.drinkRewards
-                    ? AppColors.dr_button_color
-                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color: AppThemeCustom.getChangeMobileTextColor(context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text before
       TextSpan(
         text: loc.txtChange, // translated "Change" (बदलें / 更改 / Change)
         style: TextStyle(
-            color: flavor == Flavor.drinkRewards
-                ? AppColors.dr_button_color
-                : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+            color: AppThemeCustom.getChangeMobileTextColor(context),
             fontWeight: FontWeight.w900,
             fontSize: 14),
       ),
@@ -312,9 +372,7 @@ class _LoginScreenState extends State<LoginScreen> {
         TextSpan(
             text: parts[1],
             style: TextStyle(
-                color: flavor == Flavor.drinkRewards
-                    ? AppColors.dr_button_color
-                    : Theme.of(context).buttonTheme.colorScheme!.onPrimary,
+                color: AppThemeCustom.getChangeMobileTextColor(context),
                 fontWeight: FontWeight.w400,
                 fontSize: 14)), // text after
     ];

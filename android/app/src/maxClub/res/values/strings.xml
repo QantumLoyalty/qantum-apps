@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Max Club</string>
+    <string name="default_notification_channel_id">com.au.maxclub.app.urgent</string>
+</resources>
