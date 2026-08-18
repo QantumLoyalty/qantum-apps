@@ -35,8 +35,15 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
 
   List<MatchedIncentive> get incentives => _incentives;
 
+  bool _isFirstLoad = true;
+
+
   getPromotions() async {
     try {
+      if (_isFirstLoad) {
+        _showLoader = true;
+        notifyListeners();
+      }
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = sharedPreferenceHelper.getUserData();
@@ -59,7 +66,10 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       _isError = true;
       _networkMessage = e.toString();
     } finally {
-      //_showLoader = false;
+      if (_isFirstLoad) {
+        _showLoader = false;
+        _isFirstLoad = false;
+      }
       notifyListeners();
     }
   }

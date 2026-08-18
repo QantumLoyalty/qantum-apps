@@ -283,13 +283,13 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     placeholder:
                                                                         (context,
                                                                             _) {
-                                                                      return const Stack(
+                                                                      return  Stack(
                                                                         children: [
                                                                           Center(
                                                                             child: SizedBox(
                                                                                 width: 30,
                                                                                 height: 30,
-                                                                                child: CircularProgressIndicator()),
+                                                                                child: CircularProgressIndicator(color: Theme.of(context).textSelectionTheme.selectionColor,)),
                                                                           ),
                                                                         ],
                                                                       );
@@ -348,10 +348,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                               provider.promotions!.smallPromotions![2 * index + 1].imageUrl ?? "",
                                                                           placeholder:
                                                                               (context, _) {
-                                                                            return const Stack(
+                                                                            return  Stack(
                                                                               children: [
                                                                                 Center(
-                                                                                  child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator()),
+                                                                                  child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(color:Theme.of(context).textSelectionTheme.selectionColor)),
                                                                                 ),
                                                                               ],
                                                                             );
