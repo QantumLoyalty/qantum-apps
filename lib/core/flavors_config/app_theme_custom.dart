@@ -238,16 +238,27 @@ class AppThemeCustom {
   static Color getAppUpdateLogoBackColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mosaic:
+      case Flavor.mosaic||Flavor.flinders:
         return AppColors.white;
-      case Flavor.edp:
+      case Flavor.edp ||
+            Flavor.northShoreTavern ||
+            Flavor.hogansReward ||
+            Flavor.mannumClub ||
+            Flavor.bobsBulkBooze ||
+            Flavor.bluewater ||
+            Flavor.kingscliff ||
+            Flavor.woollahra ||
+            Flavor.mhbc ||
+            Flavor.starReward ||
+            Flavor.qantumClub ||
+            Flavor.qantum||
+            Flavor.maxClub||
+            Flavor.maxx||
+            Flavor.southportSharks||
+            Flavor.drinkRewards:
         return AppColors.white.withAlpha(20);
-
-
       default:
-        return Theme.of(context)
-            .textSelectionTheme
-            .selectionColor!;
+        return AppColors.white.withAlpha(20);
     }
   }
 
@@ -1126,7 +1137,6 @@ class AppThemeCustom {
             selectedFlavor == Flavor.maxx ||
             selectedFlavor == Flavor.hogansReward ||
             selectedFlavor == Flavor.maxClub)) {
-
       return Border.all(color: AppColors.white);
     }
 
