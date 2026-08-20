@@ -48,11 +48,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
   MembershipStatus membershipStatus = MembershipStatus.loading;
 
-
   bool _isPushEnabled = true;
 
   bool get isPushEnabled => _isPushEnabled;
-
 
   Future<void> pausePushNotifications() async {
     try {
@@ -155,7 +153,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
         .logMessage();
     if (_userModel != null) {
       OneSignal.User.addTagWithKey("mobile", "${_userModel!.mobile}");
-      await syncCurrentUserIdToNative(_userModel!.id ?? 'guest');  // 👈 NAYI LINE
+      await syncCurrentUserIdToNative(
+          _userModel!.id ?? 'guest'); // 👈 NAYI LINE
     }
 
     notifyListeners();
@@ -186,7 +185,8 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);
           _userModel = userModel;
-          await syncCurrentUserIdToNative(userModel.id ?? 'guest');   // 👈 NAYI LINE
+          await syncCurrentUserIdToNative(
+              userModel.id ?? 'guest'); // 👈 NAYI LINE
           if (AppHelper.isClubApp()) {
             if (response.containsKey("serverTime")) {
               _userModel!.serverTime = response["serverTime"];
@@ -385,18 +385,14 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
               response.containsKey('value')) {
             statusTierValue = response["value"].toString();
 
-            if(response.containsKey('nextLevel') && response['nextLevel'] is bool)
-            {
-              showNextLevel=response['nextLevel'] as bool;
-
+            if (response.containsKey('nextLevel') &&
+                response['nextLevel'] is bool) {
+              showNextLevel = response['nextLevel'] as bool;
             }
-            if(response.containsKey('statusCredit') && response['statusCredit'] is bool)
-            {
-              showStatusCredit=response['statusCredit'] as bool;
-
+            if (response.containsKey('statusCredit') &&
+                response['statusCredit'] is bool) {
+              showStatusCredit = response['statusCredit'] as bool;
             }
-
-
           }
         }
       }
@@ -1215,11 +1211,16 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  String? _userId;
 
-  sendOTPOnExistingEmail(
-      {
-        required String email,
-        required AppLocalizations loc}) async {
+  String? get userId => _userId;
+  bool? _otpSentStatus;
+
+  bool? get otpSentStatus => _otpSentStatus;
+
+  Future<({bool success, String? userId, String? errorMessage})>
+      sendOTPOnExistingEmail(
+          {required String email, required AppLocalizations loc}) async {
     try {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = true;
@@ -1228,50 +1229,52 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       });
 
       NetworkResponse networkResponse =
-      await UserService.getInstance().sendOTPOnEmail(email: email);
+          await UserService.getInstance().sendOTPOnEmail(email: email);
       logEvent("Send OTP On Existing Email RESPONSE:: $networkResponse");
 
-      _accountVerified = !networkResponse.isError;
-
       if (networkResponse.response != null) {
-        /*if (networkResponse.response is Map<String, dynamic>) {
+        if (networkResponse.response is Map<String, dynamic>) {
           Map<String, dynamic> response =
-          networkResponse.response as Map<String, dynamic>;
+              networkResponse.response as Map<String, dynamic>;
 
-          if (response.containsKey("verified") &&
-              response.containsKey("user")) {
-            _accountVerified = response["verified"] as bool;
-            SharedPreferenceHelper sharedPreferencesHelper =
-            await SharedPreferenceHelper.getInstance();
-            await sharedPreferencesHelper
-                .saveUserData(UserModel.fromJson(response["user"]));
-            await sharedPreferencesHelper.saveAuthToken(response['token']);
-            await sharedPreferencesHelper
-                .saveCountryCode(params["countryCode"]);
-
-            logEvent(
-                "SAVED DATA :: ${sharedPreferencesHelper.getUserData()} --> ${sharedPreferencesHelper.getAuthToken()} --> ${sharedPreferencesHelper.getCountryCode()}");
-          } else {
-            _accountVerified = false;
+          if (response.containsKey("Id")) {
+            /*_otpSentStatus = true;
+            _userId = response["Id"];*/
+            return (
+              success: true,
+              errorMessage: networkResponse.responseMessage,
+              userId: response["Id"].toString()
+            );
           }
 
-          if (response.containsKey('message')) {
-            _networkMessage = response['message'];
-          } else if (response.containsKey('error')) {
-            _networkMessage = response['error'];
-          }
+          return (
+            success: false,
+            errorMessage: networkResponse.responseMessage,
+            userId: null
+          );
         } else {
-          _networkMessage = networkResponse.responseMessage;
-          _accountVerified = false;
-        }*/
+          /*  _otpSentStatus = false;
+          _networkMessage = networkResponse.responseMessage;*/
+          return (
+            success: false,
+            errorMessage: networkResponse.responseMessage,
+            userId: null
+          );
+        }
       } else {
-        _networkMessage = networkResponse.responseMessage;
-        _accountVerified = false;
+        /*_otpSentStatus = false;
+        _networkMessage = networkResponse.responseMessage;*/
+        return (
+          success: false,
+          errorMessage: networkResponse.responseMessage,
+          userId: null
+        );
       }
     } catch (e) {
       logEvent(e.toString());
-      _accountVerified = false;
+      _otpSentStatus = false;
       _networkMessage = e.toString();
+      return (success: false, errorMessage: e.toString(), userId: null);
     } finally {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _showLoader = false;
@@ -1280,5 +1283,132 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  resetOtpSentStatus() {
+    _otpSentStatus = null;
+    notifyListeners();
+  }
 
+  bool? _otpVerificationStatus;
+
+  bool? get otpVerificationStatus => _otpVerificationStatus;
+  String? _otpVerificationMsg;
+
+  String? get otpVerificationMsg => _otpVerificationMsg;
+
+  Future<({bool success, String? errorMesg})> verifyOTPOnExistingEmail(
+      {required String userId,
+      required String email,
+      required String countryCode,
+      required String mobile,
+      required String otp,
+      required AppLocalizations loc}) async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = true;
+        _loaderMessage = loc.msgVerifyingOTP;
+        notifyListeners();
+      });
+
+      Map<String, dynamic> params = <String, dynamic>{};
+      params["Id"] = userId;
+      params["Email"] = email;
+      params["Mobile"] = mobile;
+      params["otp"] = otp;
+
+      NetworkResponse networkResponse =
+          await UserService.getInstance().verifyOTPOfEmail(params: params);
+      logEvent("Verify OTP On Existing Email RESPONSE:: $networkResponse");
+      if (networkResponse.response != null) {
+        if (networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+
+          if (response.containsKey("status")) {
+            _otpVerificationStatus = response["status"];
+            _otpVerificationMsg = response["message"];
+
+            if (_otpVerificationStatus!) {
+              /// SENDING OTP ON NEW NUMBER
+              final mobileOTPResponse =
+                  await UserService.getInstance().login("$countryCode$mobile");
+              if (mobileOTPResponse.response is Map<String, dynamic>) {
+                final mOTPResponse =
+                    mobileOTPResponse.response as Map<String, dynamic>;
+                final isRegistered = mOTPResponse['registered'];
+                if (isRegistered != null) {
+                  final user = mOTPResponse['user'];
+                  if (user is Map<String, dynamic> && user['Id'] != null) {
+                    _userId = user['Id'];
+                    return (
+                      success: true,
+                      errorMesg: "Successfully sent the OTP on phone!"
+                    );
+                  }
+
+                  return (
+                    success: false,
+                    errorMesg:
+                        "Getting issue while verifying the OTP, please try again."
+                  );
+                } else {
+                  return (
+                    success: false,
+                    errorMesg:
+                        "Getting issue while verifying the OTP, please try again."
+                  );
+                }
+              }
+            } else {
+              _otpVerificationStatus = false;
+              return (
+                success: false,
+                errorMesg: _otpVerificationMsg ??
+                    "Getting issue while verifying the OTP, please try again."
+              );
+            }
+
+            return (
+              success: false,
+              errorMesg: _otpVerificationMsg ??
+                  "Getting issue while verifying the OTP, please try again."
+            );
+          } else {
+            _otpVerificationStatus = false;
+            _otpVerificationMsg =
+                "Getting issue while verifying the OTP, please try again.";
+            return (
+              success: false,
+              errorMesg:
+                  "Getting issue while verifying the OTP, please try again."
+            );
+          }
+        }
+      }
+      return (
+        success: false,
+        errorMesg: "Getting issue while verifying the OTP, please try again."
+      );
+    } catch (e) {
+      print("OTP VERIFICATION ISSUE $e");
+      _otpVerificationStatus = false;
+      _otpVerificationMsg = e.toString();
+      return (success: false, errorMesg: e.toString());
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showLoader = false;
+        notifyListeners();
+      });
+    }
+  }
+
+  resetOTPVerificationStatus({bool? clearAll}) {
+    _otpVerificationStatus = null;
+    _otpVerificationMsg = null;
+
+    if (clearAll != null && clearAll) {
+      _userId = null;
+    }
+
+    notifyListeners();
+  }
 }

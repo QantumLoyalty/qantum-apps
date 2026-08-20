@@ -609,7 +609,7 @@ class AppHelper with LoggingMixin {
       case Flavor.senseOfTaste:
         return const Size(280, 80);
       case Flavor.edp:
-        return const Size(280, 120);
+        return const Size(180, 80);
       case Flavor.mosaic:
         return const Size(100, 90);
       case Flavor.mannumClub:

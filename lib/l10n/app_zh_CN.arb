@@ -116,6 +116,7 @@
   "msgEmptyYear": "年份不能为空",
   "msgIncorrectOTP": "请输入正确的 4 位数 OTP 以继续。",
   "msgSendingOTPEmail": "正在向邮箱发送验证码...",
+  "msgOTPSentToEmail": "我们已将 OTP 发送至 ",
   "msgSendingOTP": "正在将 OTP 发送到您的手机...",
   "msgResendOTP": "正在再次发送 OTP 到您的手机...",
   "msgVerifyingOTP": "正在验证 OTP...",
@@ -237,5 +238,7 @@
   "deleteAccountWarning": "您即将删除您的账户。",
   "txtNotification": "通知",
   "txtPushNotification": "推送通知",
-  "deleteAccountPermanentMessage": "一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。"
+  "deleteAccountPermanentMessage": "一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。",
+  "msgEnterEmailOTP": "请输入邮箱验证码",
+  "msgEnterMobileOTP": "请输入手机验证码"
 }

@@ -1025,8 +1025,14 @@ abstract class AppLocalizations {
   /// No description provided for @msgVerificationCodeSentToEmail.
   ///
   /// In en, this message translates to:
-  /// **'       We sent a verification code to your email address.'**
+  /// **'We sent a verification code to your email address.'**
   String get msgVerificationCodeSentToEmail;
+
+  /// No description provided for @msgOTPSentToEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent an OTP to '**
+  String get msgOTPSentToEmail;
 
   /// No description provided for @msgVerificationCodeSentToPhone.
   ///
@@ -1501,6 +1507,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.'**
   String get deleteAccountPermanentMessage;
+
+  /// No description provided for @msgEnterEmailOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email OTP'**
+  String get msgEnterEmailOTP;
+
+  /// No description provided for @msgEnterMobileOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Mobile OTP'**
+  String get msgEnterMobileOTP;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

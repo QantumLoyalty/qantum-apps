@@ -473,7 +473,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get msgOtpIssue => 'There was a problem sending the OTP. Please try again.';
 
   @override
-  String get msgVerificationCodeSentToEmail => '       We sent a verification code to your email address.';
+  String get msgVerificationCodeSentToEmail => 'We sent a verification code to your email address.';
+
+  @override
+  String get msgOTPSentToEmail => 'We sent an OTP to ';
 
   @override
   String get msgVerificationCodeSentToPhone => 'We sent a verification code to the mobile number ending in';
@@ -711,4 +714,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteAccountPermanentMessage => 'Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.';
+
+  @override
+  String get msgEnterEmailOTP => 'Enter Email OTP';
+
+  @override
+  String get msgEnterMobileOTP => 'Enter Mobile OTP';
 }

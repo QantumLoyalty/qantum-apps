@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 import '/core/extensions/log_extension.dart';
 import '/core/network/APIList.dart';
 import '/data/models/NetworkResponse.dart';
@@ -160,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     }*/
     _emailDebounce?.cancel();
 
-    final email = _emailController.text.trim().toLowerCase();
+    final email = _emailController.text.trim();
     if (email.isEmpty || !AppHelper.verifyEmailAddress(email)) {
       _clearEmailCheckResult();
       return;
@@ -233,7 +234,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
     if (!mounted) return;
 
-    final currentEmail = _emailController.text.trim().toLowerCase();
+    final currentEmail = _emailController.text.trim();
 
     // Ignore the response if the user changed the email.
     if (currentEmail != email) {
@@ -296,8 +297,9 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   Widget build(BuildContext context) {
     loc = AppLocalizations.of(context)!;
 
-    return AppScaffold(body: Consumer2<SignupProvider, UserLoginProvider>(
-        builder: (context, provider, userLoginProvider, child) {
+    return AppScaffold(body:
+        Consumer3<SignupProvider, UserLoginProvider, UserInfoProvider>(builder:
+            (context, provider, userLoginProvider, userInfoProvider, child) {
       // DISPLAYING NETWORK RESPONSE
       if (userLoginProvider.networkError != null &&
           userLoginProvider.networkError!) {
@@ -984,6 +986,13 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                       loaderMessage: loc.msgPleaseWait,
                     )
                   : const SizedBox.shrink(),
+              userInfoProvider.showLoader != null &&
+                      userInfoProvider.showLoader!
+                  ? AppLoader(
+                      loaderMessage: userInfoProvider.loaderMessage,
+                    )
+                  : const SizedBox.shrink(),
+
               /*userLoginProvider.showEmailCheckLoader
                   ? AppLoader(
                       loaderMessage: loc.msgPleaseWait,
@@ -1108,10 +1117,30 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     params['phoneNo'] = widget.argument['phoneNo']!;
     params['countryCode'] = widget.argument['countryCode']!;
 
+    print("IS DUPLICATE EMAIL$_isDuplicateEmail");
+
     if (_isDuplicateEmail != null && _isDuplicateEmail!) {
-      AppNavigator.navigateTo(
+      /*    AppNavigator.navigateAndClearStack(
           context, AppNavigator.verifyExistingEmailOTPScreen,
           arguments: params);
+  */
+
+      final result = await context
+          .read<UserInfoProvider>()
+          .sendOTPOnExistingEmail(
+              email: _emailController.text.toString(), loc: loc);
+
+      if (result.success) {
+        params['userId'] = result.userId!;
+        AppNavigator.navigateAndClearStack(
+            context, AppNavigator.verifyExistingEmailOTPScreen,
+            arguments: params);
+      } else {
+        AppHelper.showErrorMessage(
+            context,
+            result.errorMessage ??
+                "Ooppss.. something went wrong, please try again");
+      }
     } else {
       AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
           arguments: params);

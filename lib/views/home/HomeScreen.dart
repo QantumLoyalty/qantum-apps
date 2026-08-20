@@ -112,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen>
     } catch (e) {
       e.logMessage();
     } finally {
+      _updateDialogDisplayed = false;
       _isCheckingForAppUpdate = false;
     }
   }

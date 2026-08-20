@@ -476,6 +476,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get msgVerificationCodeSentToEmail => '我们已将验证码发送到您的邮箱。';
 
   @override
+  String get msgOTPSentToEmail => '我們已將 OTP 發送至 ';
+
+  @override
   String get msgVerificationCodeSentToPhone => '我们已将验证码发送到以……结尾的手机号。';
 
   @override
@@ -711,6 +714,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
+
+  @override
+  String get msgEnterEmailOTP => '输入邮箱验证码';
+
+  @override
+  String get msgEnterMobileOTP => '输入手机验证码';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1185,6 +1194,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get msgVerificationCodeSentToEmail => '我们已将验证码发送到您的邮箱。';
 
   @override
+  String get msgOTPSentToEmail => '我们已将 OTP 发送至 ';
+
+  @override
   String get msgVerificationCodeSentToPhone => '我们已将验证码发送到以……结尾的手机号。';
 
   @override
@@ -1420,4 +1432,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get deleteAccountPermanentMessage => '一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。';
+
+  @override
+  String get msgEnterEmailOTP => '请输入邮箱验证码';
+
+  @override
+  String get msgEnterMobileOTP => '请输入手机验证码';
 }

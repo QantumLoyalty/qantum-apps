@@ -154,9 +154,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           if (membershipStatus == MembershipStatus.active) {
                             /// ALREADY PURCHASED THE MEMBERSHIP
                             /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
-                              AppNavigator.navigateAndClearStack(
-                                  context, AppNavigator.home);
-
+                            AppNavigator.navigateAndClearStack(
+                                context, AppNavigator.home);
                           } else if (membershipStatus ==
                               MembershipStatus.inactive) {
                             await context
@@ -177,8 +176,8 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           }
                         } else {
                           /// IF USER IS OLD
-                            AppNavigator.navigateAndClearStack(
-                                context, AppNavigator.home);
+                          AppNavigator.navigateAndClearStack(
+                              context, AppNavigator.home);
                         }
                       }
                     } else {
@@ -198,7 +197,7 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                         /// ALREADY PURCHASED THE MEMBERSHIP
                         /// CHECKING IF MEMBERSHIP IS ACTIVE OR NOT
 
-                        if(flavor == Flavor.edp){
+                        if (flavor == Flavor.edp) {
                           AppNavigator.navigateAndClearStack(
                               context, AppNavigator.chooseFavouriteVenue);
                         } else {
@@ -234,20 +233,23 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
               Container(
                 child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.chevron_left,
-                            size: 28,
-                            color: Theme.of(context)
-                                .textSelectionTheme
-                                .selectionColor,
-                          )),
-                    ),
+                    (widget.argument.containsKey("hideBackButton") &&
+                            widget.argument["hideBackButton"] == "true")
+                        ? const SizedBox.shrink()
+                        : Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.chevron_left,
+                                  size: 28,
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor,
+                                )),
+                          ),
                     Applogo(
                       hideTopLine: true,
                     ),
@@ -260,7 +262,9 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              loc.txtEnterVerificationCode,
+                              (widget.argument.containsKey("hideBackButton") &&
+                                  widget.argument["hideBackButton"] == "true")
+                                  ?loc.msgEnterMobileOTP:loc.txtEnterVerificationCode,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,

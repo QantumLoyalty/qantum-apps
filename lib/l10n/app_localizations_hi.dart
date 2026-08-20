@@ -476,6 +476,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get msgVerificationCodeSentToEmail => 'हमने आपके ईमेल पते पर एक सत्यापन कोड भेजा है।';
 
   @override
+  String get msgOTPSentToEmail => 'हमने एक OTP भेजा है ';
+
+  @override
   String get msgVerificationCodeSentToPhone => 'हमने उस मोबाइल नंबर पर सत्यापन कोड भेजा है जो इन अंकों पर समाप्त होता है';
 
   @override
@@ -711,4 +714,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get deleteAccountPermanentMessage => 'पुष्टि करने के बाद, यह खाता अब उपयोग नहीं किया जा सकेगा और आपका डेटा व व्यक्तिगत जानकारी 48 घंटों के भीतर हमारे सिस्टम से स्थायी रूप से हटा दी जाएगी।';
+
+  @override
+  String get msgEnterEmailOTP => 'ईमेल OTP दर्ज करें';
+
+  @override
+  String get msgEnterMobileOTP => 'मोबाइल OTP दर्ज करें';
 }

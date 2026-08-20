@@ -128,7 +128,7 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                               isCommunication: true),
                                       fontSize: 12),
                                 ),
-                             /*  SwitchListTile(
+                             /*   SwitchListTile(
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
                                   contentPadding: EdgeInsets.zero,
@@ -150,8 +150,8 @@ class _CommunicationPreferenceState extends State<CommunicationPreference> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
-                                ),
-                                SwitchListTile(
+                                ),*/
+                                /*SwitchListTile(
                                   dense: true,
                                   contentPadding: EdgeInsets.zero,
                                   value: provider.getUserInfo != null &&

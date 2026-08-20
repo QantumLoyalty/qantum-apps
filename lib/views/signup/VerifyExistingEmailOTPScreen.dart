@@ -29,7 +29,7 @@ class VerifyExistingEmailOTPScreen extends StatefulWidget {
 class _VerifyExistingEmailOTPScreenState
     extends State<VerifyExistingEmailOTPScreen> {
   late TextEditingController _otpController;
-  int remainingSec = 60;
+  int remainingSec = 120;
   bool enableResend = false;
   Timer? timer;
   late UserInfoProvider _userInfoProvider;
@@ -52,9 +52,9 @@ class _VerifyExistingEmailOTPScreenState
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
       sendOTPOnEmail();
-    });
+    });*/
   }
 
   sendOTPOnEmail() {
@@ -70,108 +70,60 @@ class _VerifyExistingEmailOTPScreenState
       body: Consumer<UserInfoProvider>(builder: (context, provider, child) {
         if (context.mounted) {
           /// CHECKING FOR OTP SEND CASE
-          if (provider.emailOTPSent != null) {
-            if (provider.emailOTPSent!) {
+          if (provider.otpSentStatus != null) {
+            if (provider.otpSentStatus!) {
               Future.delayed(Duration.zero, () {
                 AppHelper.showSuccessMessage(
                     context, provider.networkMessage ?? loc.msgOtpSent);
-                provider.resetNetworkResponse();
+                provider.resetOtpSentStatus();
               });
             } else {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(
                     context, provider.networkMessage ?? loc.msgOtpIssue);
-                provider.resetNetworkResponse();
-              });
-            }
-          }
-
-          /// CHECKING FOR OTP SEND CASE ON NEW MOBILE NUMBER
-          if (provider.newMobileOTPSent != null) {
-            if (provider.newMobileOTPSent!) {
-              Future.delayed(Duration.zero, () {
-                AppHelper.showSuccessMessage(
-                    context, provider.networkMessage ?? loc.msgOtpSent);
-                provider.resetNetworkResponse();
-              });
-            } else {
-              Future.delayed(Duration.zero, () {
-                AppHelper.showErrorMessage(
-                    context, provider.networkMessage ?? loc.msgOtpIssue);
-                provider.resetNetworkResponse();
+                provider.resetOtpSentStatus();
               });
             }
           }
 
           /// CHECKING FOR OTP VERIFY CASE
-          if (provider.accountVerified != null) {
-            if (provider.accountVerified!) {
-              Future.delayed(Duration.zero, () {
-                AppNavigator.navigateAndClearStack(
-                    context, AppNavigator.recoverAccountSuccess);
-
-                provider.resetNetworkResponse();
-              });
-            } else {
+          /*if (provider.otpVerificationStatus != null) {
+            if (!provider.otpVerificationStatus!) {
               Future.delayed(Duration.zero, () {
                 AppHelper.showErrorMessage(context,
-                    provider.networkMessage ?? loc.msgIssueInVerifyAccount);
-                provider.resetNetworkResponse();
+                    provider.otpVerificationMsg ?? loc.msgIssueInVerifyAccount);
+                provider.resetOTPVerificationStatus();
               });
             }
-          }
+          }*/
         }
         return SafeArea(
           child: Stack(
             children: [
               Container(
                 padding: const EdgeInsets.all(AppDimens.screenPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.chevron_left,
-                            size: 28,
-                            color:
-                                AppThemeCustom.getAccountHeaderColor(context),
-                          )),
-                    ),
-                    Applogo(
-                      hideTopLine: true,
-                    ),
-                    Text(
-                      loc.txtEnterVerificationCode,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Applogo(
+                        hideTopLine: true,
                       ),
-                    ),
-                    AppDimens.shape_5,
-                    Text(
-                      //"${AppStrings.msgEnterVerificationCode}${provider.getUserInfo != null ? AppHelper.maskPhoneNumber(provider.getUserInfo!.mobile ?? "") : ""}",
-                      "${loc.msgVerificationCodeSentToEmail} ${AppHelper.maskEmailSecond(widget.params["Email"])}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
-                        color:
-                            Theme.of(context).textSelectionTheme.selectionColor,
+                      Text(
+                        loc.msgEnterEmailOTP,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context)
+                              .textSelectionTheme
+                              .selectionColor,
+                        ),
                       ),
-                    ),
-                    AppDimens.shape_20,
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        loc.txtVerificationCode,
+                      AppDimens.shape_5,
+                      Text(
+                        "${loc.msgOTPSentToEmail} ${widget.params["Email"]}",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.normal,
@@ -180,82 +132,97 @@ class _VerifyExistingEmailOTPScreenState
                               .selectionColor,
                         ),
                       ),
-                    ),
-                    AppDimens.shape_5,
-                    TextFormField(
-                      maxLines: 1,
-                      maxLength: 4,
-                      textInputAction: TextInputAction.next,
-                      textAlign: TextAlign.start,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      controller: _otpController,
-                      style: TextStyle(
-                          color: AppThemeCustom.getTextFieldTextColor(context)),
-                      decoration: InputDecoration(
-                        counter: AppDimens.shape_5,
-                        fillColor:
-                            AppThemeCustom.getTextFieldBackground(context),
-                        filled: true,
-                        hintStyle:
-                            TextStyle(color: Theme.of(context).hintColor),
-                        hintText: 'XXXX',
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        errorBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
+                      AppDimens.shape_20,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          loc.txtVerificationCode,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                            color: Theme.of(context)
+                                .textSelectionTheme
+                                .selectionColor,
+                          ),
+                        ),
                       ),
-                    ),
-                    AppDimens.shape_15,
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                          style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                  AppColors.white.withValues(alpha: 0.1))),
-                          onPressed: () {
-                            _resetResendCode();
-                          },
-                          child: Text(
-                            "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
-                            style: TextStyle(
-                              color: remainingSec == 0
-                                  ? Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor
-                                  : Theme.of(context)
-                                      .textSelectionTheme
-                                      .selectionColor!
-                                      .withValues(alpha: 0.5),
-                            ),
-                          )),
-                    ),
-                    AppDimens.shape_15,
-                    AppButton(
-                        text: loc.txtSubmit.toUpperCase(),
-                        onClick: () {
-                          if (_otpController.text.isNotEmpty) {
-
-                          } else {
-                            AppHelper.showErrorMessage(
-                                context, loc.msgIncorrectOTP);
+                      AppDimens.shape_5,
+                      TextFormField(
+                        maxLines: 1,
+                        maxLength: 4,
+                        textInputAction: TextInputAction.next,
+                        textAlign: TextAlign.start,
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          if (value.length == 4) {
+                            verifyOTP();
                           }
-                        }),
-                  ],
+                        },
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        controller: _otpController,
+                        style: TextStyle(
+                            color:
+                                AppThemeCustom.getTextFieldTextColor(context)),
+                        decoration: InputDecoration(
+                          counter: AppDimens.shape_5,
+                          fillColor:
+                              AppThemeCustom.getTextFieldBackground(context),
+                          filled: true,
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).hintColor),
+                          hintText: 'XXXX',
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                      AppDimens.shape_15,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                    AppColors.white.withValues(alpha: 0.1))),
+                            onPressed: () {
+                              _resetResendCode();
+                            },
+                            child: Text(
+                              "${loc.txtResendCode}${remainingSec != 0 ? " (${remainingSec}s)" : ""}",
+                              style: TextStyle(
+                                color: remainingSec == 0
+                                    ? Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor
+                                    : Theme.of(context)
+                                        .textSelectionTheme
+                                        .selectionColor!
+                                        .withValues(alpha: 0.5),
+                              ),
+                            )),
+                      ),
+                      AppDimens.shape_15,
+                      AppButton(
+                          text: loc.txtSubmit.toUpperCase(),
+                          onClick: () {
+                            verifyOTP();
+                          }),
+                    ],
+                  ),
                 ),
               ),
               provider.showLoader != null && provider.showLoader!
@@ -271,12 +238,47 @@ class _VerifyExistingEmailOTPScreenState
     );
   }
 
+  verifyOTP() async {
+    if (_otpController.text.isNotEmpty) {
+      final result = await context
+          .read<UserInfoProvider>()
+          .verifyOTPOnExistingEmail(
+              userId: widget.params["userId"],
+              email: widget.params["Email"],
+              mobile: widget.params["phoneNo"],
+              countryCode: widget.params["countryCode"],
+              otp: _otpController.text,
+              loc: loc);
+
+      if (!context.mounted) return;
+
+      if (result.success) {
+        Map<String, String> args = {};
+        args['countryCode'] = widget.params["countryCode"];
+        args['phoneNo'] = widget.params["phoneNo"];
+        args['userId'] = widget.params["userId"];
+        args['hideBackButton'] = "true";
+        AppNavigator.navigateAndClearStack(context, AppNavigator.otp,
+            arguments: args);
+
+        context
+            .read<UserInfoProvider>()
+            .resetOTPVerificationStatus(clearAll: true);
+      } else {
+        AppHelper.showErrorMessage(
+            context, result.errorMesg ?? loc.msgCommonError);
+      }
+    } else {
+      AppHelper.showErrorMessage(context, loc.msgIncorrectOTP);
+    }
+  }
+
   void _resetResendCode() {
     if (remainingSec == 0) {
       _userInfoProvider.sendOTPOnExistingEmail(
           email: widget.params["Email"], loc: loc);
       setState(() {
-        remainingSec = 60;
+        remainingSec = 120;
         enableResend = false;
       });
     }
