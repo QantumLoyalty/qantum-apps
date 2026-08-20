@@ -49,6 +49,12 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
     });
   }
 
+  String _stripListTag(String html) {
+    return html
+        .replaceAll(RegExp(r'<\/?li[^>]*>', caseSensitive: false), '')
+        .trim();
+  }
+
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
@@ -166,6 +172,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                                           .benefitItems!
                                                           .length -
                                                       1,
+                                                  padding: const EdgeInsets.only(top: 5.0,bottom: 5.0),
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -183,9 +190,7 @@ class _MyBenefitsWidgetState extends State<MyBenefitsWidget> {
                                                         ),
                                                         Expanded(
                                                             child: Html(
-                                                          data: provider
-                                                                  .benefitItems![
-                                                              index],
+                                                              data: _stripListTag(provider.benefitItems![index]),
                                                               onLinkTap: (String? url,
                                                                   Map<String, String> attributes, _) {
 
