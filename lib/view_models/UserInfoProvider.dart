@@ -1249,7 +1249,9 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
 
           return (
             success: false,
-            errorMessage: networkResponse.responseMessage,
+            errorMessage: response.containsKey("error")
+                ? response["error"].toString()
+                : networkResponse.responseMessage,
             userId: null
           );
         } else {
