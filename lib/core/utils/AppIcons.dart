@@ -303,7 +303,9 @@ class AppIcons {
         }
       } else if (selectedFlavor == Flavor.mosaic) {
         switch (membershipType.toLowerCase().trim()) {
-          case "bronze":
+          case "staff":
+            return "assets/mosaicHotel/card_staff.png";
+            case "bronze":
             return "assets/mosaicHotel/card_bronze.png";
           case "cancelled":
             return "assets/mosaicHotel/card_cancelled.png";

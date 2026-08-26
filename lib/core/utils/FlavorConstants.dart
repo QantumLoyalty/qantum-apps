@@ -24,7 +24,7 @@ class FlavorConstants {
       Flavor.bobsBulkBooze: "BBB",
       Flavor.senseOfTaste: "SOT",
       Flavor.mosaic: "",
-      Flavor.mannumClub: "MCC",
+      Flavor.mannumClub: "",
       Flavor.southportSharks: "SPS",
     };
 

@@ -72,7 +72,7 @@ class AppThemeCustom {
   static Color? getNotificationItemStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.northShoreTavern||Flavor.brisbane:
+      case Flavor.northShoreTavern || Flavor.brisbane:
         return Theme.of(context).primaryColor;
 
       default:
@@ -235,10 +235,22 @@ class AppThemeCustom {
         return Theme.of(context).textSelectionTheme.selectionColor!;
     }
   }
+
+  static Color getScratchPointsTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mosaic:
+        return Theme.of(context).textSelectionTheme.selectionColor!;
+
+      default:
+        return Theme.of(context).primaryColor;
+    }
+  }
+
   static Color getAppUpdateLogoBackColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mosaic||Flavor.flinders:
+      case Flavor.mosaic || Flavor.flinders:
         return AppColors.white;
       case Flavor.edp ||
             Flavor.northShoreTavern ||
@@ -251,10 +263,10 @@ class AppThemeCustom {
             Flavor.mhbc ||
             Flavor.starReward ||
             Flavor.qantumClub ||
-            Flavor.qantum||
-            Flavor.maxClub||
-            Flavor.maxx||
-            Flavor.southportSharks||
+            Flavor.qantum ||
+            Flavor.maxClub ||
+            Flavor.maxx ||
+            Flavor.southportSharks ||
             Flavor.drinkRewards:
         return AppColors.white.withAlpha(20);
       default:
@@ -1349,8 +1361,8 @@ class AppThemeCustom {
             : AppColors.bob_button_color;
       case Flavor.mannumClub:
         return (isCancelled
-                ? AppColors.disable_color
-                : AppColors.mc_button_color);
+            ? AppColors.disable_color
+            : AppColors.mc_button_color);
       default:
         return isCancelled
             ? AppColors.disable_color

@@ -29,10 +29,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.1+63
 ###################################
 # HOGAN'S REWARD
-#version: 1.0.5+16
+#version: 1.0.6+18
 ###################################
 # MHBC
-#version:  1.0.14+102
+#version:  1.0.14+104
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -59,7 +59,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
-#version: 1.0.6+11
+#version: 1.0.6+13
 ###################################
 # FLINDERS STREET WHARVES
 #version: 1.0.3+12
@@ -80,7 +80,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.0+4
 ###################################
 #EDP
-version: 1.0.6+16
+#version: 1.0.6+17
 ################################.###
 #SOT
 #version: 1.21.0+1205
@@ -89,9 +89,9 @@ version: 1.0.6+16
 #version: 1.23.0+1
 ###################################
 #Mosaic Hotel
-#version: 1.0.5+8
+#version: 1.0.6+10
 #Mannum club
-#version: 1.0.0+3
+version: 1.0.0+4
 #Southport Sharks
 #version: 1.0.0+4
 

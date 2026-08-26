@@ -119,12 +119,6 @@ class UserModel {
         ? json["comingPaymentType"]
         : null;
     venueName = json.containsKey("venueName") ? json["venueName"] : null;
-    /*pointsValue = 4003.55;
-    pointsBalance = 40.0355;*/
-/*
-    pointsValue = json.containsKey("PointsBalance") ? json["PointsBalance"] : 0.0;
-    pointsBalance = json.containsKey("PointsValue") ? json["PointsValue"] : 0.0;
-*/
 
     membersDrawEntries =
         json.containsKey("MembersDrawEntries") ? json["MembersDrawEntries"] : 0;

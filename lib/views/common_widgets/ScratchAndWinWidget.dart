@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_scratch_card/flutter_scratch_card.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import '/core/utils/AppColors.dart';
 import '/view_models/PromotionsProvider.dart';
 import '../../core/extensions/log_extension.dart';
@@ -150,16 +151,14 @@ class _ScratchAndWinWidgetState extends State<ScratchAndWinWidget> {
                                           Text(
                                             "${widget.incentive.incentiveValue}",
                                             style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
+                                                color: AppThemeCustom.getScratchPointsTextColor(context),
                                                 fontSize: 48,
                                                 fontWeight: FontWeight.w900),
                                           ),
                                           Text(
                                             "Points",
                                             style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
+                                                color: AppThemeCustom.getScratchPointsTextColor(context),
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w500),
                                           ),

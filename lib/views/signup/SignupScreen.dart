@@ -57,8 +57,15 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   late FocusNode _birthdayYYFocusNode;
   final GlobalKey<FormState> _formKey = GlobalKey();
   late AppLocalizations loc;
-  @override
   late Flavor flavor;
+
+  final hasExistingEmailFlowApps = {
+    Flavor.mhbc,
+    Flavor.edp,
+    Flavor.bluewater,
+    Flavor.hogansReward,
+  };
+  late bool hasExistingEmailFlow;
 
   @override
   void initState() {
@@ -66,6 +73,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
 
     debugPrint("PARAMS ON SIGNUP: ${widget.argument}");
     flavor = FlavorConfig.instance.flavor!;
+    hasExistingEmailFlow = hasExistingEmailFlowApps.contains(flavor);
     String firstName = "", lastName = "";
     if (widget.argument.containsKey('name')) {
       Map<String, String> namePart =
@@ -156,9 +164,6 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
   bool? _isDuplicateEmail;
 
   void _handleEmailControllerChange() async {
-    /*if (flavor != Flavor.edp) {
-      return;
-    }*/
     _emailDebounce?.cancel();
 
     final email = _emailController.text.trim();
@@ -458,7 +463,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                         decoration: _buildCommonInputDecoration(
                             hint: loc.hintEmail, isEmail: true),
                       ),
-                      (_showDuplicateEmailMsg && flavor != Flavor.edp)
+                      (_showDuplicateEmailMsg && !hasExistingEmailFlow)
                           ? Container(
                               width: double.infinity,
                               margin: const EdgeInsets.only(left: 6, right: 6),
@@ -876,7 +881,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                             if (_formKey.currentState!.validate()) {
                               // Stop EDP registration when the email is already registered.
                               if (_isDuplicateEmail == true &&
-                                  flavor != Flavor.edp) {
+                                  !hasExistingEmailFlow) {
                                 AppHelper.showErrorMessage(
                                   context,
                                   "This Email ID is already registered. Please use another email ID.",
@@ -963,8 +968,13 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                     } else if (flavor == Flavor.edp) {
                                       navigationEDP(params);
                                     } else {
-                                      userLoginProvider.signup(phoneNo, params,
-                                          loc: loc);
+                                      if (_isDuplicateEmail! &&
+                                          hasExistingEmailFlow) {
+                                        navigateToExistingEmailFlow(params);
+                                      } else {
+                                        userLoginProvider
+                                            .signup(phoneNo, params, loc: loc);
+                                      }
                                     }
                                   } else {
                                     AppHelper.showErrorMessage(context,
@@ -1017,7 +1027,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
       filled: true,
       counterText: "",
       hintText: hint,
-      suffixIcon: (isEmail != null && isEmail && flavor != Flavor.edp)
+      suffixIcon: (isEmail != null && isEmail && !hasExistingEmailFlow)
           ? Center(
               widthFactor: 1, heightFactor: 1, child: emailCheckStatusWidget())
           : null,
@@ -1113,35 +1123,36 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     AppNavigator.navigateTo(context, AppNavigator.otp, arguments: args);
   }
 
-  navigationEDP(Map<String, dynamic> params) async {
+  navigateToExistingEmailFlow(Map<String, dynamic> params) async {
     params['phoneNo'] = widget.argument['phoneNo']!;
     params['countryCode'] = widget.argument['countryCode']!;
 
     print("IS DUPLICATE EMAIL$_isDuplicateEmail");
 
-    if (_isDuplicateEmail != null && _isDuplicateEmail!) {
-      /*    AppNavigator.navigateAndClearStack(
+    final result = await context
+        .read<UserInfoProvider>()
+        .sendOTPOnExistingEmail(
+            email: _emailController.text.toString(), loc: loc);
+    if (result.success) {
+      params['userId'] = result.userId!;
+      AppNavigator.navigateAndClearStack(
           context, AppNavigator.verifyExistingEmailOTPScreen,
           arguments: params);
-  */
-
-      final result = await context
-          .read<UserInfoProvider>()
-          .sendOTPOnExistingEmail(
-              email: _emailController.text.toString(), loc: loc);
-
-      if (result.success) {
-        params['userId'] = result.userId!;
-        AppNavigator.navigateAndClearStack(
-            context, AppNavigator.verifyExistingEmailOTPScreen,
-            arguments: params);
-      } else {
-        AppHelper.showErrorMessage(
-            context,
-            result.errorMessage ??
-                "Ooppss.. something went wrong, please try again");
-      }
     } else {
+      AppHelper.showErrorMessage(
+          context,
+          result.errorMessage ??
+              "Ooppss.. something went wrong, please try again");
+    }
+  }
+
+  navigationEDP(Map<String, dynamic> params) async {
+    if (_isDuplicateEmail != null && _isDuplicateEmail!) {
+      navigateToExistingEmailFlow(params);
+    } else {
+      params['phoneNo'] = widget.argument['phoneNo']!;
+      params['countryCode'] = widget.argument['countryCode']!;
+
       AppNavigator.navigateTo(context, AppNavigator.chooseFavouriteVenue,
           arguments: params);
     }
