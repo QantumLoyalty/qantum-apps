@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '../common_widgets/AppLogoHeader.dart';
 import '/l10n/app_localizations.dart';
 import '../../views/common_widgets/AppScaffold.dart';
@@ -156,49 +157,58 @@ class _VerifyOTPAccountState extends State<VerifyOTPAccount> with CodeAutoFill {
                       ),
                     ),
                     AppDimens.shape_5,
-                    TextFormField(
-                      maxLines: 1,
-                      maxLength: 4,
-                      textInputAction: TextInputAction.done,
-                      textAlign: TextAlign.start,
-                      keyboardType: TextInputType.number,
-                      autofillHints: const [AutofillHints.oneTimeCode],
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      onChanged: (value) {
-                        if (value.length == 4) {
-                          verifyOTP(_otpController.text);
-                        }
-                      },
-                      controller: _otpController,
-                      focusNode: _otpFocusNode,
-                      style: TextStyle(
-                          color: AppThemeCustom.getTextFieldTextColor(context)),
-                      decoration: InputDecoration(
-                        counter: AppDimens.shape_5,
-                        fillColor:
-                            AppThemeCustom.getTextFieldBackground(context),
-                        filled: true,
-                        hintStyle:
-                            TextStyle(color: Theme.of(context).hintColor),
-                        hintText: 'XXXX',
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
-                        errorBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)),
+                    Theme(
+                      data: Theme.of(context).copyWith(
+                        textSelectionTheme: TextSelectionThemeData(
+                          selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                          cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                          selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                        ),
+                      ),
+                      child: TextFormField(
+                        maxLines: 1,
+                        maxLength: 4,
+                        textInputAction: TextInputAction.done,
+                        textAlign: TextAlign.start,
+                        keyboardType: TextInputType.number,
+                        autofillHints: const [AutofillHints.oneTimeCode],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onChanged: (value) {
+                          if (value.length == 4) {
+                            verifyOTP(_otpController.text);
+                          }
+                        },
+                        controller: _otpController,
+                        focusNode: _otpFocusNode,
+                        style: TextStyle(
+                            color: AppThemeCustom.getTextFieldTextColor(context)),
+                        decoration: InputDecoration(
+                          counter: AppDimens.shape_5,
+                          fillColor:
+                              AppThemeCustom.getTextFieldBackground(context),
+                          filled: true,
+                          hintStyle:
+                              TextStyle(color: Theme.of(context).hintColor),
+                          hintText: 'XXXX',
+                          enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
                       ),
                     ),
                     AppDimens.shape_5,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../view_models/MyAccountProvider.dart';
 import '../../views/common_widgets/AppLoader.dart';
@@ -106,41 +107,50 @@ class _ClubAndMembershipState extends State<ClubAndMembership> {
                                           context,isHeadingCommunication: true,isCommunication: true)),
                             ),
                             AppDimens.shape_15,
-                            TextFormField(
-                              controller: _codeController,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: AppThemeCustom.getTextFieldTextColor(
-                                      context)),
-                              maxLines: 1,
-                              maxLength: 80,
-                              decoration: InputDecoration(
-                                counterText: "",
-                                contentPadding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                hintText: loc.msgEnterClubCode,
-                                hintStyle: TextStyle(
-                                    fontSize: 20,
-                                    color: Theme.of(context).hintColor),
-                                filled: true,
-                                fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context),
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8)),
+                            Theme(
+                              data: Theme.of(context).copyWith(
+                                textSelectionTheme: TextSelectionThemeData(
+                                  selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                                  cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                                  selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                                ),
+                              ),
+                              child: TextFormField(
+                                controller: _codeController,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppThemeCustom.getTextFieldTextColor(
+                                        context)),
+                                maxLines: 1,
+                                maxLength: 80,
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 15, right: 15),
+                                  hintText: loc.msgEnterClubCode,
+                                  hintStyle: TextStyle(
+                                      fontSize: 20,
+                                      color: Theme.of(context).hintColor),
+                                  filled: true,
+                                  fillColor:
+                                      AppThemeCustom.getTextFieldBackground(
+                                          context),
+                                  border: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
                               ),
                             ),
                             AppDimens.getCustomBoxShape(30),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import '/core/enums/MembershipStatus.dart';
 import '/core/extensions/log_extension.dart';
 import '/view_models/UserInfoProvider.dart';
@@ -300,55 +301,64 @@ class _OTPScreenState extends State<OTPScreen> with CodeAutoFill {
                               ),
                             ),
                             AppDimens.shape_5,
-                            TextFormField(
-                              maxLines: 1,
-                              maxLength: 4,
-                              focusNode: _otpFocusNode,
-                              autofillHints: const [AutofillHints.oneTimeCode],
-                              textInputAction: TextInputAction.done,
-                              onChanged: (value) {
-                                if (value.length == 4) {
-                                  verifyOTP(_otpController.text);
-                                }
-                              },
-                              textAlign: TextAlign.start,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              controller: _otpController,
-                              style: TextStyle(
-                                  color: AppThemeCustom.getTextFieldTextColor(
-                                      context,
-                                      isShadow: true)),
-                              decoration: InputDecoration(
-                                counter: AppDimens.shape_5,
-                                fillColor:
-                                    AppThemeCustom.getTextFieldBackground(
-                                        context,
-                                        isShadow: true),
-                                filled: true,
-                                hintStyle: TextStyle(
-                                    color: AppThemeCustom.getHintTextFieldColor(
+                            Theme(
+                              data: Theme.of(context).copyWith(
+                                textSelectionTheme: TextSelectionThemeData(
+                                  selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                                  cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                                  selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                                ),
+                              ),
+                              child: TextFormField(
+                                maxLines: 1,
+                                maxLength: 4,
+                                focusNode: _otpFocusNode,
+                                autofillHints: const [AutofillHints.oneTimeCode],
+                                textInputAction: TextInputAction.done,
+                                onChanged: (value) {
+                                  if (value.length == 4) {
+                                    verifyOTP(_otpController.text);
+                                  }
+                                },
+                                textAlign: TextAlign.start,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                controller: _otpController,
+                                style: TextStyle(
+                                    color: AppThemeCustom.getTextFieldTextColor(
                                         context,
                                         isShadow: true)),
-                                hintText: 'XXXX',
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
+                                decoration: InputDecoration(
+                                  counter: AppDimens.shape_5,
+                                  fillColor:
+                                      AppThemeCustom.getTextFieldBackground(
+                                          context,
+                                          isShadow: true),
+                                  filled: true,
+                                  hintStyle: TextStyle(
+                                      color: AppThemeCustom.getHintTextFieldColor(
+                                          context,
+                                          isShadow: true)),
+                                  hintText: 'XXXX',
+                                  border: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
                               ),
                             ),
                             AppDimens.shape_5,

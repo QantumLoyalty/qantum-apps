@@ -5,14 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 import 'package:qantum_apps/view_models/UserInfoProvider.dart';
+
 import '/core/extensions/log_extension.dart';
+import '/core/mixins/logging_mixin.dart';
 import '/core/network/APIList.dart';
 import '/data/models/NetworkResponse.dart';
 import '/views/signup/widgets/GenderSelector.dart';
-import '../../core/flavors_config/flavor_config.dart';
-import '/core/mixins/logging_mixin.dart';
 import '../../core/flavors_config/app_theme_custom.dart';
+import '../../core/flavors_config/flavor_config.dart';
 import '../../core/navigation/AppNavigator.dart';
 import '../../core/utils/AppDimens.dart';
 import '../../core/utils/AppHelper.dart';
@@ -391,77 +393,122 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                 .selectionColor),
                       ),
                       AppDimens.shape_20,
-                      TextFormField(
-                        maxLines: 1,
-                        keyboardType: TextInputType.text,
-                        controller: _firstNameController,
-                        inputFormatters: <TextInputFormatter>[
-                          UpperCaseTextFormatter(),
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r"[A-Za-z\s'\-]")),
-                        ],
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return loc.msgEmptyFirstName;
-                          }
-                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
-                          if (!validName.hasMatch(value)) {
-                            return loc.pleaseAvoidSpecialChar;
-                          }
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          textSelectionTheme: TextSelectionThemeData(
+                            selectionColor: AppColors.black.withOpacity(0.2),
+                            cursorColor: AppThemeCustom.getTextFieldTextColor(
+                                context,
+                                isShadow: true),
+                            selectionHandleColor:
+                            AppThemeCustom.getTextFieldTextColor(
+                                context,
+                                isShadow: true),
+                          ),
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.text,
+                          controller: _firstNameController,
+                          inputFormatters: <TextInputFormatter>[
+                            UpperCaseTextFormatter(),
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r"[A-Za-z\s'\-]")),
+                          ],
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return loc.msgEmptyFirstName;
+                            }
+                            final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                            if (!validName.hasMatch(value)) {
+                              return loc.pleaseAvoidSpecialChar;
+                            }
 
-                          return null;
-                        },
-                        style: TextStyle(
-                            color: AppThemeCustom.getTextFieldTextColor(context,
-                                isShadow: true)),
-                        decoration:
-                            _buildCommonInputDecoration(hint: loc.txtFirstName),
+                            return null;
+                          },
+                          style: TextStyle(
+                              color: AppThemeCustom.getTextFieldTextColor(
+                                  context,
+                                  isShadow: true)),
+                          decoration: _buildCommonInputDecoration(
+                              hint: loc.txtFirstName),
+                        ),
                       ),
                       AppDimens.shape_10,
-                      TextFormField(
-                        maxLines: 1,
-                        keyboardType: TextInputType.text,
-                        controller: _lastNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return loc.msgEmptyLastName;
-                          }
-                          final validName = RegExp(r"^[A-Za-z\s'\-]+$");
-                          if (!validName.hasMatch(value)) {
-                            return loc.pleaseAvoidSpecialChar;
-                          }
-                          return null;
-                        },
-                        inputFormatters: <TextInputFormatter>[
-                          UpperCaseTextFormatter(),
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r"[A-Za-z\s'\-]")),
-                        ],
-                        style: TextStyle(
-                            color: AppThemeCustom.getTextFieldTextColor(context,
-                                isShadow: true)),
-                        decoration:
-                            _buildCommonInputDecoration(hint: loc.txtLastName),
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          textSelectionTheme: TextSelectionThemeData(
+                            selectionColor: AppColors.black.withOpacity(0.2),
+                            // visible highlight
+                            cursorColor: AppThemeCustom.getTextFieldTextColor(
+                                context,
+                                isShadow: true),
+                            selectionHandleColor:
+                                AppThemeCustom.getTextFieldTextColor(context,
+                                    isShadow: true),
+                          ),
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.text,
+                          controller: _lastNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return loc.msgEmptyLastName;
+                            }
+                            final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                            if (!validName.hasMatch(value)) {
+                              return loc.pleaseAvoidSpecialChar;
+                            }
+                            return null;
+                          },
+                          inputFormatters: <TextInputFormatter>[
+                            UpperCaseTextFormatter(),
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r"[A-Za-z\s'\-]")),
+                          ],
+                          style: TextStyle(
+                              color: AppThemeCustom.getTextFieldTextColor(
+                                  context,
+                                  isShadow: true)),
+                          decoration: _buildCommonInputDecoration(
+                              hint: loc.txtLastName),
+                        ),
                       ),
                       AppDimens.shape_10,
-                      TextFormField(
-                        maxLines: 1,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        style: TextStyle(
-                            color: AppThemeCustom.getTextFieldTextColor(context,
-                                isShadow: true)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return loc.msgEmptyEmail;
-                          } else if (!AppHelper.verifyEmailAddress(value)) {
-                            return loc.msgIncorrectEmail;
-                          }
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          textSelectionTheme: TextSelectionThemeData(
+                            selectionColor: AppColors.black.withOpacity(0.2),
+                            // visible highlight
+                            cursorColor: AppThemeCustom.getTextFieldTextColor(
+                                context,
+                                isShadow: true),
+                            selectionHandleColor:
+                                AppThemeCustom.getTextFieldTextColor(context,
+                                    isShadow: true),
+                          ),
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
+                          style: TextStyle(
+                              color: AppThemeCustom.getTextFieldTextColor(
+                                  context,
+                                  isShadow: true)),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return loc.msgEmptyEmail;
+                            } else if (!AppHelper.verifyEmailAddress(value)) {
+                              return loc.msgIncorrectEmail;
+                            }
 
-                          return null;
-                        },
-                        decoration: _buildCommonInputDecoration(
-                            hint: loc.hintEmail, isEmail: true),
+                            return null;
+                          },
+                          decoration: _buildCommonInputDecoration(
+                              hint: loc.hintEmail, isEmail: true),
+                        ),
                       ),
                       (_showDuplicateEmailMsg && !hasExistingEmailFlow)
                           ? Container(
@@ -496,35 +543,67 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                           .selectionColor),
                                 ),
                                 AppDimens.shape_5,
-                                TextFormField(
-                                  maxLines: 1,
-                                  controller: _addressController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return loc.msgEmptyAddress;
-                                    }
-
-                                    return null;
-                                  },
-                                  style: TextStyle(
-                                      color:
+                                Theme(
+                                  data: Theme.of(context).copyWith(
+                                    textSelectionTheme: TextSelectionThemeData(
+                                      selectionColor: AppColors.black
+                                          .withOpacity(
+                                              0.2), // visible highlight
+                                      cursorColor:
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
-                                              isShadow: true)),
-                                  decoration: _buildCommonInputDecoration(
-                                      hint: "${loc.txtAddress} 1"),
+                                              isShadow: true),
+                                      selectionHandleColor:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context,
+                                              isShadow: true),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    maxLines: 1,
+                                    controller: _addressController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return loc.msgEmptyAddress;
+                                      }
+
+                                      return null;
+                                    },
+                                    style: TextStyle(
+                                        color: AppThemeCustom
+                                            .getTextFieldTextColor(context,
+                                                isShadow: true)),
+                                    decoration: _buildCommonInputDecoration(
+                                        hint: "${loc.txtAddress} 1"),
+                                  ),
                                 ),
                                 AppDimens.shape_10,
-                                TextFormField(
-                                  maxLines: 1,
-                                  controller: _address1Controller,
-                                  style: TextStyle(
-                                      color:
+                                Theme(
+                                  data: Theme.of(context).copyWith(
+                                    textSelectionTheme: TextSelectionThemeData(
+                                      selectionColor: AppColors.black
+                                          .withOpacity(
+                                              0.2), // visible highlight
+                                      cursorColor:
                                           AppThemeCustom.getTextFieldTextColor(
                                               context,
-                                              isShadow: true)),
-                                  decoration: _buildCommonInputDecoration(
-                                      hint: "${loc.txtAddress} 2"),
+                                              isShadow: true),
+                                      selectionHandleColor:
+                                          AppThemeCustom.getTextFieldTextColor(
+                                              context,
+                                              isShadow: true),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    maxLines: 1,
+                                    controller: _address1Controller,
+                                    style: TextStyle(
+                                        color: AppThemeCustom
+                                            .getTextFieldTextColor(context,
+                                                isShadow: true)),
+                                    decoration: _buildCommonInputDecoration(
+                                        hint: "${loc.txtAddress} 2"),
+                                  ),
                                 ),
                               ],
                             )
@@ -550,51 +629,68 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                             .selectionColor),
                                   ),
                                   Expanded(
-                                      child: TextFormField(
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    controller: _postcodeController,
-                                    style: TextStyle(
-                                        color: AppThemeCustom
+                                      child: Theme(
+                                    data: Theme.of(context).copyWith(
+                                      textSelectionTheme:
+                                          TextSelectionThemeData(
+                                        selectionColor:
+                                            AppColors.black.withOpacity(0.2),
+                                        // visible highlight
+                                        cursorColor: AppThemeCustom
                                             .getTextFieldTextColor(context,
-                                                isShadow: true)),
-                                    decoration: InputDecoration(
-                                        counterText: "",
-                                        hintText: "5555",
-                                        fillColor: AppThemeCustom
-                                            .getTextFieldBackground(context,
                                                 isShadow: true),
-                                        filled: true,
-                                        hintStyle: TextStyle(
+                                        selectionHandleColor: AppThemeCustom
+                                            .getTextFieldTextColor(context,
+                                                isShadow: true),
+                                      ),
+                                    ),
+                                    child: TextFormField(
+                                      maxLines: 1,
+                                      maxLength: 4,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      controller: _postcodeController,
+                                      style: TextStyle(
                                           color: AppThemeCustom
-                                              .getHintTextFieldColor(context,
+                                              .getTextFieldTextColor(context,
+                                                  isShadow: true)),
+                                      decoration: InputDecoration(
+                                          counterText: "",
+                                          hintText: "5555",
+                                          fillColor:
+                                              AppThemeCustom.getTextFieldBackground(
+                                                  context,
                                                   isShadow: true),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        border: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(10))),
+                                          filled: true,
+                                          hintStyle: TextStyle(
+                                            color: AppThemeCustom
+                                                .getHintTextFieldColor(context,
+                                                    isShadow: true),
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          border: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.transparent),
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
+                                    ),
                                   ))
                                 ],
                               ),
@@ -628,182 +724,257 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
                                             children: [
                                               Expanded(
                                                   flex: 2,
-                                                  child: TextFormField(
-                                                    maxLines: 1,
-                                                    maxLength: 2,
-                                                    textAlign: TextAlign.center,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: <TextInputFormatter>[
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    controller:
-                                                        _birthdayDDController,
-                                                    focusNode:
-                                                        _birthdayDDFocusNode,
-                                                    style: TextStyle(
-                                                        color: AppThemeCustom
+                                                  child: Theme(
+                                                    data: Theme.of(context)
+                                                        .copyWith(
+                                                      textSelectionTheme:
+                                                          TextSelectionThemeData(
+                                                        selectionColor:
+                                                            AppColors.black
+                                                                .withOpacity(
+                                                                    0.2),
+                                                        // visible highlight
+                                                        cursorColor: AppThemeCustom
                                                             .getTextFieldTextColor(
                                                                 context,
-                                                                isShadow:
-                                                                    true)),
-                                                    onChanged: (value) {
-                                                      if (value.length == 2) {
-                                                        int? day =
-                                                            int.tryParse(value);
-                                                        if (day != null &&
-                                                            day > 31) {
-                                                          _birthdayDDController
-                                                              .text = '31';
-                                                          _birthdayDDController
-                                                                  .selection =
-                                                              TextSelection
-                                                                  .fromPosition(
-                                                            TextPosition(
-                                                                offset:
-                                                                    _birthdayDDController
-                                                                        .text
-                                                                        .length),
-                                                          );
-                                                        } else {
-                                                          FocusScope.of(context)
-                                                              .requestFocus(
-                                                                  _birthdayMMFocusNode);
-                                                        }
-                                                      }
-                                                    },
-                                                    decoration: InputDecoration(
-                                                        counterText: "",
-                                                        hintText: "DD",
-                                                        hintStyle: TextStyle(
-                                                            color: AppThemeCustom
-                                                                .getHintTextFieldColor(
+                                                                isShadow: true),
+                                                        selectionHandleColor:
+                                                            AppThemeCustom
+                                                                .getTextFieldTextColor(
                                                                     context,
                                                                     isShadow:
                                                                         true),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                        border:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        errorBorder:
-                                                            InputBorder.none),
+                                                      ),
+                                                    ),
+                                                    child: TextFormField(
+                                                      maxLines: 1,
+                                                      maxLength: 2,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: <TextInputFormatter>[
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      controller:
+                                                          _birthdayDDController,
+                                                      focusNode:
+                                                          _birthdayDDFocusNode,
+                                                      style: TextStyle(
+                                                          color: AppThemeCustom
+                                                              .getTextFieldTextColor(
+                                                                  context,
+                                                                  isShadow:
+                                                                      true)),
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          int? day =
+                                                              int.tryParse(
+                                                                  value);
+                                                          if (day != null &&
+                                                              day > 31) {
+                                                            _birthdayDDController
+                                                                .text = '31';
+                                                            _birthdayDDController
+                                                                    .selection =
+                                                                TextSelection
+                                                                    .fromPosition(
+                                                              TextPosition(
+                                                                  offset:
+                                                                      _birthdayDDController
+                                                                          .text
+                                                                          .length),
+                                                            );
+                                                          } else {
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(
+                                                                    _birthdayMMFocusNode);
+                                                          }
+                                                        }
+                                                      },
+                                                      decoration: InputDecoration(
+                                                          counterText: "",
+                                                          hintText: "DD",
+                                                          hintStyle: TextStyle(
+                                                              color: AppThemeCustom
+                                                                  .getHintTextFieldColor(
+                                                                      context,
+                                                                      isShadow:
+                                                                          true),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                          border:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                          errorBorder:
+                                                              InputBorder.none),
+                                                    ),
                                                   )),
                                               Expanded(
                                                   flex: 2,
-                                                  child: TextFormField(
-                                                    maxLines: 1,
-                                                    maxLength: 2,
-                                                    textAlign: TextAlign.center,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: <TextInputFormatter>[
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    controller:
-                                                        _birthdayMMController,
-                                                    style: TextStyle(
-                                                        color: AppThemeCustom
+                                                  child: Theme(
+                                                    data: Theme.of(context)
+                                                        .copyWith(
+                                                      textSelectionTheme:
+                                                          TextSelectionThemeData(
+                                                        selectionColor:
+                                                            AppColors.black
+                                                                .withOpacity(
+                                                                    0.2),
+                                                        // visible highlight
+                                                        cursorColor: AppThemeCustom
                                                             .getTextFieldTextColor(
                                                                 context,
-                                                                isShadow:
-                                                                    true)),
-                                                    focusNode:
-                                                        _birthdayMMFocusNode,
-                                                    onChanged: (value) {
-                                                      if (value.length == 2) {
-                                                        int? day =
-                                                            int.tryParse(value);
-                                                        if (day != null &&
-                                                            day > 12) {
-                                                          _birthdayMMController
-                                                              .text = '12';
-                                                          _birthdayMMController
-                                                                  .selection =
-                                                              TextSelection
-                                                                  .fromPosition(
-                                                            TextPosition(
-                                                                offset:
-                                                                    _birthdayMMController
-                                                                        .text
-                                                                        .length),
-                                                          );
-                                                        } else {
-                                                          FocusScope.of(context)
-                                                              .requestFocus(
-                                                                  _birthdayYYFocusNode);
-                                                        }
-                                                      }
-                                                    },
-                                                    decoration: InputDecoration(
-                                                        counterText: "",
-                                                        hintText: "MM",
-                                                        hintStyle: TextStyle(
-                                                            color: AppThemeCustom
-                                                                .getHintTextFieldColor(
+                                                                isShadow: true),
+                                                        selectionHandleColor:
+                                                            AppThemeCustom
+                                                                .getTextFieldTextColor(
                                                                     context,
                                                                     isShadow:
                                                                         true),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                        border:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        errorBorder:
-                                                            InputBorder.none),
+                                                      ),
+                                                    ),
+                                                    child: TextFormField(
+                                                      maxLines: 1,
+                                                      maxLength: 2,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: <TextInputFormatter>[
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      controller:
+                                                          _birthdayMMController,
+                                                      style: TextStyle(
+                                                          color: AppThemeCustom
+                                                              .getTextFieldTextColor(
+                                                                  context,
+                                                                  isShadow:
+                                                                      true)),
+                                                      focusNode:
+                                                          _birthdayMMFocusNode,
+                                                      onChanged: (value) {
+                                                        if (value.length == 2) {
+                                                          int? day =
+                                                              int.tryParse(
+                                                                  value);
+                                                          if (day != null &&
+                                                              day > 12) {
+                                                            _birthdayMMController
+                                                                .text = '12';
+                                                            _birthdayMMController
+                                                                    .selection =
+                                                                TextSelection
+                                                                    .fromPosition(
+                                                              TextPosition(
+                                                                  offset:
+                                                                      _birthdayMMController
+                                                                          .text
+                                                                          .length),
+                                                            );
+                                                          } else {
+                                                            FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(
+                                                                    _birthdayYYFocusNode);
+                                                          }
+                                                        }
+                                                      },
+                                                      decoration: InputDecoration(
+                                                          counterText: "",
+                                                          hintText: "MM",
+                                                          hintStyle: TextStyle(
+                                                              color: AppThemeCustom
+                                                                  .getHintTextFieldColor(
+                                                                      context,
+                                                                      isShadow:
+                                                                          true),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                          border:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                          errorBorder:
+                                                              InputBorder.none),
+                                                    ),
                                                   )),
                                               Expanded(
                                                   flex: 6,
-                                                  child: TextFormField(
-                                                    maxLines: 1,
-                                                    maxLength: 4,
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: <TextInputFormatter>[
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    controller:
-                                                        _birthdayYYController,
-                                                    focusNode:
-                                                        _birthdayYYFocusNode,
-                                                    style: TextStyle(
-                                                        color: AppThemeCustom
+                                                  child: Theme(
+                                                    data: Theme.of(context)
+                                                        .copyWith(
+                                                      textSelectionTheme:
+                                                          TextSelectionThemeData(
+                                                        selectionColor:
+                                                            AppColors.black
+                                                                .withOpacity(
+                                                                    0.2),
+                                                        // visible highlight
+                                                        cursorColor: AppThemeCustom
                                                             .getTextFieldTextColor(
                                                                 context,
-                                                                isShadow:
-                                                                    true)),
-                                                    decoration: InputDecoration(
-                                                        counterText: "",
-                                                        hintText: "YYYY",
-                                                        hintStyle: TextStyle(
-                                                            color: AppThemeCustom
-                                                                .getHintTextFieldColor(
+                                                                isShadow: true),
+                                                        selectionHandleColor:
+                                                            AppThemeCustom
+                                                                .getTextFieldTextColor(
                                                                     context,
                                                                     isShadow:
                                                                         true),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                        border:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                        errorBorder:
-                                                            InputBorder.none),
-                                                    onChanged: (value) {
-                                                      if (value.length == 4) {
-                                                        FocusScope.of(context)
-                                                            .requestFocus(
-                                                                FocusNode());
-                                                      }
-                                                    },
+                                                      ),
+                                                    ),
+                                                    child: TextFormField(
+                                                      maxLines: 1,
+                                                      maxLength: 4,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: <TextInputFormatter>[
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      controller:
+                                                          _birthdayYYController,
+                                                      focusNode:
+                                                          _birthdayYYFocusNode,
+                                                      style: TextStyle(
+                                                          color: AppThemeCustom
+                                                              .getTextFieldTextColor(
+                                                                  context,
+                                                                  isShadow:
+                                                                      true)),
+                                                      decoration: InputDecoration(
+                                                          counterText: "",
+                                                          hintText: "YYYY",
+                                                          hintStyle: TextStyle(
+                                                              color: AppThemeCustom
+                                                                  .getHintTextFieldColor(
+                                                                      context,
+                                                                      isShadow:
+                                                                          true),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                          border:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                          errorBorder:
+                                                              InputBorder.none),
+                                                      onChanged: (value) {
+                                                        if (value.length == 4) {
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  FocusNode());
+                                                        }
+                                                      },
+                                                    ),
                                                   )),
                                             ],
                                           )),

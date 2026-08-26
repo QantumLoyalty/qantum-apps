@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
@@ -46,40 +47,49 @@ class _EditMailScreenState extends State<EditMailScreen> {
                   color: Theme.of(context).textSelectionTheme.selectionColor),
             ),
             AppDimens.shape_5,
-            TextFormField(
-              maxLines: 1,
-              keyboardType: TextInputType.emailAddress,
-              controller: _emailController,
-              style: TextStyle(
-                  color: AppThemeCustom.getTextFieldTextColor(context)),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return loc.msgEmptyEmail;
-                } else if (!AppHelper.verifyEmailAddress(value)) {
-                  return loc.msgIncorrectEmail;
-                }
+            Theme(
+              data: Theme.of(context).copyWith(
+                textSelectionTheme: TextSelectionThemeData(
+                  selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                  cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                  selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                ),
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.emailAddress,
+                controller: _emailController,
+                style: TextStyle(
+                    color: AppThemeCustom.getTextFieldTextColor(context)),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return loc.msgEmptyEmail;
+                  } else if (!AppHelper.verifyEmailAddress(value)) {
+                    return loc.msgIncorrectEmail;
+                  }
 
-                return null;
-              },
-              decoration: InputDecoration(
-                fillColor: AppThemeCustom.getTextFieldBackground(context),
-                filled: true,
-                hintText: loc.hintEmail,
-                hintStyle: TextStyle(
-                    color: Theme.of(context).hintColor,
-                    fontWeight: FontWeight.w400),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
+                  return null;
+                },
+                decoration: InputDecoration(
+                  fillColor: AppThemeCustom.getTextFieldBackground(context),
+                  filled: true,
+                  hintText: loc.hintEmail,
+                  hintStyle: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontWeight: FontWeight.w400),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ),
             AppDimens.shape_30,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 
 import '../../../core/flavors_config/app_theme_custom.dart';
 import '../../../core/utils/AppDimens.dart';
@@ -47,31 +48,40 @@ class _EditPhoneScreenState extends State<EditPhoneScreen> {
                   color: Theme.of(context).textSelectionTheme.selectionColor),
             ),
             AppDimens.shape_5,
-            TextFormField(
-              maxLines: 1,
-              maxLength: 10,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              controller: _phoneController,
-              style: TextStyle(
-                  color: AppThemeCustom.getTextFieldTextColor(context)),
-              decoration: InputDecoration(
-                counterText: "",
-                hintText: "0400000000",
-                hintStyle: TextStyle(color: Theme.of(context).hintColor),
-                fillColor: AppThemeCustom.getTextFieldBackground(context),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                focusedBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                errorBorder:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            Theme(
+              data: Theme.of(context).copyWith(
+                textSelectionTheme: TextSelectionThemeData(
+                  selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                  cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                  selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                ),
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                maxLength: 10,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                controller: _phoneController,
+                style: TextStyle(
+                    color: AppThemeCustom.getTextFieldTextColor(context)),
+                decoration: InputDecoration(
+                  counterText: "",
+                  hintText: "0400000000",
+                  hintStyle: TextStyle(color: Theme.of(context).hintColor),
+                  fillColor: AppThemeCustom.getTextFieldBackground(context),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  border:
+                      OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  focusedBorder:
+                      OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  errorBorder:
+                      OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ),
             AppDimens.shape_30,

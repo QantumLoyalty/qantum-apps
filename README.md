@@ -31,3 +31,11 @@ adb shell am start \
 ### flutter build ipa --release --flavor wonthaggi -t lib/main_wt.dart
 
 
+### api getting called multiple times
+### fetch promotion api
+### get all option api
+### fetch special incentive api
+### fetch user profile api
+### fetch special offer api
+
+

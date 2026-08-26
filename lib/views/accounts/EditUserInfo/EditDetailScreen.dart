@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/utils/AppColors.dart';
 
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
@@ -85,49 +86,58 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                   color: Theme.of(context).textSelectionTheme.selectionColor),
             ),
             AppDimens.shape_5,
-            TextFormField(
-              maxLines: 1,
-              keyboardType: TextInputType.text,
-              controller: _fullNameFieldController,
-              inputFormatters: <TextInputFormatter>[
-                UpperCaseTextFormatter(),
-                FilteringTextInputFormatter.allow(RegExp(r"[A-Za-z\s'\-]")),
-              ],
-              validator: (value) {
-                /*if (value!.isEmpty) {
-                  return loc.msgEmptyFirstName;
-                }
-                return null;*/
-                if (value == null || value.isEmpty) {
-                  return loc.msgEmptyFirstName;
-                }
-                final validName = RegExp(r"^[A-Za-z\s'\-]+$");
-                if (!validName.hasMatch(value)) {
-                  return "Please avoid special characters";
-                }
-                return null;
-              },
-              style: TextStyle(
-                  color: AppThemeCustom.getTextFieldTextColor(context)),
-              decoration: InputDecoration(
-                fillColor: AppThemeCustom.getTextFieldBackground(context),
-                filled: true,
-                hintText: "",
-                hintStyle: TextStyle(
-                    color: Theme.of(context).hintColor,
-                    fontWeight: FontWeight.w400),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
-                errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(10)),
+            Theme(
+              data: Theme.of(context).copyWith(
+                textSelectionTheme: TextSelectionThemeData(
+                  selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                  cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                  selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                ),
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.text,
+                controller: _fullNameFieldController,
+                inputFormatters: <TextInputFormatter>[
+                  UpperCaseTextFormatter(),
+                  FilteringTextInputFormatter.allow(RegExp(r"[A-Za-z\s'\-]")),
+                ],
+                validator: (value) {
+                  /*if (value!.isEmpty) {
+                    return loc.msgEmptyFirstName;
+                  }
+                  return null;*/
+                  if (value == null || value.isEmpty) {
+                    return loc.msgEmptyFirstName;
+                  }
+                  final validName = RegExp(r"^[A-Za-z\s'\-]+$");
+                  if (!validName.hasMatch(value)) {
+                    return "Please avoid special characters";
+                  }
+                  return null;
+                },
+                style: TextStyle(
+                    color: AppThemeCustom.getTextFieldTextColor(context)),
+                decoration: InputDecoration(
+                  fillColor: AppThemeCustom.getTextFieldBackground(context),
+                  filled: true,
+                  hintText: "",
+                  hintStyle: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontWeight: FontWeight.w400),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ),
             AppDimens.shape_20,
@@ -146,105 +156,31 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                 child: Row(
                   children: [
                     Expanded(
-                      child: TextFormField(
-                          maxLines: 1,
-                          maxLength: 2,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          controller: _birthdayDDController,
-                          focusNode: _birthdayDDFocusNode,
-                          enabled: true,
-                          style: TextStyle(
-                              color: AppThemeCustom.getTextFieldTextColor(
-                                  context)),
-                          decoration: InputDecoration(
-                              counterText: "",
-                              hintText: "DD",
-                              hintStyle: TextStyle(
-                                  color: Theme.of(context).hintColor,
-                                  fontWeight: FontWeight.w400),
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              errorBorder: InputBorder.none),
-                          onChanged: (value) {
-                            if (value.length == 2) {
-                              int? day = int.tryParse(value);
-                              if (day != null && day > 31) {
-                                _birthdayDDController.text = '31';
-                                _birthdayDDController.selection =
-                                    TextSelection.fromPosition(
-                                  TextPosition(
-                                      offset:
-                                          _birthdayDDController.text.length),
-                                );
-                              } else {
-                                FocusScope.of(context)
-                                    .requestFocus(_birthdayMMFocusNode);
-                              }
-                            }
-                          }),
-                    ),
-                    Expanded(
-                        child: TextFormField(
-                      maxLines: 1,
-                      maxLength: 2,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      controller: _birthdayMMController,
-                      focusNode: _birthdayMMFocusNode,
-                      enabled: true,
-                      style: TextStyle(
-                          color: AppThemeCustom.getTextFieldTextColor(context)),
-                      decoration: InputDecoration(
-                          counterText: "",
-                          hintText: "MM",
-                          hintStyle: TextStyle(
-                              color: Theme.of(context).hintColor,
-                              fontWeight: FontWeight.w400),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none),
-                      onChanged: (value) {
-                        if (value.length == 2) {
-                          int? day = int.tryParse(value);
-                          if (day != null && day > 12) {
-                            _birthdayMMController.text = '12';
-                            _birthdayMMController.selection =
-                                TextSelection.fromPosition(
-                              TextPosition(
-                                  offset: _birthdayMMController.text.length),
-                            );
-                          } else {
-                            FocusScope.of(context)
-                                .requestFocus(_birthdayYYFocusNode);
-                          }
-                        }
-                      },
-                    )),
-                    Expanded(
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          textSelectionTheme: TextSelectionThemeData(
+                            selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                            cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                            selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                          ),
+                        ),
                         child: TextFormField(
                             maxLines: 1,
-                            maxLength: 4,
-                            keyboardType: TextInputType.number,
+                            maxLength: 2,
                             textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.digitsOnly
                             ],
-                            controller: _birthdayYYController,
-                            focusNode: _birthdayYYFocusNode,
+                            controller: _birthdayDDController,
+                            focusNode: _birthdayDDFocusNode,
                             enabled: true,
                             style: TextStyle(
                                 color: AppThemeCustom.getTextFieldTextColor(
                                     context)),
                             decoration: InputDecoration(
                                 counterText: "",
-                                hintText: "YYYY",
+                                hintText: "DD",
                                 hintStyle: TextStyle(
                                     color: Theme.of(context).hintColor,
                                     fontWeight: FontWeight.w400),
@@ -252,11 +188,112 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                                 focusedBorder: InputBorder.none,
                                 errorBorder: InputBorder.none),
                             onChanged: (value) {
-                              if (value.length == 4) {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                              if (value.length == 2) {
+                                int? day = int.tryParse(value);
+                                if (day != null && day > 31) {
+                                  _birthdayDDController.text = '31';
+                                  _birthdayDDController.selection =
+                                      TextSelection.fromPosition(
+                                    TextPosition(
+                                        offset:
+                                            _birthdayDDController.text.length),
+                                  );
+                                } else {
+                                  FocusScope.of(context)
+                                      .requestFocus(_birthdayMMFocusNode);
+                                }
                               }
-                            })),
+                            }),
+                      ),
+                    ),
+                    Expanded(
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            textSelectionTheme: TextSelectionThemeData(
+                              selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                              cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                              selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                            ),
+                          ),
+                          child: TextFormField(
+                                                maxLines: 1,
+                                                maxLength: 2,
+                                                textAlign: TextAlign.center,
+                                                keyboardType: TextInputType.number,
+                                                inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                                                ],
+                                                controller: _birthdayMMController,
+                                                focusNode: _birthdayMMFocusNode,
+                                                enabled: true,
+                                                style: TextStyle(
+                            color: AppThemeCustom.getTextFieldTextColor(context)),
+                                                decoration: InputDecoration(
+                            counterText: "",
+                            hintText: "MM",
+                            hintStyle: TextStyle(
+                                color: Theme.of(context).hintColor,
+                                fontWeight: FontWeight.w400),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            errorBorder: InputBorder.none),
+                                                onChanged: (value) {
+                          if (value.length == 2) {
+                            int? day = int.tryParse(value);
+                            if (day != null && day > 12) {
+                              _birthdayMMController.text = '12';
+                              _birthdayMMController.selection =
+                                  TextSelection.fromPosition(
+                                TextPosition(
+                                    offset: _birthdayMMController.text.length),
+                              );
+                            } else {
+                              FocusScope.of(context)
+                                  .requestFocus(_birthdayYYFocusNode);
+                            }
+                          }
+                                                },
+                                              ),
+                        )),
+                    Expanded(
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            textSelectionTheme: TextSelectionThemeData(
+                              selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                              cursorColor: AppThemeCustom.getTextFieldTextColor(context),
+                              selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context),
+                            ),
+                          ),
+                          child: TextFormField(
+                              maxLines: 1,
+                              maxLength: 4,
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              controller: _birthdayYYController,
+                              focusNode: _birthdayYYFocusNode,
+                              enabled: true,
+                              style: TextStyle(
+                                  color: AppThemeCustom.getTextFieldTextColor(
+                                      context)),
+                              decoration: InputDecoration(
+                                  counterText: "",
+                                  hintText: "YYYY",
+                                  hintStyle: TextStyle(
+                                      color: Theme.of(context).hintColor,
+                                      fontWeight: FontWeight.w400),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none),
+                              onChanged: (value) {
+                                if (value.length == 4) {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                }
+                              }),
+                        )),
                   ],
                 )),
             AppDimens.shape_30,
