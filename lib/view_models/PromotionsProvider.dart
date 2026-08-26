@@ -74,13 +74,18 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  Timer? _fetchPromotedOffersTimer;
+  Timer? _fetchSpecialIncentivesTimer;
+
+
+
   bool _isFetching = false;
 
   bool get isFetching => _isFetching;
 
   fetchPromotionsTimer() async {
     await getPromotions();
-    Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
+    _fetchPromotedOffersTimer = Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
         (value) async {
       if (!_isFetching) {
         _isFetching = true;
@@ -90,13 +95,23 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     });
   }
 
+  stopPromotionsTimer() {
+    logEvent("Stopping the timer${_fetchPromotedOffersTimer != null && _fetchPromotedOffersTimer!.isActive}");
+    if (_fetchPromotedOffersTimer != null && _fetchPromotedOffersTimer!.isActive) {
+      _fetchPromotedOffersTimer!.cancel();
+      _fetchPromotedOffersTimer = null;
+    }
+  }
+
+
+
   bool _isFetchingSpecialIncentives = false;
 
   bool get isFetchingSpecialIncentives => _isFetchingSpecialIncentives;
 
   fetchSpecialIncentivesTimer() async {
     await fetchSpecialIncentives();
-    Timer.periodic(
+    _fetchSpecialIncentivesTimer =  Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTimeSpecialIncentives),
         (value) async {
       if (!_isFetchingSpecialIncentives) {
@@ -144,6 +159,14 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  stopSpecialIncentivesTimer() {
+    logEvent("Stopping the special incentives timer${_fetchSpecialIncentivesTimer != null && _fetchSpecialIncentivesTimer!.isActive}");
+    if (_fetchSpecialIncentivesTimer != null && _fetchSpecialIncentivesTimer!.isActive) {
+      _fetchSpecialIncentivesTimer!.cancel();
+      _fetchSpecialIncentivesTimer = null;
+    }
+  }
+
   String? _consumeIncentiveMessage;
 
   String? get consumeIncentiveMessage => _consumeIncentiveMessage;
@@ -153,7 +176,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       UserModel? user = sharedPreferenceHelper.getUserData();
-      "SMART INCENTIVES FOR USER: $user".logMessage();
+      "SMART INCENTIVES FOR USER for consume: $user".logMessage();
 
       if (user != null) {
         NetworkResponse networkResponse = await AppDataService.getInstance()

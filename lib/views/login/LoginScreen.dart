@@ -261,31 +261,40 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: TextFormField(
-                                        maxLines: 1,
-                                        maxLength: 10,
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: <TextInputFormatter>[
-                                          FilteringTextInputFormatter.digitsOnly
-                                        ],
-                                        controller: _phoneController,
-                                        style: TextStyle(
-                                            color: AppThemeCustom
-                                                .getTextFieldTextColor(context,
-                                                    isShadow: true)),
-                                        decoration: InputDecoration(
-                                          counterText: "",
-                                          hintText: "0400000000",
-                                          hintStyle: TextStyle(
+                                      child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                          textSelectionTheme: TextSelectionThemeData(
+                                            selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
+                                            cursorColor: AppThemeCustom.getTextFieldTextColor(context, isShadow: true),
+                                            selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context, isShadow: true),
+                                          ),
+                                        ),
+                                        child: TextFormField(
+                                          maxLines: 1,
+                                          maxLength: 10,
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter.digitsOnly
+                                          ],
+                                          controller: _phoneController,
+                                          style: TextStyle(
                                               color: AppThemeCustom
-                                                  .getHintTextFieldColor(
-                                                      context,
+                                                  .getTextFieldTextColor(context,
                                                       isShadow: true)),
-                                          fillColor: Colors.transparent,
-                                          filled: true,
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
+                                          decoration: InputDecoration(
+                                            counterText: "",
+                                            hintText: "0400000000",
+                                            hintStyle: TextStyle(
+                                                color: AppThemeCustom
+                                                    .getHintTextFieldColor(
+                                                        context,
+                                                        isShadow: true)),
+                                            fillColor: Colors.transparent,
+                                            filled: true,
+                                            border: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                            errorBorder: InputBorder.none,
+                                          ),
                                         ),
                                       ),
                                     ),

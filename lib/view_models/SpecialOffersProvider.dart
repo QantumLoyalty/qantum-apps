@@ -250,8 +250,11 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
   }
 
   stopSpecialOffersTimer() {
-    logEvent("Stopping the timer");
-    _fetchSpecialOfferTimer?.cancel();
+    logEvent("Stopping the special offer timer${_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive}");
+    if (_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive) {
+      _fetchSpecialOfferTimer!.cancel();
+      _fetchSpecialOfferTimer = null;
+    }
   }
 
   getOfferByID({required String offerID}) async {

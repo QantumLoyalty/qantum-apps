@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/extensions/log_extension.dart';
 import 'package:qantum_apps/view_models/HomeProvider.dart';
+import 'package:qantum_apps/view_models/PromotionsProvider.dart';
+import 'package:qantum_apps/view_models/SpecialOffersProvider.dart';
 import 'package:qantum_apps/views/common_widgets/AppLoader.dart';
 import '../../core/utils/AppColors.dart';
 import '/views/common_widgets/UserStatusTier.dart';
@@ -456,5 +458,15 @@ class MyProfileDialog with LoggingMixin {
 
     await Provider.of<HomeProvider>(context, listen: false)
         .stopGetAllOptionsTimer();
+
+    await Provider.of<PromotionsProvider>(context, listen: false)
+        .stopPromotionsTimer();
+
+    await Provider.of<PromotionsProvider>(context, listen: false)
+        .stopSpecialIncentivesTimer();
+
+   await Provider.of<SpecialOffersProvider>(context, listen: false)
+        .stopSpecialOffersTimer();
+
   }
 }
