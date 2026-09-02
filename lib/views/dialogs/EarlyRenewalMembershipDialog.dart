@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/data/models/MembershipModel.dart';
@@ -98,9 +97,9 @@ class EarlyRenewalMembershipDialog {
                                   builder: (context, provider, child) {
                                 return Text(
                                   AppDateFormatter.formatDateWithSuffix(
-                                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
-                                              .parse(provider.getUserInfo!
-                                                  .membershipExpiryDate!)) ??
+                                          AppDateFormatter.parseApiDateTime(
+                                              provider.getUserInfo!
+                                                  .membershipExpiryDate)!) ??
                                       "",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,

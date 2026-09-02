@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 import 'package:qantum_apps/view_models/UserInfoProvider.dart';
 
 import '/core/extensions/log_extension.dart';
@@ -113,13 +114,14 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     _address1Controller = TextEditingController();
 
     if (widget.argument.containsKey("dob")) {
-      DateFormat format = DateFormat("yyyy-MM-dd");
-      DateTime? dateTime;
-      try {
+     // DateFormat format = DateFormat("yyyy-MM-dd");
+      DateTime? dateTime = AppDateFormatter.parseShortDate(widget.argument["dob"]);
+     // DateTime? dateTime;
+     /* try {
         dateTime = format.parse(widget.argument["dob"]!);
       } catch (e) {
         logEvent("DOB Parse Error: $e");
-      }
+      }*/
       _birthdayDDController = TextEditingController(
           text: ConditionBuilder.on(
                   () => dateTime != null && dateTime.day >= 10,

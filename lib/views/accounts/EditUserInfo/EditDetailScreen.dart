@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/utils/AppColors.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 
 import '/l10n/app_localizations.dart';
 import '../../../core/flavors_config/app_theme_custom.dart';
@@ -42,13 +43,14 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
         text:
             "${_userInfoProvider.tempUser!.firstName ?? ""} ${_userInfoProvider.tempUser!.lastName ?? ""}");
 
-    DateTime? dateTime;
+    /*DateTime? dateTime;
     try {
       dateTime = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
           .parse(_userInfoProvider.tempUser!.dateOfBirth ?? "");
     } catch (e) {
       AppHelper.printMessage("Exception in parsing birthdate $e");
-    }
+    }*/
+    DateTime? dateTime = AppDateFormatter.parseApiDateTime(_userInfoProvider.tempUser!.dateOfBirth);
 
     _birthdayDDController = TextEditingController(
         text: ConditionBuilder.on(() => dateTime != null && dateTime.day >= 10,
@@ -316,11 +318,12 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           int.parse(_birthdayYYController.text.toString()),
                           int.parse(_birthdayMMController.text.toString()),
                           int.parse(_birthdayDDController.text.toString()));
-                      DateFormat dateTimeFormat =
-                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+                      /*DateFormat dateTimeFormat =
+                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");*/
                       provider.updateTempUser(
                           name: _fullNameFieldController.text.toString().trim(),
-                          dob: dateTimeFormat.format(date));
+                         // dob: dateTimeFormat.format(date));
+                          dob: AppDateFormatter.formatAsApiDateTime(date));
 
                       provider.updateSelectedEditScreen(
                           UserInfoProvider.EDIT_SCREEN);
@@ -348,12 +351,12 @@ class _EditDetailScreenState extends State<EditDetailScreen> with DOBMixin {
                           int.parse(_birthdayYYController.text.toString()),
                           int.parse(_birthdayMMController.text.toString()),
                           int.parse(_birthdayDDController.text.toString()));
-                      DateFormat dateTimeFormat =
-                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");
+                  /*    DateFormat dateTimeFormat =
+                          DateFormat("yyyy-MM-ddThh:mm:ss.000Z");*/
 
                       provider.updateTempUser(
                           name: _fullNameFieldController.text.toString(),
-                          dob: dateTimeFormat.format(date));
+                          dob: AppDateFormatter.formatAsApiDateTime(date));
 
                       provider.updateSelectedEditScreen(
                           UserInfoProvider.EDIT_SCREEN);

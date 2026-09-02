@@ -16,7 +16,7 @@ class SpecialOffersScreen extends StatefulWidget {
   State<SpecialOffersScreen> createState() => _SpecialOffersScreenState();
 }
 
-class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
+class _SpecialOffersScreenState extends State<SpecialOffersScreen> with WidgetsBindingObserver{
   late SpecialOffersProvider _specialOffersProvider;
   final _filter = ["All", "WMLC", "Fielders"];
   final _filterSR = ["ALL", "HOTEL", "BOTTLE SHOP"];
@@ -25,10 +25,35 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _specialOffersProvider =
         Provider.of<SpecialOffersProvider>(context, listen: false);
     _specialOffersProvider.fetchSpecialOffersTimer();
     selectedFlavor = FlavorConfig.instance.flavor!;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _specialOffersProvider.fetchSpecialOffersTimer();
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        _specialOffersProvider.stopSpecialOffersTimer();
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _specialOffersProvider.stopSpecialOffersTimer();
+    super.dispose();
   }
 
   @override
@@ -263,9 +288,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _specialOffersProvider.stopSpecialOffersTimer();
-  }
+  // @override
+  // void dispose() {
+  //   _specialOffersProvider.stopSpecialOffersTimer();
+  //   super.dispose();
+  // }
 }

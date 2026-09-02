@@ -34,12 +34,15 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
   late Animation<double> _scaleAnimation;
   late Flavor flavor;
   bool? isSmallScreen;
+  late PromotionsProvider _promotionsProvider;
+  late HomeProvider _homeProvider;
 
   @override
   void initState() {
     super.initState();
-    Provider.of<PromotionsProvider>(context, listen: false)
-        .fetchPromotionsTimer();
+    _promotionsProvider =
+        Provider.of<PromotionsProvider>(context, listen: false);
+    _promotionsProvider.fetchPromotionsTimer();
     fetchSpecialIncentives(context);
 
     flavor = FlavorConfig.instance.flavor!;
@@ -65,6 +68,8 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
 
   @override
   void dispose() {
+    _promotionsProvider.stopPromotionsTimer();
+    _promotionsProvider.stopSpecialIncentivesTimer();   
     _controller.dispose();
     super.dispose();
   }

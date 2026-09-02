@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:qantum_apps/core/enums/MembershipStatus.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
 
 import '../../core/mixins/logging_mixin.dart';
 import '../../core/utils/AppColors.dart';
@@ -85,8 +86,10 @@ class AppHelper with LoggingMixin {
     String formattedDate = "";
     if (date != null && date.isNotEmpty) {
       try {
-        DateTime inputDate = DateFormat("yyyy-MM-ddThh:mm:ss.000Z").parse(date);
-        formattedDate = DateFormat("dd MMM, yyyy").format(inputDate);
+       // DateTime inputDate = DateFormat("yyyy-MM-ddThh:mm:ss.000Z").parse(date);
+        DateTime? inputDate = AppDateFormatter.parseApiDateTime(date);
+        //formattedDate = DateFormat("dd MMM, yyyy").format(inputDate!);
+        formattedDate = AppDateFormatter.formatAsDisplayDate(inputDate!);
       } catch (e) {
         AppHelper.printMessage(e.toString());
       }

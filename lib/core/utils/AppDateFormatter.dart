@@ -5,6 +5,53 @@ import 'package:qantum_apps/data/models/EarlyBirdPeriod.dart';
 import '../flavors_config/flavor_config.dart';
 
 class AppDateFormatter {
+  static const String apiDateTimeFormat = "yyyy-MM-ddThh:mm:ss.000Z";
+  static const String shortDateFormat = "yyyy-MM-dd";
+  static const String displayDateFormat = "dd MMM, yyyy";
+  static const String timeFormat = "HH:mm";
+  static const String longDateFormat = "dd MMMM yyyy";
+
+  static DateTime? parseApiDateTime(String? date) {
+    if (date == null || date.isEmpty) return null;
+    try {
+      return DateFormat(apiDateTimeFormat).parse(date);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  static String formatAsApiDateTime(DateTime date) {
+    return DateFormat(apiDateTimeFormat).format(date);
+  }
+
+  static DateTime? parseShortDate(String? date) {
+    if (date == null || date.isEmpty) return null;
+    try {
+      return DateFormat(shortDateFormat).parse(date);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  static String formatAsShortDate(DateTime date) {
+    return DateFormat(shortDateFormat).format(date);
+  }
+
+
+  static String formatAsDisplayDate(DateTime date) {
+    return DateFormat(displayDateFormat).format(date);
+  }
+
+  static String formatAsTime(DateTime date) {
+    return DateFormat(timeFormat).format(date);
+  }
+
+  static String formatAsLongDate(DateTime date) {
+    return DateFormat(longDateFormat).format(date);
+  }
+
   static String? userMembershipExpiry(String? membershipExpiry) {
     Flavor flavor = FlavorConfig.instance.flavor!;
 

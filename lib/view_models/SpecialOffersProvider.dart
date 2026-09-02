@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:intl/intl.dart';
 import 'package:qantum_apps/core/enums/OffersFilterType.dart';
 import 'package:qantum_apps/core/flavors_config/flavor_config.dart';
+import 'package:qantum_apps/core/utils/AppDateFormatter.dart';
+
 import '../../data/models/OfferModel.dart';
+import '../core/mixins/logging_mixin.dart';
 import '../core/utils/AppHelper.dart';
 import '../core/utils/FlavorConstants.dart';
-import '../data/models/NetworkResponse.dart';
-import '../core/mixins/logging_mixin.dart';
 import '../data/local/SharedPreferenceHelper.dart';
+import '../data/models/NetworkResponse.dart';
 import '../data/models/UserModel.dart';
 import '../services/AppDataService.dart';
 
@@ -155,21 +156,23 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
       UserModel? userData = sharedPreferenceHelper.getUserData();
 
       if (userData != null && !userData.isUserStatusCancelled()) {
-        DateTime? dob;
+        /* DateTime? dob;
         try {
           dob = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
               .parse(userData.dateOfBirth ?? "");
         } catch (e) {
           logEvent("Exception in parsing birthdate $e");
-        }
-        DateTime? joinDate;
+        }*/
+        DateTime? dob = AppDateFormatter.parseApiDateTime(userData.dateOfBirth);
+        /* DateTime? joinDate;
         try {
           joinDate = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
               .parse(userData.dateJoined ?? "");
         } catch (e) {
           logEvent("Exception in parsing birthdate $e");
-        }
-
+        }*/
+        DateTime? joinDate =
+            AppDateFormatter.parseApiDateTime(userData.dateJoined);
         final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
 
         final String userStatusTier = FlavorConstants.getUserTierType(userData);
@@ -179,23 +182,29 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
 
         if (flavor == Flavor.mhbc) {
           membershipCategory = userData.membershipCategory;
-
-          try {
+          DateTime? dt =
+              AppDateFormatter.parseApiDateTime(userData.membershipExpiryDate);
+          if (dt != null) {
+            // expiryDate = DateFormat("yyyy-MM-dd").format(dt);
+            expiryDate = AppDateFormatter.formatAsShortDate(dt);
+          }
+          /*try {
             DateTime dt = DateFormat("yyyy-MM-ddThh:mm:ss.000Z")
                 .parse(userData.membershipExpiryDate ?? "");
 
             expiryDate = DateFormat("yyyy-MM-dd").format(dt);
           } catch (e) {
             logEvent("Exception in parsing birthdate $e");
-          }
+          }*/
         }
 
-        NetworkResponse networkResponse = await AppDataService.getInstance()
-            .fetchSpecialOffers(
+        NetworkResponse networkResponse =
+            await AppDataService.getInstance().fetchSpecialOffers(
                 membershipType: userStatusTier,
                 birthdayMonth: dob != null ? "${dob.month}" : "1",
                 userId: userData.bluizeUniqueUserId!,
-                joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
+                //   joinDate: DateFormat("yyyy-MM-dd").format(joinDate!),
+                joinDate: AppDateFormatter.formatAsShortDate(joinDate!),
                 timezone: currentTimeZone,
                 membershipCategory: membershipCategory,
                 expiryDate: expiryDate);
@@ -250,7 +259,8 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
   }
 
   stopSpecialOffersTimer() {
-    logEvent("Stopping the special offer timer${_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive}");
+    logEvent(
+        "Stopping the special offer timer${_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive}");
     if (_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive) {
       _fetchSpecialOfferTimer!.cancel();
       _fetchSpecialOfferTimer = null;

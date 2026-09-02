@@ -47,7 +47,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
       UserModel? userData = sharedPreferenceHelper.getUserData();
-
+      "Promotions: $userData".logMessage();
       if (userData != null && !userData.isUserStatusCancelled()) {
         String userTier = FlavorConstants.getUserTierType(userData);
         String? venue = userData.venueName;
@@ -78,13 +78,16 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
   Timer? _fetchSpecialIncentivesTimer;
 
 
-
+  bool _stopRequested = false;
+  bool _stopSmartIncentiveRequested = false;
   bool _isFetching = false;
 
   bool get isFetching => _isFetching;
 
   fetchPromotionsTimer() async {
+    _stopRequested = false;
     await getPromotions();
+    if (_stopRequested) return;
     _fetchPromotedOffersTimer = Timer.periodic(Duration(seconds: AppHelper.defaultRequestTime),
         (value) async {
       if (!_isFetching) {
@@ -96,6 +99,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
   }
 
   stopPromotionsTimer() {
+    _stopRequested = true;
     logEvent("Stopping the timer${_fetchPromotedOffersTimer != null && _fetchPromotedOffersTimer!.isActive}");
     if (_fetchPromotedOffersTimer != null && _fetchPromotedOffersTimer!.isActive) {
       _fetchPromotedOffersTimer!.cancel();
@@ -110,7 +114,9 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
   bool get isFetchingSpecialIncentives => _isFetchingSpecialIncentives;
 
   fetchSpecialIncentivesTimer() async {
+    _stopSmartIncentiveRequested = false;
     await fetchSpecialIncentives();
+    if (_stopSmartIncentiveRequested) return;
     _fetchSpecialIncentivesTimer =  Timer.periodic(
         Duration(seconds: AppHelper.defaultRequestTimeSpecialIncentives),
         (value) async {
@@ -160,6 +166,7 @@ class PromotionsProvider extends ChangeNotifier with LoggingMixin {
   }
 
   stopSpecialIncentivesTimer() {
+    _stopSmartIncentiveRequested = true;
     logEvent("Stopping the special incentives timer${_fetchSpecialIncentivesTimer != null && _fetchSpecialIncentivesTimer!.isActive}");
     if (_fetchSpecialIncentivesTimer != null && _fetchSpecialIncentivesTimer!.isActive) {
       _fetchSpecialIncentivesTimer!.cancel();
