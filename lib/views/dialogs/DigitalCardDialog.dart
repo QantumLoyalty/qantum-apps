@@ -51,7 +51,6 @@ class DigitalCardDialog with LoggingMixin {
       )
     ];
 
-
     final cardBackground = AppIcons.getCardBackground(userTierType);
     final membershipExpiry =
         AppDateFormatter.userMembershipExpiry(userData.membershipExpiryDate);
@@ -84,7 +83,7 @@ class DigitalCardDialog with LoggingMixin {
                                         ? AppColors.transparent
                                         : Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(10)),
-                               // margin: const EdgeInsets.only(left: 25, right: 25),
+                                // margin: const EdgeInsets.only(left: 25, right: 25),
                                 width: media.size.width,
                                 height: dialogHeight - 80,
                                 child: Container(
@@ -117,10 +116,12 @@ class DigitalCardDialog with LoggingMixin {
                                               ),
                                             ),*/
                                             flavor == Flavor.bobsBulkBooze ||
-                                                    flavor == Flavor.senseOfTaste
+                                                    flavor ==
+                                                        Flavor.senseOfTaste
                                                 ? Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        bottom: 20),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 20),
                                                     child: Image.asset(
                                                       AppIcons.app_logo,
                                                       height: 100,
@@ -133,7 +134,8 @@ class DigitalCardDialog with LoggingMixin {
                                                   BorderRadius.circular(10),
                                               child: Container(
                                                 color: AppColors.white,
-                                                padding: const EdgeInsets.all(10),
+                                                padding:
+                                                    const EdgeInsets.all(10),
                                                 child: SizedBox(
                                                   height: 180,
                                                   width: 180,
@@ -148,38 +150,44 @@ class DigitalCardDialog with LoggingMixin {
                                             ),
                                             AppDimens.shape_20,
                                             flavor == Flavor.bobsBulkBooze ||
-                                                    flavor == Flavor.senseOfTaste
+                                                    flavor ==
+                                                        Flavor.senseOfTaste
                                                 ? const SizedBox()
                                                 : Expanded(
-                                                    child: SingleChildScrollView(
+                                                    child:
+                                                        SingleChildScrollView(
                                                     child: Column(
                                                       children: [
                                                         Text(
                                                           userTierType
                                                               .toUpperCase(),
                                                           style: TextStyle(
-                                                              shadows: textShadows,
+                                                              shadows:
+                                                                  textShadows,
                                                               color: AppThemeCustom
                                                                   .getCardDialogsTextColor(
                                                                       context),
                                                               fontSize: 32,
                                                               fontWeight:
-                                                                  FontWeight.bold),
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
                                                         Text(
                                                           AppLocalizations.of(
                                                                   context)!
                                                               .txtMembership,
                                                           style: TextStyle(
-                                                              shadows: textShadows,
+                                                              shadows:
+                                                                  textShadows,
                                                               color: AppThemeCustom
                                                                   .getCardDialogsTextColor(
                                                                       context),
                                                               fontSize: 18),
                                                         ),
                                                         AppDimens.shape_5,
-                                                        (showMembershipCategory(userData
-                                                                .membershipCategory))
+                                                        (showMembershipCategory(
+                                                                userData
+                                                                    .membershipCategory))
                                                             ? Column(
                                                                 children: [
                                                                   Text(
@@ -187,22 +195,21 @@ class DigitalCardDialog with LoggingMixin {
                                                                     style: TextStyle(
                                                                         shadows:
                                                                             textShadows,
-                                                                        color: AppThemeCustom
-                                                                            .getCardDialogsTextColor(
-                                                                                context),
+                                                                        color: AppThemeCustom.getCardDialogsTextColor(
+                                                                            context),
                                                                         fontSize:
                                                                             16),
                                                                   ),
-                                                                  AppDimens.shape_5,
+                                                                  AppDimens
+                                                                      .shape_5,
                                                                   Text(
                                                                       '#${userData.bluizeId}',
                                                                       textAlign:
                                                                           TextAlign
                                                                               .center,
                                                                       style: TextStyle(
-                                                                          color: AppThemeCustom
-                                                                              .getCardDialogsTextColor(
-                                                                                  context),
+                                                                          color: AppThemeCustom.getCardDialogsTextColor(
+                                                                              context),
                                                                           fontSize:
                                                                               14))
                                                                 ],
@@ -215,20 +222,23 @@ class DigitalCardDialog with LoggingMixin {
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
-                                                              shadows: textShadows,
+                                                              shadows:
+                                                                  textShadows,
                                                               color: AppThemeCustom
                                                                   .getCardDialogsTextColor(
                                                                       context),
                                                               fontSize: 14),
                                                         ),
-                                                        (membershipExpiry != null &&
+                                                        (membershipExpiry !=
+                                                                    null &&
                                                                 membershipExpiry
                                                                     .isNotEmpty)
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
                                                                         .only(
-                                                                        top: 12),
+                                                                        top:
+                                                                            12),
                                                                 child: Text(
                                                                   "Membership Expiry: $membershipExpiry",
                                                                   style: TextStyle(
@@ -237,7 +247,8 @@ class DigitalCardDialog with LoggingMixin {
                                                                       color: AppThemeCustom
                                                                           .getCardDialogsTextColor(
                                                                               context),
-                                                                      fontSize: 14),
+                                                                      fontSize:
+                                                                          14),
                                                                 ),
                                                               )
                                                             : const SizedBox
@@ -309,7 +320,7 @@ class DigitalCardDialog with LoggingMixin {
       "INVITE ONLY",
       "STAFF",
     };
-    if (flavor != Flavor.mhbc ||
+    if ((flavor != Flavor.mhbc && flavor != Flavor.mannumClub) ||
         membershipCategory == null ||
         membershipCategory.isEmpty) {
       return false;

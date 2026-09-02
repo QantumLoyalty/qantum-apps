@@ -89,204 +89,62 @@ class _ChooseMembershipScreenState extends State<ChooseMembershipScreen>
                         ),
                       ),
                       AppDimens.shape_20,
-                      provider.membershipList.isNotEmpty?
-                          /*? (flavor == Flavor.mhbc)
-                              ?
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          return DropdownMenu<MembershipModel>(
-                            key: const ValueKey('membership_dropdown'),
-
-                            width: constraints.maxWidth,
-                            menuHeight: 260,
-
-                            initialSelection: provider.selectedMembership,
-
-                            hintText: 'Select membership',
-
-                            trailingIcon: const Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-
-                            selectedTrailingIcon: const Icon(
-                              Icons.keyboard_arrow_up_rounded,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-
-                            inputDecorationTheme: InputDecorationTheme(
-                              filled: true,
-                              fillColor: const Color(0xFF9FA8B8),
-                              hintStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 16,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                  width: 1,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-
-                            menuStyle: MenuStyle(
-                              alignment: AlignmentDirectional.bottomStart,
-                              backgroundColor: const WidgetStatePropertyAll(
-                                Colors.transparent,
-                              ),
-                              padding: const WidgetStatePropertyAll(
-                                EdgeInsets.symmetric(vertical: 6),
-                              ),
-                              shape: WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                            ),
-
-                            dropdownMenuEntries: provider.membershipList.map((membership) {
-                              final price = membership.calculatedPrice?.toStringAsFixed(2) ?? '0.00';
-
-                              return DropdownMenuEntry<MembershipModel>(
-                                value: membership,
-                                label: '${membership.membershipName ?? ''} - \$$price',
-                                labelWidget: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4,
-                                  ),
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 12,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: Colors.white,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '${membership.membershipName ?? ''} - \$$price',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                  foregroundColor: const WidgetStatePropertyAll(
-                                    Colors.white,
-                                  ),
-                                  padding: const WidgetStatePropertyAll(
-                                    EdgeInsets.symmetric(horizontal: 8),
-                                  ),
-
-                                  backgroundColor: WidgetStateProperty.resolveWith((states) {
-                                    if (states.contains(WidgetState.hovered) ||
-                                        states.contains(WidgetState.focused) ||
-                                        states.contains(WidgetState.pressed)) {
-                                      return Colors.white.withValues(alpha: 0.10);
-                                    }
-
-                                    return Colors.transparent;
-                                  }),
-                                  shape: const WidgetStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.zero,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-
-                            onSelected: (MembershipModel? membership) {
-                              if (membership == null) return;
-
-                              provider.updateDropdownValue(membership);
-                            },
-                          );
-                        },
-                      )
-                              :*/ Column(
-                                  children: [
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemBuilder: (context, position) {
-                                        MembershipModel membership =
-                                            provider.membershipList[position];
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 15),
-                                          child: ListTile(
-                                            onTap: () {
-                                              provider.updateDropdownValue(
-                                                  membership);
-                                            },
-                                            tileColor: provider
-                                                            .selectedMembership !=
+                      provider.membershipList.isNotEmpty
+                          ?
+                          Column(
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, position) {
+                                    MembershipModel membership =
+                                        provider.membershipList[position];
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 15),
+                                      child: ListTile(
+                                        onTap: () {
+                                          provider
+                                              .updateDropdownValue(membership);
+                                        },
+                                        tileColor:
+                                            provider.selectedMembership !=
                                                         null &&
                                                     provider.selectedMembership!
                                                             .id ==
                                                         membership.id
                                                 ? AppColors.white.withAlpha(50)
                                                 : Colors.transparent,
-                                            shape: RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                    color: AppColors.white,
-                                                    width: 1),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(10))),
-                                            title: Text(
-                                              "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: AppColors.white,
+                                                width: 1),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10))),
+                                        title: Text(
+                                          "${membership.membershipName} - \$${membership.calculatedPrice != null ? membership.calculatedPrice!.toStringAsFixed(2) : "0.00"}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                           ),
-                                        );
-                                      },
-                                      itemCount: provider.membershipList.length,
-                                    ),
-                                    AppDimens.shape_30,
-                                    Text(
-                                      loc.msgForOtherMembershipSeeReception,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: AppColors.white, fontSize: 17),
-                                    ),
-                                    AppDimens.shape_30,
-                                  ],
-                                )
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: provider.membershipList.length,
+                                ),
+                                AppDimens.shape_30,
+                                Text(
+                                  loc.msgForOtherMembershipSeeReception,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColors.white, fontSize: 17),
+                                ),
+                                AppDimens.shape_30,
+                              ],
+                            )
                           : const SizedBox.shrink(),
                     ],
                   ))),

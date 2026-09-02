@@ -8,7 +8,7 @@ class AppDateFormatter {
   static String? userMembershipExpiry(String? membershipExpiry) {
     Flavor flavor = FlavorConfig.instance.flavor!;
 
-    if (flavor == Flavor.mhbc || flavor ==Flavor.maxClub) {
+    if (flavor == Flavor.mhbc || flavor ==Flavor.maxClub || flavor ==Flavor.mannumClub ) {
       if (membershipExpiry == null || membershipExpiry.isEmpty) return null;
 
       try {

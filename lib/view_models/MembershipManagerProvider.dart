@@ -75,7 +75,8 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
       NetworkResponse networkResponse =
           await AppDataService.getInstance().fetchMembershipPlans();
 
-      logEvent("Membership Response: ${networkResponse.responseMessage}");
+      logEvent(
+          "Membership Response: ${networkResponse.responseMessage} && ${networkResponse.response} ");
 
       if (!networkResponse.isError) {
         _errorInResponse = networkResponse.isError;
@@ -84,6 +85,7 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
               networkResponse.response as Map<String, dynamic>;
           if (response.keys.contains("data")) {
             _membershipList = [];
+            logEvent("Membership : ${response}");
 
             List<MembershipModel> tempList = [];
 
@@ -91,8 +93,12 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
               tempList.add(MembershipModel.fromJson(item));
             });
 
+            tempList = tempList.where((item) => item.isDisplay == true).toList();
+
+            print("Temp List Size: ${tempList.length}");
+
             /// THIS CONDITION IS A TEMPORARY CONDITION WE NEED TO REMOVE IT AFTER AUSTRALIAN EXPO ///
-            if (flavor == Flavor.mhbc) {
+            /*if (flavor == Flavor.mhbc) {
               MembershipModel? specialMembership;
 
               tempList.forEach((item) {
@@ -109,8 +115,9 @@ class MembershipManagerProvider extends ChangeNotifier with LoggingMixin {
               }
             } else {
               _membershipList = tempList.take(2).toList();
-            }
-
+            }*/
+         //   _membershipList = tempList.take(2).toList();
+            _membershipList=tempList;
             logEvent("MEMBERSHIP LIST SIZE ${_membershipList.length}");
             if (_membershipList.isNotEmpty) {
               updateDropdownValue(_membershipList[0]);

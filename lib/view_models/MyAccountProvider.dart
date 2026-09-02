@@ -49,8 +49,8 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return _accountOptionsSR;
       case Flavor.edp:
         return _accountOptionsEDP;
-      case Flavor.mannumClub:
-        return _accountOptionsMannum;
+      /*case Flavor.mannumClub:
+        return _accountOptionsMannum;*/
 
       default:
         return _accountOptionsOthers;
