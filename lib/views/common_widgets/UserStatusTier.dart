@@ -58,6 +58,7 @@ class UserStatusTier extends StatelessWidget with LoggingMixin {
                     flavor == Flavor.maxx ||
                     flavor == Flavor.hogansReward ||
                     flavor == Flavor.bluewater ||
+                    flavor == Flavor.bobsBulkBooze ||
                     flavor == Flavor.mosaic
                 ? statusTierWidget(context, provider)
                 : Text(

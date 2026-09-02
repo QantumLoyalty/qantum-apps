@@ -233,8 +233,6 @@ class MyProfileDialog with LoggingMixin {
                                                       Flavor.montaukTavern ||
                                                   flavor ==
                                                       Flavor.drinkRewards ||
-                                                  flavor ==
-                                                      Flavor.bobsBulkBooze ||
                                                   flavor == Flavor.senseOfTaste)
                                               ? const SizedBox.shrink()
                                               : UserStatusTier(isSmallScreen: isSmallScreen,)
