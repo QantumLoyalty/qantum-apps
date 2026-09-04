@@ -27,7 +27,7 @@ class MyVenuesHomeScreen extends StatefulWidget {
 }
 
 class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   double scaleValue = 1.0;
   double largeAdvHeight = 180.0;
   late AnimationController _controller;
@@ -40,6 +40,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _promotionsProvider =
         Provider.of<PromotionsProvider>(context, listen: false);
     _promotionsProvider.fetchPromotionsTimer();
@@ -66,8 +67,29 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
         .fetchSpecialIncentivesTimer();
   }
 
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _promotionsProvider.stopPromotionsTimer();
+        _promotionsProvider.stopSpecialIncentivesTimer();
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+      _promotionsProvider.stopPromotionsTimer();
+      _promotionsProvider.stopSpecialIncentivesTimer();
+      break;
+    }
+  }
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _promotionsProvider.stopPromotionsTimer();
     _promotionsProvider.stopSpecialIncentivesTimer();   
     _controller.dispose();
