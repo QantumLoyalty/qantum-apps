@@ -81,6 +81,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
           Flavor.edp ||
           Flavor.qantum ||
           Flavor.bluewater ||
+          Flavor.qantumClub ||
           Flavor.maxx ||
           Flavor.mannumClub ||
           Flavor.mosaic ||
