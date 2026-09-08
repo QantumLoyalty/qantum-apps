@@ -26,13 +26,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # version:  1.0.0+56
 ###################################
 # MAX
-version:  1.0.2+64
+#version:  1.0.2+64
 ###################################
 # HOGAN'S REWARD
 #version: 1.0.6+18
 ###################################
 # MHBC
-#version:  1.0.15+105
+version:  1.0.15+105
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
