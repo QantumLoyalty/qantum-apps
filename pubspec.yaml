@@ -20,13 +20,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-version:  1.0.10+104
+#version:  1.0.10+104
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
 ###################################
 # MAX
-#version:  1.0.1+63
+version:  1.0.2+64
 ###################################
 # HOGAN'S REWARD
 #version: 1.0.6+18
@@ -44,7 +44,7 @@ version:  1.0.10+104
 #version: 1.0.4+12
 ###################################
 #QANTUM
-#version: 1.0.0+71
+#version: 1.0.1+72
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -71,10 +71,10 @@ version:  1.0.10+104
 #version: 1.0.0+7
 ###################################
 #QANTUMClub
-#version: 1.0.0+3
+#version: 1.0.1+4
 ###################################
 #MAX Club
-#version: 1.0.0+12
+#version: 1.0.1+13
 ###################################
 #WONTHAGGI
 #version: 1.0.0+4
