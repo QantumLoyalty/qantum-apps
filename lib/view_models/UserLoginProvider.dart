@@ -21,6 +21,9 @@ class UserLoginProvider extends ChangeNotifier {
   bool? _isExistingUser;
 
   bool? get isExistingUser => _isExistingUser;
+  bool? _isDisabledUser;
+
+  bool? get isDisabledUser => _isDisabledUser;
 
   String? _userId;
 
@@ -45,6 +48,7 @@ class UserLoginProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      _isDisabledUser=null;
       final networkResponse = await UserService.getInstance().login(phoneNo);
 
       _networkError = networkResponse.isError;
@@ -56,7 +60,11 @@ class UserLoginProvider extends ChangeNotifier {
         ("LOGIN RESPONSE: ${response.toString()} && _networkMessage: $_networkMessage")
             .logMessage();
 
-        if (response.containsKey("isCancel") &&
+        if (response.containsKey("isDisable") &&
+            (response["isDisable"] as bool)) {
+          _isDisabledUser=true;
+          _networkError = true;
+        }else if (response.containsKey("isCancel") &&
             (response["isCancel"] as bool)) {
           _networkError = true;
         } else {
@@ -186,6 +194,7 @@ class UserLoginProvider extends ChangeNotifier {
       otpSent = null;
       _networkError = null;
       _networkMessage = null;
+      _isDisabledUser=null;
       notifyListeners();
     });
   }

@@ -181,6 +181,12 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
           UserModel userModel = UserModel.fromJson(response["user"]);
           debugPrint("Event:: Updated user:: ${userModel.toString()}",
               wrapWidth: 1024);
+
+          if (userModel.isDisable != null && userModel.isDisable!) {
+            await _handleDisabledUser();
+            return;
+          }
+
           SharedPreferenceHelper sharedPreferenceHelper =
               await SharedPreferenceHelper.getInstance();
           await sharedPreferenceHelper.saveUserData(userModel);
@@ -215,15 +221,51 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
+  _handleDisabledUser() async {
+    if (_isDisabledUser) {
+      return;
+    }
+    _isDisabledUser = true;
+
+    profileTimer?.cancel();
+    profileTimer = null;
+
+    _userModel = null;
+    _tempUser = null;
+    SharedPreferenceHelper sph = await SharedPreferenceHelper.getInstance();
+    await sph.clearAll();
+
+
+    notifyListeners();
+    return;
+  }
+
   bool _isFetching = false;
   Timer? profileTimer;
+  bool _isDisabledUser = false;
+  bool get isDisabledUser=> _isDisabledUser;
+
+
+  resetIsDisabledUser()
+  {
+    _isDisabledUser=false;
+    notifyListeners();
+  }
 
   runFetchProfileTimer({required String fetchFromBluize}) async {
     await fetchUserProfile(fetchFromBluize);
+
+    if (_isDisabledUser) return;
+
     profileTimer = Timer.periodic(const Duration(seconds: 30), (value) async {
-      if (!_isFetching) {
+      if (_isFetching || _isDisabledUser) {
+        return;
+      }
+      try {
         _isFetching = true;
+
         await fetchUserProfile(fetchFromBluize);
+      } finally {
         _isFetching = false;
       }
     });

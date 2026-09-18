@@ -14,7 +14,7 @@ class ErrorDialog {
   ErrorDialog._internal();
 
   showErrorDialog(BuildContext context,
-      {String? title, required String message}) {
+      {bool? showTopIcon, String? title, required String message}) {
     showDialog(
         context: context,
         builder: (context) {
@@ -28,11 +28,13 @@ class ErrorDialog {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppDimens.shape_10,
-                  Icon(
-                    Icons.cancel_outlined,
-                    size: 72,
-                    color: AppColors.error_red,
-                  ),
+                  (showTopIcon != null && !showTopIcon!)
+                      ? const SizedBox.shrink()
+                      : Icon(
+                          Icons.cancel_outlined,
+                          size: 72,
+                          color: AppColors.error_red,
+                        ),
                   AppDimens.shape_15,
                   Text(
                     title ?? AppLocalizations.of(context)!.txtAlert,

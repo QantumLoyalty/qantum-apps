@@ -156,7 +156,13 @@ class _LoginScreenState extends State<LoginScreen> {
           if (provider.networkError != null &&
               provider.networkMessage != null) {
             Future.delayed(Duration.zero, () {
-              if (provider.networkError!) {
+              if (provider.isDisabledUser != null && provider.isDisabledUser!) {
+                ErrorDialog.getInstance().showErrorDialog(context,
+                    showTopIcon: false,
+                    title: "Loyalty App Suspended",
+                    message:
+                        "Your loyalty app has been suspended, if any concerns please contact the Venue");
+              } else if (provider.networkError!) {
                 ErrorDialog.getInstance().showErrorDialog(context,
                     message: provider.networkMessage ?? loc.msgCommonError);
               }
@@ -263,10 +269,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Theme(
                                         data: Theme.of(context).copyWith(
-                                          textSelectionTheme: TextSelectionThemeData(
-                                            selectionColor: AppColors.black.withOpacity(0.2), // visible highlight
-                                            cursorColor: AppThemeCustom.getTextFieldTextColor(context, isShadow: true),
-                                            selectionHandleColor: AppThemeCustom.getTextFieldTextColor(context, isShadow: true),
+                                          textSelectionTheme:
+                                              TextSelectionThemeData(
+                                            selectionColor: AppColors.black
+                                                .withOpacity(0.2),
+                                            // visible highlight
+                                            cursorColor: AppThemeCustom
+                                                .getTextFieldTextColor(context,
+                                                    isShadow: true),
+                                            selectionHandleColor: AppThemeCustom
+                                                .getTextFieldTextColor(context,
+                                                    isShadow: true),
                                           ),
                                         ),
                                         child: TextFormField(
@@ -274,12 +287,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                           maxLength: 10,
                                           keyboardType: TextInputType.number,
                                           inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter.digitsOnly
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
                                           ],
                                           controller: _phoneController,
                                           style: TextStyle(
                                               color: AppThemeCustom
-                                                  .getTextFieldTextColor(context,
+                                                  .getTextFieldTextColor(
+                                                      context,
                                                       isShadow: true)),
                                           decoration: InputDecoration(
                                             counterText: "",
@@ -325,7 +340,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     AppDimens.shape_10,
                     (widget.hideChangeMobileOption != null &&
                             widget.hideChangeMobileOption!)
-                        ?const SizedBox.shrink()
+                        ? const SizedBox.shrink()
                         : InkWell(
                             onTap: () {
                               AppNavigator.navigateTo(

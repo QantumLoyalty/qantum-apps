@@ -75,6 +75,8 @@ class _HomeScreenState extends State<HomeScreen>
     if (context.mounted) {
       WidgetsBinding.instance.addObserver(this);
       _userInfoProvider = Provider.of<UserInfoProvider>(context, listen: false);
+      _userInfoProvider.resetIsDisabledUser();
+      _userInfoProvider.addListener(_onUserInfoChanged);
       _userInfoProvider.retrieveUserInfo();
       _userInfoProvider.runFetchProfileTimer(fetchFromBluize: "false");
       _userInfoProvider.uploadDeviceDetail();
@@ -84,6 +86,13 @@ class _HomeScreenState extends State<HomeScreen>
       flavor = FlavorConfig.instance.flavor!;
       logEvent("SELECTED FLAVOR $flavor");
       checkForAppUpdate();
+    }
+  }
+
+  void _onUserInfoChanged() {
+    if (_userInfoProvider.isDisabledUser) {
+      if (!mounted) return;
+      AppNavigator.navigateAndClearStack(context, AppNavigator.login);
     }
   }
 
@@ -143,6 +152,7 @@ class _HomeScreenState extends State<HomeScreen>
   void dispose() {
     cancelPointsDialogTimer();
     WidgetsBinding.instance.removeObserver(this);
+    _userInfoProvider.removeListener(_onUserInfoChanged);
     super.dispose();
   }
 
