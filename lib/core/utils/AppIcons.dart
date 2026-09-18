@@ -172,7 +172,22 @@ class AppIcons {
           default:
             return card_value;
         }
-      } else if (selectedFlavor == Flavor.brisbane) {
+      } else if (selectedFlavor == Flavor.tgh) {
+        switch (membershipType.toLowerCase().trim()) {
+          case "staff":
+            return "assets/teaGardensHotel/card_staff.png";
+          case "test":
+            return "assets/teaGardensHotel/card_test.png";
+          case "silver":
+            return card_silver;
+          case "gold":
+            return card_gold;
+          case "platinum":
+            return card_platinum;
+          default:
+            return "assets/teaGardensHotel/card_staff.png";
+        }
+      }else if (selectedFlavor == Flavor.brisbane) {
         switch (membershipType.toLowerCase().trim()) {
           case "brewcrew":
             return "assets/brisbaneBrewing/card_brew_crew.png";

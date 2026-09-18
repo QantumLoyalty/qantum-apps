@@ -22,22 +22,7 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: TextButton(
-          style: ButtonStyle(
-              shadowColor: WidgetStatePropertyAll(Theme.of(context)
-                  .buttonTheme
-                  .colorScheme!
-                  .onSecondary
-                  .withValues(alpha: 0.1)),
-              elevation: const WidgetStatePropertyAll(20),
-              shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                  side: BorderSide(
-                      color: Theme.of(context)
-                          .buttonTheme
-                          .colorScheme!
-                          .onSecondary),
-                  borderRadius: BorderRadius.circular(80))),
-              backgroundColor: WidgetStatePropertyAll(backgroundColor ??
-                  Theme.of(context).buttonTheme.colorScheme!.primary)),
+          style: AppThemeCustom.getAppButtonStyle(context, backgroundColor),
           onPressed: onClick,
           child: icon == null
               ? getText(context)

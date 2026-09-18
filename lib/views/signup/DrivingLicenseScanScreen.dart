@@ -186,7 +186,8 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                   child: Text(
                     loc!.noLicense,
                     style: TextStyle(
-                      color: AppThemeCustom.getNoLicenseTextColor(
+                     decoration: TextDecoration.underline,
+                    color: AppThemeCustom.getNoLicenseTextColor(
                           context),
                     ),
                   ),
@@ -410,6 +411,9 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                     AppIcons.lightBulb,
                     width: 20,
                     height: 20,
+                    color: Theme.of(context)
+                        .textSelectionTheme
+                        .selectionColor,
                   ),
                   AppDimens.shape_10,
                   Expanded(
@@ -467,6 +471,9 @@ class _DrivingLicenseScanScreenState extends State<DrivingLicenseScanScreen>
                     AppIcons.lightBulb,
                     width: 20,
                     height: 20,
+                      color: Theme.of(context)
+                          .textSelectionTheme
+                          .selectionColor
                   ),
                   AppDimens.shape_10,
                   Expanded(

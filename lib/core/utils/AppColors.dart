@@ -603,6 +603,42 @@ class AppColors {
   static Color get mc_canvas_color => const Color(0xFF00B0F0);
 
 
+  /// Tea Garden Hotel Color
+
+
+  static Color get tgh_sf_color => const Color(0xFF30445B);
+
+  static Color get tgh_back_color => const Color(0xFF9BBAAC);
+
+  static Color get tgh_floating_button_icon_color => const Color(0xFFB11921);
+
+  static Color get tgh_back_color_2 => const Color(0xFF9BBAAC);
+
+  static Color get tgh_back_color_3 => const Color(0xFF9BBAAC);
+
+  static Color get tgh_text_color => const Color(0xFF30445B);
+
+  static Color get tgh_text_field_text_color => const Color(0x2549961A);
+
+  static Color get tgh_hint_text_color => const Color(0x3930445B);
+
+  static Color get tgh_button_color => const Color(0xFF30445B);
+
+  static Color get tgh_button_border_color => const Color(0xFF30445B);
+
+  static Color get tgh_card_color => const Color(0xFFFFFFFF);
+
+  static Color get tgh_divider_color => const Color(0x1A000000);
+
+  static Color get tgh_disable_color => const Color(0xFFFFFFFF);
+
+  static Color get tgh_canvas_color => const Color(0xFFEFE1CD);
+
+  static Color get tgh_profile_dialog_background_color => const Color(0xFF73A3B1);
+
+  static Color get tgh_edit_account_card_color => const Color(0xFF08040);
+
+
   /// Southport Sharks Color
 
 

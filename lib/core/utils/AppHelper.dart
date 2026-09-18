@@ -236,6 +236,17 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.tgh:
+        return ButtonStyle(
+            shadowColor:
+            const WidgetStatePropertyAll(Colors.transparent),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(
+                Colors.transparent));
       case Flavor.maxx || Flavor.maxClub:
         return ButtonStyle(
             shadowColor:
@@ -361,6 +372,17 @@ class AppHelper with LoggingMixin {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.tgh:
+        return ButtonStyle(
+            shadowColor:
+            const WidgetStatePropertyAll(Colors.transparent),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(
+                Colors.transparent));
       case Flavor.drinkRewards:
         return ButtonStyle(
             elevation: const WidgetStatePropertyAll(20),
@@ -616,6 +638,8 @@ class AppHelper with LoggingMixin {
         return const Size(250, 90);
       case Flavor.wonthaggi:
         return const Size(150, 100);
+      case Flavor.tgh:
+        return const Size(280, 80);
       default:
         return const Size(68, 68);
     }
@@ -668,6 +692,7 @@ class AppHelper with LoggingMixin {
       Flavor.qantumClub,
       Flavor.maxClub,
       Flavor.mannumClub,
+      Flavor.tgh,
      // Flavor.southportSharks,
     };
     return clubFlavors.contains(flavor);

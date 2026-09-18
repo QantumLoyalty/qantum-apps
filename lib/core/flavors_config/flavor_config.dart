@@ -23,6 +23,7 @@ enum Flavor {
   mosaic,
   mannumClub,
   southportSharks,
+  tgh
 }
 
 class FlavorValues {

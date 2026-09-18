@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qantum_apps/views/common_widgets/BluewaterScaffoldBackground.dart';
+import 'package:qantum_apps/views/common_widgets/TeaGardensHotelScaffoldBackground.dart';
 
 import '/core/flavors_config/flavor_config.dart';
 import '../../core/utils/AppHelper.dart';
@@ -31,6 +32,9 @@ class AppScaffold extends StatelessWidget {
         children: [
           (flavor == Flavor.bluewater)
               ? const BluewaterScaffoldBackground()
+              : Container(),
+          (flavor == Flavor.tgh)
+              ? const TeaGardensHotelScaffoldBackground()
               : Container(),
           Scaffold(
             appBar: appBar,

@@ -321,6 +321,7 @@ class AppThemeCustom {
             Flavor.flinders ||
             Flavor.wonthaggi ||
             Flavor.mhbc ||
+            Flavor.tgh ||
             Flavor.mosaic:
         return AppColors.white;
       default:
@@ -338,6 +339,7 @@ class AppThemeCustom {
             Flavor.wonthaggi ||
             Flavor.mhbc ||
             Flavor.mosaic ||
+            Flavor.tgh ||
             Flavor.southportSharks:
         return AppColors.white;
       default:
@@ -373,6 +375,7 @@ class AppThemeCustom {
       case Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
+            Flavor.tgh ||
             Flavor.mosaic:
         return AppColors.white;
 
@@ -403,6 +406,8 @@ class AppThemeCustom {
         return null;
       case Flavor.drinkRewards:
         return null;
+      case Flavor.tgh:
+        return AppColors.tgh_profile_dialog_background_color;
 
       default:
         return Theme.of(context).scaffoldBackgroundColor;
@@ -415,6 +420,7 @@ class AppThemeCustom {
       case Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
+            Flavor.tgh ||
             Flavor.mosaic:
         return AppColors.white;
 
@@ -432,6 +438,7 @@ class AppThemeCustom {
             Flavor.aceRewards ||
             Flavor.bluewater ||
             Flavor.mosaic ||
+            Flavor.tgh ||
             Flavor.southportSharks:
         return AppColors.white;
 
@@ -464,6 +471,8 @@ class AppThemeCustom {
         return AppColors.white.withOpacity(0.39);
       case Flavor.southportSharks:
         return isShadow != null ? AppColors.white_shadow : AppColors.white;
+      case Flavor.tgh:
+        return isShadow != null ? AppColors.dr_box_shadow : AppColors.white;
       default:
         return Theme.of(context).cardColor;
     }
@@ -509,7 +518,7 @@ class AppThemeCustom {
   static Color getTextFormFieldInnerDividerColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.kingscliff:
+      case Flavor.kingscliff || Flavor.tgh:
         return AppColors.white;
       case Flavor.maxClub || Flavor.maxx:
         return AppColors.max_hint_text_color;
@@ -533,6 +542,8 @@ class AppThemeCustom {
         return isShadow != null ? AppColors.white : AppColors.black;
       case Flavor.bobsBulkBooze:
         return AppColors.white;
+      case Flavor.tgh:
+        return AppColors.tgh_text_color;
       case Flavor.southportSharks:
         return isShadow != null
             ? Theme.of(context).textSelectionTheme.selectionColor!
@@ -665,6 +676,15 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.tgh:
+        return ButtonStyle(
+            shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
 
       default:
         return const ButtonStyle();
@@ -695,7 +715,7 @@ class AppThemeCustom {
   static Color getAllMenuItemsTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.flinders:
+      case Flavor.flinders || Flavor.tgh:
         return AppColors.white;
       case Flavor.senseOfTaste:
         return AppColors.sot_button_color;
@@ -712,7 +732,7 @@ class AppThemeCustom {
   static Color getAllMenuItemsBorderColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.flinders:
+      case Flavor.flinders || Flavor.tgh:
         return AppColors.white;
       case Flavor.mannumClub:
         return AppColors.mc_button_color;
@@ -861,8 +881,47 @@ class AppThemeCustom {
                 borderRadius: BorderRadius.circular(80))),
             backgroundColor: WidgetStatePropertyAll(
                 Theme.of(context).buttonTheme.colorScheme!.primary));
+      case Flavor.tgh:
+        return ButtonStyle(
+            shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
       default:
         return const ButtonStyle();
+    }
+  }
+
+  static ButtonStyle getAppButtonStyle(BuildContext context,Color? backgroundColor) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.tgh:
+        return ButtonStyle(
+            shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Theme.of(context).buttonTheme.colorScheme!.primary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: const WidgetStatePropertyAll(Colors.transparent));
+      default:
+        return ButtonStyle(
+            shadowColor: WidgetStatePropertyAll(Theme.of(context)
+                .buttonTheme
+                .colorScheme!
+                .onSecondary
+                .withValues(alpha: 0.1)),
+            elevation: const WidgetStatePropertyAll(20),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                side: BorderSide(
+                    color:
+                        Theme.of(context).buttonTheme.colorScheme!.onSecondary),
+                borderRadius: BorderRadius.circular(80))),
+            backgroundColor: WidgetStatePropertyAll(backgroundColor ??
+                Theme.of(context).buttonTheme.colorScheme!.primary));
     }
   }
 
@@ -897,6 +956,8 @@ class AppThemeCustom {
               : AppColors.white;
         case Flavor.mannumClub:
           return AppColors.white;
+        case Flavor.tgh:
+          return AppColors.tgh_text_color;
         case Flavor.wonthaggi:
           return AppColors.wt_text_color;
         default:
@@ -949,6 +1010,8 @@ class AppThemeCustom {
         return AppColors.bob_button_color;
       case Flavor.mannumClub:
         return AppColors.mc_button_color;
+      case Flavor.tgh:
+        return AppColors.tgh_text_color;
       default:
         return isCancelled ? AppColors.disable_color : null;
     }
@@ -976,6 +1039,14 @@ class AppThemeCustom {
         }
       case Flavor.bobsBulkBooze || Flavor.senseOfTaste || Flavor.woollahra:
         return AppColors.white_opacity;
+      case Flavor.tgh:
+        {
+          if (isEditable) {
+            return AppColors.white.withOpacity(0.27);
+          } else {
+            return AppColors.tgh_edit_account_card_color.withOpacity(0.10);
+          }
+        }
       case Flavor.mosaic:
         {
           if (isEditable) {
@@ -1075,6 +1146,7 @@ class AppThemeCustom {
         flavor != Flavor.senseOfTaste &&
         flavor != Flavor.bobsBulkBooze &&
         flavor != Flavor.mannumClub &&
+        flavor != Flavor.tgh &&
         flavor != Flavor.mosaic) {
       return selectionColor;
     }
@@ -1119,6 +1191,8 @@ class AppThemeCustom {
             : selectionColor;
       case Flavor.mosaic:
         return isFromEdit ? AppColors.mh_button_color : AppColors.white;
+      case Flavor.tgh:
+        return isFromEdit ? AppColors.white : selectionColor;
       default:
         return selectionColor;
     }
@@ -1249,6 +1323,10 @@ class AppThemeCustom {
       return AppColors.white;
     }
 
+    if (selectedFlavor == Flavor.tgh) {
+      return AppColors.white.withOpacity(0.59);
+    }
+
     // 👉 Other special flavors (keep index 2 exception)
     if (selectedFlavor == Flavor.edp) {
       return AppColors.button_shadow;
@@ -1376,6 +1454,7 @@ class AppThemeCustom {
       case Flavor.brisbane ||
             Flavor.flinders ||
             Flavor.wonthaggi ||
+            Flavor.tgh ||
             Flavor.mosaic:
         return AppColors.white;
       case Flavor.woollahra || Flavor.mannumClub:
@@ -1408,6 +1487,8 @@ class AppThemeCustom {
         return AppColors.kc_primary_color_dark;
       case Flavor.edp:
         return AppColors.edp_button_color;
+      case Flavor.tgh:
+        return AppColors.tgh_profile_dialog_background_color;
       default:
         return Theme.of(context).scaffoldBackgroundColor;
     }
