@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -346,7 +346,6 @@
 		F7C3AA6179085EF7CFB8A9DE /* Pods-RunnerTests.debug-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-flinders.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-flinders.xcconfig"; sourceTree = "<group>"; };
 		FA5913EBA133559BBC2FE1D0 /* Pods-RunnerTests.release-drinkrewards.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-drinkrewards.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-drinkrewards.xcconfig"; sourceTree = "<group>"; };
 		FA6F97EBA97145DACC61A676 /* Pods-RunnerTests.debug-clh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-clh.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-clh.xcconfig"; sourceTree = "<group>"; };
-		FAC44FA73597ACA77651B192 /* Pods-OneSignalNotificationServiceExtension.release-tgh.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release-tgh.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release-tgh.xcconfig"; sourceTree = "<group>"; };
 		FAF4AAE78B4B2A67856F9720 /* Pods-RunnerTests.debug-maxclub.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-maxclub.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-maxclub.xcconfig"; sourceTree = "<group>"; };
 		FB1034EBFFB6EEC21CCBACE5 /* Pods-RunnerTests.release-flinders.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release-flinders.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release-flinders.xcconfig"; sourceTree = "<group>"; };
 		FB644E63D3B3D559739A13BF /* Pods-RunnerTests.debug-kingscliff.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug-kingscliff.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug-kingscliff.xcconfig"; sourceTree = "<group>"; };
@@ -355,7 +354,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		235B5CEA2DC9D72D004A8F1C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		235B5CEA2DC9D72D004A8F1C /* Exceptions for "OneSignalNotificationServiceExtension" folder in "OneSignalNotificationServiceExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -365,7 +364,18 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		235B5CE32DC9D72C004A8F1C /* OneSignalNotificationServiceExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (235B5CEA2DC9D72D004A8F1C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = OneSignalNotificationServiceExtension; sourceTree = "<group>"; };
+		235B5CE32DC9D72C004A8F1C /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				235B5CEA2DC9D72D004A8F1C /* Exceptions for "OneSignalNotificationServiceExtension" folder in "OneSignalNotificationServiceExtension" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,7 +694,6 @@
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
-				78E0A7A72DC9AD7400C4905E /* FlutterGeneratedPluginSwiftPackage */,
 				3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */,
 				9740EEB21CF90195004384FC /* Debug.xcconfig */,
 				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
@@ -720,9 +729,6 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				783B49BA3063932F00447F8E /* RunnerRelease-brisbane.entitlements */,
-				783B49B93063931A00447F8E /* RunnerProfile-brisbane.entitlements */,
-				783B49B8306392FF00447F8E /* RunnerDebug-brisbane.entitlements */,
 				23E1923D3019EB9E00C13D00 /* RunnerDebug-northShoreTavern.entitlements */,
 				23E1923C3019EB4C00C13D00 /* RunnerProfile-northShoreTavern.entitlements */,
 				23E1923E3019EBF700C13D00 /* RunnerRelease-northShoreTavern.entitlements */,
@@ -811,9 +817,6 @@
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
-			packageProductDependencies = (
-				78A3181F2AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage */,
-			);
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
@@ -834,6 +837,9 @@
 				235B5CE82DC9D72D004A8F1C /* PBXTargetDependency */,
 			);
 			name = Runner;
+			packageProductDependencies = (
+				78A3181F2AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage */,
+			);
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
@@ -872,7 +878,7 @@
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
 			packageReferences = (
-				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */,
+				781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -5499,7 +5505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-brisbane";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerDebug-brisbane.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -5653,7 +5659,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-brisbane";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerRelease-brisbane.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -5799,7 +5805,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-brisbane";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-mhbc.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Runner/RunnerProfile-brisbane.entitlements";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = W4FHRW3JTA;
 				ENABLE_BITCODE = NO;
@@ -13182,12 +13188,14 @@
 			defaultConfigurationName = "Debug-kingscliff";
 		};
 /* End XCConfigurationList section */
+
 /* Begin XCLocalSwiftPackageReference section */
-		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage" */ = {
+		781AD8BC2B33823900A9FFBB /* XCLocalSwiftPackageReference "FlutterGeneratedPluginSwiftPackage" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage;
 		};
 /* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		78A3181F2AECB46A00862997 /* FlutterGeneratedPluginSwiftPackage */ = {
 			isa = XCSwiftPackageProductDependency;
