@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 
@@ -19,6 +20,37 @@ class NotificationListTile extends StatefulWidget {
 class _NotificationListTileState extends State<NotificationListTile> {
   bool _isExpanded = false;
 
+  String _formatNotificationTime(DateTime receivedAt) {
+    final now = DateTime.now();
+    final diff = now.difference(receivedAt);
+
+    if (diff.inMinutes < 120) {
+      final minutes = diff.inMinutes < 1 ? 1 : diff.inMinutes;
+      return '${minutes}m ago';
+    }
+
+    final isToday = now.year == receivedAt.year &&
+        now.month == receivedAt.month &&
+        now.day == receivedAt.day;
+    if (isToday) {
+      return DateFormat('h:mma').format(receivedAt).toLowerCase();
+    }
+
+    final yesterday = now.subtract(const Duration(days: 1));
+    final isYesterday = yesterday.year == receivedAt.year &&
+        yesterday.month == receivedAt.month &&
+        yesterday.day == receivedAt.day;
+    if (isYesterday) {
+      return 'Yesterday ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
+    }
+
+    /*if (diff.inDays < 7) {
+      return '${DateFormat('EEE').format(receivedAt)} ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
+    }*/
+
+    return '${DateFormat('dd-MM-yyyy').format(receivedAt)} ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,48 +63,63 @@ class _NotificationListTileState extends State<NotificationListTile> {
         onTap: () =>
             context.read<HomeProvider>().onTapNotification(widget.notification),
         leading: widget.notification.imageUrl != null &&
-                widget.notification.imageUrl!.isNotEmpty
+            widget.notification.imageUrl!.isNotEmpty
             ? ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  widget.notification.imageUrl!,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.fill,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return const SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: Center(
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        ),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: 48,
-                      height: 48,
-                      color: Colors.white.withValues(alpha: 0.15),
-                      child: const Icon(Icons.image_not_supported_outlined,
-                          size: 20),
-                    );
-                  },
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            widget.notification.imageUrl!,
+            width: 50,
+            height: 50,
+            fit: BoxFit.fill,
+            loadingBuilder: (context, child, progress) {
+              if (progress == null) return child;
+              return const SizedBox(
+                width: 48,
+                height: 48,
+                child: Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
                 ),
-              )
-            : null,
-        title: Text(
-          widget.notification.title,
-          style: TextStyle(
-            fontWeight: widget.notification.isRead
-                ? FontWeight.normal
-                : FontWeight.bold,
-            color: AppThemeCustom.getNotificationItemStyle(context),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                width: 48,
+                height: 48,
+                color: Colors.white.withValues(alpha: 0.15),
+                child: const Icon(Icons.image_not_supported_outlined,
+                    size: 20),
+              );
+            },
           ),
+        )
+            : null,
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                widget.notification.title,
+                style: TextStyle(
+                  fontWeight: widget.notification.isRead
+                      ? FontWeight.normal
+                      : FontWeight.bold,
+                  color: AppThemeCustom.getNotificationItemStyle(context),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              _formatNotificationTime(widget.notification.receivedAt),
+              style: TextStyle(
+                fontSize: 11,
+                color: AppThemeCustom.getNotificationItemStyle(context),
+              ),
+            ),
+          ],
         ),
         subtitle: GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -87,7 +134,7 @@ class _NotificationListTileState extends State<NotificationListTile> {
               widget.notification.body,
               maxLines: _isExpanded ? null : 2,
               overflow:
-                  _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+              _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
               style: TextStyle(
                 color: AppThemeCustom.getNotificationItemStyle(context),
               ),
@@ -97,9 +144,9 @@ class _NotificationListTileState extends State<NotificationListTile> {
         trailing: widget.notification.isRead
             ? null
             : const CircleAvatar(
-                radius: 5,
-                backgroundColor: Colors.blue,
-              ),
+          radius: 5,
+          backgroundColor: Colors.blue,
+        ),
       ),
     );
   }
