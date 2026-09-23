@@ -85,6 +85,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
           Flavor.maxx ||
           Flavor.mannumClub ||
           Flavor.mosaic ||
+          Flavor.brisbane ||
           Flavor.bobsBulkBooze ||
           Flavor.tgh ||
           Flavor.maxClub =>
