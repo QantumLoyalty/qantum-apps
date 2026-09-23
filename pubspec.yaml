@@ -32,7 +32,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.6+18
 ###################################
 # MHBC
-#version:  1.0.15+107
+#version:  1.0.15+108
 ###################################
 # MONTAUK TAVERN
 #version:  1.0.4+56
@@ -44,7 +44,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version: 1.0.4+12
 ###################################
 #QANTUM
-version: 1.0.1+74
+#version: 1.0.1+74
 ###################################
 # ACE REWARDS
 #version: 1.0.0+13
@@ -53,7 +53,7 @@ version: 1.0.1+74
 #version: 1.0.0+2
 ###################################
 # BRISBANE BREWING
-#version: 1.0.4+10
+version: 1.0.4+11
 ###################################
 # WOOLLAHRA HOTEL
 #version: 1.0.0+2

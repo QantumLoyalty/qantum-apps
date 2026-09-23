@@ -59,6 +59,14 @@ android {
                     deeplinkPath: "/"
             ]
         }
+        brisbane {
+            dimension "app"
+            applicationId "com.au.brisbanebrewing.app"
+            manifestPlaceholders = [
+                    deeplinkHost: "brisbanebrewing-applink.chewzie.net",
+                    deeplinkPath: "/"
+            ]
+        }
         senseOfTaste {
             dimension "app"
             applicationId "au.com.senseoftaste.app"
@@ -147,14 +155,7 @@ android {
                     deeplinkPath: "/.*"
             ]
         }
-        brisbane {
-            dimension "app"
-            applicationId "com.au.brisbanebrewing.app"
-            manifestPlaceholders = [
-                    deeplinkHost: "disabled.invalid",
-                    deeplinkPath: "/.*"
-            ]
-        }
+
         woollahra {
             dimension "app"
             applicationId "com.au.woollahra.app"
