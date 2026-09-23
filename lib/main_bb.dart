@@ -25,6 +25,8 @@ import 'view_models/UserLoginProvider.dart';
 import 'l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'views/AppBootstrap.dart';
+
 Future<void> syncCurrentUserIdToNative(String userId) async {
   try {
     await _nativeNotificationsChannel
@@ -197,32 +199,34 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ChangeNotifierProvider(create: (context) => InternetStatusProvider()),
         ChangeNotifierProvider(create: (context) => UnitedFuelsProvider()),
       ],
-      child: Portal(
-        child: MaterialApp(
-          onGenerateRoute: AppNavigator.generateRoute,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en'),
-            Locale('hi'),
-            Locale('zh', 'CN')
-          ],
-          title: FlavorConfig.instance.flavorValues.appName!,
-          theme: AppThemes.brisbaneTheme,
-          initialRoute: AppNavigator.splash,
-          //home: const HomeScreen(),
-          home: const SplashScreen(),
-          builder: (context, child) {
-            return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: child!);
-          },
+      child: AppBootstrap(
+        child: Portal(
+          child: MaterialApp(
+            onGenerateRoute: AppNavigator.generateRoute,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('hi'),
+              Locale('zh', 'CN')
+            ],
+            title: FlavorConfig.instance.flavorValues.appName!,
+            theme: AppThemes.brisbaneTheme,
+            initialRoute: AppNavigator.splash,
+            //home: const HomeScreen(),
+            home: const SplashScreen(),
+            builder: (context, child) {
+              return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: child!);
+            },
+          ),
         ),
       ),
     );

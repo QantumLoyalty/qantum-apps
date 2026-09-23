@@ -29,7 +29,7 @@ class _AppBootstrapState extends State<AppBootstrap> {
 
       if (flavor == Flavor.starReward ||
           flavor == Flavor.bluewater ||
-          flavor == Flavor.flinders) {
+          flavor == Flavor.flinders|| flavor == Flavor.brisbane) {
         final encodedLink = link.queryParameters['link'];
         if (encodedLink == null || encodedLink.isEmpty) return;
 

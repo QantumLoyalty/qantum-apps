@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_chewzieGuestHandled) return;
     final isChewzieFlavor = flavor == Flavor.starReward ||
         flavor == Flavor.bluewater ||
-        flavor == Flavor.flinders;
+        flavor == Flavor.flinders || flavor == Flavor.brisbane;
     if (!isChewzieFlavor) return;
 
     if (_homeProvider.startChewzieScreen != true) return;
@@ -86,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Flavor.starReward => AppColors.sr_back_color,
             Flavor.bluewater => AppColors.bcc_back_color,
             Flavor.flinders => AppColors.fw_back_color,
+            Flavor.brisbane => AppColors.bb_back_color,
             _ => AppColors.sr_back_color,
           };
 

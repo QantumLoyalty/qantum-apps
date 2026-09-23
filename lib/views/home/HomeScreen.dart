@@ -611,7 +611,7 @@ class _HomeScreenState extends State<HomeScreen>
 
       if (flavor == Flavor.starReward ||
           flavor == Flavor.bluewater ||
-          flavor == Flavor.flinders) {
+          flavor == Flavor.flinders || flavor==Flavor.brisbane) {
         _prepareChewzie(provider, userInfoProvider);
         return;
       }
