@@ -71,10 +71,10 @@ version: 1.0.4+11
 #version: 1.0.0+7
 ###################################
 #QANTUMClub
-#version: 1.0.1+4
+version: 1.0.1+5
 ###################################
 #MAX Club
-#version: 1.0.1+13
+#version: 1.0.1+14
 ###################################
 #WONTHAGGI
 #version: 1.0.0+4
@@ -91,7 +91,7 @@ version: 1.0.4+11
 #Mosaic Hotel
 #version: 1.0.6+10
 #Mannum club
-#version: 1.0.1+10
+#version: 1.0.2+11
 #Southport Sharks
 #version: 1.0.0+4
 
