@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     showTopIcon: false,
                     title: "Loyalty App Suspended",
                     message:
-                        "Your loyalty app has been suspended, if any concerns please contact the Venue");
+                        "Your access to the loyalty app is currently suspended. Please contact the venue for assistance.");
               } else if (provider.networkError!) {
                 ErrorDialog.getInstance().showErrorDialog(context,
                     message: provider.networkMessage ?? loc.msgCommonError);
