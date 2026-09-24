@@ -746,6 +746,8 @@ class AppThemeCustom {
     switch (selectedFlavor) {
       case Flavor.flinders || Flavor.mosaic:
         return Theme.of(context).scaffoldBackgroundColor;
+      case Flavor.brisbane:
+        return Theme.of(context).buttonTheme.colorScheme!.primary;
       default:
         return Theme.of(context).primaryColor;
     }
@@ -895,7 +897,8 @@ class AppThemeCustom {
     }
   }
 
-  static ButtonStyle getAppButtonStyle(BuildContext context,Color? backgroundColor) {
+  static ButtonStyle getAppButtonStyle(
+      BuildContext context, Color? backgroundColor) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
       case Flavor.tgh:
@@ -954,6 +957,10 @@ class AppThemeCustom {
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
+        case Flavor.brisbane:
+          return (provider.homeNavigationList[2].name == itemName)
+              ? Colors.transparent
+              : Theme.of(context).buttonTheme.colorScheme!.primary;
         case Flavor.mannumClub:
           return AppColors.white;
         case Flavor.tgh:
@@ -1337,6 +1344,12 @@ class AppThemeCustom {
               provider.homeNavigationList[index].name
           ? null
           : AppColors.mh_button_color;
+    }
+    if (selectedFlavor == Flavor.brisbane) {
+      return provider.homeNavigationList[2].name ==
+              provider.homeNavigationList[index].name
+          ? null
+          : AppColors.white.withOpacity(0.73);
     }
     if (selectedFlavor == Flavor.mannumClub) {
       return AppColors.button_shadow;

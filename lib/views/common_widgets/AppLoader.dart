@@ -21,11 +21,12 @@ class AppLoader extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(
+                 SizedBox(
                     width: 40,
                     height: 40,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
+                      color:  Theme.of(context).buttonTheme.colorScheme!.primary,
                     )),
                 AppDimens.shape_15,
                 Text(
