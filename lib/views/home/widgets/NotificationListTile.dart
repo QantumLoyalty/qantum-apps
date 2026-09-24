@@ -20,35 +20,34 @@ class NotificationListTile extends StatefulWidget {
 class _NotificationListTileState extends State<NotificationListTile> {
   bool _isExpanded = false;
 
-  String _formatNotificationTime(DateTime receivedAt) {
+  String _formatNotificationTime(BuildContext context, DateTime receivedAt) {
+    final local = receivedAt.toLocal(); // UTC -> phone timezone
     final now = DateTime.now();
-    final diff = now.difference(receivedAt);
+    final diff = now.difference(local);
+    final is24h = MediaQuery.alwaysUse24HourFormatOf(context);
+    print(is24h);
 
-    if (diff.inMinutes < 120) {
+    String timeStr() => is24h
+        ? DateFormat('HH:mm').format(local)
+        : DateFormat('h:mma').format(local).toLowerCase();
+
+    if (diff.inMinutes < 60) {
       final minutes = diff.inMinutes < 1 ? 1 : diff.inMinutes;
       return '${minutes}m ago';
     }
 
-    final isToday = now.year == receivedAt.year &&
-        now.month == receivedAt.month &&
-        now.day == receivedAt.day;
-    if (isToday) {
-      return DateFormat('h:mma').format(receivedAt).toLowerCase();
-    }
+    final isToday = now.year == local.year &&
+        now.month == local.month &&
+        now.day == local.day;
+    if (isToday) return timeStr();
 
     final yesterday = now.subtract(const Duration(days: 1));
-    final isYesterday = yesterday.year == receivedAt.year &&
-        yesterday.month == receivedAt.month &&
-        yesterday.day == receivedAt.day;
-    if (isYesterday) {
-      return 'Yesterday ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
-    }
+    final isYesterday = yesterday.year == local.year &&
+        yesterday.month == local.month &&
+        yesterday.day == local.day;
+    if (isYesterday) return 'Yesterday ${timeStr()}';
 
-    /*if (diff.inDays < 7) {
-      return '${DateFormat('EEE').format(receivedAt)} ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
-    }*/
-
-    return '${DateFormat('dd-MM-yyyy').format(receivedAt)} ${DateFormat('h:mma').format(receivedAt).toLowerCase()}';
+    return '${DateFormat('dd-MM-yyyy').format(local)} ${timeStr()}';
   }
 
   @override
@@ -113,7 +112,7 @@ class _NotificationListTileState extends State<NotificationListTile> {
             ),
             const SizedBox(width: 8),
             Text(
-              _formatNotificationTime(widget.notification.receivedAt),
+              _formatNotificationTime(context, widget.notification.receivedAt),
               style: TextStyle(
                 fontSize: 11,
                 color: AppThemeCustom.getNotificationItemStyle(context),
