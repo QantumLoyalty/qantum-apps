@@ -209,6 +209,7 @@ flutter:
     - assets/starReward/
     - assets/max/
     - assets/hogansReward/
+    - assets/teaGardensHotel/
 
     - .env.mhbc
     - .env.maxc
