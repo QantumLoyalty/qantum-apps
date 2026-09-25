@@ -1,15 +1,16 @@
 {
   "project_info": {
-    "project_number": "1057203232257",
-    "project_id": "queens-hotel-c1759",
-    "storage_bucket": "queens-hotel-c1759.firebasestorage.app"
+    "project_number": "1056025182878",
+    "project_id": "qantum-42fb6",
+    "storage_bucket": "qantum-42fb6.firebasestorage.app"
   },
   "client": [
+
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056025182878:android:08d115f7d12761b6c9318f",
+        "mobilesdk_app_id": "1:1056025182878:android:74363a6beb60da5bc9318f",
         "android_client_info": {
-          "package_name": "com.au.tgh.app"
+          "package_name": "com.teagardenshotel.app"
         }
       },
       "oauth_client": [],
@@ -24,6 +25,7 @@
         }
       }
     }
+
   ],
   "configuration_version": "1"
 }

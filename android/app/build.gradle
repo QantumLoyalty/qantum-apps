@@ -239,7 +239,7 @@ android {
         }
         tgh {
             dimension "app"
-            applicationId "com.au.tgh.app"
+            applicationId "com.teagardenshotel.app"
             manifestPlaceholders = [
                     deeplinkHost: "disabled.invalid",
                     deeplinkPath: "/.*"

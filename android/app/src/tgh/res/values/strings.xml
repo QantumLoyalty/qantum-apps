@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Tea Gardens Hotel</string>
-    <string name="default_notification_channel_id">com.au.tgh.app.urgent</string>
+    <string name="app_name">TGH Rewards</string>
+    <string name="default_notification_channel_id">com.teagardenshotel.app.urgent</string>
 </resources>
