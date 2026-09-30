@@ -1,10 +1,10 @@
 class APIList {
   // SANDBOX
 
- //static get BASE_URL => "https://betaapi.s2w.com.au/";
+  static get BASE_URL => "https://betaapi.s2w.com.au/";
 
   // LIVE
-  static get BASE_URL => "https://api.s2w.com.au/";
+  // static get BASE_URL => "https://api.s2w.com.au/";
 
   static get LOGIN => BASE_URL + "user/check/";
 
@@ -22,6 +22,7 @@ class APIList {
   static get UPDATE_USER_INFO => BASE_URL + "user/update-profile";
 
   static get SEND_OTP_EXISTING_EMAIL => BASE_URL + "user/otpOnEmail";
+
   static get VERIFY_OTP_EXISTING_EMAIL => BASE_URL + "user/verifyForEmail";
 
   static get SEND_OTP_PROFILE => BASE_URL + "user/otp-generate";
@@ -63,6 +64,11 @@ class APIList {
   static get FETCH_HOME_BUTTONS => BASE_URL + "button/get";
 
   static get UPDATE_COUPON_CODE => BASE_URL + "user/coupon-update";
+
+  static get GET_ACTIVE_SPONSORSHIP => BASE_URL + "sponsorship/user/";
+  static get APPLY_SPONSORSHIP_CODE => BASE_URL + "sponsorship/apply";
+  static get REMOVE_SPONSORSHIP_CODE => BASE_URL + "sponsorship/cancel/";
+  static get GET_SPONSORSHIP_CODE => BASE_URL + "sponsorship/details";
 
   static get UPLOAD_DRIVING_LICENSE_IMAGES => BASE_URL + "images/upload";
 

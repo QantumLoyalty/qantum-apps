@@ -1519,6 +1519,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter Mobile OTP'**
   String get msgEnterMobileOTP;
+
+  /// No description provided for @msgSponsorshipCodeApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Sponsorship code applied successfully'**
+  String get msgSponsorshipCodeApplied;
+
+  /// No description provided for @txtRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get txtRemove;
+
+  /// No description provided for @msgRemoveLink.
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove your link with ###. Proceed?'**
+  String get msgRemoveLink;
+
+  /// No description provided for @msgActiveSponsorshipHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn rewards & get benefits for your club. Your currently linked club is shown below.'**
+  String get msgActiveSponsorshipHeader;
+
+  /// No description provided for @yesConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Confirm'**
+  String get yesConfirm;
+
+  /// No description provided for @verifyClubCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Club Code'**
+  String get verifyClubCode;
+
+  /// No description provided for @msgVerifyClubCode.
+  ///
+  /// In en, this message translates to:
+  /// **'You have entered the code for ###. Please confirm if this is correct.'**
+  String get msgVerifyClubCode;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

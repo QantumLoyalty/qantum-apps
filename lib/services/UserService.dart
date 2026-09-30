@@ -563,4 +563,68 @@ class UserService with LoggingMixin implements UserRepository {
     }
     return networkResponse;
   }
+
+  @override
+  Future<NetworkResponse> fetchUserActiveSponsorship(
+      {required String userID}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse("${APIList.GET_ACTIVE_SPONSORSHIP}$userID"),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> removeUserActiveSponsorship(
+      {required String userID}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.putCall(
+          url: Uri.parse("${APIList.REMOVE_SPONSORSHIP_CODE}$userID"),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          },
+          body: {});
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
+
+  @override
+  Future<NetworkResponse> getSponsorshipDetail({required String code}) async {
+    NetworkResponse networkResponse;
+    try {
+      SharedPreferenceHelper sharedPreferenceHelper =
+          await SharedPreferenceHelper.getInstance();
+      var response = await NetworkHelper.instance.getCall(
+          url: Uri.parse(
+              "${APIList.GET_SPONSORSHIP_CODE}?sponsorshipCode=$code"),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
+          });
+      networkResponse = response;
+    } catch (e) {
+      networkResponse = NetworkResponse.error(responseMessage: e.toString());
+    }
+
+    return networkResponse;
+  }
 }

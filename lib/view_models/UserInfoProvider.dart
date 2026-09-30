@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:qantum_apps/data/models/SponsorshipModel.dart';
 import 'package:qantum_apps/data/models/VenueModel.dart';
 import 'package:qantum_apps/main_ss.dart';
 import '../core/utils/FlavorConstants.dart';
@@ -235,7 +236,6 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
     SharedPreferenceHelper sph = await SharedPreferenceHelper.getInstance();
     await sph.clearAll();
 
-
     notifyListeners();
     return;
   }
@@ -243,12 +243,11 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
   bool _isFetching = false;
   Timer? profileTimer;
   bool _isDisabledUser = false;
-  bool get isDisabledUser=> _isDisabledUser;
 
+  bool get isDisabledUser => _isDisabledUser;
 
-  resetIsDisabledUser()
-  {
-    _isDisabledUser=false;
+  resetIsDisabledUser() {
+    _isDisabledUser = false;
     notifyListeners();
   }
 
@@ -1453,6 +1452,219 @@ class UserInfoProvider extends ChangeNotifier with LoggingMixin {
       _userId = null;
     }
 
+    notifyListeners();
+  }
+
+  bool? _networkError;
+
+  bool? get networkError => _networkError;
+
+  String? _networkResponse;
+
+  String? get networkResponse => _networkResponse;
+
+  resetNetworkResponseStatus() {
+    //  _networkResponse = null;
+    _networkError = null;
+    notifyListeners();
+  }
+
+  addSponsorshipCode(
+      {required String code,
+      required String userId,
+      required AppLocalizations loc}) async {
+    try {
+      _showLoader = true;
+      notifyListeners();
+      NetworkResponse networkResponse = await AppDataService.getInstance()
+          .updateCouponCode(sponsorshipCode: code, userId: userId);
+      logEvent(networkResponse);
+
+      _networkError = networkResponse.isError;
+
+      Map<String, dynamic> response;
+      String? message;
+      if (networkResponse.response is Map<String, dynamic>) {
+        response = networkResponse.response as Map<String, dynamic>;
+        message = (networkResponse.response as Map<String, dynamic>)['message'];
+
+        if (networkResponse.isError) {
+          _networkResponse = message ?? loc.msgCommonError;
+        } else {
+          print("RESPONSE:: $response");
+          if (response.containsKey("sponsorship") &&
+              response['sponsorship'] is Map<String, dynamic>) {
+            Map<String, dynamic> sponsorship =
+                response['sponsorship'] as Map<String, dynamic>;
+            print("sponsorship:: $sponsorship");
+            if (sponsorship.containsKey("sponsorshipId") &&
+                sponsorship["sponsorshipId"] is Map<String, dynamic>) {
+              activeUpdateSponsorship = false;
+              _activeSponsorship = SponsorshipModel.fromJson(
+                  sponsorship['sponsorshipId'] as Map<String, dynamic>);
+            }
+          }
+
+          _networkResponse = message ?? loc.msgSponsorshipCodeApplied;
+        }
+      } else {
+        _networkResponse = loc.msgCommonError;
+      }
+    } catch (e) {
+      _networkError = true;
+      _networkResponse = e.toString();
+    } finally {
+      _showLoader = false;
+      notifyListeners();
+    }
+  }
+
+  SponsorshipModel? _activeSponsorship;
+
+  SponsorshipModel? get activeSponsorship => _activeSponsorship;
+  bool _fetchingActiveSponsorship = false;
+
+  bool get fetchingActiveSponsorship => _fetchingActiveSponsorship;
+
+  fetchUserActiveSponsorship() async {
+    try {
+      _fetchingActiveSponsorship = true;
+      activeUpdateSponsorship = false;
+      notifyListeners();
+      if (_userModel != null) {
+        String userId = _userModel!.bluizeUniqueUserId ?? "";
+        NetworkResponse networkResponse = await UserService.getInstance()
+            .fetchUserActiveSponsorship(userID: userId);
+
+        debugPrint("Event:: ACTIVE SPONSORSHIP:: ${networkResponse.toString()}",
+            wrapWidth: 1024);
+
+        print(">>>> ${networkResponse.response}");
+
+        if (!networkResponse.isError &&
+            networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> sresponse =
+              networkResponse.response as Map<String, dynamic>;
+          print("RESPONSE:: $sresponse");
+          if (sresponse.containsKey("sponsorship") &&
+              sresponse['sponsorship'] is Map<String, dynamic>) {
+            Map<String, dynamic> sponsorship =
+                sresponse['sponsorship'] as Map<String, dynamic>;
+            print("sponsorship:: $sponsorship");
+            if (sponsorship.containsKey("sponsorshipId") &&
+                sponsorship["sponsorshipId"] is Map<String, dynamic>) {
+              _activeSponsorship = SponsorshipModel.fromJson(
+                  sponsorship['sponsorshipId'] as Map<String, dynamic>);
+            }
+          }
+        }
+      }
+    } catch (e) {
+      logEvent("Event:: Fetch Sponsorship error ${e.toString()}");
+    } finally {
+      _fetchingActiveSponsorship = false;
+      notifyListeners();
+    }
+  }
+
+  bool showRemoveSponsorshipLoader = false;
+
+  Future<({bool success, String? errorMesg})>
+      removeActiveSponsorshipCode() async {
+    try {
+      showRemoveSponsorshipLoader = true;
+      notifyListeners();
+      if (_userModel != null) {
+        String userId = _userModel!.bluizeUniqueUserId ?? "";
+        NetworkResponse networkResponse = await UserService.getInstance()
+            .removeUserActiveSponsorship(userID: userId);
+
+        debugPrint(
+            "Event:: REMOVE ACTIVE SPONSORSHIP:: ${networkResponse.toString()}",
+            wrapWidth: 1024);
+
+        print(">>>> ${networkResponse.response}");
+
+        /*if (!networkResponse.isError &&
+            networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+
+          isSponsorshipRemoved = true;
+        } else {
+          return (success: false, errorMesg: respo);
+        }*/
+        if (networkResponse.response != null &&
+            networkResponse.response is Map<String, dynamic>) {
+          Map<String, dynamic> response =
+              networkResponse.response as Map<String, dynamic>;
+          if (response.containsKey("message")) {
+            String message = response["message"];
+            if (networkResponse.isError) {
+              return (success: false, errorMesg: message);
+            } else {
+              _activeSponsorship = null;
+              activeUpdateSponsorship = false;
+              return (success: true, errorMesg: message);
+            }
+          }
+          return (
+            success: false,
+            errorMesg:
+                "Getting error while removing the club code, please try again later."
+          );
+        }
+        return (
+          success: false,
+          errorMesg:
+              "Getting error while removing the club code, please try again later."
+        );
+      }
+      return (
+        success: false,
+        errorMesg:
+            "Getting error while removing the club code, please try again later."
+      );
+    } catch (e) {
+      return (success: false, errorMesg: e.toString());
+    } finally {
+      showRemoveSponsorshipLoader = false;
+      notifyListeners();
+    }
+  }
+
+  bool checkingSponsorshipDetail = false;
+
+  Future<SponsorshipModel?> checkClubCode(String code) async {
+    SponsorshipModel? sponsorship;
+    try {
+      checkingSponsorshipDetail = true;
+      notifyListeners();
+      NetworkResponse networkResponse =
+          await UserService.getInstance().getSponsorshipDetail(code: code);
+
+      if (!networkResponse.isError &&
+          networkResponse.response is Map<String, dynamic>) {
+        Map<String, dynamic> response =
+            networkResponse.response as Map<String, dynamic>;
+        if (response.containsKey("sponsorship")) {
+          sponsorship = SponsorshipModel.fromJson(
+              response["sponsorship"] as Map<String, dynamic>);
+        }
+      }
+    } catch (e) {
+      logEvent(e);
+    } finally {
+      checkingSponsorshipDetail = false;
+      notifyListeners();
+    }
+    return sponsorship;
+  }
+
+  bool activeUpdateSponsorship = false;
+
+  updateSponsorshipCode({required bool updateStatus}) {
+    activeUpdateSponsorship = updateStatus;
     notifyListeners();
   }
 }

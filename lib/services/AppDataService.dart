@@ -136,19 +136,23 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   }
 
   @override
-  Future<NetworkResponse> updateCouponCode({required String couponCode}) async {
+  Future<NetworkResponse> updateCouponCode({
+    required String sponsorshipCode,
+    required String userId,
+  }) async {
     NetworkResponse networkResponse;
     try {
       SharedPreferenceHelper sharedPreferenceHelper =
           await SharedPreferenceHelper.getInstance();
-      var URL = APIList.UPDATE_COUPON_CODE;
+      var URL = APIList.APPLY_SPONSORSHIP_CODE;
       logEvent(URL);
       var response =
-          await NetworkHelper.instance.putCall(url: Uri.parse(URL), headers: {
+          await NetworkHelper.instance.postCall(url: Uri.parse(URL), headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${sharedPreferenceHelper.getAuthToken()!}'
       }, body: {
-        'coupon_codes': couponCode
+        'sponsorshipCode': sponsorshipCode,
+        'userId': userId
       });
       networkResponse = response;
     } catch (e) {
@@ -450,7 +454,8 @@ class AppDataService extends AppDataRepository with LoggingMixin {
   Future<NetworkResponse> checkAppUpdate() async {
     NetworkResponse networkResponse;
     try {
-      var url = Uri.parse(APIList.CHECK_APP_VERSION+"${AppHelper.getAppType()}/latest");
+      var url = Uri.parse(
+          APIList.CHECK_APP_VERSION + "${AppHelper.getAppType()}/latest");
       networkResponse = await NetworkHelper.instance.getCall(
         url: url,
         headers: {

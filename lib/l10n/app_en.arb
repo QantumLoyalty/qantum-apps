@@ -240,5 +240,13 @@
   "txtPushNotification": "Push Notifications",
   "deleteAccountPermanentMessage": "Once you confirm, this account will no longer be able to be used and your data and personal information will be removed from our system permanently within 48 hours.",
   "msgEnterEmailOTP": "Enter Email OTP",
-  "msgEnterMobileOTP": "Enter Mobile OTP"
+  "msgEnterMobileOTP": "Enter Mobile OTP",
+  "msgSponsorshipCodeApplied": "Sponsorship code applied successfully",
+  "txtRemove": "Remove",
+  "msgRemoveLink": "This will remove your link with ###. Proceed?",
+  "msgActiveSponsorshipHeader": "Earn rewards & get benefits for your club. Your currently linked club is shown below.",
+  "yesConfirm": "Yes, Confirm",
+  "verifyClubCode": "Verify Club Code",
+  "msgVerifyClubCode": "You have entered the code for ###. Please confirm if this is correct."
+
 }

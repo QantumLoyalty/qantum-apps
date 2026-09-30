@@ -23,7 +23,10 @@ abstract class AppDataRepository {
   Future<NetworkResponse> fetchDLInformation(
       {required String frontImagePath, required String backImagePath});
 
-  Future<NetworkResponse> updateCouponCode({required String couponCode});
+  Future<NetworkResponse> updateCouponCode({
+    required String sponsorshipCode,
+    required String userId,
+  });
 
   Future<NetworkResponse> uploadDLImages(
       {required String frontImagePath, required String backImagePath});

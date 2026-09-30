@@ -10,19 +10,18 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   final Map<String, String> _accountOptions = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
-    "txtClubAndMembership": AppNavigator.clubAndMembership,
+    "txtSponsorship": AppNavigator.clubAndMembership,
     "txtGamingPreferences": AppNavigator.gamingPreferences,
     "txtPASStatement": AppNavigator.pasStatement,
   };
   final Map<String, String> _accountOptionsMHBC = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtCommunicationPreferences": AppNavigator.communicationPreference,
- /*   "txtSponsorship": AppNavigator.clubAndMembership,*/
+    "txtSponsorship": AppNavigator.clubAndMembership,
   };
   final Map<String, String> _accountOptionsSR = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
     "txtTermsAndConditions": "",
-
   };
   final Map<String, String> _accountOptionsMannum = {
     "txtChangeMyDetails": AppNavigator.userDetailScreen,
@@ -41,7 +40,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   Map<String, String> get accountOptions {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.qantum || Flavor.qantumClub || Flavor.maxx||Flavor.maxClub:
+      case Flavor.qantum || Flavor.qantumClub || Flavor.maxx || Flavor.maxClub:
         return _accountOptions;
       case Flavor.mhbc:
         return _accountOptionsMHBC;
@@ -60,7 +59,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   String getClubSponsorshipTitle(AppLocalizations loc) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mhbc:
+      case Flavor.mhbc || Flavor.qantum:
         return loc.txtSponsorship;
       case Flavor.starReward:
         return loc.txtClubSponsorship;
@@ -86,7 +85,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
         return loc.txtSponsorship;
       case "txtClubSponsorship":
         return loc.txtClubSponsorship;
-        case "txtTermsAndConditions":
+      case "txtTermsAndConditions":
         return loc.txtTermsAndConditions;
       case "txtChangeFavouriteVenue":
         return loc.txtChangeFavouriteVenue;
@@ -96,44 +95,5 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     }
   }
 
-  bool _showLoader = false;
 
-  bool get showLoader => _showLoader;
-
-  bool? _networkError;
-
-  bool? get networkError => _networkError;
-
-  String? _networkResponse;
-
-  String? get networkResponse => _networkResponse;
-
-  updateCoupon({required String coupon, required AppLocalizations loc}) async {
-    try {
-      _showLoader = true;
-      notifyListeners();
-      NetworkResponse networkResponse = await AppDataService.getInstance()
-          .updateCouponCode(couponCode: coupon);
-      logEvent(networkResponse);
-
-      _networkError = networkResponse.isError;
-      if (networkResponse.isError) {
-        _networkResponse = loc.msgCommonError;
-      } else {
-        _networkResponse = loc.msgClubCodeSaved;
-      }
-    } catch (e) {
-      _networkError = true;
-      _networkResponse = e.toString();
-    } finally {
-      _showLoader = false;
-      notifyListeners();
-    }
-  }
-
-  resetNetworkResponseStatus() {
-    //  _networkResponse = null;
-    _networkError = null;
-    notifyListeners();
-  }
 }

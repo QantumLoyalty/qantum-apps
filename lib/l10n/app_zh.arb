@@ -241,5 +241,13 @@
   "txtPushNotification": "推播通知",
   "deleteAccountPermanentMessage": "一旦您确认，此账户将无法继续使用，您的数据和个人信息将在 48 小时内从我们的系统中永久删除。",
   "msgEnterEmailOTP": "输入邮箱验证码",
-  "msgEnterMobileOTP": "输入手机验证码"
+  "msgEnterMobileOTP": "输入手机验证码",
+  "msgSponsorshipCodeApplied": "赞助代码已成功应用",
+  "txtRemove": "移除",
+  "msgRemoveLink": "這將移除您與 ### 的連結。是否繼續？",
+  "msgActiveSponsorshipHeader": "為您的俱樂部賺取獎勵並享受福利。您目前連結的俱樂部顯示如下。",
+  "yesConfirm": "是，確認",
+  "verifyClubCode": "驗證俱樂部代碼",
+  "msgVerifyClubCode": "您已輸入 ### 的代碼。請確認是否正確。"
+
 }

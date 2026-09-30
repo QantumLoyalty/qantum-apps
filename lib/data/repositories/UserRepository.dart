@@ -19,6 +19,9 @@ abstract class UserRepository {
   Future<NetworkResponse> cancelAccount();
 
   Future<NetworkResponse> fetchUserProfile({required String fetchFromBluize});
+  Future<NetworkResponse> fetchUserActiveSponsorship({required String userID});
+  Future<NetworkResponse> removeUserActiveSponsorship({required String userID});
+  Future<NetworkResponse> getSponsorshipDetail({required String code});
 
   Future<NetworkResponse> updateUserProfile(Map<String, dynamic> params);
 

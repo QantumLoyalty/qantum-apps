@@ -720,6 +720,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get msgEnterMobileOTP => '输入手机验证码';
+
+  @override
+  String get msgSponsorshipCodeApplied => '赞助代码已成功应用';
+
+  @override
+  String get txtRemove => '移除';
+
+  @override
+  String get msgRemoveLink => '這將移除您與 ### 的連結。是否繼續？';
+
+  @override
+  String get msgActiveSponsorshipHeader => '為您的俱樂部賺取獎勵並享受福利。您目前連結的俱樂部顯示如下。';
+
+  @override
+  String get yesConfirm => '是，確認';
+
+  @override
+  String get verifyClubCode => '驗證俱樂部代碼';
+
+  @override
+  String get msgVerifyClubCode => '您已輸入 ### 的代碼。請確認是否正確。';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -1438,4 +1459,25 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get msgEnterMobileOTP => '请输入手机验证码';
+
+  @override
+  String get msgSponsorshipCodeApplied => '赞助代码已成功应用';
+
+  @override
+  String get txtRemove => '移除';
+
+  @override
+  String get msgRemoveLink => '这将移除您与 ### 的关联。是否继续？';
+
+  @override
+  String get msgActiveSponsorshipHeader => '为您的俱乐部赚取奖励并享受福利。您当前关联的俱乐部显示如下。';
+
+  @override
+  String get yesConfirm => '是，确认';
+
+  @override
+  String get verifyClubCode => '验证俱乐部代码';
+
+  @override
+  String get msgVerifyClubCode => '您已输入 ### 的代码。请确认是否正确。';
 }

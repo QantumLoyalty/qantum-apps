@@ -720,4 +720,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get msgEnterMobileOTP => 'Enter Mobile OTP';
+
+  @override
+  String get msgSponsorshipCodeApplied => 'Sponsorship code applied successfully';
+
+  @override
+  String get txtRemove => 'Remove';
+
+  @override
+  String get msgRemoveLink => 'This will remove your link with ###. Proceed?';
+
+  @override
+  String get msgActiveSponsorshipHeader => 'Earn rewards & get benefits for your club. Your currently linked club is shown below.';
+
+  @override
+  String get yesConfirm => 'Yes, Confirm';
+
+  @override
+  String get verifyClubCode => 'Verify Club Code';
+
+  @override
+  String get msgVerifyClubCode => 'You have entered the code for ###. Please confirm if this is correct.';
 }

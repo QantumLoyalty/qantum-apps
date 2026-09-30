@@ -720,4 +720,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get msgEnterMobileOTP => 'मोबाइल OTP दर्ज करें';
+
+  @override
+  String get msgSponsorshipCodeApplied => 'स्पॉन्सरशिप कोड सफलतापूर्वक लागू किया गया';
+
+  @override
+  String get txtRemove => 'हटाएँ';
+
+  @override
+  String get msgRemoveLink => 'इससे ### के साथ आपका लिंक हट जाएगा। क्या आप आगे बढ़ना चाहते हैं?';
+
+  @override
+  String get msgActiveSponsorshipHeader => 'अपने क्लब के लिए रिवॉर्ड कमाएँ और लाभ प्राप्त करें। आपका वर्तमान में लिंक किया गया क्लब नीचे दिखाया गया है।';
+
+  @override
+  String get yesConfirm => 'हाँ, पुष्टि करें';
+
+  @override
+  String get verifyClubCode => 'क्लब कोड सत्यापित करें';
+
+  @override
+  String get msgVerifyClubCode => 'आपने ### के लिए कोड दर्ज किया है। कृपया पुष्टि करें कि यह सही है।';
 }
