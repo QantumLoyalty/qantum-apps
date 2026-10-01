@@ -42,7 +42,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
     switch (selectedFlavor) {
       case Flavor.qantum || Flavor.qantumClub || Flavor.maxx || Flavor.maxClub:
         return _accountOptions;
-      case Flavor.mhbc:
+      case Flavor.mhbc||Flavor.hogansReward:
         return _accountOptionsMHBC;
       case Flavor.starReward:
         return _accountOptionsSR;
