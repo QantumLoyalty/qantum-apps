@@ -88,6 +88,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
           Flavor.brisbane ||
           Flavor.bobsBulkBooze ||
           Flavor.tgh ||
+          Flavor.starReward ||
           Flavor.maxClub =>
             true,
           _ => false,

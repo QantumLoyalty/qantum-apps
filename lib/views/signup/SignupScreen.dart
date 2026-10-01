@@ -74,6 +74,7 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     Flavor.qantumClub,
     Flavor.tgh,
     Flavor.brisbane,
+    Flavor.starReward,
   };
   late bool hasExistingEmailFlow;
 

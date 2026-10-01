@@ -441,11 +441,9 @@ class HomeProvider extends ChangeNotifier with LoggingMixin {
                 ) >
                 0;
 
-            print(
-                "Current Version: $currentVersion, Current Build: $currentBuild");
-            print("Latest Version: $latestVersion, Latest Build: $latestBuild");
-            print(
-                "Has New Build: $hasNewerBuild, Has New Version: $hasNewerVersion");
+            ("Current Version: $currentVersion, Current Build: $currentBuild").logMessage();
+            ("Latest Version: $latestVersion, Latest Build: $latestBuild").logMessage();
+            ("Has New Build: $hasNewerBuild, Has New Version: $hasNewerVersion").logMessage();
 
             result = AppUpdateResult(
                 shouldShowDialog: hasNewerBuild || hasNewerVersion,
