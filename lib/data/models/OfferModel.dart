@@ -40,9 +40,15 @@ class OfferModel {
     header = json['header'];
     description = json['description'];
     voucherType = json['voucherType'];
-    ratingLevel = json['ratingLevel'].cast<String>();
+    if (json.containsKey('ratingLevel')) {
+      ratingLevel = json['ratingLevel'].cast<String>();
+    }
+
     expiry = json['expiry'] != null ? Expiry.fromJson(json['expiry']) : null;
-    validDaysOfWeek = json['validDaysOfWeek'].cast<String>();
+
+    if (json.containsKey('validDaysOfWeek')) {
+      validDaysOfWeek = json['validDaysOfWeek'].cast<String>();
+    }
     validTime = json['validTime'] != null
         ? ValidTime.fromJson(json['validTime'])
         : null;

@@ -209,7 +209,11 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
               (response.keys.contains("data"))) {
             _specialOffersOriginal = [];
             response["data"].forEach((item) {
-              _specialOffersOriginal!.add(OfferModel.fromJson(item));
+              try {
+                _specialOffersOriginal!.add(OfferModel.fromJson(item));
+              } catch (e) {
+                "OFFER ITEM >>> ${item.toString()} ${e.toString()}";
+              }
             });
 
             logEvent(
@@ -250,7 +254,8 @@ class SpecialOffersProvider extends ChangeNotifier with LoggingMixin {
   }
 
   stopSpecialOffersTimer() {
-    logEvent("Stopping the special offer timer${_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive}");
+    logEvent(
+        "Stopping the special offer timer${_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive}");
     if (_fetchSpecialOfferTimer != null && _fetchSpecialOfferTimer!.isActive) {
       _fetchSpecialOfferTimer!.cancel();
       _fetchSpecialOfferTimer = null;
