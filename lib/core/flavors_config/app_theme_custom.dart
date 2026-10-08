@@ -80,6 +80,17 @@ class AppThemeCustom {
     }
   }
 
+
+  static Color? getConfirmDialogYesTextColorStyle(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+
+      default:
+        return Theme.of(context).primaryColor;
+    }
+  }
   static ButtonStyle getRedeemButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {

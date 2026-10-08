@@ -255,7 +255,7 @@ class _EnterClubCodeCardState extends State<EnterClubCodeCard> {
                             child: Text(
                               loc.yesConfirm.toUpperCase(),
                               style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                                color: AppThemeCustom.getConfirmDialogYesTextColorStyle(context),
                               ),
                             )),
                       ],
