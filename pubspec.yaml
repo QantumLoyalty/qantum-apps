@@ -29,7 +29,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #version:  1.0.2+65
 ###################################
 # HOGAN'S REWARD
-version: 1.0.7+20
+#version: 1.0.7+20
 ###################################
 # MHBC
 #version:  1.0.15+112
@@ -42,7 +42,7 @@ version: 1.0.7+20
 #version:  1.0.5+66
 ###################################
 # NORTH SHORE TAVERN
-#version: 1.0.4+12
+version: 1.0.5+13
 ###################################
 #QANTUM
 #version: 1.0.1+77
@@ -60,7 +60,7 @@ version: 1.0.7+20
 #version: 1.0.0+2
 ###################################
 # Bluewater Captains Club
-#version: 1.0.6+13
+#version: 1.0.7+14
 ###################################
 # FLINDERS STREET WHARVES
 #version: 1.0.3+12

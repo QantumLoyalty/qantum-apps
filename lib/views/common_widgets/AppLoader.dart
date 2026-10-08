@@ -26,7 +26,7 @@ class AppLoader extends StatelessWidget {
                     height: 40,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color:  Theme.of(context).buttonTheme.colorScheme!.primary,
+                  //    color:  Theme.of(context).buttonTheme.colorScheme!.primary,
                     )),
                 AppDimens.shape_15,
                 Text(

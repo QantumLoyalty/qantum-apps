@@ -75,14 +75,13 @@ class _SignupScreenState extends State<SignupScreen> with LoggingMixin {
     Flavor.tgh,
     Flavor.brisbane,
     Flavor.starReward,
+    Flavor.northShoreTavern,
   };
   late bool hasExistingEmailFlow;
 
   @override
   void initState() {
     super.initState();
-
-    debugPrint("PARAMS ON SIGNUP: ${widget.argument}");
     flavor = FlavorConfig.instance.flavor!;
     hasExistingEmailFlow = hasExistingEmailFlowApps.contains(flavor);
     String firstName = "", lastName = "";
