@@ -80,17 +80,31 @@ class AppThemeCustom {
     }
   }
 
-
   static Color? getConfirmDialogYesTextColorStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.flinders:
+      case Flavor.flinders || Flavor.mosaic:
         return Theme.of(context).textSelectionTheme.selectionColor;
+
 
       default:
         return Theme.of(context).primaryColor;
     }
   }
+
+  static Color? getSpecialOffersHeaderTextColor(BuildContext context) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.mosaic:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+
+
+      default:
+        return Theme.of(context)
+            .primaryColorDark;
+    }
+  }
+
   static ButtonStyle getRedeemButtonStyle(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {

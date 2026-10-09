@@ -61,7 +61,7 @@ class MyAccountProvider extends ChangeNotifier with LoggingMixin {
   String getClubSponsorshipTitle(AppLocalizations loc) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.northShoreTavern || Flavor.bluewater
+      case Flavor.northShoreTavern || Flavor.mosaic || Flavor.bluewater
       || Flavor.mhbc || Flavor.qantum|| Flavor.hogansReward||
       Flavor.qantumClub||Flavor.maxClub||Flavor.maxx|| Flavor.bobsBulkBooze||Flavor.flinders:
         return loc.txtSponsorship;

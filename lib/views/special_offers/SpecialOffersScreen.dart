@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qantum_apps/core/flavors_config/app_theme_custom.dart';
 import 'package:qantum_apps/l10n/app_localizations.dart';
 import 'package:qantum_apps/view_models/InternetStatusProvider.dart';
 import '../../core/flavors_config/flavor_config.dart';
@@ -185,8 +186,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                                                       index] ==
                                                                   provider
                                                                       .selectedFilter
-                                                          ? Theme.of(context)
-                                                              .primaryColorDark
+                                                          ? AppThemeCustom
+                                                              .getSpecialOffersHeaderTextColor(
+                                                                  context)
                                                           : Theme.of(context)
                                                               .textSelectionTheme
                                                               .selectionColor,
@@ -229,26 +231,26 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                     ),
                                   )
                                 : Center(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.new_releases_rounded,
-                                        size: 50,
-                                      ),
-                                      AppDimens.shape_15,
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .msgNoOffers,
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textSelectionTheme
-                                                .selectionColor,
-                                            fontSize: 18),
-                                      )
-                                    ],
-                                  ),
-                                )
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          Icons.new_releases_rounded,
+                                          size: 50,
+                                        ),
+                                        AppDimens.shape_15,
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .msgNoOffers,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textSelectionTheme
+                                                  .selectionColor,
+                                              fontSize: 18),
+                                        )
+                                      ],
+                                    ),
+                                  )
                             : const SizedBox.shrink(),
                       ),
                     ],
