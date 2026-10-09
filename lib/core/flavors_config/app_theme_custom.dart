@@ -95,7 +95,7 @@ class AppThemeCustom {
   static Color? getSpecialOffersHeaderTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {
-      case Flavor.mosaic:
+      case Flavor.mosaic||Flavor.flinders:
         return Theme.of(context).textSelectionTheme.selectionColor;
 
 
@@ -1134,7 +1134,7 @@ class AppThemeCustom {
         return Theme.of(context).textSelectionTheme.selectionColor;
     }
   }
-
+/*
   static Color? getFilterInsideTextStyle(
       BuildContext context, bool isSelected) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
@@ -1147,7 +1147,7 @@ class AppThemeCustom {
             ? Theme.of(context).primaryColorDark
             : Theme.of(context).textSelectionTheme.selectionColor;
     }
-  }
+  }*/
 
   static Color? getAppButtonTextColor(BuildContext context) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
