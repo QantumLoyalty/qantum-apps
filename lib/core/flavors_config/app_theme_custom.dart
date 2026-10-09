@@ -982,6 +982,10 @@ class AppThemeCustom {
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
               : AppColors.white;
+        case Flavor.flinders:
+          return (provider.homeNavigationList[2].name == itemName)
+              ? Colors.transparent
+              : AppColors.white;
         case Flavor.brisbane:
           return (provider.homeNavigationList[2].name == itemName)
               ? Colors.transparent
@@ -1025,6 +1029,7 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
+      case Flavor.flinders:
         // case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
@@ -1127,6 +1132,20 @@ class AppThemeCustom {
 
       default:
         return Theme.of(context).textSelectionTheme.selectionColor;
+    }
+  }
+
+  static Color? getFilterInsideTextStyle(
+      BuildContext context, bool isSelected) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.flinders:
+        return Theme.of(context).textSelectionTheme.selectionColor;
+
+      default:
+        return isSelected
+            ? Theme.of(context).primaryColorDark
+            : Theme.of(context).textSelectionTheme.selectionColor;
     }
   }
 
@@ -1281,6 +1300,7 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
+      case Flavor.flinders:
         //  case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? null
@@ -1387,7 +1407,10 @@ class AppThemeCustom {
           : AppColors.wt_menu_background;
     }
     if (selectedFlavor == Flavor.flinders) {
-      return Theme.of(context).iconTheme.color!;
+      return provider.homeNavigationList[2].name ==
+              provider.homeNavigationList[index].name
+          ? null
+          : Theme.of(context).iconTheme.color!;
     }
 
     /*if (selectedFlavor == Flavor.southportSharks) {
@@ -1435,6 +1458,10 @@ class AppThemeCustom {
           provider.homeNavigationList[2].name == itemName) {
         return Colors.transparent;
       }
+      if (selectedFlavor == Flavor.flinders &&
+          provider.homeNavigationList[2].name == itemName) {
+        return Colors.transparent;
+      }
 
       return AppColors.white;
     }
@@ -1459,6 +1486,7 @@ class AppThemeCustom {
       case Flavor.drinkRewards:
       case Flavor.wonthaggi:
       case Flavor.mosaic:
+      case Flavor.flinders:
         // case Flavor.southportSharks:
         return (provider.homeNavigationList[2].name == itemName)
             ? Colors.transparent
