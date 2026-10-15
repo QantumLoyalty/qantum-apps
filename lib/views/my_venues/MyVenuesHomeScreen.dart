@@ -75,6 +75,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
     return Consumer3<PromotionsProvider, HomeProvider, InternetStatusProvider>(
       builder: (context, provider, homeProvider, internetProvider, child) {
         final bool hasSmartIncentives = switch (flavor) {
+          Flavor.drinkRewards ||
           Flavor.hogansReward ||
           Flavor.mhbc ||
           Flavor.flinders ||
@@ -290,13 +291,15 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                     placeholder:
                                                                         (context,
                                                                             _) {
-                                                                      return  Stack(
+                                                                      return Stack(
                                                                         children: [
                                                                           Center(
                                                                             child: SizedBox(
                                                                                 width: 30,
                                                                                 height: 30,
-                                                                                child: CircularProgressIndicator(color: Theme.of(context).textSelectionTheme.selectionColor,)),
+                                                                                child: CircularProgressIndicator(
+                                                                                  color: Theme.of(context).textSelectionTheme.selectionColor,
+                                                                                )),
                                                                           ),
                                                                         ],
                                                                       );
@@ -355,10 +358,10 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                                                                               provider.promotions!.smallPromotions![2 * index + 1].imageUrl ?? "",
                                                                           placeholder:
                                                                               (context, _) {
-                                                                            return  Stack(
+                                                                            return Stack(
                                                                               children: [
                                                                                 Center(
-                                                                                  child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(color:Theme.of(context).textSelectionTheme.selectionColor)),
+                                                                                  child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(color: Theme.of(context).textSelectionTheme.selectionColor)),
                                                                                 ),
                                                                               ],
                                                                             );
@@ -405,7 +408,7 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                 ],
               ),
             ),
-           // 10.h,
+            // 10.h,
             /*if (isMaxClub)
               GestureDetector(
                 onTapUp: (_) => scaleSpinToPlay(1.0),
@@ -446,59 +449,51 @@ class _MyVenuesHomeScreenState extends State<MyVenuesHomeScreen>
                   child: Image.asset('assets/common/spin_to_play.png'),
                 ),
               ),*/
-            if (hasSmartIncentives && provider.incentives.isNotEmpty)
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  const double minButtonHeight = 60.0;
-                  const double maxButtonHeight = 120.0;
+            Stack(
+              children: [
+                const MegaEntryWidget(),
+                if (hasSmartIncentives && provider.incentives.isNotEmpty)
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      const double minButtonHeight = 60.0;
+                      const double maxButtonHeight = 120.0;
 
-                  final double buttonHeight = constraints.maxHeight.clamp(
-                    minButtonHeight,
-                    maxButtonHeight,
-                  );
+                      final double buttonHeight = constraints.maxHeight.clamp(
+                        minButtonHeight,
+                        maxButtonHeight,
+                      );
 
-                  return Center(
-                    child: SizedBox(
-                      height: buttonHeight,
-                      //width: buttonHeight,
-                      child: BouncyButton(
-                        child: GifView.asset(
-                          'assets/common/scratch_and_win.gif',
-                          fit: BoxFit.contain,
+                      return Center(
+                        child: SizedBox(
+                          height: buttonHeight,
+                          //width: buttonHeight,
+                          child: BouncyButton(
+                            child: GifView.asset(
+                              'assets/common/scratch_and_win.gif',
+                              fit: BoxFit.contain,
+                            ),
+                            onTap: () async {
+                              await ScratchCardDialog.getInstance()
+                                  .showScratchCardDialog(
+                                context,
+                                incentive: provider.incentives.first,
+                              );
+
+                              await fetchSpecialIncentives(context);
+                            },
+                          ),
                         ),
-                        onTap: () async {
-                          await ScratchCardDialog.getInstance()
-                              .showScratchCardDialog(
-                            context,
-                            incentive: provider.incentives.first,
-                          );
+                      );
+                    },
+                  ),
 
-                          await fetchSpecialIncentives(context);
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-              /*BouncyButton(
-                child: GifView.asset('assets/common/scratch_and_win.gif'),
-                onTap: () async {
-                  await ScratchCardDialog.getInstance().showScratchCardDialog(
-                      context,
-                      incentive: provider.incentives.first);
-
-                  await fetchSpecialIncentives(context);
-                },
-              ),*/
-            //15.h,
-            const MegaEntryWidget(),
+              ],
+            )
           ],
         );
       },
     );
   }
-
-
 
   scaleSpinToPlay(double scale) {
     setState(() {

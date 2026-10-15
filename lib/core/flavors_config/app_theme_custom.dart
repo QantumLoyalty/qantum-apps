@@ -477,6 +477,32 @@ class AppThemeCustom {
     }
   }
 
+  static Color getSponsorshipTextFieldBackground(BuildContext context, {bool? isShadow}) {
+    Flavor selectedFlavor = FlavorConfig.instance.flavor!;
+    switch (selectedFlavor) {
+      case Flavor.qantum || Flavor.qantumClub:
+        return Theme.of(context).cardColor.withValues(alpha: 0.20);
+      case Flavor.kingscliff:
+        return isShadow != null
+            ? AppColors.white_shadow
+            : Theme.of(context).cardColor;
+      case Flavor.drinkRewards:
+        return AppColors.dr_box_shadow;
+      case Flavor.edp:
+        return AppColors.white.withOpacity(0.39);
+      case Flavor.mannumClub:
+        return AppColors.white_shadow;
+      case Flavor.bobsBulkBooze || Flavor.senseOfTaste:
+        return AppColors.white.withOpacity(0.39);
+      case Flavor.southportSharks:
+        return isShadow != null ? AppColors.white_shadow : AppColors.white;
+      case Flavor.tgh:
+        return isShadow != null ? AppColors.dr_box_shadow : AppColors.white;
+      default:
+        return Theme.of(context).cardColor;
+    }
+  }
+
   static Color getTextFieldBackground(BuildContext context, {bool? isShadow}) {
     Flavor selectedFlavor = FlavorConfig.instance.flavor!;
     switch (selectedFlavor) {

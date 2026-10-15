@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 ###################################
 # STAR REWARD
-#version:  1.0.10+105
+#version:  1.0.10+106
 ###################################
 # SENSE OF TASTE
 # version:  1.0.0+56
@@ -68,7 +68,7 @@ version: 1.0.4+14
 #version: 1.0.0+6
 ###################################
 # drinkRewards
-#version: 1.0.0+7
+#version: 1.0.1+8
 ###################################
 #QANTUMClub
 #version: 1.0.1+6
@@ -80,7 +80,7 @@ version: 1.0.4+14
 #version: 1.0.0+4
 ###################################
 #EDP
-#version: 1.0.6+17
+#version: 1.0.7+18
 ################################.###
 #SOT
 #version: 1.21.0+1205
@@ -91,7 +91,7 @@ version: 1.0.4+14
 #Mosaic Hotel
 #version: 1.0.7+11
 #Mannum club
-#version: 1.0.2+11
+version: 1.0.2+12
 #Southport Sharks
 #version: 1.0.0+4
 #TGH

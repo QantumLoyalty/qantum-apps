@@ -80,7 +80,7 @@ class _EnterClubCodeCardState extends State<EnterClubCodeCard> {
                 hintStyle:
                     TextStyle(fontSize: 20, color: Theme.of(context).hintColor),
                 filled: true,
-                fillColor: AppThemeCustom.getTextFieldBackground(context),
+                fillColor: AppThemeCustom.getSponsorshipTextFieldBackground(context),
                 border: OutlineInputBorder(
                     borderSide: const BorderSide(
                       color: Colors.transparent,
